@@ -29,16 +29,12 @@
 </template>
 
 <script>
-	import api from '../helpers/api';
 	import LoaderLine from './KsLoaderLine.vue';
 
 	export default {
 		name: 'KsAutocomplete',
 
 		props: {
-			url: {
-				type: String
-			},
 			params: {
 				type: Object,
 				default() {
@@ -101,15 +97,14 @@
 		methods: {
 			runSearch() {
 				this.loading = true;
-				api.get(this.url, {
-					params: this.filters
-				}).then((response) => {
-					this.loading = false;
-					this.selected_index = 0;
-					this.list = response;
-				}).catch((error) => {
-					this.loading = false;
-				})
+				this.$emit('search', {
+					term: this.lookup_name,
+					callback: (list) => {
+						this.loading = false;
+						this.selected_index = 0;
+						this.list = list;
+					}
+				});
 			},
 			clear() {
 				this.lookup_name = '';
@@ -164,3 +159,73 @@
 		}
 	}
 </script>
+
+<style lang="scss">
+	.autocomplete-holder {
+		position: relative;
+		.autocomplete-list {
+			margin: 0;
+			z-index: 100;
+			padding: 0;
+			width: 100%;
+			background: #fff;
+			position: absolute;
+			list-style: none;
+			border: solid 1px #CCC;
+			border-top: 0;
+			box-shadow: 0px 2px 5px #444;
+			> li {
+				will-change: transform;
+				transition: all 0.2s ease-in-out;
+				padding: 0.25em 0.5em 0.25em 0.2em;
+				border-bottom: solid 1px #CCC;
+				&:last-child {
+					border: 0;
+				}
+				&.selected-item {
+					background: darkblue;
+					color: #fff;
+				}
+				&:hover {
+					background: blue;
+					color: darken(darkblue, 10%);
+				}
+
+				.img, .img-label {
+					display: inline-block;
+					vertical-align: middle;
+				}
+
+
+				.img {
+					width: 60px;
+					height: 50px;
+					overflow: hidden;
+					position: relative;
+					img, .empty-img {
+						height: 50px;
+						width: auto;
+					}
+					.empty-img {
+						background: #CCC;
+						line-height: 50px;
+						text-align: center;
+						.icon-camera {
+							color: #444;
+						}
+					}
+					img {
+						position: absolute;
+						top: 50%;
+						left: 50%;
+						// @include translate(-50%, -50%);
+						//transform: translate(-50%, -50%);
+					}
+				}
+				.img-label {
+					padding-left: 0.25em;
+				}
+			}
+		}
+	}
+</style>

@@ -3,7 +3,7 @@ import Vue from 'vue';
 export default {
 	get(url, request) {
 		return Vue.http.get(url, request)
-			.then((response) => Promise.resolve(response.body.data))
+			.then((response) => Promise.resolve(response.data))
 			.catch((error) => Promise.reject(error));
 	},
 
