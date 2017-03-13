@@ -9,6 +9,8 @@
 //	import UiIconButton from 'src/UiIconButton.vue';
 
 	export default {
+	    name: 'App',
+
 		data() {
 			return {
 				showSidebar: false,

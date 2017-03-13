@@ -1,12 +1,15 @@
 <template>
 	<div>
-		Autocomplete
+		AutoComplete
 
+		<ks-autocomplete></ks-autocomplete>
 	</div>
 </template>
 
 
 <script>
+	import KsAutocomplete from '../../src/components/KsAutocomplete.vue';
+
 	export default {
 		name: 'PageKsAutocomplete',
 
@@ -25,5 +28,9 @@
 		methods: {},
 
 		watch: {},
+
+		components: {
+            KsAutocomplete
+		}
 	}
 </script>

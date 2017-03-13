@@ -19,6 +19,7 @@ module.exports = {
 
 		src: {
 			main: path.join(__dirname, '..', 'src'),
+            docs: path.join(__dirname, '..', 'docs-src')
 		},
 
 		output: {

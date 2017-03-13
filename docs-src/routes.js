@@ -6,7 +6,7 @@ const routes = [
 		redirect: '/ks-autocomplete'
 	},
 	{
-		path: '/ks-autocomplet',
+		path: '/ks-autocomplete',
 		component: PageKsAutocomplete,
 		meta: { title: 'Kickstart Autocomplete' }
 	}
