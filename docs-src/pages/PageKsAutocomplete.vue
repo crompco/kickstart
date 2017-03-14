@@ -4,12 +4,35 @@
 			AutoComplete
 		</h2>
 		<ks-autocomplete
+			selection-key="name"
 			@search="runSearch"
 		>
 			<template scope="props">
 				{{props.item.name}}
 			</template>
 		</ks-autocomplete>
+
+		<ks-autocomplete
+			:items="countries"
+			selection-key="name"
+			@search="runSearch"
+		>
+			<template scope="props">
+				{{props.item.name}}
+			</template>
+		</ks-autocomplete>
+
+		<ks-autocomplete
+			:items="countries"
+			selection-key="name"
+			:multiple="true"
+			@search="runSearch"
+		>
+			<template scope="props">
+				{{props.item.name}}
+			</template>
+		</ks-autocomplete>
+
 	</div>
 </template>
 
@@ -25,13 +48,17 @@
 		props: {},
 
 		data() {
-			return {};
+			return {
+				countries: []
+			};
 		},
 
 		computed: {},
 
 		mounted() {
-
+			api.get('/countries.json').then((data) => {
+				this.countries = data;
+			});
 		},
 
 		methods: {

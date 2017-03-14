@@ -1,6 +1,13 @@
 <template>
 	<div class="autocomplete-holder" style="position: relative;">
+		<span class="selection" v-if="has_selections">
+			<span v-for="s in selection" class="selection-text">
+				{{s}}
+				<a href="#" @click.prevent="clearSelection(s)" class="clear-selection">X</a>
+			</span>
+		</span>
 		<input
+			v-show="!selection || multiple"
 			type="text"
 			name="pet"
 			:placeholder="placeholder"
@@ -30,20 +37,18 @@
 
 <script>
 	import LoaderLine from './KsLoaderLine.vue';
+	import {object_get} from '../helpers/objects';
+	import {escapeRegExp} from '../helpers/strings';
 
 	export default {
 		name: 'KsAutocomplete',
 
 		props: {
-			params: {
-				type: Object,
+			items: {
+				type: Array,
 				default() {
-					return {}
+					return null;
 				}
-			},
-			limit: {
-				type: Number,
-				default: 10
 			},
 			placeholder: {
 				default: 'Lookup ...'
@@ -51,13 +56,17 @@
 			focus: {
 				default: true
 			},
-			lookupParamName: {
-				type: String,
-				default: 'q'
-			},
 			delay: {
 				type: Number,
 				default: 100
+			},
+			selectionKey: {
+				type: String,
+				default: null
+			},
+			multiple: {
+				type: Boolean,
+				default: false
 			}
 		},
 
@@ -65,6 +74,7 @@
 			return {
 				lookup_name: '',
 				selected_index: 0,
+				selection: null,
 				timer: '',
 				list: [],
 				loading: false
@@ -72,17 +82,12 @@
 		},
 
 		computed: {
-			lookupParam() {
-				let lookupParam = {};
-				lookupParam[this.lookupParamName] = this.lookup_name;
-				return lookupParam;
-			},
-			filters() {
-				return {
-					...this.params,
-					...this.lookupParam,
-					limit: this.limit
+			has_selections() {
+				if ( this.selection && this.selection.length ) {
+					return true;
 				}
+
+				return false;
 			}
 		},
 
@@ -95,7 +100,19 @@
 		},
 
 		methods: {
+			clearSelection(s) {
+				if ( this.multiple ) {
+					let index = this.selection.indexOf(s);
+					this.selection.splice(index, 1);
+				} else {
+					this.selection = null;
+					this.$nextTick(() => {
+						this.setFocus();
+					});
+				}
+			},
 			runSearch() {
+				console.log('running search');
 				this.loading = true;
 				this.$emit('search', {
 					term: this.lookup_name,
@@ -105,6 +122,15 @@
 						this.list = list;
 					}
 				});
+			},
+			runFilter() {
+				console.log('running filter');
+				let name_regex = new RegExp('^.*' + escapeRegExp(this.lookup_name) + '.*', 'i');
+				this.loading = true;
+				this.list = this.items.filter((item) => {
+					return object_get(item, this.selectionKey, '').match(name_regex) ? true : false;
+				});
+				this.loading = false;
 			},
 			clear() {
 				this.lookup_name = '';
@@ -121,7 +147,16 @@
 				this.selected_index = index;
 				this.$emit('selected', this.list[this.selected_index]);
 				this.lookup_name = '';
+				if ( this.selectionKey ) {
+					this.addSelection();
+				}
 				this.list = [];
+			},
+			addSelection() {
+				if ( !this.selection ) {
+					this.selection  = [];
+				}
+				this.selection.push(object_get(this.list[this.selected_index], this.selectionKey));
 			},
 			selectUp() {
 				var index = this.selected_index - 1;
@@ -138,9 +173,15 @@
 		},
 
 		watch: {
+
 			lookup_name() {
 				if ( this.lookup_name == '' ) {
 					this.list = [];
+					return;
+				}
+
+				if ( this.items ) {
+					this.runFilter();
 					return;
 				}
 
@@ -163,6 +204,11 @@
 <style lang="scss">
 	.autocomplete-holder {
 		position: relative;
+		> input {
+			border: 0;
+			outline: none;
+			border-bottom: 1px solid #CCC;
+		}
 		.autocomplete-list {
 			margin: 0;
 			z-index: 100;
