@@ -1,11 +1,13 @@
 <template>
 	<div class="ks-tabs">
 		<ul class="tabs-title-bar">
-			<ul>
-				<li v-for="tab in tabs">
-					<a href="#" @click.prevent="setActiveTab(tab)">{{tab.title}}</a>
-				</li>
-			</ul>
+			<li v-for="tab in tabs" :class="{'selected-tab': tab.active}">
+				<a href="#"
+				   @click.prevent="setActiveTab(tab)"
+				>
+					{{tab.title}}
+				</a>
+			</li>
 		</ul>
 		<div class="tabs-content">
 			<slot></slot>
@@ -26,6 +28,7 @@
 		data() {
 			return {
 				tab: '',
+				activeTab: null,
 				tabs: []
 			};
 		},
@@ -39,25 +42,30 @@
 		methods: {
 			registerTab(tab) {
 				this.tabs.push(tab);
+				if ( !this.activeTab ) {
+					this.setActiveTab(tab);
+				}
 			},
 			setActiveTab(tab) {
+				this.activeTab = tab.title;
 				tab.setActive(true);
+				this.$emit('tab-changed', tab.title);
 			}
 		},
 
 		watch: {},
-
-		components: {
-			RenderVnodes: {
-				name: 'render-vnodes',
-				functional: true,
-				props: ['nodes'],
-				render(createElement, context) {
-					return createElement('div', context.props.nodes);
-				}
-			}
-		}
 	}
 </script>
 
-<style></style>
+<style lang="scss">
+	.ks-tabs {
+		.tabs-title-bar {
+			padding: 0;
+			margin: 0;
+			list-style: none;
+			li {
+				display: inline-block;
+			}
+		}
+	}
+</style>

@@ -6,10 +6,19 @@
 		<div class="callout">
 			<ks-tabs>
 				<ks-tab title="Foo">
-					foo
+					<div>
+						<p>
+							This is the first tab which auto selected
+						</p>
+					</div>
 				</ks-tab>
+
 				<ks-tab title="Bar">
-					Another tab
+					<div>
+						<p>
+							This is a tab with some content
+						</p>
+					</div>
 				</ks-tab>
 			</ks-tabs>
 		</div>
