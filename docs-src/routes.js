@@ -1,5 +1,6 @@
 import PageKsAutocomplete from './pages/PageKsAutocomplete.vue';
 import PageKsTabs from './pages/PageKsTabs.vue';
+import PageKsModal from './pages/PageKsModal.vue';
 import StylesPage from './pages/StylesPage.vue';
 
 const routes = [
@@ -18,7 +19,13 @@ const routes = [
 		path: '/ks-tabs',
 		component: PageKsTabs,
 		name: 'KsTabs',
-		meta: { title: 'Kickstart Autocomplete' }
+		meta: { title: 'Kickstart Tabs' }
+	},
+	{
+		path: '/ks-modal',
+		component: PageKsModal,
+		name: 'KsModal',
+		meta: { title: 'Kickstart Modal' }
 	},
 	{
 		path: '/ks-styles',
