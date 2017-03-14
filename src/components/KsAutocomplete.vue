@@ -109,7 +109,8 @@
 				list: [],
 				loading: false,
 				cache: {},
-				page: 1
+				page: 1,
+				last_page: null
 			};
 		},
 
@@ -185,7 +186,11 @@
 					callback: (list) => {
 						this.loading = false;
 						if ( this.paginated && concat) {
-							this.list = this.list.concat(list);
+							if ( list.length ) {
+								this.list = this.list.concat(list);
+							} else {
+								this.last_page = this.page;
+							}
 						} else {
 							this.selected_index = 0;
 							this.cache[term] = list;
@@ -313,6 +318,7 @@
 				this.timer = setTimeout(() => {
 					// Reset page since the search term has changed
 					this.page = 1;
+					this.last_page = null;
 					this.runSearch();
 				}, this.delay);
 			},
@@ -320,6 +326,10 @@
 			selected_index() {
 				if ( this.paginated ) {
 					if ( this.last_index - this.paginateThreshold <= this.selected_index ) {
+						if ( parseInt(this.last_page || 0) > 0) {
+							return;
+						}
+
 						this.page++;
 						this.runSearch(true)
 					}
