@@ -1,28 +1,37 @@
 <template>
-	<div class="autocomplete-holder" style="position: relative;">
+	<div class="autocomplete-holder">
+
+		<!-- Selections  -->
 		<span class="selection" v-if="has_selections">
 			<span v-for="s in selection" class="selection-text">
 				{{s}}
 				<a href="#" @click.prevent="clearSelection(s)" class="clear-selection">X</a>
 			</span>
 		</span>
+
+		<!-- Lookup Field -->
 		<input
 			v-show="!selection || multiple"
 			type="text"
 			name="pet"
-			:placeholder="placeholder"
+			:placeholder="placeholder_txt"
 			v-model="lookup_name"
 			ref="lookup"
 			@keyup.esc="clear"
+			@keyup.delete="backspace"
 			@keydown.tab.prevent="selectItem(selected_index)"
 			@keydown.enter.prevent="selectItem(selected_index)"
 			@keydown.down.prevent="selectDown()"
 			@keydown.up.prevent="selectUp()"
 		>
-		<ul class="autocomplete-list" v-show="lookup_name.length > 0">
+
+		<!-- List -->
+		<ul class="autocomplete-list" v-show="lookup_name.length > 0" :style="'height:'+this.listHeight">
+
 			<li style="height: 5px; padding: 0; margin: 0;border:0;">
 				<loader-line :show="loading" ></loader-line>
 			</li>
+
 			<li
 				v-for="(item, index) in list"
 				:class="{ 'selected-item': index == selected_index }"
@@ -39,6 +48,8 @@
 	import LoaderLine from './KsLoaderLine.vue';
 	import {object_get} from '../helpers/objects';
 	import {escapeRegExp} from '../helpers/strings';
+	import Vue from 'vue';
+	Vue.config.keyCodes['backspace'] = 8;
 
 	export default {
 		name: 'KsAutocomplete',
@@ -71,6 +82,17 @@
 			cacheResults: {
 				Boolean,
 				default: false
+			},
+			paginated: {
+				type: Boolean,
+				default: false
+			},
+			paginateThreshold: {
+				type: Number,
+				default: 3
+			},
+			listHeight: {
+				default: "250px"
 			}
 		},
 
@@ -82,7 +104,8 @@
 				timer: '',
 				list: [],
 				loading: false,
-				cache: {}
+				cache: {},
+				page: 1
 			};
 		},
 
@@ -93,6 +116,16 @@
 				}
 
 				return false;
+			},
+			last_index() {
+				return this.items.length -1;
+			},
+			placeholder_txt() {
+				if ( this.has_selections ) {
+					return '';
+				}
+
+				return this.placeholder;
 			}
 		},
 
@@ -105,6 +138,7 @@
 		},
 
 		methods: {
+
 			clearSelection(s) {
 				if ( this.multiple ) {
 					let index = this.selection.indexOf(s);
@@ -116,22 +150,23 @@
 					});
 				}
 			},
+
 			findCache(term) {
 				if ( !this.cacheResults ) {
 					return false;
 				}
-				
+
 				if ( term in this.cache ) {
 					this.selected_index = 0;
 					this.list = this.cache[term];
-					console.log('Cached');
 					return true;
 				}
 
 				return false;
 			},
-			runSearch() {
-				if ( this.findCache(this.lookup_name) ) {
+
+			runSearch(force = false) {
+				if ( !force && this.findCache(this.lookup_name) ) {
 					return;
 				}
 
@@ -143,10 +178,15 @@
 						this.loading = false;
 						this.selected_index = 0;
 						this.cache[term] = list;
-						this.list = list;
+						if ( this.paginated ) {
+							this.list.concat(list);
+						} else {
+							this.list = list;
+						}
 					}
 				});
 			},
+
 			runFilter() {
 				if ( this.findCache(this.lookup_name) ) {
 					return;
@@ -160,13 +200,24 @@
 				this.cache[this.lookup_name] = this.list;
 				this.loading = false;
 			},
+
 			clear() {
 				this.lookup_name = '';
 				this.$emit('clear');
 			},
+
 			setFocus() {
 				this.$refs.lookup.focus();
 			},
+
+			backspace() {
+				if ( this.lookup_name == '' ) {
+					if ( this.has_selections && this.multiple ) {
+						this.selection.pop();
+					}
+				}
+			},
+
 			selectItem(index) {
 				if ( !this.list[index] ) {
 					return;
@@ -180,24 +231,29 @@
 				}
 				this.list = [];
 			},
+
 			addSelection() {
 				if ( !this.selection ) {
 					this.selection  = [];
 				}
 				this.selection.push(object_get(this.list[this.selected_index], this.selectionKey));
 			},
+
 			selectUp() {
 				var index = this.selected_index - 1;
 				if ( !(index < 0) ) {
 					this.selected_index -= 1;
 				}
 			},
+
 			selectDown() {
 				var index = this.selected_index + 1;
 				if ( index < this.list.length ) {
 					this.selected_index += 1;
 				}
+
 			}
+
 		},
 
 		watch: {
@@ -220,7 +276,16 @@
 				this.timer = setTimeout(() => {
 					this.runSearch();
 				}, this.delay);
+			},
+
+			selected_index() {
+				if ( this.paginated ) {
+					this.last_index - this.paginateThreshold <= this.selected_index;
+					this.page++;
+					this.runSearch(true)
+				}
 			}
+
 		},
 
 		components: {
@@ -232,11 +297,13 @@
 <style lang="scss">
 	.autocomplete-holder {
 		position: relative;
+
 		> input {
 			border: 0;
 			outline: none;
 			border-bottom: 1px solid #CCC;
 		}
+
 		.autocomplete-list {
 			margin: 0;
 			z-index: 100;
@@ -265,40 +332,6 @@
 					color: darken(darkblue, 10%);
 				}
 
-				.img, .img-label {
-					display: inline-block;
-					vertical-align: middle;
-				}
-
-
-				.img {
-					width: 60px;
-					height: 50px;
-					overflow: hidden;
-					position: relative;
-					img, .empty-img {
-						height: 50px;
-						width: auto;
-					}
-					.empty-img {
-						background: #CCC;
-						line-height: 50px;
-						text-align: center;
-						.icon-camera {
-							color: #444;
-						}
-					}
-					img {
-						position: absolute;
-						top: 50%;
-						left: 50%;
-						// @include translate(-50%, -50%);
-						//transform: translate(-50%, -50%);
-					}
-				}
-				.img-label {
-					padding-left: 0.25em;
-				}
 			}
 		}
 	}
