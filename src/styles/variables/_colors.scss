@@ -79,3 +79,10 @@ $top-bar: (
 	hover: $brand-light,
 	hover-color: $white
 ) !default;
+
+
+$buttons: (
+	background-color: $brand-primary,
+	hover: $brand-light,
+	color: $white
+) !default;
