@@ -1,7 +1,7 @@
 
 <template>
 	<div id="sidebar" class="nav-bar vertical fixed">
-		<ul class="nav">
+		<ul class="nav-links">
 			<li v-for="route in routes">
 				<router-link :to="{name: route.name}">
 					{{route.name}}
