@@ -3,35 +3,44 @@
 		<h2>
 			AutoComplete
 		</h2>
-		<ks-autocomplete
-			selection-key="name"
-			@search="runSearch"
-		>
-			<template scope="props">
-				{{props.item.name}}
-			</template>
-		</ks-autocomplete>
+		<div class="callout">
+			<h3>Ajax with pagination</h3>
+			<ks-autocomplete
+				selection-key="name"
+				@search="runSearch"
+			    :paginated="true"
+			>
+				<template scope="props">
+					{{props.item.name}}
+				</template>
+			</ks-autocomplete>
+		</div>
 
-		<ks-autocomplete
-			:items="countries"
-			selection-key="name"
-			@search="runSearch"
-		>
-			<template scope="props">
-				{{props.item.name}}
-			</template>
-		</ks-autocomplete>
+		<div class="callout">
+			<h3>Passed items</h3>
+			<ks-autocomplete
+				:items="countries"
+				selection-key="name"
+			>
+				<template scope="props">
+					{{props.item.name}}
+				</template>
+			</ks-autocomplete>
+		</div>
 
-		<ks-autocomplete
-			:items="countries"
-			selection-key="name"
-			:multiple="true"
-			@search="runSearch"
-		>
-			<template scope="props">
-				{{props.item.name}}
-			</template>
-		</ks-autocomplete>
+		<div class="callout">
+			<h3>Multiple Selections with custom template</h3>
+			<ks-autocomplete
+				:items="countries"
+				selection-key="name"
+				:multiple="true"
+				@search="runSearch"
+			>
+				<template scope="props">
+					<strong>{{props.item.name}}</strong> <em>{{props.item.code}}</em>
+				</template>
+			</ks-autocomplete>
+		</div>
 
 	</div>
 </template>
@@ -62,17 +71,10 @@
 		},
 
 		methods: {
-			runSearch({term, callback}) {
-				let name_regex = new RegExp('^.*' + escapeRegExp(term) + '.*', 'i');
-				api.get('/countries.json').then((data) => {
-
-					let results = data.filter((o) => {
-						return o.name.match(name_regex) ? true : false;
-					});
-
-					callback(results);
+			runSearch({term, callback, page}) {
+				api.get(`/countries?q=${term}&page=${page}`).then((data) => {
+					callback(data);
 				}).catch((error) => {
-					console.log('error', error);
 					callback([]);
 				})
 			}

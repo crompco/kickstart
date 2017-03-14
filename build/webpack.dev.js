@@ -5,6 +5,7 @@ const path = require('path');
 const options = require('./options');
 const base = require('./webpack.base.js');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const serve = require('./serve');
 
 const config = merge(base, {
 	watch: true,
@@ -20,19 +21,24 @@ const config = merge(base, {
 		path: options.paths.output.docs
 	},
 
+	// proxy: {
+	// 	"**": "http://127.0.0.1:9000"
+	// },
+
 	devServer: {
 		contentBase: options.paths.output.docs,
 		host: '127.0.0.1',
 		port: 9000,
 		historyApiFallback: true,
-		noInfo: true
+		noInfo: true,
+		setup: serve
 	},
 
     plugins: [
         new ExtractTextPlugin({
         	filename: 'docs.bundle.css'
         })
-    ],
+    ]
 });
 
 // First item in module.rules array is Vue

@@ -18,7 +18,7 @@
 			v-model="lookup_name"
 			ref="lookup"
 			@keyup.esc="clear"
-			@keyup.delete="backspace"
+			@keyup.backspace="backspace"
 			@keydown.tab.prevent="selectItem(selected_index)"
 			@keydown.enter.prevent="selectItem(selected_index)"
 			@keydown.down.prevent="selectDown()"
@@ -26,7 +26,11 @@
 		>
 
 		<!-- List -->
-		<ul class="autocomplete-list" v-show="lookup_name.length > 0" :style="'height:'+this.listHeight">
+		<ul class="autocomplete-list"
+		    v-show="lookup_name.length > 0"
+		    :style="'max-height:'+this.listHeight"
+		    ref="list"
+		>
 
 			<li style="height: 5px; padding: 0; margin: 0;border:0;">
 				<loader-line :show="loading" ></loader-line>
@@ -118,7 +122,7 @@
 				return false;
 			},
 			last_index() {
-				return this.items.length -1;
+				return this.list.length -1;
 			},
 			placeholder_txt() {
 				if ( this.has_selections ) {
@@ -156,31 +160,35 @@
 					return false;
 				}
 
-				if ( term in this.cache ) {
-					this.selected_index = 0;
-					this.list = this.cache[term];
-					return true;
+				if ( this.page in this.cache ) {
+					if ( term in this.cache[this.page] ) {
+						this.selected_index = 0;
+						this.list = this.cache[this.page][term];
+						return true;
+					}
 				}
 
 				return false;
 			},
 
-			runSearch(force = false) {
-				if ( !force && this.findCache(this.lookup_name) ) {
+			runSearch(concat = false) {
+				if ( !concat && this.findCache(this.lookup_name) ) {
 					return;
 				}
 
 				this.loading = true;
 				let term = this.lookup_name;
+				let page = this.page;
 				this.$emit('search', {
 					term,
+					page,
 					callback: (list) => {
 						this.loading = false;
-						this.selected_index = 0;
-						this.cache[term] = list;
-						if ( this.paginated ) {
-							this.list.concat(list);
+						if ( this.paginated && concat) {
+							this.list = this.list.concat(list);
 						} else {
+							this.selected_index = 0;
+							this.cache[term] = list;
 							this.list = list;
 						}
 					}
@@ -244,6 +252,12 @@
 				if ( !(index < 0) ) {
 					this.selected_index -= 1;
 				}
+
+				if ( this.list.length > 0 ) {
+					this.$nextTick(() => {
+						this.autoScroll('up');
+					})
+				}
 			},
 
 			selectDown() {
@@ -252,6 +266,29 @@
 					this.selected_index += 1;
 				}
 
+				if ( this.list.length > 0 ) {
+					this.$nextTick(() => {
+						this.autoScroll('down');
+					})
+				}
+			},
+
+			autoScroll(direction) {
+				let li = this.$refs.list.getElementsByClassName('selected-item')[0];
+				let itemOffset = li.offsetTop;
+				let itemHeight = li.offsetHeight;
+				let scrollTop = this.$refs.list.scrollTop;
+				let offsetHeight = this.$refs.list.offsetHeight;
+
+				if ( direction == 'down' ) {
+					if ( itemOffset+itemHeight >= scrollTop + offsetHeight) {
+						this.$refs.list.scrollTop += itemHeight;
+					}
+				} else {
+					if ( itemOffset-(itemHeight/2) <= scrollTop) {
+						this.$refs.list.scrollTop -= itemHeight;
+					}
+				}
 			}
 
 		},
@@ -274,15 +311,18 @@
 				}
 
 				this.timer = setTimeout(() => {
+					// Reset page since the search term has changed
+					this.page = 1;
 					this.runSearch();
 				}, this.delay);
 			},
 
 			selected_index() {
 				if ( this.paginated ) {
-					this.last_index - this.paginateThreshold <= this.selected_index;
-					this.page++;
-					this.runSearch(true)
+					if ( this.last_index - this.paginateThreshold <= this.selected_index ) {
+						this.page++;
+						this.runSearch(true)
+					}
 				}
 			}
 
@@ -315,6 +355,7 @@
 			border: solid 1px #CCC;
 			border-top: 0;
 			box-shadow: 0px 2px 5px #444;
+		    overflow-y: scroll;
 			> li {
 				will-change: transform;
 				transition: all 0.2s ease-in-out;
