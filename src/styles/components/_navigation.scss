@@ -6,6 +6,14 @@
 		height: 100%;
 
 		.nav-links {
+			list-style-type: none;
+
+			ul {
+				padding: 0;
+				margin: 0;
+				list-style-type: none;
+			}
+
 			a {
 				display: block;
 			}
