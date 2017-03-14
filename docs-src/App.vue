@@ -1,11 +1,12 @@
 <template>
 	<div id="app" class="keen-docs">
-		<router-view></router-view>
+		<sidebar></sidebar>
+		<router-view ref="pageContent" class="content"></router-view>
 	</div>
 </template>
 
 <script>
-//	import Sidebar from './Sidebar.vue';
+	import Sidebar from './Sidebar.vue';
 //	import UiIconButton from 'src/UiIconButton.vue';
 
 	export default {
@@ -23,9 +24,8 @@
 				this.updatePageTitle();
 
 				this.$nextTick(() => {
-					window.Prism.highlightAll();
 					this.$refs.pageContent.scrollTop = 0;
-					this.showSidebar = false;
+//					this.showSidebar = false;
 				});
 			}
 		},
@@ -41,7 +41,7 @@
 		},
 
 		components: {
-//			Sidebar,
+			Sidebar,
 //			UiIconButton
 		}
 	};
