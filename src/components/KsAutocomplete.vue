@@ -19,7 +19,7 @@
 			ref="lookup"
 			@keyup.esc="clear"
 			@keyup.backspace="backspace"
-			@keydown.tab.prevent="selectItem(selected_index)"
+			@keydown.tab="selectItem(selected_index, $event)"
 			@keydown.enter.prevent="selectItem(selected_index)"
 			@keydown.down.prevent="selectDown()"
 			@keydown.up.prevent="selectUp()"
@@ -52,6 +52,7 @@
 	import LoaderLine from './KsLoaderLine.vue';
 	import {object_get} from '../helpers/objects';
 	import {escapeRegExp} from '../helpers/strings';
+	import {addEvent, keyCode} from '../helpers/events';
 	import Vue from 'vue';
 	Vue.config.keyCodes['backspace'] = 8;
 
@@ -69,6 +70,11 @@
 				default: 'Lookup ...'
 			},
 			focus: {
+				type: Boolean,
+				default: false
+			},
+			closeOnBlur: {
+				type: Boolean,
 				default: true
 			},
 			delay: {
@@ -135,11 +141,16 @@
 		},
 
 		mounted() {
-			if ( this.focus ) {
-				this.$nextTick(() => {
+			this.$nextTick(() => {
+				if ( this.focus ) {
 					this.setFocus();
-				});
-			}
+				}
+				if ( this.closeOnBlur ) {
+					addEvent(this.$refs.lookup, 'blur', () => {
+						this.clear();
+					});
+				}
+			});
 		},
 
 		methods: {
@@ -216,6 +227,7 @@
 
 			clear() {
 				this.lookup_name = '';
+				this.list = [];
 				this.$emit('clear');
 			},
 
@@ -231,8 +243,13 @@
 				}
 			},
 
-			selectItem(index) {
+			selectItem(index, e) {
 				if ( !this.list[index] ) {
+					return;
+				}
+				if ( e && keyCode(e) == 9 && e.shiftKey ) {
+					console.log('pressed shift+tab')
+					this.clear();
 					return;
 				}
 
