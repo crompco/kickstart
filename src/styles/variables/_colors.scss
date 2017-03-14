@@ -76,4 +76,6 @@ $nav: (
 $top-bar: (
 	background-color: $white,
 	color: $brand-primary,
+	hover: $brand-light,
+	hover-color: $white
 ) !default;

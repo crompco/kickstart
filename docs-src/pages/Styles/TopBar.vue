@@ -1,6 +1,6 @@
 <template>
 	<div class="top-bar">
-		<ul class="dropdown">
+		<ul class="dropdown right">
 			<li>
 				<a href="#">tom.werkheiser@crompco.com</a>
 				<ul class="sub-dropdown">
