@@ -67,6 +67,10 @@
 			multiple: {
 				type: Boolean,
 				default: false
+			},
+			cacheResults: {
+				Boolean,
+				default: false
 			}
 		},
 
@@ -77,7 +81,8 @@
 				selection: null,
 				timer: '',
 				list: [],
-				loading: false
+				loading: false,
+				cache: {}
 			};
 		},
 
@@ -111,25 +116,48 @@
 					});
 				}
 			},
+			findCache(term) {
+				if ( !this.cacheResults ) {
+					return false;
+				}
+				
+				if ( term in this.cache ) {
+					this.selected_index = 0;
+					this.list = this.cache[term];
+					console.log('Cached');
+					return true;
+				}
+
+				return false;
+			},
 			runSearch() {
-				console.log('running search');
+				if ( this.findCache(this.lookup_name) ) {
+					return;
+				}
+
 				this.loading = true;
+				let term = this.lookup_name;
 				this.$emit('search', {
-					term: this.lookup_name,
+					term,
 					callback: (list) => {
 						this.loading = false;
 						this.selected_index = 0;
+						this.cache[term] = list;
 						this.list = list;
 					}
 				});
 			},
 			runFilter() {
-				console.log('running filter');
+				if ( this.findCache(this.lookup_name) ) {
+					return;
+				}
+
 				let name_regex = new RegExp('^.*' + escapeRegExp(this.lookup_name) + '.*', 'i');
 				this.loading = true;
 				this.list = this.items.filter((item) => {
 					return object_get(item, this.selectionKey, '').match(name_regex) ? true : false;
 				});
+				this.cache[this.lookup_name] = this.list;
 				this.loading = false;
 			},
 			clear() {
