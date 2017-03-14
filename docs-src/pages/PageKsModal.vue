@@ -22,8 +22,8 @@
 					This is a simple modal with just a title and content
 				</p>
 				<div slot="footer">
-					<button>Yes</button>
-					<button @click.prevent="closeModal('modal2')">Cancel</button>
+					<button class="button">Yes</button>
+					<button class="button" @click.prevent="closeModal('modal2')">Cancel</button>
 				</div>
 			</ks-modal>
 
@@ -125,8 +125,8 @@
 					</p>
 				</div>
 				<div slot="footer">
-					<button>Yes</button>
-					<button @click.prevent="closeModal('modal4')">Cancel</button>
+					<button class="button">Yes</button>
+					<button class="button" @click.prevent="closeModal('modal4')">Cancel</button>
 				</div>
 			</ks-modal>
 
