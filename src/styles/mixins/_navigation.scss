@@ -1,0 +1,62 @@
+@mixin nav-bar() {
+	@include row();
+	background-color: color($nav, background-color);
+
+	.nav-brand {
+		background-color: color($nav, brand-background);
+		height: get($nav-settings, height);
+		width: 100%;
+		text-align: center;
+
+		img {
+			height: 100%;
+			width: auto;
+		}
+	}
+
+	.nav-links {
+
+		&.center {
+			text-align: center;
+		}
+
+		a {
+			color: color($nav, color);
+			text-decoration: none;
+			padding: 1em;
+			display: inline-block;
+			@include transition(background-color, 0.3);
+
+			&:hover {
+				background-color: color($nav, hover);
+			}
+
+			.router-link-active, .active {
+
+			}
+		}
+	}
+}
+
+@mixin top-bar() {
+	position: relative;
+	height: get($nav-settings, height);
+	background-color: color($top-bar, background-color);
+	color: color($top-bar, color);
+	box-shadow: 0 0 3px $med-gray;
+
+	.text {
+		@include v-center;
+	}
+
+	.dropdown {
+		margin: 0;
+		padding-left: 0;
+		list-style-type: none;
+
+		ul {
+			list-style-type: none;
+			display: none;
+		}
+	}
+}

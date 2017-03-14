@@ -1,0 +1,79 @@
+$general: (
+	white: #fff,
+	black: #000,
+	header-color: #444,
+	light-gray: #eee,
+	med-gray: #aaa,
+	text-color: #444
+) !default;
+
+$brand: (
+	primary: #2C3E50,
+	light: #46719C,
+	lighter: #80B5E9,
+	secondary: #A52924,
+	off: #C18C77
+) !default;
+
+// General Colors
+$white: #fff;
+$black: #000;
+$header-color: #444;
+$light-gray: #eee;
+$med-gray: #aaa;
+$text-color: #444;
+
+$brand-primary: #2C3E50;
+$brand-light: #46719C;
+$brand-lighter: #80B5E9;
+$brand-secondary: #A52924;
+$brand-off: #C18C77;
+
+$main: (
+	background-color: #eff2f3
+) !default;
+
+// Alert
+$alert: (
+	success: (
+		color: #3c763d,
+		background-color: #dff0d8,
+		border-color: #d6e9c6
+	),
+	warning: (
+		color: #8a6d3b,
+		background-color: #fcf8e3,
+		border-color: #faebcc
+	),
+	info: (
+		color: #31708f,
+		background-color: #d9edf7,
+		border-color: #bce8f1
+	),
+	error: (
+		color: #a94442,
+		background-color: #f2dede,
+		border-color: #ebccd1
+	)
+) !default;
+
+// Panel
+$panel: (
+	background-color: $white,
+	shadow: $med-gray,
+	header-background: $light-gray,
+	header-color: $header-color
+) !default;
+
+// Navigation
+$nav: (
+	background-color: $brand-primary,
+	color: $white,
+	brand-background: $white,
+	hover: $brand-light
+) !default;
+
+$top-bar: (
+	background-color: $white,
+	color: $brand-primary,
+) !default;

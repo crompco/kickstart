@@ -16,9 +16,9 @@ const config = merge(base, {
 	},
 
 	plugins: [
-		// new ExtractTextPlugin({
-		// 	filename: 'docs.bundle.css'
-		// }),
+		new ExtractTextPlugin({
+			filename: 'docs.bundle.css'
+		}),
 
 		new webpack.LoaderOptionsPlugin({
 			minimize: true
@@ -43,8 +43,8 @@ const config = merge(base, {
 // First item in module.rules array is Vue
 config.module.rules[0].options.loaders = {
 	scss: ExtractTextPlugin.extract({
-		loader: 'css-loader!sass-loader',
-		fallbackLoader: 'vue-style-loader'
+        use: ['css-loader', 'sass-loader'],
+		fallback: 'style-loader'
 	})
 };
 

@@ -1,0 +1,27 @@
+.nav-bar {
+	@include nav-bar;
+
+	&.vertical {
+		width: get($nav-settings, width);
+		height: 100%;
+
+		.nav-links {
+			a {
+				display: block;
+			}
+		}
+	}
+
+	&.fixed {
+		position: fixed;
+		z-index: -1;
+
+		@include tab() {
+			z-index: auto;
+		}
+	}
+}
+
+.top-bar {
+	@include top-bar;
+}

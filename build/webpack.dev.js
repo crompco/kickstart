@@ -1,18 +1,22 @@
 'use strict';
 
 const merge = require('deep-assign');
-
+const path = require('path');
 const options = require('./options');
 const base = require('./webpack.base.js');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const config = merge(base, {
 	watch: true,
 	devtool: '#eval-source-map',
 
-	entry: options.paths.resolve('docs-src/index.js'),
+	entry: {
+        'docs.bundle.js': options.paths.resolve('docs-src/index.js'),
+        'docs.bundle.css': options.paths.resolve('src/styles/app.scss')
+	},
 
 	output: {
-		filename: 'docs.bundle.js',
+		filename: '[name]',
 		path: options.paths.output.docs
 	},
 
@@ -22,7 +26,13 @@ const config = merge(base, {
 		port: 9000,
 		historyApiFallback: true,
 		noInfo: true
-	}
+	},
+
+    plugins: [
+        new ExtractTextPlugin({
+        	filename: 'docs.bundle.css'
+        })
+    ],
 });
 
 // First item in module.rules array is Vue

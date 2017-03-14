@@ -1,0 +1,73 @@
+@mixin breakpoint($grid) {
+	@include grid-media($grid) {
+		@content;
+	}
+}
+
+@mixin sm() {
+	@include breakpoint($grid-sm) {
+		@content;
+	}
+}
+
+@mixin tab() {
+	@include breakpoint($grid-tab) {
+		@content;
+	}
+}
+
+@mixin med() {
+	@include breakpoint($grid-med) {
+		@content;
+	}
+}
+
+@mixin lg() {
+	@include breakpoint($grid-lg) {
+		@content;
+	}
+}
+
+@mixin xlg() {
+	@include breakpoint($grid-xlg) {
+		@content;
+	}
+}
+
+@mixin nav() {
+	@include breakpoint($grid-nav) {
+		@content;
+	}
+}
+
+@mixin row() {
+	@include grid-container;
+}
+
+@mixin col($column, $grid: false) {
+	@if $grid == false {
+		@include grid-column($column);
+	} @else {
+		@include grid-column($column, $grid);
+	}
+}
+
+@mixin col-sm($column) {
+	@include col($column, $grid-sm);
+}
+
+@mixin col-tab($column) {
+	@include col($column, $grid-tab);
+}
+
+@mixin col-med($column) {
+	@include col($column, $grid-med);
+}
+
+@mixin col-lg($column) {
+	@include col($column, $grid-lg);
+}
+
+@mixin col-xlg($column) {
+	@include col($column, $grid-xlg);
+}

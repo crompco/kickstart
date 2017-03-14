@@ -1,0 +1,12 @@
+@mixin form-label($display, $weight: normal) {
+	display: $display;
+	font-weight: $weight;
+
+	&.disabled {
+		opacity: 0.7;
+
+		> *, & {
+			cursor: not-allowed;
+		}
+	}
+}

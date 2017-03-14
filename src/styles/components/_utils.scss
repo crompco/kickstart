@@ -1,0 +1,35 @@
+.right {
+	float: right;
+	right: 0;
+}
+
+.left {
+	float: left;
+	left: 0;
+}
+
+.t-right {
+	text-align: right;
+	right: 0;
+}
+
+.t-left {
+	text-align: left;
+	left: 0;
+}
+
+.t-center {
+	text-align: center;
+}
+
+.rel {
+	position: relative;
+}
+
+.abs {
+	position: absolute;
+}
+
+.v-center {
+	@include v-center();
+}

@@ -1,0 +1,3 @@
+@mixin transition($where: all, $speed: 0.2) {
+	transition: #{$where} #{$speed}s ease;
+}

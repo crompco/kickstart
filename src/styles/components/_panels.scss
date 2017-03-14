@@ -1,0 +1,19 @@
+.panel {
+	margin-bottom: 20px;
+	box-shadow: 0 5px 15px -2px color($panel, 'shadow');
+	background-color: color($panel, 'background-color');
+	border: 1px solid color($panel, 'header-background');
+
+	& &-header, & &-footer {
+		background-color: color($panel, 'header-background');
+		padding: 10px;
+	}
+
+	& &-body {
+		padding: 15px;
+	}
+
+	&.no-shadow {
+		box-shadow: none;
+	}
+}

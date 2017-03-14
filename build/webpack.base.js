@@ -1,5 +1,6 @@
 const options = require('./options');
 const path = require('path');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 // const autoprefixer = require('autoprefixer');
 
 module.exports = {
@@ -15,7 +16,7 @@ module.exports = {
 			helpers: 'src/helpers',
 			components: 'src/components',
 			// mixins: 'src/mixins',
-			// styles: 'src/styles',
+			styles: 'src/styles',
 			vue$: 'vue/dist/vue.common.js'
 		},
 
@@ -42,6 +43,13 @@ module.exports = {
 				test: /\.js$/,
 				loader: 'babel-loader',
 				exclude: /node_modules/
+			},
+			{
+				test: /\.scss$/,
+                use: ExtractTextPlugin.extract({
+					fallback: 'style-loader',
+					use: ['css-loader', 'sass-loader']
+				})
 			}
 		]
 	},
