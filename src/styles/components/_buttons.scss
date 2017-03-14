@@ -1,0 +1,15 @@
+.button {
+	display: inline-block;
+	padding: 0.4em 0.6em;
+	background-color: color($buttons, background-color);
+	cursor: pointer;
+	text-decoration: none;
+	color: color($buttons, color);
+	border: 1px solid transparent;
+	border-radius: 4px;
+	@include transition(background-color);
+
+	&:hover {
+		background-color: color($buttons, hover);
+	}
+}
