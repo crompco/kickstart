@@ -1,5 +1,11 @@
-@mixin v-center() {
+@mixin v-center($height: false) {
 	position: absolute;
 	top: 50%;
-	transform: translateY(-50%);
+
+	@if $height == false {
+		transform: translateY(-50%);
+	} @else {
+		//height: $height;
+		//margin-top: $height / 2;
+	}
 }

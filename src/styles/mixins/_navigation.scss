@@ -43,7 +43,7 @@
 	height: get($nav-settings, height);
 	background-color: color($top-bar, background-color);
 	color: color($top-bar, color);
-	box-shadow: 0 0 3px $med-gray;
+	box-shadow: 0 2px 1px $med-gray;
 
 	.text {
 		@include v-center;
@@ -53,6 +53,18 @@
 		margin: 0;
 		padding-left: 0;
 		list-style-type: none;
+		display: inline-block;
+		height: 100%;
+		position: relative;
+
+		li:first-child {
+			@include v-center;
+
+			a {
+				text-decoration: none;
+				color: color($top-bar, color);
+			}
+		}
 
 		ul {
 			list-style-type: none;

@@ -13,7 +13,7 @@ const config = merge(base, {
 
 	entry: {
         'docs.bundle.js': options.paths.resolve('docs-src/index.js'),
-        'docs.bundle.css': options.paths.resolve('src/styles/app.scss')
+        'docs.bundle.css': options.paths.resolve('docs-src/app.scss')
 	},
 
 	output: {
