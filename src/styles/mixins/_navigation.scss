@@ -57,18 +57,41 @@
 		height: 100%;
 		position: relative;
 
-		li:first-child {
-			@include v-center;
+		> li:first-child {
+			height: 100%;
+
+			&:hover {
+				ul.sub-dropdown {
+					display: block;
+					padding: 0;
+					margin: 0;
+					background: color($top-bar, background-color);
+					box-shadow: 0 1px 2px $med-gray;
+
+					a {
+						padding: 0.75em;
+						line-height: get($nav-settings, height) / 2;
+
+						&:hover {
+							background-color: color($top-bar, hover);
+							color: color($top-bar, hover-color);
+						}
+					}
+				}
+			}
+
+			ul.sub-dropdown {
+				list-style-type: none;
+				display: none;
+			}
 
 			a {
+				display: block;
 				text-decoration: none;
 				color: color($top-bar, color);
+				padding: get($nav-settings, padding);
+				line-height: get($nav-settings, height) - (get($nav-settings, padding) * 2);
 			}
-		}
-
-		ul {
-			list-style-type: none;
-			display: none;
 		}
 	}
 }
