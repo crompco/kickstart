@@ -1,30 +1,49 @@
 <template>
 	<div class="ks-tabs">
-
-		<div
-			class="ks-tabs active-tab-indicator"
-		></div>
+		<ul class="tabs-title-bar">
+			<ul>
+				<li v-for="tab in tabs">
+					<a href="#" @click.prevent="setActiveTab(tab)">{{tab.title}}</a>
+				</li>
+			</ul>
+		</ul>
+		<div class="tabs-content">
+			<slot></slot>
+		</div>
 	</div>
 </template>
 
 
 <script>
+
+	import throttle from '../helpers/throttle';
+
 	export default {
 		name: 'KsTabs',
 
 		props: {},
 
 		data() {
-			return {};
+			return {
+				tab: '',
+				tabs: []
+			};
 		},
 
 		computed: {},
 
 		mounted() {
-
+			this.tabs = [];
 		},
 
-		methods: {},
+		methods: {
+			registerTab(tab) {
+				this.tabs.push(tab);
+			},
+			setActiveTab(tab) {
+				tab.setActive(true);
+			}
+		},
 
 		watch: {},
 

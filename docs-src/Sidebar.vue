@@ -38,3 +38,18 @@
 		watch: {},
 	}
 </script>
+
+<style lang="scss">
+	#sidebar {
+		padding-top: 1em;
+		ul {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+		}
+		a {
+			padding: 0.5em 1em;
+			color: white;
+		}
+	}
+</style>

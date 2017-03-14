@@ -46,3 +46,9 @@
 		}
 	};
 </script>
+
+<style>
+	.content {
+		padding: 0 2em;
+	}
+</style>
