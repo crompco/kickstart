@@ -5,11 +5,14 @@
 	cursor: pointer;
 	text-decoration: none;
 	color: color($buttons, color);
-	border: 1px solid transparent;
+	border: 2px solid color($buttons, background-color);
 	border-radius: 4px;
+	box-shadow: 0 4px 6px rgba(color($buttons, box-shadow), 0.2);
 	@include transition(background-color);
 
 	&:hover {
 		background-color: color($buttons, hover);
+		color: color($buttons, color);
+		text-shadow: -1px 1px 0 rgba(color($general, black), 0.3);
 	}
 }
