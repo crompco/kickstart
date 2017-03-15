@@ -82,8 +82,15 @@ $top-bar: (
 
 
 $buttons: (
-	background-color: $brand-primary,
-	hover: $brand-lighter,
+	background-color: $brand-light,
+	hover: darken($brand-light, 12%),
 	color: $white,
-	box-shadow: $brand-lighter
+	box-shadow: $black
 ) !default;
+
+//$buttons: (
+//	outline: (
+//
+//	),
+//
+//);
