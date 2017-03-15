@@ -1,47 +1,42 @@
 .button {
 	display: inline-block;
 	padding: 0.4em 0.6em;
-	background-color: color(buttons, default, background-color);
 	cursor: pointer;
 	text-decoration: none;
-	color: color(buttons, default, color);
-	border: 1px solid transparent;
-	box-shadow: 0 2px 4px rgba(color(buttons, default, box-shadow), 0.2);
+	box-shadow: 0 2px 4px rgba(color(black), 0.2);
 	@include transition(background-color);
 
 	&:hover:not(.disabled) {
-		background-color: color(buttons, default, hover);
-		color: color(buttons, default, color);
+		@include state-hover;
 	}
 
 	&.disabled {
 		@include disable;
 	}
-}
 
-@each $name, $map in color(buttons) {
-	@if $name != default {
+	@each $name, $map in color(buttons) {
 		$bg-color: color(buttons, $name, background-color);
 
-		.button.#{$name} {
+		&.#{$name} {
 			background-color: $bg-color;
 			color: color(buttons, $name, color);
-			border-color: color(buttons, $name, border-color);
+			border: 1px solid color(buttons, $name, border-color);
 
 			@if map-has-key($map, box-shadow) {
 				box-shadow: color(buttons, $name, box-shadow);
 			}
 
 			&:hover:not(.disabled) {
+				border: 1px solid color(buttons, $name, border-color);
 				background-color: darken($bg-color, 4%);
 				color: color(buttons, $name, hover);
 			}
 		}
 	}
-}
 
-@each $name, $map in setting(buttons, sizes) {
-	.button.#{$name} {
-		font-size: setting(buttons, sizes, $name);
+	@each $name, $map in setting(buttons, sizes) {
+		&.#{$name} {
+			font-size: setting(buttons, sizes, $name);
+		}
 	}
 }

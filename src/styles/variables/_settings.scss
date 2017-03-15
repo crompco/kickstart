@@ -27,5 +27,13 @@ $settings: (
 		content: (
 			padding: 1em
 		)
+	),
+	state: (
+		default: (
+			font-weight: normal,
+		),
+		hover: (
+			font-weight: normal,
+		)
 	)
 );
