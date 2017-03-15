@@ -56,16 +56,3 @@
 		watch: {},
 	}
 </script>
-
-<style lang="scss">
-	.ks-tabs {
-		.tabs-title-bar {
-			padding: 0;
-			margin: 0;
-			list-style: none;
-			li {
-				display: inline-block;
-			}
-		}
-	}
-</style>
