@@ -38,7 +38,8 @@
 
 			<li
 				v-for="(item, index) in list"
-				:class="{ 'selected-item': index == selected_index }"
+				:class="{ 'ks-state-hover': index == selected_index }"
+				@mouseover="selected_index = index"
 				@click.prevent="selectItem(index)"
 			>
 				<!-- Scoped slot -->
@@ -109,7 +110,7 @@
 		data() {
 			return {
 				lookup_name: '',
-				selected_index: 0,
+				selected_index: -1,
 				selection: null,
 				timer: '',
 				list: [],
@@ -174,7 +175,7 @@
 
 				if ( this.page in this.cache ) {
 					if ( term in this.cache[this.page] ) {
-						this.selected_index = 0;
+						this.selected_index = -1;
 						this.list = this.cache[this.page][term];
 						return true;
 					}
@@ -203,7 +204,7 @@
 								this.last_page = this.page;
 							}
 						} else {
-							this.selected_index = 0;
+							this.selected_index = -1;
 							this.cache[term] = list;
 							this.list = list;
 						}
@@ -319,7 +320,7 @@
 
 			lookup_name() {
 				if ( this.lookup_name == '' ) {
-					this.list = [];
+//					this.list = [];
 					return;
 				}
 
@@ -360,47 +361,3 @@
 		}
 	}
 </script>
-
-<style lang="scss">
-	.autocomplete-holder {
-		position: relative;
-
-		> input {
-			border: 0;
-			outline: none;
-			border-bottom: 1px solid #CCC;
-		}
-
-		.autocomplete-list {
-			margin: 0;
-			z-index: 100;
-			padding: 0;
-			width: 100%;
-			background: #fff;
-			position: absolute;
-			list-style: none;
-			border: solid 1px #CCC;
-			border-top: 0;
-			box-shadow: 0px 2px 5px #444;
-		    overflow-y: scroll;
-			> li {
-				will-change: transform;
-				transition: all 0.2s ease-in-out;
-				padding: 0.25em 0.5em 0.25em 0.2em;
-				border-bottom: solid 1px #CCC;
-				&:last-child {
-					border: 0;
-				}
-				&.selected-item {
-					background: darkblue;
-					color: #fff;
-				}
-				&:hover {
-					background: blue;
-					color: darken(darkblue, 10%);
-				}
-
-			}
-		}
-	}
-</style>

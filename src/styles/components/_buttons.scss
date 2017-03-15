@@ -5,6 +5,7 @@
 	text-decoration: none;
 	box-shadow: 0 2px 4px rgba(color(black), 0.2);
 	@include transition(background-color);
+	@include state-default;
 
 	&:hover:not(.disabled) {
 		@include state-hover;

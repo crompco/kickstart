@@ -1,0 +1,35 @@
+.autocomplete-holder {
+	position: relative;
+
+	> input {
+		@include form-input(inline-block);
+	}
+
+	.autocomplete-list {
+		margin: 0;
+		z-index: 100;
+		padding: 0;
+		width: 100%;
+		background: #fff;
+		position: absolute;
+		list-style: none;
+		border: solid 1px #CCC;
+		border-top: 0;
+		box-shadow: 0px 2px 5px #444;
+		overflow-y: scroll;
+		> li {
+			will-change: transform;
+			transition: all 0.2s ease-in-out;
+			padding: 0.25em 0.5em 0.25em 0.2em;
+			border: 1px solid transparent;
+			border-bottom: solid 1px #CCC;
+			&:last-child {
+				border: 0;
+			}
+			&.selected-item {
+				background: darkblue;
+				color: #fff;
+			}
+		}
+	}
+}

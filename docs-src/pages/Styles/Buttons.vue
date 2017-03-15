@@ -6,16 +6,16 @@
 				<div>Default</div>
 				<hr>
 				<div class="sm-2">
-					<button class="button ks-state-default">
+					<button class="button">
 						I'm a default button
 					</button>
-					<a href="#" class="button tiny ks-state-default">
+					<a href="#" class="button tiny">
 						I'm a tiny button
 					</a>
-					<a href="#" class="button small ks-state-default">
+					<a href="#" class="button small">
 						I'm a small button
 					</a>
-					<a href="#" class="button large ks-state-default">
+					<a href="#" class="button large">
 						I'm a large button
 					</a>
 				</div>
