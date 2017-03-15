@@ -73,6 +73,19 @@ $colors: (
 			hover: darken($_brand-light, 12%),
 			color: $_white,
 			box-shadow: $_black
+		),
+		outline: (
+			background-color: $_white,
+			hover: $_brand-light,
+			color: $_brand-light,
+			border-color: $_brand-light
+		),
+		none: (
+			background-color: transparent,
+			color: $_brand-light,
+			hover: darken($_brand-light, 20%),
+			border-color: transparent,
+			box-shadow: none
 		)
 	),
 	tabs: (

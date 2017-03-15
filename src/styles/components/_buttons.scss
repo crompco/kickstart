@@ -14,3 +14,30 @@
 		color: color(buttons, default, color);
 	}
 }
+
+@each $name, $map in color(buttons) {
+	@if $name != default {
+		$bg-color: color(buttons, $name, background-color);
+
+		.button.#{$name} {
+			background-color: $bg-color;
+			color: color(buttons, $name, color);
+			border-color: color(buttons, $name, border-color);
+
+			@if map-has-key($map, box-shadow) {
+				box-shadow: color(buttons, $name, box-shadow);
+			}
+
+			&:hover {
+				background-color: darken($bg-color, 4%);
+				color: color(buttons, $name, hover);
+			}
+		}
+	}
+}
+
+@each $name, $map in setting(buttons, sizes) {
+	.button.#{$name} {
+		font-size: setting(buttons, sizes, $name);
+	}
+}
