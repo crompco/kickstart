@@ -1,14 +1,14 @@
 .alert {
-	padding: get($alert-settings, padding);
-	margin: get($alert-settings, margin);
-	border-radius: get($alert-settings, border-radius);
+	padding: setting(alert, padding);
+	margin: setting(alert, margin);
+	border-radius: setting(alert, border-radius);
 	border: 1px solid transparent;
 }
 
-@each $name, $map in $alert {
+@each $name, $map in color(alert) {
 	.alert.#{$name} {
-		color: color($alert, $name, color);
-		background-color: color($alert, $name, background-color);
-		border-color: color($alert, $name, border-color)
+		color: color(alert, $name, color);
+		background-color: color(alert, $name, background-color);
+		border-color: color(alert, $name, border-color)
 	}
 }

@@ -1,3 +1,3 @@
-@function color($map, $keys...) {
-	@return get($map, $keys...);
+@function color($keys...) {
+	@return get($colors, $keys...);
 }

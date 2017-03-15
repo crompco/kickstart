@@ -1,16 +1,16 @@
 .button {
 	display: inline-block;
 	padding: 0.4em 0.6em;
-	background-color: color($buttons, background-color);
+	background-color: color(buttons, default, background-color);
 	cursor: pointer;
 	text-decoration: none;
-	color: color($buttons, color);
+	color: color(buttons, default, color);
 	border: 1px solid transparent;
-	box-shadow: 0 2px 4px rgba(color($buttons, box-shadow), 0.2);
+	box-shadow: 0 2px 4px rgba(color(buttons, default, box-shadow), 0.2);
 	@include transition(background-color);
 
 	&:hover {
-		background-color: color($buttons, hover);
-		color: color($buttons, color);
+		background-color: color(buttons, default, hover);
+		color: color(buttons, default, color);
 	}
 }

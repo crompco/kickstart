@@ -1,0 +1,3 @@
+@function setting($keys...) {
+	@return get($settings, $keys...);
+}

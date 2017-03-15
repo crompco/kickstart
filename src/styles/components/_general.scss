@@ -3,7 +3,7 @@
 }
 
 html, body {
-	background-color: color($main, 'background-color');
+	background-color: color(background-color);
 	font-size: 14px;
 	height: 100%;
 
@@ -17,7 +17,7 @@ html, body {
 	@include col(12);
 
 	@include tab() {
-		$width: get($nav-settings, width);
+		$width: setting(nav, width);
 
 		width: calc(100% - #{$width});
 		margin-left: $width;
