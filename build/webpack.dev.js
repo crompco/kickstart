@@ -34,11 +34,11 @@ const config = merge(base, {
 		setup: serve
 	},
 
-    plugins: [
-        new ExtractTextPlugin({
-        	filename: 'docs.bundle.css'
-        })
-    ]
+    // plugins: [
+    //     new ExtractTextPlugin({
+    //     	filename: 'docs.bundle.css'
+    //     })
+    // ]
 });
 
 // First item in module.rules array is Vue

@@ -1,7 +1,7 @@
 const options = require('./options');
 const path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-// const autoprefixer = require('autoprefixer');
+const autoprefixer = require('autoprefixer');
 
 module.exports = {
 	resolve: {
@@ -32,11 +32,11 @@ module.exports = {
 					loaders: {
 						// configured in the script specific webpack configs
 					},
-					// postcss: [
-					// 	autoprefixer({
-					// 		browsers: ['last 2 versions', 'ie > 9', 'Firefox ESR']
-					// 	})
-					// ]
+					postcss: [
+						autoprefixer({
+							browsers: ['last 2 versions', 'ie > 9', 'Firefox ESR']
+						})
+					]
 				}
 			},
 			{
@@ -46,10 +46,30 @@ module.exports = {
 			},
 			{
 				test: /\.scss$/,
-                use: ExtractTextPlugin.extract({
-					fallback: 'style-loader',
-					use: ['css-loader', 'sass-loader']
-				})
+				use: [
+					'style-loader',
+					'css-loader',
+					'sass-loader'
+				]
+                // use: ExtractTextPlugin.extract({
+				// 	fallback: 'style-loader',
+				// 	use: [
+				// 		'css-loader',
+				// 		'sass-loader',
+				// 		{
+				// 			loader: 'postcss-loader',
+				// 			options:  {
+				// 				plugins: function () {
+				// 					return [
+                 //                        autoprefixer({
+                 //                            browsers: ['last 2 versions', 'ie > 9', 'Firefox ESR']
+                 //                        })
+				// 					]
+				// 				}
+				// 			}
+				// 		}
+				// 	]
+				// })
 			}
 		]
 	},
