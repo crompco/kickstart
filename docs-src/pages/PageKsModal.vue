@@ -22,11 +22,119 @@
 					This is a simple modal with just a title and content
 				</p>
 				<div slot="footer">
-					<button>Yes</button>
-					<button @click.prevent="closeModal('modal2')">Cancel</button>
+					<button class="button">Yes</button>
+					<button class="button" @click.prevent="closeModal('modal2')">Cancel</button>
 				</div>
 			</ks-modal>
 
+
+			<button class="button" @click.prevent="openModal('modal3')">
+				Modal without header
+			</button>
+
+			<ks-modal title="Modal without header" :show-header="false" ref="modal3">
+				<p>
+					This is a simple modal without a title and only content
+				</p>
+				<em>
+					Click on the mask to close
+				</em>
+			</ks-modal>
+
+			<button class="button" @click.prevent="openModal('modal4')">
+				Modal with a lot of content
+			</button>
+
+			<ks-modal title="Modal with buttons" ref="modal4">
+				<div>
+
+					<p>
+						Lorem ipsum dolor sit amet, quo virtute admodum persecuti in.
+						Eu ullum vivendo est, praesent dignissim ut quo, sed inermis conclusionemque te.
+						Has an epicuri appellantur. Vel eu argumentum persequeris.
+						Ex sed quas atomorum, et consul epicuri vituperata vel. Mel ex dicit bonorum reprehendunt.
+						Accumsan constituam te vim, ut malis soleat doming est.
+					</p>
+
+					<p>
+						Per in quis iisque perpetua, ut probo delectus his. Purto novum repudiandae id vix,
+						eam ei dolores perpetua. In sea summo ridens iudicabit, tota dicunt vel in. Dolores
+						conclusionemque no mei, ut duo dolorum consetetur, mel cu diam oporteat. Vel cu graeci audire.
+						Idque menandri oportere ut per, id usu ipsum elitr, sed no eirmod necessitatibus.
+					</p>
+
+					<p>
+						His ex putant postulant, te epicurei theophrastus vim, probatus recusabo ius id. Mel
+						integre impedit maiorum at, nam modus nullam et. Eam ne neglegentur suscipiantur,
+						duo percipit oportere ei. Facete doctus comprehensam et his, phaedrum reprehendunt ex pro,
+						ea has laoreet voluptaria. Erant officiis in qui, eam ei inani corrumpit. At quo recusabo
+						consequuntur, vim te mazim quaeque, cu pri natum invidunt.
+					</p>
+
+					<br/>
+					<p>
+						Purto veniam sed in, ut pro ridens appetere, nam in odio eleifend. Mel no ullum eruditi
+						concludaturque, qui cotidieque comprehensam id, in per partem facilisi volutpat.
+						Choro eruditi ea nam, discere tacimates ex vim. Pro populo lucilius erroribus in,
+						te erat animal offendit vim. No his brute debitis definiebas. Cibo natum ex est.
+					</p>
+
+					<p>
+						Quot petentium cu mel, everti temporibus cu pri. Te eum summo theophrastus.
+						Ancillae interpretaris an pri, elit omnis utroque eu sea, est porro aperiam hendrerit ne.
+						Virtute blandit at pri, est dissentias dissentiunt no. Vel cu malis dissentiet,
+						at ius inimicus conceptam referrentur.
+					</p>
+
+					<p>
+						Lorem ipsum dolor sit amet, quo virtute admodum persecuti in.
+						Eu ullum vivendo est, praesent dignissim ut quo, sed inermis conclusionemque te.
+						Has an epicuri appellantur. Vel eu argumentum persequeris.
+						Ex sed quas atomorum, et consul epicuri vituperata vel. Mel ex dicit bonorum reprehendunt.
+						Accumsan constituam te vim, ut malis soleat doming est.
+					</p>
+
+					<p>
+						Per in quis iisque perpetua, ut probo delectus his. Purto novum repudiandae id vix,
+						eam ei dolores perpetua. In sea summo ridens iudicabit, tota dicunt vel in. Dolores
+						conclusionemque no mei, ut duo dolorum consetetur, mel cu diam oporteat. Vel cu graeci audire.
+						Idque menandri oportere ut per, id usu ipsum elitr, sed no eirmod necessitatibus.
+					</p>
+
+					<br/>
+					<p>
+						His ex putant postulant, te epicurei theophrastus vim, probatus recusabo ius id. Mel
+						integre impedit maiorum at, nam modus nullam et. Eam ne neglegentur suscipiantur,
+						duo percipit oportere ei. Facete doctus comprehensam et his, phaedrum reprehendunt ex pro,
+						ea has laoreet voluptaria. Erant officiis in qui, eam ei inani corrumpit. At quo recusabo
+						consequuntur, vim te mazim quaeque, cu pri natum invidunt.
+					</p>
+
+					<p>
+						Purto veniam sed in, ut pro ridens appetere, nam in odio eleifend. Mel no ullum eruditi
+						concludaturque, qui cotidieque comprehensam id, in per partem facilisi volutpat.
+						Choro eruditi ea nam, discere tacimates ex vim. Pro populo lucilius erroribus in,
+						te erat animal offendit vim. No his brute debitis definiebas. Cibo natum ex est.
+					</p>
+
+					<p>
+						Quot petentium cu mel, everti temporibus cu pri. Te eum summo theophrastus.
+						Ancillae interpretaris an pri, elit omnis utroque eu sea, est porro aperiam hendrerit ne.
+						Virtute blandit at pri, est dissentias dissentiunt no. Vel cu malis dissentiet,
+						at ius inimicus conceptam referrentur.
+					</p>
+				</div>
+				<div slot="footer">
+					<button class="button">Yes</button>
+					<button class="button" @click.prevent="closeModal('modal4')">Cancel</button>
+				</div>
+			</ks-modal>
+
+
+			<!-- Need this to simulate the scrolling effect -->
+			<div style="height: 1800px;">
+				<br/>
+			</div>
 		</div>
 	</div>
 </template>

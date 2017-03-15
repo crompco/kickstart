@@ -1,7 +1,7 @@
 <template>
 	<div class="ks-modal" v-show="isOpen">
 		<div class="ks-modal-mask" @click.prevent="close">
-			<div class="ks-modal-wrapper" @click.stop>
+			<div class="ks-modal-wrapper" @click.stop :style="modalStyle">
 
 				<!-- Modal header-->
 				<div class="ks-modal-header" v-if="showHeader">
@@ -14,15 +14,13 @@
 				</div>
 
 				<!-- Modal body-->
-				<div class="ks-modal-body">
+				<div class="ks-modal-body" ref="body">
 					<slot></slot>
 				</div>
 
 				<!-- Modal Footer-->
-				<div class="ks-modal-footer">
-					<slot name="footer"></slot>
-				</div>
-				
+				<div class="ks-modal-footer"><slot name="footer"></slot></div>
+
 			</div>
 		</div>
 	</div>
@@ -30,6 +28,8 @@
 
 
 <script>
+	import {addEvent} from '../helpers/events';
+
 	export default {
 		name: 'KsModal',
 
@@ -46,6 +46,9 @@
 				type: Boolean,
 				default: true
 			},
+			maxWidth: {
+				default: '50%'
+			}
 		},
 
 		data() {
@@ -54,10 +57,38 @@
 			};
 		},
 
-		computed: {},
+		computed: {
+			modalStyle() {
+				return {
+					maxHeight: this.maxHeight,
+					maxWidth: this.maxWidth
+				}
+			}
+		},
 
 		mounted() {
+			this.$nextTick(() => {
+				console.log('adding event');
+				addEvent(this.$refs.body, 'mousewheel', (e) => {
+					e = window.event || e;
 
+					let offsetHeight = this.$refs.body.offsetHeight;
+					let scrollHeight = this.$refs.body.scrollHeight;
+					let scrollTop = this.$refs.body.scrollTop;
+
+					if ( e.wheelDelta > 0 || e.deltaY < 0 ) {
+						if ( scrollTop == 0 ) {
+							e.preventDefault();
+						}
+					} else {
+						if ( offsetHeight + scrollTop >= scrollHeight ) {
+							e.preventDefault();
+						}
+					}
+
+					e.stopPropagation();
+				});
+			})
 		},
 
 		methods: {
@@ -66,6 +97,9 @@
 			},
 			close() {
 				this.isOpen = false;
+			},
+			scrolling() {
+				console.log('scrolling');
 			}
 		},
 
@@ -89,10 +123,10 @@
 		    position: absolute;
 		    margin: 0 auto;
 		    background: white;
-		    max-width: 50%;
 		    left: 50%;
 		    top: 50%;
 		    transform: translate(-50%, -50%);
+		    overflow-y: initial !important;
 	    }
 	    .ks-modal-header {
 		    position: relative;
@@ -111,5 +145,12 @@
 		.ks-modal-body, .ks-modal-footer {
 			padding: 1em;
 		}
+	    .ks-modal-body {
+		    max-height: calc(100vh - 200px);
+		    overflow-y: auto;
+	    }
+	    .ks-modal-footer:empty {
+		    padding: 0;
+	    }
 	}
 </style>
