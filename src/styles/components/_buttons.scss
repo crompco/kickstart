@@ -9,9 +9,13 @@
 	box-shadow: 0 2px 4px rgba(color(buttons, default, box-shadow), 0.2);
 	@include transition(background-color);
 
-	&:hover {
+	&:hover:not(.disabled) {
 		background-color: color(buttons, default, hover);
 		color: color(buttons, default, color);
+	}
+
+	&.disabled {
+		@include disable;
 	}
 }
 
@@ -28,7 +32,7 @@
 				box-shadow: color(buttons, $name, box-shadow);
 			}
 
-			&:hover {
+			&:hover:not(.disabled) {
 				background-color: darken($bg-color, 4%);
 				color: color(buttons, $name, hover);
 			}

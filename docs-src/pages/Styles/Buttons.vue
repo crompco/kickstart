@@ -25,7 +25,7 @@
 				<div>Outline</div>
 				<hr>
 				<div class="sm-2">
-					<button class="button outline">
+					<button class="button outline disabled" disabled="disabled">
 						I'm a default button
 					</button>
 					<a href="#" class="button outline tiny">
@@ -44,7 +44,7 @@
 				<div>None</div>
 				<hr>
 				<div class="sm-2">
-					<button class="button none">
+					<button class="button none disabled">
 						I'm a default button
 					</button>
 					<a href="#" class="button none tiny">
