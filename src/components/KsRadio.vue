@@ -1,15 +1,14 @@
 <template>
-	<label class="ks-radio radio" :class="classStates">
+	<label class="ks-radio radio" :class="classStates" @click="toggle">
 		<div class="ks-radio-input-wrapper">
 			<input
 				type="radio"
 			    :name="name"
 			    :value="value"
-				@change="change"
 			    :checked="isChecked"
 			>
 		</div>
-		<div class="ks-radio-label-wrapper">
+		<div class="ks-radio-label-wrapper" v-if="label.length">
 			<slot>{{label}}</slot>
 		</div>
 	</label>
@@ -20,11 +19,19 @@
 	export default {
 		name: 'KsRadio',
 
+		model: {
+			prop: 'checked',
+			event: 'input'
+		},
+
 		props: {
 			name: String,
-			label: String,
+			label: {
+				type: String,
+				default: ''
+			},
 			value: {},
-			selectedValue: {},
+			checked: {},
 			disabled: {
 				type: Boolean,
 				default: false
@@ -33,7 +40,6 @@
 
 		data() {
 			return {
-				isChecked: false
 			};
 		},
 
@@ -42,20 +48,18 @@
 				return {
 					"ks-state-active": this.isChecked
 				}
+			},
+			isChecked() {
+				return String(this.checked) == String(this.value);
 			}
 		},
 
 		mounted() {
-			this.refreshChecked();
 		},
 
 		methods: {
-			refreshChecked() {
-				this.isChecked = String(this.value) == String(this.selectedValue);
-			},
-			change(e) {
-				this.isChecked = e.target.checked;
-				this.$emit('changed', this.value);
+			toggle() {
+				this.$emit('input', this.value);
 			},
 		},
 

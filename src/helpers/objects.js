@@ -16,3 +16,19 @@ export function object_get(obj, expression, default_val = '') {
   }, obj) || default_val
 
 }
+
+/**
+ *
+ * @param obj
+ * @param val
+ * @return {Number}
+ */
+export function looseIndexOf(obj, val) {
+	for ( var i in obj ) {
+		if ( obj[i] == val ) {
+			return i;
+		}
+	}
+
+	return -1;
+}

@@ -5,8 +5,9 @@
 				type="checkbox"
 			    :name="name"
 			    :value="value"
-				@change="change"
 			    :checked="isChecked"
+			    @change="change"
+				@click="toggle"
 			>
 		</div>
 		<div class="ks-checkbox-label-wrapper">
@@ -17,14 +18,23 @@
 
 
 <script>
+	import {looseIndexOf} from '../helpers/objects';
+
 	export default {
 		name: 'KsCheckbox',
+
+		model: {
+			prop: 'checked',
+			event: 'input'
+		},
 
 		props: {
 			name: String,
 			label: String,
 			value: {},
-			selectedValue: {},
+			checked: {
+				type: [String, Array]
+			},
 			disabled: {
 				type: Boolean,
 				default: false
@@ -51,20 +61,45 @@
 
 		methods: {
 			refreshChecked() {
-				if ( Array.isArray(this.selectedValue) ) {
-					this.isChecked =  -1 !== this.selectedValue.indexOf(this.value) ? true : false;
+				if ( Array.isArray(this.checked) ) {
+					this.isChecked =  -1 !== looseIndexOf(this.checked, this.value) ? true : false;
+					return;
 				}
 
-				this.isChecked = String(this.value) == String(this.selectedValue);
+				this.isChecked = String(this.value) == String(this.checked);
+			},
+			toggle(e) {
+				this.isChecked = e.target.checked;
+
+				if ( this.isChecked ) {
+					this.$emit('input', this.addValue(this.checked));
+				} else {
+					this.$emit('input', this.removeValue(this.checked));
+				}
 			},
 			change(e) {
-				this.isChecked = e.target.checked;
-				this.$emit('changed', this.isChecked, this.value);
+				this.$emit('change', this.isChecked, e);
 			},
+			removeValue(checked) {
+				let index = looseIndexOf(checked, this.value);
+				if ( index >= 0 ) {
+					checked.splice(index, 1)
+				}
+
+				return checked;
+			},
+			addValue(checked) {
+				if ( checked instanceof Array ) {
+					checked.push(this.value);
+					return checked;
+				}
+
+				return String(this.value);
+			}
 		},
 
 		watch: {
-			selectedValue() {
+			checked() {
 				this.refreshChecked();
 			}
 		},
