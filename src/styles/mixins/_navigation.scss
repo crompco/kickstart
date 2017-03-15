@@ -1,10 +1,10 @@
 @mixin nav-bar() {
 	@include row();
-	background-color: color($nav, background-color);
+	background-color: color(nav, background-color);
 
 	.nav-brand {
-		background-color: color($nav, brand-background);
-		height: get($nav-settings, height);
+		background-color: color(nav, brand-background);
+		height: setting(nav, height);
 		width: 100%;
 		text-align: center;
 
@@ -21,14 +21,14 @@
 		}
 
 		a {
-			color: color($nav, color);
+			color: color(nav, color);
 			text-decoration: none;
 			padding: 1em;
 			display: inline-block;
 			@include transition(background-color, 0.3);
 
 			&:hover {
-				background-color: color($nav, hover);
+				background-color: color(nav, hover);
 			}
 
 			.router-link-active, .active {
@@ -40,10 +40,10 @@
 
 @mixin top-bar() {
 	position: relative;
-	height: get($nav-settings, height);
-	background-color: color($top-bar, background-color);
-	color: color($top-bar, color);
-	box-shadow: 0 2px 1px $med-gray;
+	height: setting(nav, height);
+	background-color: color(top-bar, background-color);
+	color: color(top-bar, color);
+	box-shadow: 0 2px 1px color(med-gray);
 
 	.text {
 		@include v-center;
@@ -65,16 +65,16 @@
 					display: block;
 					padding: 0;
 					margin: 0;
-					background: color($top-bar, background-color);
-					box-shadow: 0 1px 2px $med-gray;
+					background: color(top-bar, background-color);
+					box-shadow: 0 1px 2px color(med-gray);
 
 					a {
 						padding: 0.75em;
-						line-height: get($nav-settings, height) / 2;
+						line-height: setting(nav, height) / 2;
 
 						&:hover {
-							background-color: color($top-bar, hover);
-							color: color($top-bar, hover-color);
+							background-color: color(top-bar, hover);
+							color: color(top-bar, hover-color);
 						}
 					}
 				}
@@ -88,9 +88,9 @@
 			a {
 				display: block;
 				text-decoration: none;
-				color: color($top-bar, color);
-				padding: get($nav-settings, padding);
-				line-height: get($nav-settings, height) - (get($nav-settings, padding) * 2);
+				color: color(top-bar, color);
+				padding: setting(nav, padding);
+				line-height: setting(nav, height) - (setting(nav, padding) * 2);
 			}
 		}
 	}

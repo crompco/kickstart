@@ -1,0 +1,31 @@
+$settings: (
+	alert: (
+		padding: 15px,
+		margin: 0 0 20px 0,
+		border-radius: 5px
+	),
+	nav: (
+		width: 200px,
+		height: 60px,
+		padding: 10px
+	),
+	buttons: (
+		sizes: (
+			tiny: 0.6rem,
+			small: 0.75rem,
+			large: 1.25rem
+		)
+	),
+	tabs: (
+		title: (
+			font-size: 1.1rem,
+			height: 2em,
+			min-width: 4em,
+			padding: 0 0.75em,
+			opacity: 0.7
+		),
+		content: (
+			padding: 1em
+		)
+	)
+);

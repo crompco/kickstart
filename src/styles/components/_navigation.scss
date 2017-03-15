@@ -2,7 +2,7 @@
 	@include nav-bar;
 
 	&.vertical {
-		width: get($nav-settings, width);
+		width: setting(nav, width);
 		height: 100%;
 
 		.nav-links {

@@ -7,26 +7,57 @@
 				<hr>
 				<div class="sm-2">
 					<button class="button">
-						I'm a button
+						I'm a default button
 					</button>
-					<a href="#" class="button">
-						I'm a button
+					<a href="#" class="button tiny">
+						I'm a tiny button
+					</a>
+					<a href="#" class="button small">
+						I'm a small button
+					</a>
+					<a href="#" class="button large">
+						I'm a large button
 					</a>
 				</div>
 			</div>
-			<!--<br>-->
-			<!--<div class="row">-->
-				<!--<div>Outline</div>-->
-				<!--<hr>-->
-				<!--<div class="sm-2">-->
-					<!--<button class="button outline">-->
-						<!--I'm a button-->
-					<!--</button>-->
-					<!--<a href="#" class="button outline">-->
-						<!--I'm a button-->
-					<!--</a>-->
-				<!--</div>-->
-			<!--</div>-->
+			<br>
+			<div class="row">
+				<div>Outline</div>
+				<hr>
+				<div class="sm-2">
+					<button class="button outline disabled" disabled="disabled">
+						I'm a default button
+					</button>
+					<a href="#" class="button outline tiny">
+						I'm a tiny button
+					</a>
+					<a href="#" class="button outline small">
+						I'm a small button
+					</a>
+					<a href="#" class="button outline large">
+						I'm a large button
+					</a>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div>None</div>
+				<hr>
+				<div class="sm-2">
+					<button class="button none disabled">
+						I'm a default button
+					</button>
+					<a href="#" class="button none tiny">
+						I'm a tiny button
+					</a>
+					<a href="#" class="button none small">
+						I'm a small button
+					</a>
+					<a href="#" class="button none large">
+						I'm a large button
+					</a>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>

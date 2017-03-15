@@ -8,21 +8,26 @@
 
 		li {
 			display: flex;
+			border-right: 1px solid darken(color(background-color), 10%);
+
+			&:last-child {
+				border-right: 0;
+			}
 
 			a {
+				display: flex;
+				align-items: center;
+				justify-content: center;
 				text-decoration: none;
-				color: #444;
-				font-size: 1.1em;
+				color: color(text-color);
+				font-size: setting(tabs, title, font-size);
 				border-top: 2px solid transparent;
 				margin: 0;
-				align-items: center;
-				padding: 0 0.75em;
-				height: 2em;
-				min-width: 4em;
-				display: flex;
-				justify-content: center;
-				background-color: darken(color($main, background-color), 8%);
-				opacity: 0.7;
+				padding: setting(tabs, title, padding);
+				height: setting(tabs, title, height);
+				min-width: setting(tabs, title, min-width);
+				background-color: darken(color(background-color), 8%);
+				opacity: setting(tabs, title, opacity);
 				@include transition();
 
 				&:hover {
@@ -31,19 +36,27 @@
 			}
 
 			&.selected-tab {
+				border-right: 0;
+
 				a {
-					background-color: $white;
-					color: color($brand, lighter);
-					border-top-color: color($brand, lighter);
+					background-color: color(white);
+					color: color(brand, lighter);
+					border-top-color: color(brand, lighter);
 					opacity: 1;
 				}
+			}
+		}
+
+		&.expand {
+			li, a {
+				flex-grow: 1;
 			}
 		}
 	}
 
 	.tabs-content {
-		background-color: color($general, white);
-		padding: 1em;
-		box-shadow: 1px 1px 2px rgba(color($general, black), 0.1);
+		background-color: color(white);
+		padding: setting(tabs, content, padding);
+		box-shadow: 1px 1px 2px rgba(color(black), 0.1);
 	}
 }

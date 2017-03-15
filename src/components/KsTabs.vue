@@ -1,6 +1,6 @@
 <template>
 	<div class="ks-tabs">
-		<ul class="tabs-title-bar">
+		<ul class="tabs-title-bar" :class="{ expand: expand }">
 			<li v-for="tab in tabs" :class="{'selected-tab': tab.active}">
 				<a href="#"
 				   @click.prevent="setActiveTab(tab)"
@@ -23,7 +23,11 @@
 	export default {
 		name: 'KsTabs',
 
-		props: {},
+		props: {
+		    expand: {
+		        default: false
+			}
+		},
 
 		data() {
 			return {
