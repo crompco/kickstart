@@ -1,14 +1,15 @@
 <template>
 	<div class="ks-radio-group" :class="classNames">
-		<slot>{{label}}</slot>
+		<div class="ks-radio-group-title">
+			<slot>{{label}}</slot>
+		</div>
 		<template v-for="option in optionsList">
 			<ks-radio
 				:name="name"
 				:value="option.value"
-			    :selected-value="selectedValue"
-			    @changed="changed(option)"
-			>{{option.label}}</ks-radio>
-
+			    v-model="selectedValue"
+			    :label="option.label"
+			></ks-radio>
 		</template>
 	</div>
 </template>
@@ -20,7 +21,12 @@
 	export default {
 		name: 'KsRadioGroup',
 
+		model: {
+			prop: 'value'
+		},
+
 		props: {
+			value: {},
 			label: String,
 			name: {
 				type: String,
@@ -36,11 +42,12 @@
 				type: String,
 				default: 'label'
 			},
-			selectedValue: {}
 		},
 
 		data() {
 			return {
+
+				selectedValue: this.value
 			};
 		},
 
@@ -89,7 +96,15 @@
 
 		methods: {},
 
-		watch: {},
+		watch: {
+			selectedValue() {
+				this.$emit('input', this.selectedValue);
+				this.$emit('change', this.selectedValue);
+			},
+			value() {
+				this.selectedValue = this.value;
+			}
+		},
 
 		components: {
 			KsRadio

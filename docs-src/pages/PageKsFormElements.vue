@@ -16,8 +16,27 @@
 			<ks-checkbox label="JavaScript" name="checkbox1" value="2" v-model="values.checkbox1"></ks-checkbox>
 		</div>
 
-		<h3>Radio Group</h3>
+		<h3>Simple Radio Group</h3>
+		<ks-radio-group
+			class="form-group"
+			name="group1"
+			:options="['Foo', 'Bar', 'Baz']"
+		    v-model="values.group1"
+		>
+			Some group of options
+		</ks-radio-group>
 
+		<h3>Radio Group with array of objects</h3>
+		<ks-radio-group
+			class="form-group"
+			name="group2"
+			:options="radioGroup"
+			value-key="code"
+			label-key="name"
+			v-model="values.group2"
+		>
+			Each option is an object
+		</ks-radio-group>
 	</div>
 </template>
 
@@ -26,6 +45,7 @@
 	import KsRadio from '../../src/components/KsRadio.vue';
 	import KsRadioGroup from '../../src/components/KsRadioGroup.vue';
 	import KsCheckbox from '../../src/components/KsCheckbox.vue';
+	import api from '../../src/helpers/api';
 
 	export default {
 		name: 'PageKsFormElements',
@@ -36,16 +56,21 @@
 
 			return {
 				values: {
-					"radio1": 1,
-					"checkbox1": [1]
-				}
+					group1: '',
+					group2: '',
+					radio1: 1,
+					checkbox1: [1]
+				},
+				radioGroup: []
 			};
 		},
 
 		computed: {},
 
 		mounted() {
-
+			api.get('/countries.json').then((data) => {
+				this.radioGroup = data.slice(0, 10);
+			});
 		},
 
 		methods: {
