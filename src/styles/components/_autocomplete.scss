@@ -27,8 +27,12 @@
 				border: 0;
 			}
 			&.selected-item {
-				background: darkblue;
+				@include state-hover();
 				color: #fff;
+			}
+			&:hover {
+				@include state-hover();
+				background: lighten(color(state, hover, background-color), 10%);
 			}
 		}
 	}
