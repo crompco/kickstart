@@ -83,10 +83,11 @@
 			removeValue(checked) {
 				let index = looseIndexOf(checked, this.value);
 				if ( index >= 0 ) {
-					checked.splice(index, 1)
+					checked.splice(index, 1);
+					return checked;
 				}
 
-				return checked;
+				return this.value;
 			},
 			addValue(checked) {
 				if ( checked instanceof Array ) {
