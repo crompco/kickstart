@@ -29,7 +29,7 @@
 		<h3>Radio Group with array of objects</h3>
 		<ks-radio-group
 			class="form-group"
-			name="group1"
+			name="group2"
 			:options="radioGroup"
 			value-key="code"
 			label-key="name"
