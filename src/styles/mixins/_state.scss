@@ -1,0 +1,13 @@
+@mixin state-default() {
+	background-color: color(state, default, background-color);
+	border: 1px solid color(state, default, border);
+	font-weight: setting(state, default, font-weight);
+	color: color(state, default, color);
+}
+
+@mixin state-hover() {
+	background-color: color(state, hover, background-color);
+	border: 1px solid color(state, hover, border);
+	font-weight: setting(state, hover, font-weight);
+	color: color(state, hover, color);
+}
