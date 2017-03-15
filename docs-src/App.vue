@@ -1,5 +1,5 @@
 <template>
-	<div id="app" class="keen-docs">
+	<div id="app" class="kickstart-docs">
 		<sidebar></sidebar>
 		<router-view ref="pageContent" class="content"></router-view>
 	</div>
@@ -7,7 +7,6 @@
 
 <script>
 	import Sidebar from './Sidebar.vue';
-//	import UiIconButton from 'src/UiIconButton.vue';
 
 	export default {
 	    name: 'App',
@@ -25,7 +24,6 @@
 
 				this.$nextTick(() => {
 					this.$refs.pageContent.scrollTop = 0;
-//					this.showSidebar = false;
 				});
 			}
 		},
@@ -42,7 +40,6 @@
 
 		components: {
 			Sidebar,
-//			UiIconButton
 		}
 	};
 </script>

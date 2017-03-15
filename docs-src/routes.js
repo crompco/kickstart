@@ -2,6 +2,7 @@ import PageKsAutocomplete from './pages/PageKsAutocomplete.vue';
 import PageKsTabs from './pages/PageKsTabs.vue';
 import PageKsModal from './pages/PageKsModal.vue';
 import PageKsLoaders from './pages/PageKsLoaders.vue';
+import PageKsFormElements from './pages/PageKsFormElements.vue';
 import StylesPage from './pages/StylesPage.vue';
 
 const routes = [
@@ -27,6 +28,12 @@ const routes = [
 		component: PageKsModal,
 		name: 'KsModal',
 		meta: { title: 'Kickstart Modal' }
+	},
+	{
+		path: '/ks-forms',
+		component: PageKsFormElements,
+		name: 'KsForms',
+		meta: { title: 'Kickstart Forms' }
 	},
 	{
 		path: '/ks-loaders',
