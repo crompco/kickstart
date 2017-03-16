@@ -38,8 +38,7 @@
 
 			<li
 				v-for="(item, index) in list"
-				:class="{ 'ks-state-hover': index == selected_index }"
-				@mouseover="selected_index = index"
+				:class="{ 'selected-item': index == selected_index }"
 				@click.prevent="selectItem(index)"
 			>
 				<!-- Scoped slot -->
@@ -148,7 +147,9 @@
 				}
 				if ( this.closeOnBlur ) {
 					addEvent(this.$refs.lookup, 'blur', () => {
-						this.clear();
+						setTimeout(() => {
+							this.clear();
+						}, 200);
 					});
 				}
 			});
@@ -249,7 +250,6 @@
 					return;
 				}
 				if ( e && keyCode(e) == 9 && e.shiftKey ) {
-					console.log('pressed shift+tab')
 					this.clear();
 					return;
 				}
