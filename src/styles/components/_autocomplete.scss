@@ -13,7 +13,7 @@
 	padding: 0;
 	border: 0;
 
-	> input:not(.is-multiple), &.is-selected {
+	> input:not(.is-multiple) {
 		@include ks-input;
 	}
 
@@ -55,6 +55,53 @@
 		}
 	}
 
+	&:not(.is-multiple).is-selected {
+		.selection {
+			@include ks-input;
+		}
+	}
+
+	&:not(.is-multiple) {
+		.selection {
+			display: block;
+			width: 100%;
+			padding: 0.5em;
+		}
+	}
+
+	.selection {
+
+		.selection-text {
+			background-color: color(white);
+			display: inline-block;
+			color: color(text-color);
+
+			a {
+				height: 0.8rem;
+				width: 0.8rem;
+				position: relative;
+				display: inline-block;
+
+				&:hover {
+					svg g {
+						fill: darken(color(med-gray), 40%);
+					}
+				}
+			}
+
+			svg {
+				height: 0.8rem;
+				width: 0.8rem;
+				position: absolute;
+				top: 1px;
+
+				g {
+					fill: darken(color(med-gray), 20%);
+				}
+			}
+		}
+	}
+
 
 	&.is-multiple {
 		@include ks-input;
@@ -67,18 +114,28 @@
 		.autocomplete-list {
 			width: calc(100% + 2px);
 			left: -1px;
-			margin-top: calc(0.5em + 1px);
+			margin-top: 0.5em;
 		}
 
-		.selection {
+		&.is-selected .autocomplete-list {
+			margin-top: calc(0.5em - 6px);
+		}
 
-			.selection-text {
-				background-color: color(brand, lighter);
-				display: inline-block;
-				margin: 4px;
-				color: color(white);
-				padding: 3px 5px;
-				border-radius: 3px;
+		.selection .selection-text {
+			background-color: color(brand, lighter);
+			margin: 4px;
+			padding: 3px 5px;
+			border-radius: 3px;
+			color: color(white);
+
+			a:hover {
+				svg g {
+					fill: darken(color(brand, lighter), 40%);
+				}
+			}
+
+			svg g {
+				fill: darken(color(brand, lighter), 20%);
 			}
 		}
 	}
