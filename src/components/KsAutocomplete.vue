@@ -1,5 +1,7 @@
 <template>
-	<div class="autocomplete-holder">
+	<div class="autocomplete-holder"
+		 :class="{ 'is-selected': has_selections, 'is-multiple': multiple }"
+		 @click.prevent="setFocus">
 
 		<!-- Selections  -->
 		<span class="selection" v-if="has_selections">
@@ -23,6 +25,7 @@
 			@keydown.enter.prevent="selectItem(selected_index)"
 			@keydown.down.prevent="selectDown()"
 			@keydown.up.prevent="selectUp()"
+			:class="{ 'is-multiple': multiple }"
 		>
 
 		<!-- List -->
@@ -32,7 +35,7 @@
 		    ref="list"
 		>
 
-			<li style="height: 5px; padding: 0; margin: 0;border:0;">
+			<li style="padding: 0; margin: 0;border:0;">
 				<loader-line :show="loading" ></loader-line>
 			</li>
 

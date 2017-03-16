@@ -1,12 +1,29 @@
+@mixin ks-input() {
+	border: 1px solid color(med-gray);
+	outline: none;
+	width: 100%;
+	padding: 0.5em;
+	box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
 .autocomplete-holder {
 	position: relative;
+	@include form-input(inline-block);
+	background: color(white);
+	padding: 0;
+	border: 0;
 
-	> input {
-		@include form-input(inline-block);
+	> input:not(.is-multiple), &.is-selected {
+		@include ks-input;
+	}
+
+	> input.is-multiple {
+		border: 0;
+		outline: none;
 	}
 
 	.autocomplete-list {
-		margin: 0 0.3em;
+		margin: 0;
 		z-index: 100;
 		padding: 0;
 		width: 100%;
@@ -34,6 +51,34 @@
 			&:hover {
 				@include state-hover();
 				background: lighten(color(state, hover, background-color), 10%);
+			}
+		}
+	}
+
+
+	&.is-multiple {
+		@include ks-input;
+		padding: calc(0.3em - 4px) 0.3em;
+
+		&:not(.is-selected) {
+			padding: calc(0.5em - 1px);
+		}
+
+		.autocomplete-list {
+			width: calc(100% + 2px);
+			left: -1px;
+			margin-top: calc(0.5em + 1px);
+		}
+
+		.selection {
+
+			.selection-text {
+				background-color: color(brand, lighter);
+				display: inline-block;
+				margin: 4px;
+				color: color(white);
+				padding: 3px 5px;
+				border-radius: 3px;
 			}
 		}
 	}
