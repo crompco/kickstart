@@ -6,29 +6,24 @@
 	}
 
 	.autocomplete-list {
-		margin: 0;
+		margin: 0 0.3em;
 		z-index: 100;
 		padding: 0;
 		width: 100%;
-		background: #fff;
+		background-color: color(white);
 		position: absolute;
 		list-style: none;
-		border: solid 1px #CCC;
+		border: solid 1px color(med-light-gray);
 		border-top: 0;
-		box-shadow: 0px 2px 5px #444;
 		overflow-y: scroll;
+
 		> li {
-			will-change: transform;
-			transition: all 0.2s ease-in-out;
 			padding: 0.25em 0.5em 0.25em 0.2em;
 			border: 1px solid transparent;
-			border-bottom: solid 1px #CCC;
+			border-bottom: solid 1px color(med-light-gray);
+
 			&:last-child {
 				border: 0;
-			}
-			&.selected-item {
-				background: darkblue;
-				color: #fff;
 			}
 		}
 	}

@@ -271,7 +271,7 @@
 			},
 
 			selectUp() {
-				var index = this.selected_index - 1;
+				let index = this.selected_index - 1;
 				if ( !(index < 0) ) {
 					this.selected_index -= 1;
 				}
@@ -284,7 +284,7 @@
 			},
 
 			selectDown() {
-				var index = this.selected_index + 1;
+				let index = this.selected_index + 1;
 				if ( index < this.list.length ) {
 					this.selected_index += 1;
 				}
@@ -320,7 +320,7 @@
 
 			lookup_name() {
 				if ( this.lookup_name == '' ) {
-//					this.list = [];
+					this.list = [];
 					return;
 				}
 
