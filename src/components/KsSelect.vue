@@ -158,7 +158,6 @@
 
 			selectItem(i) {
 				let item = this.getItemByIndex(i);
-				console.log(item, i)
 				if ( !item[this.keyName] ) {
 					console.log('Error: Could not find key: ' + this.keyName);
 				}
