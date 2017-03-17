@@ -27,7 +27,7 @@
 			v-model="lookup_name"
 			ref="lookup"
 			@keyup.esc="clear"
-			@keyup.backspace="backspace"
+			@keydown.backspace="backspace"
 			@keydown.tab="selectItem(selected_index, $event)"
 			@keydown.enter.prevent="selectItem(selected_index)"
 			@keydown.down.prevent="selectDown()"
@@ -37,7 +37,7 @@
 
 		<!-- List -->
 		<ul class="autocomplete-list"
-		    v-show="lookup_name.length > 0"
+		    v-show="show_list"
 		    :style="'max-height:'+this.listHeight"
 		    ref="list"
 		>
@@ -95,6 +95,10 @@
 				type: String,
 				default: null
 			},
+			itemFilter: {
+				type: [String, Function],
+				default: null
+			},
 			multiple: {
 				type: Boolean,
 				default: false
@@ -113,30 +117,57 @@
 			},
 			listHeight: {
 				default: "250px"
+			},
+			minSearch: {
+				type: Number,
+				default: 1
+			},
+			startIndex: {
+				type: Number,
+				default: -1
 			}
 		},
 
 		data() {
 			return {
+				focused: false,
 				lookup_name: '',
-				selected_index: -1,
+				selected_index: this.startIndex,
 				selection: null,
 				timer: '',
 				list: [],
 				loading: false,
 				cache: {},
 				page: 1,
-				last_page: null
+				last_page: null,
 			};
 		},
 
 		computed: {
+			show_list() {
+				return this.lookup_name.length >= this.minSearch;
+			},
 			has_selections() {
 				if ( this.selection && this.selection.length ) {
 					return true;
 				}
 
 				return false;
+			},
+			filter_function() {
+				let name_regex = new RegExp('^.*' + escapeRegExp(this.lookup_name) + '.*', 'i');
+
+				let filter = this.itemFilter;
+				if ( !filter && this.selectionKey ) {
+					filter = this.selectionKey;
+				}
+				if ( typeof filter == 'function' ) {
+					return filter;
+				}
+
+				return (item) => {
+					return object_get(item, filter, '').match(name_regex) ? true : false;
+				};
 			},
 			last_index() {
 				return this.list.length -1;
@@ -155,13 +186,15 @@
 				if ( this.focus ) {
 					this.setFocus();
 				}
-				if ( this.closeOnBlur ) {
-					addEvent(this.$refs.lookup, 'blur', () => {
-						setTimeout(() => {
+
+				addEvent(this.$refs.lookup, 'blur', () => {
+					setTimeout(() => {
+						this.$emit('blur');
+						if ( this.closeOnBlur ) {
 							this.clear();
-						}, 200);
-					});
-				}
+						}
+					}, 200);
+				});
 			});
 		},
 
@@ -186,7 +219,7 @@
 
 				if ( this.page in this.cache ) {
 					if ( term in this.cache[this.page] ) {
-						this.selected_index = -1;
+						this.selected_index = this.startIndex;
 						this.list = this.cache[this.page][term];
 						return true;
 					}
@@ -215,7 +248,7 @@
 								this.last_page = this.page;
 							}
 						} else {
-							this.selected_index = -1;
+							this.selected_index = this.startIndex;
 							this.cache[term] = list;
 							this.list = list;
 						}
@@ -228,12 +261,14 @@
 					return;
 				}
 
-				let name_regex = new RegExp('^.*' + escapeRegExp(this.lookup_name) + '.*', 'i');
 				this.loading = true;
-				this.list = this.items.filter((item) => {
-					return object_get(item, this.selectionKey, '').match(name_regex) ? true : false;
-				});
-				this.cache[this.lookup_name] = this.list;
+				if ( !this.lookup_name ) {
+					this.list = this.items;
+				} else {
+					this.list = this.items.filter(this.filter_function);
+					this.cache[this.lookup_name] = this.list;
+				}
+
 				this.loading = false;
 			},
 
@@ -245,6 +280,7 @@
 
 			setFocus() {
 				this.$refs.lookup.focus();
+				this.$emit('focus');
 			},
 
 			backspace() {
@@ -253,6 +289,14 @@
 						this.selection.pop();
 					}
 				}
+			},
+
+			getSelectedItem() {
+				if ( !this.list[this.selected_index] ) {
+					return null;
+				}
+
+				return this.list[this.selected_index];
 			},
 
 			selectItem(index, e) {
@@ -285,24 +329,12 @@
 				if ( !(index < 0) ) {
 					this.selected_index -= 1;
 				}
-
-				if ( this.list.length > 0 ) {
-					this.$nextTick(() => {
-						this.autoScroll('up');
-					})
-				}
 			},
 
 			selectDown() {
 				let index = this.selected_index + 1;
 				if ( index < this.list.length ) {
 					this.selected_index += 1;
-				}
-
-				if ( this.list.length > 0 ) {
-					this.$nextTick(() => {
-						this.autoScroll('down');
-					})
 				}
 			},
 
@@ -333,14 +365,15 @@
                         this.setFocus();
 					});
 				}
-			}
+			},
 
 		},
 
 		watch: {
 
 			lookup_name() {
-				if ( this.lookup_name == '' ) {
+				this.selected_index = this.startIndex;
+				if ( this.lookup_name.length < this.minSearch ) {
 					this.list = [];
 					return;
 				}
@@ -362,7 +395,7 @@
 				}, this.delay);
 			},
 
-			selected_index() {
+			selected_index(newVal, oldVal) {
 				if ( this.paginated ) {
 					if ( this.last_index - this.paginateThreshold <= this.selected_index ) {
 						if ( parseInt(this.last_page || 0) > 0) {
@@ -372,6 +405,13 @@
 						this.page++;
 						this.runSearch(true)
 					}
+				}
+
+				// Auto scroll
+				if ( this.list.length > 0 && newVal != oldVal ) {
+					this.$nextTick(() => {
+						this.autoScroll(newVal > oldVal ? 'down' : 'up');
+					});
 				}
 			}
 

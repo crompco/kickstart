@@ -1,0 +1,22 @@
+.ks-select {
+	position: relative;
+	@include form-input(inline-block);
+	background: color(white);
+	padding: 0;
+	border: 0;
+	padding: 0.5em 0.5em;
+
+
+	.ks-select-dropdown {
+		margin: 0;
+		z-index: 100;
+		padding: 0;
+		width: 100%;
+		background-color: color(white);
+		position: absolute;
+		list-style: none;
+		border: solid 1px color(med-light-gray);
+		border-top: 0;
+		overflow-y: scroll;
+	}
+}
