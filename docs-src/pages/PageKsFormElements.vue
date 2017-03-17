@@ -7,12 +7,18 @@
 		<ks-radio :inline="true" label="PHP" name="radio1" value="1" v-model="values.radio1"></ks-radio>
 		<ks-radio :inline="true" label="JavaScript" name="radio1" value="2" v-model="values.radio1"></ks-radio>
 
+		<div class="form-group">
+			<label class="title">Which do you prefer</label>
+			<ks-radio :inline="true" label="PHP" name="radio1" value="1" v-model="values.radio1"></ks-radio>
+			<ks-radio :inline="true" label="JavaScript" name="radio1" value="2" v-model="values.radio1"></ks-radio>
+		</div>
+
 		<h3>Select all that your enjoy using (inline)</h3>
 		<ks-checkbox :inline="true" label="PHP" name="checkbox1" value="1" v-model="values.checkbox1"></ks-checkbox>
 		<ks-checkbox :inline="true" label="JavaScript" name="checkbox1" value="2" v-model="values.checkbox1"></ks-checkbox>
 
 		<div class="form-group" style="margin-top:1em;">
-			<label>Select all that your enjoy using</label>
+			<label class="title">Select all that your enjoy using</label>
 			<div class="checkbox">
 				<ks-checkbox label="PHP" name="checkbox1" value="1" v-model="values.checkbox1"></ks-checkbox>
 				<ks-checkbox label="JavaScript" name="checkbox1" value="2" v-model="values.checkbox1"></ks-checkbox>

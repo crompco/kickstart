@@ -1,4 +1,4 @@
-.ks-checkbox {
+.ks-checkbox, .ks-radio {
 	display: flex;
 	align-items: center;
 	margin-bottom: 0.5rem;
@@ -8,7 +8,7 @@
 		margin-right: 0.5em;
 	}
 
-	input[type="checkbox"] {
+	input[type="checkbox"], input[type="radio"] {
 		opacity: 0;
 		position: absolute;
 	}
@@ -31,13 +31,30 @@
 			}
 		}
 
-		.ks-checkbox-label-wrapper {
+		.ks-radio-input-wrapper {
+			border-color: color(brand, lighter);
+
+			.radio-check {
+				position: absolute;
+				display: block;
+				background-color: color(brand, lighter);
+				border-radius: 50%;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				margin: auto;
+				transform: scale(0.7);
+			}
+		}
+
+		.ks-checkbox-label-wrapper, .ks-radio-label-wrapper {
 			font-weight: bold;
 		}
 	}
 
 
-	.ks-checkbox-input-wrapper {
+	.ks-checkbox-input-wrapper, .ks-radio-input-wrapper {
 		position: relative;
 		border: 2px solid color(med-gray);
 		height: 1.1rem;
@@ -47,7 +64,11 @@
 		margin-right: 0.5rem;
 	}
 
-	.ks-checkbox-label-wrapper {
+	.ks-radio-input-wrapper {
+		border-radius: 50%;
+	}
+
+	.ks-checkbox-label-wrapper, .ks-radio-label-wrapper {
 		line-height: 1.1rem;
 	}
 }
