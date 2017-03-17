@@ -1,22 +1,28 @@
 .ks-select {
+	cursor: pointer;
 	position: relative;
 	@include form-input(inline-block);
 	background: color(white);
 	padding: 0;
 	border: 0;
-	padding: 0.5em 0.5em;
-
 
 	.ks-select-dropdown {
-		margin: 0;
-		z-index: 100;
-		padding: 0;
-		width: 100%;
-		background-color: color(white);
-		position: absolute;
-		list-style: none;
-		border: solid 1px color(med-light-gray);
-		border-top: 0;
-		overflow-y: scroll;
+		.ks-select-dropdown-input {
+			padding: 0.5em 0.5em;
+
+			> input:not(.is-multiple) {
+				@include ks-autocomplete-input;
+			}
+
+			> input.is-multiple {
+				border: 0;
+				outline: none;
+			}
+		}
 	}
+
+	.ks-select-selection {
+		padding: 0.5em 0.5em;
+	}
+
 }
