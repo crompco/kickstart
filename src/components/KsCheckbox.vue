@@ -1,14 +1,15 @@
 <template>
-	<label class="ks-checkbox checkbox" :class="classStates">
+	<label class="ks-checkbox" :class="classStates">
+		<input
+			type="checkbox"
+			:name="name"
+			:value="value"
+			:checked="isChecked"
+			@change="change"
+			@click="toggle"
+		>
 		<div class="ks-checkbox-input-wrapper">
-			<input
-				type="checkbox"
-			    :name="name"
-			    :value="value"
-			    :checked="isChecked"
-			    @change="change"
-				@click="toggle"
-			>
+			<checkmark v-show="isChecked"></checkmark>
 		</div>
 		<div class="ks-checkbox-label-wrapper">
 			<slot>{{label}}</slot>
@@ -18,6 +19,10 @@
 
 
 <script>
+	// External Dependencies
+	import Checkmark from '../svg/checkmark.svg';
+
+	// Internal Dependencies
 	import {looseIndexOf} from '../helpers/objects';
 
 	export default {
@@ -38,7 +43,11 @@
 			disabled: {
 				type: Boolean,
 				default: false
-			}
+			},
+            inline: {
+                type: Boolean,
+                default: false
+            }
 		},
 
 		data() {
@@ -50,8 +59,9 @@
 		computed: {
 			classStates() {
 				return {
-					"ks-state-active": this.isChecked
-				}
+					"ks-state-active": this.isChecked,
+                    "inline": this.inline
+                }
 			}
 		},
 
@@ -104,18 +114,9 @@
 				this.refreshChecked();
 			}
 		},
+
+        components: {
+            Checkmark
+		}
 	}
 </script>
-
-<style lang="scss">
-	.ks-checkbox {
-		> div {
-			display: inline-block;
-		}
-		&.ks-state-active {
-			background: darkblue;
-			color: white;
-		}
-	}
-
-</style>

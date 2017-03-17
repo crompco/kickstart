@@ -1,12 +1,13 @@
 <template>
-	<label class="ks-radio radio" :class="classStates" @click="toggle">
+	<label class="ks-radio" :class="classStates" @click="toggle">
+		<input
+			type="radio"
+			:name="name"
+			:value="value"
+			:checked="isChecked"
+		>
 		<div class="ks-radio-input-wrapper">
-			<input
-				type="radio"
-			    :name="name"
-			    :value="value"
-			    :checked="isChecked"
-			>
+			<span class="radio-check"></span>
 		</div>
 		<div class="ks-radio-label-wrapper" v-if="label.length">
 			<slot>{{label}}</slot>
@@ -35,6 +36,10 @@
 			disabled: {
 				type: Boolean,
 				default: false
+			},
+			inline: {
+			    type: Boolean,
+			    default: false
 			}
 		},
 
@@ -46,7 +51,8 @@
 		computed: {
 			classStates() {
 				return {
-					"ks-state-active": this.isChecked
+					"ks-state-active": this.isChecked,
+					"inline": this.inline
 				}
 			},
 			isChecked() {
@@ -70,16 +76,3 @@
 		},
 	}
 </script>
-
-<style lang="scss">
-	.ks-radio {
-		> div {
-			display: inline-block;
-		}
-		&.ks-state-active {
-			background: darkblue;
-			color: white;
-		}
-	}
-
-</style>

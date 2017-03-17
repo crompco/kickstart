@@ -1,16 +1,18 @@
 <template>
 	<div class="ks-radio-group" :class="classNames">
-		<div class="ks-radio-group-title">
+		<label class="ks-radio-group-title">
 			<slot>{{label}}</slot>
+		</label>
+		<div class="radio">
+			<template v-for="option in optionsList">
+				<ks-radio
+					:name="name"
+					:value="option.value"
+					v-model="selectedValue"
+					:label="option.label"
+				></ks-radio>
+			</template>
 		</div>
-		<template v-for="option in optionsList">
-			<ks-radio
-				:name="name"
-				:value="option.value"
-			    v-model="selectedValue"
-			    :label="option.label"
-			></ks-radio>
-		</template>
 	</div>
 </template>
 

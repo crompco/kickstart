@@ -31,6 +31,7 @@ module.exports = {
 				options: {
 					loaders: {
 						// configured in the script specific webpack configs
+						svg: 'svg-inline-loader'
 					},
 					postcss: [
 						autoprefixer({
@@ -70,6 +71,10 @@ module.exports = {
 				// 		}
 				// 	]
 				// })
+			},
+			{
+				test: /\.svg$/,
+				loader: 'vue-svg-loader'
 			}
 		]
 	},

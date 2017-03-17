@@ -3,17 +3,20 @@
 		<h2>Form Elements</h2>
 
 		<h3>Radio</h3>
-		<div class="form-group">
-			<label>Which do you prefer</label>
-			<ks-radio label="PHP" name="radio1" value="1" v-model="values.radio1"></ks-radio>
-			<ks-radio label="JavaScript" name="radio1" value="2" v-model="values.radio1"></ks-radio>
-		</div>
+		<h3>Which do you prefer</h3>
+		<ks-radio :inline="true" label="PHP" name="radio1" value="1" v-model="values.radio1"></ks-radio>
+		<ks-radio :inline="true" label="JavaScript" name="radio1" value="2" v-model="values.radio1"></ks-radio>
 
-		<h3>Checkbox</h3>
-		<div class="form-group">
+		<h3>Select all that your enjoy using (inline)</h3>
+		<ks-checkbox :inline="true" label="PHP" name="checkbox1" value="1" v-model="values.checkbox1"></ks-checkbox>
+		<ks-checkbox :inline="true" label="JavaScript" name="checkbox1" value="2" v-model="values.checkbox1"></ks-checkbox>
+
+		<div class="form-group" style="margin-top:1em;">
 			<label>Select all that your enjoy using</label>
-			<ks-checkbox label="PHP" name="checkbox1" value="1" v-model="values.checkbox1"></ks-checkbox>
-			<ks-checkbox label="JavaScript" name="checkbox1" value="2" v-model="values.checkbox1"></ks-checkbox>
+			<div class="checkbox">
+				<ks-checkbox label="PHP" name="checkbox1" value="1" v-model="values.checkbox1"></ks-checkbox>
+				<ks-checkbox label="JavaScript" name="checkbox1" value="2" v-model="values.checkbox1"></ks-checkbox>
+			</div>
 		</div>
 
 		<h3>Simple Radio Group</h3>

@@ -1,15 +1,13 @@
-@mixin form-elements($display) {
+@import "forms/_checkbox";
+@import "forms/_radio";
+
+.form-group {
 	margin-bottom: 1em;
 
 	> label {
-		@include form-label($display, 600);
+		@include form-label(block, 600);
 		max-width: 100%;
-
-		@if ( $display == inline-block ) {
-			margin-right: 0.5em;
-		} @else {
-			margin-bottom: 0.5em;
-		}
+		margin-bottom: 0.5em;
 
 		&.top {
 			vertical-align: top;
@@ -31,7 +29,7 @@
 	[type='url'],
 	[type='color'],
 	textarea {
-		@include form-input($display);
+		@include form-input(block);
 	}
 
 	textarea.no-resize {
@@ -39,26 +37,67 @@
 	}
 
 	.checkbox, .radio {
-		display: $display;
-
-		&-inline {
-			display: $display;
-
-			label {
-				@include form-label(inline-block);
-			}
-		}
+		//display: block;
 
 		label {
 			@include form-label(block);
+			margin-bottom: 0.4em;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+
+			&.ks-state-active {
+				font-weight: bold;
+			}
+
+			.ks-radio-input-wrapper, .ks-radio-label-wrapper, .ks-checkbox-input-wrapper, .ks-checkbox-label-wrapper {
+				display: inline-block;
+			}
+		}
+
+		&.inline {
+			display: inline-block;
+
+			label {
+				display: inline-block;
+				margin-bottom: 0;
+			}
 		}
 	}
-}
 
-.form-group {
-	@include form-elements(block);
+	&.inline {
+		> label {
+			@include form-label(inline-block, 600);
 
-	&-inline {
-		@include form-elements(inline-block);
+			margin-right: 0.5em;
+			margin-bottom: 0;
+		}
+
+		[type='text'],
+		[type='password'],
+		[type='date'],
+		[type='datetime'],
+		[type='datetime-local'],
+		[type='month'],
+		[type='week'],
+		[type='email'],
+		[type='number'],
+		[type='search'],
+		[type='tel'],
+		[type='time'],
+		[type='url'],
+		[type='color'],
+		textarea {
+			@include form-input(inline-block);
+		}
+
+		.checkbox, .radio {
+			display: inline-block;
+
+			label {
+				margin-bottom: 0;
+			}
+		}
 	}
 }
