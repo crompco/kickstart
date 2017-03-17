@@ -68,32 +68,3 @@
 		}
 	}
 </script>
-
-<style lang="scss">
-	.loader-line {
-		height: 4px;
-		width: 100%;
-		position: relative;
-		overflow: hidden;
-		background-color: #ddd;
-	}
-	.loader-line:before{
-		display: block;
-		position: absolute;
-		content: "";
-		left: -200px;
-		width: 200px;
-		height: 4px;
-		background-color: darkblue;
-		animation: line-loading 1.5s linear infinite;
-	}
-
-	@keyframes line-loading {
-		from {left: -100px; width: 20%;}
-		50% {width: 30%;}
-		70% {width: 70%;}
-		80% { left: 50%;}
-		95% {left: 120%;}
-		to {left: 100%;}
-	}
-</style>

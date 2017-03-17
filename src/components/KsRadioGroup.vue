@@ -1,6 +1,6 @@
 <template>
 	<div class="ks-radio-group" :class="classNames">
-		<label class="ks-radio-group-title">
+		<label class="ks-radio-group-title title">
 			<slot>{{label}}</slot>
 		</label>
 		<div class="radio">
