@@ -260,14 +260,15 @@
 
 		watch: {
 			lookup_name() {
-				this.runLookup();
+			    // when the lookup name changes we trigger the run lookup
+				this.startSearch();
 			},
 
 			list() {
+			    // Auto select when 1 element is available
 			    if ( this.taggable && this.list.length == 1 ) {
 			        this.selected_index = 0;
 				}
-
 			}
 		},
 

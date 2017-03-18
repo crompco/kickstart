@@ -190,7 +190,7 @@
 
 		watch: {
 			lookup_name() {
-				this.runLookup();
+				this.startSearch();
 			},
 			value() {
 				this.refreshSelected();
@@ -208,7 +208,7 @@
 					this.$nextTick(() => {
 						this.setFocus('lookup');
 						if ( oldOpen != open ) {
-							this.runLookup();
+							this.startSearch();
 						}
 					});
 				} else {
