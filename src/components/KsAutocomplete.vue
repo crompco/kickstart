@@ -115,6 +115,10 @@
 			taggable: {
 			    type: Boolean,
 				default: false
+			},
+			focus: {
+			    type: Boolean,
+				default: false
 			}
 		},
 
