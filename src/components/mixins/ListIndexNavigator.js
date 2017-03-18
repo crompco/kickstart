@@ -226,7 +226,9 @@ export default {
 
 			// Auto scroll
 			if ( this.list.length > 0 && newVal != oldVal ) {
-				this.autoScroll(newVal > oldVal ? 'down' : 'up');
+				this.$nextTick(() => {
+                    this.autoScroll(newVal > oldVal ? 'down' : 'up');
+				});
 			}
 		}
 	}

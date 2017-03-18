@@ -62,7 +62,8 @@
 	// Internal
 	import LoaderLine from './KsLoaderLine.vue';
 	import {addEvent, keyCode} from '../helpers/events';
-	import ListIndexNavigatior from './mixins/ListIndexNavigator';
+    import {object_get} from '../helpers/objects';
+    import ListIndexNavigatior from './mixins/ListIndexNavigator';
 
 
 	// External
@@ -114,6 +115,10 @@
 			startIndex: {
 				type: Number,
 				default: -1
+			},
+			taggable: {
+			    type: Boolean,
+				default: false
 			}
 		},
 
