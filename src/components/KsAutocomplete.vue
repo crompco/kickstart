@@ -136,7 +136,7 @@
 
 		computed: {
 			show_list() {
-				return this.lookup_name.length >= this.minSearch;
+				return this.focused && this.lookup_name.length >= this.minSearch;
 			},
 			is_multiple() {
 			    return this.taggable || this.multiple;
@@ -165,10 +165,13 @@
 				if ( this.focus ) {
 					this.setFocus('lookup');
 				}
-
+				addEvent(this.$refs.lookup, 'focus', () => {
+				    this.focused = true;
+				});
 				addEvent(this.$refs.lookup, 'blur', () => {
 					setTimeout(() => {
 						this.$emit('blur');
+						this.focused = false;
 						if ( this.closeOnBlur ) {
 							this.clear();
 						}
@@ -294,6 +297,12 @@
 			    // Auto select when 1 element is available
 			    if ( this.taggable && this.list.length == 1 ) {
 			        this.selected_index = 0;
+				}
+			},
+
+			focused() {
+			    if ( this.focused && this.minSearch == 0 && this.lookup_name.length == 0 ) {
+			        this.startSearch();
 				}
 			}
 		},

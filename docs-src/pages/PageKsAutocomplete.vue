@@ -45,9 +45,9 @@
 		<div class="callout">
 			<h3>Multiple Selections with taggable (add new)</h3>
 			<ks-autocomplete
-				:items="countries"
-				selection-key="name"
+				:min-search="0"
 				:taggable="true"
+				selection-key="name"
 				@search="runSearch"
 			>
 				<template scope="props">
