@@ -202,13 +202,6 @@
 			},
 
 			selectItem(index, e) {
-			    if ( this.taggable && index == -1 ) {
-			        console.log('Tag Me!');
-				}
-
-				if ( !this.list[index] ) {
-					return;
-				}
 				if ( e && keyCode(e) == 9 ) {
 			        if ( e.shiftKey ) {
 						this.clear();
@@ -218,6 +211,13 @@
 			            e.preventDefault();
 					}
 				}
+
+                if ( this.taggable && index == -1 && this.lookup_name.length ) {
+                    this.tagSelection();
+                    return;
+                } else if ( !this.list[index] ) {
+                    return;
+                }
 
 				this.selected_index = index;
 				this.$emit('selected', this.list[this.selected_index]);
@@ -246,6 +246,16 @@
 				}
 			},
 
+			tagSelection() {
+                let tag = this.lookup_name;
+                if ( !this.selection ) {
+                    this.selection  = [];
+                }
+
+                this.selection.push(tag);
+                this.lookup_name = '';
+                this.$emit('tag-created', tag);
+            }
 		},
 
 		watch: {
