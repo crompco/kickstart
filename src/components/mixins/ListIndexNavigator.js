@@ -192,6 +192,9 @@ export default {
 
 		autoScroll(direction) {
 			let li = this.$refs.list.getElementsByClassName('selected-item')[0];
+			if ( !li ) {
+				return;
+			}
 			let itemOffset = li.offsetTop;
 			let itemHeight = li.offsetHeight;
 			let scrollTop = this.$refs.list.scrollTop;

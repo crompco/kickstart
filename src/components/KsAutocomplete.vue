@@ -1,6 +1,6 @@
 <template>
 	<div class="autocomplete-holder"
-		 :class="{ 'is-selected': has_selections, 'is-multiple': multiple }" @click.prevent="setFocus('lookup')">
+		 :class="{ 'is-selected': has_selections, 'is-multiple': is_multiple }" @click.prevent="setFocus('lookup')">
 
 		<!-- Selections  -->
 		<span class="selection" v-if="has_selections" @click.prevent="editSelection">
@@ -20,7 +20,7 @@
 
 		<!-- Lookup Field -->
 		<input
-			v-show="!selection || multiple"
+			v-show="!selection || is_multiple"
 			type="text"
 			name="lookup_name"
 			:placeholder="placeholder_txt"
@@ -32,7 +32,7 @@
 			@keydown.enter.prevent="selectItem(selected_index)"
 			@keydown.down.prevent="selectDown()"
 			@keydown.up.prevent="selectUp()"
-			:class="{ 'is-multiple': multiple }"
+			:class="{ 'is-multiple': is_multiple }"
 		>
 
 		<!-- List -->
@@ -112,10 +112,6 @@
 				type: Number,
 				default: 1
 			},
-			startIndex: {
-				type: Number,
-				default: -1
-			},
 			taggable: {
 			    type: Boolean,
 				default: false
@@ -126,7 +122,7 @@
 			return {
 				focused: false,
 				lookup_name: '',
-				selected_index: this.startIndex,
+				selected_index: -1,
 				selection: null,
 				timer: '',
 				list: [],
@@ -137,6 +133,9 @@
 		computed: {
 			show_list() {
 				return this.lookup_name.length >= this.minSearch;
+			},
+			is_multiple() {
+			    return this.taggable || this.multiple;
 			},
 			has_selections() {
 				if ( this.selection && this.selection.length ) {
@@ -177,7 +176,7 @@
 		methods: {
 
 			clearSelection(s) {
-				if ( this.multiple ) {
+				if ( this.is_multiple ) {
 					let index = this.selection.indexOf(s);
 					this.selection.splice(index, 1);
 				} else {
@@ -196,19 +195,28 @@
 
 			backspace() {
 				if ( this.lookup_name == '' ) {
-					if ( this.has_selections && this.multiple ) {
+					if ( this.has_selections && this.is_multiple ) {
 						this.selection.pop();
 					}
 				}
 			},
 
 			selectItem(index, e) {
+			    if ( this.taggable && index == -1 ) {
+			        console.log('Tag Me!');
+				}
+
 				if ( !this.list[index] ) {
 					return;
 				}
-				if ( e && keyCode(e) == 9 && e.shiftKey ) {
-					this.clear();
-					return;
+				if ( e && keyCode(e) == 9 ) {
+			        if ( e.shiftKey ) {
+						this.clear();
+						return;
+					}
+					if ( this.is_multiple ) {
+			            e.preventDefault();
+					}
 				}
 
 				this.selected_index = index;
@@ -228,7 +236,7 @@
 			},
 
             editSelection() {
-			    if ( this.lookup_name == '' && !this.multiple ) {
+			    if ( this.lookup_name == '' && !this.is_multiple ) {
 			        this.lookup_name = this.selection;
 			        this.selection = null;
 
@@ -245,6 +253,12 @@
 				this.runLookup();
 			},
 
+			list() {
+			    if ( this.taggable && this.list.length == 1 ) {
+			        this.selected_index = 0;
+				}
+
+			}
 		},
 
 		components: {

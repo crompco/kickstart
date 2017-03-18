@@ -42,6 +42,20 @@
 			</ks-autocomplete>
 		</div>
 
+		<div class="callout">
+			<h3>Multiple Selections with taggable (add new)</h3>
+			<ks-autocomplete
+				:items="countries"
+				selection-key="name"
+				:taggable="true"
+				@search="runSearch"
+			>
+				<template scope="props">
+					<strong>{{props.item.name}}</strong> <em>{{props.item.code}}</em>
+				</template>
+			</ks-autocomplete>
+		</div>
+
 	</div>
 </template>
 
