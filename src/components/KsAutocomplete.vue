@@ -236,6 +236,13 @@
 				this.selection.push(this.list[this.selected_index]);
 			},
 
+			/**
+			 * Returns the current selection
+			 */
+			getSelection() {
+			    return this.selection;
+			},
+
             /**
 			 * Return the label for the selected item
 			 *
