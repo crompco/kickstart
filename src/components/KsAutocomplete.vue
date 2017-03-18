@@ -5,7 +5,7 @@
 		<!-- Selections  -->
 		<span class="selection" v-if="has_selections" @click.prevent="editSelection">
 			<span v-for="s in selection" class="selection-text">
-				{{s}}
+				{{getSelectionLabel(s)}}
 				<a href="#" @click.prevent="clearSelection(s)" class="clear-selection">
 					<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 						<g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -196,7 +196,8 @@
 			backspace() {
 				if ( this.lookup_name == '' ) {
 					if ( this.has_selections && this.is_multiple ) {
-						this.selection.pop();
+						let popped = this.selection.pop();
+						this.$emit('deleted', popped);
 					}
 				}
 			},
@@ -232,7 +233,21 @@
 				if ( !this.selection ) {
 					this.selection  = [];
 				}
-				this.selection.push(object_get(this.list[this.selected_index], this.selectionKey));
+				this.selection.push(this.list[this.selected_index]);
+			},
+
+            /**
+			 * Return the label for the selected item
+			 *
+             * @param s
+             * @returns {*}
+             */
+			getSelectionLabel(s) {
+			    if ( s instanceof Object ) {
+					return object_get(s, this.selectionKey);
+				}
+
+				return s;
 			},
 
             editSelection() {
