@@ -212,7 +212,7 @@
 						this.clear();
 						return;
 					}
-					if ( this.is_multiple ) {
+					if ( this.is_multiple && this.lookup_name.length ) {
 			            e.preventDefault();
 					}
 				}
