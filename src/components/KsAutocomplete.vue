@@ -162,6 +162,10 @@
 				this.filter = this.labelKey;
 			}
 			this.$nextTick(() => {
+			    this.initListNavigation({
+					lookup: 'lookup',
+					list: 'list'
+				});
 				if ( this.focus ) {
 					this.setFocus('lookup');
 				}

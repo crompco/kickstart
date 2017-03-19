@@ -1,4 +1,5 @@
 import {object_get} from '../../helpers/objects';
+import {addEvent} from '../../helpers/events';
 import {escapeRegExp} from '../../helpers/strings';
 
 export default {
@@ -28,6 +29,8 @@ export default {
 
 	data() {
 		return {
+			ref_lookup: 'lookup',
+			ref_list: 'list',
 			loading: false,
 			lookup_name: '',
 			list: [],
@@ -36,6 +39,9 @@ export default {
 			cache: {},
 			page: 1,
 			last_page: null,
+			mousescroll_timer: null,
+			mousescroll_threshold: 20,
+			mousescroll_delay: 100
 		};
 	},
 
@@ -72,6 +78,19 @@ export default {
 	},
 
 	methods: {
+		initListNavigation({lookup, list}) {
+            this.ref_lookup = lookup;
+            this.ref_list = list;
+			if ( this.paginated ) {
+				this.listenForScroll();
+			}
+		},
+
+		listenForScroll() {
+			addEvent(this.$refs[this.ref_list], 'scroll', () => {
+				this.scrollList();
+			});
+		},
 
         /**
 		 * Move the selection up
@@ -268,15 +287,35 @@ export default {
 			}
 		},
 
+		scrollList() {
+			clearTimeout(this.mousescroll_timer);
+
+			// Using a timeout will prevent this from firing too often
+			this.mousescroll_timer = setTimeout(() => {
+				let scrollTop = this.$refs.list.scrollTop;
+                let offsetHeight = this.$refs.list.offsetHeight;
+                let scrollHeight = this.$refs.list.scrollHeight;
+
+                // When scrolled to the bottom then we should run the next page
+				if ( (scrollTop + offsetHeight >= scrollHeight - this.mousescroll_threshold) && this.last_index ) {
+                    this.runNextPage(this.last_index, true);
+				}
+			}, this.mousescroll_delay);
+		},
+
         /**
 		 * Runs the next page when applicable (at the end of the list)
 		 *
          * @param index
          */
-		runNextPage(index) {
-			if ( this.last_index - this.paginateThreshold <= index ) {
+		runNextPage(index, set_index = false) {
+			if ( this.paginated && this.last_index - this.paginateThreshold <= index ) {
 				if ( !(parseInt(this.last_page || 0) > 0)) {
 					this.page++;
+					// Not sure if we want to do this
+					if ( set_index ) {
+                        this.selected_index = parseInt(index);
+					}
 					this.runSearch(true)
 				}
 			}
@@ -291,9 +330,7 @@ export default {
          * @param oldVal
          */
 		selected_index(newVal, oldVal) {
-			if ( this.paginated ) {
-				this.runNextPage(this.selected_index);
-			}
+			this.runNextPage(this.selected_index);
 
 			// Auto scroll
 			if ( this.list.length > 0 && newVal != oldVal ) {
