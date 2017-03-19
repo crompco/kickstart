@@ -284,7 +284,7 @@
 
             editSelection() {
 			    if ( this.lookup_name == '' && !this.is_multiple ) {
-			        this.lookup_name = this.selection;
+			        this.lookup_name = this.getSelectionLabel(this.selection[0]);
 			        this.selection = null;
 
 			        this.$nextTick(() => {
