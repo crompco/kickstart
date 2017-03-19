@@ -57,6 +57,10 @@
 			</ks-autocomplete>
 		</div>
 
+		<div style="height: 1200px;">
+			<!-- Force the page to get taller to test the scrolling-->
+		</div>
+
 	</div>
 </template>
 
