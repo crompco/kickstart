@@ -81,8 +81,9 @@ export default {
 		initListNavigation({lookup, list}) {
             this.ref_lookup = lookup;
             this.ref_list = list;
+
 			if ( this.paginated ) {
-				this.listenForScroll();
+                this.listenForScroll();
 			}
 		},
 

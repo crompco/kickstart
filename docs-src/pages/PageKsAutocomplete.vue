@@ -48,6 +48,7 @@
 				:min-search="0"
 				:taggable="true"
 				selection-key="name"
+				:paginated="true"
 				@search="runSearch"
 			>
 				<template scope="props">
