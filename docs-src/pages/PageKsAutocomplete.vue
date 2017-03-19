@@ -43,7 +43,7 @@
 		</div>
 
 		<div class="callout">
-			<h3>Multiple Selections with taggable (add new)</h3>
+			<h3>Multiple Selections with taggable (add new, minSearch of 0)</h3>
 			<ks-autocomplete
 				:min-search="0"
 				:taggable="true"
