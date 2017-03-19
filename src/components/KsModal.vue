@@ -28,7 +28,7 @@
 
 
 <script>
-	import {addEvent} from '../helpers/events';
+	import {stopParentScroll} from '../helpers/events';
 
 	export default {
 		name: 'KsModal',
@@ -68,27 +68,8 @@
 
 		mounted() {
 			this.$nextTick(() => {
-				console.log('adding event');
-				addEvent(this.$refs.body, 'mousewheel', (e) => {
-					e = window.event || e;
-
-					let offsetHeight = this.$refs.body.offsetHeight;
-					let scrollHeight = this.$refs.body.scrollHeight;
-					let scrollTop = this.$refs.body.scrollTop;
-
-					if ( e.wheelDelta > 0 || e.deltaY < 0 ) {
-						if ( scrollTop == 0 ) {
-							e.preventDefault();
-						}
-					} else {
-						if ( offsetHeight + scrollTop >= scrollHeight ) {
-							e.preventDefault();
-						}
-					}
-
-					e.stopPropagation();
-				});
-			})
+                stopParentScroll(this.$refs.body);
+			});
 		},
 
 		methods: {
@@ -97,9 +78,6 @@
 			},
 			close() {
 				this.isOpen = false;
-			},
-			scrolling() {
-				console.log('scrolling');
 			}
 		},
 

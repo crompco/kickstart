@@ -1,5 +1,5 @@
 import {object_get} from '../../helpers/objects';
-import {addEvent} from '../../helpers/events';
+import {addEvent, stopParentScroll, scrolledToBottom} from '../../helpers/events';
 import {escapeRegExp} from '../../helpers/strings';
 
 export default {
@@ -72,6 +72,10 @@ export default {
 			};
 		},
 
+		list_exhausted() {
+			return parseInt(this.last_page || 0) > 0;
+		},
+
         /**
 		 * This is the index of the last item in the list
 		 *
@@ -92,34 +96,15 @@ export default {
 
 		listenForScroll() {
 			if ( this.paginated ) {
-				addEvent(this.$refs[this.ref_list], 'scroll', this.scrollList);
+                scrolledToBottom(this.$refs[this.ref_list], () => {
+                    if ( this.last_index && !this.list_exhausted ) {
+                        this.selected_index = this.last_index;
+                    }
+				}, this.mousescroll_delay, this.mousescroll_threshold);
 			}
 			if ( this.stopParentScroll ) {
-                addEvent(this.$refs[this.ref_list], 'mousewheel', this.preventParentScroll);
+                stopParentScroll(this.$refs[this.ref_list]);
 			}
-		},
-
-        /**
-		 * Listens on mousewheel and prevents the scroll propagation
-		 *
-         * @param e
-         */
-		preventParentScroll(e) {
-			let offsetHeight = this.$refs[this.ref_list].offsetHeight;
-			let scrollHeight = this.$refs[this.ref_list].scrollHeight;
-			let scrollTop = this.$refs[this.ref_list].scrollTop;
-
-			if ( e.wheelDelta > 0 || e.deltaY < 0 ) {
-				if ( scrollTop == 0 ) {
-					e.preventDefault();
-				}
-			} else {
-				if ( offsetHeight + scrollTop >= scrollHeight ) {
-					e.preventDefault();
-				}
-			}
-
-			e.stopPropagation();
 		},
 
         /**
@@ -318,37 +303,14 @@ export default {
 		},
 
         /**
-		 * Fired when the list is being scrolled
-         */
-		scrollList(e) {
-			clearTimeout(this.mousescroll_timer);
-
-			// Using a timeout will prevent this from firing too often
-			this.mousescroll_timer = setTimeout(() => {
-				let scrollTop = this.$refs[this.ref_list].scrollTop;
-                let offsetHeight = this.$refs[this.ref_list].offsetHeight;
-                let scrollHeight = this.$refs[this.ref_list].scrollHeight;
-
-                // When scrolled to the bottom then we should run the next page
-				if ( (scrollTop + offsetHeight >= scrollHeight - this.mousescroll_threshold) && this.last_index ) {
-                    this.runNextPage(this.last_index, true);
-				}
-			}, this.mousescroll_delay);
-		},
-
-        /**
 		 * Runs the next page when applicable (at the end of the list)
 		 *
          * @param index
          */
-		runNextPage(index, set_index = false) {
+		runNextPage(index) {
 			if ( this.paginated && this.last_index - this.paginateThreshold <= index ) {
-				if ( !(parseInt(this.last_page || 0) > 0)) {
+				if ( !this.list_exhausted ) {
 					this.page++;
-					// Not sure if we want to do this
-					if ( set_index ) {
-                        this.selected_index = parseInt(index);
-					}
 					this.runSearch(true)
 				}
 			}

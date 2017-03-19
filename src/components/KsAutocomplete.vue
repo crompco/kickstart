@@ -159,7 +159,7 @@
 
 		mounted() {
 			if ( !this.itemFilter ) {
-				this.filter = this.labelKey;
+				this.filter = this.selectionKey;
 			}
 			this.$nextTick(() => {
 			    this.initListNavigation({
@@ -318,7 +318,13 @@
 			list() {
 			    // Auto select when 1 element is available
 			    if ( this.taggable && this.list.length == 1 ) {
-			        this.selected_index = 0;
+			        let typed_name = String(this.lookup_name).toLowerCase();
+			        let list_name = String(this.getSelectionLabel(this.getItemByIndex(0))).toLowerCase();
+
+			        // Only auto select when the typed name matches the first element
+			        if ( typed_name === list_name ) {
+                        this.selected_index = 0;
+					}
 				}
 			},
 
