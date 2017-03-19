@@ -49,7 +49,7 @@
 			<li
 				v-for="(item, index) in list"
 				:class="{ 'selected-item': index == selected_index }"
-				@click.prevent="selectItem(index)"
+				@click.prevent="selectItem(index, $event)"
 			>
 				<!-- Scoped slot -->
 				<slot :item="item"></slot>
@@ -170,10 +170,12 @@
 				});
 				addEvent(this.$refs.lookup, 'blur', () => {
 					setTimeout(() => {
-						this.$emit('blur');
-						this.focused = false;
-						if ( this.closeOnBlur ) {
-							this.clear();
+					    if ( this.$refs.lookup !== document.activeElement ) {
+							this.$emit('blur');
+							this.focused = false;
+							if ( this.closeOnBlur ) {
+								this.clear();
+							}
 						}
 					}, 200);
 				});
@@ -229,11 +231,18 @@
 
 				this.selected_index = index;
 				this.$emit('selected', this.list[this.selected_index]);
-				this.lookup_name = '';
 				if ( this.selectionKey ) {
 					this.addSelection();
 				}
+
+				// Reset the input and list
+				this.lookup_name = '';
 				this.list = [];
+
+				// If min search is 0 then we need to open the search right back up
+				if ( this.minSearch == 0 ) {
+				    this.startSearch();
+				}
 			},
 
 			addSelection() {
