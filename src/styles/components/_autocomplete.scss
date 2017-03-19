@@ -111,7 +111,7 @@
 	list-style: none;
 	border: solid 1px color(med-light-gray);
 	border-top: 0;
-	overflow-y: scroll;
+	overflow-y: auto;
 
 	> li {
 		padding: 0.25em 0.5em 0.25em 0.2em;
