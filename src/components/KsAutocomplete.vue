@@ -199,6 +199,9 @@
 			clear() {
 				this.lookup_name = '';
 				this.list = [];
+				if ( this.$refs.lookup === document.activeElement ) {
+				    this.$refs.lookup.blur();
+				}
 				this.$emit('clear');
 			},
 
@@ -230,9 +233,10 @@
                 }
 
 				this.selected_index = index;
-				this.$emit('selected', this.list[this.selected_index]);
+				let selection = this.getSelectedItem();
+				this.$emit('selected', selection);
 				if ( this.selectionKey ) {
-					this.addSelection();
+					this.addSelection(selection);
 				}
 
 				// Reset the input and list
@@ -245,11 +249,16 @@
 				}
 			},
 
-			addSelection() {
+			/**
+			 * Add a selection into the array of selections
+			 *
+			 * @param mixed selection
+			 */
+			addSelection(selection) {
 				if ( !this.selection ) {
 					this.selection  = [];
 				}
-				this.selection.push(this.list[this.selected_index]);
+				this.selection.push(selection);
 			},
 
 			/**
