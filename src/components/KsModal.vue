@@ -6,10 +6,10 @@
 				<!-- Modal header-->
 				<div class="ks-modal-header" v-if="showHeader">
 					<slot name="header">
-						<h2>{{title}}</h2>
+						<h4>{{title}}</h4>
 					</slot>
 					<div class="ks-modal-close" v-if="showClose">
-						<a href="#" @click.prevent="close">X</a>
+						<a href="#" @click.prevent="close"><close></close></a>
 					</div>
 				</div>
 
@@ -28,6 +28,10 @@
 
 
 <script>
+	// External Dependencies
+	import Close from '../svg/close.svg';
+
+	// Internal Dependencies
 	import {addEvent} from '../helpers/events';
 
 	export default {
@@ -104,53 +108,9 @@
 		},
 
 		watch: {},
+
+		components: {
+		    Close
+		}
 	}
 </script>
-
-<style lang="scss">
-	.ks-modal {
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		.ks-modal-mask {
-			width: 100%;
-			height: 100%;
-			background: rgba(40, 40, 40, 0.2);
-		}
-	    .ks-modal-wrapper {
-		    position: absolute;
-		    margin: 0 auto;
-		    background: white;
-		    left: 50%;
-		    top: 50%;
-		    transform: translate(-50%, -50%);
-		    overflow-y: initial !important;
-	    }
-	    .ks-modal-header {
-		    position: relative;
-		    overflow: hidden;
-		    h1, h2, h3, h4 {
-			    margin: 0;
-			    padding: 0.5em;
-		    }
-		    .ks-modal-close {
-			    position: absolute;
-			    right: 2em;
-			    top: 50%;
-			    transform: translateY(-50%);
-		    }
-	    }
-		.ks-modal-body, .ks-modal-footer {
-			padding: 1em;
-		}
-	    .ks-modal-body {
-		    max-height: calc(100vh - 200px);
-		    overflow-y: auto;
-	    }
-	    .ks-modal-footer:empty {
-		    padding: 0;
-	    }
-	}
-</style>
