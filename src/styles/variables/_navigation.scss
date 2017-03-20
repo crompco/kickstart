@@ -1,0 +1,20 @@
+@import "../functions/_map";
+@import "../variables/_colors";
+
+$nav-width: 200px !default;
+$nav-height: 60px !default;
+$nav-padding: 10px !default;
+
+$nav: (
+	background-color: get($brand, primary),
+	color: $white,
+	brand-background: $white,
+	hover: get($brand, light)
+) !default;
+
+$top-bar: (
+	background-color: $white,
+	color: get($brand, primary),
+	hover: get($brand, light),
+	hover-color: $white
+) !default;

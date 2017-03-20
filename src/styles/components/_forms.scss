@@ -1,5 +1,6 @@
 @import "forms/_options";
 @import "forms/_select";
+@import "../mixins/_forms";
 
 .form-group {
 	margin-bottom: 1em;

@@ -1,3 +1,7 @@
+@import "../../functions/_color";
+@import "../../mixins/_forms";
+@import "../../mixins/_autocomplete";
+
 .ks-select {
 	cursor: pointer;
 	position: relative;

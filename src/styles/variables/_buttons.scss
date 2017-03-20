@@ -1,0 +1,26 @@
+@import "../functions/map";
+@import "_colors";
+
+$button-padding: 0.4em 0.6em !default;
+$button-box-shadow: 0 2px 4px rgba($black, 0.2) !default;
+$button-sizes: (
+	tiny: 0.6rem,
+	small: 0.75rem,
+	large: 1.25rem
+) !default;
+
+$buttons: (
+	outline: (
+		background-color: $white,
+		hover: get($brand, light),
+		color: get($brand, light),
+		border-color: get($brand, light)
+	),
+	none: (
+		background-color: transparent,
+		color: get($brand, light),
+		hover: darken(get($brand, light), 20%),
+		border-color: transparent,
+		box-shadow: none
+	)
+) !default;

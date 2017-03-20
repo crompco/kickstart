@@ -1,3 +1,6 @@
+@import "../functions/_color";
+@import "../functions/_settings";
+
 @mixin state-default() {
 	background-color: color(state, default, background-color);
 	border: 1px solid color(state, default, border);

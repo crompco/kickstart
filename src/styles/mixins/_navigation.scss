@@ -1,10 +1,16 @@
+@import "../functions/_color";
+@import "../variables/_navigation";
+@import "./_animation";
+@import "./_utils";
+@import "./_grid";
+
 @mixin nav-bar() {
 	@include row();
 	background-color: color(nav, background-color);
 
 	.nav-brand {
 		background-color: color(nav, brand-background);
-		height: setting(nav, height);
+		height: $nav-height;
 		width: 100%;
 		text-align: center;
 
@@ -40,7 +46,7 @@
 
 @mixin top-bar() {
 	position: relative;
-	height: setting(nav, height);
+	height: $nav-height;
 	background-color: color(top-bar, background-color);
 	color: color(top-bar, color);
 	box-shadow: 0 2px 1px color(med-gray);
@@ -70,7 +76,7 @@
 
 					a {
 						padding: 0.75em;
-						line-height: setting(nav, height) / 2;
+						line-height: $nav-height / 2;
 
 						&:hover {
 							background-color: color(top-bar, hover);
@@ -89,8 +95,8 @@
 				display: block;
 				text-decoration: none;
 				color: color(top-bar, color);
-				padding: setting(nav, padding);
-				line-height: setting(nav, height) - (setting(nav, padding) * 2);
+				padding: $nav-padding;
+				line-height: $nav-height - ($nav-height * 2);
 			}
 		}
 	}

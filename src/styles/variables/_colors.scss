@@ -1,22 +1,51 @@
-// Private Color Variable
-$_white: #fff;
-$_black: #000;
-$_header-color: #444;
-$_light-gray: #eee;
-$_med-gray: #aaa;
-$_text-color: #444;
+@import "../functions/_map";
 
-$_brand-primary: #2C3E50;
-$_brand-light: #46719C;
-$_brand-lighter: #80B5E9;
-$_brand-secondary: #A52924;
-$_brand-off: #C18C77;
+// Color Variable
+$white: #fff !default;
+$black: #000 !default;
+$header-color: #444 !default;
+
+// Grays
+$lighter-gray: #eff2f3 !default;
+$light-gray: #eee !default;
+$med-gray: #aaa !default;
+$dark-gray: #888 !default;
+$darker-gray: #444 !default;
+
+$text-color: $darker-gray !default;
+
+// Brand Colors
+// TODO: Change names
+$brand: (
+	primary: #2C3E50,
+	light: #46719C,
+	lighter: #80B5E9,
+	secondary: #A52924,
+	off: #C18C77
+) !default;
+
+// State Colors
+$state-success: #3c763d !default;
+$state-success-bg: #dff0d8 !default;
+$state-success-border: darken($state-success-bg, 5%) !default;
+
+$state-info: #31708f !default;
+$state-info-bg: #d9edf7 !default;
+$state-info-border: darken($state-info-bg, 7%) !default;
+
+$state-warning: #8a6d3b !default;
+$state-warning-bg:  #fcf8e3 !default;
+$state-warning-border: darken($state-warning-bg, 5%) !default;
+
+$state-error: #a94442 !default;
+$state-error-bg: #f2dede !default;
+$state-error-border: darken($state-error-bg, 5%) !default;
 
 $colors: (
-	white: #fff,
-	black: #000,
-	header-color: #444,
-	light-gray: #eee,
+	white: $white,
+	black: $black,
+	header-color: $header-color,
+	light-gray: $light-gray,
 	med-light-gray: #ccc,
 	med-gray: #aaa,
 	med-dark-gray: #888,
@@ -24,82 +53,45 @@ $colors: (
 	text-color: #444,
 	background-color: #eff2f3,
 	brand: (
-		primary: #2C3E50,
-		light: #46719C,
-		lighter: #80B5E9,
-		secondary: #A52924,
-		off: #C18C77
-	),
-	alert: (
-		success: (
-			color: #3c763d,
-			background-color: #dff0d8,
-			border-color: #d6e9c6
-		),
-		warning: (
-			color: #8a6d3b,
-			background-color: #fcf8e3,
-			border-color: #faebcc
-		),
-		info: (
-			color: #31708f,
-			background-color: #d9edf7,
-			border-color: #bce8f1
-		),
-		error: (
-			color: #a94442,
-			background-color: #f2dede,
-			border-color: #ebccd1
-		)
+		primary: get($brand, primary),
+		light: get($brand, light),
+		lighter: get($brand, lighter),
+		secondary: get($brand, secondary),
+		off: get($brand, off)
 	),
 	panel: (
-		background-color: $_white,
-		shadow: $_med-gray,
-		header-background: $_light-gray,
-		header-color: $_header-color
+		background-color: $white,
+		shadow: $med-gray,
+		header-background: $light-gray,
+		header-color: $header-color
 	),
 	nav: (
-		background-color: $_brand-primary,
-		color: $_white,
-		brand-background: $_white,
-		hover: $_brand-light
+		background-color: get($brand, primary),
+		color: $white,
+		brand-background: $white,
+		hover: get($brand, light)
 	),
 	top-bar: (
-		background-color: $_white,
-		color: $_brand-primary,
-		hover: $_brand-light,
-		hover-color: $_white
-	),
-	buttons: (
-		outline: (
-			background-color: $_white,
-			hover: $_brand-light,
-			color: $_brand-light,
-			border-color: $_brand-light
-		),
-		none: (
-			background-color: transparent,
-			color: $_brand-light,
-			hover: darken($_brand-light, 20%),
-			border-color: transparent,
-			box-shadow: none
-		)
+		background-color: $white,
+		color: get($brand, primary),
+		hover: get($brand, light),
+		hover-color: $white
 	),
 	tabs: (
 		content: (
-			background-color: $_white,
+			background-color: $white,
 		)
 	),
 	state: (
 		default: (
 			border: transparent,
-			background-color: $_brand-light,
-			color: $_white
+			background-color: get($brand, light),
+			color: $white
 		),
 		hover: (
 			border: transparent,
-			background-color: darken($_brand-light, 12%),
-			color: $_white
+			background-color: darken(get($brand, light), 12%),
+			color: $white
 		)
 	)
 ) !default;

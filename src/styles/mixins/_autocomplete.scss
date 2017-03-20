@@ -1,3 +1,5 @@
+@import "../functions/_color";
+
 @mixin ks-autocomplete-input() {
 	border: 1px solid color(med-gray);
 	outline: none;
