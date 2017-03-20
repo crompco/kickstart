@@ -1,10 +1,15 @@
 import {object_get} from '../../helpers/objects';
-import {keyCode, stopParentScroll, scrolledToBottom} from '../../helpers/events';
+import {addEvent, keyCode, stopParentScroll, scrolledToBottom} from '../../helpers/events';
 import {escapeRegExp} from '../../helpers/strings';
 
 export default {
 
 	props: {
+		// When true the list auto closes when the lookup field is blurred
+        closeOnBlur: {
+            type: Boolean,
+            default: true
+        },
 		// If true the list will be cached by term
 		cacheResults: {
 			type: Boolean,
@@ -29,7 +34,12 @@ export default {
 		stopParentScroll: {
 			type: Boolean,
 			default: true
-		}
+		},
+		// If taggable then it allows entries not in the list
+        taggable: {
+            type: Boolean,
+            default: false,
+        },
 	},
 
 	data() {
@@ -37,6 +47,7 @@ export default {
 			ref_lookup: 'lookup',
 			ref_list: 'list',
 			loading: false,
+			focused: false,
 			lookup_name: '',
 			list: [],
 			startIndex: -1,
@@ -44,8 +55,7 @@ export default {
 			cache: {},
 			page: 1,
 			last_page: null,
-			mousescroll_timer: null,
-			mousescroll_threshold: 20,
+			mousescroll_threshold: 40,
 			mousescroll_delay: 100
 		};
 	},
@@ -96,11 +106,33 @@ export default {
 	},
 
 	methods: {
-		initListNavigation({lookup, list}) {
-            this.ref_lookup = lookup || 'lookup';
-            this.ref_list = list || 'list';
+		initListNavigation(options) {
+            this.ref_lookup = options.lookup || 'lookup';
+            this.ref_list = options.list || 'list';
 
-			this.listenForScroll();
+            this.$nextTick(() => {
+				this.listenForScroll();
+
+				addEvent(this.$refs.lookup, 'focus', () => {
+                    this.focused = true;
+                });
+
+				addEvent(this.$refs.lookup, 'blur', () => {
+                    setTimeout(() => {
+                        if ( this.$refs[this.ref_lookup] !== document.activeElement ) {
+                            this.$emit('blur');
+                            this.focused = false;
+                            if ( this.closeOnBlur ) {
+                                this.clear();
+                            }
+                        }
+                    }, 200);
+                });
+
+                if ( this.focus ) {
+                    this.setFocus();
+                }
+			})
 		},
 
 		listenForScroll() {
@@ -180,7 +212,7 @@ export default {
          * @param ref
          */
 		setFocus(ref) {
-			this.$refs[ref].focus();
+			this.$refs[ref || this.ref_lookup].focus();
 			this.$emit('focus');
 		},
 
