@@ -18,8 +18,8 @@
 				    :placeholder="placeholder"
 					@keyup.esc="clear"
 					@keydown.backspace="backspace"
-					@keydown.tab="selectItem(selected_index)"
-					@keydown.enter.prevent="selectItem(selected_index)"
+					@keydown.tab="selectItem(selected_index, $event)"
+					@keydown.enter.prevent="selectItem(selected_index, $event)"
 					@keydown.down.prevent="selectDown()"
 					@keydown.up.prevent="selectUp()"
 					:class="{ 'is-multiple': multiple }"
@@ -55,6 +55,7 @@
 	import KsAutocomplete from './KsAutocomplete.vue';
 	import ListIndexNavigatior from './mixins/ListIndexNavigator';
 	import LoaderLine from './KsLoaderLine.vue';
+	import {object_get} from '../helpers/objects';
 
 	export default {
 		name: 'KsSelect',
@@ -101,7 +102,7 @@
 		data () {
 			return {
 				loading: false,
-				selected: '',
+				selected: null,
 				startIndex: 0,
 				selected_index: 0,
 				keyName: this.itemKey,
@@ -113,6 +114,16 @@
 		computed: {
 			using_items() {
 				return this.items ? true : false;
+			},
+			binds_objects() {
+				// Try to determine what type of value the consumer expects
+				// If they don't provide a value then we will assume they want objects
+				if ( !this.value ) {
+					return true;
+				}
+
+				// We will
+				return typeof this.value !== 'object' ? false : true;
 			},
 			show_search() {
 				if ( !this.items ) {
@@ -140,6 +151,11 @@
 			}
 
 			this.refreshSelected();
+
+			this.initListNavigation({
+				lookup: 'lookup',
+				list: 'list',
+			});
 		},
 
 		methods: {
@@ -156,19 +172,22 @@
 				this.isOpen = false;
 			},
 
-			selectItem(i) {
-				let item = this.getItemByIndex(i);
+			selectItem(index, e) {
+				this.handleSelectEvent(e);
+
+				let item = this.getItemByIndex(index);
 				if ( !item[this.keyName] ) {
 					console.log('Error: Could not find key: ' + this.keyName);
 				}
-				this.$emit('input', item[this.keyName]);
+
+				if ( this.binds_objects ) {
+					this.$emit('input', item);
+				} else {
+					this.$emit('input', item[this.keyName]);
+				}
 
 				this.resetList('list');
 				this.selected_index = 0;
-				this.close();
-			},
-
-			clear() {
 				this.lookup_name = '';
 				this.close();
 			},
@@ -178,18 +197,29 @@
 			},
 
 			refreshSelected() {
+				if ( !this.value ) {
+					this.selected = '';
+					return;
+				}
+
+				if ( this.binds_objects ) {
+					this.selected = object_get(this.value, this.labelKey);
+					return;
+				}
+
 				for ( var i in this.list ) {
 					if ( this.list[i][this.keyName] == this.value ) {
 						this.selected = this.list[i][this.labelKey];
 						return;
 					}
 				}
-			},
 
+			},
 		},
 
 		watch: {
 			lookup_name() {
+
 				this.startSearch();
 			},
 			value() {
@@ -201,6 +231,7 @@
 			items() {
 				if ( this.items && this.items.length ) {
 					this.list = this.items;
+					this.refreshSelected();
 				}
 			},
 			isOpen(open, oldOpen) {
