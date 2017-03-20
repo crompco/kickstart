@@ -138,9 +138,6 @@
 			show_list() {
 				return this.focused && this.lookup_name.length >= this.minSearch;
 			},
-			is_multiple() {
-			    return this.taggable || this.multiple;
-			},
 			has_selections() {
 				if ( this.selection && this.selection.length ) {
 					return true;
@@ -200,15 +197,6 @@
 				}
 			},
 
-			clear() {
-				this.lookup_name = '';
-				this.list = [];
-				if ( this.$refs.lookup === document.activeElement ) {
-				    this.$refs.lookup.blur();
-				}
-				this.$emit('clear');
-			},
-
 			backspace() {
 				if ( this.lookup_name == '' ) {
 					if ( this.has_selections && this.is_multiple ) {
@@ -219,15 +207,7 @@
 			},
 
 			selectItem(index, e) {
-				if ( e && keyCode(e) == 9 ) {
-			        if ( e.shiftKey ) {
-						this.clear();
-						return;
-					}
-					if ( this.is_multiple && this.lookup_name.length ) {
-			            e.preventDefault();
-					}
-				}
+				this.handleSelectEvent(e);
 
                 if ( this.taggable && index == -1 && this.lookup_name.length ) {
                     this.tagSelection();

@@ -1,5 +1,5 @@
 import {object_get} from '../../helpers/objects';
-import {addEvent, stopParentScroll, scrolledToBottom} from '../../helpers/events';
+import {keyCode, stopParentScroll, scrolledToBottom} from '../../helpers/events';
 import {escapeRegExp} from '../../helpers/strings';
 
 export default {
@@ -76,6 +76,15 @@ export default {
 			return parseInt(this.last_page || 0) > 0;
 		},
 
+		/**
+		 * Returns true when list expects multiple selections
+		 *
+		 * @return {props.taggable|{type, default}|taggable|props.multiple|multiple|boolean}
+		 */
+		is_multiple() {
+			return this.taggable || this.multiple;
+		},
+
         /**
 		 * This is the index of the last item in the list
 		 *
@@ -88,8 +97,8 @@ export default {
 
 	methods: {
 		initListNavigation({lookup, list}) {
-            this.ref_lookup = lookup;
-            this.ref_list = list;
+            this.ref_lookup = lookup || 'lookup';
+            this.ref_list = list || 'list';
 
 			this.listenForScroll();
 		},
@@ -126,6 +135,18 @@ export default {
 			if ( index <= this.last_index ) {
 				this.selected_index += 1;
 			}
+		},
+
+		/**
+		 * Clear the lookup
+		 */
+		clear() {
+			this.lookup_name = '';
+			this.list = [];
+			if ( this.$refs[this.ref_lookup] === document.activeElement ) {
+				this.$refs[this.ref_lookup].blur();
+			}
+			this.$emit('clear');
 		},
 
         /**
@@ -244,12 +265,13 @@ export default {
          */
 		startSearch() {
 			this.selected_index = this.startIndex;
+
 			if ( this.lookup_name.length < this.minSearch ) {
 				this.list = [];
 				return;
 			}
 
-			if ( this.items ) {
+			if ( this.items && !this.paginated ) {
 				this.runFilter();
 				return;
 			}
@@ -282,22 +304,22 @@ export default {
          * @param direction
          */
 		autoScroll(direction) {
-			let li = this.$refs.list.getElementsByClassName('selected-item')[0];
+			let li = this.$refs[this.ref_list].getElementsByClassName('selected-item')[0];
 			if ( !li ) {
 				return;
 			}
 			let itemOffset = li.offsetTop;
 			let itemHeight = li.offsetHeight;
-			let scrollTop = this.$refs.list.scrollTop;
-			let offsetHeight = this.$refs.list.offsetHeight;
+			let scrollTop = this.$refs[this.ref_list].scrollTop;
+			let offsetHeight = this.$refs[this.ref_list].offsetHeight;
 
 			if ( direction == 'down' ) {
 				if ( itemOffset+itemHeight >= scrollTop + offsetHeight) {
-					this.$refs.list.scrollTop += itemHeight;
+					this.$refs[this.ref_list].scrollTop += itemHeight;
 				}
 			} else {
 				if ( itemOffset-(itemHeight/2) <= scrollTop) {
-					this.$refs.list.scrollTop -= itemHeight;
+					this.$refs[this.ref_list].scrollTop -= itemHeight;
 				}
 			}
 		},
@@ -315,6 +337,23 @@ export default {
 				}
 			}
 		},
+
+		/**
+		 * Handles the tab key intelligently
+		 *
+		 * @param e
+		 */
+		handleSelectEvent(e) {
+			if ( e && keyCode(e) == 9 ) {
+				if ( e.shiftKey ) {
+					this.clear();
+					return;
+				}
+				if ( this.is_multiple && this.lookup_name.length ) {
+					e.preventDefault();
+				}
+			}
+		}
 	},
 
 	watch: {

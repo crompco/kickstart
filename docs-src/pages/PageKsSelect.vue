@@ -5,7 +5,7 @@
 		<ks-select
 			name="code"
 			label-key="name"
-			v-model="country_code"
+			v-model="country"
 			:paginated="true"
 		    @search="runSearch"
 		>
@@ -41,8 +41,8 @@
 		data() {
 			return {
 				countries: [],
-				country_code: '',
-				country_code2: '',
+				country: '',
+				country_code2: 'AW',
 			};
 		},
 
