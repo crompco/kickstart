@@ -42,6 +42,25 @@
 			</ks-autocomplete>
 		</div>
 
+		<div class="callout">
+			<h3>Multiple Selections with taggable (add new, minSearch of 0)</h3>
+			<ks-autocomplete
+				:min-search="0"
+				:taggable="true"
+				selection-key="name"
+				:paginated="true"
+				@search="runSearch"
+			>
+				<template scope="props">
+					<strong>{{props.item.name}}</strong> <em>{{props.item.code}}</em>
+				</template>
+			</ks-autocomplete>
+		</div>
+
+		<div style="height: 1200px;">
+			<!-- Force the page to get taller to test the scrolling-->
+		</div>
+
 	</div>
 </template>
 

@@ -1,11 +1,3 @@
-@mixin ks-input() {
-	border: 1px solid color(med-gray);
-	outline: none;
-	width: 100%;
-	padding: 0.5em;
-	box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.1);
-}
-
 .autocomplete-holder {
 	position: relative;
 	@include form-input(inline-block);
@@ -14,7 +6,7 @@
 	border: 0;
 
 	> input:not(.is-multiple) {
-		@include ks-input;
+		@include ks-autocomplete-input;
 	}
 
 	> input.is-multiple {
@@ -22,42 +14,9 @@
 		outline: none;
 	}
 
-	.autocomplete-list {
-		margin: 0;
-		z-index: 100;
-		padding: 0;
-		width: 100%;
-		background-color: color(white);
-		position: absolute;
-		list-style: none;
-		border: solid 1px color(med-light-gray);
-		border-top: 0;
-		overflow-y: scroll;
-
-		> li {
-			padding: 0.25em 0.5em 0.25em 0.2em;
-			border: 1px solid transparent;
-			border-bottom: solid 1px color(med-light-gray);
-
-			&:last-child {
-				border: 0;
-			}
-
-			&.selected-item {
-				@include state-hover();
-				color: #fff;
-			}
-
-			&:hover {
-				@include state-hover();
-				background: lighten(color(state, hover, background-color), 10%);
-			}
-		}
-	}
-
 	&:not(.is-multiple).is-selected {
 		.selection {
-			@include ks-input;
+			@include ks-autocomplete-input;
 		}
 	}
 
@@ -104,7 +63,7 @@
 
 
 	&.is-multiple {
-		@include ks-input;
+		@include ks-autocomplete-input;
 		padding: calc(0.3em - 4px) 0.3em;
 
 		&:not(.is-selected) {
@@ -137,6 +96,40 @@
 			svg g {
 				fill: darken(color(brand, lighter), 20%);
 			}
+		}
+	}
+}
+
+
+.autocomplete-list {
+	margin: 0;
+	z-index: 100;
+	padding: 0;
+	width: 100%;
+	background-color: color(white);
+	position: absolute;
+	list-style: none;
+	border: solid 1px color(med-light-gray);
+	border-top: 0;
+	overflow-y: auto;
+
+	> li {
+		padding: 0.25em 0.5em 0.25em 0.2em;
+		border: 1px solid transparent;
+		border-bottom: solid 1px color(med-light-gray);
+
+		&:last-child {
+			border: 0;
+		}
+
+		&.selected-item {
+			@include state-hover();
+			color: #fff;
+		}
+
+		&:hover {
+			@include state-hover();
+			background: lighten(color(state, hover, background-color), 10%);
 		}
 	}
 }

@@ -1,11 +1,11 @@
 <template>
 	<div class="autocomplete-holder"
-		 :class="{ 'is-selected': has_selections, 'is-multiple': multiple }" @click.prevent="setFocus">
+		 :class="{ 'is-selected': has_selections, 'is-multiple': is_multiple }" @click.prevent="setFocus('lookup')">
 
 		<!-- Selections  -->
 		<span class="selection" v-if="has_selections" @click.prevent="editSelection">
 			<span v-for="s in selection" class="selection-text">
-				{{s}}
+				{{getSelectionLabel(s)}}
 				<a href="#" @click.prevent="clearSelection(s)" class="clear-selection">
 					<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 						<g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -20,24 +20,24 @@
 
 		<!-- Lookup Field -->
 		<input
-			v-show="!selection || multiple"
+			v-show="!selection || is_multiple"
 			type="text"
-			name="pet"
+			name="lookup_name"
 			:placeholder="placeholder_txt"
 			v-model="lookup_name"
 			ref="lookup"
 			@keyup.esc="clear"
-			@keyup.backspace="backspace"
+			@keydown.backspace="backspace"
 			@keydown.tab="selectItem(selected_index, $event)"
 			@keydown.enter.prevent="selectItem(selected_index)"
 			@keydown.down.prevent="selectDown()"
 			@keydown.up.prevent="selectUp()"
-			:class="{ 'is-multiple': multiple }"
+			:class="{ 'is-multiple': is_multiple }"
 		>
 
 		<!-- List -->
 		<ul class="autocomplete-list"
-		    v-show="lookup_name.length > 0"
+		    v-show="show_list"
 		    :style="'max-height:'+this.listHeight"
 		    ref="list"
 		>
@@ -49,7 +49,7 @@
 			<li
 				v-for="(item, index) in list"
 				:class="{ 'selected-item': index == selected_index }"
-				@click.prevent="selectItem(index)"
+				@click.prevent="selectItem(index, $event)"
 			>
 				<!-- Scoped slot -->
 				<slot :item="item"></slot>
@@ -59,15 +59,21 @@
 </template>
 
 <script>
+	// Internal
 	import LoaderLine from './KsLoaderLine.vue';
-	import {object_get} from '../helpers/objects';
-	import {escapeRegExp} from '../helpers/strings';
 	import {addEvent, keyCode} from '../helpers/events';
+    import {object_get} from '../helpers/objects';
+    import ListIndexNavigatior from './mixins/ListIndexNavigator';
+
+
+	// External
 	import Vue from 'vue';
 	Vue.config.keyCodes['backspace'] = 8;
 
 	export default {
 		name: 'KsAutocomplete',
+
+		mixins: [ListIndexNavigatior],
 
 		props: {
 			items: {
@@ -78,10 +84,6 @@
 			},
 			placeholder: {
 				default: 'Lookup ...'
-			},
-			focus: {
-				type: Boolean,
-				default: false
 			},
 			closeOnBlur: {
 				type: Boolean,
@@ -95,51 +97,56 @@
 				type: String,
 				default: null
 			},
+			itemFilter: {
+				type: [String, Function],
+				default: null
+			},
 			multiple: {
 				type: Boolean,
 				default: false
 			},
-			cacheResults: {
-				Boolean,
-				default: false
-			},
-			paginated: {
-				type: Boolean,
-				default: false
-			},
-			paginateThreshold: {
-				type: Number,
-				default: 3
-			},
 			listHeight: {
 				default: "250px"
+			},
+			minSearch: {
+				type: Number,
+				default: 1
+			},
+			taggable: {
+			    type: Boolean,
+				default: false
+			},
+			focus: {
+			    type: Boolean,
+				default: false
 			}
 		},
 
 		data() {
 			return {
+				focused: false,
 				lookup_name: '',
 				selected_index: -1,
 				selection: null,
 				timer: '',
 				list: [],
-				loading: false,
-				cache: {},
-				page: 1,
-				last_page: null
+				loading: false
 			};
 		},
 
 		computed: {
+			show_list() {
+				return this.focused && this.lookup_name.length >= this.minSearch;
+			},
+			is_multiple() {
+			    return this.taggable || this.multiple;
+			},
 			has_selections() {
 				if ( this.selection && this.selection.length ) {
 					return true;
 				}
 
 				return false;
-			},
-			last_index() {
-				return this.list.length -1;
 			},
 			placeholder_txt() {
 				if ( this.has_selections ) {
@@ -151,230 +158,181 @@
 		},
 
 		mounted() {
+			if ( !this.itemFilter ) {
+				this.filter = this.selectionKey;
+			}
 			this.$nextTick(() => {
+			    this.initListNavigation({
+					lookup: 'lookup',
+					list: 'list'
+				});
 				if ( this.focus ) {
-					this.setFocus();
+					this.setFocus('lookup');
 				}
-				if ( this.closeOnBlur ) {
-					addEvent(this.$refs.lookup, 'blur', () => {
-						setTimeout(() => {
-							this.clear();
-						}, 200);
-					});
-				}
+				addEvent(this.$refs.lookup, 'focus', () => {
+				    this.focused = true;
+				});
+				addEvent(this.$refs.lookup, 'blur', () => {
+					setTimeout(() => {
+					    if ( this.$refs.lookup !== document.activeElement ) {
+							this.$emit('blur');
+							this.focused = false;
+							if ( this.closeOnBlur ) {
+								this.clear();
+							}
+						}
+					}, 200);
+				});
 			});
 		},
 
 		methods: {
 
 			clearSelection(s) {
-				if ( this.multiple ) {
+				if ( this.is_multiple ) {
 					let index = this.selection.indexOf(s);
 					this.selection.splice(index, 1);
 				} else {
 					this.selection = null;
 					this.$nextTick(() => {
-						this.setFocus();
+						this.setFocus('lookup');
 					});
 				}
-			},
-
-			findCache(term) {
-				if ( !this.cacheResults ) {
-					return false;
-				}
-
-				if ( this.page in this.cache ) {
-					if ( term in this.cache[this.page] ) {
-						this.selected_index = -1;
-						this.list = this.cache[this.page][term];
-						return true;
-					}
-				}
-
-				return false;
-			},
-
-			runSearch(concat = false) {
-				if ( !concat && this.findCache(this.lookup_name) ) {
-					return;
-				}
-
-				this.loading = true;
-				let term = this.lookup_name;
-				let page = this.page;
-				this.$emit('search', {
-					term,
-					page,
-					callback: (list) => {
-						this.loading = false;
-						if ( this.paginated && concat) {
-							if ( list.length ) {
-								this.list = this.list.concat(list);
-							} else {
-								this.last_page = this.page;
-							}
-						} else {
-							this.selected_index = -1;
-							this.cache[term] = list;
-							this.list = list;
-						}
-					}
-				});
-			},
-
-			runFilter() {
-				if ( this.findCache(this.lookup_name) ) {
-					return;
-				}
-
-				let name_regex = new RegExp('^.*' + escapeRegExp(this.lookup_name) + '.*', 'i');
-				this.loading = true;
-				this.list = this.items.filter((item) => {
-					return object_get(item, this.selectionKey, '').match(name_regex) ? true : false;
-				});
-				this.cache[this.lookup_name] = this.list;
-				this.loading = false;
 			},
 
 			clear() {
 				this.lookup_name = '';
 				this.list = [];
+				if ( this.$refs.lookup === document.activeElement ) {
+				    this.$refs.lookup.blur();
+				}
 				this.$emit('clear');
-			},
-
-			setFocus() {
-				this.$refs.lookup.focus();
 			},
 
 			backspace() {
 				if ( this.lookup_name == '' ) {
-					if ( this.has_selections && this.multiple ) {
-						this.selection.pop();
+					if ( this.has_selections && this.is_multiple ) {
+						let popped = this.selection.pop();
+						this.$emit('deleted', popped);
 					}
 				}
 			},
 
 			selectItem(index, e) {
-				if ( !this.list[index] ) {
-					return;
+				if ( e && keyCode(e) == 9 ) {
+			        if ( e.shiftKey ) {
+						this.clear();
+						return;
+					}
+					if ( this.is_multiple && this.lookup_name.length ) {
+			            e.preventDefault();
+					}
 				}
-				if ( e && keyCode(e) == 9 && e.shiftKey ) {
-					this.clear();
-					return;
-				}
+
+                if ( this.taggable && index == -1 && this.lookup_name.length ) {
+                    this.tagSelection();
+                    return;
+                } else if ( !this.list[index] ) {
+                    return;
+                }
 
 				this.selected_index = index;
-				this.$emit('selected', this.list[this.selected_index]);
-				this.lookup_name = '';
+				let selection = this.getSelectedItem();
+				this.$emit('selected', selection);
 				if ( this.selectionKey ) {
-					this.addSelection();
+					this.addSelection(selection);
 				}
+
+				// Reset the input and list
+				this.lookup_name = '';
 				this.list = [];
+
+				// If min search is 0 then we need to open the search right back up
+				if ( this.minSearch == 0 ) {
+				    this.startSearch();
+				}
 			},
 
-			addSelection() {
+			/**
+			 * Add a selection into the array of selections
+			 *
+			 * @param mixed selection
+			 */
+			addSelection(selection) {
 				if ( !this.selection ) {
 					this.selection  = [];
 				}
-				this.selection.push(object_get(this.list[this.selected_index], this.selectionKey));
+				this.selection.push(selection);
 			},
 
-			selectUp() {
-				let index = this.selected_index - 1;
-				if ( !(index < 0) ) {
-					this.selected_index -= 1;
-				}
-
-				if ( this.list.length > 0 ) {
-					this.$nextTick(() => {
-						this.autoScroll('up');
-					})
-				}
+			/**
+			 * Returns the current selection
+			 */
+			getSelection() {
+			    return this.selection;
 			},
 
-			selectDown() {
-				let index = this.selected_index + 1;
-				if ( index < this.list.length ) {
-					this.selected_index += 1;
+            /**
+			 * Return the label for the selected item
+			 *
+             * @param s
+             * @returns {*}
+             */
+			getSelectionLabel(s) {
+			    if ( s instanceof Object ) {
+					return object_get(s, this.selectionKey);
 				}
 
-				if ( this.list.length > 0 ) {
-					this.$nextTick(() => {
-						this.autoScroll('down');
-					})
-				}
-			},
-
-			autoScroll(direction) {
-				let li = this.$refs.list.getElementsByClassName('selected-item')[0];
-				let itemOffset = li.offsetTop;
-				let itemHeight = li.offsetHeight;
-				let scrollTop = this.$refs.list.scrollTop;
-				let offsetHeight = this.$refs.list.offsetHeight;
-
-				if ( direction == 'down' ) {
-					if ( itemOffset+itemHeight >= scrollTop + offsetHeight) {
-						this.$refs.list.scrollTop += itemHeight;
-					}
-				} else {
-					if ( itemOffset-(itemHeight/2) <= scrollTop) {
-						this.$refs.list.scrollTop -= itemHeight;
-					}
-				}
+				return s;
 			},
 
             editSelection() {
-			    if ( this.lookup_name == '' && !this.multiple ) {
-			        this.lookup_name = this.selection;
+			    if ( this.lookup_name == '' && !this.is_multiple ) {
+			        this.lookup_name = this.getSelectionLabel(this.selection[0]);
 			        this.selection = null;
 
 			        this.$nextTick(() => {
-                        this.setFocus();
+                        this.setFocus('lookup');
 					});
 				}
-			}
+			},
 
+			tagSelection() {
+                let tag = this.lookup_name;
+                if ( !this.selection ) {
+                    this.selection  = [];
+                }
+
+                this.selection.push(tag);
+                this.lookup_name = '';
+                this.$emit('tag-created', tag);
+            }
 		},
 
 		watch: {
-
 			lookup_name() {
-				if ( this.lookup_name == '' ) {
-					this.list = [];
-					return;
-				}
-
-				if ( this.items ) {
-					this.runFilter();
-					return;
-				}
-
-				if ( this.timer ) {
-					clearTimeout(this.timer);
-				}
-
-				this.timer = setTimeout(() => {
-					// Reset page since the search term has changed
-					this.page = 1;
-					this.last_page = null;
-					this.runSearch();
-				}, this.delay);
+			    // when the lookup name changes we trigger the run lookup
+				this.startSearch();
 			},
 
-			selected_index() {
-				if ( this.paginated ) {
-					if ( this.last_index - this.paginateThreshold <= this.selected_index ) {
-						if ( parseInt(this.last_page || 0) > 0) {
-							return;
-						}
+			list() {
+			    // Auto select when 1 element is available
+			    if ( this.taggable && this.list.length == 1 ) {
+			        let typed_name = String(this.lookup_name).toLowerCase();
+			        let list_name = String(this.getSelectionLabel(this.getItemByIndex(0))).toLowerCase();
 
-						this.page++;
-						this.runSearch(true)
+			        // Only auto select when the typed name matches the first element
+			        if ( typed_name === list_name ) {
+                        this.selected_index = 0;
 					}
 				}
-			}
+			},
 
+			focused() {
+			    if ( this.focused && this.minSearch == 0 && this.lookup_name.length == 0 ) {
+			        this.startSearch();
+				}
+			}
 		},
 
 		components: {

@@ -3,6 +3,7 @@ import PageKsTabs from './pages/PageKsTabs.vue';
 import PageKsModal from './pages/PageKsModal.vue';
 import PageKsLoaders from './pages/PageKsLoaders.vue';
 import PageKsFormElements from './pages/PageKsFormElements.vue';
+import PageKsSelect from './pages/PageKsSelect.vue';
 import StylesPage from './pages/StylesPage.vue';
 
 const routes = [
@@ -34,6 +35,12 @@ const routes = [
 		component: PageKsFormElements,
 		name: 'KsForms',
 		meta: { title: 'Kickstart Forms' }
+	},
+	{
+		path: '/ks-select',
+		component: PageKsSelect,
+		name: 'KsSelect',
+		meta: { title: 'Kickstart Selects' }
 	},
 	{
 		path: '/ks-loaders',

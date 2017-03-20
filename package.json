@@ -1,6 +1,6 @@
 {
 	"name": "kickstart",
-	"version": "1.0.0",
+	"version": "0.1.4",
 	"description": "Vue componenets and js libs",
 	"main": "index.js",
 	"author": "Crompco LLC",
