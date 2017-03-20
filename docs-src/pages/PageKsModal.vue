@@ -175,5 +175,3 @@
 		}
 	}
 </script>
-
-<style></style>
