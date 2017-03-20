@@ -1,21 +1,10 @@
+@import "_global";
+@import "_alerts";
+@import "_grid";
+@import "_navigation";
+@import "_buttons";
+
 $settings: (
-	alert: (
-		padding: 15px,
-		margin: 0 0 20px 0,
-		border-radius: 5px
-	),
-	nav: (
-		width: 200px,
-		height: 60px,
-		padding: 10px
-	),
-	buttons: (
-		sizes: (
-			tiny: 0.6rem,
-			small: 0.75rem,
-			large: 1.25rem
-		)
-	),
 	tabs: (
 		title: (
 			font-size: 1.1rem,
