@@ -156,6 +156,10 @@
 				lookup: 'lookup',
 				list: 'list',
 			});
+
+			this.$on('clear', () => {
+			    this.isOpen = false;
+			});
 		},
 
 		methods: {
@@ -219,7 +223,6 @@
 
 		watch: {
 			lookup_name() {
-
 				this.startSearch();
 			},
 			value() {

@@ -85,10 +85,6 @@
 			placeholder: {
 				default: 'Lookup ...'
 			},
-			closeOnBlur: {
-				type: Boolean,
-				default: true
-			},
 			delay: {
 				type: Number,
 				default: 100
@@ -112,10 +108,6 @@
 				type: Number,
 				default: 1
 			},
-			taggable: {
-			    type: Boolean,
-				default: false
-			},
 			focus: {
 			    type: Boolean,
 				default: false
@@ -124,7 +116,6 @@
 
 		data() {
 			return {
-				focused: false,
 				lookup_name: '',
 				selected_index: -1,
 				selection: null,
@@ -162,23 +153,6 @@
 			    this.initListNavigation({
 					lookup: 'lookup',
 					list: 'list'
-				});
-				if ( this.focus ) {
-					this.setFocus('lookup');
-				}
-				addEvent(this.$refs.lookup, 'focus', () => {
-				    this.focused = true;
-				});
-				addEvent(this.$refs.lookup, 'blur', () => {
-					setTimeout(() => {
-					    if ( this.$refs.lookup !== document.activeElement ) {
-							this.$emit('blur');
-							this.focused = false;
-							if ( this.closeOnBlur ) {
-								this.clear();
-							}
-						}
-					}, 200);
 				});
 			});
 		},
@@ -312,6 +286,9 @@
 			    if ( this.focused && this.minSearch == 0 && this.lookup_name.length == 0 ) {
 			        this.startSearch();
 				}
+			},
+			show_list() {
+
 			}
 		},
 
