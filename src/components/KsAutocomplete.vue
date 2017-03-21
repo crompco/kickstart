@@ -50,6 +50,7 @@
 				v-for="(item, index) in list"
 				:class="{ 'selected-item': index == selected_index }"
 				@click.prevent="selectItem(index, $event)"
+			    @mouseover="setHoverIndex(index)"
 			>
 				<!-- Scoped slot -->
 				<slot :item="item"></slot>

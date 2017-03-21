@@ -41,6 +41,8 @@
 					v-for="(item, index) in list"
 					:class="{ 'selected-item': index == selected_index }"
 					@click.prevent="selectItem(index)"
+					@mouseover="setHoverIndex(index)"
+
 				>
 					<!-- Scoped slot -->
 					<slot :item="item"></slot>
@@ -80,6 +82,10 @@
 			searchThreshold: {
 				type: Number,
 				default: 7
+			},
+			disableSearch: {
+				type: Boolean,
+				default: false
 			},
 			itemFilter: {},
 			itemKey: String,
@@ -127,6 +133,10 @@
 				return typeof this.value !== 'object' ? false : true;
 			},
 			show_search() {
+				if ( this.disableSearch ) {
+					return false;
+				}
+
 				if ( !this.items ) {
 					return true;
 				}
