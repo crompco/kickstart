@@ -1,0 +1,27 @@
+@import "_colors";
+@import "../functions/_map";
+
+// Mask
+$modal-mask-bg: $black !default;
+$modal-mask-opacity: 0.5 !default;
+$modal-margin-top: 200px !default;
+
+// Header
+$modal-header-bg: get($brand, lighter) !default;
+$modal-header-color: $light-gray !default;
+$modal-header-box-shadow: inset 0 -10px 15px -12px rgba($black, 0.2) !default;
+
+// Wrapper
+$modal-wrapper-bg: $white !default;
+$modal-wrapper-box-shadow: 0 5px 15px rgba($black, 0.5) !default;
+$modal-body-padding: 1rem !default;
+
+// Close Button
+$modal-close-bg: darken(get($brand, lighter), 18%) !default;
+$modal-close-opacity: 0.8 !default;
+$modal-close-hover-bg: darken(get($brand, lighter), 25%) !default;
+
+// Footer
+$modal-footer-bg: $white !default;
+$modal-footer-top-border: 1px solid rgba($med-gray, 0.6) !default;
+$modal-button-align: right !default;
