@@ -52,11 +52,14 @@ export default {
 			list: [],
 			startIndex: -1,
 			selected_index: -1,
+			hover_index: -1,
 			cache: {},
 			page: 1,
 			last_page: null,
 			mousescroll_threshold: 40,
-			mousescroll_delay: 100
+			mousescroll_delay: 100,
+			navigating_with_keys: false,
+			key_pressed_timer: ''
 		};
 	},
 
@@ -117,6 +120,10 @@ export default {
                     this.focused = true;
                 });
 
+				addEvent(document, 'mousemove', () => {
+					this.navigating_with_keys = false;
+				});
+
 				addEvent(this.$refs.lookup, 'blur', () => {
                     setTimeout(() => {
                         if ( this.$refs[this.ref_lookup] !== document.activeElement ) {
@@ -139,7 +146,7 @@ export default {
 			if ( this.paginated ) {
                 scrolledToBottom(this.$refs[this.ref_list], () => {
                     if ( this.last_index && !this.list_exhausted ) {
-                        this.selected_index = this.last_index;
+                        this.runNextPage(this.last_index);
                     }
 				}, this.mousescroll_delay, this.mousescroll_threshold);
 			}
@@ -148,26 +155,53 @@ export default {
 			}
 		},
 
+		/**
+		 *
+		 * @param index
+		 */
+		setHoverIndex(index) {
+			if ( !this.navigating_with_keys ) {
+				this.selected_index = index;
+			}
+		},
+
         /**
 		 * Move the selection up
          */
 		selectUp() {
+			this.navigating_with_keys = true;
 			let index = this.selected_index - 1;
 			if ( !(index < 0) ) {
 				this.selected_index -= 1;
 			}
+
+	        // Auto scroll
+	        if ( this.list.length > 0 ) {
+		        this.$nextTick(() => {
+			        this.autoScroll('up');
+		        });
+	        }
+	        this.resetKeyPressed();
 		},
 
         /**
 		 * Move the selection down
          */
 		selectDown() {
+			this.navigating_with_keys = true;
 			let index = this.selected_index + 1;
 
 			if ( index <= this.last_index ) {
 				this.selected_index += 1;
 			}
-		},
+
+	        // Auto scroll
+	        if ( this.list.length > 0 ) {
+		        this.$nextTick(() => {
+			        this.autoScroll('down');
+		        });
+	        }
+        },
 
 		/**
 		 * Clear the lookup
@@ -397,13 +431,6 @@ export default {
          */
 		selected_index(newVal, oldVal) {
 			this.runNextPage(this.selected_index);
-
-			// Auto scroll
-			if ( this.list.length > 0 && newVal != oldVal ) {
-				this.$nextTick(() => {
-                    this.autoScroll(newVal > oldVal ? 'down' : 'up');
-				});
-			}
 		}
 	}
 }

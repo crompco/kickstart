@@ -57,6 +57,17 @@
 			</ks-autocomplete>
 		</div>
 
+		<!--<div class="callout">-->
+			<!--<ks-tabs>-->
+				<!--<ks-tab title="Props">-->
+
+				<!--</ks-tab>-->
+				<!--<ks-tab title="Events">-->
+
+				<!--</ks-tab>-->
+			<!--</ks-tabs>-->
+		<!--</div>-->
+
 		<div style="height: 1200px;">
 			<!-- Force the page to get taller to test the scrolling-->
 		</div>
@@ -68,6 +79,8 @@
 <script>
 	import api from '../../src/helpers/api';
 	import KsAutocomplete from '../../src/components/KsAutocomplete.vue';
+	import KsTabs from '../../src/components/KsTabs.vue';
+	import KsTab from '../../src/components/KsTab.vue';
 	import {escapeRegExp} from '../../src/helpers/strings';
 
 	export default {
@@ -102,7 +115,9 @@
 		watch: {},
 
 		components: {
-            KsAutocomplete
+            KsAutocomplete,
+			KsTabs,
+			KsTab
 		}
 	}
 </script>

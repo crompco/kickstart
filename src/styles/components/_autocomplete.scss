@@ -143,8 +143,8 @@
 		}
 
 		&:hover {
-			@include state-hover();
-			background: $ac-list-item-hover-bg;
+			//@include state-hover();
+			//background: $ac-list-item-hover-bg;
 		}
 	}
 }
