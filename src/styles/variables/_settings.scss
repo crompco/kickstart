@@ -3,31 +3,17 @@
 @import "_grid";
 @import "_navigation";
 @import "_buttons";
+@import "_loaders";
+@import "_modal";
+@import "_tabs";
 
 $settings: (
-	tabs: (
-		title: (
-			font-size: 1.1rem,
-			height: 2em,
-			min-width: 4em,
-			padding: 0 0.75em,
-			opacity: 0.7
-		),
-		content: (
-			padding: 1em
-		)
-	),
 	state: (
 		default: (
 			font-weight: normal,
 		),
 		hover: (
 			font-weight: normal,
-		)
-	),
-	loaders: (
-		spin: (
-			size: 28px
 		)
 	)
 );

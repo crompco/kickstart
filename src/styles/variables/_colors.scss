@@ -8,6 +8,7 @@ $header-color: #444 !default;
 // Grays
 $lighter-gray: #eff2f3 !default;
 $light-gray: #eee !default;
+$gray: #ccc !default;
 $med-gray: #aaa !default;
 $dark-gray: #888 !default;
 $darker-gray: #444 !default;
@@ -76,11 +77,6 @@ $colors: (
 		color: get($brand, primary),
 		hover: get($brand, light),
 		hover-color: $white
-	),
-	tabs: (
-		content: (
-			background-color: $white,
-		)
 	),
 	state: (
 		default: (

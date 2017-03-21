@@ -1,13 +1,14 @@
-@import "../../functions/_color";
+@import "../../functions/_utils";
+@import "../../variables/_forms";
 
 .ks-checkbox, .ks-radio {
 	display: flex;
 	align-items: center;
-	margin-bottom: 0.5rem;
+	margin-bottom: rem($form-options-margin-bottom);
 
 	&.inline {
 		display: inline-flex;
-		margin-right: 0.5em;
+		margin-right: rem($form-options-margin-right);
 	}
 
 	input[type="checkbox"], input[type="radio"] {
@@ -17,36 +18,38 @@
 
 	&.ks-state-active {
 		.ks-checkbox-input-wrapper {
-			background-color: color(brand, lighter);
-			border-color: color(brand, lighter);
+			background-color: $form-options-active-bg;
+			border-color: $form-options-active-border;
 
 			svg {
+				$abs_offset: ($form-options-border-radius / 2) * -1;
+
 				position: absolute;
-				height: calc(1.1rem - 2px);
-				width: calc(1.1rem - 2px);
-				top: -1px;
-				left: -1px;
+				height: calc(#{rem($form-options-height)} - #{$form-options-border-radius});
+				width: calc(#{rem($form-options-width)} - #{$form-options-border-radius});
+				top: $abs_offset;
+				left: $abs_offset;
 
 				path {
-					fill: color(white);
+					fill: $form-checkbox-check-fill;
 				}
 			}
 		}
 
 		.ks-radio-input-wrapper {
-			border-color: color(brand, lighter);
+			border-color: $form-options-active-border;
 
 			.radio-check {
 				position: absolute;
 				display: block;
-				background-color: color(brand, lighter);
+				background-color: $form-options-active-bg;
 				border-radius: 50%;
 				top: 0;
 				bottom: 0;
 				left: 0;
 				right: 0;
 				margin: auto;
-				transform: scale(0.7);
+				transform: scale(#{$form-radio-select-scale});
 			}
 		}
 
@@ -58,12 +61,13 @@
 
 	.ks-checkbox-input-wrapper, .ks-radio-input-wrapper {
 		position: relative;
-		border: 2px solid color(med-gray);
-		height: 1.1rem;
-		width: 1.1rem;
-		border-radius: 2px;
+		background-color: $form-options-bg;
+		border: 2px solid $form-options-border;
+		height: $form-options-height;
+		width: $form-options-width;
+		border-radius: $form-options-border-radius;
 		flex-shrink: 0;
-		margin-right: 0.5rem;
+		margin-right: rem($form-options-margin-right);
 	}
 
 	.ks-radio-input-wrapper {
@@ -71,6 +75,6 @@
 	}
 
 	.ks-checkbox-label-wrapper, .ks-radio-label-wrapper {
-		line-height: 1.1rem;
+		line-height: rem($form-options-height);
 	}
 }

@@ -5,7 +5,10 @@
 
 .autocomplete-holder {
 	position: relative;
-	@include form-input(inline-block);
+	display: inline-block;
+	margin-right: 0.3em;
+	margin-left: 0.3em;
+	@extend %form-input;
 	background: color(white);
 	padding: 0;
 	border: 0;
@@ -117,6 +120,7 @@
 	border: solid 1px color(med-light-gray);
 	border-top: 0;
 	overflow-y: auto;
+	left: 0;
 
 	> li {
 		padding: 0.25em 0.5em 0.25em 0.2em;

@@ -1,14 +1,24 @@
+@import "../functions/_utils";
 @import "forms/_options";
 @import "forms/_select";
 @import "../mixins/_forms";
 
 .form-group {
-	margin-bottom: 1em;
+	margin-bottom: rem($form-group-margin-bottom);
 
 	.title {
-		@include form-label(block, 600);
 		max-width: 100%;
-		margin-bottom: 0.5em;
+		margin-bottom: rem($form-title-margin-bottom);
+		display: block;
+		font-weight: $form-title-font-weight;
+
+		&.disabled {
+			opacity: $form-title-disabled-opacity;
+
+			> *, & {
+				cursor: not-allowed;
+			}
+		}
 
 		&.top {
 			vertical-align: top;
@@ -30,7 +40,7 @@
 	[type='url'],
 	[type='color'],
 	textarea {
-		@include form-input(block);
+		@extend %form-input-block;
 	}
 
 	textarea.no-resize {
@@ -39,9 +49,9 @@
 
 	&.inline {
 		.title {
-			@include form-label(inline-block, 600);
+			display: inline-block;
 
-			margin-right: 0.5em;
+			margin-right: rem($form-title-margin-right);
 			margin-bottom: 0;
 		}
 
@@ -60,7 +70,7 @@
 		[type='url'],
 		[type='color'],
 		textarea {
-			@include form-input(inline-block);
+			@extend %form-input-inline;
 		}
 	}
 }
