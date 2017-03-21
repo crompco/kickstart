@@ -1,6 +1,0 @@
-@import "_map";
-@import "../variables/_colors";
-
-@function color($keys...) {
-	@return get($colors, $keys...);
-}

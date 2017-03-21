@@ -1,15 +1,16 @@
-@import "../functions/_color";
+@import "../functions/_utils";
 @import "../variables/_navigation";
 @import "./_animation";
 @import "./_utils";
 @import "./_grid";
 
+// TODO: combine these 2 mixins to one or change nav-bar to side-bar
 @mixin nav-bar() {
-	@include row(); 	
-	background-color: color(nav, background-color);
+	@include row();
+	background-color: $nav-bg;
 
 	.nav-brand {
-		background-color: color(nav, brand-background);
+		background-color: $nav-brand-bg;
 		height: $nav-height;
 		width: 100%;
 		text-align: center;
@@ -27,14 +28,14 @@
 		}
 
 		a {
-			color: color(nav, color);
+			color: $nav-links-color;
 			text-decoration: none;
 			padding: 1em;
 			display: inline-block;
 			@include transition(background-color, 0.3);
 
 			&:hover {
-				background-color: color(nav, hover);
+				background-color: $nav-links-hover-color;
 			}
 
 			.router-link-active, .active {
@@ -47,9 +48,11 @@
 @mixin top-bar() {
 	position: relative;
 	height: $nav-height;
-	background-color: color(top-bar, background-color);
-	color: color(top-bar, color);
-	box-shadow: 0 2px 1px color(med-gray);
+	background-color: $top-bar-bg;
+	color: $top-bar-color;
+	@if $top-bar-box-shadow != false {
+		box-shadow: $top-bar-box-shadow;
+	}
 
 	.text {
 		@include v-center;
@@ -71,16 +74,18 @@
 					display: block;
 					padding: 0;
 					margin: 0;
-					background: color(top-bar, background-color);
-					box-shadow: 0 1px 2px color(med-gray);
+					background: $top-bar-dd-bg;
+					@if $top-bar-dd-box-shadow != false {
+						box-shadow: $top-bar-dd-box-shadow;
+					}
 
 					a {
-						padding: 0.75em;
-						line-height: $nav-height / 2;
+						padding: rem($top-bar-dd-link-padding);
+						line-height: ($nav-height / 2);
 
 						&:hover {
-							background-color: color(top-bar, hover);
-							color: color(top-bar, hover-color);
+							background-color: $top-bar-dd-hover;
+							color: $top-bar-dd-hover-color;
 						}
 					}
 				}
@@ -94,9 +99,14 @@
 			a {
 				display: block;
 				text-decoration: none;
-				color: color(top-bar, color);
+				color: $top-bar-color;
 				padding: $nav-padding;
-				line-height: $nav-height - ($nav-height * 2);
+				line-height: $nav-height - ($nav-padding * 2);
+
+				&:hover {
+					background-color: $top-bar-hover-bg;
+					color: $top-bar-hover-color;
+				}
 			}
 		}
 	}

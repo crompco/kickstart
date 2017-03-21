@@ -1,14 +1,5 @@
 // Normalize
-@import "../../node_modules/normalize.css/normalize";
-
-// Functions
-@import "functions/_functions";
-
-// Mixins
-@import "mixins/_mixins";
-
-// Variable
-@import "variables/_variables";
+@import "~normalize.css/normalize";
 
 // Grid
 @import "layout/_grid";
@@ -25,5 +16,4 @@
 @import "components/_autocomplete";
 @import "components/_loaders";
 @import "components/_modal";
-
 @import "components/_state";

@@ -1,4 +1,4 @@
-@import "../variables/_colors";
+@import "../variables/_global";
 
 @mixin state-default() {
 	background-color: $state-default-bg;
