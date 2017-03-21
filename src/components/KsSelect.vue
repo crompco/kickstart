@@ -1,11 +1,12 @@
 <template>
-	<div class="ks-select">
+	<div class="ks-select" :class="{ 'ks-select-open': isOpen }">
 		<input type="hidden" :name="name" :value="value">
 		<div class="ks-select-selection" @click.prevent="toggleOpen">
 			<div class="ks-select-placeholder" v-if="!value">{{placeholder}}</div>
 			<template v-else>
 				{{selected}}
 			</template>
+			<span class="ks-select-arrow"></span>
 		</div>
 
 		<div class="ks-select-dropdown" v-show="isOpen">
