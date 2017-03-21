@@ -1,16 +1,15 @@
-@import "../functions/_color";
-@import "../functions/_settings";
+@import "../variables/_colors";
 
 @mixin state-default() {
-	background-color: color(state, default, background-color);
-	border: 1px solid color(state, default, border);
-	font-weight: setting(state, default, font-weight);
-	color: color(state, default, color);
+	background-color: $state-default-bg;
+	border: 1px solid $state-default-border;
+	font-weight: normal;
+	color: $state-default-color;
 }
 
 @mixin state-hover() {
-	background-color: color(state, hover, background-color);
-	border: 1px solid color(state, hover, border);
-	font-weight: setting(state, hover, font-weight);
-	color: color(state, hover, color);
+	background-color: $state-hover-bg;
+	border: 1px solid $state-hover-border;
+	font-weight: normal;
+	color: $state-hover-color;
 }

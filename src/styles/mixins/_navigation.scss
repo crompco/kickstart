@@ -5,7 +5,7 @@
 @import "./_grid";
 
 @mixin nav-bar() {
-	@include row();
+	@include row(); 	
 	background-color: color(nav, background-color);
 
 	.nav-brand {
