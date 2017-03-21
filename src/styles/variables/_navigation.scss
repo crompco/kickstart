@@ -1,20 +1,30 @@
 @import "../functions/_map";
-@import "../variables/_colors";
+@import "_global";
 
 $nav-width: 200px !default;
 $nav-height: 60px !default;
 $nav-padding: 10px !default;
 
-$nav: (
-	background-color: get($brand, primary),
-	color: $white,
-	brand-background: $white,
-	hover: get($brand, light)
-) !default;
+//
+// Top Bar
+//
+$top-bar-bg: $white !default;
+$top-bar-hover-bg: $white !default;
+$top-bar-color: get($brand, primary) !default;
+$top-bar-hover-color: get($brand, primary) !default;
+$top-bar-box-shadow: 0 2px 1px $med-gray !default;
 
-$top-bar: (
-	background-color: $white,
-	color: get($brand, primary),
-	hover: get($brand, light),
-	hover-color: $white
-) !default;
+$top-bar-dd-bg: $top-bar-bg !default;
+$top-bar-dd-box-shadow: 0 1px 2px $med-gray !default;
+$top-bar-dd-link-padding: 0.75rem !default;
+$top-bar-dd-hover-color: $white !default;
+$top-bar-dd-hover: get($brand, light) !default;
+
+
+//
+// Nav Bar
+//
+$nav-bg: get($brand, primary) !default;
+$nav-brand-bg: get($brand, primary) !default;
+$nav-links-color: $white !default;
+$nav-links-hover-color: get($brand, light) !default;

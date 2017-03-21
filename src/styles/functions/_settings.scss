@@ -1,5 +1,0 @@
-@import "_map";
-
-@function setting($keys...) {
-	@return get($settings, $keys...);
-}
