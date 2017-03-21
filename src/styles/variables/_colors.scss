@@ -42,6 +42,16 @@ $state-error: #a94442 !default;
 $state-error-bg: #f2dede !default;
 $state-error-border: darken($state-error-bg, 5%) !default;
 
+
+// State Actions
+$state-default-bg: get($brand, light) !default;
+$state-default-border: transparent !default;
+$state-default-color: $white !default;
+
+$state-hover-bg: darken(get($brand, light), 12%) !default;
+$state-hover-border: transparent !default;
+$state-hover-color: $white !default;
+
 $colors: (
 	white: $white,
 	black: $black,
@@ -60,12 +70,6 @@ $colors: (
 		secondary: get($brand, secondary),
 		off: get($brand, off)
 	),
-	panel: (
-		background-color: $white,
-		shadow: $med-gray,
-		header-background: $light-gray,
-		header-color: $header-color
-	),
 	nav: (
 		background-color: get($brand, primary),
 		color: $white,
@@ -77,17 +81,5 @@ $colors: (
 		color: get($brand, primary),
 		hover: get($brand, light),
 		hover-color: $white
-	),
-	state: (
-		default: (
-			border: transparent,
-			background-color: get($brand, light),
-			color: $white
-		),
-		hover: (
-			border: transparent,
-			background-color: darken(get($brand, light), 12%),
-			color: $white
-		)
 	)
 ) !default;
