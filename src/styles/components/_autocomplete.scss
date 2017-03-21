@@ -1,7 +1,16 @@
+@import "../mixins/_forms";
+@import "../functions/_utils";
+@import "../mixins/_state";
+@import "../mixins/_autocomplete";
+@import "../variables/_autocomplete";
+
 .autocomplete-holder {
 	position: relative;
-	@include form-input(inline-block);
-	background: color(white);
+	display: inline-block;
+	margin-right: rem($ac-margin-right);
+	margin-left: rem($ac-margin-left);
+	@extend %form-input;
+	background: $ac-bg;
 	padding: 0;
 	border: 0;
 
@@ -24,38 +33,38 @@
 		.selection {
 			display: block;
 			width: 100%;
-			padding: 0.5em;
+			padding: rem($ac-selection-padding);
 		}
 	}
 
 	.selection {
 
 		.selection-text {
-			background-color: color(white);
+			background-color: $ac-selection-bg;
 			display: inline-block;
-			color: color(text-color);
+			color: $ac-selection-color;
 
 			a {
-				height: 0.8rem;
-				width: 0.8rem;
+				height: rem($ac-clear-height);
+				width: rem($ac-clear-width);
 				position: relative;
 				display: inline-block;
 
 				&:hover {
 					svg g {
-						fill: darken(color(med-gray), 40%);
+						fill: $ac-clear-color;
 					}
 				}
 			}
 
 			svg {
-				height: 0.8rem;
-				width: 0.8rem;
+				height: rem($ac-clear-height);
+				width: rem($ac-clear-width);
 				position: absolute;
 				top: 1px;
 
 				g {
-					fill: darken(color(med-gray), 20%);
+					fill: $ac-clear-color-hover;
 				}
 			}
 		}
@@ -64,37 +73,42 @@
 
 	&.is-multiple {
 		@include ks-autocomplete-input;
-		padding: calc(0.3em - 4px) 0.3em;
+		padding: calc(#{rem($ac-input-multi-padding)} - #{$ac-multi-margin}) rem($ac-input-multi-padding);
 
 		&:not(.is-selected) {
-			padding: calc(0.5em - 1px);
+			// 1px is for border
+			padding: calc(#{rem($ac-input-padding)} - 1px);
 		}
 
 		.autocomplete-list {
+			// 2px is for border
+			// -1px is to move over to compensate for parent borders
+			// margin-top is for when there is a selection. padding of the wrapper changes when there are selections
 			width: calc(100% + 2px);
 			left: -1px;
-			margin-top: 0.5em;
+			margin-top: rem($ac-input-padding);
 		}
 
 		&.is-selected .autocomplete-list {
-			margin-top: calc(0.5em - 6px);
+			// Set margin top 2px for border width
+			margin-top: 2px;
 		}
 
 		.selection .selection-text {
-			background-color: color(brand, lighter);
-			margin: 4px;
-			padding: 3px 5px;
-			border-radius: 3px;
-			color: color(white);
+			background-color: $ac-multi-bg;
+			margin: $ac-multi-margin;
+			padding: $ac-multi-padding;
+			border-radius: $ac-multi-border-radius;
+			color: $ac-multi-color;
 
 			a:hover {
 				svg g {
-					fill: darken(color(brand, lighter), 40%);
+					fill: $ac-multi-close-color;
 				}
 			}
 
 			svg g {
-				fill: darken(color(brand, lighter), 20%);
+				fill: $ac-multi-close-color-hover;
 			}
 		}
 	}
@@ -106,17 +120,18 @@
 	z-index: 100;
 	padding: 0;
 	width: 100%;
-	background-color: color(white);
+	background-color: $ac-list-bg;
 	position: absolute;
 	list-style: none;
-	border: solid 1px color(med-light-gray);
+	border: solid 1px $ac-list-border;
 	border-top: 0;
 	overflow-y: auto;
+	left: 0;
 
 	> li {
-		padding: 0.25em 0.5em 0.25em 0.2em;
+		padding: rem($ac-list-item-padding);
 		border: 1px solid transparent;
-		border-bottom: solid 1px color(med-light-gray);
+		border-bottom-color: $ac-list-item-border;
 
 		&:last-child {
 			border: 0;
@@ -124,12 +139,12 @@
 
 		&.selected-item {
 			@include state-hover();
-			color: #fff;
+			color: $ac-list-selected-color;
 		}
 
 		&:hover {
 			@include state-hover();
-			background: lighten(color(state, hover, background-color), 10%);
+			background: $ac-list-item-hover-bg;
 		}
 	}
 }

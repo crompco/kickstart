@@ -1,3 +1,9 @@
+// External
+@import "~bourbon-neat/core/_neat";
+
+// Internal
+@import "../variables/_grid";
+
 @mixin breakpoint($grid) {
 	@include grid-media($grid) {
 		@content;
@@ -30,12 +36,6 @@
 
 @mixin xlg() {
 	@include breakpoint($grid-xlg) {
-		@content;
-	}
-}
-
-@mixin nav() {
-	@include breakpoint($grid-nav) {
 		@content;
 	}
 }

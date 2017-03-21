@@ -1,8 +1,11 @@
+@import "../mixins/_grid";
+@import "../mixins/_navigation";
+
 .nav-bar {
 	@include nav-bar;
 
 	&.vertical {
-		width: setting(nav, width);
+		width: $nav-width;
 		height: 100%;
 
 		.nav-links {

@@ -1,0 +1,50 @@
+@import "../functions/_map";
+@import "_global";
+
+$ac-bg: $white !default;
+$ac-margin-right: 0.3rem !default;
+$ac-margin-left: 0.3rem !default;
+
+//
+// Input Box
+//
+$ac-input-padding: 0.5rem !default;
+$ac-input-border: $med-gray !default;
+$ac-input-box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.1) !default;
+$ac-input-multi-padding: 0.3rem !default;
+
+//
+// Selected
+//
+$ac-selection-padding: 0.5rem !default;
+$ac-selection-bg: $white !default;
+$ac-selection-color: $text-color !default;
+
+//
+// Clear Button
+//
+$ac-clear-height: 0.8rem !default;
+$ac-clear-width:  0.8rem !default;
+$ac-clear-color: $dark-gray !default;
+$ac-clear-color-hover: darken($dark-gray, 8%) !default;
+
+//
+// List
+//
+$ac-list-bg: $white !default;
+$ac-list-border: $gray !default;
+$ac-list-item-border: $gray !default;
+$ac-list-item-padding: 0.25rem 0.5rem 0.25rem 0.2rem !default;
+$ac-list-selected-color: $white !default;
+$ac-list-item-hover-bg: darken(get($brand, light), 2%) !default;
+
+//
+// Multiple
+//
+$ac-multi-bg: get($brand, lighter) !default;
+$ac-multi-margin: 4px !default;
+$ac-multi-padding: 3px 5px !default;
+$ac-multi-border-radius: 3px !default;
+$ac-multi-color: $white !default;
+$ac-multi-close-color: darken(get($brand, lighter), 40%) !default;
+$ac-multi-close-color-hover: darken(get($brand, lighter), 20%) !default;

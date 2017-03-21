@@ -1,9 +1,11 @@
+// Vertically Center an item in it's parent
 @mixin v-center() {
 	position: absolute;
 	top: 50%;
 	transform: translateY(-50%);
 }
 
+// Disable an element
 @mixin disable() {
 	opacity: 0.5;
 	cursor: not-allowed;

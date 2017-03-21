@@ -1,0 +1,20 @@
+@import "../functions/_map";
+@import "_global";
+
+// Line Loader
+$line-loader-height: 4px;
+$line-loader-width: 100%;
+$line-loader-bg: #ddd;
+$line-loader-bg-active: get($brand, secondary);
+$line-loader-speed: 1.5;
+$line-loader-animation-style: linear;
+$line-loader-animation-length: infinite;
+
+// Spinner Loader
+$spinner-size: 28px;
+$spinner-border: #ddd;
+$spinner-border-width: .25rem;
+$spinner-border-active: get($brand, secondary);
+$spinner-speed: 1;
+$spinner-animation-style: linear;
+$spinner-animation-length: infinite;

@@ -1,3 +1,7 @@
+@import "../functions/_utils";
+@import "../mixins/_animation";
+@import "../variables/_tabs";
+
 .ks-tabs {
 
 	.tabs-title-bar {
@@ -8,7 +12,9 @@
 
 		li {
 			display: flex;
-			border-right: 1px solid darken(color(background-color), 10%);
+			@if $tabs-links-border-right != false {
+				border-right: $tabs-links-border-right;
+			}
 
 			&:last-child {
 				border-right: 0;
@@ -19,15 +25,15 @@
 				align-items: center;
 				justify-content: center;
 				text-decoration: none;
-				color: color(text-color);
-				font-size: setting(tabs, title, font-size);
+				color: $tabs-inactive-color;
+				font-size: rem($tabs-font-size);
 				border-top: 2px solid transparent;
 				margin: 0;
-				padding: setting(tabs, title, padding);
-				height: setting(tabs, title, height);
-				min-width: setting(tabs, title, min-width);
-				background-color: darken(color(background-color), 8%);
-				opacity: setting(tabs, title, opacity);
+				padding: rem($tabs-padding);
+				height: rem($tabs-height);
+				min-width: rem($tabs-min-width);
+				background-color: $tabs-bg;
+				opacity: $tabs-opacity;
 				@include transition();
 
 				&:hover {
@@ -39,9 +45,9 @@
 				border-right: 0;
 
 				a {
-					background-color: color(white);
-					color: color(brand, lighter);
-					border-top-color: color(brand, lighter);
+					background-color: $tabs-links-bg;
+					color: $tabs-links-color;
+					border-top-color: $tabs-links-border-top-color;
 					opacity: 1;
 				}
 			}
@@ -55,8 +61,11 @@
 	}
 
 	.tabs-content {
-		background-color: color(white);
-		padding: setting(tabs, content, padding);
-		box-shadow: 1px 1px 2px rgba(color(black), 0.1);
+		background-color: $tabs-content-bg;
+		padding: rem($tabs-content-padding);
+
+		@if $tabs-content-box-shadow != false {
+			box-shadow: $tabs-content-box-shadow;
+		}
 	}
 }

@@ -1,29 +1,35 @@
-@mixin form-label($display, $weight: normal) {
-	display: $display;
-	font-weight: $weight;
+@import "../functions/_utils";
+@import "../variables/_global";
+@import "../variables/_forms";
 
-	&.disabled {
-		opacity: 0.7;
-
-		> *, & {
-			cursor: not-allowed;
+@mixin form-input($extend: true) {
+	@if $extend {
+		@extend %form-input;
+	} @else {
+		padding: rem($form-padding);
+		border: $form-border;
+		color: $form-color;
+		width: 100%;
+		@if $form-box-shadow {
+			box-shadow: $form-box-shadow;
 		}
 	}
 }
 
-@mixin form-input($display) {
-	display: $display;
-	padding: 0.5em;
-	border: 1px solid color(med-gray);
-	box-shadow: inset 0 1px 5px rgba(color(black), 0.1);
-	color: color(text-color);
-	width: 100%;
+%form-input {
+	@include form-input(false);
+}
 
-	@if ( $display == inline-block ) {
-		margin-right: 0.3em;
-		margin-left: 0.3em;
-	} @else {
-		margin-top: 0.3em;
-		margin-bottom: 0.3em;
-	}
+%form-input-block {
+	@extend %form-input;
+	display: block;
+	margin-top: rem($form-block-margin-top);
+	margin-bottom: rem($form-block-margin-bottom);
+}
+
+%form-input-inline {
+	@extend %form-input;
+	display: inline-block;
+	margin-left: rem($form-inline-margin-left);
+	margin-right: rem($form-inline-margin-right);
 }

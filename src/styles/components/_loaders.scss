@@ -1,21 +1,22 @@
-$base-spinner-size: setting(loaders, spin, size);
+@import "../functions/_utils";
+@import "../variables/_loaders";
 
 .loader-line {
-	height: 4px;
-	width: 100%;
+	height: $line-loader-height;
+	width: $line-loader-width;
 	position: relative;
 	overflow: hidden;
-	background-color: #ddd;
+	background-color: $line-loader-bg;
 
-	&:before{
+	&:before {
 		display: block;
 		position: absolute;
 		content: "";
 		left: -200px;
 		width: 200px;
-		height: 4px;
-		background-color: color(brand, secondary);
-		animation: line-loading 1.5s linear infinite;
+		height: $line-loader-height;
+		background-color: $line-loader-bg-active;
+		animation: line-loading #{$line-loader-speed}s $line-loader-animation-style $line-loader-animation-length;
 	}
 }
 
@@ -37,12 +38,6 @@ $base-spinner-size: setting(loaders, spin, size);
 	}
 }
 
-@keyframes pulse {
-	50% {
-		background: white;
-	}
-}
-
 .ks-loader-spin {
 	position: relative;
 	text-align: center;
@@ -50,22 +45,21 @@ $base-spinner-size: setting(loaders, spin, size);
 
 .ks-spin-loading {
 	border-radius: 50%;
-	width: $base-spinner-size;
-	height: $base-spinner-size;
-	border: .25rem solid #ddd;
-	border-top-color: color(brand, secondary);
-	animation: spin 1s infinite linear;
+	width: $spinner-size;
+	height: $spinner-size;
+	border: rem($spinner-border-width) solid $spinner-border;
+	border-top-color: $spinner-border-active;
+	animation: spin #{$spinner-speed}s $spinner-animation-style $spinner-animation-length;
 	margin: 0 auto;
 
 	&.double {
+		border-width: rem($spinner-border-width * 2);
 		border-style: double;
-		border-width: .5rem;
 	}
 
 	&.x2 {
-		border: .5rem solid #ddd;
-		border-top-color: color(brand, secondary);
-		width: $base-spinner-size*2;
-		height: $base-spinner-size*2;
+		border-width: rem($spinner-border-width * 2);
+		width: $spinner-size * 2;
+		height: $spinner-size * 2;
 	}
 }

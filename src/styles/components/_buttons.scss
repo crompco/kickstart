@@ -1,11 +1,20 @@
+@import "../mixins/_state";
+@import "../mixins/_animation";
+@import "../mixins/_utils";
+@import "../functions/_utils";
+@import "../functions/_map";
+@import "../variables/_buttons";
+
 .button {
 	display: inline-block;
-	padding: 0.4em 0.6em;
+	padding: rem($button-padding);
 	cursor: pointer;
 	text-decoration: none;
-	box-shadow: 0 2px 4px rgba(color(black), 0.2);
 	@include transition(background-color);
 	@include state-default;
+	@if $button-box-shadow != false {
+		box-shadow: $button-box-shadow;
+	}
 
 	&:hover:not(.disabled) {
 		@include state-hover;
@@ -15,29 +24,29 @@
 		@include disable;
 	}
 
-	@each $name, $map in color(buttons) {
-		$bg-color: color(buttons, $name, background-color);
+	@each $name, $map in $buttons {
+		$bg-color: get($map, background-color);
 
 		&.#{$name} {
 			background-color: $bg-color;
-			color: color(buttons, $name, color);
-			border: 1px solid color(buttons, $name, border-color);
+			color: get($map, color);
+			border: 1px solid get($map, border-color);
 
 			@if map-has-key($map, box-shadow) {
-				box-shadow: color(buttons, $name, box-shadow);
+				box-shadow: get($map, box-shadow);
 			}
 
 			&:hover:not(.disabled) {
-				border: 1px solid color(buttons, $name, border-color);
+				border: 1px solid get($map, border-color);
 				background-color: darken($bg-color, 4%);
-				color: color(buttons, $name, hover);
+				color: get($map, hover);
 			}
 		}
 	}
 
-	@each $name, $map in setting(buttons, sizes) {
+	@each $name, $size in $button-sizes {
 		&.#{$name} {
-			font-size: setting(buttons, sizes, $name);
+			font-size: rem($size);
 		}
 	}
 }

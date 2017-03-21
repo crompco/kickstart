@@ -1,14 +1,25 @@
+@import "../../functions/_utils";
+@import "../../mixins/_forms";
+@import "../../mixins/_autocomplete";
+@import "../../mixins/_shapes";
+@import "../../mixins/_utils";
+@import "../../variables/_select";
+
 .ks-select {
 	cursor: pointer;
 	position: relative;
-	@include form-input(inline-block);
-	background: color(white);
+	display: inline-block;
+	@include form-input(false);
+	background: $select-bg;
 	padding: 0;
 	border: 0;
 
 	.ks-select-dropdown {
+		border: solid $select-dropdown-border-color;
+		border-width: 0 1px;
+
 		.ks-select-dropdown-input {
-			padding: 0.5em 0.5em;
+			padding: rem($select-input-padding);
 
 			> input:not(.is-multiple) {
 				@include ks-autocomplete-input;
@@ -19,10 +30,24 @@
 				outline: none;
 			}
 		}
+
+		.autocomplete-list {
+			li {
+				border-color: transparent;
+			}
+		}
 	}
 
 	.ks-select-selection {
-		padding: 0.5em 0.5em;
+		position: relative;
+		padding: rem($select-selected-padding);
+		border: 1px solid $select-border-color;
+
+		.ks-select-arrow {
+			@include triangle-down($size: rem(9px), $color: $select-arrow-color);
+			@include v-center();
+			right: 1rem;
+		}
 	}
 
 }

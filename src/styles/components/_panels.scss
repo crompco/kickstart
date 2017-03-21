@@ -1,16 +1,19 @@
+@import "../functions/_utils";
+@import "../variables/_panels";
+
 .panel {
-	margin-bottom: 20px;
-	box-shadow: 0 5px 15px -2px color(panel, shadow);
-	background-color: color(panel, background-color);
-	border: 1px solid color(panel, header-background);
+	margin-bottom: $panel-margin-bottom;
+	box-shadow: $panel-box-shadow $panel-box-shadow-color;
+	background-color: $panel-bg;
+	border: 1px solid $panel-border-color;
 
 	& &-header, & &-footer {
-		background-color: color(panel, header-background);
-		padding: 10px;
+		background-color: $panel-header-bg;
+		padding: rem($panel-header-padding);
 	}
 
 	& &-body {
-		padding: 15px;
+		padding: rem($panel-body-padding);
 	}
 
 	&.no-shadow {

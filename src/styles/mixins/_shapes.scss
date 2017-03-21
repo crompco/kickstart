@@ -1,0 +1,9 @@
+@import "../variables/_global";
+
+@mixin triangle-down($color: $black, $size: 50px) {
+	width: 0;
+	height: 0;
+	border-left: ($size / 2) solid transparent;
+	border-right: ($size / 2) solid transparent;
+	border-top: $size solid $color;
+}
