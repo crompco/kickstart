@@ -1,0 +1,15 @@
+@import "../functions/_utils";
+@import "../variables/_block";
+
+.basic-block {
+	background-color: $bb-bg;
+	border: 1px solid $bb-border-color;
+	padding: rem($bb-padding);
+	margin-top: rem($bb-margin-top);
+	margin-bottom: rem($bb-margin-bottom);
+
+	> :first-child {
+		margin-top: 0;
+		margin-bottom: 0.5rem;
+	}
+}

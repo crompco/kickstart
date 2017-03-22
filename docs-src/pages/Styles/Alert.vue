@@ -1,6 +1,6 @@
 <template>
-	<div class="panel">
-		<div class="panel-header">Alerts</div>
+	<div class="basic-block">
+		<h3>Alerts</h3>
 		<div class="alert success">
 			<strong>Success</strong> This is a success message
 		</div>
