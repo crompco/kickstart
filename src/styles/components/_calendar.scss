@@ -1,0 +1,14 @@
+// External
+@import "~bourbon-neat/core/_neat";
+
+$calendar-grid: (
+	columns: 7,
+	gutter: 0
+);
+
+.calendar {
+
+	.day-col {
+		@include grid-column(1, $calendar-grid);
+	}
+}

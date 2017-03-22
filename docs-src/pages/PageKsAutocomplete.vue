@@ -3,7 +3,7 @@
 		<h2>
 			AutoComplete
 		</h2>
-		<div class="callout">
+		<div class="basic-block">
 			<h3>Ajax with pagination</h3>
 			<ks-autocomplete
 				selection-key="name"
@@ -16,7 +16,7 @@
 			</ks-autocomplete>
 		</div>
 
-		<div class="callout">
+		<div class="basic-block">
 			<h3>Passed items</h3>
 			<ks-autocomplete
 				:items="countries"
@@ -28,7 +28,7 @@
 			</ks-autocomplete>
 		</div>
 
-		<div class="callout">
+		<div class="basic-block">
 			<h3>Multiple Selections with custom template</h3>
 			<ks-autocomplete
 				:items="countries"
@@ -42,7 +42,7 @@
 			</ks-autocomplete>
 		</div>
 
-		<div class="callout">
+		<div class="basic-block">
 			<h3>Multiple Selections with taggable (add new, minSearch of 0)</h3>
 			<ks-autocomplete
 				:min-search="0"

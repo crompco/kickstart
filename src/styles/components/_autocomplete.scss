@@ -13,6 +13,7 @@
 	background: $ac-bg;
 	padding: 0;
 	border: 0;
+	width: calc(100% - (#{rem($ac-margin-right)} + #{rem($ac-margin-left)}));
 
 	> input:not(.is-multiple) {
 		@include ks-autocomplete-input;
