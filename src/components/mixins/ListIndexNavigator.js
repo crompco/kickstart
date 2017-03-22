@@ -181,7 +181,6 @@ export default {
 			        this.autoScroll('up');
 		        });
 	        }
-	        this.resetKeyPressed();
 		},
 
         /**
