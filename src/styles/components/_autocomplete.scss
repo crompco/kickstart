@@ -15,13 +15,20 @@
 	border: 0;
 	width: calc(100% - (#{rem($ac-margin-right)} + #{rem($ac-margin-left)}));
 
-	> input:not(.is-multiple) {
+	&:not(.is-multiple) > input {
 		@include ks-autocomplete-input;
 	}
 
-	> input.is-multiple {
+	&.is-multiple > input {
 		border: 0;
 		outline: none;
+	}
+
+	.searching-results {
+		padding: 0;
+		margin: 0;
+		border:0;
+		height: 4px;
 	}
 
 	&:not(.is-multiple).is-selected {

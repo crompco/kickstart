@@ -1,5 +1,6 @@
 // External
 @import "~bourbon-neat/core/_neat";
+@import "../mixins/_grid";
 
 $calendar-grid: (
 	columns: 7,
@@ -8,7 +9,11 @@ $calendar-grid: (
 
 .calendar {
 
-	.day-col {
-		@include grid-column(1, $calendar-grid);
+	.cal-week {
+		@include row();
+
+		.cal-day {
+			@include grid-column(1, $calendar-grid);
+		}
 	}
 }

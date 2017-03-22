@@ -7,6 +7,7 @@
 			<h3>Ajax with pagination</h3>
 			<ks-autocomplete
 				selection-key="name"
+				v-model="value1"
 				@search="runSearch"
 			    :paginated="true"
 			>
@@ -21,6 +22,7 @@
 			<ks-autocomplete
 				:items="countries"
 				selection-key="name"
+				v-model="value2"
 			>
 				<template scope="props">
 					{{props.item.name}}
@@ -34,6 +36,7 @@
 				:items="countries"
 				selection-key="name"
 				:multiple="true"
+				v-model="value3"
 				@search="runSearch"
 			>
 				<template scope="props">
@@ -48,6 +51,7 @@
 				:min-search="0"
 				:taggable="true"
 				selection-key="name"
+				v-model="value4"
 				:paginated="true"
 				@search="runSearch"
 			>
@@ -58,14 +62,23 @@
 		</div>
 
 		<!--<div class="callout">-->
-			<!--<ks-tabs>-->
-				<!--<ks-tab title="Props">-->
-
-				<!--</ks-tab>-->
-				<!--<ks-tab title="Events">-->
-
-				<!--</ks-tab>-->
-			<!--</ks-tabs>-->
+			<ks-tabs>
+				<ks-tab title="Props">
+					<p>
+						Todo...
+					</p>
+				</ks-tab>
+				<ks-tab title="Events">
+					<p>
+						Todo...
+					</p>
+				</ks-tab>
+				<ks-tab title="Methods">
+					<p>
+						Todo...
+					</p>
+				</ks-tab>
+			</ks-tabs>
 		<!--</div>-->
 
 		<div style="height: 1200px;">
@@ -90,6 +103,10 @@
 
 		data() {
 			return {
+				value1:'',
+				value2: '',
+				value3: '',
+				value4: '',
 				countries: []
 			};
 		},
