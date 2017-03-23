@@ -7,7 +7,10 @@ $calendar-grid: (
 	gutter: 0
 );
 
-.calendar {
+.ks-calendar {
+	.ks-calendar-title {
+		text-align: center;
+	}
 
 	.cal-week {
 		@include row();

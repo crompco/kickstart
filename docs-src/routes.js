@@ -5,6 +5,7 @@ import PageKsLoaders from './pages/PageKsLoaders.vue';
 import PageKsFormElements from './pages/PageKsFormElements.vue';
 import PageKsSelect from './pages/PageKsSelect.vue';
 import StylesPage from './pages/StylesPage.vue';
+import PageKsCalendar from './pages/PageKsCalendar.vue';
 
 const routes = [
 	{
@@ -41,6 +42,12 @@ const routes = [
 		component: PageKsSelect,
 		name: 'KsSelect',
 		meta: { title: 'Kickstart Selects' }
+	},
+	{
+		path: '/ks-calendar',
+		component: PageKsCalendar,
+		name: 'KsCalendar',
+		meta: { title: 'Kickstart Calendar' }
 	},
 	{
 		path: '/ks-loaders',
