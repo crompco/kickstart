@@ -1,6 +1,8 @@
 // External
 @import "~bourbon-neat/core/_neat";
 @import "../mixins/_grid";
+@import "../variables/calendar";
+@import "../functions/utils";
 
 $calendar-grid: (
 	columns: 7,
@@ -8,15 +10,32 @@ $calendar-grid: (
 );
 
 .ks-calendar {
+	background: $calendar-bg;
 	.ks-calendar-title {
+		background: $calendar-header-bg;
+		color: $calendar-header-color;
+		padding: rem($calendar-header-padding);
 		text-align: center;
 	}
 
-	.cal-week {
-		@include row();
+	.ks-calendar-month {
+		width: 100%;
+		border-collapse: collapse;
 
-		.cal-day {
-			@include grid-column(1, $calendar-grid);
+		.cal-week {
+
+			.cal-day, .cal-blank {
+				width: 1/7%;
+			}
+		}
+		tbody {
+			.cal-day {
+				border: solid 1px $calendar-day-border-color;
+				.day-num {
+					display: block;
+					text-align: right;
+				}
+			}
 		}
 	}
 }

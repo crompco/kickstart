@@ -62,7 +62,7 @@ export function subDays(date, days = 1) {
 	d.setDate(date.getDate() - days);
 	if ( d.getDate() > date.getDate() ) {
 		d.setMonth(date.getMonth() - 1);
-		if ( d.getFullYear() > date.getFullYear() ) {
+		if ( d.getMonth() > date.getMonth() ) {
 			d.setFullYear(date.getFullYear() - 1);
 		}
 	}
@@ -77,7 +77,7 @@ export function subDays(date, days = 1) {
 export function subMonths(date, months = 1) {
 	let d = cloneDate(date);
 	d.setMonth(date.getMonth() - months);
-	if ( d.getFullYear() > date.getFullYear() ) {
+	if ( d.getMonth() > date.getMonth() ) {
 		d.setFullYear(date.getFullYear() - 1);
 	}
 	return d;

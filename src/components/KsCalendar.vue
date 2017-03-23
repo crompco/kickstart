@@ -7,23 +7,29 @@
         <div class="ks-calendar-view">
             <div class="ks-calendar-controls"></div>
 
-            <div class="ks-calendar-month">
-	            <div class="cal-week cal-week-header">
-		            <div v-for="title in week_titles" class="cal-day">
-			            {{title}}
-		            </div>
-	            </div>
-	            <div class="cal-week" v-for="week in weeks">
-		            <div class="cal-day" v-for="day in week">
-			            <span v-if="isInMonth(day)">
-				            {{day | day}}
-			            </span>
-			            <span v-else>
-				            &nbsp;
-			            </span>
-		            </div>
-	            </div>
-            </div>
+            <table class="ks-calendar-month">
+	            <thead>
+		            <tr class="cal-week cal-week-header">
+			            <th v-for="title in week_titles" class="cal-day">
+				            {{title}}
+			            </th>
+		            </tr>
+	            </thead>
+	            <tbody>
+		            <tr class="cal-week" v-for="week in weeks">
+			            <td v-for="day in week"
+			                v-if="isInMonth(day)"
+			                class="cal-day"
+			            >
+				            <span class="day-num">
+					            {{day | day}}
+				            </span>
+				            <slot :name="formatDate(day)"></slot>
+			            </td>
+			            <td v-else class="cal-blank"></td>
+		            </tr>
+	            </tbody>
+            </table>
         </div>
     </div>
 
@@ -82,20 +88,13 @@
         		return this.date_obj.getFullYear();
 		    },
 		    week_titles() {
-        		let name_type = this.abbrevDay ? 'abbreviations' : 'names';
+        		let titles = this.lang.days[this.abbrevDay ? 'abbreviations' : 'names']
         		if ( this.weekStart == 0 ) {
-			        return this.lang.days[name_type];
+			        return titles;
 		        }
 
-		        let titles = [], append = [];
-		        for ( var i = 0; i < this.lang.days[name_type].length; i++ ) {
-        			if ( i >= this.weekStart ) {
-        				titles.push(this.lang.days[name_type][i]);
-			        } else {
-        				append.push(this.lang.days[name_type][i]);
-			        }
-		        }
-		        return titles.concat(append);
+			    return titles.slice(this.weekStart)
+				    .concat(titles.slice(0, this.weekStart));
 		    },
 		    days() {
         		return getDaysInMonth(this.date_obj.getMonth(), this.date_obj.getFullYear());
@@ -134,8 +133,18 @@
         	setLang(lang) {
         		this.lang = lang;
 	        },
+		    getWeekTitles() {
+			    let name_type = this.abbrevDay ? 'abbreviations' : 'names';
+			    let titles = this.lang.days[name_type];
+
+			    return titles.slice(this.weekStart).concat(titles.slice(0, this.weekStart))
+		    },
 		    isInMonth(day) {
         		return day.getMonth() == this.date_obj.getMonth();
+		    },
+		    formatDate(date) {
+
+        		return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
 		    }
 	    }
 
