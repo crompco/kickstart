@@ -48,3 +48,14 @@ export function currency(str) {
 			return i && c !== "." && ((a.length - i) % 3 === 0) ? ',' + c : c;
 		});
 }
+
+/**
+ * Pads a string
+ * @param str
+ * @param pad_with
+ * @param pad_length
+ * @return {string}
+ */
+export function pad_left(str, pad_with, pad_length) {
+	return String(pad_with + String(str)).slice(pad_length*-1);
+}

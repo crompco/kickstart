@@ -7,7 +7,9 @@
         <div class="ks-calendar-view">
             <div class="ks-calendar-controls"></div>
 
+	        <!-- Month -->
             <table class="ks-calendar-month">
+	            <!-- Heading -->
 	            <thead>
 		            <tr class="cal-week cal-week-header">
 			            <th v-for="title in week_titles" class="cal-day">
@@ -15,6 +17,7 @@
 			            </th>
 		            </tr>
 	            </thead>
+	            <!-- Weeks -->
 	            <tbody>
 		            <tr class="cal-week" v-for="week in weeks">
 			            <td v-for="day in week"
@@ -37,6 +40,7 @@
 
 <script>
 	import {defaultLocale, getMonthRange, getDaysInMonth, subDays} from '../helpers/dates';
+	import {pad_left} from '../helpers/strings';
 
     export default {
         name: 'KsCalendar',
@@ -59,6 +63,10 @@
 	        abbrevMonth: {
         		type: Boolean,
 		        default: false
+	        },
+	        format: {
+        		type: String,
+		        default: "y-m-d"
 	        }
         },
 
@@ -93,8 +101,7 @@
 			        return titles;
 		        }
 
-			    return titles.slice(this.weekStart)
-				    .concat(titles.slice(0, this.weekStart));
+			    return titles.slice(this.weekStart).concat(titles.slice(0, this.weekStart));
 		    },
 		    days() {
         		return getDaysInMonth(this.date_obj.getMonth(), this.date_obj.getFullYear());
@@ -130,22 +137,40 @@
 	    },
 
 	    methods: {
-        	setLang(lang) {
+		    /**
+		     * Set the language info
+		     *
+		     * @param lang
+		     */
+		    setLang(lang) {
         		this.lang = lang;
 	        },
-		    getWeekTitles() {
-			    let name_type = this.abbrevDay ? 'abbreviations' : 'names';
-			    let titles = this.lang.days[name_type];
 
-			    return titles.slice(this.weekStart).concat(titles.slice(0, this.weekStart))
-		    },
+		    /**
+		     * Checks if the day is in the current month
+		     *
+		     * @param day
+		     * @return {boolean}
+		     */
 		    isInMonth(day) {
         		return day.getMonth() == this.date_obj.getMonth();
 		    },
-		    formatDate(date) {
 
-        		return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-		    }
+		    /**
+		     * Formats a date
+		     * @param date
+		     * @return {string}
+		     */
+		    formatDate(date) {
+		    	let year = date.getFullYear();
+		    	let month = date.getMonth() + 1;
+		    	let day = date.getDate();
+
+			    month = pad_left(month, '0', 2);
+			    day = pad_left(day, '0', 2);
+
+		    	return this.format.toLowerCase().replace('y', year).replace('m', month).replace('d', day);
+		    },
 	    }
 
     }
