@@ -32,8 +32,7 @@
 	import Close from '../svg/close.svg';
 
 	// Internal Dependencies
-	import {addEvent} from '../helpers/events';
-	import {stopParentScroll} from '../helpers/events';
+	import {addEvent, stopParentScroll} from '../helpers/events';
 
 	export default {
 		name: 'KsModal',

@@ -3,7 +3,7 @@
 		 :class="{ 'is-selected': has_selections, 'is-multiple': is_multiple }" @click.prevent="setFocus('lookup')">
 
 		<!-- Selections  -->
-		<span class="selection" v-if="has_selections" @click.prevent="editSelection">
+		<span class="selection" v-if="selectionKey && has_selections" @click.prevent="editSelection">
 			<span v-for="s in selection" class="selection-text">
 				{{getSelectionLabel(s)}}
 				<a href="#" @click.prevent="clearSelection(s)" class="clear-selection">
@@ -20,7 +20,7 @@
 
 		<!-- Lookup Field -->
 		<input
-			v-show="!selection || is_multiple"
+			v-show="!has_selections || is_multiple"
 			type="text"
 			name="lookup_name"
 			:placeholder="placeholder_txt"
@@ -32,30 +32,29 @@
 			@keydown.enter.prevent="selectItem(selected_index)"
 			@keydown.down.prevent="selectDown()"
 			@keydown.up.prevent="selectUp()"
-			:class="{ 'is-multiple': is_multiple }"
 		>
 
 		<!-- List -->
-		<ul class="autocomplete-list"
-		    v-show="show_list"
-		    :style="'max-height:'+this.listHeight"
-		    ref="list"
-		>
-
-			<li style="padding: 0; margin: 0;border:0;">
+		<div v-show="show_list">
+			<div class="searching-results">
 				<loader-line :show="loading" ></loader-line>
-			</li>
-
-			<li
-				v-for="(item, index) in list"
-				:class="{ 'selected-item': index == selected_index }"
-				@click.prevent="selectItem(index, $event)"
-			    @mouseover="setHoverIndex(index)"
+			</div>
+			<ul class="autocomplete-list"
+			    :style="'max-height:'+this.listHeight"
+			    ref="list"
 			>
-				<!-- Scoped slot -->
-				<slot :item="item"></slot>
-			</li>
-		</ul>
+
+				<li
+					v-for="(item, index) in list"
+					:class="{ 'selected-item': index == selected_index }"
+					@click.prevent="selectItem(index, $event)"
+				    @mouseover="setHoverIndex(index)"
+				>
+					<!-- Scoped slot -->
+					<slot :item="item"></slot>
+				</li>
+			</ul>
+		</div>
 	</div>
 </template>
 
@@ -77,6 +76,7 @@
 		mixins: [ListIndexNavigatior],
 
 		props: {
+			value: {},
 			items: {
 				type: Array,
 				default() {
@@ -150,6 +150,8 @@
 			if ( !this.itemFilter ) {
 				this.filter = this.selectionKey;
 			}
+			this.refreshSelection();
+
 			this.$nextTick(() => {
 			    this.initListNavigation({
 					lookup: 'lookup',
@@ -181,6 +183,14 @@
 				}
 			},
 
+			selectionValue() {
+				if ( this.is_multiple ) {
+					return this.selection;
+				}
+
+				return this.selection.length ? this.selection[0] : '';
+			},
+
 			selectItem(index, e) {
 				this.handleSelectEvent(e);
 
@@ -193,10 +203,10 @@
 
 				this.selected_index = index;
 				let selection = this.getSelectedItem();
-				this.$emit('selected', selection);
-				if ( this.selectionKey ) {
-					this.addSelection(selection);
-				}
+				this.addSelection(selection);
+
+				// Emit input event
+				this.$emit('input', this.selectionValue());
 
 				// Reset the input and list
 				this.lookup_name = '';
@@ -244,7 +254,8 @@
             editSelection() {
 			    if ( this.lookup_name == '' && !this.is_multiple ) {
 			        this.lookup_name = this.getSelectionLabel(this.selection[0]);
-			        this.selection = null;
+			        this.selection = [];
+			        this.$emit('input', '');
 
 			        this.$nextTick(() => {
                         this.setFocus('lookup');
@@ -261,13 +272,31 @@
                 this.selection.push(tag);
                 this.lookup_name = '';
                 this.$emit('tag-created', tag);
-            }
+            },
+
+			refreshSelection() {
+				if ( !this.value ) {
+					this.selection  = [];
+				} else {
+					if ( this.is_multiple && this.value instanceof Array ) {
+						this.selection = this.value;
+					} else if ( !this.selection ) {
+						this.selection = [this.value];
+					} else {
+						if ( -1 == this.selection.indexOf(this.value) ) {
+							this.selection.push(this.value);
+						}
+					}
+				}
+			}
 		},
 
 		watch: {
-			lookup_name() {
-			    // when the lookup name changes we trigger the run lookup
-				this.startSearch();
+			lookup_name(newVal, oldVal) {
+				if ( newVal != oldVal ) {
+				    // when the lookup name changes we trigger the run lookup
+					this.startSearch();
+				}
 			},
 
 			list() {
@@ -288,8 +317,9 @@
 			        this.startSearch();
 				}
 			},
-			show_list() {
 
+			value() {
+				this.refreshSelection();
 			}
 		},
 
