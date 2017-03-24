@@ -8,6 +8,12 @@
 @mixin nav-bar() {
 	@include row();
 	background-color: $nav-bg;
+	z-index: 5;
+	position: relative;
+
+	// Mobile First Stuff
+	width: 100% !important;
+	height: 40px !important;
 
 	.nav-brand {
 		background-color: $nav-brand-bg;
@@ -22,6 +28,11 @@
 	}
 
 	.nav-links {
+		position: absolute;
+		background: $nav-brand-bg;
+		z-index: 6;
+		width: 100%;
+		top: 40px;
 
 		&.center {
 			text-align: center;
@@ -58,6 +69,15 @@
 		@include v-center;
 	}
 
+	.menu {
+		padding: 0;
+		margin: 0;
+
+		li {
+			display: inline-block;
+		}
+	}
+
 	.dropdown {
 		margin: 0;
 		padding-left: 0;
@@ -71,6 +91,8 @@
 
 			&:hover {
 				ul.sub-dropdown {
+					position: absolute;
+					width: 100%;
 					display: block;
 					padding: 0;
 					margin: 0;
