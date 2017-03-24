@@ -24,7 +24,15 @@
 		outline: none;
 	}
 
+	> input::-ms-clear {
+		display: none;
+	}
+
 	.searching-results {
+		position: absolute;
+		width: 100%;
+		left: 0;
+
 		padding: 0;
 		margin: 0;
 		border:0;
