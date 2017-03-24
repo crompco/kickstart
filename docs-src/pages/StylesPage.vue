@@ -1,5 +1,5 @@
 <template>
-	<div style="margin-bottom:10em;">
+	<div style="margin-bottom:10em;" class="sm-2 med-12">
 		<alert></alert>
 		<br>
 		<buttons></buttons>

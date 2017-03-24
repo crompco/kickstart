@@ -1,6 +1,172 @@
+@import "../functions/_utils";
+@import "../mixins/_grid";
 @import "../variables/_global";
+@import "../variables/_tables";
+
+%table-header-no-border {
+	border-bottom: 0;
+}
+
+@mixin table-head-color($color) {
+	thead {
+		background-color: $color;
+		color: $table-brand-header-color;
+
+		th {
+			@extend %table-header-no-border;
+		}
+	}
+}
+
+@mixin responsive-table() {
+	tbody, tr, th, td {
+		display: block;
+		text-align: left;
+		white-space: normal;
+	}
+
+	@include breakpoint(map-get($breakpoint-list, $table-breakpoint)) {
+		tbody {
+			display: table-row-group;
+		}
+
+		tr {
+			display: table-row;
+		}
+
+		th, td {
+			display: table-cell;
+		}
+	}
+
+	thead {
+		display: none;
+
+		@include breakpoint(map-get($breakpoint-list, $table-breakpoint)) {
+			display: table-header-group;
+		}
+	}
+
+	tbody {
+		tr {
+			@include breakpoint(map-get($breakpoint-list, $table-breakpoint)) {
+				margin-bottom: 0;
+				border: 0;
+			}
+
+			&:last-child {
+				td {
+					border-bottom: 1px solid $table-border-color;
+
+					@include breakpoint(map-get($breakpoint-list, $table-breakpoint)) {
+						border-bottom: 0;
+					}
+				}
+			}
+		}
+
+		td {
+			text-align: right;
+
+			@include breakpoint(map-get($breakpoint-list, $table-breakpoint)) {
+				text-align: left;
+			}
+
+			&[data-title]:before {
+				content: attr(data-title);
+				float: left;
+				font-size: 0.8rem;
+
+				@include breakpoint(map-get($breakpoint-list, $table-breakpoint)) {
+					content: none;
+				}
+			}
+		}
+	}
+}
+
+.scroll-table {
+	overflow-x: auto;
+	overflow-y: hidden;
+	width: 100%;
+	display: block;
+
+	.table {
+		thead, tbody {
+			tr td, tr th {
+				white-space: nowrap;
+			}
+		}
+	}
+}
 
 .table {
 	width: 100%;
 	max-width: 100%;
+	border-spacing: 0;
+	background-color: $table-bg;
+
+	&.responsive {
+		@include responsive-table;
+	}
+
+
+	thead {
+		text-align: left;
+
+		th {
+			padding: rem($table-cell-padding);
+			border-bottom: 2px solid $table-border-color;
+
+		}
+	}
+
+	tbody {
+		td {
+			padding: rem($table-cell-padding);
+			border-bottom: 1px solid $table-border-color;
+		}
+
+		tr {
+			border: 1px solid $table-border-color;
+			border-bottom: 0;
+			margin: rem($table-res-margin);
+
+			&:last-child {
+				td {
+					border-bottom: 0;
+				}
+			}
+		}
+	}
+
+	&.striped {
+		tbody {
+			tr:nth-child(odd) {
+				background-color: $table-strip-tr-color;
+			}
+		}
+	}
+
+	&.bordered {
+		border: 1px solid $table-border-color;
+
+		th, td {
+			border-right: 1px solid $table-border-color;
+
+			&:last-child {
+				border-right: 0;
+			}
+		}
+	}
+
+	&.shadow {
+		box-shadow: $table-box-shadow;
+	}
+
+	@each $name, $color in $brand {
+		&.#{$name} {
+			@include table-head-color($color);
+		}
+	}
 }

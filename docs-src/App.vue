@@ -1,7 +1,9 @@
 <template>
 	<div id="app" class="kickstart-docs">
 		<sidebar></sidebar>
-		<router-view ref="pageContent" class="content"></router-view>
+		<div class="content">
+			<router-view ref="pageContent"></router-view>
+		</div>
 	</div>
 </template>
 
@@ -43,9 +45,3 @@
 		}
 	};
 </script>
-
-<style>
-	.content {
-		padding: 0 2em;
-	}
-</style>

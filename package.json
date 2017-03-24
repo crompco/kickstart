@@ -3,6 +3,10 @@
 	"version": "0.1.5",
 	"description": "Vue componenets and js libs",
 	"main": "index.js",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/crompco/kickstart.git"
+	},
 	"author": "Crompco LLC",
 	"license": "MIT",
 	"scripts": {
