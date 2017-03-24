@@ -8,31 +8,27 @@
             <div class="ks-calendar-controls"></div>
 
 	        <!-- Month -->
-            <table class="ks-calendar-month">
+            <div class="ks-calendar-month">
 	            <!-- Heading -->
-	            <thead>
-		            <tr class="cal-week cal-week-header">
-			            <th v-for="title in week_titles" class="cal-day">
-				            {{title}}
-			            </th>
-		            </tr>
-	            </thead>
+	            <div class="cal-week cal-week-header">
+		            <div v-for="title in week_titles" class="cal-day">
+			            {{title}}
+		            </div>
+	            </div>
 	            <!-- Weeks -->
-	            <tbody>
-		            <tr class="cal-week" v-for="week in weeks">
-			            <td v-for="day in week"
-			                v-if="isInMonth(day)"
-			                class="cal-day"
-			            >
-				            <span class="day-num">
-					            {{day | day}}
-				            </span>
-				            <slot :name="formatDate(day)"></slot>
-			            </td>
-			            <td v-else class="cal-blank"></td>
-		            </tr>
-	            </tbody>
-            </table>
+	            <div class="cal-week" v-for="week in weeks">
+		            <div v-for="day in week"
+		                v-if="isInMonth(day)"
+		                class="cal-day"
+		            >
+			            <span class="day-num">
+				            {{day | day}}
+			            </span>
+			            <slot :name="formatDate(day)"></slot>
+		            </div>
+		            <div v-else class="cal-blank"></div>
+	            </div>
+            </div>
         </div>
     </div>
 

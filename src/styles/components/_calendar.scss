@@ -22,19 +22,31 @@ $calendar-grid: (
 		width: 100%;
 		border-collapse: collapse;
 
+		.cal-week:first-of-type .cal-day:first-of-type {
+			//margin-left: 42.85714%;
+		}
 		.cal-week {
-
+			display: flex;
 			.cal-day, .cal-blank {
-				width: 1/7%;
+				flex-grow: 1;
+				flex-shrink: 1;
+				flex-basis: 0;
 			}
 		}
-		tbody {
+
+		.cal-day, .cal-blank {
+			border-collapse: collapse;
+			box-shadow: -1px -1px $calendar-day-border-color, inset -1px -1px $calendar-day-border-color;
+			.day-num {
+				display: block;
+				text-align: right;
+			}
+		}
+
+		.cal-week-header {
+			font-weight: bold;
 			.cal-day {
-				border: solid 1px $calendar-day-border-color;
-				.day-num {
-					display: block;
-					text-align: right;
-				}
+				box-shadow: none;
 			}
 		}
 	}
