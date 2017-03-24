@@ -1,3 +1,5 @@
+import {pad_left} from './strings';
+
 export const defaultLocale = {
 	months: {
 		names: [
@@ -92,6 +94,61 @@ export function subYears(date, years = 1) {
 	let d = cloneDate(date);
 	d.setFullYear(date.getFullYear() - years);
 	return d;
+}
+
+/**
+ *
+ * @param date
+ * @param days
+ */
+export function addDays(date, days = 1) {
+	let d = cloneDate(date);
+	d.setDate(date.getDate() + days);
+	if ( d.getDate() < date.getDate() ) {
+		d.setMonth(date.getMonth() + 1);
+		if ( d.getMonth() < date.getMonth() ) {
+			d.setFullYear(date.getFullYear() + 1);
+		}
+	}
+	return d;
+}
+
+/**
+ * Formats date
+ * replace Y, m, and d chars
+ *
+ * @param date
+ * @return {string}
+ */
+export function formatDate(date, format = 'Y-m-d') {
+	if ( !(date instanceof Date) ) {
+		date = parseDate(date, format);
+	}
+	let year = date.getFullYear();
+	let month = date.getMonth() + 1;
+	let day = date.getUTCDate();
+
+	month = pad_left(month, '0', 2);
+	day = pad_left(day, '0', 2);
+
+	return format.toLowerCase().replace('y', year).replace('m', month).replace('d', day);
+}
+
+/**
+ *
+ * @param date
+ * @param format
+ * @return {Date|*}
+ */
+export function parseDate(date, format = 'Y-m-d') {
+	// TODO handle different formats
+	let d = date.split('-');
+	date = (new Date());
+	date.setFullYear(d[0]);
+	date.setMonth(d[1]-1);
+	date.setDate(d[2]);
+
+	return date;
 }
 
 export default {

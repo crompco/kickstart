@@ -1,0 +1,18 @@
+@import "calendar";
+@import "../mixins/_forms";
+@import "../variables/_forms";
+@import "../variables/_datepicker";
+
+.ks-datepicker {
+	position: relative;
+
+	input.ks-datepicker-display {
+		@include form-input();
+	}
+
+	.ks-datepicker-cal {
+		position: absolute;
+		font-size: 0.8em;
+		box-shadow: $datepicker-cal-box-shadow;
+	}
+}

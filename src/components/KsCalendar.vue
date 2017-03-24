@@ -4,8 +4,15 @@
 	        {{month}} {{year}}
         </div>
 
-        <div class="ks-calendar-view">
-            <div class="ks-calendar-controls"></div>
+        <div
+	        class="ks-calendar-view"
+			:class="{'interactive': interactive}"
+        >
+            <div class="ks-calendar-controls">
+	            <button>&lt;</button>
+	            {{month}} {{year}}
+	            <button>&gt;</button>
+            </div>
 
 	        <!-- Month -->
             <div class="ks-calendar-month">
@@ -16,17 +23,23 @@
 		            </div>
 	            </div>
 	            <!-- Weeks -->
-	            <div class="cal-week" v-for="week in weeks">
-		            <div v-for="day in week"
+	            <div class="cal-week" v-for="week in weeks" :style="week_style">
+
+		             <div v-for="day in week"
 		                v-if="isInMonth(day)"
 		                class="cal-day"
+						@click.prevent="$emit('select', formatDate(day))"
 		            >
-			            <span class="day-num">
-				            {{day | day}}
-			            </span>
-			            <slot :name="formatDate(day)"></slot>
+			            <div>
+				            <span class="day-num">
+					            {{day | day}}
+				            </span>
+				            <slot :name="formatDate(day)"></slot>
+			            </div>
 		            </div>
+
 		            <div v-else class="cal-blank"></div>
+
 	            </div>
             </div>
         </div>
@@ -35,7 +48,15 @@
 </template>
 
 <script>
-	import {defaultLocale, getMonthRange, getDaysInMonth, subDays} from '../helpers/dates';
+	import {
+		defaultLocale,
+		getMonthRange,
+		getDaysInMonth,
+		addDays,
+		subDays,
+		formatDate,
+		parseDate
+	} from '../helpers/dates';
 	import {pad_left} from '../helpers/strings';
 
     export default {
@@ -63,6 +84,14 @@
 	        format: {
         		type: String,
 		        default: "y-m-d"
+	        },
+	        weekHeight: {
+        		type: String,
+		        default: 'auto'
+	        },
+	        interactive: {
+        		type: Boolean,
+		        default: true
 	        }
         },
 
@@ -80,7 +109,7 @@
         			return this.date;
 		        }
 
-		        return new Date(this.date);
+		        return parseDate(this.date, this.format);
 	        },
         	month() {
         		return this.lang.months.names[this.date_obj.getMonth()];
@@ -104,21 +133,50 @@
 		    },
 		    weeks() {
         		let weeks = [], week = [];
-			    for ( var i = 0; i < this.days.length; i++ ) {
 
-			    	week.push(this.days[i]);
-			    	if ( i == 0 ) {
-			    		let day = subDays(this.days[i], 1);
-			    		while ( day.getDay() != this.weekStart ) {
-			    			week.unshift(day);
-						    day = subDays(day, 1);
-					    }
-				    } else if ( this.weekStart == this.days[i].getDay() ) {
-			    		weeks.push(week);
-			    		week = [];
-				    }
+        		// Pre fill the previous days in the week
+			    if ( this.weekStart != this.days[0].getDay() ) {
+				    let day = this.days[0];
+
+				    do {
+					    day = subDays(day, 1);
+					    week.unshift(day);
+				    } while ( day.getDay() != this.weekStart );
 			    }
+
+			    // Push the first day
+			    week.push(this.days[0]);
+
+			    // Run through the other days
+			    for ( var i = 1; i < this.days.length; i++ ) {
+				    if ( this.weekStart == this.days[i].getDay() ) {
+					    weeks.push(week);
+					    week = [];
+				    }
+
+				    week.push(this.days[i]);
+			    }
+
+			    // Attach the remaining days
+			    if ( week.length ) {
+			    	let day = this.days[this.days.length-1];
+			    	while ( week.length < 7 ) {
+					    day = addDays(day, 1);
+			    		week.push(day);
+				    }
+				    weeks.push(week);
+			    }
+
 			    return weeks;
+		    },
+		    week_style() {
+        		if ( 'auto' == this.weekHeight ) {
+        			return {};
+		        }
+
+        		return {
+        			'min-height': this.weekHeight
+		        }
 		    }
 	    },
 
@@ -158,14 +216,7 @@
 		     * @return {string}
 		     */
 		    formatDate(date) {
-		    	let year = date.getFullYear();
-		    	let month = date.getMonth() + 1;
-		    	let day = date.getDate();
-
-			    month = pad_left(month, '0', 2);
-			    day = pad_left(day, '0', 2);
-
-		    	return this.format.toLowerCase().replace('y', year).replace('m', month).replace('d', day);
+		    	return formatDate(date, this.format);
 		    },
 	    }
 

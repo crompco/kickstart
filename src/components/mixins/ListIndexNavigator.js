@@ -116,13 +116,13 @@ export default {
             this.$nextTick(() => {
 				this.listenForScroll();
 
-				addEvent(this.$refs.lookup, 'focus', () => {
-                    this.focused = true;
-                });
-
 				addEvent(document, 'mousemove', () => {
 					this.navigating_with_keys = false;
 				});
+
+				addEvent(this.$refs.lookup, 'focus', () => {
+                    this.focused = true;
+                });
 
 				addEvent(this.$refs.lookup, 'blur', () => {
                     setTimeout(() => {
