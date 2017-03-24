@@ -35,9 +35,9 @@
 		>
 
 		<!-- List -->
-		<div v-show="show_list">
+		<div v-show="show_list" class="autocomplete-list-wrapper">
 			<div class="searching-results">
-				<loader-line :show="loading" ></loader-line>
+				<loader-line :show="loading"></loader-line>
 			</div>
 			<ul class="autocomplete-list"
 			    :style="'max-height:'+this.listHeight"
