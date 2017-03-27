@@ -26,12 +26,8 @@ export function smartFocusToggle(el, callback, delay = 150) {
 	let focused = [];
 
 	addEvent(el, 'focus', (e) => {
-		// console.log(e.target);
 		callback(true, e);
 		focused.push(e.target);
-		if ( el == e.target ) {
-			e.stopPropagation();
-		}
 	}, true);
 
 	addEvent(el, 'blur', (e) => {
