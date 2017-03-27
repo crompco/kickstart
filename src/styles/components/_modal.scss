@@ -24,6 +24,7 @@
 		@if $modal-wrapper-box-shadow != false {
 			box-shadow: $modal-wrapper-box-shadow;
 		}
+		outline: none;
 	}
 
 	.ks-modal-header {
