@@ -105,7 +105,7 @@
 	        },
 	        interactive: {
         		type: Boolean,
-		        default: true
+		        default: false
 	        },
 	        yearPicker: {
         		type: Boolean,

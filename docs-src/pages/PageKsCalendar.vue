@@ -1,10 +1,6 @@
 <template>
 	<div>
 		<div class="basic-block">
-			<h3>Datepicker</h3>
-			<ks-datepicker v-model="date1"></ks-datepicker>
-		</div>
-		<div class="basic-block">
 			<h3>Plain Calendar with Event Slot</h3>
 			<ks-calendar>
 				<div :slot="'2017-03-22'">
@@ -34,7 +30,6 @@
 
 		data() {
 			return {
-				date1: '2017-01-01',
 				bday: "2017-03-22"
 			};
 		},

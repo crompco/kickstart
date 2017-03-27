@@ -16,6 +16,7 @@
 				ref="calendar"
 				v-model="calendar_date"
 				week-height="30px"
+				:interactive="true"
 			    @select="selectDay"
 			></ks-calendar>
 		</div>

@@ -213,7 +213,7 @@
 									<td>used to open the modal</td>
 								</tr>
 								<tr>
-									<td><pre>close</pre></td>
+									<td><pre>close()</pre></td>
 									<td>used to close the modal</td>
 								</tr>
 							</tbody>
