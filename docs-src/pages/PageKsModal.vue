@@ -131,6 +131,97 @@
 			</ks-modal>
 
 
+			<div>
+				<ks-tabs>
+					<ks-tab title="Props">
+						<table class="table striped">
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Type</th>
+									<th>Default</th>
+									<th>Description</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>title</td>
+									<td>String</td>
+									<td><pre>''</pre></td>
+									<td>The title of the Modal. Displayed in the title bar.</td>
+								</tr>
+								<tr>
+									<td>showHeader</td>
+									<td>Boolean</td>
+									<td><pre>false</pre></td>
+									<td>Weather to show the header/titlebar</td>
+								</tr>
+								<tr>
+									<td>showClose</td>
+									<td>Boolean</td>
+									<td><pre>true</pre></td>
+									<td>Whether to show the close(x) button in the header/titlebar</td>
+								</tr>
+								<tr>
+									<td>maxWidth</td>
+									<td>String</td>
+									<td><pre>'50%'</pre></td>
+									<td>The maximum width that should be allowed for the modal</td>
+								</tr>
+								<tr>
+									<td>closeOnEscape</td>
+									<td>Boolean</td>
+									<td><pre>true</pre></td>
+									<td>Whether to close the modal when the user presses the 'escape' key</td>
+								</tr>
+							</tbody>
+						</table>
+					</ks-tab>
+
+					<ks-tab title="Events">
+						<table class="table striped events-table">
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Description</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>open</td>
+									<td>Fired when the modal is opened</td>
+								</tr>
+								<tr>
+									<td>close</td>
+									<td>Fired when the modal is closed</td>
+								</tr>
+							</tbody>
+						</table>
+					</ks-tab>
+
+					<ks-tab title="Methods">
+						<table class="table striped methods-table">
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Description</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><pre>open()</pre></td>
+									<td>used to open the modal</td>
+								</tr>
+								<tr>
+									<td><pre>close</pre></td>
+									<td>used to close the modal</td>
+								</tr>
+							</tbody>
+						</table>
+					</ks-tab>
+				</ks-tabs>
+			</div>
+
 			<!-- Need this to simulate the scrolling effect -->
 			<div style="height: 1800px;">
 				<br/>
@@ -143,6 +234,8 @@
 <script>
 
 	import KsModal from '../../src/components/KsModal.vue';
+	import KsTabs from '../../src/components/KsTabs.vue';
+	import KsTab from '../../src/components/KsTab.vue';
 
 	export default {
 		name: 'PageKsModal',
@@ -171,7 +264,9 @@
 		watch: {},
 
 		components: {
-			KsModal
+			KsModal,
+			KsTabs,
+			KsTab
 		}
 	}
 </script>
