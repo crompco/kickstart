@@ -52,6 +52,10 @@ $state-hover-bg: darken(get($brand, light), 12%) !default;
 $state-hover-border: transparent !default;
 $state-hover-color: $white !default;
 
+$state-focus-bg: lighten(get($brand, lighter), 12%) !default;
+$state-focus-border: transparent !default;
+$state-focus-color: get($brand, primary) !default;
+
 
 // Global
 $global-font-size: 100% !default;

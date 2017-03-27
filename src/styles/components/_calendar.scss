@@ -1,19 +1,105 @@
 // External
 @import "~bourbon-neat/core/_neat";
 @import "../mixins/_grid";
+@import "../mixins/_state";
+@import "../variables/calendar";
+@import "../functions/utils";
 
 $calendar-grid: (
 	columns: 7,
 	gutter: 0
 );
 
-.calendar {
+.ks-calendar {
+	background: $calendar-bg;
+	outline: none;
 
-	.cal-week {
-		@include row();
+	.ks-calendar-title {
+		background: $calendar-header-bg;
+		color: $calendar-header-color;
+		padding: rem($calendar-header-padding);
+		text-align: center;
+	}
 
+	.ks-calendar-view.interactive {
+		.cal-week:not(.cal-week-header) {
+			.cal-day {
+				&:hover {
+					@include state-hover();
+					border: 0;
+				}
+				&:focus {
+					@include state-focus();
+					border: 0;
+					outline: none;
+					//@include
+				}
+				> div {
+					height: 100%;
+					cursor: pointer;
+
+				}
+			}
+		}
+	}
+
+	.ks-calendar-controls {
+		background: $calendar-controls-bg;
+		line-height: 1.5rem;
+		position: relative;
+		padding: 0.5rem;
+		text-align: center;
+		button:first-child {
+			position: absolute;
+			left: 0.5rem;
+		}
+		button:last-child {
+			position: absolute;
+			right: 0.5rem;
+		}
+	}
+
+	.ks-calendar-month {
+		width: 100%;
+		padding: 0.5rem;
+		border-collapse: collapse;
+
+		.cal-week:first-of-type .cal-day:first-of-type {
+			//margin-left: 42.85714%;
+		}
+		.cal-week {
+			display: flex;
+			.cal-day, .cal-blank {
+				flex-grow: 1;
+				flex-shrink: 1;
+				flex-basis: 0;
+			}
+		}
+
+		.cal-day, .cal-blank {
+			> div {
+				padding: 0.5rem;
+			}
+			.day-num {
+				display: block;
+				text-align: right;
+			}
+		}
 		.cal-day {
-			@include grid-column(1, $calendar-grid);
+			box-shadow: -1px -1px $calendar-day-border-color, inset -1px -1px $calendar-day-border-color;
+			&.today {
+				color: $calendar-today-color;
+				font-weight: bold;
+			}
+		}
+
+		.cal-week-header {
+			font-weight: bold;
+			.cal-day {
+				color: $calendar-week-header-color;
+				box-shadow: none;
+				padding: 0.5em;
+			}
 		}
 	}
 }
