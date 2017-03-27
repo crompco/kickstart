@@ -5,16 +5,49 @@
  * @param eventName
  * @param callback
  */
-export function addEvent(el, eventName, callback) {
+export function addEvent(el, eventName, callback, event_capturing = false) {
 	if ( el.addEventListener ) {
-		el.addEventListener(eventName, callback, false);
+		el.addEventListener(eventName, callback, event_capturing);
 		if ( eventName == 'mousewheel' ) {
-			el.addEventListener("DOMMouseScroll", callback, false);
+			el.addEventListener("DOMMouseScroll", callback, event_capturing);
 		}
 	} else {
 		el.attachEvent(eventName, callback)
 	}
 };
+
+/**
+ *
+ * @param el
+ * @param callback
+ * @param delay
+ */
+export function smartFocusToggle(el, callback, delay = 150) {
+	let focused = [];
+
+	addEvent(el, 'focus', (e) => {
+		// console.log(e.target);
+		callback(true, e);
+		focused.push(e.target);
+		if ( el == e.target ) {
+			e.stopPropagation();
+		}
+	}, true);
+
+	addEvent(el, 'blur', (e) => {
+		let index = focused.indexOf(e.target);
+		if ( index !== -1 ) {
+			focused.splice(index, 1);
+		}
+		setTimeout(() => {
+			if ( 0 == focused.length ) {
+				if ( el !== document.activeElement ) {
+					callback(false, e);
+				}
+			}
+		}, delay);
+	}, true);
+}
 
 /**
  *

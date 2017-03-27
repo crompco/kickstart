@@ -12,6 +12,7 @@ $calendar-grid: (
 
 .ks-calendar {
 	background: $calendar-bg;
+	outline: none;
 
 	.ks-calendar-title {
 		background: $calendar-header-bg;
@@ -21,13 +22,40 @@ $calendar-grid: (
 	}
 
 	.ks-calendar-view.interactive {
-		.cal-day > div {
-			height: 100%;
-			cursor: pointer;
-			&:hover {
-				@include state-hover();
-				border: 0;
+		.cal-week:not(.cal-week-header) {
+			.cal-day {
+				&:hover {
+					@include state-hover();
+					border: 0;
+				}
+				&:focus {
+					@include state-focus();
+					border: 0;
+					outline: none;
+					//@include
+				}
+				> div {
+					height: 100%;
+					cursor: pointer;
+
+				}
 			}
+		}
+	}
+
+	.ks-calendar-controls {
+		background: $calendar-controls-bg;
+		line-height: 1.5rem;
+		position: relative;
+		padding: 0.5rem;
+		text-align: center;
+		button:first-child {
+			position: absolute;
+			left: 0.5rem;
+		}
+		button:last-child {
+			position: absolute;
+			right: 0.5rem;
 		}
 	}
 
@@ -59,11 +87,16 @@ $calendar-grid: (
 		}
 		.cal-day {
 			box-shadow: -1px -1px $calendar-day-border-color, inset -1px -1px $calendar-day-border-color;
+			&.today {
+				color: $calendar-today-color;
+				font-weight: bold;
+			}
 		}
 
 		.cal-week-header {
 			font-weight: bold;
 			.cal-day {
+				color: $calendar-week-header-color;
 				box-shadow: none;
 				padding: 0.5em;
 			}

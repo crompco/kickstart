@@ -1,5 +1,5 @@
 <template>
-    <div class="ks-calendar">
+    <div class="ks-calendar" tabindex="-1">
         <div class="ks-calendar-title">
 	        {{month}} {{year}}
         </div>
@@ -8,27 +8,35 @@
 	        class="ks-calendar-view"
 			:class="{'interactive': interactive}"
         >
+	        <!-- Calendar Controls -->
             <div class="ks-calendar-controls">
-	            <button>&lt;</button>
-	            {{month}} {{year}}
-	            <button>&gt;</button>
+	            <button @click.prevent="previous" class="ctrl-left">&lt;</button>
+	            <span class="ctrl-label">{{month}} {{year}}</span>
+	            <button @click.prevent="next" class="ctrl-right">&gt;</button>
             </div>
 
 	        <!-- Month -->
-            <div class="ks-calendar-month">
+            <div class="ks-calendar-month" v-show="!openYearPicker">
 	            <!-- Heading -->
 	            <div class="cal-week cal-week-header">
 		            <div v-for="title in week_titles" class="cal-day">
 			            {{title}}
 		            </div>
 	            </div>
+
 	            <!-- Weeks -->
-	            <div class="cal-week" v-for="week in weeks" :style="week_style">
+	            <div class="cal-week"
+	                 v-for="week in weeks"
+	                 :style="week_style"
+	            >
 
 		             <div v-for="day in week"
-		                v-if="isInMonth(day)"
-		                class="cal-day"
-						@click.prevent="$emit('select', formatDate(day))"
+						  v-if="isInMonth(day)"
+						  class="cal-day"
+						  :tabindex="tabindex"
+						  :class="dayClass(day)"
+						  @click.prevent="selectDay(day)"
+						  @keydown.enter="selectDay(day)"
 		            >
 			            <div>
 				            <span class="day-num">
@@ -54,13 +62,19 @@
 		getDaysInMonth,
 		addDays,
 		subDays,
+		subMonths,
+		addMonths,
 		formatDate,
-		parseDate
+		parseDate,
 	} from '../helpers/dates';
 	import {pad_left} from '../helpers/strings';
 
     export default {
         name: 'KsCalendar',
+
+        model: {
+        	prop: 'date'
+        },
 
         props: {
         	date: {
@@ -92,6 +106,10 @@
 	        interactive: {
         		type: Boolean,
 		        default: true
+	        },
+	        yearPicker: {
+        		type: Boolean,
+		        default: false
 	        }
         },
 
@@ -99,11 +117,15 @@
             return {
             	lang: defaultLocale,
 	            first_day: '',
-	            last_day: ''
+	            last_day: '',
+	            openYearPicker: false
             };
         },
 
 	    computed: {
+        	tabindex() {
+        		return this.interactive ? '0' : false;
+	        },
         	date_obj() {
         		if ( this.date instanceof Date ) {
         			return this.date;
@@ -177,11 +199,13 @@
         		return {
         			'min-height': this.weekHeight
 		        }
+		    },
+		    today() {
+        		return this.formatDate(new Date());
 		    }
 	    },
 
 	    mounted() {
-
 	    },
 
 	    filters: {
@@ -218,6 +242,40 @@
 		    formatDate(date) {
 		    	return formatDate(date, this.format);
 		    },
+
+		    /**
+		     * Returns classes for the day
+		     */
+		    dayClass(date) {
+		    	let day = this.formatDate(date);
+		    	return {
+		    		'selected': day === this.date,
+				    'today': day == this.today
+		    	};
+		    },
+
+		    /**
+		     * Select the given date
+		     */
+		    selectDay(date) {
+			    this.$emit('select', this.formatDate(date));
+		    },
+
+		    /**
+		     * Moves the month back
+		     */
+		    previous() {
+			    this.$emit('input', this.formatDate(subMonths(this.date_obj)));
+			    this.$emit('previous');
+		    },
+
+		    /**
+		     * Moves the month forward
+		     */
+		    next() {
+			    this.$emit('input', this.formatDate(addMonths(this.date_obj)));
+			    this.$emit('next');
+		    }
 	    }
 
     }

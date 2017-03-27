@@ -1,5 +1,5 @@
 <template>
-	<div class="ks-datepicker">
+	<div class="ks-datepicker" @keyup.esc="is_open=false">
 		<!-- value field-->
 		<input type="hidden" :name="name" :value="value">
 
@@ -7,14 +7,14 @@
 		<input class="ks-datepicker-display"
 		       :value="display_date"
 		       @focus="open"
-		       @keyup.esc="isOpen=false"
 		       ref="display"
 		>
 
 		<!-- Calendar -->
 		<div class="ks-datepicker-cal" v-show="show">
 			<ks-calendar
-				:date="value"
+				ref="calendar"
+				v-model="calendar_date"
 				week-height="30px"
 			    @select="selectDay"
 			></ks-calendar>
@@ -26,7 +26,7 @@
 
 	import KsCalendar from './KsCalendar.vue';
 	import {formatDate} from '../helpers/dates';
-	import {addEvent} from '../helpers/events';
+	import {addEvent, smartFocusToggle} from '../helpers/events';
 
 	export default {
 		name: 'KsDatepicker',
@@ -49,8 +49,10 @@
 
 		data() {
 			return {
-				isOpen: false,
-				focused: false
+				is_open: false,
+				focused: false,
+				calendar_date: this.value,
+				calendar_focused: false
 			}
 		},
 
@@ -63,7 +65,7 @@
 				return '';
 			},
 			show() {
-				return this.isOpen;
+				return this.is_open;
 			},
 			value_date() {
 				if ( this.value ) {
@@ -75,30 +77,32 @@
 		},
 
 		mounted() {
-			addEvent(this.$refs.display, 'focus', () => {
-				this.focused = true;
-			});
 
-			addEvent(this.$refs.display, 'blur', () => {
-				setTimeout(() => {
-					if ( this.$refs[this.ref_lookup] !== document.activeElement ) {
-						this.$emit('blur');
-						this.focused = false;
-						if ( this.closeOnBlur ) {
-							this.clear();
-						}
-					}
-				}, 200);
+			this.$nextTick(() => {
+				smartFocusToggle(this.$el, (focus, e) => {
+					this.focused = focus;
+				});
 			});
 		},
 
 		methods: {
 			selectDay(day) {
 				this.$emit('input', formatDate(day, this.dateFormat));
-				this.isOpen = false;
+				this.is_open = false;
 			},
 			open() {
-				this.isOpen = true;
+				this.is_open = true;
+			}
+		},
+
+		watch: {
+			calendar_date() {
+				this.$emit('calendar_change', this.calendar_date);
+			},
+			focused() {
+				if ( !this.focused ) {
+					this.is_open = false;
+				}
 			}
 		},
 

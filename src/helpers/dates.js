@@ -114,6 +114,20 @@ export function addDays(date, days = 1) {
 }
 
 /**
+ *
+ * @param date
+ * @param months
+ */
+export function addMonths(date, months = 1) {
+	let d = cloneDate(date);
+	d.setMonth(date.getMonth() + months);
+	if ( d.getMonth() < date.getMonth() ) {
+		d.setFullYear(date.getFullYear() + 1);
+	}
+	return d;
+}
+
+/**
  * Formats date
  * replace Y, m, and d chars
  *

@@ -14,5 +14,6 @@
 		position: absolute;
 		font-size: 0.8em;
 		box-shadow: $datepicker-cal-box-shadow;
+		z-index: 100;
 	}
 }

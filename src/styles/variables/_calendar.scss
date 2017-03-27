@@ -1,9 +1,18 @@
 @import "../functions/_map";
 @import "_global";
 
+// Main
 $calendar-bg: $white !default;
 $calendar-header-bg: get($brand, primary) !default;
 $calendar-header-color: $white !default;
 $calendar-header-padding: 0.5rem !default;
 
+// Week
+$calendar-week-header-color: darken($gray, 10%) !default;
+
+// Day
 $calendar-day-border-color: $gray !default;
+$calendar-today-color: get($brand, primary) !default;
+
+// Controls
+$calendar-controls-bg: $light-gray !default;;
