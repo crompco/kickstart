@@ -53,7 +53,7 @@
 			return {
 				is_open: false,
 				focused: false,
-				calendar_date: this.getCalendarDateFormat(),
+				calendar_date: this.value_date,
 				calendar_focused: false
 			}
 		},
