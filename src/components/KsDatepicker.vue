@@ -15,7 +15,9 @@
 			<ks-calendar
 				ref="calendar"
 				v-model="calendar_date"
-				week-height="30px"
+				:format="dateFormat"
+				:selection="value"
+				:year-picker="yearPicker"
 				:interactive="true"
 			    @select="selectDay"
 			></ks-calendar>
@@ -34,6 +36,10 @@
 
 		props: {
 			value: {},
+			name: {
+				type: String,
+				default: "ks_datepicker"
+			},
 			dateFormat: {
 				type: String,
 				default: 'Y-m-d'
@@ -42,9 +48,13 @@
 				type: String,
 				default: 'm/d/Y'
 			},
-			name: {
-				type: String,
-				default: "ks_datepicker"
+			yearPicker: {
+				type: Boolean,
+				default: false
+			},
+			monthPicker: {
+				type: Boolean,
+				default: false
 			}
 		},
 
@@ -52,7 +62,7 @@
 			return {
 				is_open: false,
 				focused: false,
-				calendar_date: this.value,
+				calendar_date: this.value_date,
 				calendar_focused: false
 			}
 		},
@@ -60,7 +70,7 @@
 		computed: {
 			display_date() {
 				if ( this.value ) {
-					return formatDate(this.value, this.displayFormat);
+					return formatDate(this.value, this.displayFormat, this.dateFormat);
 				}
 
 				return '';
@@ -82,8 +92,9 @@
 			this.$nextTick(() => {
 				smartFocusToggle(this.$el, (focus, e) => {
 					this.focused = focus;
-				});
+				}, 50);
 			});
+			this.calendar_date = this.value_date;
 		},
 
 		methods: {
@@ -92,7 +103,13 @@
 				this.is_open = false;
 			},
 			open() {
+				this.calendar_date = this.value_date;
 				this.is_open = true;
+				this.$emit('open');
+			},
+			close() {
+				this.is_open = false;
+				this.$emit('close');
 			}
 		},
 
