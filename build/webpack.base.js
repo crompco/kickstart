@@ -1,7 +1,7 @@
 const options = require('./options');
 const path = require('path');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const autoprefixer = require('autoprefixer');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
 	resolve: {
@@ -12,10 +12,8 @@ module.exports = {
 
 		alias: {
 			src: 'src',
-			// directives: 'src/directives',
 			helpers: 'src/helpers',
 			components: 'src/components',
-			// mixins: 'src/mixins',
 			styles: 'src/styles',
 			vue$: 'vue/dist/vue.common.js'
 		},
@@ -25,52 +23,35 @@ module.exports = {
 
 	module: {
 		rules: [
-			{
-				test: /\.vue$/,
-				loader: 'vue-loader',
-				options: {
-					loaders: {
-						// configured in the script specific webpack configs
-						svg: 'svg-inline-loader'
-					},
+            {
+                test: /\.vue$/,
+                loader: 'vue-loader',
+                options: {
+                    loaders: {
+                        svg: 'svg-inline-loader',
+                        scss: ExtractTextPlugin.extract({
+                            use: ['css-loader', 'sass-loader'],
+                            fallback: 'style-loader'
+                        })
+                    },
 					postcss: [
 						autoprefixer({
-							browsers: ['last 2 versions', 'ie > 9', 'Firefox ESR']
+							browsers: ['last 3 versions', 'ie > 8', 'Firefox ESR']
 						})
 					]
-				}
-			},
+                }
+            },
+            {
+                test: /\.scss$/,
+                loader: ExtractTextPlugin.extract({
+                    use: ['css-loader', 'sass-loader', 'postcss-loader'],
+                    fallback: 'style-loader'
+                })
+            },
 			{
 				test: /\.js$/,
 				loader: 'babel-loader',
 				exclude: /node_modules/
-			},
-			{
-				test: /\.scss$/,
-				use: [
-					'style-loader',
-					'css-loader',
-					'sass-loader'
-				]
-                // use: ExtractTextPlugin.extract({
-				// 	fallback: 'style-loader',
-				// 	use: [
-				// 		'css-loader',
-				// 		'sass-loader',
-				// 		{
-				// 			loader: 'postcss-loader',
-				// 			options:  {
-				// 				plugins: function () {
-				// 					return [
-                 //                        autoprefixer({
-                 //                            browsers: ['last 2 versions', 'ie > 9', 'Firefox ESR']
-                 //                        })
-				// 					]
-				// 				}
-				// 			}
-				// 		}
-				// 	]
-				// })
 			},
 			{
 				test: /\.svg$/,
