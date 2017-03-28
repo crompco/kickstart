@@ -2,7 +2,9 @@
 	<div>
 		<div class="basic-block">
 			<h3>Plain Calendar with Event Slot</h3>
-			<ks-calendar>
+			<ks-calendar
+				v-model="date1"
+			>
 				<div :slot="'2017-03-22'">
 					<strong>Patty's Birthday</strong>
 				</div>
@@ -11,6 +13,7 @@
 		<div class="basic-block">
 			<h3>Custom Week Start</h3>
 			<ks-calendar
+				v-model="date2"
 				week-start="1"
 			    week-height="80px"
 			></ks-calendar>
@@ -30,6 +33,8 @@
 
 		data() {
 			return {
+				date1: '',
+				date2: '',
 				bday: "2017-03-22"
 			};
 		},

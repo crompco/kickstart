@@ -131,6 +131,10 @@
         			return this.date;
 		        }
 
+		        if ( !this.date ) {
+        			return new Date();
+		        }
+
 		        return parseDate(this.date, this.format);
 	        },
         	month() {
