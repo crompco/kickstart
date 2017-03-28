@@ -12,8 +12,8 @@
 	position: relative;
 
 	// Mobile First Stuff
-	width: 100% !important;
-	height: 40px !important;
+	//width: 100% !important;
+	//height: 40px !important;
 
 	.nav-brand {
 		background-color: $nav-brand-bg;
@@ -31,8 +31,8 @@
 		position: absolute;
 		background: $nav-brand-bg;
 		z-index: 6;
-		width: 100%;
-		top: 40px;
+		//width: 100%;
+		//top: 40px;
 
 		&.center {
 			text-align: center;
