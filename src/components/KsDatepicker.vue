@@ -15,6 +15,7 @@
 			<ks-calendar
 				ref="calendar"
 				v-model="calendar_date"
+				:format="dateFormat"
 				week-height="30px"
 				:interactive="true"
 			    @select="selectDay"
@@ -52,7 +53,7 @@
 			return {
 				is_open: false,
 				focused: false,
-				calendar_date: this.value,
+				calendar_date: this.getCalendarDateFormat(),
 				calendar_focused: false
 			}
 		},
@@ -60,7 +61,7 @@
 		computed: {
 			display_date() {
 				if ( this.value ) {
-					return formatDate(this.value, this.displayFormat);
+					return formatDate(this.value, this.displayFormat, this.dateFormat);
 				}
 
 				return '';
@@ -84,6 +85,7 @@
 					this.focused = focus;
 				});
 			});
+			this.calendar_date = this.getCalendarDateFormat();
 		},
 
 		methods: {
@@ -93,6 +95,9 @@
 			},
 			open() {
 				this.is_open = true;
+			},
+			getCalendarDateFormat() {
+				return this.value_date;
 			}
 		},
 

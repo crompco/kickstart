@@ -97,7 +97,7 @@
 	        },
 	        format: {
         		type: String,
-		        default: "y-m-d"
+		        default: "Y-m-d"
 	        },
 	        weekHeight: {
         		type: String,
