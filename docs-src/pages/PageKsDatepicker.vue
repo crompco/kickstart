@@ -18,9 +18,10 @@
 
 		<div class="basic-block row">
 			<div class="med-6">
-				<h3>Custom Date format</h3>
+				<h3>Custom Date format with year picker</h3>
 				<ks-datepicker
 					v-model="date2"
+					:year-picker="true"
 					date-format="m/d/Y"
 				></ks-datepicker>
 			</div>

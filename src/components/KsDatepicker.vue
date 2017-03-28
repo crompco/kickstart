@@ -17,7 +17,7 @@
 				v-model="calendar_date"
 				:format="dateFormat"
 				:selection="value"
-				week-height="30px"
+				:year-picker="yearPicker"
 				:interactive="true"
 			    @select="selectDay"
 			></ks-calendar>
@@ -36,6 +36,10 @@
 
 		props: {
 			value: {},
+			name: {
+				type: String,
+				default: "ks_datepicker"
+			},
 			dateFormat: {
 				type: String,
 				default: 'Y-m-d'
@@ -44,9 +48,13 @@
 				type: String,
 				default: 'm/d/Y'
 			},
-			name: {
-				type: String,
-				default: "ks_datepicker"
+			yearPicker: {
+				type: Boolean,
+				default: false
+			},
+			monthPicker: {
+				type: Boolean,
+				default: false
 			}
 		},
 

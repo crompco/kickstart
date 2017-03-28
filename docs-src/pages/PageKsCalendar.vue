@@ -24,7 +24,6 @@
 
 <script>
 	import KsCalendar from '../../src/components/KsCalendar';
-	import KsDatepicker from '../../src/components/KsDatepicker';
 
 	export default {
 		name: 'PageKsCalendar',
@@ -51,7 +50,6 @@
 
 		components: {
 			KsCalendar,
-			KsDatepicker,
 		}
 	}
 </script>

@@ -120,3 +120,46 @@ export function isScrolledToBottom(el, threshold = 20) {
 
     return false;
 }
+
+/**
+ * Custom event listener for when a mouse click is helf
+ *
+ * @param el
+ * @param callback
+ * @param delay
+ * @param speed
+ */
+export function mouseHold(el, callback, delay = 300, speed = 300) {
+	let held = false;
+	let poll_timer = null;
+	let delay_timer = null;
+	let _speed = speed;
+
+	// Incrementing poll
+	function sendPoll() {
+		poll_timer = setTimeout(() => {
+			callback();
+
+			_speed = _speed * 0.925;
+			sendPoll();
+		}, _speed);
+	}
+
+	// mousedown to start the event
+	addEvent(el, 'mousedown', () => {
+		delay_timer = setTimeout(() => {
+			held = true;
+			if ( held === true ) {
+				sendPoll();
+			}
+		}, delay)
+	});
+
+	// mouseup to end the timers and reset the speed
+	addEvent(el, 'mouseup', () => {
+		clearTimeout(delay_timer);
+		clearTimeout(poll_timer);
+		held = false;
+		_speed = speed;
+	});
+}
