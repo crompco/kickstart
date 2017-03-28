@@ -9,8 +9,8 @@
 
 		<div class="form-group">
 			<label class="title">Which do you prefer</label>
-			<ks-radio :inline="true" label="PHP" name="radio1" value="1" v-model="values.radio1"></ks-radio>
-			<ks-radio :inline="true" label="JavaScript" name="radio1" value="2" v-model="values.radio1"></ks-radio>
+			<ks-radio :inline="true" label="PHP" name="radio1" value="1" v-model="values.radio1a"></ks-radio>
+			<ks-radio :inline="true" label="JavaScript" name="radio1" value="2" v-model="values.radio1a"></ks-radio>
 		</div>
 
 		<h3>Select all that your enjoy using (inline)</h3>
@@ -20,8 +20,8 @@
 		<div class="form-group" style="margin-top:1em;">
 			<label class="title">Select all that your enjoy using</label>
 			<div class="checkbox">
-				<ks-checkbox label="PHP" name="checkbox1" value="1" v-model="values.checkbox1"></ks-checkbox>
-				<ks-checkbox label="JavaScript" name="checkbox1" value="2" v-model="values.checkbox1"></ks-checkbox>
+				<ks-checkbox label="PHP" name="checkbox1" value="1" v-model="values.checkbox1a"></ks-checkbox>
+				<ks-checkbox label="JavaScript" name="checkbox1" value="2" v-model="values.checkbox1a"></ks-checkbox>
 			</div>
 		</div>
 
@@ -68,7 +68,9 @@
 					group1: '',
 					group2: '',
 					radio1: 1,
-					checkbox1: [1]
+					radio1a: '',
+					checkbox1: [1],
+					checkbox1a: []
 				},
 				radioGroup: []
 			};
