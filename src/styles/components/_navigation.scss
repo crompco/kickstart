@@ -25,18 +25,14 @@
 
 	&.fixed {
 		position: fixed;
-		//z-index: -1;
-		//left: $nav-width * -1;
-		//height: auto;
-		//width: 100%;
+		z-index: -1;
+		left: $nav-width * -1;
 
 		@include tab() {
 			z-index: auto;
 			left: 0;
 		}
 	}
-
-
 }
 
 .top-bar {

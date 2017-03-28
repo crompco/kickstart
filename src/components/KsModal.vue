@@ -1,7 +1,13 @@
 <template>
 	<div class="ks-modal" v-show="isOpen">
 		<div class="ks-modal-mask" @click.prevent="close">
-			<div class="ks-modal-wrapper" @click.stop :style="modalStyle">
+			<div class="ks-modal-wrapper"
+			     :style="modalStyle"
+			     tabindex="-1"
+			     ref="container"
+			     @click.stop
+			     @keydown.esc.stop="escape()"
+			>
 
 				<!-- Modal header-->
 				<div class="ks-modal-header" v-if="showHeader">
@@ -52,6 +58,10 @@
 			},
 			maxWidth: {
 				default: '50%'
+			},
+			closeOnEscape: {
+				type: Boolean,
+				default: true
 			}
 		},
 
@@ -74,18 +84,28 @@
 			this.$nextTick(() => {
                 stopParentScroll(this.$refs.body);
 			});
+			this.$on('open', () => {
+				this.$nextTick(() => {
+					this.$refs.container.focus();
+				});
+			});
 		},
 
 		methods: {
 			open() {
 				this.isOpen = true;
+				this.$emit('open');
 			},
 			close() {
 				this.isOpen = false;
+				this.$emit('close');
+			},
+			escape() {
+				if ( this.closeOnEscape ) {
+					this.close();
+				}
 			}
 		},
-
-		watch: {},
 
 		components: {
 		    Close
