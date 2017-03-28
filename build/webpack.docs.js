@@ -1,18 +1,24 @@
-'use strict';
-
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const merge = require('deep-assign');
 const webpack = require('webpack');
 
 const options = require('./options');
 const base = require('./webpack.base.js');
 
-const config = merge(base, {
-	entry: options.paths.resolve('docs-src/index.js'),
+const config = {
+    entry: {
+        'docs.bundle.js': options.paths.resolve('docs-src/index.js'),
+        'docs.bundle.css': options.paths.resolve('docs-src/app.scss')
+    },
 
 	output: {
-		filename: 'docs.bundle.js',
+		filename: '[name]',
 		path: options.paths.output.docs
+	},
+
+	resolve: base.resolve,
+
+	module: {
+    	rules: base.module.rules
 	},
 
 	plugins: [
@@ -37,15 +43,9 @@ const config = merge(base, {
 				warnings: false
 			}
 		})
-	]
-});
+	],
 
-// First item in module.rules array is Vue
-config.module.rules[0].options.loaders = {
-	scss: ExtractTextPlugin.extract({
-        use: ['css-loader', 'sass-loader'],
-		fallback: 'style-loader'
-	})
+    stats: base.stats
 };
 
 module.exports = config;
