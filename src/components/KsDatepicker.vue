@@ -83,9 +83,9 @@
 			this.$nextTick(() => {
 				smartFocusToggle(this.$el, (focus, e) => {
 					this.focused = focus;
-				});
+				}, 50);
 			});
-			this.calendar_date = this.getCalendarDateFormat();
+			this.calendar_date = this.value_date;
 		},
 
 		methods: {
@@ -95,9 +95,11 @@
 			},
 			open() {
 				this.is_open = true;
+				this.$emit('open');
 			},
-			getCalendarDateFormat() {
-				return this.value_date;
+			close() {
+				this.is_open = false;
+				this.$emit('close');
 			}
 		},
 
