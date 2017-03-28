@@ -271,7 +271,8 @@
 
                 this.selection.push(tag);
                 this.lookup_name = '';
-                this.$emit('tag-created', tag);
+				this.$emit('tag-created', tag);
+				this.$emit('input', this.selectionValue());
             },
 
 			refreshSelection() {
