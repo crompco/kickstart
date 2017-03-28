@@ -9,7 +9,7 @@
 	display: inline-block;
 	margin-right: rem($ac-margin-right);
 	margin-left: rem($ac-margin-left);
-	@extend %form-input;
+	@include form-input(false);
 	background: $ac-bg;
 	padding: 0;
 	border: 0;
