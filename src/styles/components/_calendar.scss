@@ -39,6 +39,10 @@ $calendar-grid: (
 					cursor: pointer;
 
 				}
+				&.selected {
+					@include state-default();
+					border: 0;
+				}
 			}
 		}
 	}

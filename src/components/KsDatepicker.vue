@@ -16,6 +16,7 @@
 				ref="calendar"
 				v-model="calendar_date"
 				:format="dateFormat"
+				:selection="value"
 				week-height="30px"
 				:interactive="true"
 			    @select="selectDay"
@@ -94,6 +95,7 @@
 				this.is_open = false;
 			},
 			open() {
+				this.calendar_date = this.value_date;
 				this.is_open = true;
 				this.$emit('open');
 			},

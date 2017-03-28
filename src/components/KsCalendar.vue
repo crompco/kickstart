@@ -83,6 +83,10 @@
         			return new Date();
 		        }
 	        },
+	        selection: {
+        		type: [String, Array],
+		        default: ''
+	        },
 	        weekStart: {
         		type: [String, Number],
 		        default: 0
@@ -253,7 +257,7 @@
 		    dayClass(date) {
 		    	let day = this.formatDate(date);
 		    	return {
-		    		'selected': day === this.date,
+		    		'selected': day === this.selection,
 				    'today': day == this.today
 		    	};
 		    },
