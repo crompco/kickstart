@@ -5,6 +5,7 @@
 @import "layout/_grid";
 
 // Components
+@import "components/_general";
 @import "components/_alerts";
 @import "components/_buttons";
 @import "components/_forms";
@@ -12,7 +13,6 @@
 @import "components/_navigation";
 @import "components/_utils";
 @import "components/_tabs";
-@import "components/_general";
 @import "components/_autocomplete";
 @import "components/_loaders";
 @import "components/_modal";

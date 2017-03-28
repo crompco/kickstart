@@ -1,13 +1,8 @@
-'use strict';
-
-const merge = require('deep-assign');
-const path = require('path');
 const options = require('./options');
 const base = require('./webpack.base.js');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const serve = require('./serve');
 
-const config = merge(base, {
+const config = {
 	watch: true,
 	devtool: '#eval-source-map',
 
@@ -21,9 +16,7 @@ const config = merge(base, {
 		path: options.paths.output.docs
 	},
 
-	// proxy: {
-	// 	"**": "http://127.0.0.1:9000"
-	// },
+	resolve: base.resolve,
 
 	devServer: {
 		contentBase: options.paths.output.docs,
@@ -34,16 +27,39 @@ const config = merge(base, {
 		setup: serve
 	},
 
-    // plugins: [
-    //     new ExtractTextPlugin({
-    //     	filename: 'docs.bundle.css'
-    //     })
-    // ]
-});
+	module: {
+		rules: [
+            {
+                test: /\.vue$/,
+                loader: 'vue-loader',
+                options: {
+                    loaders: {
+                        svg: 'svg-inline-loader',
+                        scss: 'vue-style-loader!css-loader!sass-loader'
+                    }
+                }
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    'sass-loader'
+                ]
+            },
+            {
+                test: /\.js$/,
+                loader: 'babel-loader',
+                exclude: /node_modules/
+            },
+            {
+                test: /\.svg$/,
+                loader: 'vue-svg-loader'
+            }
+		]
+	},
 
-// First item in module.rules array is Vue
-config.module.rules[0].options.loaders = {
-	scss: 'vue-style-loader!css-loader!sass-loader'
+	stats: base.stats
 };
 
 module.exports = config;

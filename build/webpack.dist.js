@@ -1,22 +1,21 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const webpack = require('webpack');
+const autoprefixer = require('autoprefixer');
 
 const options = require('./options');
 const base = require('./webpack.base.js');
 
 const config = {
     entry: {
-        KsAutocomplete: ['./src/components/KsAutocomplete.vue']
+        'kickstart-ui.min.js': options.paths.resolve('src/index.js'),
     },
 
     output: {
-        path: options.paths.output.lib,
-        filename: options.isProduction ? '[name].min.js' : '[name].js',
-        library: ['KickstartUI', '[name]'],
+        filename: '[name]',
+        path: options.paths.output.main,
+        library: 'KickstartUI',
         libraryTarget: 'umd'
     },
-
-    resolve: base.resolve,
 
     module: {
         rules: base.module.rules
@@ -24,7 +23,7 @@ const config = {
 
     plugins: [
         new ExtractTextPlugin({
-            filename: '[name]'
+            filename: 'kickstart-ui.min.css'
         }),
 
         new webpack.LoaderOptionsPlugin({
@@ -43,10 +42,14 @@ const config = {
             compress: {
                 warnings: false
             }
-        })
-    ],
+        }),
 
-    stats: base.stats
+        new webpack.BannerPlugin({
+            banner: options.banner,
+            raw: true,
+            entryOnly: true
+        })
+    ]
 };
 
 module.exports = config;

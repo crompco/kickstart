@@ -1,55 +1,76 @@
 <template>
     <div class="ks-calendar" tabindex="-1">
         <div class="ks-calendar-title">
-	        {{month}} {{year}}
+	        <a href="" @click.prevent="closeYear">{{month}}</a>
+	        <a href="" v-if="yearPicker" @click.prevent="openYear">{{year}}</a>
+	        <span v-else>{{year}}</span>
         </div>
-
         <div
 	        class="ks-calendar-view"
 			:class="{'interactive': interactive}"
+            ref="calendar"
         >
-	        <!-- Calendar Controls -->
-            <div class="ks-calendar-controls">
-	            <button @click.prevent="previous" class="ctrl-left">&lt;</button>
-	            <span class="ctrl-label">{{month}} {{year}}</span>
-	            <button @click.prevent="next" class="ctrl-right">&gt;</button>
-            </div>
+	        <div v-show="!yearPickerOpen">
+	            <!-- Calendar Controls -->
+	            <div class="ks-calendar-controls">
+		            <button @click.prevent="previous" class="ctrl-left" ref="previous">&lt;</button>
 
-	        <!-- Month -->
-            <div class="ks-calendar-month" v-show="!openYearPicker">
-	            <!-- Heading -->
-	            <div class="cal-week cal-week-header">
-		            <div v-for="title in week_titles" class="cal-day">
-			            {{title}}
-		            </div>
+		            <span class="ctrl-label">
+			            {{month}} {{year}}
+		            </span>
+
+		            <button @click.prevent="next" class="ctrl-right" ref="next">&gt;</button>
 	            </div>
 
-	            <!-- Weeks -->
-	            <div class="cal-week"
-	                 v-for="week in weeks"
-	                 :style="week_style"
-	            >
+		        <!-- Month -->
+	            <div class="ks-calendar-month">
 
-		             <div v-for="day in week"
-						  v-if="isInMonth(day)"
-						  class="cal-day"
-						  :tabindex="tabindex"
-						  :class="dayClass(day)"
-						  @click.prevent="selectDay(day)"
-						  @keydown.enter="selectDay(day)"
-		            >
-			            <div>
-				            <span class="day-num">
-					            {{day | day}}
-				            </span>
-				            <slot :name="formatDate(day)"></slot>
+		            <!-- Heading -->
+		            <div class="cal-week cal-week-header">
+			            <div v-for="title in week_titles" class="cal-day">
+				            {{title}}
 			            </div>
 		            </div>
 
-		            <div v-else class="cal-blank"></div>
+		            <!-- Weeks -->
+		            <div class="cal-week"
+		                 v-for="week in weeks"
+		                 :style="week_style"
+		            >
 
+			             <div v-for="day in week"
+							  v-if="isInMonth(day)"
+							  class="cal-day"
+							  :tabindex="tabindex"
+							  :class="dayClass(day)"
+							  @click.prevent="selectDay(day)"
+							  @keydown.enter="selectDay(day)"
+			            >
+				            <div>
+					            <span class="day-num">
+						            {{day | day}}
+					            </span>
+					            <slot :name="formatDate(day)"></slot>
+				            </div>
+			            </div>
+
+			            <div v-else class="cal-blank"></div>
+
+		            </div>
 	            </div>
-            </div>
+	        </div>
+	        <div v-show="yearPickerOpen">
+		        <ul class="year-selection">
+			        <li
+				        v-for="y in year_list"
+				        tabindex="0"
+				        v-text="y"
+				        :class="{ 'selected-year': y == year}"
+			            @click.prevent="changeYear(y)"
+			            @keydown.enter.stop.prevent="changeYear(y)"
+			        ></li>
+		        </ul>
+	        </div>
         </div>
     </div>
 
@@ -66,7 +87,9 @@
 		addMonths,
 		formatDate,
 		parseDate,
+		cloneDate,
 	} from '../helpers/dates';
+	import {mouseHold} from '../helpers/events';
 	import {pad_left} from '../helpers/strings';
 
     export default {
@@ -83,6 +106,10 @@
         			return new Date();
 		        }
 	        },
+	        selection: {
+        		type: [String, Array],
+		        default: ''
+	        },
 	        weekStart: {
         		type: [String, Number],
 		        default: 0
@@ -97,7 +124,7 @@
 	        },
 	        format: {
         		type: String,
-		        default: "y-m-d"
+		        default: "Y-m-d"
 	        },
 	        weekHeight: {
         		type: String,
@@ -110,6 +137,10 @@
 	        yearPicker: {
         		type: Boolean,
 		        default: false
+	        },
+	        monthPicker: {
+        		type: Boolean,
+		        default: false
 	        }
         },
 
@@ -118,7 +149,7 @@
             	lang: defaultLocale,
 	            first_day: '',
 	            last_day: '',
-	            openYearPicker: false
+	            yearPickerOpen: false
             };
         },
 
@@ -131,6 +162,10 @@
         			return this.date;
 		        }
 
+		        if ( !this.date ) {
+        			return new Date();
+		        }
+
 		        return parseDate(this.date, this.format);
 	        },
         	month() {
@@ -141,6 +176,18 @@
 		    },
 		    year() {
         		return this.date_obj.getFullYear();
+		    },
+		    year_list() {
+        		if ( !this.yearPicker ) {
+        			return [];
+		        }
+
+		        // For performance the best approach here is to just run through pre defined length Array
+			    let years = Array(200);
+			    for ( var i = 0; i < 200; i++ ) {
+			    	years[i] = this.year - 100 + (i+1);
+			    }
+			    return years;
 		    },
 		    week_titles() {
         		let titles = this.lang.days[this.abbrevDay ? 'abbreviations' : 'names']
@@ -206,6 +253,10 @@
 	    },
 
 	    mounted() {
+        	this.$nextTick(() => {
+		        mouseHold(this.$refs.next, this.next);
+		        mouseHold(this.$refs.previous, this.previous);
+	        });
 	    },
 
 	    filters: {
@@ -223,6 +274,17 @@
 		    setLang(lang) {
         		this.lang = lang;
 	        },
+
+		    /**
+		     * Sets the year of the calendar
+		     */
+		    changeYear(year) {
+			    let new_date = cloneDate(this.date_obj);
+			    new_date.setFullYear(year);
+			    this.$emit('input', this.formatDate(new_date));
+			    this.closeYear();
+			    this.$el.focus();
+		    },
 
 		    /**
 		     * Checks if the day is in the current month
@@ -249,7 +311,7 @@
 		    dayClass(date) {
 		    	let day = this.formatDate(date);
 		    	return {
-		    		'selected': day === this.date,
+		    		'selected': day === this.selection,
 				    'today': day == this.today
 		    	};
 		    },
@@ -275,6 +337,25 @@
 		    next() {
 			    this.$emit('input', this.formatDate(addMonths(this.date_obj)));
 			    this.$emit('next');
+		    },
+
+		    /**
+		     * Open the year picker
+		     */
+		    openYear() {
+		    	this.yearPickerOpen = true;
+			    this.$nextTick(() => {
+			    	let offsetHeight = this.$refs.calendar.offsetHeight;
+			    	let scrollTop = this.$refs.calendar.scrollHeight / 2 - (offsetHeight/2);
+				    this.$refs.calendar.scrollTop = scrollTop;
+			    });
+		    },
+
+		    /**
+		     * Close the year picker
+		     */
+		    closeYear() {
+			    this.yearPickerOpen = false;
 		    }
 	    }
 

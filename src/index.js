@@ -4,6 +4,8 @@ import KsTabs from './components/KsTabs.vue';
 import KsTab from './components/KsTab.vue';
 import KsModal from './components/KsModal.vue';
 
+require('./styles/app.scss');
+
 const Kickstart = {
 	KsAutocomplete,
 	KsLoaderLine,

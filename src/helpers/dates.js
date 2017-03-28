@@ -134,9 +134,9 @@ export function addMonths(date, months = 1) {
  * @param date
  * @return {string}
  */
-export function formatDate(date, format = 'Y-m-d') {
+export function formatDate(date, format = 'Y-m-d', parse_format = format) {
 	if ( !(date instanceof Date) ) {
-		date = parseDate(date, format);
+		date = parseDate(date, parse_format);
 	}
 	let year = date.getFullYear();
 	let month = date.getMonth() + 1;
@@ -155,12 +155,27 @@ export function formatDate(date, format = 'Y-m-d') {
  * @return {Date|*}
  */
 export function parseDate(date, format = 'Y-m-d') {
-	// TODO handle different formats
-	let d = date.split('-');
+	// Pad the format so we can easily replace the string
+	format = format.replace('Y', 'YYYY')
+		.replace('m', 'mm')
+		.replace('d', 'dd');
+
+	// Pull out the index of each format
+	let y_index = format.indexOf('Y'),
+		m_index = format.indexOf('m'),
+		d_index = format.indexOf('d');
+
+
+	// Slice the date up based on our indexes
+	let year = parseInt(date.slice(y_index, y_index+4)),
+		month = parseInt(date.slice(m_index, m_index+2)),
+		day = parseInt(date.slice(d_index, d_index+2));
+
+	// Build the new date
 	date = (new Date());
-	date.setFullYear(d[0]);
-	date.setMonth(d[1]-1);
-	date.setDate(d[2]);
+	date.setFullYear(year);
+	date.setMonth(month-1);
+	date.setDate(day);
 
 	return date;
 }
