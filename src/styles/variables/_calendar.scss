@@ -22,5 +22,6 @@ $calendar-year-hover-color: $white !default;
 $calendar-year-hover-bg: get($brand, light) !default;
 
 // Selected Year
+$calendar-year-selected-size: 2em;
 $calendar-year-selected-color: get($brand, lighter) !default;
 $calendar-year-selected-bg: inherit !default;

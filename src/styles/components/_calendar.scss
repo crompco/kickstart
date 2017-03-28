@@ -135,6 +135,7 @@ $calendar-grid: (
 				background: $calendar-year-hover-bg;
 			}
 			&.selected-year {
+				font-size: $calendar-year-selected-size;
 				color: $calendar-year-selected-color;
 				background: $calendar-year-selected-bg;
 			}

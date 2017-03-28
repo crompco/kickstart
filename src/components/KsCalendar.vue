@@ -5,7 +5,6 @@
 	        <a href="" v-if="yearPicker" @click.prevent="openYear">{{year}}</a>
 	        <span v-else>{{year}}</span>
         </div>
-
         <div
 	        class="ks-calendar-view"
 			:class="{'interactive': interactive}"
