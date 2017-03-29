@@ -2,14 +2,16 @@
 @import "../mixins/_navigation";
 
 .nav-bar {
-	@include nav-bar;
-
 	&.vertical {
-		width: $nav-width;
-		height: 100%;
+		@include tab() {
+			width: $nav-width;
+			height: 100%;
+		}
 
 		.nav-links {
 			list-style-type: none;
+			padding: 0;
+			margin: 0;
 
 			ul {
 				padding: 0;
@@ -24,15 +26,17 @@
 	}
 
 	&.fixed {
-		position: fixed;
-		z-index: -1;
-		left: $nav-width * -1;
+		@include tab() {
+			position: fixed;
+		}
 
 		@include tab() {
 			z-index: auto;
 			left: 0;
 		}
 	}
+
+	@include nav-bar;
 }
 
 .top-bar {

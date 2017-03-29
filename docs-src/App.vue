@@ -2,7 +2,7 @@
 	<div id="app" class="kickstart-docs">
 		<sidebar></sidebar>
 		<div class="content">
-			<router-view ref="pageContent" class="sm-2 med-12"></router-view>
+			<router-view ref="pageContent" class="sm-12 med-12"></router-view>
 		</div>
 	</div>
 </template>

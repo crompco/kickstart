@@ -4,6 +4,7 @@
  * @param el
  * @param eventName
  * @param callback
+ * @param event_capturing
  */
 export function addEvent(el, eventName, callback, event_capturing = false) {
 	if ( el.addEventListener ) {
