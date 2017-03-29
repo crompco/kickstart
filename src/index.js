@@ -1,29 +1,58 @@
 import KsAutocomplete from './components/KsAutocomplete.vue';
+import KsCalendar from './components/KsCalendar.vue';
+import KsCheckbox from './components/KsCheckbox.vue';
+import KsDatepicker from './components/KsDatepicker.vue';
+import KsLoaderSpin from './components/KsLoaderSpin.vue';
 import KsLoaderLine from './components/KsLoaderLine.vue';
-import KsTabs from './components/KsTabs.vue';
-import KsTab from './components/KsTab.vue';
 import KsModal from './components/KsModal.vue';
+import KsRadio from './components/KsRadio.vue';
+import KsRadioGroup from './components/KsRadioGroup.vue';
+import KsSelect from './components/KsSelect.vue';
+import KsTab from './components/KsTab.vue';
+import KsTabs from './components/KsTabs.vue';
 
 require('./styles/app.scss');
 
 const Kickstart = {
 	KsAutocomplete,
+	KsCalendar,
+	KsCheckbox,
+	KsDatepicker,
+	KsLoaderSpin,
 	KsLoaderLine,
-	KsTabs,
-	KsTab,
 	KsModal,
+	KsRadio,
+	KsRadioGroup,
+	KsSelect,
+	KsTab,
+	KsTabs,
 	install(Vue) {
-		Vue.component('ks-autocomplete')
-		Vue.component('ks-loader-line')
+		Vue.component('ks-autocomplete', KsAutocomplete)
+		Vue.component('ks-calendar', KsCalendar)
+		Vue.component('ks-checkbox', KsCheckbox)
+		Vue.component('ks-datepicker', KsDatepicker)
+		Vue.component('ks-loader-spin', KsLoaderSpin)
+		Vue.component('ks-loader-line', KsLoaderLine)
+		Vue.component('ks-modal', KsModal)
+		Vue.component('ks-radio', KsRadio)
+		Vue.component('ks-radio-group', KsRadioGroup)
+		Vue.component('ks-select', KsSelect)
+		Vue.component('ks-tab', KsTab)
+		Vue.component('ks-tabs', KsTabs)
 	}
 };
 
 export default Kickstart;
 
-export {
-	KsAutocomplete,
-	KsLoaderLine,
-	KsTabs,
-	KsTab,
-	KsModal
-};
+export {KsAutocomplete};
+export {KsCalendar};
+export {KsCheckbox};
+export {KsDatepicker};
+export {KsLoaderSpin};
+export {KsLoaderLine};
+export {KsModal};
+export {KsRadio};
+export {KsRadioGroup};
+export {KsSelect};
+export {KsTab};
+export {KsTabs};
