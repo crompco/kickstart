@@ -75,12 +75,6 @@
 
 		props: {
 			value: {},
-			items: {
-				type: Array,
-				default() {
-					return null;
-				}
-			},
 			placeholder: {
 				default: 'Lookup ...'
 			},
@@ -298,6 +292,11 @@
 				}
 			},
 
+			items() {
+				// Clear the cache if the items are changed
+				this.clearCache();
+			},
+
 			list() {
 			    // Auto select when 1 element is available
 			    if ( this.taggable && this.list.length == 1 ) {
@@ -314,6 +313,13 @@
 			focused() {
 			    if ( this.focused && this.minSearch == 0 && this.lookup_name.length == 0 ) {
 			        this.startSearch();
+				}
+			},
+
+			show_list() {
+				// Reset the list when its closed
+				if ( !this.show_list ) {
+					this.resetList();
 				}
 			},
 

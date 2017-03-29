@@ -5,6 +5,13 @@ import {escapeRegExp} from '../../helpers/strings';
 export default {
 
 	props: {
+		// A list of items to use in the list
+		items: {
+			type: Array,
+			default() {
+				return null;
+			}
+		},
 		// When true the list auto closes when the lookup field is blurred
         closeOnBlur: {
             type: Boolean,
@@ -137,10 +144,13 @@ export default {
 			})
 		},
 
+		/**
+		 * Listens for the scroll changes to detect when to run the next page
+		 */
 		listenForScroll() {
 			if ( this.paginated ) {
                 scrolledToBottom(this.$refs[this.ref_list], () => {
-                    if ( this.last_index && !this.list_exhausted ) {
+                    if ( this.last_index && !this.list_exhausted && this.list.length ) {
                         this.runNextPage(this.last_index);
                     }
 				}, this.mousescroll_delay, this.mousescroll_threshold);
@@ -201,6 +211,7 @@ export default {
 		 * Clear the lookup
 		 */
 		clear() {
+			this.resetList();
 			this.lookup_name = '';
 			this.list = [];
 			if ( this.$refs[this.ref_lookup] === document.activeElement ) {
@@ -208,6 +219,13 @@ export default {
 			}
 			this.$emit('clear');
 		},
+
+		/**
+		 * Clear the cache
+		 */
+		clearCache() {
+			this.cache = {};
+        },
 
         /**
 		 * Retrieves the item at the current selected index
@@ -250,21 +268,31 @@ export default {
          * @param term
          * @returns {boolean}
          */
-		findCache(term) {
-			if ( !this.cacheResults ) {
-				return false;
-			}
-
-			if ( this.page in this.cache ) {
-				if ( term in this.cache[this.page] ) {
-					this.selected_index = this.startIndex;
-					this.list = this.cache[this.page][term];
-					return true;
+		findCache(term, page) {
+			if ( term in this.cache ) {
+				if ( page in this.cache[term] ) {
+					return this.cache[term][page];
 				}
 			}
 
 			return false;
 		},
+
+		/**
+		 * Add results into the cache
+		 *
+		 * @param term
+		 * @param page
+		 * @param results
+		 * @return {boolean}
+		 */
+		addCache(term, page, results) {
+	        if ( !this.cache[term] ) {
+	        	this.cache[term] = {};
+	        }
+
+	        this.cache[term][page] = results;
+        },
 
         /**
 		 * Emits the search event with the given lookup name and attaches the new results
@@ -272,8 +300,13 @@ export default {
          * @param concat
          */
 		runSearch(concat = false) {
-			if ( !concat && this.findCache(this.lookup_name) ) {
-				return;
+			// See if we can process the request from our cache
+			if ( this.cacheResults ) {
+				let cached_list = this.findCache(this.lookup_name, this.page)
+				if ( cached_list ) {
+					this.callback(cached_list, false, concat);
+					return;
+				}
 			}
 
 			this.loading = true;
@@ -283,21 +316,42 @@ export default {
 				term,
 				page,
 				callback: (list) => {
-					this.loading = false;
-					if ( this.paginated && concat) {
-						if ( list.length ) {
-							this.list = this.list.concat(list);
-						} else {
-							this.last_page = this.page;
-						}
-					} else {
-						this.selected_index = this.startIndex;
-						this.cache[term] = list;
-						this.list = list;
-					}
+					this.callback(list, true, concat);
 				}
 			});
 		},
+
+		/**
+		 * Callback when list is updated
+		 *
+		 * @param list
+		 */
+		callback(list, cache = true, concat = false) {
+	        this.loading = false;
+			let term = this.lookup_name;
+
+	        if ( this.paginated ) {
+	        	// If we have results and the we want them concatenated
+		        if ( list.length ) {
+		        	if ( concat ) {
+				        this.list = this.list.concat(list);
+			        } else {
+				        this.selected_index = this.startIndex;
+				        this.list = list;
+			        }
+		        } else {
+			        // Save when we reach the last page to prevent repeated calls
+			        this.last_page = this.page;
+		        }
+	        } else {
+		        this.selected_index = this.startIndex;
+		        this.list = list;
+	        }
+
+	        if ( cache && this.cacheResults ) {
+		        this.addCache(term, this.page, list);
+	        }
+        },
 
         /**
 		 * Runs the filter for the given lookup text
@@ -325,6 +379,7 @@ export default {
          */
 		startSearch() {
 			this.selected_index = this.startIndex;
+	        this.$refs[this.ref_list].scrollTop = 0;
 
 			if ( this.lookup_name.length < this.minSearch ) {
 				this.list = [];
@@ -350,11 +405,10 @@ export default {
 
         /**
 		 * Resets the scroll of the given reference
-		 *
-         * @param ref
          */
-		resetList(ref) {
-			this.$refs[ref].scrollTop = 0;
+		resetList() {
+			this.$refs[this.ref_list].scrollTop = 0;
+	        this.selected_index = this.startIndex;
 		},
 
         /**
@@ -402,29 +456,32 @@ export default {
 		 * Handles the tab key intelligently
 		 *
 		 * @param e
+		 * @return Boolean
 		 */
 		handleSelectEvent(e) {
 			if ( e && keyCode(e) == 9 ) {
 				if ( e.shiftKey ) {
 					this.clear();
-					return;
+					return false;
 				}
 				if ( this.is_multiple && this.lookup_name.length ) {
 					e.preventDefault();
 				}
 			}
-		}
+
+			return true;
+		},
+
 	},
 
 	watch: {
         /**
 		 * Watch the selected index in order to run the next page or to autoScroll
-		 *
-         * @param newVal
-         * @param oldVal
          */
-		selected_index(newVal, oldVal) {
-			this.runNextPage(this.selected_index);
+		selected_index() {
+			if ( this.selected_index >= 0 ) {
+				this.runNextPage(this.selected_index);
+			}
 		}
 	}
 }

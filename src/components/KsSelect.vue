@@ -1,5 +1,11 @@
 <template>
-	<div class="ks-select" :class="{ 'ks-select-open': isOpen }">
+	<div
+		class="ks-select"
+		:class="{ 'ks-select-open': isOpen }"
+		tabindex="0"
+		@keydown.space.prevent.stop="open"
+		@keydown.enter.prevent.stop="open"
+	>
 		<input type="hidden" :name="name" :value="value">
 		<div class="ks-select-selection" @click.prevent="toggleOpen">
 			<div class="ks-select-placeholder" v-if="!value">{{placeholder}}</div>
@@ -20,7 +26,7 @@
 					@keyup.esc="clear"
 					@keydown.backspace="backspace"
 					@keydown.tab="selectItem(selected_index, $event)"
-					@keydown.enter.prevent="selectItem(selected_index, $event)"
+					@keydown.enter.prevent.stop="selectItem(selected_index, $event)"
 					@keydown.down.prevent="selectDown()"
 					@keydown.up.prevent="selectUp()"
 					:class="{ 'is-multiple': multiple }"
@@ -89,10 +95,6 @@
 			},
 			itemFilter: {},
 			itemKey: String,
-			items: {
-				type: Array,
-				default: null
-			},
 			listHeight: {
 				default: "250px"
 			},
@@ -188,7 +190,9 @@
 			},
 
 			selectItem(index, e) {
-				this.handleSelectEvent(e);
+				if ( !this.handleSelectEvent(e) ) {
+					return;
+				}
 
 				let item = this.getItemByIndex(index);
 				if ( !item[this.keyName] ) {
@@ -201,10 +205,11 @@
 					this.$emit('input', item[this.keyName]);
 				}
 
-				this.resetList('list');
+				this.resetList();
 				this.selected_index = 0;
 				this.lookup_name = '';
 				this.close();
+				this.$el.focus();
 			},
 
 			backspace() {
@@ -246,6 +251,7 @@
 				if ( this.items && this.items.length ) {
 					this.list = this.items;
 					this.refreshSelected();
+					this.clearCache();
 				}
 			},
 			isOpen(open, oldOpen) {

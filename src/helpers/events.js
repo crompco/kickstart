@@ -113,8 +113,14 @@ export function isScrolledToBottom(el, threshold = 20) {
     let offsetHeight = el.offsetHeight;
     let scrollHeight = el.scrollHeight;
 
-    // When scrolled to the bottom then we should run the next page
-    if ( scrollTop + offsetHeight >= scrollHeight - threshold ) {
+    // For some reason the scroll gets triggered when containers are empty
+	// in that event we want to just return false
+	if ( scrollTop === 0 ) {
+		return false;
+	}
+
+	// When scrolled to the bottom then we should run the next page
+	if ( scrollTop + offsetHeight >= scrollHeight - threshold ) {
         return true;
     }
 
