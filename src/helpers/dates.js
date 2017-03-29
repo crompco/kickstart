@@ -51,14 +51,8 @@ export function cloneDate(date) {
  * @param days
  */
 export function subDays(date, days = 1) {
-	let d = cloneDate(date);
-	d.setDate(date.getDate() - days);
-	if ( d.getDate() > date.getDate() ) {
-		d.setMonth(date.getMonth() - 1);
-		if ( d.getMonth() > date.getMonth() ) {
-			d.setFullYear(date.getFullYear() - 1);
-		}
-	}
+	let d = new Date(date.getTime() - (days*24*60*60*1000));
+	d.setHours(0,0,0,0);
 	return d;
 }
 
@@ -68,12 +62,7 @@ export function subDays(date, days = 1) {
 * @param months
 */
 export function subMonths(date, months = 1) {
-	let d = cloneDate(date);
-	d.setMonth(date.getMonth() - months);
-	if ( d.getMonth() > date.getMonth() ) {
-		d.setFullYear(date.getFullYear() - 1);
-	}
-	return d;
+	return dateModify(date, 'month', -1 * months)
 }
 
 /**
@@ -93,15 +82,7 @@ export function subYears(date, years = 1) {
  * @param days
  */
 export function addDays(date, days = 1) {
-	let d = cloneDate(date);
-	d.setDate(date.getDate() + days);
-	if ( d.getDate() < date.getDate() ) {
-		d.setMonth(date.getMonth() + 1);
-		if ( d.getMonth() < date.getMonth() ) {
-			d.setFullYear(date.getFullYear() + 1);
-		}
-	}
-	return d;
+	return dateModify(date, 'day', days)
 }
 
 /**
@@ -110,12 +91,7 @@ export function addDays(date, days = 1) {
  * @param months
  */
 export function addMonths(date, months = 1) {
-	let d = cloneDate(date);
-	d.setMonth(date.getMonth() + months);
-	if ( d.getMonth() < date.getMonth() ) {
-		d.setFullYear(date.getFullYear() + 1);
-	}
-	return d;
+	return dateModify(date, 'month', months)
 }
 
 /**
@@ -169,6 +145,57 @@ export function parseDate(date, format = 'Y-m-d') {
 	date.setDate(day);
 
 	return date;
+}
+
+export function dateModify(d, increment, val) {
+	d = cloneDate(d);
+	val = parseInt(val);
+
+	switch (increment) {
+		case 'day':
+			d = dateModify(d, 'hour', val * 24);
+			break;
+		case 'hour':
+			d = dateModify(d, 'minute', val * 60);
+			break;
+		case 'week':
+			d = dateModify(d, 'day', val * 7);
+			break;
+		case 'minute':
+			d = dateModify(d, 'second', val * 60);
+			break;
+		case 'second':
+			d = dateModify(d, 'millisecond', val * 1000);
+			break;
+		case 'month':
+			let original_day = d.getUTCDate();
+			val = val + d.getUTCMonth();
+			if (val/12>0) {
+				d = dateModify(d, 'year', val/12);
+				val = val % 12;
+			}
+			// If the date is greater than 28 then we need to make sure the month supports that date
+			if ( original_day > 28 ) {
+				// First set the day to 1 to avoid the month setting failure
+				d.setUTCDate(1);
+				d.setUTCMonth(val);
+				let last_day = (new Date(d.getUTCFullYear(), d.getUTCMonth()+1, 0)).getDate();
+				d.setUTCDate(original_day > last_day ? last_day : original_day);
+			} else {
+				d.setUTCMonth(val);
+			}
+			break;
+		case 'millisecond':
+			d.setTime(d.getTime() + val);
+			break;
+		case 'year':
+			d.setFullYear(d.getUTCFullYear() + val);
+			break;
+		default:
+			console.log('Error: Invalid date increment passed');
+			break;
+	}
+	return d;
 }
 
 export default {
