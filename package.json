@@ -40,15 +40,16 @@
 		"style-loader": "^0.13.2",
 		"svg-inline-loader": "^0.7.1",
 		"tether": "^1.4.0",
-		"vue": "^2.2.4",
 		"vue-loader": "^11.1.4",
-		"vue-resource": "^1.2.1",
 		"vue-router": "^2.3.0",
 		"vue-style-loader": "^2.0.3",
 		"vue-svg-loader": "^0.1.2",
-		"vue-template-compiler": "^2.2.4",
+		"vue-template-compiler": "^2.2.6",
 		"webpack": "^2.2.1",
 		"webpack-dev-server": "^2.4.1"
 	},
-	"dependencies": {}
+	"dependencies": {
+		"axios": "^0.15.3",
+		"vue": "^2.2.0"
+	}
 }
