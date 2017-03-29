@@ -1,5 +1,5 @@
 import {object_get} from '../../helpers/objects';
-import {addEvent, keyCode, stopParentScroll, scrolledToBottom} from '../../helpers/events';
+import {addEvent, smartFocusToggle, keyCode, stopParentScroll, scrolledToBottom} from '../../helpers/events';
 import {escapeRegExp} from '../../helpers/strings';
 
 export default {
@@ -120,21 +120,16 @@ export default {
 					this.navigating_with_keys = false;
 				});
 
-				addEvent(this.$refs.lookup, 'focus', () => {
-                    this.focused = true;
-                });
-
-				addEvent(this.$refs.lookup, 'blur', () => {
-                    setTimeout(() => {
-                        if ( this.$refs[this.ref_lookup] !== document.activeElement ) {
-                            this.$emit('blur');
-                            this.focused = false;
-                            if ( this.closeOnBlur ) {
-                                this.clear();
-                            }
-                        }
-                    }, 200);
-                });
+	            smartFocusToggle(this.$el, (focus, e) => {
+		            this.focused = focus;
+		            if ( !focus ) {
+			            this.$emit('blur');
+			            this.focused = false;
+			            if ( this.closeOnBlur ) {
+				            this.clear();
+			            }
+		            }
+	            }, 50);
 
                 if ( this.focus ) {
                     this.setFocus();

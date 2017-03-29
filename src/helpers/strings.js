@@ -59,3 +59,12 @@ export function currency(str) {
 export function pad_left(str, pad_with, pad_length) {
 	return String(pad_with + String(str)).slice(pad_length*-1);
 }
+
+
+export default {
+	escapeRegExp,
+	ucwords,
+	posesses,
+	currency,
+	pad_left,
+}

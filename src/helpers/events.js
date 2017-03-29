@@ -163,3 +163,13 @@ export function mouseHold(el, callback, delay = 300, speed = 300) {
 		_speed = speed;
 	});
 }
+
+export default {
+	addEvent,
+	smartFocusToggle,
+	keyCode,
+	stopParentScroll,
+	scrolledToBottom,
+	isScrolledToBottom,
+	mouseHold,
+}

@@ -1,6 +1,9 @@
 <template>
 	<div class="autocomplete-holder"
-		 :class="{ 'is-selected': has_selections, 'is-multiple': is_multiple }" @click.prevent="setFocus('lookup')">
+		 :class="{ 'is-selected': has_selections, 'is-multiple': is_multiple }"
+		 @click.prevent="setFocus('lookup')"
+	     tabindex="-1"
+	>
 
 		<!-- Selections  -->
 		<span class="selection" v-if="selectionKey && has_selections" @click.prevent="editSelection">
@@ -27,7 +30,7 @@
 			v-model="lookup_name"
 			ref="lookup"
 			@keyup.esc="clear"
-			@keydown.backspace="backspace"
+			@keydown.8="backspace"
 			@keydown.tab="selectItem(selected_index, $event)"
 			@keydown.enter.prevent="selectItem(selected_index)"
 			@keydown.down.prevent="selectDown()"
@@ -64,11 +67,6 @@
 	import {addEvent, keyCode} from '../helpers/events';
     import {object_get} from '../helpers/objects';
     import ListIndexNavigatior from './mixins/ListIndexNavigator';
-
-
-	// External
-	import Vue from 'vue';
-	Vue.config.keyCodes['backspace'] = 8;
 
 	export default {
 		name: 'KsAutocomplete',

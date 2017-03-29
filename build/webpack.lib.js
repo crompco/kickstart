@@ -6,7 +6,14 @@ const base = require('./webpack.base.js');
 
 const config = {
     entry: {
-        KsAutocomplete: ['./src/components/KsAutocomplete.vue']
+    	// Components
+	    KsAutocomplete: ['./src/components/KsAutocomplete.vue'],
+	    KsDatepicker: ['./src/components/KsDatepicker.vue'],
+	    KsModal: ['./src/components/KsModal.vue'],
+	    // Helpers
+	    api: ['./src/helpers/api.js'],
+	    strings: ['./src/helpers/strings.js'],
+	    dates: ['./src/helpers/dates.js'],
     },
 
     output: {

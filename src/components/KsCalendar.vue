@@ -79,7 +79,6 @@
 <script>
 	import {
 		defaultLocale,
-		getMonthRange,
 		getDaysInMonth,
 		addDays,
 		subDays,

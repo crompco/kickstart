@@ -21,15 +21,6 @@ export const defaultLocale = {
 	}
 };
 
-export function getMonthRange(date) {
-	let year = date.getFulllYear();
-	let month = date.getMonth();
-	return {
-		first: new Date(y, m, 1),
-		last: new Date(y, m + 1, 0)
-	}
-}
-
 /**
  * @param {int} The month number, 0 based
  * @param {int} The year, not zero based, required to account for leap years
@@ -172,7 +163,7 @@ export function parseDate(date, format = 'Y-m-d') {
 		day = parseInt(date.slice(d_index, d_index+2));
 
 	// Build the new date
-	date = (new Date());
+	date = new Date;
 	date.setFullYear(year);
 	date.setMonth(month-1);
 	date.setDate(day);
@@ -181,5 +172,14 @@ export function parseDate(date, format = 'Y-m-d') {
 }
 
 export default {
-	defaultLocale
+	defaultLocale,
+	getDaysInMonth,
+	cloneDate,
+	subDays,
+	subMonths,
+	subYears,
+	addDays,
+	addMonths,
+	formatDate,
+	parseDate,
 }
