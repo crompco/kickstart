@@ -90,6 +90,7 @@
 	&.is-multiple {
 		@include ks-autocomplete-input;
 		padding: calc(#{rem($ac-input-multi-padding)} - #{$ac-multi-margin}) rem($ac-input-multi-padding);
+		width: calc(100% - (#{rem($ac-margin-right)} + #{rem($ac-margin-left)}));
 
 		&:not(.is-selected) {
 			// 1px is for border
