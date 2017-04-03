@@ -1,6 +1,6 @@
 <template>
 	<div id="app" class="kickstart-docs">
-		<ks-top-nav>
+		<ks-top-nav :has-sidebar="true">
 			<div class="brand">
 				Kickstart UI
 			</div>

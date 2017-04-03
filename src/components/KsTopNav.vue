@@ -26,7 +26,7 @@
         props: {
 	  		hasSidebar: {
 	  		    type: Boolean,
-				default: true
+				default: false
 			}
 		},
 
