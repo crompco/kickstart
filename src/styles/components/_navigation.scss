@@ -1,42 +1,36 @@
 @import "../mixins/_grid";
 @import "../mixins/_navigation";
 
-.nav-bar {
+.side-nav {
 	&.vertical {
-		@include tab() {
+		@include breakpoint(map-get($breakpoint-list, $side-nav-breakpoint)) {
+			padding-top: rem($nav-vertical-padding-top);
 			width: $nav-width;
 			height: 100%;
 		}
 
-		.nav-links {
+		ul.nav-links {
 			list-style-type: none;
 			padding: 0;
 			margin: 0;
 
-			ul {
-				padding: 0;
-				margin: 0;
-				list-style-type: none;
-			}
-
 			a {
 				display: block;
+				padding: rem($nav-vertical-link-padding);
 			}
 		}
 	}
 
 	&.fixed {
-		@include tab() {
-			position: fixed;
-		}
+		position: fixed;
 
-		@include tab() {
-			z-index: auto;
+		@include breakpoint(map-get($breakpoint-list, $side-nav-breakpoint)) {
+			z-index: 10;
 			left: 0;
 		}
 	}
 
-	@include nav-bar;
+	@include side-nav;
 }
 
 .top-bar {

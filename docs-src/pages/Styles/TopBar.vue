@@ -2,7 +2,7 @@
 	<div class="top-bar">
 		<ul class="dropdown right">
 			<li>
-				<a href="#">tom.werkheiser@crompco.com</a>
+				<a href="#">jimbo.jones@email.com</a>
 				<ul class="sub-dropdown">
 					<li><a href="#">Profile</a></li>
 					<li><a href="#">Sign Out</a></li>

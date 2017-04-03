@@ -35,7 +35,7 @@ html, body {
 	height: 100%;
 	@include col(12);
 
-	@include tab() {
+	@include breakpoint(map-get($breakpoint-list, $side-nav-breakpoint)) {
 		$width: $nav-width;
 
 		width: calc(100% - #{$width});

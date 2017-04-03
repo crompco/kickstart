@@ -4,10 +4,63 @@
 @import "./_utils";
 @import "./_grid";
 
-// TODO: combine these 2 mixins to one or change nav-bar to side-bar
-@mixin nav-bar() {
+%mobile-menu {
+	@include v-center;
+	left: 0.5rem;
+	outline: none;
+	padding: rem($nav-mobile-icon-padding);
+	border: 1px solid;
+
+	&:hover {
+		cursor: pointer;
+	}
+
+	svg {
+		vertical-align: middle;
+	}
+
+	@include breakpoint(map-get($breakpoint-list, $side-nav-breakpoint)) {
+		display: none;
+	}
+}
+
+%show-dropdown-nav {
+	ul.sub-dropdown {
+		padding: 0;
+		margin: 0;
+		background: $top-bar-dd-bg;
+		width: 100%;
+
+		@if $top-bar-dd-box-shadow != false {
+			box-shadow: $top-bar-dd-box-shadow;
+		}
+
+		@include breakpoint(map-get($breakpoint-list, $top-bar-breakpoint)) {
+			display: block;
+			top: $nav-height;
+			position: absolute;
+		}
+
+		@include breakpoint(map-get($breakpoint-list, $top-bar-breakpoint), true) {
+			display: flex;
+			flex-direction: column;
+		}
+
+		a {
+			padding: rem($top-bar-dd-link-padding);
+			line-height: ($nav-height / 2);
+
+			&:hover {
+				background-color: $top-bar-dd-hover;
+				color: $top-bar-dd-hover-color;
+			}
+		}
+	}
+}
+
+@mixin side-nav() {
 	@include row();
-	background-color: $nav-bg;
+	background-color: $side-nav-bg;
 	z-index: 5;
 	position: relative;
 
@@ -17,24 +70,28 @@
 	padding-top: 0;
 
 	.mobile-menu {
-		line-height: 1.5rem;
-		font-size: 1.5rem;
-		color: $white;
-		background-color: $dark-gray;
-		border: 0;
-		@include v-center;
-		left: 0.5rem;
+		@extend %mobile-menu;
+		color: $side-nav-links-color;
+		background-color: $side-nav-bg;
 
-		@include tab() {
-			display: none;
+		svg path {
+			fill: $side-nav-links-color;
 		}
 	}
 
-	.nav-brand {
+	.brand {
 		background-color: $nav-brand-bg;
-		height: $nav-height;
 		width: 100%;
 		text-align: center;
+		color: $nav-brand-color;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 100%;
+
+		@include breakpoint(map-get($breakpoint-list, $side-nav-breakpoint)) {
+			height: $nav-height;
+		}
 
 		img {
 			height: 100%;
@@ -49,7 +106,7 @@
 		width: 100%;
 		left: -100%;
 
-		@include tab() {
+		@include breakpoint(map-get($breakpoint-list, $side-nav-breakpoint)) {
 			left: 0;
 		}
 
@@ -58,7 +115,7 @@
 		}
 
 		a {
-			color: $nav-links-color;
+			color: $side-nav-links-color;
 			text-decoration: none;
 			padding: 1em;
 			display: inline-block;
@@ -75,14 +132,20 @@
 	}
 
 	&.show {
-		.nav-links {
-			left: 0;
-			top: 40px;
+		@include breakpoint(map-get($breakpoint-list, $side-nav-breakpoint), true) {
+			.nav-links {
+				left: 0;
+				top: 40px;
+			}
 		}
 	}
 }
 
 @mixin top-bar() {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
 	position: relative;
 	height: $nav-height;
 	background-color: $top-bar-bg;
@@ -91,41 +154,104 @@
 		box-shadow: $top-bar-box-shadow;
 	}
 
+	@include breakpoint(map-get($breakpoint-list, $top-bar-breakpoint)) {
+		flex-wrap: nowrap;
+	}
+
 	.text {
 		@include v-center;
+	}
+
+	.mobile-menu {
+		@extend %mobile-menu;
+		color: $top-bar-color;
+		background-color: $top-bar-bg;
+		border-color: $top-bar-color;
+
+		svg path {
+			fill: $top-bar-color;
+		}
+
+		&.has-sidebar {
+			right: 0.5rem;
+			left: auto;
+			border-color: transparent;
+		}
+	}
+
+	.brand {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 0.25rem 0.5rem;
+		white-space: nowrap;
+		width: 100%;
+		height: 100%;
+
+		@include breakpoint(map-get($breakpoint-list, $top-bar-breakpoint)) {
+			width: auto;
+			height: 100%;
+		}
+	}
+
+	.collapse {
+		width: 100%;
+		flex-direction: column;
+		display: none;
+
+		@include breakpoint(map-get($breakpoint-list, $top-bar-breakpoint)) {
+			height: 100%;
+			flex-direction: row;
+			display: flex;
+		}
+
+		@include breakpoint(map-get($breakpoint-list, $top-bar-breakpoint), true) {
+			.nav-links, .dropdown {
+				flex-direction: column;
+				background: $top-bar-bg;
+
+				li, a {
+					width: 100%;
+				}
+			}
+		}
+	}
+
+	&.show {
+		.collapse {
+			display: flex;
+		}
 	}
 
 	.dropdown {
 		margin: 0;
 		padding-left: 0;
 		list-style-type: none;
-		display: inline-block;
+		display: flex;
 		height: 100%;
 		position: relative;
+
+		&.show {
+			> li:first-child {
+				@extend %show-dropdown-nav;
+			}
+		}
+
+		li {
+			height: 100%;
+			display: flex;
+			align-items: center;
+
+			@include breakpoint(map-get($breakpoint-list, $top-bar-breakpoint), true) {
+				flex-direction: column;
+			}
+		}
 
 		> li:first-child {
 			height: 100%;
 
 			&:hover {
-				ul.sub-dropdown {
-					display: block;
-					padding: 0;
-					margin: 0;
-					background: $top-bar-dd-bg;
-					@if $top-bar-dd-box-shadow != false {
-						box-shadow: $top-bar-dd-box-shadow;
-					}
-
-					a {
-						padding: rem($top-bar-dd-link-padding);
-						line-height: ($nav-height / 2);
-
-						&:hover {
-							background-color: $top-bar-dd-hover;
-							color: $top-bar-dd-hover-color;
-						}
-					}
-				}
+				@extend %show-dropdown-nav;
 			}
 
 			ul.sub-dropdown {
@@ -134,15 +260,63 @@
 			}
 
 			a {
-				display: block;
+				display: flex;
+				align-items: center;
+				height: 100%;
+				width: 100%;
 				text-decoration: none;
 				color: $top-bar-color;
-				padding: $nav-padding;
-				line-height: $nav-height - ($nav-padding * 2);
+				padding: 10px;
 
 				&:hover {
 					background-color: $top-bar-hover-bg;
 					color: $top-bar-hover-color;
+				}
+			}
+		}
+
+		&.right {
+			@include breakpoint(map-get($breakpoint-list, $top-bar-breakpoint)) {
+				margin-left: auto;
+			}
+		}
+	}
+
+	&.fixed {
+		position: fixed;
+		width: 100%;
+		z-index: 10;
+
+		@include breakpoint(map-get($breakpoint-list, $top-bar-breakpoint)) {
+			& ~ div {
+				margin-top: $nav-height;
+			}
+		}
+	}
+
+	.nav-links {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		height: 100%;
+		display: flex;
+
+		li {
+			height: 100%;
+			display: flex;
+			align-items: center;
+
+			a {
+				height: 100%;
+				display: flex;
+				align-items: center;
+				padding: 15px 10px;
+				text-decoration: none;
+				color: $text-color;
+
+				&:hover {
+					color: $white;
+					background-color: get($brand, lighter);
 				}
 			}
 		}

@@ -1,6 +1,7 @@
 
 <template>
-	<ks-nav-bar id="sidebar" class="vertical fixed">
+	<ks-side-nav id="sidebar" class="vertical fixed">
+		<div class="brand">Kickstart</div>
 		<ul class="nav-links">
 			<li v-for="route in routes">
 				<router-link :to="{name: route.name}">
@@ -8,14 +9,14 @@
 			</router-link>
 			</li>
 		</ul>
-	</ks-nav-bar>
+	</ks-side-nav>
 </template>
 
 
 <script>
 
 	import routes from './routes';
-	import KsNavBar from '../src/components/KsNavBar.vue';
+	import KsSideNav from '../src/components/KsSideNav.vue';
 
 	export default {
 		name: 'Sidebar',
@@ -39,7 +40,7 @@
 		watch: {},
 
 		components: {
-		    KsNavBar
+            KsSideNav
 		}
 	}
 </script>

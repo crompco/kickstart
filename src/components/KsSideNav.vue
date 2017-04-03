@@ -15,7 +15,7 @@
 	import {addEvent} from '../helpers/events';
 
     export default {
-        name: 'KsNavBar',
+        name: 'KsSideNav',
 
 		data() {
 	  		return {
