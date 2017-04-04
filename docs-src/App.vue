@@ -1,30 +1,27 @@
 <template>
 	<div id="app" class="kickstart-docs">
-		<ks-top-nav :has-sidebar="true">
-			<div class="brand">
-				Kickstart UI
-			</div>
-			<div class="collapse">
-				<ul class="nav-links">
-					<li><a href="#">Top Nav 1</a></li>
-					<li><a href="#">Top Nav 2</a></li>
-					<li><a href="#">Top Nav 3</a></li>
-					<li><a href="#">Top Nav 4</a></li>
-					<li><a href="#">Top Nav 5</a></li>
-				</ul>
-				<ul class="dropdown right">
-					<li>
-						<a href="#" class="dropdown-toggle">jimbo.jones@email.com</a>
-						<ul class="sub-dropdown">
-							<li><a href="#">Profile</a></li>
-							<li><a href="#">Sign Out</a></li>
-						</ul>
-					</li>
-				</ul>
-			</div>
-		</ks-top-nav>
 		<sidebar></sidebar>
 		<div class="content">
+			<ks-top-nav :has-sidebar="true">
+				<div class="collapse">
+					<ul class="nav-links">
+						<li><a href="#">Top Nav 1</a></li>
+						<li><a href="#">Top Nav 2</a></li>
+						<li><a href="#">Top Nav 3</a></li>
+						<li><a href="#">Top Nav 4</a></li>
+						<li><a href="#">Top Nav 5</a></li>
+					</ul>
+					<ul class="dropdown right">
+						<li>
+							<a href="#" class="dropdown-toggle">jimbo.jones@email.com</a>
+							<ul class="sub-dropdown">
+								<li><a href="#">Profile</a></li>
+								<li><a href="#">Sign Out</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</ks-top-nav>
 			<router-view ref="pageContent" class="sm-12 med-12"></router-view>
 		</div>
 	</div>

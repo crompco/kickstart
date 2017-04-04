@@ -198,6 +198,7 @@
 		width: 100%;
 		flex-direction: column;
 		display: none;
+		position: relative;
 
 		@include breakpoint(map-get($breakpoint-list, $top-bar-breakpoint)) {
 			height: 100%;
@@ -206,9 +207,14 @@
 		}
 
 		@include breakpoint(map-get($breakpoint-list, $top-bar-breakpoint), true) {
+			position: absolute;
+			top: $nav-height;
+			width: 100%;
+
 			.nav-links, .dropdown {
 				flex-direction: column;
 				background: $top-bar-bg;
+				width: 100%;
 
 				li, a {
 					width: 100%;
@@ -219,7 +225,9 @@
 
 	&.show {
 		.collapse {
-			display: flex;
+			@include breakpoint(map-get($breakpoint-list, $top-bar-breakpoint), true) {
+				display: block;
+			}
 		}
 	}
 
@@ -291,6 +299,12 @@
 			& ~ div {
 				margin-top: $nav-height;
 			}
+		}
+	}
+
+	@at-root {
+		.content &.fixed {
+			width: inherit;
 		}
 	}
 
