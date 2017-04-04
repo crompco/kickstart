@@ -2,7 +2,7 @@
 	<div id="app" class="kickstart-docs">
 		<sidebar></sidebar>
 		<div class="content">
-			<ks-top-nav :has-sidebar="true">
+			<ks-top-nav :has-sidebar="true" :fixed="true">
 				<div class="collapse">
 					<ul class="nav-links">
 						<li><a href="#">Top Nav 1</a></li>

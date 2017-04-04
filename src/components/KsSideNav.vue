@@ -17,10 +17,18 @@
     export default {
         name: 'KsSideNav',
 
+		props: {
+	  		fixed: {
+	  		    type: Boolean,
+				default: true
+			}
+		},
+
 		data() {
 	  		return {
 	  		    classObj: {
-					show: false
+					show: false,
+					fixed: this.fixed
 				}
 			}
 		},

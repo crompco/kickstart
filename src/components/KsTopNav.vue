@@ -1,6 +1,6 @@
 <template>
-	<div class="top-bar fixed">
-		<button class="mobile-menu" @click="showLinks()">
+	<div class="top-bar" :class="classObj">
+		<button class="mobile-menu">
 			<menu-svg></menu-svg>
 		</button>
 
@@ -27,13 +27,18 @@
 	  		hasSidebar: {
 	  		    type: Boolean,
 				default: false
+			},
+
+			fixed: {
+	  		    type: Boolean,
+				default: false
 			}
 		},
 
         data() {
             return {
                 classObj: {
-                    show: false
+					fixed: this.fixed
                 }
             }
         },
@@ -59,12 +64,6 @@
 			   		toggleClass(parent(this, '.top-bar'), 'show');
 				});
 			}
-        },
-
-        methods: {
-            showLinks() {
-                this.classObj.show = !this.classObj.show;
-            }
         },
 
 		components: {
