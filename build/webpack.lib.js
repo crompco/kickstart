@@ -13,6 +13,7 @@ const config = {
 	    // Helpers
 	    api: ['./src/helpers/api.js'],
 	    strings: ['./src/helpers/strings.js'],
+	    objects: ['./src/helpers/objects.js'],
 	    dates: ['./src/helpers/dates.js'],
     },
 
