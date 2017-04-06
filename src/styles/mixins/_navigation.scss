@@ -1,5 +1,6 @@
 @import "../functions/_utils";
 @import "../variables/_navigation";
+@import "../variables/_forms";
 @import "./_animation";
 @import "./_utils";
 @import "./_grid";
@@ -194,11 +195,23 @@
 		}
 	}
 
+	.form-group {
+
+		@include breakpoint(map-get($breakpoint-list, $top-bar-breakpoint)) {
+			display: flex;
+			align-items: center;
+			margin-bottom: 0;
+			margin-top: 0;
+			margin-left: rem($form-inline-margin-left);
+		}
+	}
+
 	.collapse {
 		width: 100%;
 		flex-direction: column;
 		display: none;
 		position: relative;
+		background: $top-bar-bg;
 
 		@include breakpoint(map-get($breakpoint-list, $top-bar-breakpoint)) {
 			height: 100%;

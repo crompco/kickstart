@@ -4,13 +4,11 @@
 		<div class="content">
 			<ks-top-nav :has-sidebar="true" :fixed="true">
 				<div class="collapse">
-					<ul class="nav-links">
-						<li><a href="#">Top Nav 1</a></li>
-						<li><a href="#">Top Nav 2</a></li>
-						<li><a href="#">Top Nav 3</a></li>
-						<li><a href="#">Top Nav 4</a></li>
-						<li><a href="#">Top Nav 5</a></li>
-					</ul>
+					<div class="form-group">
+						<input type="text">
+
+						<button class="button none">Search</button>
+					</div>
 					<ul class="dropdown right">
 						<li>
 							<a href="#" class="dropdown-toggle">jimbo.jones@email.com</a>
