@@ -54,5 +54,10 @@
   "dependencies": {
     "axios": "^0.15.3",
     "vue": "^2.2.0"
+  },
+  "ava": {
+    "require": [
+      "./test/helpers/setup.js"
+    ]
   }
 }

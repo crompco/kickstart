@@ -1,22 +1,18 @@
-const browserEnv = require('browser-env');
-const Vue = require('vue');
-const window = browserEnv();
+const Vue = require('vue/dist/vue.js');
 
-export function resetDocument() {
-	if ( document.body.firstChild ) {
-		document.body.removeChild(document.body.firstChild);
-	}
+module.exports = {
+    resetDocument() {
+		if ( document.body.firstChild ) {
+			document.body.removeChild(document.body.firstChild);
+		}
 
-	let div = document.createElement('div');
-	div.setAttribute('id', 'testapp');
-	document.body.appendChild(div);
+		let div = document.createElement('div');
+		div.setAttribute('id', 'testapp');
+		document.body.appendChild(div);
+	},
+    component(Component, propsData) {
+        const c = Vue.extend(Component);
+
+        return new c({propsData}).$mount();
+    }
 }
-
-export function component(Component, props) {
-	const c = Vue.extend(Component)
-	let vm = new c({propsData: props}).$mount();
-	console.log(document.getElementById('testapp'), document.getElementById('testapp').firstChild);
-	console.log(vm.$el);
-	return vm;
-}
-
