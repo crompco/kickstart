@@ -16,7 +16,7 @@
 		"build:lib": "webpack --config build/webpack.lib.js",
 		"build:all": "npm run build && npm run build:lib",
 		"clean": "rimraf ./dist ./lib ./docs/docs.bundle.css ./docs/docs.bundle.js",
-		"lint": "eslint --format=node_modules/eslint-formatter-pretty --ext .js,.vue,.html ./",
+		"lint": "eslint --ext .js,.vue,.html ./",
 		"test": "npm run lint"
 	},
 	"devDependencies": {
@@ -31,6 +31,8 @@
 		"cross-env": "^3.2.3",
 		"css-loader": "^0.27.3",
 		"deep-assign": "^2.0.0",
+		"eslint": "^3.19.0",
+		"eslint-plugin-vue": "^2.0.1",
 		"extract-text-webpack-plugin": "^2.1.0",
 		"file-loader": "^0.10.1",
 		"node-sass": "^4.5.0",
