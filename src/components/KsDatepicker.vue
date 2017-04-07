@@ -16,7 +16,7 @@
 				ref="calendar"
 				v-model="calendar_date"
 				:format="dateFormat"
-				:selection="value"
+				:selection="value_date"
 				:year-picker="yearPicker"
 				:interactive="true"
 			    @select="selectDay"
