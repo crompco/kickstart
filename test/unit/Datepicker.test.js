@@ -6,8 +6,9 @@ test('Datepicker:computed', t => {
 	resetDocument();
 
 	let vm = component(KsDatepicker, {
-		value: '2017-01-01'
+		value: new Date(2017, 0, 1)
 	});
 
 	t.is(vm.display_date, '01/01/2017');
+	t.is(vm.value_date, '2017-01-01');
 });
