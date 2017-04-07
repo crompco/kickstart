@@ -127,7 +127,8 @@
 			}
 
 			.router-link-active, .active {
-
+				background-color: $nav-links-active-bg;
+				color: $nav-links-active-color;
 			}
 		}
 	}
