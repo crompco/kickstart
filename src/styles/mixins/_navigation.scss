@@ -101,7 +101,7 @@
 	}
 
 	.nav-links {
-		background: $nav-brand-bg;
+		background: $side-nav-bg;
 		z-index: 6;
 		position: absolute;
 		width: 100%;
@@ -126,7 +126,7 @@
 				background-color: $nav-links-hover-color;
 			}
 
-			.router-link-active, .active {
+			&.router-link-active, &.active {
 				background-color: $nav-links-active-bg;
 				color: $nav-links-active-color;
 			}
