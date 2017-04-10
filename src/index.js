@@ -10,6 +10,7 @@ import KsRadioGroup from './components/KsRadioGroup.vue';
 import KsSelect from './components/KsSelect.vue';
 import KsTab from './components/KsTab.vue';
 import KsTabs from './components/KsTabs.vue';
+import API from './helpers/api';
 
 require('./styles/app.scss');
 
@@ -27,6 +28,8 @@ const Kickstart = {
 	KsTab,
 	KsTabs,
 	install(Vue) {
+		Vue.api = API;
+
 		Vue.component('ks-autocomplete', KsAutocomplete)
 		Vue.component('ks-calendar', KsCalendar)
 		Vue.component('ks-checkbox', KsCheckbox)
@@ -39,6 +42,10 @@ const Kickstart = {
 		Vue.component('ks-select', KsSelect)
 		Vue.component('ks-tab', KsTab)
 		Vue.component('ks-tabs', KsTabs)
+
+		Object.defineProperty(Vue.prototype, '$api', {
+			get() { return API }
+		})
 	}
 };
 
