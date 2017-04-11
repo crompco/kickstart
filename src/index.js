@@ -44,7 +44,7 @@ const Kickstart = {
 		Vue.component('ks-tabs', KsTabs)
 
 		Object.defineProperty(Vue.prototype, '$api', {
-			get() { return API }
+			get() { return Vue.api }
 		})
 	}
 };
