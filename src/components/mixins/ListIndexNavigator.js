@@ -176,7 +176,7 @@ export default {
 		selectUp() {
 			this.navigating_with_keys = true;
 			let index = this.selected_index - 1;
-			if ( !(index < 0) ) {
+			if ( !(index < this.startIndex) ) {
 				this.selected_index -= 1;
 			}
 

@@ -46,7 +46,12 @@
 			    :style="'max-height:'+this.listHeight"
 			    ref="list"
 			>
-
+				<li
+					v-if="showTagInList && taggable && lookup_name"
+					:class="{ 'selected-item': -1 == selected_index }"
+				>
+					Add "<em v-text="lookup_name"></em>"
+				</li>
 				<li
 					v-for="(item, index) in list"
 					:class="{ 'selected-item': index == selected_index }"
@@ -102,6 +107,10 @@
 				default: 1
 			},
 			focus: {
+			    type: Boolean,
+				default: false
+			},
+            showTagInList: {
 			    type: Boolean,
 				default: false
 			}
