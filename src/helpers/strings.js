@@ -67,6 +67,20 @@ export function pad_left(str, pad_with, pad_length) {
 	return str;
 }
 
+/**
+ *
+ * @param str
+ * @param max_length
+ * @return {string}
+ */
+export function ellipsis(str, max_length = 20) {
+    if ( str.length > max_length ) {
+        return str.substr(0, max_length) + '...';
+    }
+
+    return str;
+}
+
 
 export default {
 	escapeRegExp,
@@ -74,4 +88,5 @@ export default {
 	posesses,
 	currency,
 	pad_left,
+    ellipsis
 }

@@ -33,3 +33,8 @@ test('strings:pad_left', t => {
 	t.is(strings.pad_left('1', 0, 2), "01");
 	t.is(strings.pad_left('01', 0, 2), "01");
 });
+
+test('strings:ellipsis', t => {
+   t.is(strings.ellipsis("mystring", 5), 'mystr...');
+   t.is(strings.ellipsis("strin", 5), 'strin');
+});
