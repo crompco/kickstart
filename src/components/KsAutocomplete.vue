@@ -49,6 +49,7 @@
 				<li
 					v-if="showTagInList && taggable && lookup_name"
 					:class="{ 'selected-item': -1 == selected_index }"
+                    @click="selectItem(-1, $event)"
 				>
 					Add "<em v-text="lookup_name"></em>"
 				</li>
