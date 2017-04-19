@@ -19,7 +19,7 @@ const config = {
         KsLoaderSpin: ['./src/components/KsLoaderSpin.vue'],
         KsCheckbox: ['./src/components/KsCheckbox.vue'],
         KsRadio: ['./src/components/KsRadio.vue'],
-        KsRadioGRoup: ['./src/components/KsRadioGRoup.vue'],
+        KsRadioGRoup: ['./src/components/KsRadioGroup.vue'],
         KsSelect: ['./src/components/KsSelect.vue'],
         // Helpers
         api: ['./src/helpers/api.js'],
