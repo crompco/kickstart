@@ -31,7 +31,7 @@ export default {
 	interceptors: {
 		request(options, onRejected = false) {
 			return axios.interceptors.request.use(config => {
-					return Object.assign(config, options);
+					return options(config);
 				}, error => {
 					if ( onRejected !== false ) {
 						return Promise.reject(onRejected(error));
