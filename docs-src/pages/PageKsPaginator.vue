@@ -2,8 +2,18 @@
     <div class="sm-full">
         <h2>Paginator</h2>
         <div class="basic-block">
+            Event
             <ks-paginator
                 :pagination="pagination"
+                @input="pagination.current_page=$event"
+            ></ks-paginator>
+        </div>
+
+        <div class="basic-block">
+            Routed
+            <ks-paginator
+                :pagination="pagination2"
+                :routed="true"
                 @input="pagination.current_page=$event"
             ></ks-paginator>
         </div>
@@ -95,6 +105,11 @@
         data() {
             return {
                 pagination: {
+                    total_count: 902,
+                    total_pages: 15,
+                    current_page: 1,
+                },
+                pagination2: {
                     total_count: 902,
                     total_pages: 15,
                     current_page: 1,

@@ -158,7 +158,7 @@
                     return;
                 }
 
-                let query = this.$route.query;
+                let query = Object.assign({}, this.$route.query);
                 query[this.pageVar] = page;
 
                 this.$router.push({
