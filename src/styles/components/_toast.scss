@@ -1,0 +1,90 @@
+@import "../functions/_utils";
+@import "../variables/_alerts";
+
+.ks-toast {
+    position: fixed;
+    z-index: 10;
+
+    &.top {
+        top: rem(1rem);
+        bottom: rem(1rem);
+        left: 0;
+        right: 0;
+
+        .alert {
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        &-left {
+            top: rem(1rem);
+            left: rem(1rem);
+        }
+
+        &-right {
+            top: rem(1rem);
+            right: rem(1rem);
+        }
+    }
+
+    &.bottom {
+        bottom: rem(1rem);
+        left: 0;
+        right: 0;
+
+        .alert {
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        &-left {
+            bottom: rem(1rem);
+            left: rem(1rem);
+        }
+
+        &-right {
+            bottom: rem(1rem);
+            right: rem(1rem);
+        }
+    }
+
+    div.alert {
+        max-width: 400px;
+        position: relative;
+
+        &.has-close {
+            padding-right: 30px;
+        }
+
+        a.close {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+
+            &:hover {
+                cursor: pointer;
+
+                svg path {
+                    fill-opacity: 1;
+                }
+            }
+
+            svg {
+                width: 14px;
+                height: 14px;
+
+                path {
+                    fill-opacity: 0.6;
+                }
+            }
+        }
+
+        @each $name, $map in $alerts {
+            &.#{$name} {
+                svg path {
+                    fill: get($map, color);
+                }
+            }
+        }
+    }
+}

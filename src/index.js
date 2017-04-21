@@ -11,6 +11,7 @@ import KsSelect from './components/KsSelect.vue';
 import KsTab from './components/KsTab.vue';
 import KsTabs from './components/KsTabs.vue';
 import API from './helpers/api';
+import KsToast from './components/KsToast.vue';
 
 require('./styles/app.scss');
 
@@ -28,7 +29,27 @@ const Kickstart = {
 	KsTab,
 	KsTabs,
 	install(Vue) {
+        function open(propsData) {
+            const Toast = Vue.extend(KsToast);
+
+            return new Toast({
+                el: document.createElement('div'),
+                propsData
+            })
+        }
+
 		Vue.api = API;
+		Vue.toast = function(params) {
+			let message;
+
+			if ( typeof params === 'string' ) {
+				message = params;
+			}
+
+			return open(Object.assign({
+				message
+			}, params))
+		};
 
 		Vue.component('ks-autocomplete', KsAutocomplete)
 		Vue.component('ks-calendar', KsCalendar)
@@ -43,8 +64,13 @@ const Kickstart = {
 		Vue.component('ks-tab', KsTab)
 		Vue.component('ks-tabs', KsTabs)
 
-		Object.defineProperty(Vue.prototype, '$api', {
-			get() { return Vue.api }
+		Object.defineProperties(Vue.prototype, {
+			'$api': {
+				get() { return Vue.api }
+			},
+			'$toast': {
+				get() { return Vue.toast }
+			}
 		})
 	}
 };
