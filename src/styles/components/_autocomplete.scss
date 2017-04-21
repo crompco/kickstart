@@ -22,6 +22,12 @@
 	&.is-multiple > input {
 		border: 0;
 		outline: none;
+		display: inline-block;
+		margin-top: 0;
+		margin-bottom: 0;
+		box-shadow: none;
+		width: auto;
+		padding: 1px 0;
 	}
 
 	> input::-ms-clear {
