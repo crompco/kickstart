@@ -2,4 +2,4 @@
 @import "_global";
 
 
-$paginator-link-color: get($brand, light);
+$paginator-link-color: get($brand, light) !default;
