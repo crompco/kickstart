@@ -12,6 +12,7 @@ import KsTab from './components/KsTab.vue';
 import KsTabs from './components/KsTabs.vue';
 import API from './helpers/api';
 import KsToast from './components/KsToast.vue';
+import KsPaginator from './components/KsPaginator.vue';
 
 require('./styles/app.scss');
 
@@ -27,7 +28,9 @@ const Kickstart = {
 	KsRadioGroup,
 	KsSelect,
 	KsTab,
-	KsTabs,
+    KsTabs,
+    KsToast,
+    KsPaginator,
 	install(Vue) {
         function open(propsData) {
             const Toast = Vue.extend(KsToast);
@@ -62,7 +65,8 @@ const Kickstart = {
 		Vue.component('ks-radio-group', KsRadioGroup)
 		Vue.component('ks-select', KsSelect)
 		Vue.component('ks-tab', KsTab)
-		Vue.component('ks-tabs', KsTabs)
+        Vue.component('ks-tabs', KsTabs)
+        Vue.component('ks-paginator', KsPaginator)
 
 		Object.defineProperties(Vue.prototype, {
 			'$api': {

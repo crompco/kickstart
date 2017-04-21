@@ -21,6 +21,8 @@ const config = {
         KsRadio: ['./src/components/KsRadio.vue'],
         KsRadioGRoup: ['./src/components/KsRadioGroup.vue'],
         KsSelect: ['./src/components/KsSelect.vue'],
+        KsToast: ['./src/components/KsToast.vue'],
+        KsPaginator: ['./src/components/KsPaginator.vue'],
         // Helpers
         api: ['./src/helpers/api.js'],
         strings: ['./src/helpers/strings.js'],

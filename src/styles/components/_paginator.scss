@@ -1,0 +1,48 @@
+@import '../variables/paginator';
+
+.pagination {
+    > ul {
+        margin: 0;
+        padding: 0.25rem 0 0.65rem;
+        list-style: none;
+
+        li {
+
+            float: left;
+            a {
+                display: block;
+                border: solid 1px $paginator-link-color;
+                padding: 0.25rem 0.5rem;
+                text-decoration: none;
+                &:hover {
+                    background: lighten($paginator-link-color, 20%);
+                    color: $white;
+                }
+                &.current-page {
+                    background: $paginator-link-color;
+                    color: $white;
+                }
+            }
+            &:nth-child(n+3) a {
+                border-left: none;
+            }
+
+            & a.next-page, & a.prev-page {
+                border: solid 1px transparent;
+                &:hover {
+                    border-color: lighten($paginator-link-color, 20%);
+                }
+            }
+
+            // add left border back into the page link
+            &.dot-pages {
+                padding: 0.25rem 0.5rem;
+                vertical-align: middle;
+                + li a {
+                    border: solid 1px $paginator-link-color;
+                }
+            }
+
+        }
+    }
+}
