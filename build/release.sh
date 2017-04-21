@@ -30,6 +30,9 @@ if [[ $REPLY =~ [Yy]$ ]]; then
     # Push to remote
     git push origin refs/tags/v$VERSION
     git push
+
+    # Publish to npm
+    npm publish
 else
     echo "Version $VERSION was not released."
 fi
