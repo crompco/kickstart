@@ -31,7 +31,11 @@ export default {
 	interceptors: {
 		request(options, onRejected = false) {
 			return axios.interceptors.request.use(config => {
-					return options(config);
+					if ( typeof options === 'function' ) {
+                        return options(config);
+                    }
+
+                    return config;
 				}, error => {
 					if ( onRejected !== false ) {
 						return Promise.reject(onRejected(error));
