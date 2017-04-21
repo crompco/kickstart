@@ -4,7 +4,11 @@
 // Internal
 @import "../variables/_grid";
 
-@mixin breakpoint($grid) {
+@mixin breakpoint($grid, $max: false) {
+	@if $max {
+		$grid: map-merge($grid, (media: quote('(max-width:' + map-get($grid, media) + ')')));
+	}
+
 	@include grid-media($grid) {
 		@content;
 	}
@@ -16,8 +20,8 @@
 	}
 }
 
-@mixin tab() {
-	@include breakpoint($grid-tab) {
+@mixin tab($max: false) {
+	@include breakpoint($grid-tab, $max) {
 		@content;
 	}
 }

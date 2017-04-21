@@ -35,7 +35,8 @@ const config = {
                 options: {
                     loaders: {
                         svg: 'svg-inline-loader',
-                        scss: 'vue-style-loader!css-loader!sass-loader'
+                        scss: 'vue-style-loader!css-loader!sass-loader',
+                        js: 'babel-loader'
                     }
                 }
             },

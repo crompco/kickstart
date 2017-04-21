@@ -53,6 +53,7 @@
 				selection-key="name"
 				v-model="value4"
 				:paginated="true"
+				:show-tag-in-list="true"
 				@search="runSearch"
 			>
 				<template scope="props">

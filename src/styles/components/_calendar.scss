@@ -19,6 +19,17 @@ $calendar-grid: (
 		color: $calendar-header-color;
 		padding: rem($calendar-header-padding);
 		text-align: center;
+		a {
+			font-size: 1.2em;
+			color: white;
+			text-decoration: none;
+		}
+	}
+
+	.ks-calendar-view {
+		overflow-y: auto;
+		max-width: 100%;
+		overflow-x: hidden;
 	}
 
 	.ks-calendar-view.interactive {
@@ -38,6 +49,10 @@ $calendar-grid: (
 					height: 100%;
 					cursor: pointer;
 
+				}
+				&.selected {
+					@include state-default();
+					border: 0;
 				}
 			}
 		}
@@ -96,9 +111,33 @@ $calendar-grid: (
 		.cal-week-header {
 			font-weight: bold;
 			.cal-day {
+				text-align: center;
 				color: $calendar-week-header-color;
 				box-shadow: none;
-				padding: 0.5em;
+				padding: 0.25rem;
+			}
+		}
+	}
+
+
+	.year-selection {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		li {
+			width: 100%;
+			padding: 0.25rem 0.5rem;
+			font-size: 1.2rem;
+			text-align: center;
+			cursor: pointer;
+			&:hover {
+				color: $calendar-year-hover-color;
+				background: $calendar-year-hover-bg;
+			}
+			&.selected-year {
+				font-size: $calendar-year-selected-size;
+				color: $calendar-year-selected-color;
+				background: $calendar-year-selected-bg;
 			}
 		}
 	}

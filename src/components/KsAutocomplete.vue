@@ -1,12 +1,15 @@
 <template>
 	<div class="autocomplete-holder"
-		 :class="{ 'is-selected': has_selections, 'is-multiple': is_multiple }" @click.prevent="setFocus('lookup')">
+		 :class="{ 'is-selected': has_selections, 'is-multiple': is_multiple }"
+		 @click.prevent="setFocus('lookup')"
+	     tabindex="-1"
+	>
 
 		<!-- Selections  -->
 		<span class="selection" v-if="selectionKey && has_selections" @click.prevent="editSelection">
 			<span v-for="s in selection" class="selection-text">
 				{{getSelectionLabel(s)}}
-				<a href="#" @click.prevent="clearSelection(s)" class="clear-selection">
+				<a href="#" @click.prevent.stop="clearSelection(s)" class="clear-selection">
 					<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 						<g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 							<g id="close" fill="#000000">
@@ -27,7 +30,7 @@
 			v-model="lookup_name"
 			ref="lookup"
 			@keyup.esc="clear"
-			@keydown.backspace="backspace"
+			@keydown.8="backspace"
 			@keydown.tab="selectItem(selected_index, $event)"
 			@keydown.enter.prevent="selectItem(selected_index)"
 			@keydown.down.prevent="selectDown()"
@@ -43,7 +46,13 @@
 			    :style="'max-height:'+this.listHeight"
 			    ref="list"
 			>
-
+				<li
+					v-if="showTagInList && taggable && lookup_name"
+					:class="{ 'selected-item': -1 == selected_index }"
+                    @click="selectItem(-1, $event)"
+				>
+					Add "<em v-text="lookup_name"></em>"
+				</li>
 				<li
 					v-for="(item, index) in list"
 					:class="{ 'selected-item': index == selected_index }"
@@ -65,11 +74,6 @@
     import {object_get} from '../helpers/objects';
     import ListIndexNavigatior from './mixins/ListIndexNavigator';
 
-
-	// External
-	import Vue from 'vue';
-	Vue.config.keyCodes['backspace'] = 8;
-
 	export default {
 		name: 'KsAutocomplete',
 
@@ -77,12 +81,6 @@
 
 		props: {
 			value: {},
-			items: {
-				type: Array,
-				default() {
-					return null;
-				}
-			},
 			placeholder: {
 				default: 'Lookup ...'
 			},
@@ -110,6 +108,10 @@
 				default: 1
 			},
 			focus: {
+			    type: Boolean,
+				default: false
+			},
+            showTagInList: {
 			    type: Boolean,
 				default: false
 			}
@@ -300,6 +302,11 @@
 				}
 			},
 
+			items() {
+				// Clear the cache if the items are changed
+				this.clearCache();
+			},
+
 			list() {
 			    // Auto select when 1 element is available
 			    if ( this.taggable && this.list.length == 1 ) {
@@ -316,6 +323,13 @@
 			focused() {
 			    if ( this.focused && this.minSearch == 0 && this.lookup_name.length == 0 ) {
 			        this.startSearch();
+				}
+			},
+
+			show_list() {
+				// Reset the list when its closed
+				if ( !this.show_list ) {
+					this.resetList();
 				}
 			},
 

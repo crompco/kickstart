@@ -7,6 +7,7 @@ import PageKsSelect from './pages/PageKsSelect.vue';
 import StylesPage from './pages/StylesPage.vue';
 import PageKsCalendar from './pages/PageKsCalendar.vue';
 import PageKsDatepicker from './pages/PageKsDatepicker.vue';
+import PageKsToast from './pages/PageKsToast.vue';
 
 const routes = [
 	{
@@ -61,6 +62,12 @@ const routes = [
 		component: PageKsLoaders,
 		name: 'KsLoaders',
 		meta: { title: 'Kickstart Loaders' }
+	},
+	{
+		path: '/ks-toast',
+		component: PageKsToast,
+		name: 'KsToast',
+		meta: { title: 'Kickstart Toast' }
 	},
 	{
 		path: '/ks-styles',

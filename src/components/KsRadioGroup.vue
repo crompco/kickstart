@@ -65,7 +65,6 @@
 			optionsList() {
 				let optionsList = [];
 				for ( var i in this.options ) {
-					console.log(this.options[i]);
 					if ( this.hasObjects ) {
 						if ( this.valueKey.length ||  this.labelKey.length ) {
 							optionsList.push({
@@ -74,7 +73,6 @@
 							});
 						} else {
 							if ( !this.options[i].hasOwnProperty('value') || !this.options[i].hasOwnProperty('value') ) {
-								console.error('Invalid options: must contain value and label keys');
 								return [];
 							}
 							optionsList.push(this.options[i]);

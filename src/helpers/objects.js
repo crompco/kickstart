@@ -32,3 +32,9 @@ export function looseIndexOf(obj, val) {
 
 	return -1;
 }
+
+
+export default {
+	object_get,
+	looseIndexOf
+}

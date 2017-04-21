@@ -6,7 +6,26 @@ const base = require('./webpack.base.js');
 
 const config = {
     entry: {
-        KsAutocomplete: ['./src/components/KsAutocomplete.vue']
+        // Components
+        KsAutocomplete: ['./src/components/KsAutocomplete.vue'],
+        KsDatepicker: ['./src/components/KsDatepicker.vue'],
+        KsModal: ['./src/components/KsModal.vue'],
+        KsSideNav: ['./src/components/KsSideNav.vue'],
+        KsTopNav: ['./src/components/KsTopNav.vue'],
+        KsCalendar: ['./src/components/KsCalendar.vue'],
+        KsTabs: ['./src/components/KsTabs.vue'],
+        KsTab: ['./src/components/KsTab.vue'],
+        KsLoaderLine: ['./src/components/KsLoaderLine.vue'],
+        KsLoaderSpin: ['./src/components/KsLoaderSpin.vue'],
+        KsCheckbox: ['./src/components/KsCheckbox.vue'],
+        KsRadio: ['./src/components/KsRadio.vue'],
+        KsRadioGRoup: ['./src/components/KsRadioGroup.vue'],
+        KsSelect: ['./src/components/KsSelect.vue'],
+        // Helpers
+        api: ['./src/helpers/api.js'],
+        strings: ['./src/helpers/strings.js'],
+        objects: ['./src/helpers/objects.js'],
+        dates: ['./src/helpers/dates.js'],
     },
 
     output: {

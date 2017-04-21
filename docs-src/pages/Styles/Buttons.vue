@@ -4,7 +4,7 @@
 		<div class="row">
 			<div>Default</div>
 			<hr>
-			<div class="sm-2">
+			<div class="sm-12">
 				<button class="button">
 					I'm a default button
 				</button>
@@ -23,7 +23,7 @@
 		<div class="row">
 			<div>Outline</div>
 			<hr>
-			<div class="sm-2">
+			<div class="sm-12">
 				<button class="button outline disabled" disabled="disabled">
 					I'm a default button
 				</button>
@@ -42,7 +42,7 @@
 		<div class="row">
 			<div>None</div>
 			<hr>
-			<div class="sm-2">
+			<div class="sm-12">
 				<button class="button none disabled">
 					I'm a default button
 				</button>

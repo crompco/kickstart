@@ -1,29 +1,57 @@
 // External
 @import "~bourbon-neat/core/_neat";
-
 // Internal
 @import "../mixins/_grid";
 @import "../variables/_grid";
 
-@each $name, $map in $breakpoint-list  {
-	@include breakpoint($map) {
-		@for $i from 1 through map-get($map, columns) {
-			.#{$name}-#{$i} {
-				@include grid-column($i, $map);
-			}
+@each $name, $map in $breakpoint-list {
+    @include breakpoint($map) {
+        @for $i from 1 through map-get($map, columns) {
+            $columns: map-get($map, columns);
 
-			// TODO: get push to work
-			//.#{$name}-push-#{$i} {
-			//	@include grid-push($i, $map);
-			//}
-		}
-	}
+            @if $i / $columns == 0.5 {
+                .#{$name}-#{$i}, .#{$name}-half {
+                    @include grid-column($i, $map);
+                }
+            } @else if $i / $columns == 0.25 {
+                .#{$name}-#{$i}, .#{$name}-quarter {
+                    @include grid-column($i, $map);
+                }
+            } @else if $i / $columns == 1 {
+                .#{$name}-#{$i}, .#{$name}-full {
+                    @include grid-column($i, $map);
+                }
+            } @else {
+                .#{$name}-#{$i} {
+                    @include grid-column($i, $map);
+                }
+            }
+
+            // TODO: get push to work
+            //.#{$name}-push-#{$i} {
+            //	@include grid-push($i, $map);
+            //}
+        }
+    }
+}
+
+.container {
+    @include grid-container;
+    max-width: $container-width;
+    margin: auto;
+    &:before {
+        content: " ";
+        display: table;
+    }
+    &:after {
+        display: table;
+    }
 }
 
 .row {
-	@include grid-container;
+    @include grid-container;
 }
 
 .full-height {
-	height: 100%;
+    height: 100%;
 }

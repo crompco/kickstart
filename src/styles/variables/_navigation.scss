@@ -6,8 +6,15 @@ $nav-height: 60px !default;
 $nav-padding: 10px !default;
 
 //
+// Side Nav
+//
+$side-nav-breakpoint: tab !default;
+
+
+//
 // Top Bar
 //
+$top-bar-breakpoint: tab !default;
 $top-bar-bg: $white !default;
 $top-bar-hover-bg: $white !default;
 $top-bar-color: get($brand, primary) !default;
@@ -15,7 +22,7 @@ $top-bar-hover-color: get($brand, primary) !default;
 $top-bar-box-shadow: 0 2px 1px $med-gray !default;
 
 $top-bar-dd-bg: $top-bar-bg !default;
-$top-bar-dd-box-shadow: 0 1px 2px $med-gray !default;
+$top-bar-dd-box-shadow: 0 2px 2px $med-gray !default;
 $top-bar-dd-link-padding: 0.75rem !default;
 $top-bar-dd-hover-color: $white !default;
 $top-bar-dd-hover: get($brand, light) !default;
@@ -24,7 +31,15 @@ $top-bar-dd-hover: get($brand, light) !default;
 //
 // Nav Bar
 //
-$nav-bg: get($brand, primary) !default;
 $nav-brand-bg: get($brand, primary) !default;
-$nav-links-color: $white !default;
+$nav-brand-color: $white !default;
+$side-nav-bg: get($brand, primary) !default;
+$side-nav-links-color: $white !default;
 $nav-links-hover-color: get($brand, light) !default;
+$nav-links-active-bg: get($brand, secondary) !default;
+$nav-links-active-color: $white !default;
+
+$nav-vertical-padding-top: 0 !default;
+$nav-vertical-link-padding: 0.5rem 1rem !default;
+
+$nav-mobile-icon-padding: 0.25rem 0.75rem !default;

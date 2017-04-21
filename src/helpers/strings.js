@@ -43,8 +43,8 @@ export function posesses(str) {
  * @param str
  * @returns {string}
  */
-export function currency(str) {
-	return '$' + parseFloat(str).toFixed(2).replace(/./g, function(c, i, a) {
+export function currency(str, symbol = '$') {
+	return symbol + parseFloat(str).toFixed(2).replace(/./g, function(c, i, a) {
 			return i && c !== "." && ((a.length - i) % 3 === 0) ? ',' + c : c;
 		});
 }
@@ -57,5 +57,36 @@ export function currency(str) {
  * @return {string}
  */
 export function pad_left(str, pad_with, pad_length) {
-	return String(pad_with + String(str)).slice(pad_length*-1);
+	str = String(str);
+	let delta = pad_length - str.length;
+
+	if ( delta > 0 ) {
+		return String(pad_with).repeat(delta) + str;
+	}
+
+	return str;
+}
+
+/**
+ *
+ * @param str
+ * @param max_length
+ * @return {string}
+ */
+export function ellipsis(str, max_length = 20) {
+    if ( str.length > max_length ) {
+        return str.substr(0, max_length) + '...';
+    }
+
+    return str;
+}
+
+
+export default {
+	escapeRegExp,
+	ucwords,
+	posesses,
+	currency,
+	pad_left,
+    ellipsis
 }

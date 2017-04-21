@@ -6,6 +6,7 @@
 
 .ks-modal {
 	@include overlay-bg();
+	z-index: 100;
 
 	.ks-modal-mask {
 		width: 100%;
