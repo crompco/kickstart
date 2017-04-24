@@ -105,6 +105,7 @@
 	max-width: 100%;
 	border-spacing: 0;
 	background-color: $table-bg;
+	margin-bottom: rem($table-margin-bottom);
 
 	&.responsive {
 		@include responsive-table;

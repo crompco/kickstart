@@ -33,6 +33,10 @@
             //}
         }
     }
+
+    .#{$name}-collapse {
+        @include grid-collapse($map);
+    }
 }
 
 .container {
