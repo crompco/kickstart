@@ -2,4 +2,4 @@
 @import "_global";
 
 
-$paginator-link-color: get($brand, light) !default;
+$paginator-link-color: $state-default-bg !default;

@@ -44,7 +44,7 @@ $state-error-border: darken($state-error-bg, 5%) !default;
 
 
 // State Actions
-$state-default-bg: get($brand, light) !default;
+$state-default-bg: #237CB0 !default;
 $state-default-border: transparent !default;
 $state-default-color: $white !default;
 
