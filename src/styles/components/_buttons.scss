@@ -4,6 +4,7 @@
 @import "../functions/_utils";
 @import "../functions/_map";
 @import "../variables/_buttons";
+@import "../variables/_alerts";
 
 .button {
 	display: inline-block;
@@ -50,4 +51,11 @@
 			font-size: rem($size);
 		}
 	}
-}
+
+    @each $name, $map in $alerts {
+        &.#{$name} {
+            background: get($map, button-background-color);
+            color: get($map, button-color);
+        }
+    }
+ }
