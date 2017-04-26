@@ -25,6 +25,7 @@
 		<input
 			v-show="!has_selections || is_multiple"
 			type="text"
+			autocomplete="off"
 			name="lookup_name"
 			:placeholder="placeholder_txt"
 			v-model="lookup_name"

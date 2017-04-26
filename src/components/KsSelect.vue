@@ -20,6 +20,7 @@
 			<div class="ks-select-dropdown-input" v-show="show_search">
 				<input
 					type="text"
+					autocomplete="off"
 					ref="lookup"
 					v-model="lookup_name"
 				    :placeholder="placeholder"

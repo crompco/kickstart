@@ -126,7 +126,7 @@
 				background-color: $nav-links-hover-color;
 			}
 
-			&.router-link-active, &.active {
+			&.router-link-active, &.is-active {
 				background-color: $nav-links-active-bg;
 				color: $nav-links-active-color;
 			}

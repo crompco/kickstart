@@ -36,7 +36,7 @@ $nav-brand-color: $white !default;
 $side-nav-bg: get($brand, primary) !default;
 $side-nav-links-color: $white !default;
 $nav-links-hover-color: get($brand, light) !default;
-$nav-links-active-bg: get($brand, secondary) !default;
+$nav-links-active-bg: $state-default-bg !default;
 $nav-links-active-color: $white !default;
 
 $nav-vertical-padding-top: 0 !default;

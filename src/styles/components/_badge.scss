@@ -1,0 +1,23 @@
+@import "../functions/_utils";
+@import "../variables/_alerts";
+@import "../variables/_badge";
+
+.ks-badge {
+    background: $badge-bg;
+    color: $badge-color;
+    display: inline-block;
+    text-align: center;
+    line-height: 1;
+    font-size: rem($badge-font-size);
+    white-space: nowrap;
+    vertical-align: middle;
+    padding: rem($badge-padding);
+    border-radius: rem($badge-border-radius);
+
+    @each $name, $map in $alerts {
+        &.#{$name} {
+            background: get($map, background-color);
+            color: get($map, color);
+        }
+    }
+}
