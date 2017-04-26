@@ -10,6 +10,7 @@
 	padding: rem($button-padding);
 	cursor: pointer;
 	text-decoration: none;
+	border-radius: $button-border-radius;
 	@include transition(background-color);
 	@include state-default;
 	@if $button-box-shadow != false {
