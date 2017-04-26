@@ -9,6 +9,7 @@ import PageKsCalendar from './pages/PageKsCalendar.vue';
 import PageKsDatepicker from './pages/PageKsDatepicker.vue';
 import PageKsToast from './pages/PageKsToast.vue';
 import PageKsPaginator from './pages/PageKsPaginator.vue';
+import PageKsCard from './pages/PageKsCard.vue';
 
 const routes = [
     {
@@ -75,6 +76,12 @@ const routes = [
         component: PageKsPaginator,
         name: 'KsPaginator',
         meta: {title: 'Kickstart Paginator'}
+    },
+    {
+        path: '/ks-card',
+        component: PageKsCard,
+        name: 'KsCard',
+        meta: {title: 'Kickstart Card'}
     },
     {
         path: '/ks-styles',

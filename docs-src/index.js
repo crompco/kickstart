@@ -1,7 +1,7 @@
 // import 'helpers/modality';
 // eslint-disable-next-line no-unused-vars
 // import prism from 'prismjs';
-require('./app.scss');
+// require('./app.scss');
 
 import Vue from 'vue';
 import VueRouter from 'vue-router';

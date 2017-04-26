@@ -1,0 +1,49 @@
+@import "../functions/_utils";
+@import "../variables/_card";
+
+.ks-card {
+    box-shadow: $card-box-shadow;
+    background: $card-bg;
+
+    .card-header {
+        font-size: rem($card-header-font-size);
+        padding: rem($card-header-padding);
+        box-shadow: $card-header-box-shadow;
+    }
+
+    .card-body {
+        padding: rem($card-body-padding);
+    }
+
+    .card-footer {
+        display: flex;
+        justify-content: space-around;
+
+        button, a {
+            width: 100%;
+            border: solid $card-footer-border-color;
+            border-width: 1px 1px 0 0;
+            background: $card-footer-bg;
+            padding: rem($card-footer-padding);
+            cursor: pointer;
+            outline: none;
+            color: $card-footer-color;
+
+            &:last-child {
+                border-right: 0;
+            }
+            &.danger {
+                color: $card-footer-danger-color;
+            }
+
+            &:not(.danger):hover {
+                background: $card-footer-hover-bg;
+                color: $card-footer-hover-color;
+            }
+            &.danger:hover {
+                background: $card-footer-danger-hover-bg;
+                color: $card-footer-danger-hover-color;
+            }
+        }
+    }
+}
