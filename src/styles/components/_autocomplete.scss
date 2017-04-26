@@ -3,12 +3,14 @@
 @import "../mixins/_state";
 @import "../mixins/_autocomplete";
 @import "../variables/_autocomplete";
+@import "../variables/_forms";
 
 .autocomplete-holder {
 	position: relative;
 	display: inline-block;
 	margin-right: rem($ac-margin-right);
 	margin-left: rem($ac-margin-left);
+	margin-bottom: rem($form-block-margin-bottom);
 	@include form-input(false);
 	background: $ac-bg;
 	padding: 0;
@@ -17,6 +19,7 @@
 
 	&:not(.is-multiple) > input {
 		@include ks-autocomplete-input;
+		margin-bottom: 0;
 	}
 
 	&.is-multiple > input {

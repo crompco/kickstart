@@ -13,6 +13,7 @@
 	background: $select-bg;
 	padding: 0;
 	border: 0;
+	margin-bottom: rem($form-block-margin-bottom);
 
 	.ks-select-dropdown {
 		border: solid $select-dropdown-border-color;

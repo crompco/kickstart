@@ -6,11 +6,12 @@
 .form-group {
 	margin-bottom: rem($form-group-margin-bottom);
 
-	.title {
+	.label {
 		max-width: 100%;
 		margin-bottom: rem($form-title-margin-bottom);
 		display: block;
 		font-weight: $form-title-font-weight;
+		font-size: $form-font-size;
 
 		&.disabled {
 			opacity: $form-title-disabled-opacity;

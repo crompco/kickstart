@@ -18,7 +18,7 @@
 		<ks-checkbox :inline="true" label="JavaScript" name="checkbox1" value="2" v-model="values.checkbox1"></ks-checkbox>
 
 		<div class="form-group" style="margin-top:1em;">
-			<label class="title">Select all that your enjoy using</label>
+			<label class="label">Select all that your enjoy using</label>
 			<div class="checkbox">
 				<ks-checkbox label="PHP" name="checkbox1" value="1" v-model="values.checkbox1a"></ks-checkbox>
 				<ks-checkbox label="JavaScript" name="checkbox1" value="2" v-model="values.checkbox1a"></ks-checkbox>
@@ -46,6 +46,54 @@
 		>
 			Each option is an object
 		</ks-radio-group>
+
+		<h3>Example Form</h3>
+		<form>
+			<div class="row">
+				<div class="tab-full">
+					<div class="form-group">
+						<div class="label">Username</div>
+						<input type="text">
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="tab-full">
+					<div class="form-group">
+						<div class="label">Autocomplete</div>
+						<ks-autocomplete></ks-autocomplete>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="tab-half">
+					<div class="form-group">
+						<div class="label">First Name</div>
+						<input type="text">
+					</div>
+				</div>
+				<div class="tab-half">
+					<div class="form-group">
+						<div class="label">Last Name</div>
+						<input type="text">
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="tab-half">
+					<div class="form-group">
+						<div class="label">Password</div>
+						<input type="password">
+					</div>
+				</div>
+				<div class="tab-half">
+					<div class="form-group">
+						<div class="label">Password Confirmation</div>
+						<input type="password">
+					</div>
+				</div>
+			</div>
+		</form>
 	</div>
 </template>
 
@@ -55,6 +103,7 @@
 	import KsRadioGroup from '../../src/components/KsRadioGroup.vue';
 	import KsCheckbox from '../../src/components/KsCheckbox.vue';
 	import api from '../../src/helpers/api';
+	import KsAutocomplete from '../../src/components/KsAutocomplete.vue';
 
 	export default {
 		name: 'PageKsFormElements',
@@ -103,7 +152,8 @@
 		components: {
 			KsRadio,
 			KsRadioGroup,
-			KsCheckbox
+			KsCheckbox,
+            KsAutocomplete
 		}
 	}
 </script>
