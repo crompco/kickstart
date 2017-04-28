@@ -1,0 +1,57 @@
+@import "../functions/_utils";
+@import "../variables/_action-menu";
+
+.ks-action-menu {
+    display: inline-block;
+
+    .menu-button {
+        border: $am-button-border;
+        background: $am-button-bg;
+        padding: rem($am-button-padding);
+        outline: none;
+        cursor: pointer;
+
+        svg {
+            vertical-align: middle;
+        }
+    }
+
+    .menu-list {
+        background: $am-list-bg;
+        min-width: $am-list-min-width;
+        display: none;
+
+        &.active {
+            display: block;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .list-item, a {
+            text-decoration: none;
+            padding: rem($am-list-link-padding);
+            display: block;
+            color: $am-list-link-color;
+
+            &.separator {
+                border-top: 1px solid $am-list-separator;
+            }
+
+            &:hover {
+                background: $am-list-link-hover-bg;
+                color: $am-list-link-hover-color;
+            }
+        }
+
+        &.tether-target-attached-top {
+            box-shadow: $am-box-shadow-top;
+        }
+        &.tether-target-attached-bottom {
+            box-shadow: $am-box-shadow-bottom;
+        }
+    }
+}

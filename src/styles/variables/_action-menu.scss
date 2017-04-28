@@ -1,0 +1,25 @@
+@import "_global";
+
+//
+// Button
+//
+$am-button-bg: transparent !default;
+$am-button-border: 1px solid transparent !default;
+$am-button-padding: 3px 5px !default;
+
+//
+// List
+//
+$am-list-bg: $white !default;
+$am-list-min-width: 100px !default;
+$am-list-link-color: $state-default-bg !default;
+$am-list-link-padding: 0.35rem 0.75rem 0.35rem 0.5rem !default;
+$am-list-link-hover-bg: $state-default-bg !default;
+$am-list-link-hover-color: $white !default;
+$am-list-separator: #ddd !default;
+
+//
+// Box Shadow
+//
+$am-box-shadow-top: 0 -1px 4px rgba($black, 0.3) !default;
+$am-box-shadow-bottom: 0 2px 4px rgba($black, 0.3) !default;
