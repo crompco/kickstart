@@ -37,8 +37,8 @@
 
         mounted() {
             this.tether = new Tether({
-                element: this.$el.querySelector('.ks-action-menu .menu-list'),
-                target: this.$el.querySelector('.ks-action-menu .menu-button'),
+                element: this.$el.querySelector('.menu-list'),
+                target: this.$el.querySelector('.menu-button'),
                 attachment: 'top left',
                 targetAttachment: 'bottom left',
                 enabled: false,
@@ -73,6 +73,7 @@
 
                         this.listening = true;
                         this.tether.enable();
+                        this.$nextTick(() => this.tether.position());
                     } else {
                         this.listening = false;
                         this.tether.disable();
