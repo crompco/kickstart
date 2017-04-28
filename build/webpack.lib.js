@@ -23,6 +23,7 @@ const config = {
         KsSelect: ['./src/components/KsSelect.vue'],
         KsToast: ['./src/components/KsToast.vue'],
         KsPaginator: ['./src/components/KsPaginator.vue'],
+        KsActionMenu: ['./src/components/KsActionMenu.vue'],
         // Helpers
         api: ['./src/helpers/api.js'],
         strings: ['./src/helpers/strings.js'],
