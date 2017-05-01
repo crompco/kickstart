@@ -1,31 +1,42 @@
 <template>
-	<div>
+	<div class="sm-full">
 		<h2>Select</h2>
-		<p>with autocomplete and pagination</p>
-		<ks-select
-			name="code"
-			label-key="name"
-			v-model="country"
-			:paginated="true"
-		    @search="runSearch"
-		>
-			<template scope="props">
-				{{props.item.name}}
-			</template>
-		</ks-select>
+        <div class="basic-block">
 
-		<h2>Select</h2>
-		<ks-select
-			name="code"
-			:items="countries"
-			label-key="name"
-		    v-model="country_code2"
-		>
-			<template scope="props">
-				{{props.item.name}}
-			</template>
-		</ks-select>
-	</div>
+            <p>Autocomplete and pagination</p>
+            <div class="form-group">
+                <div class="label">
+                    Country
+                </div>
+                <ks-select
+                    name="code"
+                    label-key="name"
+                    v-model="country"
+                    :paginated="true"
+                    @search="runSearch"
+                >
+                    <template scope="props">
+                        {{props.item.name}}
+                    </template>
+                </ks-select>
+            </div>
+            <p>Plan select</p>
+            <div class="form-group">
+                <div class="label">Country</div>
+                <ks-select
+                    name="code"
+                    :items="countries"
+                    label-key="name"
+                    v-model="country_code2"
+                >
+                    <template scope="props">
+                        {{props.item.name}}
+                    </template>
+                </ks-select>
+            </div>
+        </div>
+
+    </div>
 </template>
 
 

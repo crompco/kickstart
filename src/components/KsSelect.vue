@@ -5,6 +5,8 @@
 		tabindex="0"
 		@keydown.space.prevent.stop="open"
 		@keydown.enter.prevent.stop="open"
+        @keydown.down.prevent.stop="open"
+        @keydown.up.prevent.stop="open"
 	>
 		<input type="hidden" :name="name" :value="value">
 		<div class="ks-select-selection" @click.prevent="toggleOpen">
@@ -34,16 +36,17 @@
 				>
 			</div>
 
+            <!-- Loading indicator -->
+            <div style="position: relative; height: 5px;margin-top: -5px;">
+                <loader-line :show="loading" :absolute="true"></loader-line>
+            </div>
+
 			<!-- Autocomplete list-->
 			<ul
 				ref="list"
 				class="autocomplete-list"
 				:style="'max-height:'+this.listHeight"
 			>
-				<li style="padding: 0; margin: 0;border:0;" v-if="!list.length">
-					<loader-line :show="loading" ></loader-line>
-				</li>
-
 				<li
 					v-for="(item, index) in list"
 					:class="{ 'selected-item': index == selected_index }"

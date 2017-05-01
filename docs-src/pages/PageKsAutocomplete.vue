@@ -3,66 +3,70 @@
 		<h2>
 			AutoComplete
 		</h2>
-		<div class="basic-block">
-			<h3>Ajax with pagination</h3>
-			<ks-autocomplete
-				selection-key="name"
-				v-model="value1"
-				@search="runSearch"
-			    :paginated="true"
-			>
-				<template scope="props">
-					{{props.item.name}}
-				</template>
-			</ks-autocomplete>
-		</div>
+        <div class="basic-block">
 
-		<div class="basic-block">
-			<h3>Passed items</h3>
-			<ks-autocomplete
-				:items="countries"
-				selection-key="name"
-				v-model="value2"
-			>
-				<template scope="props">
-					{{props.item.name}}
-				</template>
-			</ks-autocomplete>
-		</div>
+            <div class="form-group">
+                <div class="label">Ajax with pagination</div>
+                <ks-autocomplete
+                    selection-key="name"
+                    v-model="value1"
+                    @search="runSearch"
+                    :paginated="true"
+                >
+                    <template scope="props">
+                        {{props.item.name}}
+                    </template>
+                </ks-autocomplete>
+            </div>
 
-		<div class="basic-block">
-			<h3>Multiple Selections with custom template</h3>
-			<ks-autocomplete
-				:items="countries"
-				selection-key="name"
-				:multiple="true"
-				v-model="value3"
-				@search="runSearch"
-			>
-				<template scope="props">
-					<strong>{{props.item.name}}</strong> <em>{{props.item.code}}</em>
-				</template>
-			</ks-autocomplete>
-		</div>
+            <div class="form-group">
+                <div class="label">Passed items</div>
+                <ks-autocomplete
+                    :items="countries"
+                    selection-key="name"
+                    v-model="value2"
+                >
+                    <template scope="props">
+                        {{props.item.name}}
+                    </template>
+                </ks-autocomplete>
+            </div>
 
-		<div class="basic-block">
-			<h3>Multiple Selections with taggable (add new, minSearch of 0)</h3>
-			<ks-autocomplete
-				:min-search="0"
-				:taggable="true"
-				selection-key="name"
-				v-model="value4"
-				:paginated="true"
-				:show-tag-in-list="true"
-				@search="runSearch"
-			>
-				<template scope="props">
-					<strong>{{props.item.name}}</strong> <em>{{props.item.code}}</em>
-				</template>
-			</ks-autocomplete>
-		</div>
+            <div class="form-group">
+                <div class="label">Multiple Selections with custom template</div>
+                <ks-autocomplete
+                    :items="countries"
+                    selection-key="name"
+                    :multiple="true"
+                    v-model="value3"
+                    @search="runSearch"
+                >
+                    <template scope="props">
+                        <strong>{{props.item.name}}</strong> <em>{{props.item.code}}</em>
+                    </template>
+                </ks-autocomplete>
+            </div>
 
-		<!--<div class="callout">-->
+            <div class="form-group">
+                <div class="label">Multiple Selections with taggable (add new, minSearch of 0)</div>
+                <ks-autocomplete
+                    :min-search="0"
+                    :taggable="true"
+                    selection-key="name"
+                    v-model="value4"
+                    :paginated="true"
+                    :show-tag-in-list="true"
+                    @search="runSearch"
+                >
+                    <template scope="props">
+                        <strong>{{props.item.name}}</strong> <em>{{props.item.code}}</em>
+                    </template>
+                </ks-autocomplete>
+            </div>
+        </div>
+
+
+        <!--<div class="callout">-->
 			<ks-tabs>
 				<ks-tab title="Props">
 					<p>
