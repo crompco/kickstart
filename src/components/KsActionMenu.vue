@@ -36,31 +36,36 @@
         },
 
         mounted() {
-            this.tether = new Tether({
-                element: this.$refs.menuList,
-                target: this.$refs.menu,
-                attachment: 'top left',
-                targetAttachment: 'bottom left',
-                enabled: false,
-                offset: '0 0',
-                targetOffset: '0 0',
-                constraints: [
-                    {
-                        to: 'window',
-                        attachment: 'none together'
-                    }
-                ]
-            });
+            this.$nextTick(() => {
 
-            if ( !window.actionEvent ) {
-                window.actionEvent = new Event('close:actionmenu');
-            }
+                this.tether = new Tether({
+                    element: this.$refs.menuList,
+                    target: this.$refs.menu,
+                    attachment: 'top left',
+                    targetAttachment: 'bottom left',
+                    enabled: false,
+                    offset: '0 0',
+                    targetOffset: '0 0',
+                    constraints: [
+                        {
+                            to: 'window',
+                            attachment: 'none together'
+                        }
+                    ]
+                });
 
-            document.addEventListener('close:actionmenu', () => {
-                if ( this.listening ) {
-                    this.close();
+                if ( !window.actionEvent ) {
+                    window.actionEvent = new Event('close:actionmenu');
                 }
-            });
+
+                document.addEventListener('close:actionmenu', () => {
+                    if ( this.listening ) {
+                        this.close();
+                    }
+                });
+                
+            })
+
         },
 
         methods: {
