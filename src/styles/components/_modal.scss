@@ -86,4 +86,10 @@
 			padding: 0;
 		}
 	}
+
+	&.warning {
+		.ks-modal-header {
+			background-color: $state-error;
+		}
+	}
 }

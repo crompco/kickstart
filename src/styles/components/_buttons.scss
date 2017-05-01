@@ -56,6 +56,10 @@
         &.#{$name} {
             background: get($map, button-background-color);
             color: get($map, button-color);
+
+            &:hover {
+                background: darken(get($map, button-background-color), 8%);
+            }
         }
     }
  }

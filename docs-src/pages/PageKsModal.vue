@@ -17,12 +17,12 @@
 				Modal with buttons
 			</button>
 
-			<ks-modal title="Modal with buttons" ref="modal2">
+			<ks-modal title="Modal with buttons" ref="modal2"  class="warning">
 				<p>
 					This is a simple modal with just a title and content
 				</p>
 				<div slot="footer">
-					<button class="button">Yes</button>
+					<button class="button error">Yes</button>
 					<button class="button" @click.prevent="closeModal('modal2')">Cancel</button>
 				</div>
 			</ks-modal>
