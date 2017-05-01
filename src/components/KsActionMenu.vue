@@ -1,9 +1,9 @@
 <template>
     <div class="ks-action-menu">
-        <button class="menu-button" @click.prevent="toggle()">
+        <button class="menu-button" @click.prevent="toggle()" ref="menu">
             <slot name="menu"><menu-svg></menu-svg></slot>
         </button>
-        <div class="menu-list" :class="{'active': active}" @click="close()">
+        <div class="menu-list" ref="menuList" :class="{'active': active}" @click="close()">
             <slot></slot>
         </div>
     </div>
@@ -37,8 +37,8 @@
 
         mounted() {
             this.tether = new Tether({
-                element: this.$el.querySelector('.menu-list'),
-                target: this.$el.querySelector('.menu-button'),
+                element: this.$refs.menuList,
+                target: this.$refs.menu,
                 attachment: 'top left',
                 targetAttachment: 'bottom left',
                 enabled: false,
