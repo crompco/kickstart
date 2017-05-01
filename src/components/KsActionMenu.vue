@@ -36,20 +36,22 @@
         },
 
         mounted() {
-            this.tether = new Tether({
-                element: this.$el.querySelector('.menu-list'),
-                target: this.$el.querySelector('.menu-button'),
-                attachment: 'top left',
-                targetAttachment: 'bottom left',
-                enabled: false,
-                offset: '0 0',
-                targetOffset: '0 0',
-                constraints: [
-                    {
-                        to: 'window',
-                        attachment: 'none together'
-                    }
-                ]
+            this.$nextTick(() => {
+                this.tether = new Tether({
+                    element: this.$el.querySelector('.menu-list'),
+                    target: this.$el.querySelector('.menu-button'),
+                    attachment: 'top left',
+                    targetAttachment: 'bottom left',
+                    enabled: false,
+                    offset: '0 0',
+                    targetOffset: '0 0',
+                    constraints: [
+                        {
+                            to: 'window',
+                            attachment: 'none together'
+                        }
+                    ]
+                });
             });
 
             if ( !window.actionEvent ) {
