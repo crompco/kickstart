@@ -11,8 +11,8 @@
                     Let's break it down!
                 </div>
                 <div class="card-footer">
-                    <button>Edit</button>
-                    <button class="danger">Delete</button>
+                    <a>Edit</a>
+                    <a class="danger">Delete</a>
                 </div>
             </div>
         </div>

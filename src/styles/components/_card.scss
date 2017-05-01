@@ -28,6 +28,8 @@
             cursor: pointer;
             outline: none;
             color: $card-footer-color;
+            text-decoration: none;
+            text-align: center;
 
             &:last-child {
                 border-right: 0;
