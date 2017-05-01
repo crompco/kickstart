@@ -1,5 +1,5 @@
 <template>
-	<div class="ks-modal" v-show="isOpen">
+	<div class="ks-modal" v-show="isOpen" :class="{ 'danger': danger }">
 		<div class="ks-modal-mask" @click.prevent="close">
 			<div class="ks-modal-wrapper"
 			     :style="modalStyle"
@@ -62,7 +62,11 @@
 			closeOnEscape: {
 				type: Boolean,
 				default: true
-			}
+			},
+            danger: {
+                type: Boolean,
+                default: false
+            },
 		},
 
 		data() {

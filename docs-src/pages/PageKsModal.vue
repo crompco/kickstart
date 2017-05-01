@@ -17,7 +17,7 @@
 				Modal with buttons
 			</button>
 
-			<ks-modal title="Modal with buttons" ref="modal2"  class="warning">
+			<ks-modal title="Modal with buttons" ref="modal2" >
 				<p>
 					This is a simple modal with just a title and content
 				</p>
@@ -27,8 +27,24 @@
 				</div>
 			</ks-modal>
 
+            <button
+                class="button danger"
+                @click.prevent="openModal('modal_danger')"
+            >
+                Danger Modal
+            </button>
 
-			<button class="button" @click.prevent="openModal('modal3')">
+            <ks-modal title="Modal Danger" ref="modal_danger" :danger="true">
+                <p>
+                    Be careful with this action!
+                </p>
+                <div slot="footer">
+                    <button class="button danger">Yes, Delete</button>
+                    <button class="button" @click.prevent="closeModal('modal_danger')">Cancel</button>
+                </div>
+            </ks-modal>
+
+            <button class="button" @click.prevent="openModal('modal3')">
 				Modal without header
 			</button>
 
@@ -175,6 +191,12 @@
 								<td><pre>true</pre></td>
 								<td>Whether to close the modal when the user presses the 'escape' key</td>
 							</tr>
+                            <tr>
+                                <td>danger</td>
+                                <td>Boolean</td>
+                                <td><pre>false</pre></td>
+                                <td>Whether to add the danger styling to the modal</td>
+                            </tr>
 						</tbody>
 					</table>
 				</ks-tab>

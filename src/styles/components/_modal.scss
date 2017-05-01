@@ -64,6 +64,10 @@
 		}
 	}
 
+    &.danger .ks-modal-header {
+        background-color: $modal-header-danger-bg;
+        color: $modal-header-danger-color;
+    }
 	.ks-modal-body, .ks-modal-footer {
 		padding: rem($modal-body-padding);
 	}
