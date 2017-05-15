@@ -11,7 +11,7 @@
 					</div>
 					<ul class="dropdown right">
 						<li><a href="#">admin</a></li>
-						<li class="dropper">
+						<li>
 							<a href="#" class="dropdown-toggle">jimbo.jones@email.com</a>
 							<ul class="sub-dropdown">
 								<li><a href="#">Profile</a></li>
