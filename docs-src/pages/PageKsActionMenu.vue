@@ -3,7 +3,7 @@
         <h2>Action Menu</h2>
 
         <div class="row">
-            <div class="sm-half">
+            <div class="sm-8">
                 <ks-action-menu>
                     <a href="#" @click.prevent="action('New')" class="list-item">New</a>
                     <a href="#" @click.prevent="action('Add')" class="list-item">Add</a>
@@ -11,7 +11,7 @@
                     <a href="#" @click.prevent="action('Delete')" class="list-item separator">Delete</a>
                 </ks-action-menu>
             </div>
-            <div class="sm-half">
+            <div class="sm-4 t-right">
                 <ks-action-menu>
                     <div slot="menu">Menu</div>
                     <a href="#" @click.prevent="action('New')" class="list-item">New</a>

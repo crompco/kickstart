@@ -12,7 +12,7 @@
 <script>
     // External Dependencies
     import MenuSvg from '../svg/menu.svg';
-    import Tether from 'tether';
+    import Popper from 'popper.js';
 
     // Internal Dependencies
     import {addEvent} from '../helpers/events';
@@ -37,21 +37,18 @@
 
         mounted() {
             this.$nextTick(() => {
-
-                this.tether = new Tether({
-                    element: this.$refs.menuList,
-                    target: this.$refs.menu,
-                    attachment: 'top left',
-                    targetAttachment: 'bottom left',
-                    enabled: false,
-                    offset: '0 0',
-                    targetOffset: '0 0',
-                    constraints: [
-                        {
-                            to: 'window',
-                            attachment: 'none together'
+                this.tether = new Popper(this.$el, this.$refs.menuList, {
+                    placement: 'bottom-start',
+                    removeOnDestroy: true,
+                    modifiers: {
+                        flip: {
+                            behavior: ['bottom-end'],
+                        },
+                        preventOverflow: {
+                            boundariesElement: this.$el.parentNode,
+                            priority: ['right', 'top']
                         }
-                    ]
+                    }
                 });
 
                 if ( !window.actionEvent ) {
@@ -63,7 +60,7 @@
                         this.close();
                     }
                 });
-                
+
             })
 
         },
@@ -76,12 +73,10 @@
                     if ( this.active ) {
                         document.dispatchEvent(window.actionEvent);
 
+                        this.tether.update();
                         this.listening = true;
-                        this.tether.enable();
-                        this.$nextTick(() => this.tether.position());
                     } else {
                         this.listening = false;
-                        this.tether.disable();
                     }
                 });
             },
@@ -89,8 +84,6 @@
             close() {
                 this.active = false;
                 this.listening = false;
-
-                this.tether.disable();
             }
         },
 
