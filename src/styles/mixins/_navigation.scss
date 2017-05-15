@@ -47,7 +47,7 @@
 			flex-direction: column;
 		}
 
-		a {
+		a, button {
 			padding: rem($top-bar-dd-link-padding);
 			line-height: ($nav-height / 2);
 
@@ -279,9 +279,13 @@
 			ul.sub-dropdown {
 				list-style-type: none;
 				display: none;
+
+				form {
+					width: 100%;
+				}
 			}
 
-			a {
+			a, button {
 				display: flex;
 				align-items: center;
 				height: 100%;
@@ -289,6 +293,9 @@
 				text-decoration: none;
 				color: $top-bar-color;
 				padding: 10px;
+				border: 0;
+				background: $top-bar-dd-bg;
+				cursor: pointer;
 
 				&:hover {
 					background-color: $top-bar-hover-bg;
