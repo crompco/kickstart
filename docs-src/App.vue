@@ -10,7 +10,8 @@
 						<button class="button none">Search</button>
 					</div>
 					<ul class="dropdown right">
-						<li>
+						<li><a href="#">admin</a></li>
+						<li class="dropper">
 							<a href="#" class="dropdown-toggle">jimbo.jones@email.com</a>
 							<ul class="sub-dropdown">
 								<li><a href="#">Profile</a></li>
