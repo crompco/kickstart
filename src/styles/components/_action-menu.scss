@@ -10,6 +10,8 @@
         padding: rem($am-button-padding);
         outline: none;
         cursor: pointer;
+        position: relative;
+        z-index: 2;
 
         svg {
             vertical-align: middle;
@@ -20,6 +22,7 @@
         background: $am-list-bg;
         min-width: $am-list-min-width;
         display: none;
+        z-index: 3;
 
         &.active {
             display: block;

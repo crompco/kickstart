@@ -42,7 +42,7 @@
                     removeOnDestroy: true,
                     modifiers: {
                         flip: {
-                            behavior: ['bottom-end'],
+                            behavior: ['bottom-end']
                         },
                         preventOverflow: {
                             boundariesElement: this.$el.parentNode,
