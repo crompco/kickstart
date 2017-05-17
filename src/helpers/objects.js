@@ -20,6 +20,22 @@ export function object_get(obj, expression, default_val = '') {
 /**
  *
  * @param obj
+ * @param only
+ * @return {{}}
+ */
+export function object_only(obj, only) {
+    let o = {};
+
+    for ( var i in only ) {
+        o[only[i]] = typeof obj[only[i]] !== 'undefined' ? obj[only[i]] : null;
+    }
+
+    return o;
+}
+
+/**
+ *
+ * @param obj
  * @param val
  * @return {Number}
  */
@@ -36,5 +52,6 @@ export function looseIndexOf(obj, val) {
 
 export default {
 	object_get,
+    object_only,
 	looseIndexOf
 }
