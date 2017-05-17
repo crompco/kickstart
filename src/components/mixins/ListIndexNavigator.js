@@ -47,6 +47,10 @@ export default {
             type: Boolean,
             default: false,
         },
+        selectionKey: {
+            type: String,
+            default: null
+        },
 	},
 
 	data() {

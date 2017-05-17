@@ -22,7 +22,7 @@
 					This is a simple modal with just a title and content
 				</p>
 				<div slot="footer">
-					<button class="button error">Yes</button>
+					<button class="button">Yes</button>
 					<button class="button" @click.prevent="closeModal('modal2')">Cancel</button>
 				</div>
 			</ks-modal>
@@ -146,6 +146,30 @@
 				</div>
 			</ks-modal>
 
+			<button class="button" @click.prevent="openModal('modal5')">
+				Modal with Select
+			</button>
+
+			<ks-modal title="Modal with buttons" ref="modal5" >
+				<p>
+					This is a simple modal with a select
+				</p>
+
+				<ks-select
+					name="code"
+					:items="countries"
+					label-key="name"
+					v-model="country_code"
+					list-height="150px"
+				>
+					<template scope="props">{{props.item.name}}</template>
+				</ks-select>
+				<div slot="footer">
+					<button class="button error">Yes</button>
+					<button class="button" @click.prevent="closeModal('modal5')">Cancel</button>
+				</div>
+			</ks-modal>
+
 		</div>
 
 		<div>
@@ -258,6 +282,8 @@
 	import KsModal from '../../src/components/KsModal.vue';
 	import KsTabs from '../../src/components/KsTabs.vue';
 	import KsTab from '../../src/components/KsTab.vue';
+	import KsSelect from '../../src/components/KsSelect.vue';
+	import api from '../../src/helpers/api';
 
 	export default {
 		name: 'PageKsModal',
@@ -265,13 +291,18 @@
 		props: {},
 
 		data() {
-			return {};
+			return {
+			    countries: [],
+				country_code: ''
+			};
 		},
 
 		computed: {},
 
 		mounted() {
-
+            api.get('/countries.json').then((data) => {
+                this.countries = data;
+            });
 		},
 
 		methods: {
@@ -288,7 +319,8 @@
 		components: {
 			KsModal,
 			KsTabs,
-			KsTab
+			KsTab,
+			KsSelect
 		}
 	}
 </script>

@@ -18,14 +18,20 @@
 		position: absolute;
 		margin: 0 auto;
 		left: 50%;
-		top: 50%;
-		transform: translate(-50%, -50%);
+		top: 25%;
+		transform: translate(-50%, -25%);
 		overflow-y: initial !important;
 		background-color: $modal-wrapper-bg;
 		@if $modal-wrapper-box-shadow != false {
 			box-shadow: $modal-wrapper-box-shadow;
 		}
 		outline: none;
+	}
+
+	&.modal-scroll .ks-modal-wrapper {
+		top: 0;
+		transform: translate(-50%, 0);
+		margin: 1rem auto;
 	}
 
 	.ks-modal-header {
@@ -73,8 +79,7 @@
 	}
 
 	.ks-modal-body {
-		max-height: calc(100vh - #{$modal-margin-top});
-		overflow-y: auto;
+		overflow-y: visible;
 	}
 
 	.ks-modal-footer {
@@ -95,5 +100,14 @@
 		.ks-modal-header {
 			background-color: $state-error;
 		}
+	}
+}
+
+.modal-open {
+	overflow: hidden !important;
+
+	.ks-modal {
+		overflow-x: hidden;
+		overflow-y: auto;
 	}
 }

@@ -89,10 +89,6 @@
 				type: Number,
 				default: 100
 			},
-			selectionKey: {
-				type: String,
-				default: null
-			},
 			itemFilter: {
 				type: [String, Function],
 				default: null

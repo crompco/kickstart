@@ -16,9 +16,14 @@
 
 	.ks-select-dropdown {
         border: 0;
+		position: absolute;
+		width: 100%;
+		background: $select-bg;
 
 		.ks-select-dropdown-input {
 			padding: rem($select-input-padding);
+			box-shadow: 0px -1px 0 0px #fff, 0 0 0 1px #aaa;
+			background: $select-bg;
 
 			> input:not(.is-multiple) {
 				@include ks-autocomplete-input;
