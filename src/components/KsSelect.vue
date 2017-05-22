@@ -5,8 +5,7 @@
 		tabindex="0"
 		@keydown.space.prevent.stop="open"
 		@keydown.enter.prevent.stop="enterOpen"
-        @keydown.down.prevent.stop="open"
-        @keydown.up.prevent.stop="open"
+        @keydown.tab="tabOpen"
         @keydown.down.prevent="openSelectDown"
         @keydown.up.prevent="openSelectUp"
     >
@@ -30,10 +29,7 @@
 				    :placeholder="placeholder"
 					@keyup.esc="clear"
 					@keydown.backspace="backspace"
-					@keydown.tab="selectItem(selected_index, $event)"
-					@keydown.enter.prevent.stop="selectItem(selected_index, $event)"
-					@keydown.down.prevent="selectDown()"
-					@keydown.up.prevent="selectUp()"
+
 					:class="{ 'is-multiple': multiple }"
 				>
 			</div>
@@ -185,13 +181,20 @@
 			toggleOpen() {
 				this.isOpen = !this.isOpen;
 			},
-            enterOpen() {
+            enterOpen(e) {
 			    if ( !this.isOpen ) {
 			        this.isOpen = true;
 			        return;
                 }
 
-                this.selectItem(this.selected_index);
+                this.selectItem(this.selected_index, e);
+            },
+            tabOpen(e) {
+			    if ( this.isOpen ) {
+                    this.selectItem(this.selected_index, e);
+                }
+                
+                return true;
             },
             openSelectDown() {
 			    this.open();
