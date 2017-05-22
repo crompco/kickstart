@@ -1,59 +1,66 @@
 <template>
-	<div>
-		<h2>Form Elements</h2>
+	<div class="sm-full">
+        <h2>Form Elements</h2>
+        <div class="basic-block">
+            <h3>Radio</h3>
+            <div class="form-group">
+                <div class="label">Which do you prefer</div>
+                <ks-radio :inline="true" label="PHP" name="radio1" value="1" v-model="values.radio1"></ks-radio>
+                <ks-radio :inline="true" label="JavaScript" name="radio1" value="2" v-model="values.radio1"></ks-radio>
+            </div>
 
-		<h3>Radio</h3>
-		<h3>Which do you prefer</h3>
-		<ks-radio :inline="true" label="PHP" name="radio1" value="1" v-model="values.radio1"></ks-radio>
-		<ks-radio :inline="true" label="JavaScript" name="radio1" value="2" v-model="values.radio1"></ks-radio>
+            <div class="form-group">
+                <label class="label">Which do you prefer</label>
+                <ks-radio :inline="true" label="PHP" name="radio1" value="1" v-model="values.radio1a"></ks-radio>
+                <ks-radio :inline="true" label="JavaScript" name="radio1" value="2" v-model="values.radio1a"></ks-radio>
+            </div>
 
-		<div class="form-group">
-			<label class="title">Which do you prefer</label>
-			<ks-radio :inline="true" label="PHP" name="radio1" value="1" v-model="values.radio1a"></ks-radio>
-			<ks-radio :inline="true" label="JavaScript" name="radio1" value="2" v-model="values.radio1a"></ks-radio>
-		</div>
+            <div class="form-group">
+                <div class="label">Select all that your enjoy using (inline)</div>
+                <ks-checkbox :inline="true" label="PHP" name="checkbox1" value="1" v-model="values.checkbox1"></ks-checkbox>
+                <ks-checkbox :inline="true" label="JavaScript" name="checkbox1" value="2" v-model="values.checkbox1"></ks-checkbox>
+            </div>
 
-		<h3>Select all that your enjoy using (inline)</h3>
-		<ks-checkbox :inline="true" label="PHP" name="checkbox1" value="1" v-model="values.checkbox1"></ks-checkbox>
-		<ks-checkbox :inline="true" label="JavaScript" name="checkbox1" value="2" v-model="values.checkbox1"></ks-checkbox>
+            <div class="form-group" style="margin-top:1em;">
+                <label class="label">Select all that your enjoy using</label>
+                <div class="checkbox">
+                    <ks-checkbox label="PHP" name="checkbox1" value="1" v-model="values.checkbox1a"></ks-checkbox>
+                    <ks-checkbox label="JavaScript" name="checkbox1" value="2" v-model="values.checkbox1a"></ks-checkbox>
+                </div>
+            </div>
 
-		<div class="form-group" style="margin-top:1em;">
-			<label class="label">Select all that your enjoy using</label>
-			<div class="checkbox">
-				<ks-checkbox label="PHP" name="checkbox1" value="1" v-model="values.checkbox1a"></ks-checkbox>
-				<ks-checkbox label="JavaScript" name="checkbox1" value="2" v-model="values.checkbox1a"></ks-checkbox>
-			</div>
-		</div>
+            <h3>Simple Radio Group</h3>
+            <ks-radio-group
+                class="form-group"
+                name="group1"
+                :options="['Foo', 'Bar', 'Baz']"
+                v-model="values.group1"
+            >
+                Some group of options
+            </ks-radio-group>
 
-		<h3>Simple Radio Group</h3>
-		<ks-radio-group
-			class="form-group"
-			name="group1"
-			:options="['Foo', 'Bar', 'Baz']"
-		    v-model="values.group1"
-		>
-			Some group of options
-		</ks-radio-group>
+            <h3>Radio Group with array of objects</h3>
+            <ks-radio-group
+                class="form-group"
+                name="group2"
+                :options="radioGroup"
+                value-key="code"
+                label-key="name"
+                v-model="values.group2"
+            >
+                Each option is an object
+            </ks-radio-group>
+        </div>
 
-		<h3>Radio Group with array of objects</h3>
-		<ks-radio-group
-			class="form-group"
-			name="group2"
-			:options="radioGroup"
-			value-key="code"
-			label-key="name"
-			v-model="values.group2"
-		>
-			Each option is an object
-		</ks-radio-group>
 
 		<h3>Example Form</h3>
-		<form>
+		<form class="basic-block">
 			<div class="row">
 				<div class="tab-full">
 					<div class="form-group">
-						<div class="label">Username</div>
+						<div class="label">Username (with an error)</div>
 						<input type="text">
+                        <div class="error-msg">Username is required</div>
 					</div>
 				</div>
 			</div>

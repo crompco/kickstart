@@ -26,6 +26,13 @@
 		}
 	}
 
+    .error-msg {
+        color: $form-error-color;
+        background: $form-error-bg-color;
+        font-size: $form-error-font-size;
+        padding: $form-error-padding;
+    }
+
 	[type='text'],
 	[type='password'],
 	[type='date'],
