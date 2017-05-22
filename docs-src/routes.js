@@ -11,6 +11,7 @@ import PageKsToast from './pages/PageKsToast.vue';
 import PageKsPaginator from './pages/PageKsPaginator.vue';
 import PageKsCard from './pages/PageKsCard.vue';
 import PageKsActionMenu from './pages/PageKsActionMenu.vue';
+import PageKsGrid from './pages/PageKsGrid.vue';
 
 const routes = [
     {
@@ -95,6 +96,12 @@ const routes = [
         component: StylesPage,
         name: 'KsStyles',
         meta: {title: 'Kickstart Styles'}
+    },
+    {
+        path: '/ks-grid',
+        component: PageKsGrid,
+        name: 'KsGrid',
+        meta: {title: 'Kickstart Grid'}
     }
 ];
 

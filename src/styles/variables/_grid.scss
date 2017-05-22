@@ -7,11 +7,11 @@ $neat-grid: (
 
 // (name, columns, gutter, media)
 $breakpoint-list: (
-	sm: (columns: 12, gutter: 0.5rem, media: 480px),
-	tab: (columns: 12, gutter: 0.5rem, media: 768px),
+	sm: (columns: 12, gutter: 1rem, media: 480px),
+	tab: (columns: 12, gutter: 1rem, media: 768px),
 	med: (columns: 12, gutter: 1rem, media: 1024px),
-	lg: (columns: 12, gutter: 1.5rem, media: 1224px),
-	xlg: (columns: 12, gutter: 2rem, media: 1400px),
+	lg: (columns: 12, gutter: 1rem, media: 1224px),
+	xlg: (columns: 12, gutter: 1rem, media: 1400px),
 );
 
 // Breakpoints

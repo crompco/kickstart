@@ -39,6 +39,10 @@
     }
 }
 
+.row-collapse {
+    @include grid-collapse($grid-sm);
+}
+
 .container {
     @include grid-container;
     max-width: $container-width;
