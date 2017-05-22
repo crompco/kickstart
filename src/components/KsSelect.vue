@@ -4,10 +4,12 @@
 		:class="{ 'ks-select-open': isOpen }"
 		tabindex="0"
 		@keydown.space.prevent.stop="open"
-		@keydown.enter.prevent.stop="open"
+		@keydown.enter.prevent.stop="enterOpen"
         @keydown.down.prevent.stop="open"
         @keydown.up.prevent.stop="open"
-	>
+        @keydown.down.prevent="openSelectDown"
+        @keydown.up.prevent="openSelectUp"
+    >
 		<input type="hidden" :name="name" :value="value">
 		<div class="ks-select-selection" @click.prevent="toggleOpen">
 			<div class="ks-select-placeholder" v-if="!value">{{placeholder}}</div>
@@ -131,7 +133,7 @@
 			binds_objects() {
 				// Try to determine what type of value the consumer expects
 				// If they don't provide a value then we will assume they want objects
-				if ( !this.value ) {
+				if ( null === this.value || typeof this.value === "undefined" ) {
 					return true;
 				}
 
@@ -183,6 +185,22 @@
 			toggleOpen() {
 				this.isOpen = !this.isOpen;
 			},
+            enterOpen() {
+			    if ( !this.isOpen ) {
+			        this.isOpen = true;
+			        return;
+                }
+
+                this.selectItem(this.selected_index);
+            },
+            openSelectDown() {
+			    this.open();
+			    this.selectDown();
+            },
+            openSelectUp() {
+                this.open();
+                this.selectUp();
+            },
 			blurred() {
 				this.close();
 			},

@@ -51,6 +51,11 @@ export default {
             type: String,
             default: null
         },
+        // The delay used for the search
+        delay: {
+            type: Number,
+            default: 100
+        },
 	},
 
 	data() {

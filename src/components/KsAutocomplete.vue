@@ -85,10 +85,6 @@
 			placeholder: {
 				default: 'Lookup ...'
 			},
-			delay: {
-				type: Number,
-				default: 100
-			},
 			itemFilter: {
 				type: [String, Function],
 				default: null
