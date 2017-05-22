@@ -2,7 +2,7 @@
 
 <template>
 	<div v-show="active" :class="{'active-tab': active}">
-		<slot></slot>
+		<slot v-if="active"></slot>
 	</div>
 </template>
 
