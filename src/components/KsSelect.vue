@@ -126,6 +126,25 @@
 			using_items() {
 				return this.items ? true : false;
 			},
+
+            value_index() {
+			    // This currently only works properly with the
+			    if ( this.value && !this.multiple && this.using_items ) {
+			        if ( this.binds_objects ) {
+			            return this.list.indexOf(this.value);
+                    }
+
+                    // When not using objects we need to iterate over the list to determine the values index
+                    for ( var i in this.list ) {
+			            if ( this.list[i][this.keyName] == this.value ) {
+			                return i;
+                        }
+                    }
+                }
+
+                return -1;
+            },
+
 			binds_objects() {
 				// Try to determine what type of value the consumer expects
 				// If they don't provide a value then we will assume they want objects
@@ -175,11 +194,16 @@
 			this.$on('clear', () => {
 			    this.isOpen = false;
 			});
+
 		},
 
 		methods: {
 			toggleOpen() {
-				this.isOpen = !this.isOpen;
+			    if ( !this.isOpen ) {
+			        this.open();
+                } else {
+			        this.close();
+                }
 			},
             enterOpen(e) {
 			    if ( !this.isOpen ) {
@@ -284,12 +308,20 @@
 					this.$nextTick(() => {
 						this.setFocus('lookup');
 						if ( oldOpen != open ) {
-							this.startSearch();
+							this.startSearch(this.value_index);
 						}
 					});
-				} else {
 				}
-			}
+			},
+            value_index() {
+			    if ( this.isOpen && this.value_index > 0 ) {
+			        // I plan using this approach for the autocomplete dropdown but it still needs some work for now
+//			        this.$nextTick(() => {
+//                        this.selected_index = this.value_index;
+//                        this.initListScrollTo(this.selected_index);
+//                    });
+                }
+            }
 		},
 
 		components: {

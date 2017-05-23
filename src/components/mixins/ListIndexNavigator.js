@@ -122,6 +122,7 @@ export default {
 		last_index() {
 			return this.list.length -1;
 		},
+
 	},
 
 	methods: {
@@ -339,13 +340,14 @@ export default {
 	        this.loading = false;
 			let term = this.lookup_name;
 
+			let start_index = this.getSearchStartIndex();
 	        if ( this.paginated ) {
 	        	// If we have results and the we want them concatenated
 		        if ( list.length ) {
 		        	if ( concat ) {
 				        this.list = this.list.concat(list);
 			        } else {
-				        this.selected_index = this.startIndex;
+				        this.selected_index = start_index;
 				        this.list = list;
 			        }
 		        } else {
@@ -353,13 +355,17 @@ export default {
 			        this.last_page = this.page;
 		        }
 	        } else {
-		        this.selected_index = this.startIndex;
+		        this.selected_index = start_index;
 		        this.list = list;
 	        }
 
 	        if ( cache && this.cacheResults ) {
 		        this.addCache(term, this.page, list);
 	        }
+        },
+
+        getSearchStartIndex() {
+		    return this.startIndex;
         },
 
         /**
@@ -385,10 +391,13 @@ export default {
         /**
 		 * Begins the execution of a search from the user
 		 * this is triggered before runSearch or runFilter
+         *
+         * @param Number index
          */
-		startSearch() {
-			this.selected_index = this.startIndex;
-	        this.$refs[this.ref_list].scrollTop = 0;
+		startSearch(index = null) {
+		    // If a value index is provided then we should initialize to that
+			this.selected_index = parseInt(index && index != -1 ? index : this.startIndex);
+			this.initListScrollTo(this.selected_index);
 
 			if ( this.lookup_name.length < this.minSearch ) {
 				this.list = [];
@@ -411,6 +420,19 @@ export default {
 				this.runSearch();
 			}, this.delay);
 		},
+
+        /**
+         * Sets up the scroll to of the list when it is opened
+         */
+        initListScrollTo(index) {
+            let scrollStart = 0;
+            if ( index > 0 && this.$refs[this.ref_list].children[index] ) {
+                scrollStart = (this.$refs[this.ref_list].children[index].scrollHeight + 2) * index;
+                scrollStart = parseInt(Math.abs(scrollStart));
+            }
+
+            this.$refs[this.ref_list].scrollTop = scrollStart;
+        },
 
         /**
 		 * Resets the scroll of the given reference
