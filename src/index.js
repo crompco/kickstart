@@ -72,7 +72,7 @@ const Kickstart = {
         Vue.component('ks-tabs', KsTabs)
         Vue.component('ks-paginator', KsPaginator)
         Vue.component('ks-action-menu', KsActionMenu)
-        Vue.component('ks-step-through', KsActionMenu)
+        Vue.component('ks-step-through', KsStepThrough)
 
 		Object.defineProperties(Vue.prototype, {
 			'$api': {
