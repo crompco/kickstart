@@ -1,0 +1,19 @@
+@import "_global";
+
+// Text
+$steps-text-color: $state-default-bg !default;
+$steps-complete-color: $state-success !default;
+
+// Line
+$steps-line-color: $state-default-bg !default;
+$steps-line-complete-color: $state-success !default;
+
+// Number
+$steps-number-color: $state-default-bg !default;
+$steps-number-bg: $white !default;
+
+$steps-active-number-color: $white !default;
+$steps-active-number-bg: $state-default-bg !default;
+
+$steps-complete-number-bg: $state-success !default;
+$steps-complete-number-color: $white !default;

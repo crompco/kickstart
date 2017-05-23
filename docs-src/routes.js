@@ -12,6 +12,7 @@ import PageKsPaginator from './pages/PageKsPaginator.vue';
 import PageKsCard from './pages/PageKsCard.vue';
 import PageKsActionMenu from './pages/PageKsActionMenu.vue';
 import PageKsGrid from './pages/PageKsGrid.vue';
+import PageKsStepThrough from './pages/PageKsStepThrough.vue';
 
 const routes = [
     {
@@ -102,7 +103,14 @@ const routes = [
         component: PageKsGrid,
         name: 'KsGrid',
         meta: {title: 'Kickstart Grid'}
+    },
+    {
+        path: '/ks-step-through',
+        component: PageKsStepThrough,
+        name: 'KsStepThrough',
+        meta: {title: 'Kickstart Step Through'}
     }
+
 ];
 
 export default routes;

@@ -193,7 +193,7 @@
 			    if ( this.isOpen ) {
                     this.selectItem(this.selected_index, e);
                 }
-                
+
                 return true;
             },
             openSelectDown() {
