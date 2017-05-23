@@ -75,7 +75,7 @@ export default {
 			mousescroll_threshold: 40,
 			mousescroll_delay: 100,
 			navigating_with_keys: false,
-			key_pressed_timer: ''
+			key_pressed_timer: '',
 		};
 	},
 

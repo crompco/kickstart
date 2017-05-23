@@ -119,6 +119,7 @@
 				keyName: this.itemKey,
 				filter: this.itemFilter,
 				isOpen: false,
+                needs_new_search: true
 			};
 		},
 
@@ -129,7 +130,8 @@
 
             value_index() {
 			    // This currently only works properly with the
-			    if ( this.value && !this.multiple && this.using_items ) {
+                //&& this.using_items
+			    if ( this.value && !this.multiple ) {
 			        if ( this.binds_objects ) {
 			            return this.list.indexOf(this.value);
                     }
@@ -289,6 +291,7 @@
 		watch: {
 			lookup_name() {
 				this.startSearch();
+				this.needs_new_search = true;
 			},
 			value() {
 				this.refreshSelected();
@@ -308,18 +311,25 @@
 					this.$nextTick(() => {
 						this.setFocus('lookup');
 						if ( oldOpen != open ) {
-							this.startSearch(this.value_index);
+						    // Only start the new search when the list is empty
+                            // otherwise we can just keep the current list
+						    if ( this.list.length == 0 || this.needs_new_search ) {
+                                this.startSearch(this.value_index);
+                                this.needs_new_search = false;
+                            } else {
+						        this.selected_index = this.value_index;
+                                this.initListScrollTo(this.selected_index);
+                            }
 						}
 					});
-				}
+                }
 			},
             value_index() {
-			    if ( this.isOpen && this.value_index > 0 ) {
-			        // I plan using this approach for the autocomplete dropdown but it still needs some work for now
-//			        this.$nextTick(() => {
-//                        this.selected_index = this.value_index;
-//                        this.initListScrollTo(this.selected_index);
-//                    });
+			    if ( this.value_index > 0 ) {
+                    // updating the selected index
+                    this.startIndex = this.value_index;
+                } else {
+			        this.startIndex = 0;
                 }
             }
 		},
