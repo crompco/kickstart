@@ -129,16 +129,6 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>multiple</td>
-                            <td>Boolean</td>
-                            <td>
-                                <pre>false</pre>
-                            </td>
-                            <td>
-                                Whether or not to support multiple selections
-                            </td>
-                        </tr>
-                        <tr>
                             <td>taggable</td>
                             <td>Boolean</td>
                             <td>
@@ -174,6 +164,16 @@
                             </td>
                             <td>
                                 The minimum number of items for the search input to be shown.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>keepTextOnDelete</td>
+                            <td>Boolean</td>
+                            <td>
+                                <pre>false</pre>
+                            </td>
+                            <td>
+                                When set to true if a user deletes a seleciton it will retain the text of the selection
                             </td>
                         </tr>
                         <tr>

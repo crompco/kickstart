@@ -6,10 +6,10 @@
 	>
 
 		<!-- Selections  -->
-		<span class="selection" v-if="selectionKey && has_selections" @click.prevent="editSelection">
-			<span v-for="s in selection" class="selection-text">
+		<span class="selection" v-if="selectionKey && has_selections" @click.prevent="editSelection" ref="selections">
+			<span v-for="s in selection" class="selection-text" tabindex="0" @keyup.delete.prevent.stop="clearSelection(s)">
 				{{getSelectionLabel(s)}}
-				<a href="#" @click.prevent.stop="clearSelection(s)" class="clear-selection">
+				<a href="#" @click.prevent.stop="clearSelection(s)" class="clear-selection" tabindex="-1">
 					<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 						<g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 							<g id="close" fill="#000000">
@@ -31,7 +31,7 @@
 			v-model="lookup_name"
 			ref="lookup"
 			@keyup.esc="clear"
-			@keydown.8="backspace"
+			@keyup.8="backspace"
 			@keydown.tab="selectItem(selected_index, $event)"
 			@keydown.enter.prevent="selectItem(selected_index)"
 			@keydown.down.prevent="selectDown()"
@@ -107,7 +107,11 @@
             showTagInList: {
 			    type: Boolean,
 				default: false
-			}
+			},
+            keepTextOnDelete: {
+			    type: Boolean,
+                default: false
+            }
 		},
 
 		data() {
@@ -158,22 +162,36 @@
 		methods: {
 
 			clearSelection(s) {
+			    let popped = null;
+
 				if ( this.is_multiple ) {
 					let index = this.selection.indexOf(s);
-					this.selection.splice(index, 1);
+                    if ( index > -1 ) {
+                        popped = this.selection.splice(index, 1);
+                        this.$emit('deleted', popped);
+                    }
 				} else {
+				    popped = this.selection;
 					this.selection = null;
-					this.$nextTick(() => {
-						this.setFocus('lookup');
-					});
 				}
+
+				// Keep the selection text if prop is set to true
+				if ( popped && this.keepTextOnDelete) {
+                    this.lookup_name = this.getSelectionLabel(popped[0])
+                }
+
+                this.$nextTick(() => {
+                    this.setFocus();
+                });
 			},
 
 			backspace() {
 				if ( this.lookup_name == '' ) {
 					if ( this.has_selections && this.is_multiple ) {
-						let popped = this.selection.pop();
-						this.$emit('deleted', popped);
+                        let child = this.$refs.selections.children[this.selection.length-1];
+                        if ( child ) {
+                            child.focus();
+                        }
 					}
 				}
 			},
