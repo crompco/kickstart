@@ -14,6 +14,7 @@ import API from './helpers/api';
 import KsToast from './components/KsToast.vue';
 import KsPaginator from './components/KsPaginator.vue';
 import KsActionMenu from './components/KsActionMenu.vue';
+import KsStepThrough from './components/KsStepThrough.vue';
 
 require('./styles/app.scss');
 
@@ -33,6 +34,7 @@ const Kickstart = {
     KsToast,
     KsPaginator,
 	KsActionMenu,
+    KsStepThrough,
 	install(Vue) {
         function open(propsData) {
             const Toast = Vue.extend(KsToast);
@@ -69,7 +71,8 @@ const Kickstart = {
 		Vue.component('ks-tab', KsTab)
         Vue.component('ks-tabs', KsTabs)
         Vue.component('ks-paginator', KsPaginator)
-		Vue.component('ks-action-menu', KsActionMenu)
+        Vue.component('ks-action-menu', KsActionMenu)
+        Vue.component('ks-step-through', KsActionMenu)
 
 		Object.defineProperties(Vue.prototype, {
 			'$api': {
