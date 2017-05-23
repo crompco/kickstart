@@ -19,6 +19,7 @@
 		position: absolute;
 		width: 100%;
 		background: $select-bg;
+		z-index: 2;
 
 		.ks-select-dropdown-input {
 			padding: rem($select-input-padding);

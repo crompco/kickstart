@@ -3,6 +3,7 @@
 // Internal
 @import "../mixins/_grid";
 @import "../variables/_grid";
+@import "../functions/_utils";
 
 @each $name, $map in $breakpoint-list {
     @include breakpoint($map) {
@@ -12,18 +13,22 @@
             @if $i / $columns == 0.5 {
                 .#{$name}-#{$i}, .#{$name}-half {
                     @include grid-column($i, $map);
+                    margin-bottom: rem($grid-margin-bottom);
                 }
             } @else if $i / $columns == 0.25 {
                 .#{$name}-#{$i}, .#{$name}-quarter {
                     @include grid-column($i, $map);
+                    margin-bottom: rem($grid-margin-bottom);
                 }
             } @else if $i / $columns == 1 {
                 .#{$name}-#{$i}, .#{$name}-full {
                     @include grid-column($i, $map);
+                    margin-bottom: rem($grid-margin-bottom);
                 }
             } @else {
                 .#{$name}-#{$i} {
                     @include grid-column($i, $map);
+                    margin-bottom: rem($grid-margin-bottom);
                 }
             }
 
