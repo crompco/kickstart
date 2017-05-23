@@ -20,3 +20,6 @@ $grid-tab: map-get($breakpoint-list, tab);
 $grid-med: map-get($breakpoint-list, med);
 $grid-lg: map-get($breakpoint-list, lg);
 $grid-xlg: map-get($breakpoint-list, xlg);
+
+
+$grid-margin-bottom: 1rem;
