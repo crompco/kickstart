@@ -318,10 +318,6 @@
 
 		& ~ div {
 			margin-top: $nav-height;
-
-			@include breakpoint(map-get($breakpoint-list, $top-bar-breakpoint), true) {
-				display: inline-block;
-			}
 		}
 	}
 
