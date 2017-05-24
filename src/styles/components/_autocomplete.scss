@@ -136,6 +136,11 @@
 			svg g {
 				fill: $ac-multi-close-color-hover;
 			}
+
+            &:focus {
+                box-shadow: $ac-multi-selection-focus-box-shadow;
+                background-color: lighten($ac-multi-bg, 15%);
+            }
 		}
 	}
 }

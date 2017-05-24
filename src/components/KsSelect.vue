@@ -114,11 +114,13 @@
 			return {
 				loading: false,
 				selected: null,
-				startIndex: 0,
+                startIndex: 0,
+                minIndex: 0,
 				selected_index: 0,
 				keyName: this.itemKey,
 				filter: this.itemFilter,
 				isOpen: false,
+                needs_new_search: true
 			};
 		},
 
@@ -126,6 +128,26 @@
 			using_items() {
 				return this.items ? true : false;
 			},
+
+            value_index() {
+			    // This currently only works properly with the
+                //&& this.using_items
+			    if ( this.value && !this.multiple ) {
+			        if ( this.binds_objects ) {
+			            return this.list.indexOf(this.value);
+                    }
+
+                    // When not using objects we need to iterate over the list to determine the values index
+                    for ( var i in this.list ) {
+			            if ( this.list[i][this.keyName] == this.value ) {
+			                return i;
+                        }
+                    }
+                }
+
+                return -1;
+            },
+
 			binds_objects() {
 				// Try to determine what type of value the consumer expects
 				// If they don't provide a value then we will assume they want objects
@@ -175,11 +197,16 @@
 			this.$on('clear', () => {
 			    this.isOpen = false;
 			});
+
 		},
 
 		methods: {
 			toggleOpen() {
-				this.isOpen = !this.isOpen;
+			    if ( !this.isOpen ) {
+			        this.open();
+                } else {
+			        this.close();
+                }
 			},
             enterOpen(e) {
 			    if ( !this.isOpen ) {
@@ -265,6 +292,7 @@
 		watch: {
 			lookup_name() {
 				this.startSearch();
+				this.needs_new_search = true;
 			},
 			value() {
 				this.refreshSelected();
@@ -284,12 +312,27 @@
 					this.$nextTick(() => {
 						this.setFocus('lookup');
 						if ( oldOpen != open ) {
-							this.startSearch();
+						    // Only start the new search when the list is empty
+                            // otherwise we can just keep the current list
+						    if ( this.list.length == 0 || this.needs_new_search ) {
+                                this.startSearch(this.value_index);
+                                this.needs_new_search = false;
+                            } else {
+						        this.selected_index = this.value_index;
+                                this.initListScrollTo(this.selected_index);
+                            }
 						}
 					});
-				} else {
-				}
-			}
+                }
+			},
+            value_index() {
+			    if ( this.value_index > 0 ) {
+                    // updating the selected index
+                    this.startIndex = this.value_index;
+                } else {
+			        this.startIndex = 0;
+                }
+            }
 		},
 
 		components: {
