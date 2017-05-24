@@ -67,6 +67,7 @@ export default {
 			lookup_name: '',
 			list: [],
 			startIndex: -1,
+            minIndex: -1,
 			selected_index: -1,
 			hover_index: -1,
 			cache: {},
@@ -186,7 +187,7 @@ export default {
 		selectUp() {
 			this.navigating_with_keys = true;
 			let index = this.selected_index - 1;
-			if ( !(index < this.startIndex) ) {
+			if ( !(index < this.minIndex) ) {
 				this.selected_index -= 1;
 			}
 

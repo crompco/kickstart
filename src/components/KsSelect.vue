@@ -114,7 +114,8 @@
 			return {
 				loading: false,
 				selected: null,
-				startIndex: 0,
+                startIndex: 0,
+                minIndex: 0,
 				selected_index: 0,
 				keyName: this.itemKey,
 				filter: this.itemFilter,
