@@ -67,7 +67,7 @@
 
 	// Mobile First Stuff
 	width: 100%;
-	height: 40px;
+	height: $nav-height;
 	padding-top: 0;
 
 	.mobile-menu {
@@ -137,7 +137,7 @@
 		@include breakpoint(map-get($breakpoint-list, $side-nav-breakpoint), true) {
 			.nav-links {
 				left: 0;
-				top: 40px;
+				top: $nav-height;
 			}
 		}
 	}
@@ -316,10 +316,8 @@
 		width: 100%;
 		z-index: 10;
 
-		@include breakpoint(map-get($breakpoint-list, $top-bar-breakpoint)) {
-			& ~ div {
-				margin-top: $nav-height;
-			}
+		& ~ div {
+			margin-top: $nav-height;
 		}
 	}
 
