@@ -87,10 +87,6 @@
 		},
 
 		mounted() {
-			this.$nextTick(() => {
-                stopParentScroll(this.$refs.body);
-			});
-
 			this.$on('open', () => {
 				this.$nextTick(() => {
 					this.$refs.container.focus();
