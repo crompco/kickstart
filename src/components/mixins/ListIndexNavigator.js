@@ -366,7 +366,7 @@ export default {
         },
 
         getSearchStartIndex() {
-            return this.startIndex;
+            return parseInt(this.startIndex);
         },
 
         /**
@@ -398,7 +398,9 @@ export default {
         startSearch(index = null) {
             // If a value index is provided then we should initialize to that
             this.selected_index = parseInt(index && index != -1 ? index : this.startIndex);
-            this.initListScrollTo(this.selected_index);
+            this.$nextTick(() => {
+                this.initListScrollTo(this.selected_index);
+            });
 
             if ( this.lookup_name.length < this.minSearch ) {
                 this.list = [];
@@ -440,7 +442,7 @@ export default {
          */
         resetList() {
             this.$refs[this.ref_list].scrollTop = 0;
-            this.selected_index = this.startIndex;
+            this.selected_index = parseInt(this.startIndex);
         },
 
         /**

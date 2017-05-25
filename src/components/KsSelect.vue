@@ -112,6 +112,7 @@
 
 		data () {
 			return {
+			    clear_on_close: false,
 				loading: false,
 				selected: null,
                 startIndex: 0,
@@ -128,25 +129,6 @@
 			using_items() {
 				return this.items ? true : false;
 			},
-
-            value_index() {
-			    // This currently only works properly with the
-                //&& this.using_items
-			    if ( this.value && !this.multiple ) {
-			        if ( this.binds_objects ) {
-			            return this.list.indexOf(this.value);
-                    }
-
-                    // When not using objects we need to iterate over the list to determine the values index
-                    for ( var i in this.list ) {
-			            if ( this.list[i][this.keyName] == this.value ) {
-			                return i;
-                        }
-                    }
-                }
-
-                return -1;
-            },
 
 			binds_objects() {
 				// Try to determine what type of value the consumer expects
@@ -201,6 +183,18 @@
 		},
 
 		methods: {
+            /**
+             * Clear the lookup
+             */
+            clear() {
+                this.resetList();
+                this.lookup_name = '';
+
+                if ( this.$refs[this.ref_lookup] === document.activeElement ) {
+                    this.$refs[this.ref_lookup].blur();
+                }
+                this.$emit('clear');
+            },
 			toggleOpen() {
 			    if ( !this.isOpen ) {
 			        this.open();
@@ -287,6 +281,25 @@
 				}
 
 			},
+
+            value_index() {
+                // This currently only works properly with the
+                //&& this.using_items
+                if ( this.value && !this.multiple ) {
+                    if ( this.binds_objects ) {
+                        return parseInt(this.list.indexOf(this.value));
+                    }
+
+                    // When not using objects we need to iterate over the list to determine the values index
+                    for ( var i in this.list ) {
+                        if ( this.list[i][this.keyName] == this.value ) {
+                            return parseInt(i);
+                        }
+                    }
+                }
+
+                return -1;
+            },
 		},
 
 		watch: {
@@ -314,25 +327,18 @@
 						if ( oldOpen != open ) {
 						    // Only start the new search when the list is empty
                             // otherwise we can just keep the current list
+                            let value_index = this.value_index();
 						    if ( this.list.length == 0 || this.needs_new_search ) {
-                                this.startSearch(this.value_index);
+                                this.startSearch(value_index);
                                 this.needs_new_search = false;
                             } else {
-						        this.selected_index = this.value_index;
+						        this.selected_index = value_index;
                                 this.initListScrollTo(this.selected_index);
                             }
 						}
 					});
                 }
 			},
-            value_index() {
-			    if ( this.value_index > 0 ) {
-                    // updating the selected index
-                    this.startIndex = this.value_index;
-                } else {
-			        this.startIndex = 0;
-                }
-            }
 		},
 
 		components: {
