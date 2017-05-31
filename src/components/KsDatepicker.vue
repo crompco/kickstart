@@ -5,7 +5,8 @@
 
 		<!-- Display field-->
 		<input class="ks-datepicker-display"
-		       :value="display_date"
+			   v-model="input_date"
+			   v-mask="mask"
 		       @focus="open"
 		       ref="display"
 		>
@@ -62,6 +63,7 @@
 			return {
 				is_open: false,
 				focused: false,
+				input_date: this.display_date,
 				calendar_date: this.value_date,
 				calendar_focused: false
 			}
@@ -74,6 +76,9 @@
 				}
 
 				return '';
+			},
+			mask() {
+			    return this.displayFormat.replace('m', '##').replace('Y', '####').replace('d', '##');
 			},
 			show() {
 				return this.is_open;
@@ -93,12 +98,14 @@
 				smartFocusToggle(this.$el, (focus, e) => {
 					this.focused = focus;
 				}, 50);
+				this.input_date = this.display_date;
 			});
 			this.calendar_date = this.value_date;
 		},
 
 		methods: {
 			selectDay(day) {
+			    console.log(day);
 				this.$emit('input', formatDate(day, this.dateFormat));
 				this.is_open = false;
 			},
@@ -121,11 +128,22 @@
 				if ( !this.focused ) {
 					this.is_open = false;
 				}
+			},
+			value_date() {
+			    this.calendar_date = this.value_date;
+			},
+			display_date() {
+			    this.input_date = this.display_date;
+			},
+			input_date() {
+			    if ( this.input_date.length == this.mask.length ) {
+                    this.$emit('input', formatDate(this.input_date, this.dateFormat, this.displayFormat));
+				}
 			}
 		},
 
 		components: {
-			KsCalendar
+			KsCalendar,
 		}
 	}
 </script>

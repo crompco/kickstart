@@ -23,6 +23,16 @@ $calendar-grid: (
 			font-size: 1.2em;
 			color: white;
 			text-decoration: none;
+			svg {
+				vertical-align: bottom;
+				display: inline-block;
+				color: $calendar-header-color;
+				height: 1em;
+				width: 1em;
+				path {
+					fill: $calendar-header-color;
+				}
+			}
 		}
 	}
 

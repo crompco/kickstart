@@ -2,7 +2,7 @@
     <div class="ks-calendar" tabindex="-1">
         <div class="ks-calendar-title">
 	        <a href="" @click.prevent="closeYear">{{month}}</a>
-	        <a href="" v-if="yearPicker" @click.prevent="openYear">{{year}}</a>
+	        <a href="" v-if="yearPicker" @click.prevent="openYear">{{year}} <down-svg></down-svg></a>
 	        <span v-else>{{year}}</span>
         </div>
         <div
@@ -90,6 +90,7 @@
 	} from '../helpers/dates';
 	import {mouseHold} from '../helpers/events';
 	import {pad_left} from '../helpers/strings';
+    import DownSvg from '../svg/cheveron-down.svg';
 
     export default {
         name: 'KsCalendar',
@@ -356,7 +357,11 @@
 		    closeYear() {
 			    this.yearPickerOpen = false;
 		    }
-	    }
+	    },
+
+		components: {
+            DownSvg
+		}
 
     }
 </script>

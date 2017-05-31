@@ -5,6 +5,7 @@
 
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import VueMask from 'v-mask';
 
 import App from './App.vue';
 import routes from './routes.js';
@@ -14,6 +15,7 @@ import KickStart from '../src/index';
 Vue.config.devtools = true;
 
 Vue.use(VueRouter);
+Vue.use(VueMask);
 Vue.use(KickStart);
 
 Vue.api.interceptors.request({
