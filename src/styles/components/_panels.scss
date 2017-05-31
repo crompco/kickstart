@@ -10,6 +10,7 @@
 	& &-header, & &-footer {
 		background-color: $panel-header-bg;
 		padding: rem($panel-header-padding);
+		color: $panel-header-color;
 	}
 
 	& &-body {
