@@ -1,5 +1,6 @@
 <template>
-	<div>
+	<div class="col sm-full">
+		<h2>Datepicker</h2>
 		<div class="basic-block row">
 			<div class="med-6">
 				<h3>Simple Datepicker</h3>
@@ -15,6 +16,7 @@
 				</pre>
 			</div>
 		</div>
+
 
 		<div class="basic-block row">
 			<div class="med-6">
