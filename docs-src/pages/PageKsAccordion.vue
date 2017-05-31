@@ -48,6 +48,7 @@
         name: 'PageKsAccordion',
 
         components: {
+            KsAccordion,
             KsAccordionRow
         }
     }
