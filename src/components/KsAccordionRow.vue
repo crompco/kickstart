@@ -18,6 +18,7 @@
     // Internal Dependencies
     import {slideDown, slideUp} from '../helpers/animations';
     import './transitions/Transitions';
+    let parent = null;
 
     export default {
         name: 'KsAccordionRow',
@@ -32,9 +33,29 @@
             }
         },
 
+        mounted() {
+            this.$nextTick(() => {
+                parent = this.getAccordionParent(this);
+
+                parent.registerAccordion(this);
+            });
+        },
+
         methods: {
             handleClick(e) {
-                this.showContent = !this.showContent;
+                parent.setActiveAccordion(this);
+            },
+
+            getAccordionParent(vm) {
+                if ( vm.$parent.$options.name === 'KsAccordion' ) {
+                    return vm.$parent;
+                }
+
+                return this.getAccordionParent(vm.$parent);
+            },
+
+            setActive(bool) {
+                this.showContent = bool;
             }
         }
     }

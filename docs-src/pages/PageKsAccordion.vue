@@ -43,13 +43,15 @@
     // Internal Dependencies
     import KsAccordion from '../../src/components/KsAccordion.vue';
     import KsAccordionRow from '../../src/components/KsAccordionRow.vue';
+    import KsActionMenu from '../../src/components/KsActionMenu.vue';
 
     export default {
         name: 'PageKsAccordion',
 
         components: {
             KsAccordion,
-            KsAccordionRow
+            KsAccordionRow,
+            KsActionMenu
         }
     }
 </script>
