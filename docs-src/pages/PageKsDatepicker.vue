@@ -10,10 +10,7 @@
 			</div>
 
 			<div class="med-6">
-				<pre>
-					<strong>v-model</strong>
-					{{date1}}
-				</pre>
+				<pre><strong>v-model</strong>: {{date1}}</pre>
 			</div>
 		</div>
 
@@ -23,16 +20,14 @@
 				<h3>Custom Date format with year picker</h3>
 				<ks-datepicker
 					v-model="date2"
-					:year-picker="true"
+                    :year-picker="true"
+                    :month-picker="true"
 					date-format="m/d/Y"
 				></ks-datepicker>
 			</div>
 
 			<div class="med-6">
-				<pre>
-					<strong>v-model</strong>
-					{{date2}}
-				</pre>
+				<pre><strong>v-model</strong>: {{date2}}</pre>
 			</div>
 		</div>
 
@@ -77,6 +72,18 @@
 							<td><pre>ks_datepicker</pre></td>
 							<td>The name of the input field</td>
 						</tr>
+                        <tr>
+                            <td>yearPicker</td>
+                            <td><pre>Boolean</pre></td>
+                            <td><pre>false</pre></td>
+                            <td>Whether to allow the user to use the year picker. This makes the year in the header interactive</td>
+                        </tr>
+                        <tr>
+                            <td>monthPicker</td>
+                            <td><pre>Boolean</pre></td>
+                            <td><pre>false</pre></td>
+                            <td>Whether to allow the user to use the month picker. This makes the month in the header interactive</td>
+                        </tr>
 					</tbody>
 				</table>
 			</ks-tab>

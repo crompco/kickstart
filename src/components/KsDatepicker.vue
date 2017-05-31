@@ -18,7 +18,8 @@
 				v-model="calendar_date"
 				:format="dateFormat"
 				:selection="value_date"
-				:year-picker="yearPicker"
+                :year-picker="yearPicker"
+                :month-picker="monthPicker"
 				:interactive="true"
 			    @select="selectDay"
 			></ks-calendar>
