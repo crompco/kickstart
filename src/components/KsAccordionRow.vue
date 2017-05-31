@@ -1,8 +1,14 @@
 <template>
     <li class="row">
-        <a href="#" @click.prevent="handleClick">
-            <slot name="title">{{title}}</slot>
-        </a>
+        <div class="ks-accordion-title-row">
+            <a href="#" @click.prevent="handleClick" class="ks-accordion-title">
+                <slot name="title">{{title}}</slot>
+            </a>
+
+            <div class="ks-accordion-buttons">
+                <slot name="actions"></slot>
+            </div>
+        </div>
 
         <slide-transition>
             <div class="ks-accordion-content" ref="content" v-show="showContent">

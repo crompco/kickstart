@@ -16,10 +16,16 @@
             border-bottom-width: 1px;
         }
 
-        a {
+        .ks-accordion-title-row {
+            display: flex;
+            align-items: center;
+        }
+
+        a.ks-accordion-title {
             text-decoration: none;
             color: #444;
             display: block;
+            width: 100%;
         }
 
         .ks-accordion-content {
