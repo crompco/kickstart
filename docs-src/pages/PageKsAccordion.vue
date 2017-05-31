@@ -5,6 +5,12 @@
         <div class="row">
             <ks-accordion>
                 <ks-accordion-row title="Row 1">
+                    <div slot="actions">
+                        <ks-action-menu>
+                            <a href="#">Edit</a>
+                            <a href="#">Delete</a>
+                        </ks-action-menu>
+                    </div>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lobortis leo risus, quis finibus diam venenatis elementum. Sed quis metus ut turpis ornare euismod. Etiam in accumsan justo. Pellentesque leo magna, suscipit et ipsum quis, viverra luctus mauris. In faucibus lacus et egestas tempus. Aliquam erat volutpat. Aenean lobortis erat eget orci auctor iaculis. In quis erat volutpat, blandit dolor non, tempus mi. Nullam hendrerit fringilla arcu, ut ornare velit placerat eu. Cras augue ligula, ultricies at fringilla fringilla, pellentesque sed magna. Praesent ut facilisis metus. Donec eu congue orci. Cras nunc ligula, laoreet ut turpis eget, aliquam convallis elit. Aliquam iaculis metus ac diam ornare, eget molestie enim euismod. Ut non faucibus nunc. Morbi nisl nunc, scelerisque a enim ac, tincidunt varius nulla.</p>
 
                     <p>Morbi faucibus rutrum mauris, eu lobortis ex aliquam ut. Pellentesque at nulla orci. Curabitur malesuada, risus in porta porttitor, massa magna commodo dui, accumsan euismod lectus velit in mauris. Morbi hendrerit sodales nibh, vitae maximus enim pellentesque id. Morbi in tellus tempor nisi convallis placerat in non justo. Duis egestas aliquam ligula a dictum. Integer vestibulum id ante et tempor. Praesent porta tempor magna, ut lacinia nisl imperdiet et. Ut molestie ac lacus ac vulputate.</p>
@@ -43,12 +49,15 @@
     // Internal Dependencies
     import KsAccordion from '../../src/components/KsAccordion.vue';
     import KsAccordionRow from '../../src/components/KsAccordionRow.vue';
+    import KsActionMenu from '../../src/components/KsActionMenu.vue';
 
     export default {
         name: 'PageKsAccordion',
 
         components: {
-            KsAccordionRow
+            KsAccordion,
+            KsAccordionRow,
+            KsActionMenu
         }
     }
 </script>

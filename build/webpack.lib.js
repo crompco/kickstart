@@ -25,6 +25,8 @@ const config = {
         KsPaginator: ['./src/components/KsPaginator.vue'],
         KsActionMenu: ['./src/components/KsActionMenu.vue'],
         KsStepThrough: ['./src/components/KsStepThrough.vue'],
+        KsAccordion: ['./src/components/KsAccordion'],
+        KsAccordionRow: ['./src/components/KsAccordionRow'],
         // Helpers
         api: ['./src/helpers/api.js'],
         strings: ['./src/helpers/strings.js'],

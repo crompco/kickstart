@@ -1,10 +1,9 @@
 // External Dependencies
-import Vue from 'vue';
 
 // Internal Dependencies
 import {slideDown, slideUp} from '../../helpers/animations';
 
-Vue.component('slide-transition', {
+const SlideTransition = {
     functional: true,
 
     render(createElement, context) {
@@ -27,4 +26,6 @@ Vue.component('slide-transition', {
 
         return createElement('transition', data, context.children);
     }
-});
+};
+
+export {SlideTransition};

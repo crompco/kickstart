@@ -14,21 +14,38 @@
     export default {
         name: 'KsAccordion',
 
-        render(createElement) {
-            return createElement(
-                'div',
-                createElement('ul', {
-                    'attrs': {
-                        'class': 'ks-accordion'
-                    }
-                }, this.$slots.default)
-            )
+        props: {
+            collapsible: {
+                type: Boolean,
+                default: true
+            }
         },
 
-        mounted() {
-            this.$nextTick(() => {
-                console.log('SLOTS: ', this.$slots);
-            });
+        data() {
+            return{
+                activeAccordion: null,
+                accordions: []
+            }
+        },
+
+        methods: {
+            registerAccordion(accordion) {
+                this.accordions.push(accordion);
+            },
+
+            setActiveAccordion(accordion) {
+                if ( this.collapsible == true ) {
+                    for ( let acc of this.accordions ) {
+                        if ( acc.$data.showContent === true && acc != accordion ) {
+                            acc.setActive(false);
+                        } else if ( acc == accordion ) {
+                            accordion.setActive(!accordion.$data.showContent);
+                        }
+                    }
+                } else {
+                    accordion.setActive(!accordion.$data.showContent);
+                }
+            }
         }
     }
 </script>
