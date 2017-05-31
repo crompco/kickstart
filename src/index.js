@@ -17,6 +17,7 @@ import KsActionMenu from './components/KsActionMenu.vue';
 import KsStepThrough from './components/KsStepThrough.vue';
 import KsAccordion from './components/KsAccordion.vue';
 import KsAccordionRow from './components/KsAccordionRow.vue';
+import * as animations from './components/transitions/Transitions';
 
 require('./styles/app.scss');
 
@@ -40,8 +41,6 @@ const Kickstart = {
     KsAccordion,
     KsAccordionRow,
 	install(Vue) {
-        require('./components/transitions/Transitions');
-
         function open(propsData) {
             const Toast = Vue.extend(KsToast);
 
@@ -81,6 +80,10 @@ const Kickstart = {
         Vue.component('ks-step-through', KsStepThrough)
 		Vue.component('ks-accordion', KsAccordion)
 		Vue.component('ks-accordion-row', KsAccordionRow)
+
+		for ( let i in animations ) {
+			Vue.component(i, animations[i]);
+		}
 
 		Object.defineProperties(Vue.prototype, {
 			'$api': {
