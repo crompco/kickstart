@@ -17,7 +17,6 @@
 
     // Internal Dependencies
     import {slideDown, slideUp} from '../helpers/animations';
-    import './transitions/Transitions';
     let parent = null;
 
     export default {

@@ -40,6 +40,8 @@ const Kickstart = {
     KsAccordion,
     KsAccordionRow,
 	install(Vue) {
+        require('./components/transitions/Transitions');
+
         function open(propsData) {
             const Toast = Vue.extend(KsToast);
 
