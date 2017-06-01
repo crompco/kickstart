@@ -21,7 +21,7 @@ export const slideDown = (el, timing = '0.4s ease', cb = null) => {
         }
 
         el.removeEventListener('transitionend', endingTransition, false);
-        el.removeProperty('maxHeight');
+        el.style.removeProperty('maxHeight');
     };
 
     requestAnimationFrame(function() {
