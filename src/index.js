@@ -18,6 +18,7 @@ import KsStepThrough from './components/KsStepThrough.vue';
 import KsAccordion from './components/KsAccordion.vue';
 import KsAccordionRow from './components/KsAccordionRow.vue';
 import * as animations from './components/transitions/Transitions';
+import * as strings from './helpers/strings';
 
 require('./styles/app.scss');
 
@@ -84,6 +85,26 @@ const Kickstart = {
 		for ( let i in animations ) {
 			Vue.component(i, animations[i]);
 		}
+
+		// Filters
+        Vue.filter('escapeRegExp', function (value) {
+            return strings.escapeRegExp(value);
+        });
+        Vue.filter('ucwords', function (value) {
+            return strings.ucwords(value);
+        });
+        Vue.filter('posesses', function (value) {
+            return strings.posesses(value);
+        });
+		Vue.filter('currency', function (value, symbol = '$') {
+			return strings.currency(value, symbol);
+		});
+        Vue.filter('pad_left', function (value, pad_width, pad_length) {
+            return strings.pad_left(value, pad_width, pad_length);
+        });
+        Vue.filter('ellipsis', function (value, max_length = 20) {
+            return strings.ellipsis(value, max_length);
+        });
 
 		Object.defineProperties(Vue.prototype, {
 			'$api': {

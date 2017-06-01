@@ -54,6 +54,12 @@
     export default {
         name: 'PageKsAccordion',
 
+        data() {
+            return {
+                money: '5000'
+            }
+        },
+
         components: {
             KsAccordion,
             KsAccordionRow,
