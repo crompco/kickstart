@@ -51,9 +51,7 @@ export function cloneDate(date) {
  * @param days
  */
 export function subDays(date, days = 1) {
-	let d = new Date(date.getTime() - (days*24*60*60*1000));
-	d.setHours(0,0,0,0);
-	return d;
+    return dateModify(date, 'day', -1 * days);
 }
 
 /**
@@ -135,16 +133,11 @@ export function parseDate(date, format = 'Y-m-d') {
 
 	// Slice the date up based on our indexes
 	let year = parseInt(date.slice(y_index, y_index+4)),
-		month = parseInt(date.slice(m_index, m_index+2)),
+		month = parseInt(date.slice(m_index, m_index+2)) -1,
 		day = parseInt(date.slice(d_index, d_index+2));
 
 	// Build the new date
-	date = new Date;
-	date.setFullYear(year);
-	date.setMonth(month-1);
-	date.setDate(day);
-
-	return date;
+	return new Date(year, month, day);
 }
 
 export function dateModify(d, increment, val) {
@@ -192,7 +185,7 @@ export function dateModify(d, increment, val) {
 			d.setFullYear(d.getUTCFullYear() + val);
 			break;
 		default:
-			console.log('Error: Invalid date increment passed');
+			console.error('Invalid date increment passed');
 			break;
 	}
 	return d;
