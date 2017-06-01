@@ -20,14 +20,15 @@ export const slideDown = (el, timing = '0.4s ease', cb = null) => {
             cb(e);
         }
 
-        el.removeEventListener('transitionend', endingTransition, false)
+        el.removeEventListener('transitionend', endingTransition, false);
+        el.removeProperty('maxHeight');
     };
 
     requestAnimationFrame(function() {
         el.style.maxHeight = height + 'px';
         el.style.opacity = '1';
 
-        el.addEventListener('transitionend', endingTransition, false)
+        el.addEventListener('transitionend', endingTransition, false);
     });
 };
 
@@ -50,12 +51,12 @@ export const slideUp = (el, timing = '0.4s ease', cb = null) => {
             cb(e);
         }
 
-        el.removeEventListener('transitionend', endingTransition, false)
+        el.removeEventListener('transitionend', endingTransition, false);
     };
 
     requestAnimationFrame(function () {
         el.style.maxHeight = '0';
 
-        el.addEventListener('transitionend', endingTransition, false)
+        el.addEventListener('transitionend', endingTransition, false);
     });
 };
