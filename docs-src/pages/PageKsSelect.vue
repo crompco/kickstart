@@ -190,6 +190,16 @@
                             </td>
                         </tr>
                         <tr>
+                            <td>singleDeselect</td>
+                            <td>Boolean</td>
+                            <td>
+                                <pre>false</pre>
+                            </td>
+                            <td>
+                                Allows users to deselect a selected option.
+                            </td>
+                        </tr>
+                        <tr>
                             <td>multiple</td>
                             <td>Boolean</td>
                             <td>
