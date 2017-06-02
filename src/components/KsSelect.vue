@@ -15,7 +15,8 @@
 			<template v-else>
 				{{selected}}
 			</template>
-			<span class="ks-select-arrow"></span>
+            <span class="ks-select-deselect" v-if="showDeselect" @click.prevent.stop="clearSelection()">x</span>
+            <span class="ks-select-arrow"></span>
 		</div>
 
 		<div class="ks-select-dropdown" v-show="isOpen">
@@ -28,8 +29,6 @@
 					v-model="lookup_name"
 				    :placeholder="placeholder"
 					@keyup.esc="clear"
-					@keydown.backspace="backspace"
-
 					:class="{ 'is-multiple': multiple }"
 				>
 			</div>
@@ -45,6 +44,15 @@
 				class="autocomplete-list"
 				:style="'max-height:'+this.listHeight"
 			>
+                <!--<li-->
+                    <!--v-if="singleDeselect && !multiple"-->
+                    <!--class="placeholder-option"-->
+                    <!--:class="{ 'selected-item': -1 == selected_index }"-->
+                    <!--@mouseover="setHoverIndex(-1)"-->
+                    <!--@click.prevent="selectItem(-1)"-->
+                <!--&gt;-->
+                    <!--<em>{{placeholder}}</em>-->
+                <!--</li>-->
 				<li
 					v-for="(item, index) in list"
 					:class="{ 'selected-item': index == selected_index }"
@@ -108,6 +116,10 @@
 				type: Boolean,
 				default: false
 			},
+            singleDeselect: {
+			    type: Boolean,
+                default: false
+            }
 		},
 
 		data () {
@@ -116,6 +128,7 @@
 				loading: false,
 				selected: null,
                 startIndex: 0,
+//                minIndex: this.singleDeselect ? -1 : 0,
                 minIndex: 0,
 				selected_index: 0,
 				keyName: this.itemKey,
@@ -154,7 +167,10 @@
 				}
 
 				return false;
-			}
+			},
+            showDeselect() {
+                return !this.multiple && this.singleDeselect && this.selected ? true : false;
+            }
 		},
 
 		mounted() {
@@ -195,6 +211,25 @@
                 }
                 this.$emit('clear');
             },
+
+            clearSelection(s = null) {
+                let popped = null;
+
+                if ( this.multiple ) {
+                    let index = this.selected.indexOf(s);
+                    if ( index > -1 ) {
+                        popped = this.selected.splice(index, 1);
+                    }
+                } else {
+                    popped = this.selected;
+                    this.selected = null;
+                }
+
+                this.$emit('deleted', popped);
+                this.$emit('input', this.binds_objects ? null : '');
+                this.refreshSelected();
+            },
+
 			toggleOpen() {
 			    if ( !this.isOpen ) {
 			        this.open();
@@ -240,27 +275,37 @@
 					return;
 				}
 
-				let item = this.getItemByIndex(index);
-				if ( !item[this.keyName] ) {
-					console.log('Error: Could not find key: ' + this.keyName);
-				}
+				// If user is selecting index -1 then we should just clear the selection
+                // This should only happen when single deselect is active
+				if ( index == -1 ) {
+				    this.clearSelection();
+				    return this.resetSelect();
+                }
 
-				if ( this.binds_objects ) {
-					this.$emit('input', item);
-				} else {
-					this.$emit('input', item[this.keyName]);
-				}
+                // Find the item by the given index
+                let item = this.getItemByIndex(index);
+                if ( !item[this.keyName] ) {
+                    console.log('Error: Could not find key: ' + this.keyName);
+                }
 
-				this.resetList();
-				this.selected_index = 0;
-				this.lookup_name = '';
-				this.close();
-				this.$el.focus();
+                // Determine what value to emit
+                if ( this.binds_objects ) {
+                    this.$emit('input', item);
+                } else {
+                    this.$emit('input', item[this.keyName]);
+                }
+
+                // Reset the select to it starting state
+                this.resetSelect();
 			},
 
-			backspace() {
-
-			},
+            resetSelect() {
+                this.resetList();
+                this.selected_index = 0;
+                this.lookup_name = '';
+                this.close();
+                this.$el.focus();
+            },
 
 			refreshSelected() {
 				if ( !this.value ) {

@@ -43,6 +43,7 @@
                     :items="short_countries"
                     label-key="name"
                     v-model="country_code3"
+                    :single-deselect="true"
                 >
                     <template scope="props">
                         {{props.item.name}}

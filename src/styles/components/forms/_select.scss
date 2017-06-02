@@ -39,6 +39,9 @@
 		.autocomplete-list {
 			li {
 				border-color: transparent;
+                &.placeholder-option {
+                    color: darken($gray, 10%);
+                }
 			}
 		}
 	}
@@ -53,6 +56,26 @@
 			@include v-center();
 			right: 1rem;
 		}
+        .ks-select-deselect {
+            display: inline-block;
+            font-weight: bold;
+            font-size: 0.9rem;
+            font-family: "helvetica Neue", "Helvetica", sans-serif;
+            @include v-center();
+            right: 2.1rem;
+            padding: 0.25rem;
+            height: 1.75rem;
+            width: 1.75rem;
+            border-radius: 50%;
+            text-align: center;
+            border: solid 1px transparent;
+
+            &:hover {
+                background: $white;
+                color: $state-error;
+                border: solid 1px $state-error-bg;
+            }
+        }
 	}
 
 }
