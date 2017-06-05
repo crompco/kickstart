@@ -7,7 +7,7 @@
 				Simple Modal
 			</button>
 
-			<ks-modal title="Simple Modal" ref="modal1">
+			<ks-modal title="Simple Modal" ref="modal1" min-width="80%">
 				<p>
 					This is a simple modal with just a title and content
 				</p>

@@ -60,6 +60,10 @@
 			maxWidth: {
 				default: '50%'
 			},
+            minWidth: {
+			    type: String,
+                default: null
+            },
 			closeOnEscape: {
 				type: Boolean,
 				default: true
@@ -81,7 +85,8 @@
 			modalStyle() {
 				return {
 					maxHeight: this.maxHeight,
-					maxWidth: this.maxWidth
+					maxWidth: this.maxWidth,
+                    minWidth: this.minWidth
 				}
 			}
 		},
