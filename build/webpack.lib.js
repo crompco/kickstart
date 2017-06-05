@@ -32,6 +32,7 @@ const config = {
         strings: ['./src/helpers/strings.js'],
         objects: ['./src/helpers/objects.js'],
         dates: ['./src/helpers/dates.js'],
+        events: ['./src/helpers/events.js'],
     },
 
     output: {
