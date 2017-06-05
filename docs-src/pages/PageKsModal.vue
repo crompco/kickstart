@@ -7,7 +7,7 @@
 				Simple Modal
 			</button>
 
-			<ks-modal title="Simple Modal" ref="modal1" min-width="80%">
+			<ks-modal title="Simple Modal" ref="modal1">
 				<p>
 					This is a simple modal with just a title and content
 				</p>
@@ -214,6 +214,18 @@
                                 <td>String</td>
                                 <td><pre>NULL</pre></td>
                                 <td>The minimum width that should be allowed for the modal</td>
+                            </tr>
+                            <tr>
+                                <td>maxHeight</td>
+                                <td>String</td>
+                                <td><pre>NULL</pre></td>
+                                <td>The maximum height that should be allowed for the modal</td>
+                            </tr>
+                            <tr>
+                                <td>minHeight</td>
+                                <td>String</td>
+                                <td><pre>NULL</pre></td>
+                                <td>The minimum height that should be allowed for the modal</td>
                             </tr>
 							<tr>
 								<td>closeOnEscape</td>

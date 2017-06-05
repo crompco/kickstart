@@ -64,6 +64,14 @@
 			    type: String,
                 default: null
             },
+            maxHeight: {
+			    type: String,
+                default: null
+            },
+            minHeight: {
+                type: String,
+                default: null
+            },
 			closeOnEscape: {
 				type: Boolean,
 				default: true
@@ -84,7 +92,8 @@
 		computed: {
 			modalStyle() {
 				return {
-					maxHeight: this.maxHeight,
+                    maxHeight: this.maxHeight,
+                    minHeight: this.minHeight,
 					maxWidth: this.maxWidth,
                     minWidth: this.minWidth
 				}
