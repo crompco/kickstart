@@ -209,6 +209,12 @@
 								<td><pre>'50%'</pre></td>
 								<td>The maximum width that should be allowed for the modal</td>
 							</tr>
+                            <tr>
+                                <td>minWidth</td>
+                                <td>String</td>
+                                <td><pre>NULL</pre></td>
+                                <td>The minimum width that should be allowed for the modal</td>
+                            </tr>
 							<tr>
 								<td>closeOnEscape</td>
 								<td>Boolean</td>
