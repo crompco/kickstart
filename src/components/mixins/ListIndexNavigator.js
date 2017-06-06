@@ -56,6 +56,10 @@ export default {
             type: Number,
             default: 100
         },
+        groupBy: {
+            type: [String],
+            default: null
+        }
     },
 
     data() {
@@ -124,6 +128,31 @@ export default {
             return this.list.length - 1;
         },
 
+        groups() {
+            if ( !this.groupBy ) {
+                return {};
+            }
+
+            let groups = {}
+
+            // Using custom group by in order to retain the original index for selecting the items
+            for ( let i in this.list ) {
+                let group = object_get(this.list[i], this.groupBy);
+
+                // Initialize the group
+                if ( typeof groups[group] == 'undefined' ) {
+                    groups[group] = [];
+                }
+
+                // Push the group with the original index as _index
+                groups[group].push({
+                    ...this.list[i],
+                    _index: i
+                });
+            }
+
+            return groups;
+        }
     },
 
     methods: {
@@ -365,7 +394,12 @@ export default {
             }
         },
 
-        getSearchStartIndex() {
+        /**
+         *
+         * @returns {Number}
+         */
+        getSearchStartIndex()
+        {
             return parseInt(this.startIndex);
         },
 

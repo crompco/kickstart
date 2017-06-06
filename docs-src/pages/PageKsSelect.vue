@@ -50,6 +50,24 @@
                     </template>
                 </ks-select>
             </div>
+
+            <p>Group Select</p>
+            <div class="form-group">
+                <div class="label">Country</div>
+                <ks-select
+                    name="name"
+                    :items="characters"
+                    group-by="show"
+                    label-key="name"
+                    v-model="character"
+                    :single-deselect="true"
+                >
+                    <template scope="props">
+                        {{props.item.name}}
+                    </template>
+                </ks-select>
+                <pre>{{character}}</pre>
+            </div>
         </div>
         <div class="alert warning">
             <strong>Warning v-model usage:</strong>
@@ -386,9 +404,11 @@
 		data() {
 			return {
 				countries: [],
+                characters: [],
 				country: '',
                 country_code2: 'AW',
                 country_code3: '',
+                character: '',
                 short_countries: [
                     {
                         name: 'USA',
@@ -408,6 +428,9 @@
 			api.get('/countries.json').then((data) => {
 				this.countries = data;
 			});
+            api.get('/characters.json').then((data) => {
+                this.characters = data;
+            });
 		},
 
 		methods: {

@@ -38,10 +38,17 @@
 
 		.autocomplete-list {
 			li {
-				border-color: transparent;
+				border: 1px solid transparent;
                 &.placeholder-option {
                     color: darken($gray, 10%);
                 }
+				ul {
+					list-style: none;
+					padding: 0;
+					li {
+						padding-left: 1rem;
+					}
+				}
 			}
 		}
 	}
