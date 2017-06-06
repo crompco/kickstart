@@ -13,7 +13,8 @@ export default {
         buttons: {
             type: Boolean,
             default: false
-        }
+        },
+        classNames: String,
     },
 
     computed: {
@@ -49,6 +50,16 @@ export default {
             }
 
             return optionsList;
+        },
+        groupClass() {
+            let classes = {
+                'option-buttons': this.buttons
+            };
+
+            if ( this.classNames ) {
+                classes[this.classNames] = true;
+            }
+            return classes;
         }
     },
 }

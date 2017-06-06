@@ -38,7 +38,6 @@
 				type: String,
 				required: true
 			},
-			classNames: String,
 			options: {},
 			valueKey: {
 				type: String,
@@ -49,17 +48,6 @@
 				default: 'label'
 			},
 		},
-
-        computed: {
-		    groupClass() {
-                let classes = {
-                    'option-buttons': this.buttons
-                };
-
-                classes[this.classNames] = true;
-                return classes;
-            }
-        },
 
 		data() {
 			return {

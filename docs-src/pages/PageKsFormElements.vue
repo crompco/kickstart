@@ -64,6 +64,7 @@
                 Each option is an object
             </ks-checkbox-group>
             <pre>{{values.checkbox2}}</pre>
+
         </div>
 
 
@@ -84,6 +85,34 @@
 						<div class="label">Autocomplete</div>
 						<ks-autocomplete></ks-autocomplete>
 					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="tab-half">
+					<ks-checkbox-group
+							class="form-group"
+							name="group2"
+							:options="buttonGroup"
+							:buttons="true"
+							value-key="code"
+							label-key="name"
+							v-model="values.checkbox3"
+					>
+						Checkbox Button Set
+					</ks-checkbox-group>
+				</div>
+				<div class="tab-half">
+					<ks-radio-group
+							class="form-group"
+							name="group2"
+							:options="buttonGroup"
+							:buttons="true"
+							value-key="code"
+							label-key="name"
+							v-model="values.group3"
+					>
+						Radio Button Set
+					</ks-radio-group>
 				</div>
 			</div>
 			<div class="row">
@@ -115,6 +144,8 @@
 				</div>
 			</div>
 		</form>
+
+		<div style="height: 300px;"></div>
 	</div>
 </template>
 
@@ -138,11 +169,13 @@
 				values: {
 					group1: '',
 					group2: '',
+					group3: '',
 					radio1: 1,
 					radio1a: '',
 					checkbox1: [1],
 					checkbox1a: [],
                     checkbox2: [],
+                    checkbox3: [],
                     checkboxButtons: [],
                     radioButtons: []
 				},

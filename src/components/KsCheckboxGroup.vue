@@ -1,5 +1,5 @@
 <template>
-	<div class="ks-checkbox-group" :class="classNames">
+	<div class="ks-checkbox-group" :class="groupClass">
 		<label class="ks-checkbox-group-title label">
 			<slot>{{label}}</slot>
 		</label>
@@ -37,7 +37,6 @@
 				type: String,
 				required: true
 			},
-			classNames: String,
 		},
 
 		components: {
