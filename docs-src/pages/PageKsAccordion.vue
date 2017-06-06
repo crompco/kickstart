@@ -38,6 +38,15 @@
                     <p>Etiam congue dictum ante, tincidunt tristique nunc tempus in. Nulla facilisi. Praesent tempor ex vel porta lacinia. Praesent nunc elit, dapibus at lacinia in, blandit vitae elit. Praesent enim justo, fermentum ac vestibulum nec, convallis et nibh. Pellentesque vulputate eu leo nec aliquet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut placerat odio a nulla finibus, et faucibus nibh facilisis. Suspendisse cursus, lacus posuere tempus aliquam, felis sapien lobortis nisi, eu posuere dui tortor at risus. Etiam non sem ut dui scelerisque consequat a ut nibh. Aliquam at ante at quam efficitur placerat imperdiet ut lorem.</p>
                 </ks-accordion-row>
             </ks-accordion>
+
+            <br>
+            <br>
+            <br>
+
+            <ks-accordion>
+                <ks-accordion-row title="Row 1">ROW 1</ks-accordion-row>
+                <ks-accordion-row title="Row 2">ROW 2</ks-accordion-row>
+            </ks-accordion>
         </div>
     </div>
 </template>

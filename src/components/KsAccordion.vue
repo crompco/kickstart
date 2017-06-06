@@ -36,6 +36,7 @@
             setActiveAccordion(accordion) {
                 if ( this.collapsible == true ) {
                     for ( let acc of this.accordions ) {
+
                         if ( acc.$data.showContent === true && acc != accordion ) {
                             acc.setActive(false);
                         } else if ( acc == accordion ) {

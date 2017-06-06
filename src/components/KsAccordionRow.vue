@@ -22,7 +22,6 @@
     // External Dependencies
 
     // Internal Dependencies
-    let parent = null;
 
     export default {
         name: 'KsAccordionRow',
@@ -33,21 +32,22 @@
 
         data() {
             return {
-                showContent: false
+                showContent: false,
+                parent: false
             }
         },
 
         mounted() {
             this.$nextTick(() => {
-                parent = this.getAccordionParent(this);
+                this.parent = this.getAccordionParent(this);
 
-                parent.registerAccordion(this);
+                this.parent.registerAccordion(this);
             });
         },
 
         methods: {
             handleClick(e) {
-                parent.setActiveAccordion(this);
+                this.parent.setActiveAccordion(this);
             },
 
             getAccordionParent(vm) {

@@ -19,6 +19,23 @@
                 </ks-autocomplete>
             </div>
 
+            <div>
+                <pre>
+                    <code class="language-html">
+                         &lt;ks-autocomplete
+                            selection-key="name"
+                            v-model="value1"
+                            @search="runSearch"
+                            :paginated="true"
+                        >
+                             &lt;template scope="props">
+                                {{&quot;{&quot; + &quot;{ props.item.name }&quot; + &quot;}&quot;}}
+                             &lt;/template>
+                         &lt;/ks-autocomplete>
+                    </code>
+                </pre>
+            </div>
+
             <div class="form-group">
                 <div class="label">Passed items</div>
                 <ks-autocomplete
@@ -30,6 +47,22 @@
                         {{props.item.name}}
                     </template>
                 </ks-autocomplete>
+            </div>
+
+            <div>
+                <pre>
+                    <code class="language-html">
+                         &lt;ks-autocomplete
+                            :items="countries"
+                            selection-key="name"
+                            v-model="value2"
+                        >
+                             &lt;template scope="props">
+                                {{&quot;{&quot; + &quot;{ props.item.name }&quot; + &quot;}&quot;}}
+                             &lt;/template>
+                         &lt;/ks-autocomplete>
+                    </code>
+                </pre>
             </div>
 
             <div class="form-group">
@@ -47,6 +80,24 @@
                 </ks-autocomplete>
             </div>
 
+            <div>
+                <pre>
+                    <code class="language-html">
+                         &lt;ks-autocomplete
+                            :items="countries"
+                            selection-key="name"
+                            :multiple="true"
+                            v-model="value3"
+                            @search="runSearch"
+                        >
+                             &lt;template scope="props">
+                                &lt;strong>{{&quot;{&quot; + &quot;{props.item.name}&quot; + &quot;}&quot;}}&lt;/strong> &lt;em>{{&quot;{&quot; + &quot;{props.item.code}&quot; + &quot;}&quot;}}&lt;/em>
+                             &lt;/template>
+                         &lt;/ks-autocomplete>
+                    </code>
+                </pre>
+            </div>
+
             <div class="form-group">
                 <div class="label">Multiple Selections with taggable (add new, minSearch of 0)</div>
                 <ks-autocomplete
@@ -62,6 +113,26 @@
                         <strong>{{props.item.name}}</strong> <em>{{props.item.code}}</em>
                     </template>
                 </ks-autocomplete>
+            </div>
+
+            <div>
+                <pre>
+                    <code class="language-html">
+                         &lt;ks-autocomplete
+                            :min-search="0"
+                            :taggable="true"
+                            selection-key="name"
+                            v-model="value4"
+                            :paginated="true"
+                            :show-tag-in-list="true"
+                            @search="runSearch"
+                        >
+                             &lt;template scope="props">
+                                &lt;strong>{{&quot;{&quot; + &quot;{props.item.name}&quot; + &quot;}&quot;}}&lt;/strong> &lt;em>{{&quot;{&quot; + &quot;{props.item.code}&quot; + &quot;}&quot;}}&lt;/em>
+                             &lt;/template>
+                         &lt;/ks-autocomplete>
+                    </code>
+                </pre>
             </div>
         </div>
 
