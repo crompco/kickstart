@@ -1,5 +1,5 @@
 <template>
-	<label class="ks-radio" :class="classStates" @click="toggle">
+	<label class="ks-radio" :class="classStates" @click.stop="toggle">
 		<input
 			type="radio"
 			:name="name"
@@ -65,14 +65,10 @@
 
 		methods: {
 			toggle() {
-				this.$emit('input', this.value);
+			    if ( this.checked != this.value ) {
+                    this.$emit('input', this.value);
+                }
 			},
-		},
-
-		watch: {
-			selectedValue() {
-				this.refreshChecked();
-			}
 		},
 	}
 </script>

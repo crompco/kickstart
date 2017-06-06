@@ -50,6 +50,21 @@
             >
                 Each option is an object
             </ks-radio-group>
+            <pre>{{values.group2}}</pre>
+
+
+            <ks-checkbox-group
+                class="form-group"
+                name="group2"
+                :options="radioGroup"
+                value-key="code"
+                label-key="name"
+                v-model="values.checkbox2"
+            >
+                Each option is an object
+            </ks-checkbox-group>
+            <pre>{{values.checkbox2}}</pre>
+
         </div>
 
 
@@ -70,6 +85,34 @@
 						<div class="label">Autocomplete</div>
 						<ks-autocomplete></ks-autocomplete>
 					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="tab-half">
+					<ks-checkbox-group
+							class="form-group"
+							name="group2"
+							:options="buttonGroup"
+							:buttons="true"
+							value-key="code"
+							label-key="name"
+							v-model="values.checkbox3"
+					>
+						Checkbox Button Set
+					</ks-checkbox-group>
+				</div>
+				<div class="tab-half">
+					<ks-radio-group
+							class="form-group"
+							name="group2"
+							:options="buttonGroup"
+							:buttons="true"
+							value-key="code"
+							label-key="name"
+							v-model="values.group3"
+					>
+						Radio Button Set
+					</ks-radio-group>
 				</div>
 			</div>
 			<div class="row">
@@ -101,13 +144,16 @@
 				</div>
 			</div>
 		</form>
+
+		<div style="height: 300px;"></div>
 	</div>
 </template>
 
 
 <script>
 	import KsRadio from '../../src/components/KsRadio.vue';
-	import KsRadioGroup from '../../src/components/KsRadioGroup.vue';
+    import KsRadioGroup from '../../src/components/KsRadioGroup.vue';
+    import KsCheckboxGroup from '../../src/components/KsCheckboxGroup.vue';
 	import KsCheckbox from '../../src/components/KsCheckbox.vue';
 	import api from '../../src/helpers/api';
 	import KsAutocomplete from '../../src/components/KsAutocomplete.vue';
@@ -123,12 +169,18 @@
 				values: {
 					group1: '',
 					group2: '',
+					group3: '',
 					radio1: 1,
 					radio1a: '',
 					checkbox1: [1],
-					checkbox1a: []
+					checkbox1a: [],
+                    checkbox2: [],
+                    checkbox3: [],
+                    checkboxButtons: [],
+                    radioButtons: []
 				},
-				radioGroup: []
+				radioGroup: [],
+                buttonGroup: [],
 			};
 		},
 
@@ -136,7 +188,8 @@
 
 		mounted() {
 			api.get('/countries.json').then((data) => {
-				this.radioGroup = data.slice(0, 10);
+                this.radioGroup = data.slice(0, 7);
+                this.buttonGroup = data.slice(0, 3);
 			});
 		},
 
@@ -160,7 +213,8 @@
 			KsRadio,
 			KsRadioGroup,
 			KsCheckbox,
-            KsAutocomplete
+            KsAutocomplete,
+            KsCheckboxGroup
 		}
 	}
 </script>
