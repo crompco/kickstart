@@ -5,6 +5,7 @@
 	display: flex;
 	align-items: center;
 	margin-bottom: rem($form-options-margin-bottom);
+    user-select: none;
 
 	&.inline {
 		display: inline-flex;
@@ -77,4 +78,8 @@
 	.ks-checkbox-label-wrapper, .ks-radio-label-wrapper {
 		line-height: rem($form-options-height);
 	}
+
+    &:hover {
+        cursor: pointer;
+    }
 }

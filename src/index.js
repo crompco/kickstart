@@ -1,6 +1,7 @@
 import KsAutocomplete from './components/KsAutocomplete.vue';
 import KsCalendar from './components/KsCalendar.vue';
 import KsCheckbox from './components/KsCheckbox.vue';
+import KsCheckboxGroup from './components/KsCheckboxGroup.vue';
 import KsDatepicker from './components/KsDatepicker.vue';
 import KsLoaderSpin from './components/KsLoaderSpin.vue';
 import KsLoaderLine from './components/KsLoaderLine.vue';
@@ -66,7 +67,8 @@ const Kickstart = {
 
 		Vue.component('ks-autocomplete', KsAutocomplete)
 		Vue.component('ks-calendar', KsCalendar)
-		Vue.component('ks-checkbox', KsCheckbox)
+        Vue.component('ks-checkbox', KsCheckbox)
+        Vue.component('ks-checkbox-group', KsCheckboxGroup)
 		Vue.component('ks-datepicker', KsDatepicker)
 		Vue.component('ks-loader-spin', KsLoaderSpin)
 		Vue.component('ks-loader-line', KsLoaderLine)
