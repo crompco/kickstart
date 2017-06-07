@@ -246,6 +246,16 @@
                             </td>
                         </tr>
                         <tr>
+                            <td>groupBy</td>
+                            <td>String</td>
+                            <td>
+                                <pre>NULL</pre>
+                            </td>
+                            <td>
+                                The key to group items by. Dot notation is supported for nested values in the items.
+                            </td>
+                        </tr>
+                        <tr>
                             <td>singleDeselect</td>
                             <td>Boolean</td>
                             <td>

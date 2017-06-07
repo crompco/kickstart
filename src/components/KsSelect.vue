@@ -45,8 +45,8 @@
 				:style="'max-height:'+this.listHeight"
 			>
 				<template v-if="groupBy">
-					<li v-for="(group_list, group) in groups">
-						<strong class="opt-group">{{group}}</strong>
+					<li v-for="(group_list, group) in groups" class="opt-group">
+						<strong>{{group}}</strong>
 						<ul>
 							<li
 								v-for="(item, index) in group_list"
