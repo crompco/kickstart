@@ -44,11 +44,18 @@
                     :items="countries"
                     label-key="name"
                     v-model="country_code2"
-                >
-                    <template scope="props">
-                        {{props.item.name}}
-                    </template>
-                </ks-select>
+                ></ks-select>
+
+                <code-block>
+                    <code class="language-html" v-pre>
+                        &lt;ks-select
+                            name="code"
+                            :items="countries"
+                            label-key="name"
+                            v-model="country_code2"
+                        >&lt;/ks-select>
+                    </code>
+                </code-block>
             </div>
 
             <p>Select without the search</p>
@@ -58,13 +65,21 @@
                     name="code"
                     :items="short_countries"
                     label-key="name"
-                    v-model="country_code3"
                     :single-deselect="true"
-                >
-                    <template scope="props">
-                        {{props.item.name}}
-                    </template>
-                </ks-select>
+                    v-model="country_code3"
+                ></ks-select>
+
+                <code-block>
+                    <code class="language-html" v-pre>
+                        &lt;ks-select
+                            name="code"
+                            :items="short_countries"
+                            label-key="name"
+                            :single-deselect="true"
+                            v-model="country_code3"
+                        >&lt;/ks-select>
+                    </code>
+                </code-block>
             </div>
 
             <p>Group Select</p>
@@ -73,16 +88,23 @@
                 <ks-select
                     name="name"
                     :items="characters"
-                    group-by="show"
                     label-key="name"
+                    group-by="show"
                     v-model="character"
                     :single-deselect="true"
-                >
-                    <template scope="props">
-                        {{props.item.name}}
-                    </template>
-                </ks-select>
-                <pre>{{character}}</pre>
+                ></ks-select>
+                <code-block>
+                    <code class="language-html" v-pre>
+                        &lt;ks-select
+                            name="name"
+                            :items="characters"
+                            label-key="name"
+                            v-model="character"
+                            group-by="show"
+                            :single-deselect="true"
+                        >&lt;/ks-select>
+                    </code>
+                </code-block>
             </div>
         </div>
         <div class="alert warning">

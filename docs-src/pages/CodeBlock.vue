@@ -1,9 +1,7 @@
 <template>
     <ks-accordion class="col code-block-accordion">
         <ks-accordion-row title="Show Code">
-            <pre>
-                <slot></slot>
-            </pre>
+            <pre><slot></slot></pre>
         </ks-accordion-row>
     </ks-accordion>
 </template>

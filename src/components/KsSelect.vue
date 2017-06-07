@@ -55,7 +55,7 @@
 								@mouseover="setHoverIndex(item._index)"
 							>
 								<!-- Scoped slot -->
-								<slot :item="item">{{item[this.labelKey]}}</slot>
+								<slot :item="item">{{item[labelKey]}}</slot>
 							</li>
 						</ul>
 					</li>
@@ -68,8 +68,8 @@
 						@mouseover="setHoverIndex(index)"
 
 					>
-						<!-- Scoped slot -->
-						<slot :item="item">{{item[this.labelKey]}}</slot>
+						<!-- Scoped slot  that defaults to the labelKey-->
+						<slot :item="item">{{item[labelKey]}}</slot>
 					</li>
 				</template>
 			</ul>
