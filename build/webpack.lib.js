@@ -18,17 +18,22 @@ const config = {
         KsLoaderLine: ['./src/components/KsLoaderLine.vue'],
         KsLoaderSpin: ['./src/components/KsLoaderSpin.vue'],
         KsCheckbox: ['./src/components/KsCheckbox.vue'],
+        KsCheckboxGroup: ['./src/components/KsCheckboxGroup.vue'],
         KsRadio: ['./src/components/KsRadio.vue'],
-        KsRadioGRoup: ['./src/components/KsRadioGroup.vue'],
+        KsRadioGroup: ['./src/components/KsRadioGroup.vue'],
         KsSelect: ['./src/components/KsSelect.vue'],
         KsToast: ['./src/components/KsToast.vue'],
         KsPaginator: ['./src/components/KsPaginator.vue'],
         KsActionMenu: ['./src/components/KsActionMenu.vue'],
+        KsStepThrough: ['./src/components/KsStepThrough.vue'],
+        KsAccordion: ['./src/components/KsAccordion'],
+        KsAccordionRow: ['./src/components/KsAccordionRow'],
         // Helpers
         api: ['./src/helpers/api.js'],
         strings: ['./src/helpers/strings.js'],
         objects: ['./src/helpers/objects.js'],
         dates: ['./src/helpers/dates.js'],
+        events: ['./src/helpers/events.js'],
     },
 
     output: {

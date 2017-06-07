@@ -12,15 +12,19 @@
 	@include form-input(false);
 	background: $select-bg;
 	padding: 0;
-	border: 0;
 	margin-bottom: rem($form-block-margin-bottom);
 
 	.ks-select-dropdown {
-		border: solid $select-dropdown-border-color;
-		border-width: 0 1px;
+        border: 0;
+		position: absolute;
+		width: 100%;
+		background: $select-bg;
+		z-index: 2;
 
 		.ks-select-dropdown-input {
 			padding: rem($select-input-padding);
+			box-shadow: 0px -1px 0 0px #fff, 0 0 0 1px #aaa;
+			background: $select-bg;
 
 			> input:not(.is-multiple) {
 				@include ks-autocomplete-input;
@@ -34,7 +38,17 @@
 
 		.autocomplete-list {
 			li {
-				border-color: transparent;
+				border: 1px solid transparent;
+                &.placeholder-option {
+                    color: darken($gray, 10%);
+                }
+				ul {
+					list-style: none;
+					padding: 0;
+					li {
+						padding-left: 1rem;
+					}
+				}
 			}
 		}
 	}
@@ -42,13 +56,33 @@
 	.ks-select-selection {
 		position: relative;
 		padding: rem($select-selected-padding);
-		border: 1px solid $select-border-color;
+		border: none;
 
 		.ks-select-arrow {
 			@include triangle-down($size: rem(9px), $color: $select-arrow-color);
 			@include v-center();
 			right: 1rem;
 		}
+        .ks-select-deselect {
+            display: inline-block;
+            font-weight: bold;
+            font-size: 0.9rem;
+            font-family: "helvetica Neue", "Helvetica", sans-serif;
+            @include v-center();
+            right: 2.1rem;
+            padding: 0.25rem;
+            height: 1.75rem;
+            width: 1.75rem;
+            border-radius: 50%;
+            text-align: center;
+            border: solid 1px transparent;
+
+            &:hover {
+                background: $white;
+                color: $state-error;
+                border: solid 1px $state-error-bg;
+            }
+        }
 	}
 
 }

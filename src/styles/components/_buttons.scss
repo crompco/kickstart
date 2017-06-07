@@ -26,6 +26,13 @@
 		@include disable;
 	}
 
+    &.danger {
+        @include state-danger;
+        &:hover {
+            @include state-danger-hover();
+        }
+    }
+
 	@each $name, $map in $buttons {
 		$bg-color: get($map, background-color);
 

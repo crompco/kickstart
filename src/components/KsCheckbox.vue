@@ -5,8 +5,7 @@
 			:name="name"
 			:value="value"
 			:checked="isChecked"
-			@change="change"
-			@click="toggle"
+            @click="toggle"
 		>
 		<div class="ks-checkbox-input-wrapper">
 			<checkmark v-show="isChecked"></checkmark>
@@ -38,7 +37,7 @@
 			label: String,
 			value: {},
 			checked: {
-				type: [String, Array]
+				type: [String, Array, Boolean]
 			},
 			disabled: {
 				type: Boolean,
@@ -86,9 +85,6 @@
 				} else {
 					this.$emit('input', this.removeValue(this.checked));
 				}
-			},
-			change(e) {
-				this.$emit('change', this.isChecked, e);
 			},
 			removeValue(checked) {
 				let index = looseIndexOf(checked, this.value);

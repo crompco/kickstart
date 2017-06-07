@@ -3,6 +3,7 @@
 
 .ks-action-menu {
     display: inline-block;
+    position: relative;
 
     .menu-button {
         border: $am-button-border;
@@ -10,6 +11,8 @@
         padding: rem($am-button-padding);
         outline: none;
         cursor: pointer;
+        position: relative;
+        z-index: 2;
 
         svg {
             vertical-align: middle;
@@ -20,6 +23,8 @@
         background: $am-list-bg;
         min-width: $am-list-min-width;
         display: none;
+        z-index: 3;
+        box-shadow: $am-box-shadow-bottom;
 
         &.active {
             display: block;
@@ -45,13 +50,6 @@
                 background: $am-list-link-hover-bg;
                 color: $am-list-link-hover-color;
             }
-        }
-
-        &.tether-target-attached-top {
-            box-shadow: $am-box-shadow-top;
-        }
-        &.tether-target-attached-bottom {
-            box-shadow: $am-box-shadow-bottom;
         }
     }
 }

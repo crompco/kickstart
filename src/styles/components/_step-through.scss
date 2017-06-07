@@ -1,0 +1,77 @@
+@import "../functions/utils";
+@import "../variables/step-through";
+
+.steps {
+    padding: 1em 2em;
+    > ul {
+        display: flex;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        align-items: stretch;
+        li {
+            position: relative;
+            text-align: center;
+            flex-grow: 1;
+            a {
+                display: block;
+                text-decoration: none;
+            }
+            div.num {
+                position: relative;
+                z-index: 5;
+
+                border-radius: 50%;
+                height: 1.5em;
+                width: 1.5em;
+                padding: 0.25em;
+                text-decoration: none;
+                background: $steps-number-bg;
+                display: inline-block;
+                vertical-align: middle;
+                color: $steps-number-color;
+            }
+
+            p {
+                color: $steps-text-color
+            }
+
+            &.active {
+                font-weight: bold;
+            }
+
+            &.active div.num,
+            &.completed div.num,
+            a:hover:not(.disabled) div.num {
+                color: $steps-active-number-color;
+                background: $steps-active-number-bg;
+            }
+            .step-line {
+                position: absolute;
+                width: 100%;
+                height: 5px;
+                background: white;
+                top: 0.75em;
+                z-index: 1;
+            }
+            &.active .step-line
+            {
+                background: $steps-line-color;
+            }
+            &.completed {
+                a .num {
+                    background: $steps-complete-number-bg;
+                    color: $steps-complete-number-color;
+                }
+                .step-line {
+                    background: $steps-line-complete-color;
+                }
+                p {
+                    font-weight: bold;
+                    color: $steps-complete-color;
+                }
+            }
+
+        }
+    }
+}

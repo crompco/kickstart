@@ -1,8 +1,22 @@
 <template>
     <div class="ks-calendar" tabindex="-1">
         <div class="ks-calendar-title">
-	        <a href="" @click.prevent="closeYear">{{month}}</a>
-	        <a href="" v-if="yearPicker" @click.prevent="openYear">{{year}}</a>
+	        <a href=""
+               v-if="monthPicker"
+               @click.prevent="toggleMonthPicker"
+               :class="{'open-picker': monthPickerOpen }"
+            >
+                {{month}} <down-svg></down-svg>
+            </a>
+            <span v-else>{{month}}</span>
+
+            <a href=""
+               v-if="yearPicker"
+               @click.prevent="toggleYearPicker"
+               :class="{'open-picker': yearPickerOpen }"
+            >
+                {{year}} <down-svg></down-svg>
+            </a>
 	        <span v-else>{{year}}</span>
         </div>
         <div
@@ -10,7 +24,7 @@
 			:class="{'interactive': interactive}"
             ref="calendar"
         >
-	        <div v-show="!yearPickerOpen">
+	        <div v-show="!yearPickerOpen && !monthPickerOpen">
 	            <!-- Calendar Controls -->
 	            <div class="ks-calendar-controls">
 		            <button @click.prevent="previous" class="ctrl-left" ref="previous">&lt;</button>
@@ -59,6 +73,17 @@
 		            </div>
 	            </div>
 	        </div>
+            <div v-show="monthPickerOpen" class="month-selection">
+                <div
+                    v-for="(m, index) in lang.months.names"
+                    :class="{ 'selected-month': m == month}"
+                    tabindex="0"
+                    @click.prevent="changeMonth(index)"
+                    @keydown.enter.stop.prevent="changeMonth(index)"
+                >
+                    <div>{{m}}</div>
+                </div>
+            </div>
 	        <div v-show="yearPickerOpen">
 		        <ul class="year-selection">
 			        <li
@@ -90,6 +115,7 @@
 	} from '../helpers/dates';
 	import {mouseHold} from '../helpers/events';
 	import {pad_left} from '../helpers/strings';
+    import DownSvg from '../svg/cheveron-down.svg';
 
     export default {
         name: 'KsCalendar',
@@ -148,7 +174,8 @@
             	lang: defaultLocale,
 	            first_day: '',
 	            last_day: '',
-	            yearPickerOpen: false
+	            yearPickerOpen: false,
+                monthPickerOpen: false,
             };
         },
 
@@ -203,13 +230,13 @@
         		let weeks = [], week = [];
 
         		// Pre fill the previous days in the week
-			    if ( this.weekStart != this.days[0].getDay() ) {
+			    if ( this.weekStart != this.days[0].getUTCDay() ) {
 				    let day = this.days[0];
 
 				    do {
 					    day = subDays(day, 1);
 					    week.unshift(day);
-				    } while ( day.getDay() != this.weekStart );
+				    } while ( day.getUTCDay() != this.weekStart );
 			    }
 
 			    // Push the first day
@@ -217,7 +244,7 @@
 
 			    // Run through the other days
 			    for ( var i = 1; i < this.days.length; i++ ) {
-				    if ( this.weekStart == this.days[i].getDay() ) {
+				    if ( this.weekStart == this.days[i].getUTCDay() ) {
 					    weeks.push(week);
 					    week = [];
 				    }
@@ -285,6 +312,17 @@
 			    this.$el.focus();
 		    },
 
+            /**
+             * Sets the month of the calendar
+             */
+            changeMonth(month) {
+                let new_date = cloneDate(this.date_obj);
+                new_date.setUTCMonth(parseInt(month));
+                this.$emit('input', this.formatDate(new_date));
+                this.closeMonth();
+                this.$el.focus();
+            },
+
 		    /**
 		     * Checks if the day is in the current month
 		     *
@@ -338,11 +376,39 @@
 			    this.$emit('next');
 		    },
 
+            toggleMonthPicker() {
+                if ( this.monthPickerOpen ) {
+                    return this.closeMonth();
+                }
+
+                return this.openMonth();
+            },
+
+            openMonth() {
+		        this.monthPickerOpen = true;
+		        this.closeYear();
+            },
+
+            closeMonth() {
+		        this.monthPickerOpen = false;
+
+            },
+
+            toggleYearPicker() {
+		        if ( this.yearPickerOpen ) {
+		            return this.closeYear();
+                }
+
+                return this.openYear();
+            },
+
 		    /**
 		     * Open the year picker
 		     */
 		    openYear() {
 		    	this.yearPickerOpen = true;
+                this.closeMonth();
+
 			    this.$nextTick(() => {
 			    	let offsetHeight = this.$refs.calendar.offsetHeight;
 			    	let scrollTop = this.$refs.calendar.scrollHeight / 2 - (offsetHeight/2);
@@ -356,7 +422,11 @@
 		    closeYear() {
 			    this.yearPickerOpen = false;
 		    }
-	    }
+	    },
+
+		components: {
+            DownSvg
+		}
 
     }
 </script>

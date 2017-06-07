@@ -6,7 +6,7 @@
 .form-group {
 	margin-bottom: rem($form-group-margin-bottom);
 
-	label, .label {
+	.label {
 		max-width: 100%;
 		margin-bottom: rem($form-title-margin-bottom);
 		display: block;
@@ -25,6 +25,13 @@
 			vertical-align: top;
 		}
 	}
+
+    .error-msg {
+        color: $form-error-color;
+        background: $form-error-bg-color;
+        font-size: $form-error-font-size;
+        padding: $form-error-padding;
+    }
 
 	[type='text'],
 	[type='password'],

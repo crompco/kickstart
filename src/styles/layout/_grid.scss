@@ -3,6 +3,7 @@
 // Internal
 @import "../mixins/_grid";
 @import "../variables/_grid";
+@import "../functions/_utils";
 
 @each $name, $map in $breakpoint-list {
     @include breakpoint($map) {
@@ -39,6 +40,10 @@
     }
 }
 
+.row-collapse {
+    @include grid-collapse($grid-sm);
+}
+
 .container {
     @include grid-container;
     max-width: $container-width;
@@ -58,4 +63,8 @@
 
 .full-height {
     height: 100%;
+}
+
+.col {
+    margin-bottom: rem($grid-margin-bottom);
 }

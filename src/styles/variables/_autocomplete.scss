@@ -41,10 +41,12 @@ $ac-list-item-hover-bg: darken(get($brand, light), 2%) !default;
 //
 // Multiple
 //
-$ac-multi-bg: get($brand, lighter) !default;
+$ac-multi-bg: lighten($state-default-bg, 5%) !default;
 $ac-multi-margin: 4px !default;
 $ac-multi-padding: 3px 5px !default;
 $ac-multi-border-radius: 3px !default;
 $ac-multi-color: $white !default;
-$ac-multi-close-color: darken(get($brand, lighter), 40%) !default;
-$ac-multi-close-color-hover: darken(get($brand, lighter), 20%) !default;
+$ac-multi-close-color: $white !default;
+$ac-multi-close-color-hover: darken($state-default-bg, 20%) !default;
+$ac-multi-selection-focus-box-shadow: 0 0px 5px lighten($state-default-bg, 10%) !default;
+

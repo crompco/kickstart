@@ -1,59 +1,81 @@
 <template>
-	<div>
-		<h2>Form Elements</h2>
+	<div class="sm-full">
+        <h2>Form Elements</h2>
+        <div class="basic-block">
+            <h3>Radio</h3>
+            <div class="form-group">
+                <div class="label">Which do you prefer</div>
+                <ks-radio :inline="true" label="PHP" name="radio1" value="1" v-model="values.radio1"></ks-radio>
+                <ks-radio :inline="true" label="JavaScript" name="radio1" value="2" v-model="values.radio1"></ks-radio>
+            </div>
 
-		<h3>Radio</h3>
-		<h3>Which do you prefer</h3>
-		<ks-radio :inline="true" label="PHP" name="radio1" value="1" v-model="values.radio1"></ks-radio>
-		<ks-radio :inline="true" label="JavaScript" name="radio1" value="2" v-model="values.radio1"></ks-radio>
+            <div class="form-group">
+                <label class="label">Which do you prefer</label>
+                <ks-radio :inline="true" label="PHP" name="radio1" value="1" v-model="values.radio1a"></ks-radio>
+                <ks-radio :inline="true" label="JavaScript" name="radio1" value="2" v-model="values.radio1a"></ks-radio>
+            </div>
 
-		<div class="form-group">
-			<label class="title">Which do you prefer</label>
-			<ks-radio :inline="true" label="PHP" name="radio1" value="1" v-model="values.radio1a"></ks-radio>
-			<ks-radio :inline="true" label="JavaScript" name="radio1" value="2" v-model="values.radio1a"></ks-radio>
-		</div>
+            <div class="form-group">
+                <div class="label">Select all that your enjoy using (inline)</div>
+                <ks-checkbox :inline="true" label="PHP" name="checkbox1" value="1" v-model="values.checkbox1"></ks-checkbox>
+                <ks-checkbox :inline="true" label="JavaScript" name="checkbox1" value="2" v-model="values.checkbox1"></ks-checkbox>
+            </div>
 
-		<h3>Select all that your enjoy using (inline)</h3>
-		<ks-checkbox :inline="true" label="PHP" name="checkbox1" value="1" v-model="values.checkbox1"></ks-checkbox>
-		<ks-checkbox :inline="true" label="JavaScript" name="checkbox1" value="2" v-model="values.checkbox1"></ks-checkbox>
+            <div class="form-group" style="margin-top:1em;">
+                <label class="label">Select all that your enjoy using</label>
+                <div class="checkbox">
+                    <ks-checkbox label="PHP" name="checkbox1" value="1" v-model="values.checkbox1a"></ks-checkbox>
+                    <ks-checkbox label="JavaScript" name="checkbox1" value="2" v-model="values.checkbox1a"></ks-checkbox>
+                </div>
+            </div>
 
-		<div class="form-group" style="margin-top:1em;">
-			<label class="label">Select all that your enjoy using</label>
-			<div class="checkbox">
-				<ks-checkbox label="PHP" name="checkbox1" value="1" v-model="values.checkbox1a"></ks-checkbox>
-				<ks-checkbox label="JavaScript" name="checkbox1" value="2" v-model="values.checkbox1a"></ks-checkbox>
-			</div>
-		</div>
+            <h3>Simple Radio Group</h3>
+            <ks-radio-group
+                class="form-group"
+                name="group1"
+                :options="['Foo', 'Bar', 'Baz']"
+                v-model="values.group1"
+            >
+                Some group of options
+            </ks-radio-group>
 
-		<h3>Simple Radio Group</h3>
-		<ks-radio-group
-			class="form-group"
-			name="group1"
-			:options="['Foo', 'Bar', 'Baz']"
-		    v-model="values.group1"
-		>
-			Some group of options
-		</ks-radio-group>
+            <h3>Radio Group with array of objects</h3>
+            <ks-radio-group
+                class="form-group"
+                name="group2"
+                :options="radioGroup"
+                value-key="code"
+                label-key="name"
+                v-model="values.group2"
+            >
+                Each option is an object
+            </ks-radio-group>
+            <pre>{{values.group2}}</pre>
 
-		<h3>Radio Group with array of objects</h3>
-		<ks-radio-group
-			class="form-group"
-			name="group2"
-			:options="radioGroup"
-			value-key="code"
-			label-key="name"
-			v-model="values.group2"
-		>
-			Each option is an object
-		</ks-radio-group>
+
+            <ks-checkbox-group
+                class="form-group"
+                name="group2"
+                :options="radioGroup"
+                value-key="code"
+                label-key="name"
+                v-model="values.checkbox2"
+            >
+                Each option is an object
+            </ks-checkbox-group>
+            <pre>{{values.checkbox2}}</pre>
+
+        </div>
+
 
 		<h3>Example Form</h3>
-		<form>
+		<form class="basic-block">
 			<div class="row">
 				<div class="tab-full">
 					<div class="form-group">
-						<div class="label">Username</div>
+						<div class="label">Username (with an error)</div>
 						<input type="text">
+                        <div class="error-msg">Username is required</div>
 					</div>
 				</div>
 			</div>
@@ -63,6 +85,34 @@
 						<div class="label">Autocomplete</div>
 						<ks-autocomplete></ks-autocomplete>
 					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="tab-half">
+					<ks-checkbox-group
+							class="form-group"
+							name="group2"
+							:options="buttonGroup"
+							:buttons="true"
+							value-key="code"
+							label-key="name"
+							v-model="values.checkbox3"
+					>
+						Checkbox Button Set
+					</ks-checkbox-group>
+				</div>
+				<div class="tab-half">
+					<ks-radio-group
+							class="form-group"
+							name="group2"
+							:options="buttonGroup"
+							:buttons="true"
+							value-key="code"
+							label-key="name"
+							v-model="values.group3"
+					>
+						Radio Button Set
+					</ks-radio-group>
 				</div>
 			</div>
 			<div class="row">
@@ -94,13 +144,16 @@
 				</div>
 			</div>
 		</form>
+
+		<div style="height: 300px;"></div>
 	</div>
 </template>
 
 
 <script>
 	import KsRadio from '../../src/components/KsRadio.vue';
-	import KsRadioGroup from '../../src/components/KsRadioGroup.vue';
+    import KsRadioGroup from '../../src/components/KsRadioGroup.vue';
+    import KsCheckboxGroup from '../../src/components/KsCheckboxGroup.vue';
 	import KsCheckbox from '../../src/components/KsCheckbox.vue';
 	import api from '../../src/helpers/api';
 	import KsAutocomplete from '../../src/components/KsAutocomplete.vue';
@@ -116,12 +169,18 @@
 				values: {
 					group1: '',
 					group2: '',
+					group3: '',
 					radio1: 1,
 					radio1a: '',
 					checkbox1: [1],
-					checkbox1a: []
+					checkbox1a: [],
+                    checkbox2: [],
+                    checkbox3: [],
+                    checkboxButtons: [],
+                    radioButtons: []
 				},
-				radioGroup: []
+				radioGroup: [],
+                buttonGroup: [],
 			};
 		},
 
@@ -129,7 +188,8 @@
 
 		mounted() {
 			api.get('/countries.json').then((data) => {
-				this.radioGroup = data.slice(0, 10);
+                this.radioGroup = data.slice(0, 7);
+                this.buttonGroup = data.slice(0, 3);
 			});
 		},
 
@@ -153,7 +213,8 @@
 			KsRadio,
 			KsRadioGroup,
 			KsCheckbox,
-            KsAutocomplete
+            KsAutocomplete,
+            KsCheckboxGroup
 		}
 	}
 </script>

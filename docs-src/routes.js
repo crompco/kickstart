@@ -11,6 +11,9 @@ import PageKsToast from './pages/PageKsToast.vue';
 import PageKsPaginator from './pages/PageKsPaginator.vue';
 import PageKsCard from './pages/PageKsCard.vue';
 import PageKsActionMenu from './pages/PageKsActionMenu.vue';
+import PageKsGrid from './pages/PageKsGrid.vue';
+import PageKsStepThrough from './pages/PageKsStepThrough.vue';
+import PageKsAccordion from './pages/PageKsAccordion.vue';
 
 const routes = [
     {
@@ -95,7 +98,26 @@ const routes = [
         component: StylesPage,
         name: 'KsStyles',
         meta: {title: 'Kickstart Styles'}
+    },
+    {
+        path: '/ks-grid',
+        component: PageKsGrid,
+        name: 'KsGrid',
+        meta: {title: 'Kickstart Grid'}
+    },
+    {
+        path: '/ks-step-through',
+        component: PageKsStepThrough,
+        name: 'KsStepThrough',
+        meta: {title: 'Kickstart Step Through'}
+    },
+    {
+        path: '/ks-accordion',
+        component: PageKsAccordion,
+        name: 'KsAccordion',
+        meta: {title: 'Kickstart Accordion'}
     }
+
 ];
 
 export default routes;

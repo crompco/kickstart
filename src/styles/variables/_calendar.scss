@@ -25,3 +25,9 @@ $calendar-year-hover-bg: get($brand, light) !default;
 $calendar-year-selected-size: 2em;
 $calendar-year-selected-color: get($brand, lighter) !default;
 $calendar-year-selected-bg: inherit !default;
+
+// Month selection colors
+$calendar-month-color: $state-default-bg !default;
+$calendar-month-hover-color: $state-default-bg !default;
+$calendar-month-hover-background: lighten($gray, 10%) !default;
+$calendar-month-border-color: lighten(get($brand, lighter), 15%) !default;

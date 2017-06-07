@@ -52,6 +52,10 @@ $state-danger-bg: $state-error !default;
 $state-danger-border: transparent !default;
 $state-danger-color: $white !default;
 
+$state-danger-hover-bg: darken($state-error, 12%) !default;
+$state-danger-hover-border: transparent !default;
+$state-danger-hover-color: $white !default;
+
 $state-hover-bg: darken(get($brand, light), 12%) !default;
 $state-hover-border: transparent !default;
 $state-hover-color: $white !default;

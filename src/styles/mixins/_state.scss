@@ -20,3 +20,16 @@
 	font-weight: bold;
 	color: $state-focus-color;
 }
+
+@mixin state-danger() {
+    background-color: $state-danger-bg;
+    border: 1px solid $state-danger-border;
+    color: $state-danger-color;
+}
+
+@mixin state-danger-hover() {
+    background-color: $state-danger-hover-bg;
+    border: 1px solid $state-danger-hover-border;
+    font-weight: normal;
+    color: $state-danger-hover-color;
+}

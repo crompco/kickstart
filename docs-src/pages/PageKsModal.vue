@@ -17,18 +17,34 @@
 				Modal with buttons
 			</button>
 
-			<ks-modal title="Modal with buttons" ref="modal2"  class="warning">
+			<ks-modal title="Modal with buttons" ref="modal2" >
 				<p>
 					This is a simple modal with just a title and content
 				</p>
 				<div slot="footer">
-					<button class="button error">Yes</button>
+					<button class="button">Yes</button>
 					<button class="button" @click.prevent="closeModal('modal2')">Cancel</button>
 				</div>
 			</ks-modal>
 
+            <button
+                class="button danger"
+                @click.prevent="openModal('modal_danger')"
+            >
+                Danger Modal
+            </button>
 
-			<button class="button" @click.prevent="openModal('modal3')">
+            <ks-modal title="Modal Danger" ref="modal_danger" :danger="true">
+                <p>
+                    Be careful with this action!
+                </p>
+                <div slot="footer">
+                    <button class="button danger">Yes, Delete</button>
+                    <button class="button" @click.prevent="closeModal('modal_danger')">Cancel</button>
+                </div>
+            </ks-modal>
+
+            <button class="button" @click.prevent="openModal('modal3')">
 				Modal without header
 			</button>
 
@@ -130,6 +146,30 @@
 				</div>
 			</ks-modal>
 
+			<button class="button" @click.prevent="openModal('modal5')">
+				Modal with Select
+			</button>
+
+			<ks-modal title="Modal with buttons" ref="modal5" >
+				<p>
+					This is a simple modal with a select
+				</p>
+
+				<ks-select
+					name="code"
+					:items="countries"
+					label-key="name"
+					v-model="country_code"
+					list-height="150px"
+				>
+					<template scope="props">{{props.item.name}}</template>
+				</ks-select>
+				<div slot="footer">
+					<button class="button error">Yes</button>
+					<button class="button" @click.prevent="closeModal('modal5')">Cancel</button>
+				</div>
+			</ks-modal>
+
 		</div>
 
 		<div>
@@ -169,12 +209,36 @@
 								<td><pre>'50%'</pre></td>
 								<td>The maximum width that should be allowed for the modal</td>
 							</tr>
+                            <tr>
+                                <td>minWidth</td>
+                                <td>String</td>
+                                <td><pre>NULL</pre></td>
+                                <td>The minimum width that should be allowed for the modal</td>
+                            </tr>
+                            <tr>
+                                <td>maxHeight</td>
+                                <td>String</td>
+                                <td><pre>NULL</pre></td>
+                                <td>The maximum height that should be allowed for the modal</td>
+                            </tr>
+                            <tr>
+                                <td>minHeight</td>
+                                <td>String</td>
+                                <td><pre>NULL</pre></td>
+                                <td>The minimum height that should be allowed for the modal</td>
+                            </tr>
 							<tr>
 								<td>closeOnEscape</td>
 								<td>Boolean</td>
 								<td><pre>true</pre></td>
 								<td>Whether to close the modal when the user presses the 'escape' key</td>
 							</tr>
+                            <tr>
+                                <td>danger</td>
+                                <td>Boolean</td>
+                                <td><pre>false</pre></td>
+                                <td>Whether to add the danger styling to the modal</td>
+                            </tr>
 						</tbody>
 					</table>
 				</ks-tab>
@@ -236,6 +300,8 @@
 	import KsModal from '../../src/components/KsModal.vue';
 	import KsTabs from '../../src/components/KsTabs.vue';
 	import KsTab from '../../src/components/KsTab.vue';
+	import KsSelect from '../../src/components/KsSelect.vue';
+	import api from '../../src/helpers/api';
 
 	export default {
 		name: 'PageKsModal',
@@ -243,13 +309,18 @@
 		props: {},
 
 		data() {
-			return {};
+			return {
+			    countries: [],
+				country_code: ''
+			};
 		},
 
 		computed: {},
 
 		mounted() {
-
+            api.get('/countries.json').then((data) => {
+                this.countries = data;
+            });
 		},
 
 		methods: {
@@ -266,7 +337,8 @@
 		components: {
 			KsModal,
 			KsTabs,
-			KsTab
+			KsTab,
+			KsSelect
 		}
 	}
 </script>

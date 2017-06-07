@@ -10,11 +10,16 @@
 						<button class="button none">Search</button>
 					</div>
 					<ul class="dropdown right">
+						<li><a href="#">admin</a></li>
 						<li>
 							<a href="#" class="dropdown-toggle">jimbo.jones@email.com</a>
 							<ul class="sub-dropdown">
 								<li><a href="#">Profile</a></li>
-								<li><a href="#">Sign Out</a></li>
+								<li>
+									<form action="/">
+										<button type="submit">Logout</button>
+									</form>
+								</li>
 							</ul>
 						</li>
 					</ul>

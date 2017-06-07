@@ -1,9 +1,9 @@
 <template>
     <div class="ks-action-menu">
-        <button class="menu-button" @click.prevent="toggle()">
+        <button class="menu-button" @click.prevent="toggle()" ref="menu">
             <slot name="menu"><menu-svg></menu-svg></slot>
         </button>
-        <div class="menu-list" :class="{'active': active}" @click="close()">
+        <div class="menu-list" ref="menuList" :class="{'active': active}" @click="close()">
             <slot></slot>
         </div>
     </div>
@@ -12,7 +12,7 @@
 <script>
     // External Dependencies
     import MenuSvg from '../svg/menu.svg';
-    import Tether from 'tether';
+    import Popper from 'popper.js';
 
     // Internal Dependencies
     import {addEvent} from '../helpers/events';
@@ -36,31 +36,33 @@
         },
 
         mounted() {
-            this.tether = new Tether({
-                element: this.$el.querySelector('.menu-list'),
-                target: this.$el.querySelector('.menu-button'),
-                attachment: 'top left',
-                targetAttachment: 'bottom left',
-                enabled: false,
-                offset: '0 0',
-                targetOffset: '0 0',
-                constraints: [
-                    {
-                        to: 'window',
-                        attachment: 'none together'
+            this.$nextTick(() => {
+                this.tether = new Popper(this.$el, this.$refs.menuList, {
+                    placement: 'bottom-start',
+                    removeOnDestroy: true,
+                    modifiers: {
+                        flip: {
+                            behavior: ['bottom-end']
+                        },
+                        preventOverflow: {
+                            boundariesElement: this.$el.parentNode,
+                            priority: ['right', 'top']
+                        }
                     }
-                ]
-            });
+                });
 
-            if ( !window.actionEvent ) {
-                window.actionEvent = new Event('close:actionmenu');
-            }
-
-            document.addEventListener('close:actionmenu', () => {
-                if ( this.listening ) {
-                    this.close();
+                if ( !window.actionEvent ) {
+                    window.actionEvent = new Event('close:actionmenu');
                 }
-            });
+
+                document.addEventListener('close:actionmenu', () => {
+                    if ( this.listening ) {
+                        this.close();
+                    }
+                });
+
+            })
+
         },
 
         methods: {
@@ -71,12 +73,10 @@
                     if ( this.active ) {
                         document.dispatchEvent(window.actionEvent);
 
+                        this.tether.update();
                         this.listening = true;
-                        this.tether.enable();
-                        this.$nextTick(() => this.tether.position());
                     } else {
                         this.listening = false;
-                        this.tether.disable();
                     }
                 });
             },
@@ -84,8 +84,6 @@
             close() {
                 this.active = false;
                 this.listening = false;
-
-                this.tether.disable();
             }
         },
 
