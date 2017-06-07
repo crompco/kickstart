@@ -19,6 +19,22 @@
                         {{props.item.name}}
                     </template>
                 </ks-select>
+
+               <code-block>
+                    <code class="language-html" v-pre>
+                        &lt;ks-select
+                            name="code"
+                            label-key="name"
+                            v-model="country"
+                            :paginated="true"
+                            @search="runSearch"
+                        >
+                            &lt;template scope="props">
+                                {{props.item.name}}
+                            &lt;/template>
+                        &lt;/ks-select>
+                    </code>
+               </code-block>
             </div>
             <p>Plain select</p>
             <div class="form-group">

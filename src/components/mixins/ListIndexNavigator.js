@@ -85,14 +85,16 @@ export default {
     },
 
     computed: {
+        nameRegex() {
+            return new RegExp('^.*' + escapeRegExp('' + this.lookup_name) + '.*', 'i');
+        },
+
         /**
          * Returns the filter used against the list
          *
          * @returns {function(*=)}
          */
         filter_function() {
-            let name_regex = new RegExp('^.*' + escapeRegExp('' + this.lookup_name) + '.*', 'i');
-
             let filter = this.filter;
             if ( !filter && this.selectionKey ) {
                 filter = this.selectionKey;
@@ -102,7 +104,15 @@ export default {
             }
 
             return (item) => {
-                return object_get(item, filter, '').match(name_regex) ? true : false;
+                let name_match = object_get(item, filter, '').match(this.nameRegex) ? true : false;
+
+                // If groupBy is set then we should filter on the group name or the name match
+                if ( this.groupBy ) {
+                    let group_match = object_get(item, this.groupBy, '').match(this.nameRegex) ? true : false;
+                    return name_match || group_match;
+                }
+
+                return name_match;
             };
         },
 
