@@ -2,7 +2,7 @@
     <div>
         <h2>Action Menu</h2>
 
-        <div class="row">
+        <div class="row col">
             <div class="sm-8">
                 <ks-action-menu>
                     <a href="#" @click.prevent="action('New')" class="list-item">New</a>
@@ -20,6 +20,64 @@
                     <a href="#" @click.prevent="action('Delete')" class="list-item separator">Delete</a>
                 </ks-action-menu>
             </div>
+        </div>
+
+        <div class="row col">
+            <code-block>
+                <code class="language-html" v-pre>
+                    &lt;ks-action-menu>
+                        &lt;a href="#" class="list-item">New&lt;/a>
+                        &lt;a href="#" class="list-item">Add&lt;/a>
+                        &lt;a href="#" class="list-item">Edit&lt;/a>
+                        &lt;a href="#" class="list-item separator">Delete&lt;/a>
+                    &lt;/ks-action-menu>
+                </code>
+            </code-block>
+        </div>
+
+        <div class="row">
+            <ks-tabs>
+                <ks-tab title="Props">
+                    <table class="table striped">
+                        <thead>
+                            <tr>
+                                <th>Prop</th>
+                                <th>Type</th>
+                                <th>Default</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>show</td>
+                                <td>Boolean</td>
+                                <td>false</td>
+                                <td>This will open the menu</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </ks-tab>
+                <ks-tab title="Methods">
+                    <table class="table striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>toggle</td>
+                                <td>This will toggle the open state of the menu</td>
+                            </tr>
+                            <tr>
+                                <td>close</td>
+                                <td>This will close the menu</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </ks-tab>
+            </ks-tabs>
         </div>
     </div>
 </template>
