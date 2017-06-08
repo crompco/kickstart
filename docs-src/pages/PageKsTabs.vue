@@ -6,57 +6,205 @@
 		<div class="callout">
 			<ks-tabs>
 				<ks-tab title="Foo">
-					<div>
-						<p>
-							This is the first tab which auto selected
-						</p>
-					</div>
+                    <p>
+                        This is the first tab which auto selected
+                    </p>
 				</ks-tab>
 
 				<ks-tab title="Bar">
-					<div>
-						<p>
-							This is a tab with some content
-						</p>
-					</div>
+                    <p>
+                        This is a tab with some content
+                    </p>
 				</ks-tab>
 
 				<ks-tab title="Baz">
-					<div>
-						<p>
-							This the last tab with some content
-						</p>
-					</div>
+                    <p>
+                        This the last tab with some content
+                    </p>
 				</ks-tab>
 			</ks-tabs>
+            <code-block>
+                <code class="language-html" v-pre>
+                    &lt;ks-tabs>
+                        &lt;ks-tab title="Foo">
+                            &lt;p>
+                                This is the first tab which auto selected
+                            &lt;/p>
+                        &lt;/ks-tab>
+
+                        &lt;ks-tab title="Bar">
+                            &lt;p>
+                                This is a tab with some content
+                            &lt;/p>
+                        &lt;/ks-tab>
+
+                        &lt;ks-tab title="Baz">
+                            &lt;p>
+                                This the last tab with some content
+                            &lt;/p>
+                        &lt;/ks-tab>
+                    &lt;/ks-tabs>
+                </code>
+            </code-block>
 		</div>
 		<br>
 		<div class="callout">
 			<ks-tabs :expand="true">
 				<ks-tab title="Foo">
-					<div>
-						<p>
-							This is the first tab which auto selected
-						</p>
-					</div>
+                    <p>
+                        This is the first tab which auto selected
+                    </p>
 				</ks-tab>
 
 				<ks-tab title="Bar">
-					<div>
-						<p>
-							This is a tab with some content
-						</p>
-					</div>
+                    <p>
+                        This is a tab with some content
+                    </p>
 				</ks-tab>
 
 				<ks-tab title="Baz">
-					<div>
-						<p>
-							This the last tab with some content
-						</p>
-					</div>
+                    <p>
+                        This the last tab with some content
+                    </p>
 				</ks-tab>
 			</ks-tabs>
+
+            <code-block>
+                <code class="language-html" v-pre>
+                    &lt;ks-tabs :expand="true">
+                        &lt;ks-tab title="Foo">
+                            &lt;p>
+                                This is the first tab which auto selected
+                            &lt;/p>
+                        &lt;/ks-tab>
+
+                        &lt;ks-tab title="Bar">
+                            &lt;p>
+                                This is a tab with some content
+                            &lt;/p>
+                        &lt;/ks-tab>
+
+                        &lt;ks-tab title="Baz">
+                            &lt;p>
+                                This the last tab with some content
+                            &lt;/p>
+                        &lt;/ks-tab>
+                    &lt;/ks-tabs>
+                </code>
+            </code-block>
+
+            <ks-tabs>
+                <ks-tab title="Props">
+                    <h2>KsTabs</h2>
+                    <table class="table striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Default</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>expand</td>
+                            <td><pre>Boolean</pre></td>
+                            <td><pre>false</pre></td>
+                            <td>When set to true the tabs will expand into an even width</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <h2>KsTab</h2>
+                    <table class="table striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Default</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>title</td>
+                                <td><pre>String</pre></td>
+                                <td><pre>NULL</pre></td>
+                                <td>When set to true the tabs will expand into an even width</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </ks-tab>
+
+                <ks-tab title="Events">
+                    <h2>KsTabs</h2>
+                    <table class="table striped events-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>tab-changed</td>
+                                <td>Fired when the tab content is changed</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h2>KsTab</h2>
+                    <table class="table striped events-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>active</td>
+                                <td>Fired when the tab is activated</td>
+                            </tr>
+                            <tr>
+                                <td>inactive</td>
+                                <td>Fired when the tab is de-activated</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </ks-tab>
+
+                <ks-tab title="Methods">
+                    <h2>KsTabs</h2>
+                    <table class="table striped methods-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><pre>setActiveTab(tabTitle)</pre></td>
+                                <td>Sets the active tab. Expects a paramter of the title</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h2>KsTabs</h2>
+                    <table class="table striped methods-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><pre>setActive(Boolean active)</pre></td>
+                                <td>Sets the tab to be the active tab. Expects a boolean</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </ks-tab>
+            </ks-tabs>
 		</div>
 	</div>
 </template>

@@ -40,6 +40,11 @@
 		methods: {
 			setActive(active) {
 				this.active = active;
+				if ( this.active ) {
+                    this.$emit('active');
+                } else {
+                    this.$emit('inactive');
+                }
 			},
 			getTabsParent(vm) {
 				if ( vm.$parent.$options._componentTag === 'ks-tabs' ) {
