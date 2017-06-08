@@ -1,5 +1,7 @@
 <template>
 	<div style="margin-bottom:10em;">
+		<h2>Styles</h2>
+
 		<alert></alert>
 		<br>
 		<buttons></buttons>

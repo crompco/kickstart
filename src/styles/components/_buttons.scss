@@ -50,6 +50,17 @@
 				background-color: darken($bg-color, 4%);
 				color: get($map, hover);
 			}
+
+			&.danger {
+				border-color: get($map, danger-border-color);
+				color: get($map, danger-color);
+
+				&:hover:not(.disabled) {
+					border-color: darken(get($map, danger-border-color), 12%);
+					color: darken(get($map, danger-color), 12%);
+					background-color: $bg-color;
+				}
+			}
 		}
 	}
 

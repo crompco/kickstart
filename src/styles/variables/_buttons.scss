@@ -15,13 +15,17 @@ $buttons: (
 		background-color: $white,
 		hover: get($brand, light),
 		color: get($brand, light),
-		border-color: get($brand, light)
+		border-color: get($brand, light),
+		danger-color: $state-danger-bg,
+		danger-border-color: $state-danger-bg
 	),
 	none: (
 		background-color: transparent,
 		color: get($brand, light),
 		hover: darken(get($brand, light), 20%),
 		border-color: transparent,
-		box-shadow: none
+		box-shadow: none,
+		danger-color: $state-danger-bg,
+		danger-border-color: transparent
 	)
 ) !default;

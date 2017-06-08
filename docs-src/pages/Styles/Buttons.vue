@@ -15,7 +15,7 @@
 					<a href="#" class="button small">
 						I'm a small button
 					</a>
-					<a href="#" class="button large">
+					<a href="#" class="button large danger">
 						I'm a large button
 					</a>
 				</div>
@@ -34,7 +34,7 @@
 					<a href="#" class="button outline small">
 						I'm a small button
 					</a>
-					<a href="#" class="button outline large">
+					<a href="#" class="button outline large danger">
 						I'm a large button
 					</a>
 				</div>
@@ -53,7 +53,7 @@
 					<a href="#" class="button none small">
 						I'm a small button
 					</a>
-					<a href="#" class="button none large">
+					<a href="#" class="button none large danger">
 						I'm a large button
 					</a>
 				</div>
@@ -74,7 +74,7 @@
 						&lt;a href="#" class="button small">
 							I'm a small button
 						&lt;/a>
-						&lt;a href="#" class="button large">
+						&lt;a href="#" class="button large danger">
 							I'm a large button
 						&lt;/a>
                     </code>
@@ -92,7 +92,7 @@
 						&lt;a href="#" class="button outline small">
 							I'm a small button
 						&lt;/a>
-						&lt;a href="#" class="button outline large">
+						&lt;a href="#" class="button outline large danger">
 							I'm a large button
 						&lt;/a>
                     </code>
@@ -110,7 +110,7 @@
 						&lt;a href="#" class="button none small">
 							I'm a small button
 						&lt;/a>
-						&lt;a href="#" class="button none large">
+						&lt;a href="#" class="button none large danger">
 							I'm a large button
 						&lt;/a>
                     </code>
