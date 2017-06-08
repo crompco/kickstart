@@ -20,20 +20,18 @@
                     </template>
                 </ks-select>
 
-               <code-block>
-                    <code class="language-html" v-pre>
-                        &lt;ks-select
-                            name="code"
-                            label-key="name"
-                            v-model="country"
-                            :paginated="true"
-                            @search="runSearch"
-                        >
-                            &lt;template scope="props">
-                                {{props.item.name}}
-                            &lt;/template>
-                        &lt;/ks-select>
-                    </code>
+               <code-block v-pre>
+                    &lt;ks-select
+                        name="code"
+                        label-key="name"
+                        v-model="country"
+                        :paginated="true"
+                        @search="runSearch"
+                    >
+                        &lt;template scope="props">
+                            {{props.item.name}}
+                        &lt;/template>
+                    &lt;/ks-select>
                </code-block>
             </div>
             <p>Plain select</p>
@@ -46,15 +44,13 @@
                     v-model="country_code2"
                 ></ks-select>
 
-                <code-block>
-                    <code class="language-html" v-pre>
-                        &lt;ks-select
-                            name="code"
-                            :items="countries"
-                            label-key="name"
-                            v-model="country_code2"
-                        >&lt;/ks-select>
-                    </code>
+                <code-block v-pre>
+                    &lt;ks-select
+                        name="code"
+                        :items="countries"
+                        label-key="name"
+                        v-model="country_code2"
+                    >&lt;/ks-select>
                 </code-block>
             </div>
 
@@ -69,16 +65,14 @@
                     v-model="country_code3"
                 ></ks-select>
 
-                <code-block>
-                    <code class="language-html" v-pre>
-                        &lt;ks-select
-                            name="code"
-                            :items="short_countries"
-                            label-key="name"
-                            :single-deselect="true"
-                            v-model="country_code3"
-                        >&lt;/ks-select>
-                    </code>
+                <code-block v-pre>
+                    &lt;ks-select
+                        name="code"
+                        :items="short_countries"
+                        label-key="name"
+                        :single-deselect="true"
+                        v-model="country_code3"
+                    >&lt;/ks-select>
                 </code-block>
             </div>
 
@@ -93,17 +87,15 @@
                     v-model="character"
                     :single-deselect="true"
                 ></ks-select>
-                <code-block>
-                    <code class="language-html" v-pre>
-                        &lt;ks-select
-                            name="name"
-                            :items="characters"
-                            label-key="name"
-                            v-model="character"
-                            group-by="show"
-                            :single-deselect="true"
-                        >&lt;/ks-select>
-                    </code>
+                <code-block v-pre>
+                    &lt;ks-select
+                        name="name"
+                        :items="characters"
+                        label-key="name"
+                        v-model="character"
+                        group-by="show"
+                        :single-deselect="true"
+                    >&lt;/ks-select>
                 </code-block>
             </div>
         </div>

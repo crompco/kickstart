@@ -1,7 +1,7 @@
 <template>
     <ks-accordion class="col code-block-accordion">
         <ks-accordion-row title="Show Code">
-            <pre><slot></slot></pre>
+            <pre><code class="language-html" v-pre><slot></slot></code></pre>
         </ks-accordion-row>
     </ks-accordion>
 </template>
@@ -13,7 +13,12 @@
     export default {
         name: 'CodeBlock',
 
-        props: [],
+        props: {
+            lang: {
+                type: String,
+                default: 'language-html'
+            }
+        },
 
         data() {
             return {}

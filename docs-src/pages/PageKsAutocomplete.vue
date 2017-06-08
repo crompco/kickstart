@@ -13,16 +13,13 @@
                     @search="runSearch"
                     :paginated="true"
                 ></ks-autocomplete>
-
-                <code-block>
-                    <code class="language-html" v-pre>
-                        &lt;ks-autocomplete
-                            selection-key="name"
-                            v-model="value1"
-                            @search="runSearch"
-                            :paginated="true"
-                        >&lt;/ks-autocomplete>
-                    </code>
+                <code-block v-pre>
+                    &lt;ks-autocomplete
+                        selection-key="name"
+                        v-model="value1"
+                        @search="runSearch"
+                        :paginated="true"
+                    >&lt;/ks-autocomplete>
                 </code-block>
             </div>
 
@@ -35,14 +32,12 @@
                     v-model="value2"
                 ></ks-autocomplete>
 
-                <code-block>
-                    <code class="language-html" v-pre>
-                         &lt;ks-autocomplete
-                            :items="countries"
-                            selection-key="name"
-                            v-model="value2"
-                        >&lt;/ks-autocomplete>
-                    </code>
+                <code-block v-pre>
+                     &lt;ks-autocomplete
+                        :items="countries"
+                        selection-key="name"
+                        v-model="value2"
+                    >&lt;/ks-autocomplete>
                 </code-block>
             </div>
 
@@ -62,20 +57,18 @@
                     </template>
                 </ks-autocomplete>
 
-                <code-block>
-                    <code class="language-html" v-pre>
-                        &lt;ks-autocomplete
-                            :items="countries"
-                            selection-key="name"
-                            :multiple="true"
-                            v-model="value3"
-                            @search="runSearch"
-                        >
-                            &lt;template scope="props">
-                                &lt;strong>{{props.item.name}}&lt;/strong> &lt;em>{{props.item.code}}&lt;/em>
-                            &lt;/template>
-                        &lt;/ks-autocomplete>
-                    </code>
+                <code-block v-pre>
+                    &lt;ks-autocomplete
+                        :items="countries"
+                        selection-key="name"
+                        :multiple="true"
+                        v-model="value3"
+                        @search="runSearch"
+                    >
+                        &lt;template scope="props">
+                            &lt;strong>{{props.item.name}}&lt;/strong> &lt;em>{{props.item.code}}&lt;/em>
+                        &lt;/template>
+                    &lt;/ks-autocomplete>
                 </code-block>
             </div>
 
@@ -97,22 +90,20 @@
                 </ks-autocomplete>
 
 
-                <code-block>
-                    <code class="language-html" v-pre>
-                        &lt;ks-autocomplete
-                            :min-search="0"
-                            :taggable="true"
-                            selection-key="name"
-                            v-model="value4"\
-                            :paginated="true"
-                            :show-tag-in-list="true"
-                            @search="runSearch"
-                        >
-                            &lt;template scope="props">
-                                &lt;strong>{{props.item.name}}&lt;/strong> &lt;em>{{props.item.code}}&lt;/em>
-                            &lt;/template>
-                        &lt;/ks-autocomplete>
-                    </code>
+                <code-block v-pre>
+                    &lt;ks-autocomplete
+                        :min-search="0"
+                        :taggable="true"
+                        selection-key="name"
+                        v-model="value4"\
+                        :paginated="true"
+                        :show-tag-in-list="true"
+                        @search="runSearch"
+                    >
+                        &lt;template scope="props">
+                            &lt;strong>{{props.item.name}}&lt;/strong> &lt;em>{{props.item.code}}&lt;/em>
+                        &lt;/template>
+                    &lt;/ks-autocomplete>
                 </code-block>
             </div>
 
@@ -127,19 +118,17 @@
                     :show-tag-in-list="true"
                     group-by="show"
                 ></ks-autocomplete>
-                <code-block>
-                    <code class="language-html" v-pre>
-                        &lt;ks-autocomplete
-                            :min-search="0"
-                            :taggable="true"
-                            selection-key="name"
-                            v-model="value5"
-                            :paginated="true"
-                            :show-tag-in-list="true"
-                            :items="characters"
-                            group-by="show"
-                        >&lt;/ks-autocomplete>
-                    </code>
+                <code-block v-pre>
+                    &lt;ks-autocomplete
+                        :min-search="0"
+                        :taggable="true"
+                        selection-key="name"
+                        v-model="value5"
+                        :paginated="true"
+                        :show-tag-in-list="true"
+                        :items="characters"
+                        group-by="show"
+                    >&lt;/ks-autocomplete>
                 </code-block>
             </div>
         </div>

@@ -1,5 +1,6 @@
 <template>
 	<div class="col sm-full">
+        <h2>Calendar</h2>
 		<div class="basic-block">
 			<h3>Plain Calendar with Event Slot</h3>
 			<ks-calendar
@@ -9,6 +10,13 @@
 					<strong>Patty's Birthday</strong>
 				</div>
 			</ks-calendar>
+            <code-block>
+                &lt;ks-calendar v-model="date1">
+                    &lt;div :slot="'2017-03-22'">
+                        &lt;strong>Patty's Birthday&lt;/strong>
+                    &lt;/div>
+                &lt;/ks-calendar>
+            </code-block>
 		</div>
 		<div class="basic-block">
 			<h3>Custom Week Start</h3>
@@ -17,6 +25,14 @@
 				week-start="1"
 			    week-height="80px"
 			></ks-calendar>
+
+            <code-block>
+                &lt;ks-calendar
+                    v-model="date2"
+                    week-start="1"
+                    week-height="80px"
+                >&lt;/ks-calendar>
+            </code-block>
 		</div>
 
 

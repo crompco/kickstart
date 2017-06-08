@@ -23,28 +23,26 @@
                     </p>
 				</ks-tab>
 			</ks-tabs>
-            <code-block>
-                <code class="language-html" v-pre>
-                    &lt;ks-tabs>
-                        &lt;ks-tab title="Foo">
-                            &lt;p>
-                                This is the first tab which auto selected
-                            &lt;/p>
-                        &lt;/ks-tab>
+            <code-block v-pre>
+                &lt;ks-tabs>
+                    &lt;ks-tab title="Foo">
+                        &lt;p>
+                            This is the first tab which auto selected
+                        &lt;/p>
+                    &lt;/ks-tab>
 
-                        &lt;ks-tab title="Bar">
-                            &lt;p>
-                                This is a tab with some content
-                            &lt;/p>
-                        &lt;/ks-tab>
+                    &lt;ks-tab title="Bar">
+                        &lt;p>
+                            This is a tab with some content
+                        &lt;/p>
+                    &lt;/ks-tab>
 
-                        &lt;ks-tab title="Baz">
-                            &lt;p>
-                                This the last tab with some content
-                            &lt;/p>
-                        &lt;/ks-tab>
-                    &lt;/ks-tabs>
-                </code>
+                    &lt;ks-tab title="Baz">
+                        &lt;p>
+                            This the last tab with some content
+                        &lt;/p>
+                    &lt;/ks-tab>
+                &lt;/ks-tabs>
             </code-block>
 		</div>
 		<br>
@@ -69,28 +67,26 @@
 				</ks-tab>
 			</ks-tabs>
 
-            <code-block>
-                <code class="language-html" v-pre>
-                    &lt;ks-tabs :expand="true">
-                        &lt;ks-tab title="Foo">
-                            &lt;p>
-                                This is the first tab which auto selected
-                            &lt;/p>
-                        &lt;/ks-tab>
+            <code-block v-pre>
+                &lt;ks-tabs :expand="true">
+                    &lt;ks-tab title="Foo">
+                        &lt;p>
+                            This is the first tab which auto selected
+                        &lt;/p>
+                    &lt;/ks-tab>
 
-                        &lt;ks-tab title="Bar">
-                            &lt;p>
-                                This is a tab with some content
-                            &lt;/p>
-                        &lt;/ks-tab>
+                    &lt;ks-tab title="Bar">
+                        &lt;p>
+                            This is a tab with some content
+                        &lt;/p>
+                    &lt;/ks-tab>
 
-                        &lt;ks-tab title="Baz">
-                            &lt;p>
-                                This the last tab with some content
-                            &lt;/p>
-                        &lt;/ks-tab>
-                    &lt;/ks-tabs>
-                </code>
+                    &lt;ks-tab title="Baz">
+                        &lt;p>
+                            This the last tab with some content
+                        &lt;/p>
+                    &lt;/ks-tab>
+                &lt;/ks-tabs>
             </code-block>
 
             <ks-tabs>
