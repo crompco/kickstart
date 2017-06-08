@@ -10,31 +10,29 @@
         </div>
 
         <div class="row">
-            <code-block>
-                <code class="language-html" v-pre>
-                    &lt;!-- Success -->
-                    &lt;ks-toast
-                        message="This is an success toast"
-                        type="success"
-                    >&lt;/ks-toast>
+            <code-block v-pre>
+                &lt;!-- Success -->
+                &lt;ks-toast
+                    message="This is an success toast"
+                    type="success"
+                >&lt;/ks-toast>
 
-                    &lt;!-- Info -->
-                    &lt;ks-toast
-                        message="This is an info toast"
-                    >&lt;/ks-toast>
+                &lt;!-- Info -->
+                &lt;ks-toast
+                    message="This is an info toast"
+                >&lt;/ks-toast>
 
-                    &lt;!-- Error -->
-                    &lt;ks-toast
-                        message="This is an error toast"
-                        type="error"
-                    >&lt;/ks-toast>
+                &lt;!-- Error -->
+                &lt;ks-toast
+                    message="This is an error toast"
+                    type="error"
+                >&lt;/ks-toast>
 
-                    &lt;!-- Warning -->
-                    &lt;ks-toast
-                        message="This is an warning toast"
-                        type="warning"
-                    >&lt;/ks-toast>
-                </code>
+                &lt;!-- Warning -->
+                &lt;ks-toast
+                    message="This is an warning toast"
+                    type="warning"
+                >&lt;/ks-toast>
             </code-block>
         </div>
 
@@ -42,28 +40,26 @@
             There are multiple ways to use this components. There is a property on the vue instance if you use kickstart as a plugin.
         </div>
         <div class="row">
-            <code-block>
-                <code class="language-js" v-pre>
-                    this.$toast({
-                        type: 'success',
-                        message: 'Success message',
-                        position: 'top-right',
-                        duration: 2500,
-                        limit: 3
-                    });
+            <code-block lang="language-js" v-pre>
+                this.$toast({
+                    type: 'success',
+                    message: 'Success message',
+                    position: 'top-right',
+                    duration: 2500,
+                    limit: 3
+                });
 
-                    Vue.toast({
-                        type: 'success',
-                        message: 'Success message',
-                        position: 'top-right',
-                        duration: 2500,
-                        limit: 3
-                    });
+                Vue.toast({
+                    type: 'success',
+                    message: 'Success message',
+                    position: 'top-right',
+                    duration: 2500,
+                    limit: 3
+                });
 
-                    // This will default to an info toast
-                    this.$toast('info message');
-                    Vue.toast('info message');
-                </code>
+                // This will default to an info toast
+                this.$toast('info message');
+                Vue.toast('info message');
             </code-block>
         </div>
 

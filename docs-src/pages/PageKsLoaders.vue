@@ -16,10 +16,8 @@
 				<ks-loader-line :show="show"></ks-loader-line>
 			</p>
 
-            <code-block>
-                <code class="language-html" v-pre>
+            <code-block v-pre>
                     &lt;ks-loader-line :show="show">&lt;/ks-loader-line>
-                </code>
             </code-block>
 		</div>
 
@@ -37,10 +35,8 @@
 				<ks-loader-spin :show="show_spin"></ks-loader-spin>
 			</p>
 
-            <code-block>
-                <code class="language-html" v-pre>
+            <code-block v-pre>
                     &lt;ks-loader-spin :show="show_spin">&lt;/ks-loader-spin>
-                </code>
             </code-block>
 		</div>
 

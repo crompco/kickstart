@@ -9,13 +9,11 @@
             ></ks-paginator>
 
             <div class="row">
-                <code-block>
-                    <code class="language-html" v-pre>
-                        &lt;ks-paginator
-                            :pagination="pagination"
-                            @input="pagination.current_page=$event"
-                        >&lt;/ks-paginator>
-                    </code>
+                <code-block v-pre>
+                    &lt;ks-paginator
+                        :pagination="pagination"
+                        @input="pagination.current_page=$event"
+                    >&lt;/ks-paginator>
                 </code-block>
             </div>
         </div>
@@ -29,14 +27,12 @@
             ></ks-paginator>
 
             <div class="row">
-                <code-block>
-                    <code class="language-html" v-pre>
-                        &lt;ks-paginator
-                            :pagination="pagination2"
-                            :routed="true"
-                            @input="pagination.current_page=$event"
-                        >&lt;/ks-paginator>
-                    </code>
+                <code-block v-pre>
+                    &lt;ks-paginator
+                        :pagination="pagination2"
+                        :routed="true"
+                        @input="pagination.current_page=$event"
+                    >&lt;/ks-paginator>
                 </code-block>
             </div>
         </div>

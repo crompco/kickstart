@@ -23,16 +23,14 @@
         </div>
 
         <div class="row col">
-            <code-block>
-                <code class="language-html" v-pre>
-                    &lt;ks-action-menu>
-                        &lt;div slot="menu">Menu&lt;/div>
-                        &lt;a href="#" class="list-item">New&lt;/a>
-                        &lt;a href="#" class="list-item">Add&lt;/a>
-                        &lt;a href="#" class="list-item">Edit&lt;/a>
-                        &lt;a href="#" class="list-item separator">Delete&lt;/a>
-                    &lt;/ks-action-menu>
-                </code>
+            <code-block v-pre>
+                &lt;ks-action-menu>
+                    &lt;div slot="menu">Menu&lt;/div>
+                    &lt;a href="#" class="list-item">New&lt;/a>
+                    &lt;a href="#" class="list-item">Add&lt;/a>
+                    &lt;a href="#" class="list-item">Edit&lt;/a>
+                    &lt;a href="#" class="list-item separator">Delete&lt;/a>
+                &lt;/ks-action-menu>
             </code-block>
         </div>
 

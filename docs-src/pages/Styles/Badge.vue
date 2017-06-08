@@ -16,20 +16,18 @@
             <div class="ks-badge warning">Tag</div>
             <div class="ks-badge error">Tag</div>
 
-            <code-block style="margin-top:1rem;">
-                <code class="language-markup" v-pre>
-                    &lt;div class="ks-badge">10&lt;/div>
-                    &lt;div class="ks-badge success">10&lt;/div>
-                    &lt;div class="ks-badge info">10&lt;/div>
-                    &lt;div class="ks-badge warning">10&lt;/div>
-                    &lt;div class="ks-badge error">10&lt;/div>
-                    <br>
-                    &lt;div class="ks-badge">Tag&lt;/div>
-                    &lt;div class="ks-badge success">Tag&lt;/div>
-                    &lt;div class="ks-badge info">Tag&lt;/div>
-                    &lt;div class="ks-badge warning">Tag&lt;/div>
-                    &lt;div class="ks-badge error">Tag&lt;/div>
-                </code>
+            <code-block style="margin-top:1rem;" v-pre>
+                &lt;div class="ks-badge">10&lt;/div>
+                &lt;div class="ks-badge success">10&lt;/div>
+                &lt;div class="ks-badge info">10&lt;/div>
+                &lt;div class="ks-badge warning">10&lt;/div>
+                &lt;div class="ks-badge error">10&lt;/div>
+                <br>
+                &lt;div class="ks-badge">Tag&lt;/div>
+                &lt;div class="ks-badge success">Tag&lt;/div>
+                &lt;div class="ks-badge info">Tag&lt;/div>
+                &lt;div class="ks-badge warning">Tag&lt;/div>
+                &lt;div class="ks-badge error">Tag&lt;/div>
             </code-block>
         </div>
     </div>

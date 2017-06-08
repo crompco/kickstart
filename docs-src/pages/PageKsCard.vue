@@ -24,22 +24,20 @@
         </div>
 
         <div class="row">
-            <code-block>
-                <code class="language-html" v-pre>
-                    &lt;div class="ks-card">
-                        &lt;div class="card-header">
-                            Foo
-                        &lt;/div>
-                        &lt;div class="card-body">
-                            Here is the body of the card. &lt;br>
-                            Let's break it down!
-                        &lt;/div>
-                        &lt;div class="card-footer">
-                            &lt;button>Edit&lt;/button>
-                            &lt;button class="danger">Delete&lt;/button>
-                        &lt;/div>
+            <code-block v-pre>
+                &lt;div class="ks-card">
+                    &lt;div class="card-header">
+                        Foo
                     &lt;/div>
-                </code>
+                    &lt;div class="card-body">
+                        Here is the body of the card. &lt;br>
+                        Let's break it down!
+                    &lt;/div>
+                    &lt;div class="card-footer">
+                        &lt;button>Edit&lt;/button>
+                        &lt;button class="danger">Delete&lt;/button>
+                    &lt;/div>
+                &lt;/div>
             </code-block>
         </div>
     </div>

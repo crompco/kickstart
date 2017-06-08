@@ -17,10 +17,8 @@
 			</div>
 
             <div class="med-12">
-                <code-block>
-                    <code class="language-html" v-pre>
+                <code-block v-pre>
                         &lt;ks-datepicker v-model="date1">&lt;/ks-datepicker>
-                    </code>
                 </code-block>
             </div>
 		</div>
@@ -46,15 +44,13 @@
 			</div>
 
             <div class="med-12">
-                <code-block>
-                    <code class="language-html" v-pre>
+                <code-block v-pre>
                         &lt;ks-datepicker
                             v-model="date2"
                             :year-picker="true"
                             :month-picker="true"
                             date-format="m/d/Y"
                         >&lt;/ks-datepicker>
-                    </code>
                 </code-block>
             </div>
 		</div>

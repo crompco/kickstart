@@ -1,7 +1,7 @@
 <template>
     <ks-accordion class="col code-block-accordion">
         <ks-accordion-row title="Show Code">
-            <pre><code class="language-html" v-pre><slot></slot></code></pre>
+            <pre><code :class="lang"><slot></slot></code></pre>
         </ks-accordion-row>
     </ks-accordion>
 </template>
