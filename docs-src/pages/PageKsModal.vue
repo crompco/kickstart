@@ -2,175 +2,306 @@
 	<div>
 		<h2>Modal</h2>
 
-		<div class="basic-block">
-			<button class="button" @click.prevent="openModal('modal1')">
-				Simple Modal
-			</button>
+        <!-- Simple Modal -->
+        <div class="basic-block">
 
-			<ks-modal title="Simple Modal" ref="modal1">
-				<p>
-					This is a simple modal with just a title and content
-				</p>
-			</ks-modal>
+            <div class="row">
+                <div class="col sm-full med-half">
+                    <button class="button" @click.prevent="$refs.modal1.open()">
+                        Simple Modal
+                    </button>
 
-			<button class="button" @click.prevent="openModal('modal2')">
-				Modal with buttons
-			</button>
+                    <ks-modal title="Simple Modal" ref="modal1">
+                        <p>
+                            This is a simple modal with just a title and content
+                        </p>
+                    </ks-modal>
+                    <code-block>
+                        <code class="language-html" v-pre>
+                            &lt;button class="button" @click.prevent="$refs.modal1.open()">
+                                Simple Modal
+                            &lt;/button>
 
-			<ks-modal title="Modal with buttons" ref="modal2" >
-				<p>
-					This is a simple modal with just a title and content
-				</p>
-				<div slot="footer">
-					<button class="button">Yes</button>
-					<button class="button" @click.prevent="closeModal('modal2')">Cancel</button>
-				</div>
-			</ks-modal>
-
-            <button
-                class="button danger"
-                @click.prevent="openModal('modal_danger')"
-            >
-                Danger Modal
-            </button>
-
-            <ks-modal title="Modal Danger" ref="modal_danger" :danger="true">
-                <p>
-                    Be careful with this action!
-                </p>
-                <div slot="footer">
-                    <button class="button danger">Yes, Delete</button>
-                    <button class="button" @click.prevent="closeModal('modal_danger')">Cancel</button>
+                            &lt;ks-modal title="Simple Modal" ref="modal1">
+                                &lt;p>
+                                    This is a simple modal with just a title and content
+                                &lt;/p>
+                            &lt;/ks-modal>
+                        </code>
+                    </code-block>
                 </div>
-            </ks-modal>
+                <div class="col sm-full med-half">
+                    <button class="button" @click.prevent="$refs.modal2.open()">
+                        Modal with buttons
+                    </button>
 
-            <button class="button" @click.prevent="openModal('modal3')">
-				Modal without header
-			</button>
+                    <ks-modal title="Modal with buttons" ref="modal2" >
+                        <p>
+                            This is a simple modal with just a title and content
+                        </p>
+                        <div slot="footer">
+                            <button class="button">Yes</button>
+                            <button class="button" @click.prevent="$refs.modal2.close()">Cancel</button>
+                        </div>
+                    </ks-modal>
 
-			<ks-modal title="Modal without header" :show-header="false" ref="modal3">
-				<p>
-					This is a simple modal without a title and only content
-				</p>
-				<em>
-					Click on the mask to close
-				</em>
-			</ks-modal>
+                    <code-block>
+                        <code class="language-html" v-pre>
+                            &lt;button class="button" @click.prevent="$refs.modal2.open()">
+                                Modal with buttons
+                            &lt;/button>
 
-			<button class="button" @click.prevent="openModal('modal4')">
-				Modal with a lot of content
-			</button>
+                            &lt;ks-modal title="Modal with buttons" ref="modal2" >
+                                &lt;p>
+                                    This is a simple modal with just a title and content
+                                &lt;/p>
+                                &lt;div slot="footer">
+                                    &lt;button class="button">Yes&lt;/button>
+                                    &lt;button class="button" @click.prevent="$refs.modal2.close()">Cancel&lt;/button>
+                                &lt;/div>
+                            &lt;/ks-modal>
+                        </code>
+                    </code-block>
+                </div>
 
-			<ks-modal title="Modal with buttons" ref="modal4">
-				<div>
+                <!-- Danger button modal -->
+                <div class="col sm-full med-half">
+                    <button class="button danger" @click.prevent="$refs.modal_danger.open()">
+                        Danger Modal
+                    </button>
 
-					<p>
-						Lorem ipsum dolor sit amet, quo virtute admodum persecuti in.
-						Eu ullum vivendo est, praesent dignissim ut quo, sed inermis conclusionemque te.
-						Has an epicuri appellantur. Vel eu argumentum persequeris.
-						Ex sed quas atomorum, et consul epicuri vituperata vel. Mel ex dicit bonorum reprehendunt.
-						Accumsan constituam te vim, ut malis soleat doming est.
-					</p>
+                    <ks-modal title="Modal Danger" ref="modal_danger" :danger="true">
+                        <p>
+                            Be careful with this action!
+                        </p>
+                        <div slot="footer">
+                            <button class="button danger">Yes, Delete</button>
+                            <button class="button" @click.prevent="$refs.modal_danger.close()">Cancel</button>
+                        </div>
+                    </ks-modal>
 
-					<p>
-						Per in quis iisque perpetua, ut probo delectus his. Purto novum repudiandae id vix,
-						eam ei dolores perpetua. In sea summo ridens iudicabit, tota dicunt vel in. Dolores
-						conclusionemque no mei, ut duo dolorum consetetur, mel cu diam oporteat. Vel cu graeci audire.
-						Idque menandri oportere ut per, id usu ipsum elitr, sed no eirmod necessitatibus.
-					</p>
+                    <code-block>
+                        <code class="language-html" v-pre>
+                            &lt;button class="button danger" @click.prevent="$refs.modal_danger.open()">
+                                Danger Modal
+                            &lt;/button>
 
-					<p>
-						His ex putant postulant, te epicurei theophrastus vim, probatus recusabo ius id. Mel
-						integre impedit maiorum at, nam modus nullam et. Eam ne neglegentur suscipiantur,
-						duo percipit oportere ei. Facete doctus comprehensam et his, phaedrum reprehendunt ex pro,
-						ea has laoreet voluptaria. Erant officiis in qui, eam ei inani corrumpit. At quo recusabo
-						consequuntur, vim te mazim quaeque, cu pri natum invidunt.
-					</p>
+                            &lt;ks-modal title="Modal Danger" ref="modal_danger" :danger="true">
+                                &lt;p>
+                                    Be careful with this action!
+                                &lt;/p>
+                                &lt;div slot="footer">
+                                    &lt;button class="button danger">Yes, Delete&lt;/button>
+                                    &lt;button class="button" @click.prevent="$refs.modal_danger.close()">Cancel&lt;/button>
+                                &lt;/div>
+                            &lt;/ks-modal>
+                        </code>
+                    </code-block>
+                </div>
+                <div class="col sm-full med-half">
+                    <button class="button" @click.prevent="$refs.modal3.open()">
+                        Modal without header
+                    </button>
 
-					<br/>
-					<p>
-						Purto veniam sed in, ut pro ridens appetere, nam in odio eleifend. Mel no ullum eruditi
-						concludaturque, qui cotidieque comprehensam id, in per partem facilisi volutpat.
-						Choro eruditi ea nam, discere tacimates ex vim. Pro populo lucilius erroribus in,
-						te erat animal offendit vim. No his brute debitis definiebas. Cibo natum ex est.
-					</p>
+                    <ks-modal :show-header="false" ref="modal3">
+                        <p>
+                            This is a simple modal without a title and only content
+                        </p>
+                        <em>
+                            Click on the mask to close
+                        </em>
+                    </ks-modal>
 
-					<p>
-						Quot petentium cu mel, everti temporibus cu pri. Te eum summo theophrastus.
-						Ancillae interpretaris an pri, elit omnis utroque eu sea, est porro aperiam hendrerit ne.
-						Virtute blandit at pri, est dissentias dissentiunt no. Vel cu malis dissentiet,
-						at ius inimicus conceptam referrentur.
-					</p>
+                    <code-block>
+                        <code class="language-html" v-pre>
+                            &lt;button class="button" @click.prevent="$refs.modal3.open()">
+                                Modal without header
+                            &lt;/button>
 
-					<p>
-						Lorem ipsum dolor sit amet, quo virtute admodum persecuti in.
-						Eu ullum vivendo est, praesent dignissim ut quo, sed inermis conclusionemque te.
-						Has an epicuri appellantur. Vel eu argumentum persequeris.
-						Ex sed quas atomorum, et consul epicuri vituperata vel. Mel ex dicit bonorum reprehendunt.
-						Accumsan constituam te vim, ut malis soleat doming est.
-					</p>
+                            &lt;ks-modal :show-header="false" ref="modal3">
+                                &lt;p>
+                                    This is a simple modal without a title and only content
+                                &lt;/p>
+                                &lt;em>
+                                    Click on the mask to close
+                                &lt;/em>
+                            &lt;/ks-modal>
+                        </code>
+                    </code-block>
+                </div>
+                <div class="col sm-full med-half">
+                    <button class="button" @click.prevent="$refs.modal4.open()">
+                        Modal with a lot of content
+                    </button>
 
-					<p>
-						Per in quis iisque perpetua, ut probo delectus his. Purto novum repudiandae id vix,
-						eam ei dolores perpetua. In sea summo ridens iudicabit, tota dicunt vel in. Dolores
-						conclusionemque no mei, ut duo dolorum consetetur, mel cu diam oporteat. Vel cu graeci audire.
-						Idque menandri oportere ut per, id usu ipsum elitr, sed no eirmod necessitatibus.
-					</p>
+                    <ks-modal title="Modal with buttons" ref="modal4">
+                        <div>
 
-					<br/>
-					<p>
-						His ex putant postulant, te epicurei theophrastus vim, probatus recusabo ius id. Mel
-						integre impedit maiorum at, nam modus nullam et. Eam ne neglegentur suscipiantur,
-						duo percipit oportere ei. Facete doctus comprehensam et his, phaedrum reprehendunt ex pro,
-						ea has laoreet voluptaria. Erant officiis in qui, eam ei inani corrumpit. At quo recusabo
-						consequuntur, vim te mazim quaeque, cu pri natum invidunt.
-					</p>
+                            <p>
+                                Lorem ipsum dolor sit amet, quo virtute admodum persecuti in.
+                                Eu ullum vivendo est, praesent dignissim ut quo, sed inermis conclusionemque te.
+                                Has an epicuri appellantur. Vel eu argumentum persequeris.
+                                Ex sed quas atomorum, et consul epicuri vituperata vel. Mel ex dicit bonorum reprehendunt.
+                                Accumsan constituam te vim, ut malis soleat doming est.
+                            </p>
 
-					<p>
-						Purto veniam sed in, ut pro ridens appetere, nam in odio eleifend. Mel no ullum eruditi
-						concludaturque, qui cotidieque comprehensam id, in per partem facilisi volutpat.
-						Choro eruditi ea nam, discere tacimates ex vim. Pro populo lucilius erroribus in,
-						te erat animal offendit vim. No his brute debitis definiebas. Cibo natum ex est.
-					</p>
+                            <p>
+                                Per in quis iisque perpetua, ut probo delectus his. Purto novum repudiandae id vix,
+                                eam ei dolores perpetua. In sea summo ridens iudicabit, tota dicunt vel in. Dolores
+                                conclusionemque no mei, ut duo dolorum consetetur, mel cu diam oporteat. Vel cu graeci audire.
+                                Idque menandri oportere ut per, id usu ipsum elitr, sed no eirmod necessitatibus.
+                            </p>
 
-					<p>
-						Quot petentium cu mel, everti temporibus cu pri. Te eum summo theophrastus.
-						Ancillae interpretaris an pri, elit omnis utroque eu sea, est porro aperiam hendrerit ne.
-						Virtute blandit at pri, est dissentias dissentiunt no. Vel cu malis dissentiet,
-						at ius inimicus conceptam referrentur.
-					</p>
-				</div>
-				<div slot="footer">
-					<button class="button">Yes</button>
-					<button class="button" @click.prevent="closeModal('modal4')">Cancel</button>
-				</div>
-			</ks-modal>
+                            <p>
+                                His ex putant postulant, te epicurei theophrastus vim, probatus recusabo ius id. Mel
+                                integre impedit maiorum at, nam modus nullam et. Eam ne neglegentur suscipiantur,
+                                duo percipit oportere ei. Facete doctus comprehensam et his, phaedrum reprehendunt ex pro,
+                                ea has laoreet voluptaria. Erant officiis in qui, eam ei inani corrumpit. At quo recusabo
+                                consequuntur, vim te mazim quaeque, cu pri natum invidunt.
+                            </p>
 
-			<button class="button" @click.prevent="openModal('modal5')">
-				Modal with Select
-			</button>
+                            <br/>
+                            <p>
+                                Purto veniam sed in, ut pro ridens appetere, nam in odio eleifend. Mel no ullum eruditi
+                                concludaturque, qui cotidieque comprehensam id, in per partem facilisi volutpat.
+                                Choro eruditi ea nam, discere tacimates ex vim. Pro populo lucilius erroribus in,
+                                te erat animal offendit vim. No his brute debitis definiebas. Cibo natum ex est.
+                            </p>
 
-			<ks-modal title="Modal with buttons" ref="modal5" >
-				<p>
-					This is a simple modal with a select
-				</p>
+                            <p>
+                                Quot petentium cu mel, everti temporibus cu pri. Te eum summo theophrastus.
+                                Ancillae interpretaris an pri, elit omnis utroque eu sea, est porro aperiam hendrerit ne.
+                                Virtute blandit at pri, est dissentias dissentiunt no. Vel cu malis dissentiet,
+                                at ius inimicus conceptam referrentur.
+                            </p>
 
-				<ks-select
-					name="code"
-					:items="countries"
-					label-key="name"
-					v-model="country_code"
-					list-height="150px"
-				>
-					<template scope="props">{{props.item.name}}</template>
-				</ks-select>
-				<div slot="footer">
-					<button class="button error">Yes</button>
-					<button class="button" @click.prevent="closeModal('modal5')">Cancel</button>
-				</div>
-			</ks-modal>
+                            <p>
+                                Lorem ipsum dolor sit amet, quo virtute admodum persecuti in.
+                                Eu ullum vivendo est, praesent dignissim ut quo, sed inermis conclusionemque te.
+                                Has an epicuri appellantur. Vel eu argumentum persequeris.
+                                Ex sed quas atomorum, et consul epicuri vituperata vel. Mel ex dicit bonorum reprehendunt.
+                                Accumsan constituam te vim, ut malis soleat doming est.
+                            </p>
 
-		</div>
+                            <p>
+                                Per in quis iisque perpetua, ut probo delectus his. Purto novum repudiandae id vix,
+                                eam ei dolores perpetua. In sea summo ridens iudicabit, tota dicunt vel in. Dolores
+                                conclusionemque no mei, ut duo dolorum consetetur, mel cu diam oporteat. Vel cu graeci audire.
+                                Idque menandri oportere ut per, id usu ipsum elitr, sed no eirmod necessitatibus.
+                            </p>
+
+                            <br/>
+                            <p>
+                                His ex putant postulant, te epicurei theophrastus vim, probatus recusabo ius id. Mel
+                                integre impedit maiorum at, nam modus nullam et. Eam ne neglegentur suscipiantur,
+                                duo percipit oportere ei. Facete doctus comprehensam et his, phaedrum reprehendunt ex pro,
+                                ea has laoreet voluptaria. Erant officiis in qui, eam ei inani corrumpit. At quo recusabo
+                                consequuntur, vim te mazim quaeque, cu pri natum invidunt.
+                            </p>
+
+                            <p>
+                                Purto veniam sed in, ut pro ridens appetere, nam in odio eleifend. Mel no ullum eruditi
+                                concludaturque, qui cotidieque comprehensam id, in per partem facilisi volutpat.
+                                Choro eruditi ea nam, discere tacimates ex vim. Pro populo lucilius erroribus in,
+                                te erat animal offendit vim. No his brute debitis definiebas. Cibo natum ex est.
+                            </p>
+
+                            <p>
+                                Quot petentium cu mel, everti temporibus cu pri. Te eum summo theophrastus.
+                                Ancillae interpretaris an pri, elit omnis utroque eu sea, est porro aperiam hendrerit ne.
+                                Virtute blandit at pri, est dissentias dissentiunt no. Vel cu malis dissentiet,
+                                at ius inimicus conceptam referrentur.
+                            </p>
+                        </div>
+                        <div slot="footer">
+                            <button class="button">Yes</button>
+                            <button class="button" @click.prevent="$refs.modal4.close()">Cancel</button>
+                        </div>
+                    </ks-modal>
+
+                    <code-block>
+                        <code class="language-html" v-pre>
+                            &lt;button class="button" @click.prevent="$refs.modal4.open()">
+                                Modal with a lot of content
+                            &lt;/button>
+
+                            &lt;ks-modal title="Modal with buttons" ref="modal4">
+                                &lt;div>
+
+                                    &lt;p>
+                                        Lorem ipsum dolor sit amet, quo virtute admodum persecuti in.
+                                        Eu ullum vivendo est, praesent dignissim ut quo, sed inermis conclusionemque te.
+                                        Has an epicuri appellantur. Vel eu argumentum persequeris.
+                                        Ex sed quas atomorum, et consul epicuri vituperata vel. Mel ex dicit bonorum reprehendunt.
+                                        Accumsan constituam te vim, ut malis soleat doming est.
+                                    &lt;/p>
+
+                                    ...
+                                &lt;/div>
+                                &lt;div slot="footer">
+                                    &lt;button class="button">Yes&lt;/button>
+                                    &lt;button class="button" @click.prevent="$refs.modal4.close()">Cancel&lt;/button>
+                                &lt;/div>
+                            &lt;/ks-modal>
+                        </code>
+                    </code-block>
+                </div>
+                <div class="col sm-full med-half">
+                    <button class="button" @click.prevent="$refs.modal5.open()">
+                        Modal with Select
+                    </button>
+
+                    <ks-modal title="Modal with buttons" ref="modal5" >
+                        <p>
+                            This is a simple modal with a select
+                        </p>
+
+                        <ks-select
+                            name="code"
+                            :items="countries"
+                            label-key="name"
+                            v-model="country_code"
+                            list-height="150px"
+                        >
+                            <template scope="props">{{props.item.name}}</template>
+                        </ks-select>
+                        <div slot="footer">
+                            <button class="button error">Yes</button>
+                            <button class="button" @click.prevent="$refs.modal5.close()">Cancel</button>
+                        </div>
+                    </ks-modal>
+
+                    <code-block>
+                        <code class="language-html" v-pre>
+                            &lt;button class="button" @click.prevent="$refs.modal5.open()">
+                                Modal with Select
+                            &lt;/button>
+
+                            &lt;ks-modal title="Modal with buttons" ref="modal5" >
+                                &lt;p>
+                                    This is a simple modal with a select
+                                &lt;/p>
+
+                                &lt;ks-select
+                                    name="code"
+                                    :items="countries"
+                                    label-key="name"
+                                    v-model="country_code"
+                                    list-height="150px"
+                                >
+                                    &lt;template scope="props">{{props.item.name}}&lt;/template>
+                                &lt;/ks-select>
+                                &lt;div slot="footer">
+                                    &lt;button class="button error">Yes&lt;/button>
+                                    &lt;button class="button" @click.prevent="$refs.modal5.close()">Cancel&lt;/button>
+                                &lt;/div>
+                            &lt;/ks-modal>
+                        </code>
+                    </code-block>
+
+                </div>
+            </div>
+        </div>
 
 		<div>
 			<ks-tabs>
