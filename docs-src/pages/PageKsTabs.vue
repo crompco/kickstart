@@ -200,6 +200,39 @@
                         </tbody>
                     </table>
                 </ks-tab>
+                <ks-tab title="Slots">
+                    <h2>KsTabs</h2>
+                    <table class="table striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>default</td>
+                                <td>This is where the ks-tabs will be.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h2>KsTab</h2>
+                    <table class="table striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>default</td>
+                                <td>This is where the tab content will be. By default the non-active tabs are not in the DOM. So the mounted will not be called until it is the active tab.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </ks-tab>
             </ks-tabs>
 		</div>
 	</div>
