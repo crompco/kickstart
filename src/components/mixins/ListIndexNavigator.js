@@ -56,6 +56,10 @@ export default {
             type: Number,
             default: 100
         },
+        groupBy: {
+            type: [String],
+            default: null
+        }
     },
 
     data() {
@@ -81,14 +85,16 @@ export default {
     },
 
     computed: {
+        nameRegex() {
+            return new RegExp('^.*' + escapeRegExp('' + this.lookup_name) + '.*', 'i');
+        },
+
         /**
          * Returns the filter used against the list
          *
          * @returns {function(*=)}
          */
         filter_function() {
-            let name_regex = new RegExp('^.*' + escapeRegExp('' + this.lookup_name) + '.*', 'i');
-
             let filter = this.filter;
             if ( !filter && this.selectionKey ) {
                 filter = this.selectionKey;
@@ -98,7 +104,15 @@ export default {
             }
 
             return (item) => {
-                return object_get(item, filter, '').match(name_regex) ? true : false;
+                let name_match = object_get(item, filter, '').match(this.nameRegex) ? true : false;
+
+                // If groupBy is set then we should filter on the group name or the name match
+                if ( this.groupBy ) {
+                    let group_match = object_get(item, this.groupBy, '').match(this.nameRegex) ? true : false;
+                    return name_match || group_match;
+                }
+
+                return name_match;
             };
         },
 
@@ -124,6 +138,31 @@ export default {
             return this.list.length - 1;
         },
 
+        groups() {
+            if ( !this.groupBy ) {
+                return {};
+            }
+
+            let groups = {}
+
+            // Using custom group by in order to retain the original index for selecting the items
+            for ( let i in this.list ) {
+                let group = object_get(this.list[i], this.groupBy);
+
+                // Initialize the group
+                if ( typeof groups[group] == 'undefined' ) {
+                    groups[group] = [];
+                }
+
+                // Push the group with the original index as _index
+                groups[group].push({
+                    ...this.list[i],
+                    _index: i
+                });
+            }
+
+            return groups;
+        }
     },
 
     methods: {
@@ -365,7 +404,12 @@ export default {
             }
         },
 
-        getSearchStartIndex() {
+        /**
+         *
+         * @returns {Number}
+         */
+        getSearchStartIndex()
+        {
             return parseInt(this.startIndex);
         },
 

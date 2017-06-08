@@ -4,17 +4,22 @@
  * @param String expression
  */
 export function object_get(obj, expression, default_val = '') {
-  if (!(obj && expression)) throw new Error('both obj and expression args are required')
+    let reference = obj;
+    let keys = expression.split('.');
 
-  return expression.trim().split('.').reduce(function (prev, curr) {
-    var arr = curr.match(/(.*?)\[(.*?)\]/)
-    if (arr) {
-      return prev && prev[arr[1]][arr[2]]
-    } else {
-      return prev && prev[curr]
+    // Traverse to the last 'level' if we can. As soon as we find a missing
+    // property, we return the default value
+    for ( let i = 0; i < keys.length - 1; ++i ) {
+        let expression = keys[i];
+
+        if ( typeof reference[expression] == "undefined" ) {
+            return default_val;
+        }
+
+        reference = reference[expression];
     }
-  }, obj) || default_val
 
+    return reference[keys[keys.length - 1]] || default_val;
 }
 
 /**
@@ -49,9 +54,23 @@ export function looseIndexOf(obj, val) {
 	return -1;
 }
 
+export function groupBy(arr, groupBy) {
+    let groups = {};
+    for ( var i in arr ) {
+        let group = object_get(arr[i], groupBy)
+        if ( groups[group] ) {
+            groups[group].push(arr[i])
+        } else {
+            groups[group] = [arr[i]];
+        }
+    }
+    return groups;
+}
+
 
 export default {
 	object_get,
     object_only,
-	looseIndexOf
+	looseIndexOf,
+    groupBy
 }

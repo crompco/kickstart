@@ -44,25 +44,34 @@
 				class="autocomplete-list"
 				:style="'max-height:'+this.listHeight"
 			>
-                <!--<li-->
-                    <!--v-if="singleDeselect && !multiple"-->
-                    <!--class="placeholder-option"-->
-                    <!--:class="{ 'selected-item': -1 == selected_index }"-->
-                    <!--@mouseover="setHoverIndex(-1)"-->
-                    <!--@click.prevent="selectItem(-1)"-->
-                <!--&gt;-->
-                    <!--<em>{{placeholder}}</em>-->
-                <!--</li>-->
-				<li
-					v-for="(item, index) in list"
-					:class="{ 'selected-item': index == selected_index }"
-					@click.prevent="selectItem(index)"
-					@mouseover="setHoverIndex(index)"
+				<template v-if="groupBy">
+					<li v-for="(group_list, group) in groups" class="opt-group">
+						<strong>{{group}}</strong>
+						<ul>
+							<li
+								v-for="(item, index) in group_list"
+								:class="{ 'selected-item': item._index == selected_index }"
+								@click.prevent="selectItem(item._index, $event)"
+								@mouseover="setHoverIndex(item._index)"
+							>
+								<!-- Scoped slot -->
+								<slot :item="item">{{item[labelKey]}}</slot>
+							</li>
+						</ul>
+					</li>
+				</template>
+				<template v-else>
+					<li
+						v-for="(item, index) in list"
+						:class="{ 'selected-item': index == selected_index }"
+						@click.prevent="selectItem(index)"
+						@mouseover="setHoverIndex(index)"
 
-				>
-					<!-- Scoped slot -->
-					<slot :item="item"></slot>
-				</li>
+					>
+						<!-- Scoped slot  that defaults to the labelKey-->
+						<slot :item="item">{{item[labelKey]}}</slot>
+					</li>
+				</template>
 			</ul>
 		</div>
 	</div>
@@ -128,7 +137,6 @@
 				loading: false,
 				selected: null,
                 startIndex: 0,
-//                minIndex: this.singleDeselect ? -1 : 0,
                 minIndex: 0,
 				selected_index: 0,
 				keyName: this.itemKey,

@@ -38,10 +38,17 @@
 
 		.autocomplete-list {
 			li {
-				border-color: transparent;
+				border: 1px solid transparent;
                 &.placeholder-option {
                     color: darken($gray, 10%);
                 }
+				ul {
+					list-style: none;
+					padding: 0;
+					li {
+						padding-left: 1rem;
+					}
+				}
 			}
 		}
 	}
@@ -64,16 +71,20 @@
             @include v-center();
             right: 2.1rem;
             padding: 0.25rem;
+            //margin-left: 0.5rem;
             height: 1.75rem;
             width: 1.75rem;
-            border-radius: 50%;
+            border-radius: $select-deselect-border-radius;
             text-align: center;
-            border: solid 1px transparent;
+            border: solid 1px $select-deselect-border-color;
+            color: $select-deselect-color;
+            backgroud: $select-deselect-bg;
+            transition: all 0.2s;
 
             &:hover {
-                background: $white;
-                color: $state-error;
-                border: solid 1px $state-error-bg;
+                background: $select-deselect-hover-bg;
+                color: $select-deselect-hover-color;
+                border: solid 1px $select-deselect-hover-border-color;
             }
         }
 	}

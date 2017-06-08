@@ -19,6 +19,22 @@
                         {{props.item.name}}
                     </template>
                 </ks-select>
+
+               <code-block>
+                    <code class="language-html" v-pre>
+                        &lt;ks-select
+                            name="code"
+                            label-key="name"
+                            v-model="country"
+                            :paginated="true"
+                            @search="runSearch"
+                        >
+                            &lt;template scope="props">
+                                {{props.item.name}}
+                            &lt;/template>
+                        &lt;/ks-select>
+                    </code>
+               </code-block>
             </div>
             <p>Plain select</p>
             <div class="form-group">
@@ -28,11 +44,18 @@
                     :items="countries"
                     label-key="name"
                     v-model="country_code2"
-                >
-                    <template scope="props">
-                        {{props.item.name}}
-                    </template>
-                </ks-select>
+                ></ks-select>
+
+                <code-block>
+                    <code class="language-html" v-pre>
+                        &lt;ks-select
+                            name="code"
+                            :items="countries"
+                            label-key="name"
+                            v-model="country_code2"
+                        >&lt;/ks-select>
+                    </code>
+                </code-block>
             </div>
 
             <p>Select without the search</p>
@@ -42,13 +65,46 @@
                     name="code"
                     :items="short_countries"
                     label-key="name"
-                    v-model="country_code3"
                     :single-deselect="true"
-                >
-                    <template scope="props">
-                        {{props.item.name}}
-                    </template>
-                </ks-select>
+                    v-model="country_code3"
+                ></ks-select>
+
+                <code-block>
+                    <code class="language-html" v-pre>
+                        &lt;ks-select
+                            name="code"
+                            :items="short_countries"
+                            label-key="name"
+                            :single-deselect="true"
+                            v-model="country_code3"
+                        >&lt;/ks-select>
+                    </code>
+                </code-block>
+            </div>
+
+            <p>Group Select</p>
+            <div class="form-group">
+                <div class="label">Country</div>
+                <ks-select
+                    name="name"
+                    :items="characters"
+                    label-key="name"
+                    group-by="show"
+                    v-model="character"
+                    :single-deselect="true"
+                ></ks-select>
+                <code-block>
+                    <code class="language-html" v-pre>
+                        &lt;ks-select
+                            name="name"
+                            :items="characters"
+                            label-key="name"
+                            v-model="character"
+                            group-by="show"
+                            :single-deselect="true"
+                        >&lt;/ks-select>
+                    </code>
+                </code-block>
             </div>
         </div>
         <div class="alert warning">
@@ -187,6 +243,16 @@
                             </td>
                             <td>
                                 Minimum number of characters typed in the search box needed to trigger the search
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>groupBy</td>
+                            <td>String</td>
+                            <td>
+                                <pre>NULL</pre>
+                            </td>
+                            <td>
+                                The key to group items by. Dot notation is supported for nested values in the items.
                             </td>
                         </tr>
                         <tr>
@@ -386,9 +452,11 @@
 		data() {
 			return {
 				countries: [],
+                characters: [],
 				country: '',
                 country_code2: 'AW',
                 country_code3: '',
+                character: '',
                 short_countries: [
                     {
                         name: 'USA',
@@ -408,6 +476,9 @@
 			api.get('/countries.json').then((data) => {
 				this.countries = data;
 			});
+            api.get('/characters.json').then((data) => {
+                this.characters = data;
+            });
 		},
 
 		methods: {

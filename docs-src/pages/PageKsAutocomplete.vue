@@ -12,31 +12,20 @@
                     v-model="value1"
                     @search="runSearch"
                     :paginated="true"
-                >
-                    <template scope="props">
-                        {{props.item.name}}
-                    </template>
-                </ks-autocomplete>
+                ></ks-autocomplete>
+
+                <code-block>
+                    <code class="language-html" v-pre>
+                        &lt;ks-autocomplete
+                            selection-key="name"
+                            v-model="value1"
+                            @search="runSearch"
+                            :paginated="true"
+                        >&lt;/ks-autocomplete>
+                    </code>
+                </code-block>
             </div>
 
-            <ks-accordion class="col">
-                <ks-accordion-row title="Show Code">
-                    <pre>
-                        <code class="language-html">
-                             &lt;ks-autocomplete
-                                selection-key="name"
-                                v-model="value1"
-                                @search="runSearch"
-                                :paginated="true"
-                            >
-                                 &lt;template scope="props">
-                                    {{&quot;{&quot; + &quot;{ props.item.name }&quot; + &quot;}&quot;}}
-                                 &lt;/template>
-                             &lt;/ks-autocomplete>
-                        </code>
-                    </pre>
-                </ks-accordion-row>
-            </ks-accordion>
 
             <div class="form-group">
                 <div class="label">Passed items</div>
@@ -44,30 +33,20 @@
                     :items="countries"
                     selection-key="name"
                     v-model="value2"
-                >
-                    <template scope="props">
-                        {{props.item.name}}
-                    </template>
-                </ks-autocomplete>
+                ></ks-autocomplete>
+
+                <code-block>
+                    <code class="language-html" v-pre>
+                         &lt;ks-autocomplete
+                            :items="countries"
+                            selection-key="name"
+                            v-model="value2"
+                        >&lt;/ks-autocomplete>
+                    </code>
+                </code-block>
             </div>
 
-            <ks-accordion class="col">
-                <ks-accordion-row title="Show Code">
-                    <pre>
-                        <code class="language-html">
-                             &lt;ks-autocomplete
-                                :items="countries"
-                                selection-key="name"
-                                v-model="value2"
-                            >
-                                 &lt;template scope="props">
-                                    {{&quot;{&quot; + &quot;{ props.item.name }&quot; + &quot;}&quot;}}
-                                 &lt;/template>
-                             &lt;/ks-autocomplete>
-                        </code>
-                    </pre>
-                </ks-accordion-row>
-            </ks-accordion>
+
 
             <div class="form-group">
                 <div class="label">Multiple Selections with custom template</div>
@@ -82,27 +61,24 @@
                         <strong>{{props.item.name}}</strong> <em>{{props.item.code}}</em>
                     </template>
                 </ks-autocomplete>
+
+                <code-block>
+                    <code class="language-html" v-pre>
+                        &lt;ks-autocomplete
+                            :items="countries"
+                            selection-key="name"
+                            :multiple="true"
+                            v-model="value3"
+                            @search="runSearch"
+                        >
+                            &lt;template scope="props">
+                                &lt;strong>{{props.item.name}}&lt;/strong> &lt;em>{{props.item.code}}&lt;/em>
+                            &lt;/template>
+                        &lt;/ks-autocomplete>
+                    </code>
+                </code-block>
             </div>
 
-            <ks-accordion class="col">
-                <ks-accordion-row title="Show Code">
-                    <pre>
-                        <code class="language-html">
-                             &lt;ks-autocomplete
-                                :items="countries"
-                                selection-key="name"
-                                :multiple="true"
-                                v-model="value3"
-                                @search="runSearch"
-                            >
-                                 &lt;template scope="props">
-                                    &lt;strong>{{&quot;{&quot; + &quot;{props.item.name}&quot; + &quot;}&quot;}}&lt;/strong> &lt;em>{{&quot;{&quot; + &quot;{props.item.code}&quot; + &quot;}&quot;}}&lt;/em>
-                                 &lt;/template>
-                             &lt;/ks-autocomplete>
-                        </code>
-                    </pre>
-                </ks-accordion-row>
-            </ks-accordion>
 
             <div class="form-group">
                 <div class="label">Multiple Selections with taggable (add new, minSearch of 0)</div>
@@ -119,30 +95,55 @@
                         <strong>{{props.item.name}}</strong> <em>{{props.item.code}}</em>
                     </template>
                 </ks-autocomplete>
+
+
+                <code-block>
+                    <code class="language-html" v-pre>
+                        &lt;ks-autocomplete
+                            :min-search="0"
+                            :taggable="true"
+                            selection-key="name"
+                            v-model="value4"\
+                            :paginated="true"
+                            :show-tag-in-list="true"
+                            @search="runSearch"
+                        >
+                            &lt;template scope="props">
+                                &lt;strong>{{props.item.name}}&lt;/strong> &lt;em>{{props.item.code}}&lt;/em>
+                            &lt;/template>
+                        &lt;/ks-autocomplete>
+                    </code>
+                </code-block>
             </div>
 
-            <ks-accordion class="col">
-                <ks-accordion-row title="Show Code">
-                    <pre>
-                        <code class="language-html">
-                             &lt;ks-autocomplete
-                                :min-search="0"
-                                :taggable="true"
-                                selection-key="name"
-                                v-model="value4"
-                                :paginated="true"
-                                :show-tag-in-list="true"
-                                @search="runSearch"
-                            >
-                                 &lt;template scope="props">
-                                    &lt;strong>{{&quot;{&quot; + &quot;{props.item.name}&quot; + &quot;}&quot;}}&lt;/strong> &lt;em>{{&quot;{&quot; + &quot;{props.item.code}&quot; + &quot;}&quot;}}&lt;/em>
-                                 &lt;/template>
-                             &lt;/ks-autocomplete>
-                        </code>
-                    </pre>
-                </ks-accordion-row>
-            </ks-accordion>
+            <div class="form-group">
+                <div class="label">Grouped options, Multiple Selections with taggable (add new, minSearch of 0)</div>
+                <ks-autocomplete
+                    :min-search="0"
+                    :taggable="true"
+                    :items="characters"
+                    selection-key="name"
+                    v-model="value5"
+                    :show-tag-in-list="true"
+                    group-by="show"
+                ></ks-autocomplete>
+                <code-block>
+                    <code class="language-html" v-pre>
+                        &lt;ks-autocomplete
+                            :min-search="0"
+                            :taggable="true"
+                            selection-key="name"
+                            v-model="value5"
+                            :paginated="true"
+                            :show-tag-in-list="true"
+                            :items="characters"
+                            group-by="show"
+                        >&lt;/ks-autocomplete>
+                    </code>
+                </code-block>
+            </div>
         </div>
+
 
         <ks-tabs>
             <ks-tab title="Props">
@@ -215,6 +216,16 @@
                             </td>
                             <td>
                                 When true the user is allowed to enter values not in the list items.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>groupBy</td>
+                            <td>String</td>
+                            <td>
+                                <pre>NULL</pre>
+                            </td>
+                            <td>
+                                The key to group items by. Dot notation is supported for nested values in the items.
                             </td>
                         </tr>
                         <tr>
@@ -457,7 +468,7 @@
             </ks-tab>
         </ks-tabs>
 
-		<div style="height: 1200px;">
+		<div style="height: 400px;">
 			<!-- Force the page to get taller to test the scrolling-->
 		</div>
 
@@ -484,17 +495,22 @@
 				value1:'',
 				value2: '',
 				value3: '',
-				value4: '',
-				countries: []
+                value4: '',
+                value5: '',
+                countries: [],
+                characters: []
 			};
 		},
 
 		computed: {},
 
 		mounted() {
-			api.get('/countries.json').then((data) => {
-				this.countries = data;
-			});
+            api.get('/countries.json').then((data) => {
+                this.countries = data;
+            });
+            api.get('/characters.json').then((data) => {
+                this.characters = data;
+            });
 		},
 
 		methods: {

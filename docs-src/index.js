@@ -12,6 +12,9 @@ import VueMask from 'v-mask';
 import App from './App.vue';
 import routes from './routes.js';
 import KickStart from '../src/index';
+import CodeBlock from './pages/CodeBlock.vue';
+
+Vue.component('code-block', CodeBlock);
 
 // Allow inspection, even in production mode
 Vue.config.devtools = true;

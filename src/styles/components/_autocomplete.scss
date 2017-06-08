@@ -159,16 +159,28 @@
 	overflow-y: auto;
 	left: 0;
 
-	> li {
+	li {
 		padding: rem($ac-list-item-padding);
 		border: 1px solid transparent;
 		border-bottom-color: $ac-list-item-border;
 
-		&:last-child {
-			border: 0;
+        // If its the last child or an option group then we disable the border
+		&:last-child, &.opt-group {
+			border-bottom-color: transparent;
 		}
 
-		&.selected-item {
+        &.opt-group {
+            padding-bottom: 0;
+            strong {
+                display: block;
+                padding: 0.15rem;
+            }
+            &:first-child strong {
+                padding-top: 0;
+            }
+        }
+
+        &.selected-item {
 			@include state-hover();
 			color: $ac-list-selected-color;
 		}
@@ -177,5 +189,14 @@
 			//@include state-hover();
 			//background: $ac-list-item-hover-bg;
 		}
+
+        // Handle nested lists
+        ul {
+            list-style: none;
+            padding: 0;
+            li {
+                padding-left: 1rem;
+            }
+        }
 	}
 }
