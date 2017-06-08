@@ -26,6 +26,7 @@
             <code-block>
                 <code class="language-html" v-pre>
                     &lt;ks-action-menu>
+                        &lt;div slot="menu">Menu&lt;/div>
                         &lt;a href="#" class="list-item">New&lt;/a>
                         &lt;a href="#" class="list-item">Add&lt;/a>
                         &lt;a href="#" class="list-item">Edit&lt;/a>
@@ -73,6 +74,22 @@
                             <tr>
                                 <td>close</td>
                                 <td>This will close the menu</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </ks-tab>
+                <ks-tab title="Slots">
+                    <table class="table striped">
+                        <thead>
+                            <tr>
+                                <th>Slot</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>menu</td>
+                                <td>This slot will change the button from the hamburger menu</td>
                             </tr>
                         </tbody>
                     </table>
