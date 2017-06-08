@@ -60,7 +60,7 @@
 			</div>
 		</div>
 
-		<ks-accordion>
+		<ks-accordion class="code-block-accordion">
 			<ks-accordion-row title="Show Code Default">
 				Can be used with an anchor tag or button tag
 				<pre>
