@@ -9,6 +9,65 @@
             <button class="button" @click="show('warning')">Show Toast (Warning)</button>
         </div>
 
+        <div class="row">
+            <code-block>
+                <code class="language-html" v-pre>
+                    &lt;!-- Success -->
+                    &lt;ks-toast
+                        message="This is an success toast"
+                        type="success"
+                    >&lt;/ks-toast>
+
+                    &lt;!-- Info -->
+                    &lt;ks-toast
+                        message="This is an info toast"
+                    >&lt;/ks-toast>
+
+                    &lt;!-- Error -->
+                    &lt;ks-toast
+                        message="This is an error toast"
+                        type="error"
+                    >&lt;/ks-toast>
+
+                    &lt;!-- Warning -->
+                    &lt;ks-toast
+                        message="This is an warning toast"
+                        type="warning"
+                    >&lt;/ks-toast>
+                </code>
+            </code-block>
+        </div>
+
+        <div class="alert info">
+            There are multiple ways to use this components. There is a property on the vue instance if you use kickstart as a plugin.
+        </div>
+        <div class="row">
+            <code-block>
+                <code class="language-js" v-pre>
+                    this.$toast({
+                        type: 'success',
+                        message: 'Success message',
+                        position: 'top-right',
+                        duration: 2500,
+                        limit: 3
+                    });
+
+                    Vue.toast({
+                        type: 'success',
+                        message: 'Success message',
+                        position: 'top-right',
+                        duration: 2500,
+                        limit: 3
+                    });
+
+                    // This will default to an info toast
+                    this.$toast('info message');
+                    Vue.toast('info message');
+                </code>
+            </code-block>
+        </div>
+
+
         <ks-tabs>
             <ks-tab title="Props">
                 <table class="table striped">
@@ -50,6 +109,26 @@
                             <td>Number</td>
                             <td>3</td>
                             <td>The number of toast that are on screen at once</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </ks-tab>
+            <ks-tab title="Methods">
+                <table class="table striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>show</td>
+                            <td>Show the toast. Or if the limit has been reached the toast will be added to the queue.</td>
+                        </tr>
+                        <tr>
+                            <td>close</td>
+                            <td>Closes the toast message.</td>
                         </tr>
                     </tbody>
                 </table>
