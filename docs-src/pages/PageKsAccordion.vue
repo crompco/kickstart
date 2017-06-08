@@ -2,7 +2,7 @@
     <div>
         <h2>Accordion</h2>
 
-        <div class="row">
+        <div class="row col">
             <ks-accordion>
                 <ks-accordion-row title="Row 1">
                     <div slot="actions">
@@ -38,15 +38,109 @@
                     <p>Etiam congue dictum ante, tincidunt tristique nunc tempus in. Nulla facilisi. Praesent tempor ex vel porta lacinia. Praesent nunc elit, dapibus at lacinia in, blandit vitae elit. Praesent enim justo, fermentum ac vestibulum nec, convallis et nibh. Pellentesque vulputate eu leo nec aliquet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut placerat odio a nulla finibus, et faucibus nibh facilisis. Suspendisse cursus, lacus posuere tempus aliquam, felis sapien lobortis nisi, eu posuere dui tortor at risus. Etiam non sem ut dui scelerisque consequat a ut nibh. Aliquam at ante at quam efficitur placerat imperdiet ut lorem.</p>
                 </ks-accordion-row>
             </ks-accordion>
+        </div>
 
-            <br>
-            <br>
-            <br>
+        <div class="row">
+            <code-block>
+                <code class="language-html" v-pre>
+                    &lt;ks-accordion>
+                        &lt;ks-accordion-row title="Row 1">
+                            &lt;div slot="actions">
+                                &lt;ks-action-menu>
+                                    &lt;a href="#">Edit&lt;/a>
+                                    &lt;a href="#">Delete&lt;/a>
+                                &lt;/ks-action-menu>
+                            &lt;/div>
 
-            <ks-accordion>
-                <ks-accordion-row title="Row 1">ROW 1</ks-accordion-row>
-                <ks-accordion-row title="Row 2">ROW 2</ks-accordion-row>
-            </ks-accordion>
+                            Content Here...
+                        &lt;/ks-accordion-row>
+                        &lt;ks-accordion-row title="Row 2">
+                            Content Here...
+                        &lt;/ks-accordion-row>
+                        &lt;ks-accordion-row title="Row 3">
+                            Content Here...
+                        &lt;/ks-accordion-row>
+                    &lt;/ks-accordion>
+                </code>
+            </code-block>
+        </div>
+
+        <div>
+            <h3>Accordion</h3>
+            <ks-tabs>
+                <ks-tab title="Props">
+                    <table class="table striped">
+                        <thead>
+                            <tr>
+                                <th>Prop</th>
+                                <th>Type</th>
+                                <th>Default</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>collapsible</td>
+                                <td>Boolean</td>
+                                <td>true</td>
+                                <td>This will close other rows that are open when the row is clicked</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </ks-tab>
+
+            </ks-tabs>
+        </div>
+
+        <div>
+            <h3>Accordion Row</h3>
+            <ks-tabs>
+                <ks-tab title="Props">
+                    <table class="table striped">
+                        <thead>
+                        <tr>
+                            <th>Prop</th>
+                            <th>Type</th>
+                            <th>Default</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>title</td>
+                            <td>String</td>
+                            <td>''</td>
+                            <td>This is the title of the row</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </ks-tab>
+
+                <ks-tab title="Slots">
+                    <table class="table striped">
+                        <thead>
+                            <tr>
+                                <th>Slot</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>default</td>
+                                <td>This is the default slot. This will be the content that is in the accordion.</td>
+                            </tr>
+                            <tr>
+                                <td>title</td>
+                                <td>This is the title of the row. If the title prop is too limited this can be used.</td>
+                            </tr>
+                            <tr>
+                                <td>actions</td>
+                                <td>This will be on the right side of the row. If the row needs to have any actions or other content</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </ks-tab>
+            </ks-tabs>
         </div>
     </div>
 </template>

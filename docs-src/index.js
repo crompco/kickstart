@@ -13,8 +13,12 @@ import App from './App.vue';
 import routes from './routes.js';
 import KickStart from '../src/index';
 import CodeBlock from './pages/CodeBlock.vue';
+import KsTabs from '../src/components/KsTabs.vue';
+import KsTab from '../src/components/KsTab.vue';
 
 Vue.component('code-block', CodeBlock);
+Vue.component('ks-tabs', KsTabs);
+Vue.component('ks-tab', KsTab);
 
 // Allow inspection, even in production mode
 Vue.config.devtools = true;
