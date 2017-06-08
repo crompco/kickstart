@@ -17,37 +17,33 @@
 			<div class="alert warning">
 				<strong>Warning</strong> This is a warning message
 			</div>
+
+			<div>
+				<code-block>
+					<code class="language-html" v-pre>
+						&lt;div class="alert success">
+							&lt;strong>Success&lt;/strong>
+							this is a success message
+						&lt;/div>
+
+						&lt;div class="alert error">
+							&lt;strong>Error&lt;/strong>
+							this is a error message
+						&lt;/div>
+
+						&lt;div class="alert info">
+							&lt;strong>Info&lt;/strong>
+							this is a info message
+						&lt;/div>
+
+						&lt;div class="alert warning">
+							&lt;strong>Warning&lt;/strong>
+							this is a warning message
+						&lt;/div>
+					</code>
+				</code-block>
+			</div>
 		</div>
-
-		<ks-accordion>
-			<ks-accordion-row title="Show Code">
-				<div>
-					<pre>
-						<code class="language-html">
-							&lt;div class="alert success">
-								&lt;strong>Success&lt;/strong>
-								this is a success message
-							&lt;/div>
-
-							&lt;div class="alert error">
-								&lt;strong>Error&lt;/strong>
-								this is a error message
-							&lt;/div>
-
-							&lt;div class="alert info">
-								&lt;strong>Info&lt;/strong>
-								this is a info message
-							&lt;/div>
-
-							&lt;div class="alert warning">
-								&lt;strong>Warning&lt;/strong>
-								this is a warning message
-							&lt;/div>
-						</code>
-					</pre>
-				</div>
-			</ks-accordion-row>
-		</ks-accordion>
 	</div>
 </template>
 
@@ -57,11 +53,14 @@
     // Internal Dependencies
     import KsAccordion from '../../../src/components/KsAccordion.vue';
     import KsAccordionRow from '../../../src/components/KsAccordionRow.vue';
+    import CodeBlock from "../CodeBlock";
+
 
     export default {
         name: 'Alert',
 
         components: {
+            CodeBlock,
             KsAccordion,
 			KsAccordionRow
 		}
