@@ -403,6 +403,30 @@
 						</tbody>
 					</table>
 				</ks-tab>
+                <ks-tab title="Slots">
+                    <table class="table striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>default</td>
+                                <td>This will be the content of the modal</td>
+                            </tr>
+                            <tr>
+                                <td>header</td>
+                                <td>This will be the header title. If you pass a title prop this isn't needed.</td>
+                            </tr>
+                            <tr>
+                                <td>footer</td>
+                                <td>This is where the buttons will be located or anything else that will be shown on the bottom of the modal.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </ks-tab>
 			</ks-tabs>
 		</div>
 

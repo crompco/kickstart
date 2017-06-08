@@ -188,6 +188,22 @@
 					</tbody>
 				</table>
 			</ks-tab>
+			<ks-tab title="Slots">
+				<table class="table striped">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Dynamic</td>
+							<td>This is a dynamic slot component name. The name can be any date in the format that is specified in the props tab. The default is 'Y-m-d' or '2017-01-31'</td>
+						</tr>
+					</tbody>
+				</table>
+			</ks-tab>
 		</ks-tabs>
 	</div>
 </template>

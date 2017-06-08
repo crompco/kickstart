@@ -455,6 +455,25 @@
                     </tbody>
                 </table>
             </ks-tab>
+            <ks-tab title="Slots">
+                <table class="table striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>default</td>
+                            <td>
+                                This is a <a href="https://vuejs.org/v2/guide/components.html#Scoped-Slots" target="_blank">scoped slot</a>.
+                                This is used so that you have more control over the look of the data. The component loops through the data and passes the props with a props attribute. An example can be seem above in either the Multiple selection examples.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </ks-tab>
         </ks-tabs>
 
 		<div style="height: 400px;">

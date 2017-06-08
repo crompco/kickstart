@@ -69,6 +69,7 @@
             <h3>Accordion</h3>
             <ks-tabs>
                 <ks-tab title="Props">
+                    <h3>Accordion</h3>
                     <table class="table striped">
                         <thead>
                             <tr>
@@ -87,15 +88,8 @@
                             </tr>
                         </tbody>
                     </table>
-                </ks-tab>
 
-            </ks-tabs>
-        </div>
-
-        <div>
-            <h3>Accordion Row</h3>
-            <ks-tabs>
-                <ks-tab title="Props">
+                    <h3>Accordion Row</h3>
                     <table class="table striped">
                         <thead>
                         <tr>
@@ -117,26 +111,43 @@
                 </ks-tab>
 
                 <ks-tab title="Slots">
+                    <h3>Accordion</h3>
                     <table class="table striped">
                         <thead>
-                            <tr>
-                                <th>Slot</th>
-                                <th>Description</th>
-                            </tr>
+                        <tr>
+                            <th>Slot</th>
+                            <th>Description</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>default</td>
-                                <td>This is the default slot. This will be the content that is in the accordion.</td>
-                            </tr>
-                            <tr>
-                                <td>title</td>
-                                <td>This is the title of the row. If the title prop is too limited this can be used.</td>
-                            </tr>
-                            <tr>
-                                <td>actions</td>
-                                <td>This will be on the right side of the row. If the row needs to have any actions or other content</td>
-                            </tr>
+                        <tr>
+                            <td>default</td>
+                            <td>This is the default slot. This will be where the accordion-row components will be.</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Accordion Row</h3>
+                    <table class="table striped">
+                        <thead>
+                        <tr>
+                            <th>Slot</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>default</td>
+                            <td>This is the default slot. This will be the content that is in the accordion.</td>
+                        </tr>
+                        <tr>
+                            <td>title</td>
+                            <td>This is the title of the row. If the title prop is too limited this can be used.</td>
+                        </tr>
+                        <tr>
+                            <td>actions</td>
+                            <td>This will be on the right side of the row. If the row needs to have any actions or other content</td>
+                        </tr>
                         </tbody>
                     </table>
                 </ks-tab>

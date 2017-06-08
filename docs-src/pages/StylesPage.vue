@@ -8,8 +8,6 @@
 		<br>
 		<top-bar></top-bar>
 		<br>
-		<tables></tables>
-		<br>
 		<badge></badge>
 	</div>
 </template>
@@ -21,7 +19,6 @@
 	import Alert from './Styles/Alert.vue';
 	import TopBar from './Styles/TopBar.vue';
 	import Buttons from './Styles/Buttons.vue';
-	import Tables from './Styles/Tables.vue';
 	import Badge from './Styles/Badge.vue';
 
     export default {
@@ -31,7 +28,6 @@
             Alert,
 			TopBar,
             Buttons,
-			Tables,
 			Badge
 		}
     }
