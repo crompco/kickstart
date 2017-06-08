@@ -7,6 +7,17 @@
                 :pagination="pagination"
                 @input="pagination.current_page=$event"
             ></ks-paginator>
+
+            <div class="row">
+                <code-block>
+                    <code class="language-html" v-pre>
+                        &lt;ks-paginator
+                            :pagination="pagination"
+                            @input="pagination.current_page=$event"
+                        >&lt;/ks-paginator>
+                    </code>
+                </code-block>
+            </div>
         </div>
 
         <div class="basic-block">
@@ -16,6 +27,18 @@
                 :routed="true"
                 @input="pagination.current_page=$event"
             ></ks-paginator>
+
+            <div class="row">
+                <code-block>
+                    <code class="language-html" v-pre>
+                        &lt;ks-paginator
+                            :pagination="pagination2"
+                            :routed="true"
+                            @input="pagination.current_page=$event"
+                        >&lt;/ks-paginator>
+                    </code>
+                </code-block>
+            </div>
         </div>
 
         <div class="alert info">
