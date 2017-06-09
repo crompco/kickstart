@@ -1,149 +1,161 @@
 <template>
 	<div class="sm-full">
-        <h2>Form Elements</h2>
-        <div class="basic-block">
-            <h3>Radio</h3>
-            <div class="form-group">
-                <div class="label">Which do you prefer</div>
-                <ks-radio :inline="true" label="PHP" name="radio1" value="1" v-model="values.radio1"></ks-radio>
-                <ks-radio :inline="true" label="JavaScript" name="radio1" value="2" v-model="values.radio1"></ks-radio>
-            </div>
-
-            <div class="form-group">
-                <label class="label">Which do you prefer</label>
-                <ks-radio :inline="true" label="PHP" name="radio1" value="1" v-model="values.radio1a"></ks-radio>
-                <ks-radio :inline="true" label="JavaScript" name="radio1" value="2" v-model="values.radio1a"></ks-radio>
-            </div>
-
-            <div class="form-group">
-                <div class="label">Select all that your enjoy using (inline)</div>
-                <ks-checkbox :inline="true" label="PHP" name="checkbox1" value="1" v-model="values.checkbox1"></ks-checkbox>
-                <ks-checkbox :inline="true" label="JavaScript" name="checkbox1" value="2" v-model="values.checkbox1"></ks-checkbox>
-            </div>
-
-            <div class="form-group" style="margin-top:1em;">
-                <label class="label">Select all that your enjoy using</label>
-                <div class="checkbox">
-                    <ks-checkbox label="PHP" name="checkbox1" value="1" v-model="values.checkbox1a"></ks-checkbox>
-                    <ks-checkbox label="JavaScript" name="checkbox1" value="2" v-model="values.checkbox1a"></ks-checkbox>
+		<h3>Example Form</h3>
+        <div class="basic-block collapse">
+            <form>
+                <div class="row">
+                    <div class="tab-full">
+                        <div class="form-group">
+                            <div class="label">Username (with an error)</div>
+                            <input type="text">
+                            <div class="error-msg">Username is required</div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-
-            <h3>Simple Radio Group</h3>
-            <ks-radio-group
-                class="form-group"
-                name="group1"
-                :options="['Foo', 'Bar', 'Baz']"
-                v-model="values.group1"
-            >
-                Some group of options
-            </ks-radio-group>
-
-            <h3>Radio Group with array of objects</h3>
-            <ks-radio-group
-                class="form-group"
-                name="group2"
-                :options="radioGroup"
-                value-key="code"
-                label-key="name"
-                v-model="values.group2"
-            >
-                Each option is an object
-            </ks-radio-group>
-            <pre>{{values.group2}}</pre>
-
-
-            <ks-checkbox-group
-                class="form-group"
-                name="group2"
-                :options="radioGroup"
-                value-key="code"
-                label-key="name"
-                v-model="values.checkbox2"
-            >
-                Each option is an object
-            </ks-checkbox-group>
-            <pre>{{values.checkbox2}}</pre>
-
+                <div class="row">
+                    <div class="tab-full">
+                        <div class="form-group">
+                            <div class="label">Autocomplete</div>
+                            <ks-autocomplete></ks-autocomplete>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="tab-half">
+                        <ks-checkbox-group
+                                class="form-group"
+                                name="group2"
+                                :options="buttonGroup"
+                                :buttons="true"
+                                value-key="code"
+                                label-key="name"
+                                v-model="values.checkbox3"
+                        >
+                            Checkbox Button Set
+                        </ks-checkbox-group>
+                    </div>
+                    <div class="tab-half">
+                        <ks-radio-group
+                                class="form-group"
+                                name="group2"
+                                :options="buttonGroup"
+                                :buttons="true"
+                                value-key="code"
+                                label-key="name"
+                                v-model="values.group3"
+                        >
+                            Radio Button Set
+                        </ks-radio-group>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="tab-half">
+                        <div class="form-group">
+                            <div class="label">First Name</div>
+                            <input type="text">
+                        </div>
+                    </div>
+                    <div class="tab-half">
+                        <div class="form-group">
+                            <div class="label">Last Name</div>
+                            <input type="text">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="tab-half">
+                        <div class="form-group">
+                            <div class="label">Password</div>
+                            <input type="password">
+                        </div>
+                    </div>
+                    <div class="tab-half">
+                        <div class="form-group">
+                            <div class="label">Password Confirmation</div>
+                            <input type="password">
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <code-block v-pre>
+                &lt;form>
+                    &lt;div class="row">
+                        &lt;div class="tab-full">
+                            &lt;div class="form-group">
+                                &lt;div class="label">Username (with an error)&lt;/div>
+                                &lt;input type="text">
+                                &lt;div class="error-msg">Username is required&lt;/div>
+                            &lt;/div>
+                        &lt;/div>
+                    &lt;/div>
+                    &lt;div class="row">
+                        &lt;div class="tab-full">
+                            &lt;div class="form-group">
+                                &lt;div class="label">Autocomplete&lt;/div>
+                                &lt;ks-autocomplete>&lt;/ks-autocomplete>
+                            &lt;/div>
+                        &lt;/div>
+                    &lt;/div>
+                    &lt;div class="row">
+                        &lt;div class="tab-half">
+                            &lt;ks-checkbox-group
+                                class="form-group"
+                                name="group2"
+                                :options="buttonGroup"
+                                :buttons="true"
+                                value-key="code"
+                                label-key="name"
+                                v-model="values.checkbox3"
+                            >
+                                Checkbox Button Set
+                            &lt;/ks-checkbox-group>
+                        &lt;/div>
+                        &lt;div class="tab-half">
+                            &lt;ks-radio-group
+                                class="form-group"
+                                name="group2"
+                                :options="buttonGroup"
+                                :buttons="true"
+                                value-key="code"
+                                label-key="name"
+                                v-model="values.group3"
+                            >
+                                Radio Button Set
+                            &lt;/ks-radio-group>
+                        &lt;/div>
+                    &lt;/div>
+                    &lt;div class="row">
+                        &lt;div class="tab-half">
+                            &lt;div class="form-group">
+                                &lt;div class="label">First Name&lt;/div>
+                                &lt;input type="text">
+                            &lt;/div>
+                        &lt;/div>
+                        &lt;div class="tab-half">
+                            &lt;div class="form-group">
+                                &lt;div class="label">Last Name&lt;/div>
+                                &lt;input type="text">
+                            &lt;/div>
+                        &lt;/div>
+                    &lt;/div>
+                    &lt;div class="row">
+                        &lt;div class="tab-half">
+                            &lt;div class="form-group">
+                                &lt;div class="label">Password&lt;/div>
+                                &lt;input type="password">
+                            &lt;/div>
+                        &lt;/div>
+                        &lt;div class="tab-half">
+                            &lt;div class="form-group">
+                                &lt;div class="label">Password Confirmation&lt;/div>
+                                &lt;input type="password">
+                            &lt;/div>
+                        &lt;/div>
+                    &lt;/div>
+                &lt;/form>
+            </code-block>
         </div>
 
-
-		<h3>Example Form</h3>
-		<form class="basic-block">
-			<div class="row">
-				<div class="tab-full">
-					<div class="form-group">
-						<div class="label">Username (with an error)</div>
-						<input type="text">
-                        <div class="error-msg">Username is required</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="tab-full">
-					<div class="form-group">
-						<div class="label">Autocomplete</div>
-						<ks-autocomplete></ks-autocomplete>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="tab-half">
-					<ks-checkbox-group
-							class="form-group"
-							name="group2"
-							:options="buttonGroup"
-							:buttons="true"
-							value-key="code"
-							label-key="name"
-							v-model="values.checkbox3"
-					>
-						Checkbox Button Set
-					</ks-checkbox-group>
-				</div>
-				<div class="tab-half">
-					<ks-radio-group
-							class="form-group"
-							name="group2"
-							:options="buttonGroup"
-							:buttons="true"
-							value-key="code"
-							label-key="name"
-							v-model="values.group3"
-					>
-						Radio Button Set
-					</ks-radio-group>
-				</div>
-			</div>
-			<div class="row">
-				<div class="tab-half">
-					<div class="form-group">
-						<div class="label">First Name</div>
-						<input type="text">
-					</div>
-				</div>
-				<div class="tab-half">
-					<div class="form-group">
-						<div class="label">Last Name</div>
-						<input type="text">
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="tab-half">
-					<div class="form-group">
-						<div class="label">Password</div>
-						<input type="password">
-					</div>
-				</div>
-				<div class="tab-half">
-					<div class="form-group">
-						<div class="label">Password Confirmation</div>
-						<input type="password">
-					</div>
-				</div>
-			</div>
-		</form>
 
 		<div style="height: 300px;"></div>
 	</div>

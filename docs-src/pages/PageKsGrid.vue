@@ -56,6 +56,20 @@
                 Here is col 2 of tab grid
             </div>
         </div>
+        <div class="row">
+            <div class="col">
+                <code-block v-pre>
+                    &lt;div class="row col row-collapse">
+                        &lt;div class="col tab-6" style="background:#fff;padding:1rem;">
+                            Here is col 1 of tab grid
+                        &lt;/div>
+                        &lt;div class="col tab-6" style="background:#fff;padding:1rem;">
+                            Here is col 2 of tab grid
+                        &lt;/div>
+                    &lt;/div>
+                </code-block>
+            </div>
+        </div>
 
         <div class="row">
             <ks-tabs>
@@ -69,23 +83,30 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>.row</td>
+                                <td><pre>.row</pre></td>
                                 <td>This will just add a row around the columns. This adds a clearfix.</td>
                             </tr>
                             <tr>
-                                <td>.{col-prefix}-half</td>
+                                <td><pre>.col</pre></td>
+                                <td>
+                                    This will add a margin bottom to the element. For use in page layouts. <br/>
+                                    *Note the form-group class for laying out form elements will automatically attach this margin for you
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><pre>.{col-prefix}-half</pre></td>
                                 <td>This is an alias for .{col-prefix}-6</td>
                             </tr>
                             <tr>
-                                <td>.{col-prefix}-quarter</td>
+                                <td><pre>.{col-prefix}-quarter</pre></td>
                                 <td>This is an alias for .{col-prefix}-3</td>
                             </tr>
                             <tr>
-                                <td>.{col-prefix}-full</td>
+                                <td><pre>.{col-prefix}-full</pre></td>
                                 <td>This is an alias for .{col-prefix}-12</td>
                             </tr>
                             <tr>
-                                <td>.row-collapse</td>
+                                <td><pre>.row-collapse</pre></td>
                                 <td>
                                     This is a helper to collapse the row. If the margin on each side is too much or is off, collapsing the row will remove the margin on both sides. This is mainly used when nesting columns.
                                 </td>

@@ -31,7 +31,11 @@
 		},
 
 		props: {
-			value: {},
+			value: {
+			    default() {
+			        return [];
+                }
+            },
 			label: String,
 			name: {
 				type: String,

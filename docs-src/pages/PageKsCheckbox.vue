@@ -1,33 +1,46 @@
 <template>
     <div>
-        <h2>Radio Buttons</h2>
+        <h2>Checkbox Buttons</h2>
         <div class="basic-block">
             <div class="form-group">
-                <div class="label">Radio buttons</div>
-                <ks-radio label="PHP" name="radio1" value="1" v-model="values.radio1"></ks-radio>
-                <ks-radio label="JavaScript" name="radio1" value="2" v-model="values.radio1"></ks-radio>
+                <div class="label">Checkbox buttons</div>
+                <ks-checkbox label="PHP" name="checkbox1" value="1" v-model="values.checkbox1"></ks-checkbox>
+                <ks-checkbox label="JavaScript" name="checkbox1" value="2" v-model="values.checkbox1"></ks-checkbox>
             </div>
             <code-block v-pre>
                 &lt;div class="form-group">
-                    &lt;div class="label">Which do you prefer&lt;/div>
-                    &lt;ks-radio label="PHP" name="radio1" value="1" v-model="values.radio1">&lt;/ks-radio>
-                    &lt;ks-radio label="JavaScript" name="radio1" value="2" v-model="values.radio1">&lt;/ks-radio>
+                    &lt;div class="label">Checkbox buttons&lt;/div>
+                    &lt;ks-checkbox label="PHP" name="checkbox1" value="1" v-model="values.checkbox1">&lt;/ks-checkbox>
+                    &lt;ks-checkbox label="JavaScript" name="checkbox1" value="2" v-model="values.checkbox1">&lt;/ks-checkbox>
                 &lt;/div>
             </code-block>
         </div>
         <div class="basic-block">
             <div class="form-group">
-                <div class="label">Radio buttons (inline)</div>
-                <ks-radio :inline="true" label="PHP" name="radio2" value="1" v-model="values.radio2"></ks-radio>
-                <ks-radio :inline="true" label="JavaScript" name="radio2" value="2" v-model="values.radio2"></ks-radio>
+                <div class="label">Checkbox buttons (inline)</div>
+                <ks-checkbox :inline="true" label="PHP" name="checkbox2" value="1" v-model="values.checkbox2"></ks-checkbox>
+                <ks-checkbox :inline="true" label="JavaScript" name="checkbox2" value="2" v-model="values.checkbox2"></ks-checkbox>
             </div>
             <code-block v-pre>
                 &lt;div class="form-group">
-                    &lt;div class="label">Radio buttons (inline)&lt;/div>
-                    &lt;ks-radio :inline="true" label="PHP" name="radio1" value="1" v-model="values.radio1">&lt;/ks-radio>
-                    &lt;ks-radio :inline="true" label="JavaScript" name="radio1" value="2" v-model="values.radio1">&lt;/ks-radio>
+                    &lt;div class="label">Checkbox buttons (inline)&lt;/div>
+                    &lt;ks-checkbox :inline="true" label="PHP" name="checkbox2" value="1" v-model="values.checkbox2">&lt;/ks-checkbox>
+                    &lt;ks-checkbox :inline="true" label="JavaScript" name="checkbox2" value="2" v-model="values.checkbox2">&lt;/ks-checkbox>
                 &lt;/div>
             </code-block>
+
+        </div>
+
+        <div class="alert info">
+            <strong>v-model usage:</strong>
+            <p>
+                If you bind an *Array* as your v-model then the component will automatically add/remove the value from
+                the array when it is changed.
+            </p>
+            - or -
+            <p>
+                If you bind a String, Number, or NULL then it will just bind the value directly
+            </p>
         </div>
 
         <div class="row row-collapse">
@@ -45,10 +58,10 @@
                         <tbody>
                             <tr>
                                 <td>checked <span class="v-model">v-model</span></td>
-                                <td><pre>[String, Boolean]</pre></td>
+                                <td><pre>[Array, String, Boolean]</pre></td>
                                 <td><pre>NULL</pre></td>
                                 <td>
-                                    The v-model binded prop on the radio input. Should be provided via v-model.
+                                    The v-model binded prop on the checkbox input. Should be provided via v-model.
                                     If only the prop is sent then you would need to listen for the input
                                     event to update the prop
                                 </td>
@@ -63,14 +76,14 @@
                                 <td>label</td>
                                 <td><pre>String</pre></td>
                                 <td><pre>''</pre></td>
-                                <td>The label to be used for the radio button</td>
+                                <td>The label to be used for the checkbox button</td>
                             </tr>
                             <tr>
                                 <td>value</td>
                                 <td><pre>[String, Number]</pre></td>
                                 <td><pre>NULL</pre></td>
                                 <td>
-                                    The actual value of the radio button
+                                    The actual value of the checkbox button
                                 </td>
                             </tr>
                             <tr>
@@ -78,7 +91,7 @@
                                 <td><pre>Boolean</pre></td>
                                 <td><pre>false</pre></td>
                                 <td>
-                                    Whether the radio is disabled or not
+                                    Whether the checkbox is disabled or not
                                 </td>
                             </tr>
                             <tr>
@@ -86,7 +99,7 @@
                                 <td><pre>Boolean</pre></td>
                                 <td><pre>false</pre></td>
                                 <td>
-                                    If set true the radio will be displayed inline
+                                    If set true the checkbox will be displayed inline
                                 </td>
                             </tr>
                         </tbody>
@@ -96,16 +109,16 @@
                 <ks-tab title="Events">
                     <table class="table striped events-table">
                         <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Description</th>
-                            </tr>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><pre>input</pre></td>
-                                <td>This is fired when the checked value is changed</td>
-                            </tr>
+                        <tr>
+                            <td><pre>input</pre></td>
+                            <td>This is fired when the checked value is changed</td>
+                        </tr>
                         </tbody>
                     </table>
                 </ks-tab>
@@ -121,7 +134,7 @@
                         <tbody>
                             <tr>
                                 <td><pre>toggle()</pre></td>
-                                <td>Toggles the value of the radio</td>
+                                <td>Toggles the value of the checkbox</td>
                             </tr>
                         </tbody>
                     </table>
@@ -129,36 +142,36 @@
             </ks-tabs>
         </div>
 
-        <h2>Radio Button Groups</h2>
+        <h2>Checkbox Button Groups</h2>
 
         <div class="basic-block">
-            <ks-radio-group
+            <ks-checkbox-group
                 class="form-group"
                 name="group1"
-                :options="radioGroup"
+                :options="checkboxGroup"
                 value-key="code"
                 label-key="name"
                 v-model="values.group1"
             >
-                Radio button groups
-            </ks-radio-group>
+                Checkbox button groups
+            </ks-checkbox-group>
 
             <code-block v-pre>
-                &lt;ks-radio-group
+                &lt;ks-checkbox-group
                     class="form-group"
                     name="group1"
-                    :options="radioGroup"
+                    :options="checkboxGroup"
                     value-key="code"
                     label-key="name"
                     v-model="values.group1"
                 >
-                    Radio button groups
-                &lt;/ks-radio-group>
+                    Checkbox button groups
+                &lt;/ks-checkbox-group>
             </code-block>
         </div>
 
         <div class="basic-block">
-            <ks-radio-group
+            <ks-checkbox-group
                 class="form-group"
                 name="group2"
                 :buttons="true"
@@ -167,11 +180,11 @@
                 label-key="name"
                 v-model="values.group2"
             >
-                Radio button groups ( button style )
-            </ks-radio-group>
+                Checkbox button groups ( button style )
+            </ks-checkbox-group>
 
             <code-block v-pre>
-                &lt;ks-radio-group
+                &lt;ks-checkbox-group
                     class="form-group"
                     name="group2"
                     :buttons="true"
@@ -180,8 +193,8 @@
                     label-key="name"
                     v-model="values.group2"
                 >
-                    Radio button groups ( button style )
-                &lt;/ks-radio-group>
+                    Checkbox button groups ( button style )
+                &lt;/ks-checkbox-group>
             </code-block>
         </div>
 
@@ -190,20 +203,20 @@
                 <ks-tab title="Props">
                     <table class="table striped">
                         <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Default</th>
-                                <th>Description</th>
-                            </tr>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Default</th>
+                            <th>Description</th>
+                        </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>value <span class="v-model">v-model</span></td>
-                                <td><pre>[String, Boolean]</pre></td>
-                                <td><pre>NULL</pre></td>
+                                <td><pre>Array</pre></td>
+                                <td><pre>[]</pre></td>
                                 <td>
-                                    The v-model binded prop on the radio input. Should be provided via v-model.
+                                    The v-model binded prop on the checkbox input. Should be provided via v-model.
                                     If only the prop is sent then you would need to listen for the input
                                     event to update the prop
                                 </td>
@@ -212,14 +225,14 @@
                                 <td>label</td>
                                 <td><pre>String</pre></td>
                                 <td><pre>''</pre></td>
-                                <td>The label to be used for the radio button</td>
+                                <td>The label to be used for the checkbox button</td>
                             </tr>
                             <tr>
                                 <td>name <span class="required">*</span></td>
                                 <td><pre>String</pre></td>
                                 <td><pre>NULL</pre></td>
                                 <td>
-                                    The actual value of the radio button
+                                    The actual value of the checkbox button
                                 </td>
                             </tr>
                             <tr>
@@ -235,7 +248,7 @@
                                 <td><pre>[String, Number]</pre></td>
                                 <td><pre>''</pre></td>
                                 <td>
-                                    The key to use in the Object options for the radio value
+                                    The key to use in the Object options for the checkbox value
                                 </td>
                             </tr>
                             <tr>
@@ -243,7 +256,7 @@
                                 <td><pre>[String, Number]</pre></td>
                                 <td><pre>''</pre></td>
                                 <td>
-                                    The key to use in the Object options for the radio label
+                                    The key to use in the Object options for the checkbox label
                                 </td>
                             </tr>
                             <tr>
@@ -274,23 +287,6 @@
                         </tbody>
                     </table>
                 </ks-tab>
-
-                <ks-tab title="Methods">
-                    <table class="table striped methods-table">
-                        <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Description</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td><pre>selectRadio(value)</pre></td>
-                            <td>Selects the radio with the given value</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </ks-tab>
             </ks-tabs>
         </div>
     </div>
@@ -300,26 +296,26 @@
     import api from '../../src/helpers/api.js';
 
     export default {
-        name: 'PageKsRadio',
+        name: 'PageKsCheckbox',
 
         props: [],
 
         data() {
             return {
                 values: {
-                    radio1: null,
-                    radio2: null,
-                    group1: null,
-                    group2: null
+                    checkbox1: [],
+                    checkbox2: [],
+                    group1: [],
+                    group2: []
                 },
-                radioGroup: [],
+                checkboxGroup: [],
                 buttonGroup: [],
             }
         },
 
         mounted() {
             api.get('/countries.json').then((data) => {
-                this.radioGroup = data.slice(0, 7);
+                this.checkboxGroup = data.slice(0, 7);
                 this.buttonGroup = data.slice(0, 3);
             });
         },
