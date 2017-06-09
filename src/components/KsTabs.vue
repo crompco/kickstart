@@ -1,6 +1,6 @@
 <template>
 	<div class="ks-tabs">
-		<ul class="tabs-title-bar" :class="{ expand: expand }">
+		<ul class="tabs-title-bar" :class="classObj">
 			<li v-for="tab in tabs" :class="{'selected-tab': tab.active}">
 				<a href="#"
 				   @click.prevent="setActiveTab(tab)"
@@ -26,6 +26,11 @@
 		props: {
 		    expand: {
 		        default: false
+			},
+
+			align: {
+		        type: String,
+		        default: 'center'
 			}
 		},
 
@@ -33,7 +38,13 @@
 			return {
 				tab: '',
 				activeTab: null,
-				tabs: []
+				tabs: [],
+				classObj: {
+				    "expand": this.expand,
+					"title-right": this.align === 'right',
+					"title-center": this.align === 'center',
+					"title-left": this.align === 'left'
+				}
 			};
 		},
 

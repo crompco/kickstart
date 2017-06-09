@@ -58,6 +58,24 @@
 				flex-grow: 1;
 			}
 		}
+
+		&.title-center {
+			li a {
+				justify-content: center;
+			}
+		}
+
+		&.title-left {
+			li a {
+				justify-content: flex-start;
+			}
+		}
+
+		&.title-right {
+			li a {
+				justify-content: flex-end;
+			}
+		}
 	}
 
 	.tabs-content {

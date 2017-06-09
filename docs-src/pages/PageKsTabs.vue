@@ -108,6 +108,12 @@
                             <td><pre>false</pre></td>
                             <td>When set to true the tabs will expand into an even width</td>
                         </tr>
+                        <tr>
+                            <td>align</td>
+                            <td><pre>String</pre></td>
+                            <td><pre>center</pre></td>
+                            <td>Where to text align the tabs name. Options are ('left', 'center', 'right')</td>
+                        </tr>
                         </tbody>
                     </table>
                     <h2>KsTab</h2>
