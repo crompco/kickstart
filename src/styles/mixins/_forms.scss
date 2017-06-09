@@ -13,6 +13,12 @@
 		@if $form-box-shadow {
 			box-shadow: $form-box-shadow;
 		}
+
+		&[disabled] {
+			cursor: not-allowed;
+			opacity: 0.8;
+			background: #eee;
+		}
 	}
 }
 
