@@ -6,9 +6,6 @@
     li {
         position: relative;
         background: #fff;
-        padding: 0.5rem 1rem;
-        //margin-top: 0.2rem;
-        //margin-bottom: 0.2rem;
         border: solid #ccc;
         border-width: 1px 1px 0 1px;
 
@@ -26,10 +23,11 @@
             color: #444;
             display: block;
             width: 100%;
+            padding: 0.5rem 1rem;
         }
 
-        .ks-accordion-content {
-            //margin-top: 1rem;
+        .ks-accordion-buttons > * {
+            padding-right: 0.5rem;
         }
     }
 }
