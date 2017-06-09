@@ -51,6 +51,15 @@
                 background: $am-list-link-hover-bg;
                 color: $am-list-link-hover-color;
             }
+
+            &.danger {
+                color: $state-danger-bg;
+
+                &:hover {
+                    background: $state-danger-bg;
+                    color: $state-danger-color;
+                }
+            }
         }
     }
 }

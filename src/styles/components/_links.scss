@@ -1,0 +1,13 @@
+@import "../variables/_global.scss";
+
+a {
+    text-decoration: none;
+
+    &.danger {
+        color: $state-danger-bg;
+
+        &:hover {
+            color: darken($state-danger-bg, 12%);
+        }
+    }
+}

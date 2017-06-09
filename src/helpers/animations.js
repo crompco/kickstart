@@ -9,8 +9,8 @@ export const slideDown = (el, timing = '0.4s ease', cb = null) => {
     el.style.overflow = 'hidden';
     el.style.opacity = '0';
     // Add transition
-    el.style.webkitTransition = 'max-height ' + timing + ' 0s';
-    el.style.transition = 'max-height ' + timing + ' 0s';
+    el.style.webkitTransition = 'all ' + timing + ' 0s';
+    el.style.transition = 'all ' + timing + ' 0s';
 
     let height = el.offsetHeight;
     el.style.maxHeight = '0';
@@ -40,12 +40,14 @@ export const slideUp = (el, timing = '0.4s ease', cb = null) => {
 
     el.style.maxHeight = el.offsetHeight + 'px';
     // Add transition
-    el.style.webkitTransition = 'max-height ' + timing + ' 0s';
-    el.style.transition = 'max-height ' + timing + ' 0s';
+    el.style.webkitTransition = 'all ' + timing + ' 0s';
+    el.style.transition = 'all ' + timing + ' 0s';
 
     let endingTransition = (e) => {
         el.style.opacity = '0';
         el.style.display = 'none';
+        el.style.removeProperty('padding-top');
+        el.style.removeProperty('padding-bottom');
 
         if ( cb !== null ) {
             cb(e);
@@ -56,6 +58,8 @@ export const slideUp = (el, timing = '0.4s ease', cb = null) => {
 
     requestAnimationFrame(function () {
         el.style.maxHeight = '0';
+        el.style.paddingTop = '0';
+        el.style.paddingBottom = '0';
 
         el.addEventListener('transitionend', endingTransition, false);
     });
