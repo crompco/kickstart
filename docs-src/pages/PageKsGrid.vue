@@ -46,6 +46,18 @@
                 Here is col 2 of tab grid
             </div>
         </div>
+        <div>
+            <code-block v-pre>
+                &lt;div class="row col">
+                    &lt;div class="col tab-6" style="background:#fff;padding:1rem;">
+                        Here is col 1 of tab grid
+                    &lt;/div>
+                    &lt;div class="col tab-6" style="background:#fff;padding:1rem;">
+                        Here is col 2 of tab grid
+                    &lt;/div>
+                &lt;/div>
+            </code-block>
+        </div>
 
         <h3>Row Collapse</h3>
         <div class="row col row-collapse">
@@ -111,6 +123,10 @@
                                     This is a helper to collapse the row. If the margin on each side is too much or is off, collapsing the row will remove the margin on both sides. This is mainly used when nesting columns.
                                 </td>
                             </tr>
+                        <tr>
+                            <td><pre>.collapse</pre></td>
+                            <td>Removes an elements padding left and right. Similar to .row-collapse but doesn't change with or margin.</td>
+                        </tr>
                         </tbody>
                     </table>
                 </ks-tab>

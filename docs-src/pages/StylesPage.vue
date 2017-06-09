@@ -9,6 +9,8 @@
 		<top-bar></top-bar>
 		<br>
 		<badge></badge>
+		<br>
+		<helpers></helpers>
 	</div>
 </template>
 
@@ -20,6 +22,7 @@
 	import TopBar from './Styles/TopBar.vue';
 	import Buttons from './Styles/Buttons.vue';
 	import Badge from './Styles/Badge.vue';
+	import Helpers from './Styles/Helpers.vue';
 
     export default {
         name: 'StylesPage',
@@ -28,7 +31,8 @@
             Alert,
 			TopBar,
             Buttons,
-			Badge
+			Badge,
+			Helpers
 		}
     }
 </script>

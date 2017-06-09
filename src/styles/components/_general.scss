@@ -50,5 +50,11 @@ html, body {
 
 .disabled {
     pointer-events: none;
-    opacity: 0.4;
+    opacity: $disabled-opacity;
+}
+
+.heading {
+    font-weight: bold;
+    display: block;
+    margin-bottom: rem($heading-mb);
 }
