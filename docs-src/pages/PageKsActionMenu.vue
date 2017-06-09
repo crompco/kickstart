@@ -7,8 +7,8 @@
                 <ks-action-menu>
                     <a href="#" @click.prevent="action('New')" class="list-item">New</a>
                     <a href="#" @click.prevent="action('Add')" class="list-item">Add</a>
-                    <a href="#" @click.prevent="action('Edit')" class="list-item">Edit</a>
-                    <a href="#" @click.prevent="action('Delete')" class="list-item separator">Delete</a>
+                    <a href="#" @click.prevent="action('Edit')" class="list-item disabled">Edit</a>
+                    <a href="#" @click.prevent="action('Delete')" class="list-item separator">Delete Class Link</a>
                 </ks-action-menu>
             </div>
             <div class="sm-4 t-right">
@@ -28,7 +28,7 @@
                     &lt;div slot="menu">Menu&lt;/div>
                     &lt;a href="#" class="list-item">New&lt;/a>
                     &lt;a href="#" class="list-item">Add&lt;/a>
-                    &lt;a href="#" class="list-item">Edit&lt;/a>
+                    &lt;a href="#" class="list-item disabled">Edit&lt;/a>
                     &lt;a href="#" class="list-item separator">Delete&lt;/a>
                 &lt;/ks-action-menu>
             </code-block>
