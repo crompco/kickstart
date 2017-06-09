@@ -41,27 +41,25 @@
         </div>
 
         <div class="row">
-            <code-block>
-                <code class="language-html" v-pre>
-                    &lt;ks-accordion>
-                        &lt;ks-accordion-row title="Row 1">
-                            &lt;div slot="actions">
-                                &lt;ks-action-menu>
-                                    &lt;a href="#">Edit&lt;/a>
-                                    &lt;a href="#">Delete&lt;/a>
-                                &lt;/ks-action-menu>
-                            &lt;/div>
+            <code-block v-pre>
+                &lt;ks-accordion>
+                    &lt;ks-accordion-row title="Row 1">
+                        &lt;div slot="actions">
+                            &lt;ks-action-menu>
+                                &lt;a href="#">Edit&lt;/a>
+                                &lt;a href="#">Delete&lt;/a>
+                            &lt;/ks-action-menu>
+                        &lt;/div>
 
-                            Content Here...
-                        &lt;/ks-accordion-row>
-                        &lt;ks-accordion-row title="Row 2">
-                            Content Here...
-                        &lt;/ks-accordion-row>
-                        &lt;ks-accordion-row title="Row 3">
-                            Content Here...
-                        &lt;/ks-accordion-row>
-                    &lt;/ks-accordion>
-                </code>
+                        Content Here...
+                    &lt;/ks-accordion-row>
+                    &lt;ks-accordion-row title="Row 2">
+                        Content Here...
+                    &lt;/ks-accordion-row>
+                    &lt;ks-accordion-row title="Row 3">
+                        Content Here...
+                    &lt;/ks-accordion-row>
+                &lt;/ks-accordion>
             </code-block>
         </div>
 

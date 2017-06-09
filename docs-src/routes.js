@@ -14,6 +14,8 @@ import PageKsActionMenu from './pages/PageKsActionMenu.vue';
 import PageKsGrid from './pages/PageKsGrid.vue';
 import PageKsStepThrough from './pages/PageKsStepThrough.vue';
 import PageKsAccordion from './pages/PageKsAccordion.vue';
+import PageKsRadio from './pages/PageKsRadio.vue';
+import PageKsCheckbox from './pages/PageKsCheckbox.vue';
 import PageKsTable from './pages/PageKsTable.vue';
 
 const routes = [
@@ -45,6 +47,18 @@ const routes = [
         component: PageKsFormElements,
         name: 'KsForms',
         meta: {title: 'Kickstart Forms'}
+    },
+    {
+        path: '/ks-radio',
+        component: PageKsRadio,
+        name: 'KsRadio',
+        meta: {title: 'Kickstart Radio Buttons'}
+    },
+    {
+        path: '/ks-checkbox',
+        component: PageKsCheckbox,
+        name: 'KsCheckbox',
+        meta: {title: 'Kickstart Radio Buttons'}
     },
     {
         path: '/ks-select',
