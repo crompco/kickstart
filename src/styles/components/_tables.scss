@@ -118,7 +118,11 @@
 		th {
 			padding: rem($table-cell-padding);
 			border-bottom: 2px solid $table-border-color;
+			vertical-align: top;
+		}
 
+		&.middle th {
+			vertical-align: middle;
 		}
 	}
 
@@ -126,6 +130,11 @@
 		td {
 			padding: rem($table-cell-padding);
 			border-bottom: 1px solid $table-border-color;
+			vertical-align: top;
+		}
+
+		&.middle td {
+			vertical-align: middle;
 		}
 
 		tr {
@@ -138,6 +147,12 @@
 					border-bottom: 0;
 				}
 			}
+		}
+	}
+
+	&.middle {
+		th, td {
+			vertical-align: middle;
 		}
 	}
 
