@@ -6,8 +6,7 @@ const base = require('./webpack.base.js');
 
 const config = {
     entry: {
-        'docs.bundle.js': options.paths.resolve('docs-src/index.js'),
-        'docs.bundle.css': options.paths.resolve('docs-src/app.scss')
+        'docs.bundle.js': options.paths.resolve('docs-src/index.js')
     },
 
 	output: {
