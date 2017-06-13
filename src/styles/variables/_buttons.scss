@@ -17,7 +17,8 @@ $buttons: (
 		color: get($brand, light),
 		border-color: get($brand, light),
 		danger-color: $state-danger-bg,
-		danger-border-color: $state-danger-bg
+		danger-border-color: $state-danger-bg,
+		danger-bg: $white
 	),
 	none: (
 		background-color: transparent,
@@ -26,6 +27,7 @@ $buttons: (
 		border-color: transparent,
 		box-shadow: none,
 		danger-color: $state-danger-bg,
-		danger-border-color: transparent
+		danger-border-color: transparent,
+		danger-bg: transparent
 	)
 ) !default;

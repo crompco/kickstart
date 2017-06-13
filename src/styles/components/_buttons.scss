@@ -54,11 +54,13 @@
 			&.danger {
 				border-color: get($map, danger-border-color);
 				color: get($map, danger-color);
+				background-color: get($map, danger-bg);
+
 
 				&:hover:not(.disabled) {
 					border-color: darken(get($map, danger-border-color), 12%);
 					color: darken(get($map, danger-color), 12%);
-					background-color: $bg-color;
+					background-color: darken($bg-color, 4%);
 				}
 			}
 		}
