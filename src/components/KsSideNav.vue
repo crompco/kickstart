@@ -34,10 +34,13 @@
 		},
 
 		mounted() {
-			addEvent(this.$el.querySelector('.nav-links'), 'click', (e) => {
-				console.log('nav links');
-				this.classObj.show = !this.classObj.show;
-			});
+            let $element = this.$el.querySelector('.nav-links');
+
+            if ( $element != null ) {
+                addEvent($element, 'click', (e) => {
+                    this.classObj.show = !this.classObj.show;
+                });
+            }
 		},
 
 		methods: {
