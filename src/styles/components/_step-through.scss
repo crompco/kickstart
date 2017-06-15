@@ -22,9 +22,9 @@
                 z-index: 5;
 
                 border-radius: 50%;
-                height: 1.5em;
-                width: 1.5em;
-                padding: 0.25em;
+                height: 1.5rem;
+                width: 1.5rem;
+                padding: 0.25rem;
                 text-decoration: none;
                 background: $steps-number-bg;
                 display: inline-block;
@@ -42,7 +42,7 @@
 
             &.active div.num,
             &.completed div.num,
-            a:hover:not(.disabled) div.num {
+            a:hover:not(.interactive-disabled) div.num {
                 color: $steps-active-number-color;
                 background: $steps-active-number-bg;
             }

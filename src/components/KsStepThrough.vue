@@ -3,7 +3,7 @@
         <ul class="step-list">
             <li :class="{ 'active': index+1 == activeStep, 'completed': completed[index] }" v-for="(step, index) in steps">
                 <div class="step-line"></div>
-                <a href="" @click.prevent="clickStep(index+1)" :class="{ 'disabled': !this.allowInteraction }">
+                <a href="" @click.prevent="clickStep(index+1)" :class="{ 'interactive-disabled': !this.allowInteraction }">
                     <div class="num" v-if="!completed[index]">{{index + 1}}</div>
                     <div class="num" v-else>&#x2714;</div>
                     <p>{{step}}</p>
