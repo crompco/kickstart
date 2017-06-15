@@ -260,11 +260,11 @@ export default {
         /**
          * Clear the lookup
          */
-        clear() {
+        clear(keep_focus = false) {
             this.resetList();
             this.lookup_name = '';
             this.list = [];
-            if ( this.$refs[this.ref_lookup] === document.activeElement ) {
+            if ( this.$refs[this.ref_lookup] === document.activeElement && !keep_focus) {
                 this.$refs[this.ref_lookup].blur();
             }
             this.$emit('clear');

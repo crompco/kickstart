@@ -211,7 +211,7 @@
                             child.focus();
                         }
 					} else {
-					    this.clear();
+					    this.clear(true);
                     }
 				}
 			},
