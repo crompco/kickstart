@@ -4,7 +4,7 @@ export default {
         options: {},
         valueKey: {
             type: String,
-            default: ''
+            default: 'value'
         },
         labelKey: {
             type: String,

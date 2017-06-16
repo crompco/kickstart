@@ -38,15 +38,6 @@
 				type: String,
 				required: true
 			},
-			options: {},
-			valueKey: {
-				type: String,
-				default: ''
-			},
-			labelKey: {
-				type: String,
-				default: 'label'
-			},
 		},
 
 		data() {

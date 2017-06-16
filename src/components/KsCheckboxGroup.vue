@@ -9,7 +9,8 @@
 					:name="name"
 					:value="option.value"
 					:label="option.label"
-					v-model="value"
+					:checked="value"
+                    @input="$emit('input', $event)"
 				></ks-checkbox>
 			</template>
 		</div>
