@@ -37,7 +37,7 @@
 			label: String,
 			value: {},
 			checked: {
-				type: [String, Array, Boolean]
+				type: [String, Array, Boolean, Number]
 			},
 			disabled: {
 				type: Boolean,

@@ -233,17 +233,17 @@
                             <tr>
                                 <td>valueKey</td>
                                 <td><pre>[String, Number]</pre></td>
-                                <td><pre>''</pre></td>
+                                <td><pre>'value'</pre></td>
                                 <td>
-                                    The key to use in the Object options for the radio value
+                                    The key to use in the Object options for the checkbox value
                                 </td>
                             </tr>
                             <tr>
                                 <td>labelKey</td>
                                 <td><pre>[String, Number]</pre></td>
-                                <td><pre>''</pre></td>
+                                <td><pre>'label'</pre></td>
                                 <td>
-                                    The key to use in the Object options for the radio label
+                                    The key to use in the Object options for the checkbox label
                                 </td>
                             </tr>
                             <tr>

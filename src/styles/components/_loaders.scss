@@ -57,9 +57,18 @@
 		border-style: double;
 	}
 
-	&.x2 {
-		border-width: rem($spinner-border-width * 2);
-		width: $spinner-size * 2;
-		height: $spinner-size * 2;
-	}
+    $sizes: (
+        tiny: 0.5,
+        small: 0.75,
+        medium: 2,
+        large: 3,
+        x-large: 4
+    );
+    @each $size, $multiplier in $sizes {
+        &.loader-#{$size} {
+            border-width: rem($spinner-border-width * $multiplier);
+            width: $spinner-size * $multiplier;
+            height: $spinner-size * $multiplier;
+        }
+    }
 }
