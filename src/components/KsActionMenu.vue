@@ -1,5 +1,5 @@
 <template>
-    <div class="ks-action-menu">
+    <div class="ks-action-menu" @click.stop>
         <button class="menu-button" @click.prevent="toggle()" ref="menu">
             <slot name="menu"><menu-svg></menu-svg></slot>
         </button>
@@ -60,7 +60,11 @@
                         this.close();
                     }
                 });
-
+                document.addEventListener('click', () => {
+                    if ( this.listening ) {
+                        this.close();
+                    }
+                });
             })
 
         },
