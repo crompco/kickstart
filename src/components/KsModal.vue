@@ -20,6 +20,8 @@
 				</div>
 			</div>
 
+            <ks-loader-line :show="isLoading"></ks-loader-line>
+
 			<!-- Modal body-->
 			<div class="ks-modal-body" ref="body">
 				<slot></slot>
@@ -80,11 +82,16 @@
                 type: Boolean,
                 default: false
             },
+            loading: {
+                type: Boolean,
+                default: false
+            },
 		},
 
 		data() {
 			return {
 				isOpen: false,
+                isLoading: false,
                 classObj: {}
 			};
 		},
@@ -146,8 +153,26 @@
 				if ( this.closeOnEscape ) {
 					this.close();
 				}
-			}
+			},
+            loadingOn() {
+                this.isLoading = true;
+                return this;
+            },
+            loadingOff() {
+                this.isLoading = false;
+                return this;
+            }
 		},
+
+        watch: {
+            loading() {
+                if (this.loading) {
+                    this.loadingOn();
+                } else {
+                    this.loadingOff();
+                }
+            }
+        },
 
 		components: {
 		    Close
