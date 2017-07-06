@@ -70,6 +70,7 @@
                         &lt;/template>
                     &lt;/ks-autocomplete>
                 </code-block>
+                <pre>{{value3}}</pre>
             </div>
 
 

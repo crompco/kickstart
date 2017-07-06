@@ -187,10 +187,12 @@
                     if ( index > -1 ) {
                         popped = this.selection.splice(index, 1);
                         this.$emit('deleted', popped);
+                        this.$emit('input', this.selection);
                     }
 				} else {
 				    popped = this.selection;
 					this.selection = null;
+					this.$emit('input', this.selection);
 				}
 
 				// Keep the selection text if prop is set to true
