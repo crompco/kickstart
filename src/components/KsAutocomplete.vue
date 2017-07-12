@@ -310,21 +310,21 @@
 				this.$emit('input', this.selectionValue());
             },
 
-			refreshSelection() {
-				if ( !this.value ) {
-					this.selection  = [];
-				} else {
-					if ( this.is_multiple && this.value instanceof Array ) {
-						this.selection = this.value;
-					} else if ( !this.selection ) {
-						this.selection = [this.value];
-					} else {
-						if ( -1 == this.selection.indexOf(this.value) ) {
-							this.selection.push(this.value);
-						}
-					}
-				}
-			}
+            refreshSelection() {
+                if ( !this.value ) {
+                    this.selection  = [];
+                } else {
+                    if ( this.is_multiple && this.value instanceof Array ) {
+                        this.selection = this.value;
+                    } else if ( !this.selection || !this.is_multiple ) {
+                        this.selection = [this.value];
+                    } else {
+                        if ( -1 == this.selection.indexOf(this.value) ) {
+                            this.selection.push(this.value);
+                        }
+                    }
+                }
+            }
 		},
 
 		watch: {
