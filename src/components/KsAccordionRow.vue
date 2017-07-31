@@ -47,6 +47,8 @@
 
         methods: {
             handleClick(e) {
+                this.$emit('row-clicked', e);
+
                 this.parent.setActiveAccordion(this);
             },
 
