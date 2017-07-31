@@ -98,6 +98,11 @@
                     >&lt;/ks-select>
                 </code-block>
             </div>
+
+            <div class="form-group">
+                <div class="label">Disabled Select</div>
+                <ks-select :disabled="true"></ks-select>
+            </div>
         </div>
         <div class="alert warning">
             <strong>Warning v-model usage:</strong>
