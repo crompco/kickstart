@@ -9,6 +9,7 @@
 			   v-mask="mask"
 		       @focus="open"
 		       ref="display"
+               type="text"
 		>
 
 		<!-- Calendar -->
