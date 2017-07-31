@@ -8,6 +8,7 @@
         @keydown.tab="tabOpen"
         @keydown.down.prevent="openSelectDown"
         @keydown.up.prevent="openSelectUp"
+        :disabled="disabled"
     >
 		<input type="hidden" :name="name" :value="value">
 		<div class="ks-select-selection" @click.prevent="toggleOpen">
@@ -66,7 +67,6 @@
 						:class="{ 'selected-item': index == selected_index }"
 						@click.prevent="selectItem(index)"
 						@mouseover="setHoverIndex(index)"
-
 					>
 						<!-- Scoped slot  that defaults to the labelKey-->
 						<slot :item="item">{{item[labelKey]}}</slot>
@@ -126,6 +126,10 @@
 				default: false
 			},
             singleDeselect: {
+			    type: Boolean,
+                default: false
+            },
+            disabled: {
 			    type: Boolean,
                 default: false
             }
@@ -246,6 +250,10 @@
                 }
 			},
             enterOpen(e) {
+                if ( this.disabled ) {
+                    return false;
+                }
+
 			    if ( !this.isOpen ) {
 			        this.isOpen = true;
 			        return;
@@ -254,6 +262,10 @@
                 this.selectItem(this.selected_index, e);
             },
             tabOpen(e) {
+                if ( this.disabled ) {
+                    return false;
+                }
+
 			    if ( this.isOpen ) {
                     this.selectItem(this.selected_index, e);
                 }
@@ -272,6 +284,10 @@
 				this.close();
 			},
 			open() {
+                if ( this.disabled ) {
+                    return false;
+                }
+
 				this.isOpen = true;
 			},
 			close() {
