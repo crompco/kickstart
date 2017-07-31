@@ -358,6 +358,12 @@
                                 <td><pre>false</pre></td>
                                 <td>Whether to add the danger styling to the modal</td>
                             </tr>
+                            <tr>
+                                <td>loading</td>
+                                <td>Boolean</td>
+                                <td><pre>false</pre></td>
+                                <td>Whether to show a loading bar in the modal</td>
+                            </tr>
 						</tbody>
 					</table>
 				</ks-tab>
@@ -396,9 +402,17 @@
 								<td><pre>open()</pre></td>
 								<td>used to open the modal</td>
 							</tr>
+                            <tr>
+                                <td><pre>close()</pre></td>
+                                <td>used to close the modal</td>
+                            </tr>
+                            <tr>
+                                <td><pre>loadingOn()</pre></td>
+                                <td>show loading bar</td>
+                            </tr>
 							<tr>
-								<td><pre>close()</pre></td>
-								<td>used to close the modal</td>
+								<td><pre>loadingOff()</pre></td>
+								<td>hide loading bar</td>
 							</tr>
 						</tbody>
 					</table>

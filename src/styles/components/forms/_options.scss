@@ -85,39 +85,42 @@
 
 }
 // Option buttons
-.ks-radio-group.option-buttons .ks-radio, .ks-checkbox-group.option-buttons .ks-checkbox {
-	display: inline-block;
-	padding: 0.5rem 0.5rem;
-	border: solid 1px $gray;
-	border-left-width: 0;
-	color: lighten($text-color, 10%);
-	white-space: nowrap;
-	margin: 0;
-	&:first-child {
-		border-left-width: 1px;
-		border-top-left-radius: 3px;
-		border-bottom-left-radius: 3px;
-	}
-	&:last-child {
-		border-top-right-radius: 3px;
-		border-bottom-right-radius: 3px;
-	}
-	&:hover {
-		color: $text-color;
-	}
-	&.ks-state-active {
-		box-shadow: inset 0 0 10px darken($form-options-active-bg, 17%);
-		background: $form-options-active-bg;
-		color: $form-checkbox-check-fill;
-		text-shadow: 1px 0px 0px $form-checkbox-check-fill;
-		border-color: $form-options-active-bg;
-	}
+.ks-radio-group.option-buttons, .ks-checkbox-group.option-buttons {
+    .ks-radio, .ks-checkbox {
+        display: inline-block;
+        // Using a hard pixel value to get a precise matching height to the other form elements
+        padding: 8.5px 0.5rem;
+        border: solid 1px $gray;
+        border-left-width: 0;
+        color: lighten($text-color, 10%);
+        white-space: nowrap;
+        margin: 0 0 rem($form-block-margin-bottom);
+        &:first-child {
+            border-left-width: 1px;
+            border-top-left-radius: 3px;
+            border-bottom-left-radius: 3px;
+        }
+        &:last-child {
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+        }
+        &:hover {
+            color: $text-color;
+        }
+        &.ks-state-active {
+            box-shadow: inset 0 0 10px darken($form-options-active-bg, 17%);
+            background: $form-options-active-bg;
+            color: $form-checkbox-check-fill;
+            text-shadow: 1px 0px 0px $form-checkbox-check-fill;
+            border-color: $form-options-active-bg;
+        }
 
-	.ks-checkbox-input-wrapper, .ks-radio-input-wrapper {
-		display: none;
-	}
+        .ks-checkbox-input-wrapper, .ks-radio-input-wrapper {
+            display: none;
+        }
 
-	.ks-radio-label-wrapper, .ks-checkbox-label-wrapper {
+        .ks-radio-label-wrapper, .ks-checkbox-label-wrapper {
 
-	}
+        }
+    }
 }
