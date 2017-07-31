@@ -10,6 +10,7 @@
 		border: $form-border;
 		color: $form-color;
 		width: 100%;
+        margin-bottom: rem($form-block-margin-bottom);
 		@if $form-box-shadow {
 			box-shadow: $form-box-shadow;
 		}
