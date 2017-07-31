@@ -29,7 +29,8 @@
 
 %form-input-block {
 	@extend %form-input;
-	display: block;
+	display: inline-block;
+    width: 100%;
 	margin-top: rem($form-block-margin-top);
 	margin-bottom: rem($form-block-margin-bottom);
 }

@@ -76,6 +76,28 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="tab-half">
+                        <div class="form-group">
+                            <div class="label">Text</div>
+                            <input type="text">
+                        </div>
+                        <div class="form-group">
+                            <div class="label">Datepicker</div>
+                            <ks-datepicker></ks-datepicker>
+                        </div>
+                    </div>
+                    <div class="tab-half">
+                        <div class="form-group">
+                            <div class="label">select</div>
+                            <ks-select></ks-select>
+                        </div>
+                        <div class="form-group">
+                            <div class="label">Password Confirmation</div>
+                            <input type="password">
+                        </div>
+                    </div>
+                </div>
             </form>
             <code-block v-pre>
                 &lt;form>
