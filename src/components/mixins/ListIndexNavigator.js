@@ -393,6 +393,11 @@ export default {
                 } else {
                     // Save when we reach the last page to prevent repeated calls
                     this.last_page = this.page;
+
+                    // If it's not a concatenation then the list should be cleared out
+                    if ( !concat ) {
+                        this.list = list;
+                    }
                 }
             } else {
                 this.selected_index = start_index;
