@@ -47,7 +47,7 @@
 		</div>
 		<br>
 		<div class="callout">
-			<ks-tabs :expand="true">
+			<ks-tabs :expand="true" id="foo-example">
 				<ks-tab title="Foo">
                     <p>
                         This is the first tab which auto selected
@@ -68,7 +68,7 @@
 			</ks-tabs>
 
             <code-block v-pre>
-                &lt;ks-tabs :expand="true">
+                &lt;ks-tabs :expand="true" id="foo-example">
                     &lt;ks-tab title="Foo">
                         &lt;p>
                             This is the first tab which auto selected
@@ -102,18 +102,30 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>expand</td>
-                            <td><pre>Boolean</pre></td>
-                            <td><pre>false</pre></td>
-                            <td>When set to true the tabs will expand into an even width</td>
-                        </tr>
-                        <tr>
-                            <td>align</td>
-                            <td><pre>String</pre></td>
-                            <td><pre>center</pre></td>
-                            <td>Where to text align the tabs name. Options are ('left', 'center', 'right')</td>
-                        </tr>
+                            <tr>
+                                <td>expand</td>
+                                <td><pre>Boolean</pre></td>
+                                <td><pre>false</pre></td>
+                                <td>When set to true the tabs will expand into an even width</td>
+                            </tr>
+                            <tr>
+                                <td>align</td>
+                                <td><pre>String</pre></td>
+                                <td><pre>center</pre></td>
+                                <td>Where to text align the tabs name. Options are ('left', 'center', 'right')</td>
+                            </tr>
+                            <tr>
+                                <td>id</td>
+                                <td><pre>String</pre></td>
+                                <td><pre>NULL</pre></td>
+                                <td>When provided the last active tab will be remembered unless the rememberTab prop is set to false</td>
+                            </tr>
+                            <tr>
+                                <td>rememberTab</td>
+                                <td><pre>Boolean</pre></td>
+                                <td><pre>true</pre></td>
+                                <td>Only used when an ID is provided in case you want to use an id without remembering the tab selection.</td>
+                            </tr>
                         </tbody>
                     </table>
                     <h2>KsTab</h2>
