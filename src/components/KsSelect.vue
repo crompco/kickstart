@@ -12,12 +12,14 @@
     >
 		<input type="hidden" :name="name" :value="value">
 		<div class="ks-select-selection" @click.prevent="toggleOpen">
-			<div class="ks-select-placeholder" v-if="!value">{{placeholder}}</div>
-			<template v-else>
-				{{selected}}
-			</template>
-            <span class="ks-select-deselect" v-if="showDeselect" @click.prevent.stop="clearSelection()">x</span>
-            <span class="ks-select-arrow"></span>
+                <div class="ks-select-placeholder" v-if="!value">{{placeholder}}</div>
+                <template v-else>
+                    <slot :value="value" :label="selected" name="label">
+                        {{selected}}
+                    </slot>
+                </template>
+                <span class="ks-select-deselect" v-if="showDeselect" @click.prevent.stop="clearSelection()">x</span>
+                <span class="ks-select-arrow"></span>
 		</div>
 
 		<div class="ks-select-dropdown" v-show="isOpen">

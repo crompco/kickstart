@@ -3,7 +3,7 @@
 		<h2>Select</h2>
         <div class="basic-block">
 
-            <p>Autocomplete and pagination</p>
+            <p>Autocomplete and pagination (with slots: default, label)</p>
             <div class="form-group">
                 <div class="label">
                     Country
@@ -15,6 +15,9 @@
                     :paginated="true"
                     @search="runSearch"
                 >
+                    <template slot="label" scope="{value, label}">
+                        {{value}}: {{label}}
+                    </template>
                     <template scope="props">
                         {{props.item.name}}
                     </template>
@@ -28,6 +31,9 @@
                         :paginated="true"
                         @search="runSearch"
                     >
+                       &lt;template slot="label" scope="{value, label}">
+                           {{value}}: {{label}}
+                       &lt;/template>
                         &lt;template scope="props">
                             {{props.item.name}}
                         &lt;/template>
@@ -445,7 +451,16 @@
                             <td>default</td>
                             <td>
                                 This is a <a href="https://vuejs.org/v2/guide/components.html#Scoped-Slots" target="_blank">scoped slot</a>.
-                                This is used so that you have more control over the look of the data. The component loops through the data and passes the props with a props attribute. An example can be seem above in autocomplete and pagination examples.
+                                This is used so that you have more control over the look of the data. The component loops through the data and passes the props with a props attribute.
+                                An example can be seem above in autocomplete and pagination examples.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>label</td>
+                            <td>
+                                This is a <a href="https://vuejs.org/v2/guide/components.html#Scoped-Slots" target="_blank">scoped slot</a>.
+                                This will be used to show the selection. If no selection is made it will not render this slot. It will take a scope of {value: ..., label}.
+                                An example can be seen above.
                             </td>
                         </tr>
                     </tbody>
