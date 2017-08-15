@@ -453,6 +453,10 @@
                                 This should not be needed since the autocomplete will automatically refresh the display
                             </td>
                         </tr>
+                        <tr>
+                            <td><pre>reset()</pre></td>
+                            <td>Clears selection, items, and cache</td>
+                        </tr>
                     </tbody>
                 </table>
             </ks-tab>

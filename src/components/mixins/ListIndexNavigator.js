@@ -555,6 +555,14 @@ export default {
             return true;
         },
 
+        /**
+         * Clears selections, items, and cache
+         */
+        reset() {
+            this.clearSelection();
+            this.clear();
+            this.clearCache();
+        }
     },
 
     watch: {
