@@ -559,6 +559,8 @@ export default {
          * Clears selections, items, and cache
          */
         reset() {
+            this.list = [];
+            this.lookup_name = '';
             this.clearSelection();
             this.clear();
             this.clearCache();
