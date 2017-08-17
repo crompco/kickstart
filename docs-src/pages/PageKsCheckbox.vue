@@ -3,6 +3,15 @@
         <h2>Checkbox Buttons</h2>
         <div class="basic-block">
             <div class="form-group">
+                <div class="label">Single Checkbox</div>
+                <ks-checkbox label="Check Me" name="single" value="1" v-model="values.single"></ks-checkbox>
+            </div>
+            <code-block v-pre>
+                &lt;ks-checkbox label="Check Me" name="single" value="1" v-model="values.single">&lt;/ks-checkbox>
+            </code-block>
+        </div>
+        <div class="basic-block">
+            <div class="form-group">
                 <div class="label">Checkbox buttons</div>
                 <ks-checkbox label="PHP" name="checkbox1" value="1" v-model="values.checkbox1"></ks-checkbox>
                 <ks-checkbox label="JavaScript" name="checkbox1" value="2" v-model="values.checkbox1"></ks-checkbox>
@@ -303,6 +312,7 @@
         data() {
             return {
                 values: {
+                    single: 0,
                     checkbox1: [],
                     checkbox2: [],
                     group1: [],

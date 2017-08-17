@@ -87,13 +87,15 @@
 				}
 			},
 			removeValue(checked) {
-				let index = looseIndexOf(checked, this.value);
-				if ( index >= 0 ) {
-					checked.splice(index, 1);
-					return checked;
-				}
-
-				return this.value;
+			    if ( checked instanceof Array ) {
+                    let index = looseIndexOf(checked, this.value);
+                    if ( index >= 0 ) {
+                        checked.splice(index, 1);
+                        return checked;
+                    }
+                } else {
+			        return false;
+                }
 			},
 			addValue(checked) {
 				if ( checked instanceof Array ) {
