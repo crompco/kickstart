@@ -551,6 +551,12 @@ export default {
                     e.preventDefault();
                 }
             }
+            if ( e && keyCode(e) == 13 ) {
+                if ( !this.is_multiple ) {
+                    e.stopImmediatePropagation();
+                    e.stopPropagation();
+                }
+            }
 
             return true;
         },

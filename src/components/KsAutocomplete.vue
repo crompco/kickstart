@@ -34,7 +34,7 @@
 			@keyup.esc="clear"
 			@keyup.8="backspace"
 			@keydown.tab="selectItem(selected_index, $event)"
-			@keydown.enter.prevent="selectItem(selected_index)"
+			@keydown.enter.prevent="selectItem(selected_index, $event)"
 			@keydown.down.prevent="selectDown()"
 			@keydown.up.prevent="selectUp()"
 		>
@@ -201,6 +201,8 @@
                     this.lookup_name = this.getSelectionLabel(popped[0])
                 }
 
+                // resetting focused to force watcher to fire in the nextTick
+                this.focused = false;
                 this.$nextTick(() => {
                     this.setFocus();
                 });
