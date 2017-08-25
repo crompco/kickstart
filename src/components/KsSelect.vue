@@ -292,6 +292,7 @@
 
 				this.isOpen = true;
 			},
+
 			close() {
 				this.isOpen = false;
 			},
@@ -311,7 +312,7 @@
                 // Find the item by the given index
                 let item = this.getItemByIndex(index);
                 if ( !item[this.keyName] ) {
-                    console.log('Error: Could not find key: ' + this.keyName);
+                    console.error('KsSelect: Could not find key: ' + this.keyName);
                 }
 
                 // Determine what value to emit

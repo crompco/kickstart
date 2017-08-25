@@ -2,6 +2,7 @@
 	<div class="autocomplete-holder"
 		 :class="{ 'is-selected': has_selections, 'is-multiple': is_multiple }"
 		 @click.prevent="setFocus('lookup')"
+         @keydown.enter.prevent.stop="editSelection"
 	     tabindex="-1"
 	>
 
@@ -251,6 +252,13 @@
 				if ( this.minSearch == 0 && this.is_multiple ) {
 				    this.startSearch();
                 }
+
+                if ( !this.is_multiple && e && 'type' in e && e.type == 'click' ) {
+				    // When clicking on selections it can casue an issue
+                    // where the list is pulled and multiple selections can be made
+                    // To avoid this bug I will tell the autocomplete that it's not focused even though it is
+                    this.focused = false;
+                }
 			},
 
 			/**
@@ -262,7 +270,10 @@
 				if ( !this.selection ) {
 					this.selection  = [];
 				}
-				this.selection.push(selection);
+				// Prevent duplicate adds
+				if ( -1 == this.selection.indexOf(selection) ) {
+                    this.selection.push(selection);
+                }
 			},
 
 			/**
@@ -331,7 +342,9 @@
 			lookup_name(newVal, oldVal) {
 				if ( newVal != oldVal ) {
 				    // when the lookup name changes we trigger the run lookup
-					this.startSearch();
+                    if ( !this.has_selections || this.is_multiple ) {
+                        this.startSearch();
+                    }
 				}
 			},
 
@@ -355,7 +368,9 @@
 
 			focused() {
 			    if ( this.focused && this.minSearch == 0 && this.lookup_name.length == 0 ) {
-			        this.startSearch();
+			        if ( !this.has_selections || this.is_multiple ) {
+                        this.startSearch();
+                    }
 				}
 			},
 

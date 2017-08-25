@@ -12,6 +12,7 @@
                     v-model="value1"
                     @search="runSearch"
                     :paginated="true"
+                    :min-search="0"
                 ></ks-autocomplete>
                 <code-block v-pre>
                     &lt;ks-autocomplete
