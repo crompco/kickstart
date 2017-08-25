@@ -340,7 +340,7 @@
 				}
 
 				if ( this.binds_objects ) {
-					this.selected = object_get(this.value, this.labelKey);
+					this.selected = object_get(this.value, this.labelKey, null);
 					return;
 				}
 

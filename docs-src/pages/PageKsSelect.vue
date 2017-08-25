@@ -84,7 +84,7 @@
 
             <p>Group Select</p>
             <div class="form-group">
-                <div class="label">Country</div>
+                <div class="label">Characters</div>
                 <ks-select
                     name="name"
                     :items="characters"
@@ -107,7 +107,7 @@
 
             <div class="form-group">
                 <div class="label">Disabled Select</div>
-                <ks-select :disabled="true"></ks-select>
+                <ks-select name="foo" :disabled="true" label-key="foo"></ks-select>
             </div>
         </div>
         <div class="alert warning">

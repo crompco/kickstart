@@ -247,10 +247,10 @@
 				this.lookup_name = '';
 				this.list = [];
 
-				// If min search is 0 then we need to open the search right back up
-				if ( this.minSearch == 0 ) {
+				// If min search is 0 and it supports multiple then we need to open the search right back up
+				if ( this.minSearch == 0 && this.is_multiple ) {
 				    this.startSearch();
-				}
+                }
 			},
 
 			/**
