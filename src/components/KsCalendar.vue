@@ -43,7 +43,7 @@
 		            <div class="cal-week cal-week-header">
 			            <div v-for="title in week_titles" class="cal-day">
 				            {{title}}
-			            </div>
+                        </div>
 		            </div>
 
 		            <!-- Weeks -->
@@ -55,7 +55,7 @@
 			             <div v-for="day in week"
 							  v-if="isInMonth(day)"
 							  class="cal-day"
-							  :tabindex="tabindex"
+							  :tabindex="tabindex && isDayInScope(day)"
 							  :class="dayClass(day)"
 							  @click.prevent="selectDay(day)"
 							  @keydown.enter="selectDay(day)"
@@ -64,7 +64,8 @@
 					            <span class="day-num">
 						            {{day | day}}
 					            </span>
-					            <slot :name="formatDate(day)"></slot>
+
+                                <slot :name="formatDate(day)"></slot>
 				            </div>
 			            </div>
 
@@ -124,6 +125,17 @@
         	prop: 'date'
         },
 
+        provide() {
+            return {
+                selection: this.selection,
+                today: this.today,
+                minDate: this.minDateObj,
+                maxDate: this.maxDateObj,
+                tabindex: this.tabindex,
+                format: this.format
+            }
+        },
+
         props: {
         	date: {
         		type: [String, Date],
@@ -166,7 +178,9 @@
 	        monthPicker: {
         		type: Boolean,
 		        default: false
-	        }
+	        },
+            minDate: {},
+            maxDate: {},
         },
 
         data() {
@@ -176,6 +190,8 @@
 	            last_day: '',
 	            yearPickerOpen: false,
                 monthPickerOpen: false,
+//                minDateObj: this.minDate ? parseDate(this.minDate, this.format) : null,
+//                maxDateObj: this.maxDate ? parseDate(this.maxDate, this.format) : null,
             };
         },
 
@@ -183,6 +199,20 @@
         	tabindex() {
         		return this.interactive ? '0' : false;
 	        },
+            minDateObj() {
+                if ( !this.minDate ) {
+                    return null;
+                }
+
+                return parseDate(this.minDate, this.format);
+            },
+            maxDateObj() {
+                if ( !this.maxDate ) {
+                    return null;
+                }
+
+                return parseDate(this.maxDate, this.format);
+            },
         	date_obj() {
         		if ( this.date instanceof Date ) {
         			return this.date;
@@ -282,6 +312,7 @@
         	this.$nextTick(() => {
 		        mouseHold(this.$refs.next, this.next);
 		        mouseHold(this.$refs.previous, this.previous);
+                console.log('mounted: ', this.isDayInScope(new Date(2017, 7, 4)));
 	        });
 	    },
 
@@ -347,17 +378,43 @@
 		     */
 		    dayClass(date) {
 		    	let day = this.formatDate(date);
+
 		    	return {
 		    		'selected': day === this.selection,
-				    'today': day == this.today
+				    'today': day == this.today,
+                    'out_of_scope': this.isDayInScope(date) ? false : true
 		    	};
 		    },
+
+            /**
+             * Check If a date is with in the given min/max props
+             * Used to determine interactive dates
+             *
+             * @return Boolean
+             */
+            isDayInScope(date) {
+		        if ( this.minDateObj ) {
+		            if ( date.getTime() < this.minDateObj.getTime() ) {
+		                return false;
+                    }
+                }
+
+                if ( this.maxDateObj ) {
+                    if ( date.getTime() >this.maxDateObj.getTime() ) {
+                        return false;
+                    }
+                }
+
+                return true;
+            },
 
 		    /**
 		     * Select the given date
 		     */
 		    selectDay(date) {
-			    this.$emit('select', this.formatDate(date));
+		        if ( this.isDayInScope(date) ) {
+                    this.$emit('select', this.formatDate(date));
+                }
 		    },
 
 		    /**

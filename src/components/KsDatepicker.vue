@@ -22,6 +22,8 @@
                 :year-picker="yearPicker"
                 :month-picker="monthPicker"
 				:interactive="true"
+                :min-date="minDate"
+                :max-date="maxDate"
 			    @select="selectDay"
 			></ks-calendar>
 		</div>
@@ -51,6 +53,8 @@
 				type: String,
 				default: 'm/d/Y'
 			},
+            minDate: {},
+            maxDate: {},
 			yearPicker: {
 				type: Boolean,
 				default: false

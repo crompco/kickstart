@@ -48,7 +48,7 @@ $calendar-grid: (
 
 	.ks-calendar-view.interactive {
 		.cal-week:not(.cal-week-header) {
-			.cal-day {
+			.cal-day:not(.out_of_scope) {
 				&:hover {
 					@include state-hover();
 					border: 0;
@@ -69,6 +69,10 @@ $calendar-grid: (
 					border: 0;
 				}
 			}
+            .cal-day.out_of_scope {
+                background: $lighter-gray;
+                cursor: default;
+            }
 		}
 	}
 

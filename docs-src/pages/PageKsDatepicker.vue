@@ -6,7 +6,10 @@
                 <div class="form-group">
                     <div class="label">Simple Datepicker</div>
                     <div class="data">
-                        <ks-datepicker v-model="date1"></ks-datepicker>
+                        <ks-datepicker
+                            ref="dpicker"
+                            v-model="date1"
+                        ></ks-datepicker>
                     </div>
                 </div>
 				<h3></h3>
@@ -108,6 +111,18 @@
                             <td><pre>false</pre></td>
                             <td>Whether to allow the user to use the month picker. This makes the month in the header interactive</td>
                         </tr>
+                        <tr>
+                            <td>minDate</td>
+                            <td><pre>String</pre></td>
+                            <td><pre>NULL</pre></td>
+                            <td>The minimum date that can be selected. Should be in the same format as `dateFormat`</td>
+                        </tr>
+                        <tr>
+                            <td>maxDate</td>
+                            <td><pre>String</pre></td>
+                            <td><pre>NULL</pre></td>
+                            <td>The maximum date that can be selected. Should be in the same format as `dateFormat`</td>
+                        </tr>
 					</tbody>
 				</table>
 			</ks-tab>
@@ -179,7 +194,8 @@
 
 		data() {
 			return {
-				date1: '2017-01-01',
+				date1: '2017-08-01',
+                minDate: '2017-08-05',
 				date2: '02/21/2017'
 			};
 		},
@@ -187,7 +203,7 @@
 		computed: {},
 
 		mounted() {
-
+		    console.log(this.$refs.dpicker.$refs.calendar.isDayInScope(new Date(2017, 7, 1)));
 		},
 
 		methods: {},
