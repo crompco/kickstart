@@ -70,7 +70,10 @@ $calendar-grid: (
 				}
 			}
             .cal-day.out_of_scope {
-                background: $lighter-gray;
+                background: $calendar-inactive-day-background;
+                .day-num {
+                    color: $calendar-inactive-day-color;
+                }
                 cursor: default;
             }
 		}

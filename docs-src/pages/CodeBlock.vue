@@ -1,6 +1,6 @@
 <template>
     <ks-accordion class="col code-block-accordion">
-        <ks-accordion-row title="Show Code">
+        <ks-accordion-row :title="title">
             <pre><code :class="lang"><slot></slot></code></pre>
         </ks-accordion-row>
     </ks-accordion>
@@ -14,6 +14,9 @@
         name: 'CodeBlock',
 
         props: {
+            title: {
+                default: 'Show Code'
+            },
             lang: {
                 type: String,
                 default: 'language-html'
@@ -21,7 +24,8 @@
         },
 
         data() {
-            return {}
+            return {
+            }
         },
 
         components: {

@@ -190,8 +190,6 @@
 	            last_day: '',
 	            yearPickerOpen: false,
                 monthPickerOpen: false,
-//                minDateObj: this.minDate ? parseDate(this.minDate, this.format) : null,
-//                maxDateObj: this.maxDate ? parseDate(this.maxDate, this.format) : null,
             };
         },
 
@@ -200,6 +198,10 @@
         		return this.interactive ? '0' : false;
 	        },
             minDateObj() {
+                if ( this.minDate instanceof Date ) {
+                    return this.minDate;
+                }
+
                 if ( !this.minDate ) {
                     return null;
                 }
@@ -207,6 +209,10 @@
                 return parseDate(this.minDate, this.format);
             },
             maxDateObj() {
+                if ( this.maxDate instanceof Date ) {
+                    return this.maxDate;
+                }
+
                 if ( !this.maxDate ) {
                     return null;
                 }

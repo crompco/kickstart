@@ -58,6 +58,69 @@
             </div>
 		</div>
 
+        <div class="basic-block row">
+            <div class="med-6">
+                <div class="form-group">
+                    <div class="label">min/max Date requirements</div>
+                    <div class="data">
+                        <ks-datepicker
+                            v-model="date3"
+                            :year-picker="true"
+                            :month-picker="true"
+                            :min-date="minDate"
+                            :max-date="maxDate"
+                            @input-error="$toast({type: 'error', message: 'Invalid date provided'})"
+                        ></ks-datepicker>
+                    </div>
+                </div>
+            </div>
+            <div class="med-6">
+                <pre><strong>v-model</strong>: {{date3}}</pre>
+            </div>
+
+            <div class="med-12">
+                <code-block v-pre>
+                    &lt;ks-datepicker
+                        v-model="date3"
+                        :year-picker="true"
+                        :month-picker="true"
+                        :min-date="minDate"
+                        :max-date="maxDate"
+                        @input-error="$toast({type: 'error', message: 'Invalid date provided'})"
+                    >&lt;/ks-datepicker>
+                </code-block>
+            </div>
+        </div>
+
+        <code-block v-pre title="Page Code" lang="language-js">
+            import KsDatepicker from '../../src/components/KsDatepicker.vue';
+            import KsTabs from '../../src/components/KsTabs.vue';
+            import KsTab from '../../src/components/KsTab.vue';
+            import {dateModify} from '../../src/helpers/dates';
+
+            export default {
+                name: 'PageKsDatepicker',
+
+                props: {},
+
+                data() {
+                    return {
+                        date1: '2017-08-01',
+                        date2: '02/21/2017',
+                        date3: new Date(),
+                        minDate: dateModify(new Date(), 'day', -2),
+                        maxDate: dateModify(new Date(), 'day', +5),
+                    };
+                },
+
+                components: {
+                    KsDatepicker,
+                    KsTabs,
+                    KsTab
+                },
+            }
+        </code-block>
+
 
 		<ks-tabs>
 			<ks-tab title="Props">
@@ -152,6 +215,10 @@
 							<td><pre>close</pre></td>
 							<td>Fired when the datepicker calendar is closed</td>
 						</tr>
+                        <tr>
+                            <td><pre>input-error</pre></td>
+                            <td>Fired when a value is set out of the range (min/max restrictions). Payload will have the date.</td>
+                        </tr>
 					</tbody>
 				</table>
 			</ks-tab>
@@ -186,6 +253,7 @@
 	import KsDatepicker from '../../src/components/KsDatepicker.vue';
 	import KsTabs from '../../src/components/KsTabs.vue';
 	import KsTab from '../../src/components/KsTab.vue';
+	import {dateModify} from '../../src/helpers/dates';
 
 	export default {
 		name: 'PageKsDatepicker',
@@ -195,18 +263,12 @@
 		data() {
 			return {
 				date1: '2017-08-01',
-                minDate: '2017-08-05',
-				date2: '02/21/2017'
-			};
+				date2: '02/21/2017',
+                date3: new Date(),
+                minDate: dateModify(new Date(), 'day', -2),
+                maxDate: dateModify(new Date(), 'day', +5),
+            };
 		},
-
-		computed: {},
-
-		mounted() {
-		    console.log(this.$refs.dpicker.$refs.calendar.isDayInScope(new Date(2017, 7, 1)));
-		},
-
-		methods: {},
 
 		components: {
 			KsDatepicker,

@@ -33,7 +33,7 @@
 <script>
 
 	import KsCalendar from './KsCalendar.vue';
-	import {formatDate} from '../helpers/dates';
+	import {formatDate, parseDate} from '../helpers/dates';
 	import {addEvent, smartFocusToggle} from '../helpers/events';
 
 	export default {
@@ -123,7 +123,15 @@
 			close() {
 				this.is_open = false;
 				this.$emit('close');
-			}
+			},
+            isDayInScope(date) {
+			    if ( !(date instanceof Date) ) {
+                    date = parseDate(date);
+                }
+
+                // Ask the calendar to run the logic to check for a valid day
+                return this.$refs.calendar.isDayInScope(date);
+            }
 		},
 
 		watch: {
@@ -143,6 +151,22 @@
 			},
 			input_date() {
 			    if ( this.input_date.length == this.mask.length ) {
+                    let input = formatDate(this.input_date, this.dateFormat, this.displayFormat);
+
+                    // Before setting the date we need to make sure it is in the scope
+			        if ( !this.isDayInScope(input) ) {
+			            // Emit an input error in case the consumer wants to provide user feedback
+			            this.$emit('input-error', input, "Out of scope date");
+
+			            // Emit the original value back to prevent the change
+			            this.$emit('input', this.value_date);
+
+			            // Reset the input date back to it's original value
+			            this.input_date = formatDate(this.value_date, this.displayFormat, this.dateFormat);
+
+			            return;
+                    }
+
                     this.$emit('input', formatDate(this.input_date, this.dateFormat, this.displayFormat));
 				}
 			}
