@@ -13,6 +13,7 @@
 
     // Internal Dependencies
 	import {addEvent} from '../helpers/events';
+	import {toggleClass, parent} from '../helpers/dom';
 
     export default {
         name: 'KsSideNav',
@@ -37,8 +38,8 @@
             let $element = this.$el.querySelector('.nav-links');
 
             if ( $element != null ) {
-                addEvent($element, 'click', (e) => {
-                    this.classObj.show = !this.classObj.show;
+                addEvent($element, 'click', function (e) {
+                    toggleClass(parent(this, '.side-nav'), 'show');
                 });
             }
 		},
