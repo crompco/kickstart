@@ -113,6 +113,11 @@ $calendar-grid: (
 		}
 
 		.cal-day, .cal-blank {
+            .row-collapse {
+                margin-left: -0.5rem;
+                margin-right: -0.5rem;
+                width: calc(100% + 1rem);
+            }
 			> div {
 				padding: 0.5rem;
 			}
@@ -120,6 +125,28 @@ $calendar-grid: (
 				display: block;
 				text-align: right;
 			}
+            a.day-num {
+                display: inline-block;
+                font-size: 0.9rem;
+                float: right;
+                margin: -0.25rem 0.2rem 0 0;
+                padding: 0.25rem;
+                //margin-left: 0.5rem;
+                height: 1.75rem;
+                width: 1.75rem;
+                border-radius: $calendar-day-select-border-radius;
+                text-align: center;
+                border: solid 1px $calendar-day-select-border-color;
+                color: $calendar-day-select-color;
+                backgroud: $calendar-day-select-bg;
+                transition: all 0.2s;
+
+                &:hover {
+                    background: $calendar-day-select-hover-bg;
+                    color: $calendar-day-select-hover-color;
+                    border: solid 1px $calendar-day-select-hover-border-color;
+                }
+            }
 		}
 		.cal-day {
 			box-shadow: -1px -1px $calendar-day-border-color, inset -1px -1px $calendar-day-border-color;

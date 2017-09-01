@@ -35,3 +35,12 @@ $calendar-month-border-color: lighten(get($brand, lighter), 15%) !default;
 // Inactive/Out of Scope colors
 $calendar-inactive-day-color: $med-gray !default;
 $calendar-inactive-day-background: $lighter-gray !default;
+
+// Day Selector
+$calendar-day-select-border-radius: 50% !default;
+$calendar-day-select-border-color: transparent !default;
+$calendar-day-select-color: $text-color !default;
+$calendar-day-select-bg: transparent !default;
+$calendar-day-select-hover-color: $white !default;
+$calendar-day-select-hover-bg: $state-default-bg !default;
+$calendar-day-select-hover-border-color: transparent !default;

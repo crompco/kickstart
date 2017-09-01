@@ -6,169 +6,145 @@
 @import "../variables/_forms";
 
 .autocomplete-holder {
-	position: relative;
-	display: inline-block;
-	margin-right: rem($ac-margin-right);
-	margin-left: rem($ac-margin-left);
-	margin-bottom: rem($form-block-margin-bottom);
-	@include form-input(false);
-	background: $ac-bg;
-	padding: 0;
-	border: 0;
-	width: calc(100% - (#{rem($ac-margin-right)} + #{rem($ac-margin-left)}));
-
-	&:not(.is-multiple) > input {
-		@include ks-autocomplete-input;
-		margin-bottom: 0;
-	}
-
-	&.is-multiple > input {
-		border: 0;
-		outline: none;
-		display: inline-block;
-		margin-top: 0;
-		margin-bottom: 0;
-		box-shadow: none;
-		width: auto;
-		padding: 1px 0;
-	}
-
-	> input::-ms-clear {
-		display: none;
-	}
-
-	.searching-results {
-		position: absolute;
-		width: 100%;
-		left: 0;
-
-		padding: 0;
-		margin: 0;
-		border:0;
-		height: 4px;
-	}
-
-	&:not(.is-multiple).is-selected {
-		.selection {
-			@include ks-autocomplete-input;
-		}
-	}
-
-	&:not(.is-multiple) {
-		.selection {
-			display: block;
-			width: 100%;
-			padding: rem($ac-selection-padding);
-		}
-	}
-
-	.selection {
-
-		.selection-text {
-			background-color: $ac-selection-bg;
-			display: inline-block;
-			color: $ac-selection-color;
-
-			a {
-				height: rem($ac-clear-height);
-				width: rem($ac-clear-width);
-				position: relative;
-				display: inline-block;
-
-				&:hover {
-					svg g {
-						fill: $ac-clear-color;
-					}
-				}
-			}
-
-			svg {
-				height: rem($ac-clear-height);
-				width: rem($ac-clear-width);
-				position: absolute;
-				top: 1px;
-
-				g {
-					fill: $ac-clear-color-hover;
-				}
-			}
-		}
-	}
-
-
-	&.is-multiple {
-		@include ks-autocomplete-input;
-		padding: calc(#{rem($ac-input-multi-padding)} - #{$ac-multi-margin}) rem($ac-input-multi-padding);
-		width: calc(100% - (#{rem($ac-margin-right)} + #{rem($ac-margin-left)}));
-
-		&:not(.is-selected) {
-			// 1px is for border
-			padding: calc(#{rem($ac-input-padding)} - 1px);
-		}
-
-		.autocomplete-list {
-			// 2px is for border
-			// -1px is to move over to compensate for parent borders
-			// margin-top is for when there is a selection. padding of the wrapper changes when there are selections
-			width: calc(100% + 2px);
-			left: -1px;
-			margin-top: rem($ac-input-padding);
-		}
-
-		&.is-selected .autocomplete-list {
-			// Set margin top 2px for border width
-			margin-top: 2px;
-		}
-
-		.selection .selection-text {
-			background-color: $ac-multi-bg;
-			margin: $ac-multi-margin;
-			padding: $ac-multi-padding;
-			border-radius: $ac-multi-border-radius;
-			color: $ac-multi-color;
-
-			a:hover {
-				svg g {
-					fill: $ac-multi-close-color;
-				}
-			}
-
-			svg g {
-				fill: $ac-multi-close-color-hover;
-			}
-
+    position: relative;
+    display: inline-block;
+    margin-right: rem($ac-margin-right);
+    margin-left: rem($ac-margin-left);
+    margin-bottom: rem($form-block-margin-bottom);
+    @include form-input(false);
+    background: $ac-bg;
+    padding: 0;
+    border: 0;
+    width: calc(100% - (#{rem($ac-margin-right)} + #{rem($ac-margin-left)}));
+    &:not(.is-multiple) > input {
+        @include ks-autocomplete-input;
+        margin-bottom: 0;
+    }
+    &.is-multiple > input {
+        border: 0;
+        outline: none;
+        display: inline-block;
+        margin-top: 0;
+        margin-bottom: 0;
+        box-shadow: none;
+        max-width: 100%;
+        width: auto;
+        padding: 1px 0;
+    }
+    > input::-ms-clear {
+        display: none;
+    }
+    .searching-results {
+        position: absolute;
+        width: 100%;
+        left: 0;
+        padding: 0;
+        margin: 0;
+        border: 0;
+        height: 4px;
+    }
+    &:not(.is-multiple).is-selected {
+        .selection {
+            @include ks-autocomplete-input;
+        }
+    }
+    &:not(.is-multiple) {
+        .selection {
+            display: block;
+            width: 100%;
+            padding: rem($ac-selection-padding);
+        }
+    }
+    .selection {
+        .selection-text {
+            background-color: $ac-selection-bg;
+            display: inline-block;
+            color: $ac-selection-color;
+            a {
+                height: rem($ac-clear-height);
+                width: rem($ac-clear-width);
+                position: relative;
+                display: inline-block;
+                &:hover {
+                    svg g {
+                        fill: $ac-clear-color;
+                    }
+                }
+            }
+            svg {
+                height: rem($ac-clear-height);
+                width: rem($ac-clear-width);
+                position: absolute;
+                top: 1px;
+                g {
+                    fill: $ac-clear-color-hover;
+                }
+            }
+        }
+    }
+    &.is-multiple {
+        @include ks-autocomplete-input;
+        padding: calc(#{rem($ac-input-multi-padding)} - #{$ac-multi-margin}) rem($ac-input-multi-padding);
+        width: calc(100% - (#{rem($ac-margin-right)} + #{rem($ac-margin-left)}));
+        &:not(.is-selected) {
+            // 1px is for border
+            padding: calc(#{rem($ac-input-padding)} - 1px);
+        }
+        .autocomplete-list {
+            // 2px is for border
+            // -1px is to move over to compensate for parent borders
+            // margin-top is for when there is a selection. padding of the wrapper changes when there are selections
+            width: calc(100% + 2px);
+            left: -1px;
+            margin-top: rem($ac-input-padding);
+        }
+        &.is-selected .autocomplete-list {
+            // Set margin top 2px for border width
+            margin-top: 2px;
+        }
+        .selection .selection-text {
+            background-color: $ac-multi-bg;
+            margin: $ac-multi-margin;
+            padding: $ac-multi-padding;
+            border-radius: $ac-multi-border-radius;
+            color: $ac-multi-color;
+            a:hover {
+                svg g {
+                    fill: $ac-multi-close-color;
+                }
+            }
+            svg g {
+                fill: $ac-multi-close-color-hover;
+            }
             &:focus {
                 box-shadow: $ac-multi-selection-focus-box-shadow;
                 background-color: lighten($ac-multi-bg, 15%);
             }
-		}
-	}
+        }
+    }
 }
 
-
 .autocomplete-list {
-	margin: 0;
-	z-index: 100;
-	padding: 0;
-	width: 100%;
-	background-color: $ac-list-bg;
-	position: absolute;
-	list-style: none;
-	border: solid 1px $ac-list-border;
-	border-top: 0;
-	overflow-y: auto;
-	left: 0;
-
-	li {
-		padding: rem($ac-list-item-padding);
-		border: 1px solid transparent;
-		border-bottom-color: $ac-list-item-border;
-
+    margin: 0;
+    z-index: 100;
+    padding: 0;
+    width: 100%;
+    background-color: $ac-list-bg;
+    position: absolute;
+    list-style: none;
+    border: solid 1px $ac-list-border;
+    border-top: 0;
+    overflow-y: auto;
+    left: 0;
+    li {
+        padding: rem($ac-list-item-padding);
+        border: 1px solid transparent;
+        border-bottom-color: $ac-list-item-border;
         // If its the last child or an option group then we disable the border
-		&:last-child, &.opt-group {
-			border-bottom-color: transparent;
-		}
-
+        &:last-child,
+        &.opt-group {
+            border-bottom-color: transparent;
+        }
         &.opt-group {
             padding-bottom: 0;
             strong {
@@ -179,17 +155,14 @@
                 padding-top: 0;
             }
         }
-
         &.selected-item {
-			@include state-hover();
-			color: $ac-list-selected-color;
-		}
-
-		&:hover {
-			//@include state-hover();
-			//background: $ac-list-item-hover-bg;
-		}
-
+            @include state-hover();
+            color: $ac-list-selected-color;
+        }
+        &:hover {
+            //@include state-hover();
+            //background: $ac-list-item-hover-bg;
+        }
         // Handle nested lists
         ul {
             list-style: none;
@@ -198,5 +171,5 @@
                 padding-left: 1rem;
             }
         }
-	}
+    }
 }
