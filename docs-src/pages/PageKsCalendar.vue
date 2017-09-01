@@ -35,6 +35,26 @@
             </code-block>
 		</div>
 
+        <div class="basic-block">
+            <h3>Interactive Days</h3>
+            <ks-calendar
+                v-model="date3"
+                week-height="80px"
+                :interactive-days="true"
+            >
+                <div :slot="'2017-09-22'">
+                    <strong>Patty's Birthday</strong>
+                </div>
+            </ks-calendar>
+
+            <code-block>
+                &lt;ks-calendar
+                    v-model="date3"
+                    week-height="80px"
+                    :interactive-days="true"
+                >&lt;/ks-calendar>
+            </code-block>
+        </div>
 
 		<ks-tabs>
 			<ks-tab title="Props">
@@ -101,8 +121,20 @@
 							<td>interactive</td>
 							<td><pre>Boolean</pre></td>
 							<td><pre>false</pre></td>
-							<td>Whether or not to make the days click-able so they can be interacted with</td>
+							<td>
+                                Whether or not to make the calendar interactive so you can click on the cells.
+                                Emits the select event (used with datepicker).
+                            </td>
 						</tr>
+                        <tr>
+                            <td>interactiveDays</td>
+                            <td><pre>Boolean</pre></td>
+                            <td><pre>false</pre></td>
+                            <td>
+                                Whether or not to make the days click-able. Different from the 'interactive' prop because
+                                this only makes the day number clickable not the whole cell.
+                            </td>
+                        </tr>
 						<tr>
 							<td>yearPicker</td>
 							<td><pre>Boolean</pre></td>

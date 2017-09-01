@@ -61,9 +61,15 @@
 							  @keydown.enter="selectDay(day)"
 			            >
 				            <div>
-					            <span class="day-num">
-						            {{day | day}}
-					            </span>
+                                <div v-if="interactiveDays" class="row row-collapse">
+                                    <a href="#" class="day-num" @click.prevent.stop="dayClicked(day)">
+                                        {{day | day}}
+                                    </a>
+                                </div>
+                                <span v-else class="day-num">
+                                    {{day | day}}
+                                </span>
+
 
                                 <slot :name="formatDate(day)"></slot>
 				            </div>
@@ -171,6 +177,10 @@
         		type: Boolean,
 		        default: false
 	        },
+            interactiveDays: {
+        	    type: Boolean,
+                default: false
+            },
 	        yearPicker: {
         		type: Boolean,
 		        default: false
@@ -422,6 +432,16 @@
                     this.$emit('select', this.formatDate(date));
                 }
 		    },
+
+            /**
+             * Select from a click on the day number
+             */
+            dayClicked(date) {
+                console.log('dayClicked');
+                if ( this.isDayInScope(date) ) {
+                    this.$emit('select-day', this.formatDate(date));
+                }
+            },
 
 		    /**
 		     * Moves the month back
