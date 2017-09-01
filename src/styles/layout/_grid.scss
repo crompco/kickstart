@@ -27,16 +27,62 @@
                     @include grid-column($i, $map);
                 }
             }
-
-            // TODO: get push to work
-            //.#{$name}-push-#{$i} {
-            //	@include grid-push($i, $map);
-            //}
         }
     }
 
     .#{$name}-collapse {
         @include grid-collapse($map);
+    }
+}
+
+@for $i from 1 through length($breakpoint-list) {
+    $keys: map-keys($breakpoint-list);
+    $name: nth($keys, $i);
+    $map: map-get($breakpoint-list, $name);
+    // Hide breakpoints
+    @if $i == 1 {
+        @include breakpoint($map, true) {
+            .#{$name}-hide {
+                display: none;
+            }
+        }
+    } @else if $i == length($breakpoint-list) {
+        @include breakpoint($map) {
+            .#{$name}-hide {
+                display: none;
+            }
+        }
+    } @else {
+        $max-map: map-get($breakpoint-list, nth($keys, $i + 1));
+        $min-max-grid: map-merge($map, (media: quote('(min-width:' + map-get($map, media) + ') and (max-width:' + map-get($max-map, media) + ')')));
+        @include breakpoint($min-max-grid) {
+            .#{$name}-hide {
+                display: none;
+            }
+        }
+    }
+
+    // Show breakpoints
+    @if $i == 1 {
+        @include breakpoint($map) {
+            .#{$name}-show {
+                display: none;
+            }
+        }
+    } @else if $i == length($breakpoint-list) {
+        @include breakpoint($map, true) {
+            .#{$name}-show {
+                display: none;
+            }
+        }
+    } @else {
+        $max-map: map-get($breakpoint-list, nth($keys, $i + 1));
+        $min-max-grid: map-merge($map, (media: quote('(max-width:' + map-get($map, media) + '), (min-width:' + map-get($max-map, media) + ')')));
+        @include breakpoint($min-max-grid) {
+            .#{$name}-show {
+                display: none;
+            }
+        }
     }
 }
 
