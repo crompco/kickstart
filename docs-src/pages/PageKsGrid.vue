@@ -37,6 +37,103 @@
             </table>
         </div>
 
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Small <br> <small>480px</small></th>
+                        <th>Tablet <br> <small>768px</small></th>
+                        <th>Medium Screen <br> <small>1024px</small></th>
+                        <th>Large Screen <br> <small>1224px</small></th>
+                        <th>Extra Large Screen <br> <small>1400px</small></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>.sm-show</th>
+                        <td style="background-color:lightgreen;">Visible</td>
+                        <td style="background-color:#ddd;">Hidden</td>
+                        <td style="background-color:#ddd;">Hidden</td>
+                        <td style="background-color:#ddd;">Hidden</td>
+                        <td style="background-color:#ddd;">Hidden</td>
+                    </tr>
+                    <tr>
+                        <th>.tab-show</th>
+                        <td style="background-color:#ddd;">Hidden</td>
+                        <td style="background-color:lightgreen;">Visible</td>
+                        <td style="background-color:#ddd;">Hidden</td>
+                        <td style="background-color:#ddd;">Hidden</td>
+                        <td style="background-color:#ddd;">Hidden</td>
+                    </tr>
+                    <tr>
+                        <th>.med-show</th>
+                        <td style="background-color:#ddd;">Hidden</td>
+                        <td style="background-color:#ddd;">Hidden</td>
+                        <td style="background-color:lightgreen;">Visible</td>
+                        <td style="background-color:#ddd;">Hidden</td>
+                        <td style="background-color:#ddd;">Hidden</td>
+                    </tr>
+                    <tr>
+                        <th>.lg-show</th>
+                        <td style="background-color:#ddd;">Hidden</td>
+                        <td style="background-color:#ddd;">Hidden</td>
+                        <td style="background-color:#ddd;">Hidden</td>
+                        <td style="background-color:lightgreen;">Visible</td>
+                        <td style="background-color:#ddd;">Hidden</td>
+                    </tr>
+                    <tr>
+                        <th style="border-bottom:2px solid #aaa;">.xlg-show</th>
+                        <td style="border-bottom:2px solid #aaa; background-color:#ddd;">Hidden</td>
+                        <td style="border-bottom:2px solid #aaa; background-color:#ddd;">Hidden</td>
+                        <td style="border-bottom:2px solid #aaa; background-color:#ddd;">Hidden</td>
+                        <td style="border-bottom:2px solid #aaa; background-color:#ddd;">Hidden</td>
+                        <td style="border-bottom:2px solid #aaa; background-color:lightgreen;">Visible</td>
+                    </tr>
+                    <tr>
+                        <th>.sm-hide</th>
+                        <td style="background-color:#ddd;">Hidden</td>
+                        <td style="background-color:lightgreen;">Visible</td>
+                        <td style="background-color:lightgreen;">Visible</td>
+                        <td style="background-color:lightgreen;">Visible</td>
+                        <td style="background-color:lightgreen;">Visible</td>
+                    </tr>
+                    <tr>
+                        <th>.tab-hide</th>
+                        <td style="background-color:lightgreen;">Visible</td>
+                        <td style="background-color:#ddd;">Hidden</td>
+                        <td style="background-color:lightgreen;">Visible</td>
+                        <td style="background-color:lightgreen;">Visible</td>
+                        <td style="background-color:lightgreen;">Visible</td>
+                    </tr>
+                    <tr>
+                        <th>.med-hide</th>
+                        <td style="background-color:lightgreen;">Visible</td>
+                        <td style="background-color:lightgreen;">Visible</td>
+                        <td style="background-color:#ddd;">Hidden</td>
+                        <td style="background-color:lightgreen;">Visible</td>
+                        <td style="background-color:lightgreen;">Visible</td>
+                    </tr>
+                    <tr>
+                        <th>.lg-hide</th>
+                        <td style="background-color:lightgreen;">Visible</td>
+                        <td style="background-color:lightgreen;">Visible</td>
+                        <td style="background-color:lightgreen;">Visible</td>
+                        <td style="background-color:#ddd;">Hidden</td>
+                        <td style="background-color:lightgreen;">Visible</td>
+                    </tr>
+                    <tr>
+                        <th>.xlg-hide</th>
+                        <td style="background-color:lightgreen;">Visible</td>
+                        <td style="background-color:lightgreen;">Visible</td>
+                        <td style="background-color:lightgreen;">Visible</td>
+                        <td style="background-color:lightgreen;">Visible</td>
+                        <td style="background-color:#ddd;">Hidden</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
         <h3>No Row Collapse</h3>
         <div class="row col">
             <div class="col tab-6" style="background:#fff;padding:1rem;">
