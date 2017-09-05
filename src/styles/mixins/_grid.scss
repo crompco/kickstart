@@ -5,12 +5,16 @@
 @import "../variables/_grid";
 
 @mixin breakpoint($grid, $max: false) {
-	@if $max {
-		$grid: map-merge($grid, (media: quote('(max-width:' + map-get($grid, media) + ')')));
-	}
+	@if map-get($grid, media) == null {
+		@content
+	} @else {
+		@if $max {
+			$grid: map-merge($grid, (media: quote('(max-width:' + map-get($grid, media) + ')')));
+		}
 
-	@include grid-media($grid) {
-		@content;
+		@include grid-media($grid) {
+			@content;
+		}
 	}
 }
 
