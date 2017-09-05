@@ -13,7 +13,7 @@
 
     // Internal Dependencies
 	import {addEvent} from '../helpers/events';
-	import {toggleClass, parent} from '../helpers/dom';
+	import {removeClass, parent} from '../helpers/dom';
 
     export default {
         name: 'KsSideNav',
@@ -39,7 +39,7 @@
 
             if ( $element != null ) {
                 addEvent($element, 'click', function (e) {
-                    toggleClass(parent(this, '.side-nav'), 'show');
+                    removeClass(parent(this, '.side-nav'), 'show');
                 });
             }
 		},
@@ -47,12 +47,6 @@
 		methods: {
 	  		showLinks() {
 				this.classObj.show = !this.classObj.show;
-			}
-		},
-
-		watch: {
-			'classObj.show'(val) {
-
 			}
 		},
 
