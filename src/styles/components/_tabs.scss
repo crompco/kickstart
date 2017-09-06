@@ -1,14 +1,72 @@
 @import "../functions/_utils";
 @import "../mixins/_animation";
 @import "../variables/_tabs";
+@import "../mixins/_grid";
+@import "../mixins/shapes";
+@import "../mixins/utils";
 
 .ks-tabs {
+
+	.tabs-title-bar-wrapper {
+		position: relative;
+		height: rem($tabs-height);
+
+		@include tab(true) {
+			&:after {
+				content: '';
+				position: absolute;
+				right: rem(0.8rem);
+				@include v-center();
+			}
+
+			.tabs-title-bar li.selected-tab a {
+				border-top-color: $tabs-links-border-top-color;
+			}
+			&:not(.show) {
+				&:after {
+					@include triangle-down($color: #444, $size: 10px);
+				}
+			}
+			&.show {
+				&:after {
+					z-index: 201;
+					@include triangle($color: #444, $size: 10px, $direction: 'up');
+				}
+				.tabs-title-bar {
+					z-index: 100;
+
+					li {
+						&:first-child a {
+							border-top-color: $tabs-links-border-top-color;
+						}
+						&:not(.selected-tab) {
+							display: flex;
+						}
+						&.selected-tab:not(:first-child) a {
+							border-top-color: transparent;
+						}
+					}
+				}
+			}
+		}
+	}
 
 	.tabs-title-bar {
 		padding: 0;
 		margin: 0;
 		list-style: none;
 		display: flex;
+
+		position: absolute;
+		flex-direction: column;
+		width: 100%;
+
+		@include tab() {
+			position: relative;
+			flex-direction: row;
+			width: auto;
+
+		}
 
 		li {
 			display: flex;
@@ -23,7 +81,6 @@
 			a {
 				display: flex;
 				align-items: center;
-				justify-content: center;
 				text-decoration: none;
 				color: $tabs-inactive-color;
 				font-size: rem($tabs-font-size);
@@ -33,11 +90,16 @@
 				height: rem($tabs-height);
 				min-width: rem($tabs-min-width);
 				background-color: $tabs-bg;
-				opacity: $tabs-opacity;
+				flex-grow: 1;
 				@include transition();
 
 				&:hover {
 					opacity: 1;
+				}
+
+				@include tab() {
+					flex-grow: 0;
+					opacity: $tabs-opacity;
 				}
 			}
 
@@ -47,8 +109,17 @@
 				a {
 					background-color: $tabs-links-bg;
 					color: $tabs-links-color;
-					border-top-color: $tabs-links-border-top-color;
 					opacity: 1;
+
+					@include tab() {
+						border-top-color: $tabs-links-border-top-color;
+					}
+				}
+			}
+
+			@include tab(true) {
+				&:not(.selected-tab) {
+					display: none;
 				}
 			}
 		}

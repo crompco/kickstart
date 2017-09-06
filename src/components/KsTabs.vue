@@ -1,14 +1,16 @@
 <template>
     <div class="ks-tabs">
-        <ul class="tabs-title-bar" :class="classObj">
-            <li v-for="tab in tabs" :class="{'selected-tab': tab.active}">
-                <a :href="'#' + tab.title"
-                   @click.prevent="setActiveTab(tab)"
-                >
-                    {{tab.title}}
-                </a>
-            </li>
-        </ul>
+        <div class="tabs-title-bar-wrapper" :class="classWrapperObj">
+            <ul class="tabs-title-bar" :class="classObj">
+                <li v-for="tab in tabs" :class="{'selected-tab': tab.active}">
+                    <a :href="'#' + tab.title"
+                       @click.prevent="setActiveTab(tab)"
+                    >
+                        {{tab.title}}
+                    </a>
+                </li>
+            </ul>
+        </div>
         <div class="tabs-content">
             <slot></slot>
         </div>
@@ -55,6 +57,9 @@
                     "title-right": this.align === 'right',
                     "title-center": this.align === 'center',
                     "title-left": this.align === 'left'
+                },
+                classWrapperObj: {
+                    'show': false
                 }
             };
         },
@@ -93,10 +98,27 @@
                 this.activeTab = tab.title;
                 tab.setActive(true);
                 this.$emit('tab-changed', tab.title);
+                this.mobileShow();
                 if ( this.hasTabCacheEnabled ) {
                     sessionStorage.setItem('ks-tabs.' + this.id, tab.title);
                 }
-            }
+            },
+
+            mobileShow() {
+                let tabs = this.$el.querySelectorAll('.tabs-title-bar li:not(.selected-tab)');
+
+                if ( tabs.length > 0 ) {
+                    let visible = true;
+                    for ( let tab of tabs ) {
+                        if ( !(tab.offsetHeight || tab.offsetHeight || tab.getClientRects().length) ) {
+                            visible = false;
+                            break;
+                        }
+                    }
+
+                    this.classWrapperObj.show = visible == false;
+                }
+            },
         },
 
         watch: {},
