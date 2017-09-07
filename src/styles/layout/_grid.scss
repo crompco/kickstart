@@ -27,7 +27,12 @@
                     @include grid-column($i, $map);
                 }
             }
+        }
+    }
 
+
+    @include breakpoint($map) {
+        @for $i from 1 through map-get($map, columns) {
             .#{$name}-push-#{$i} {
                 @include grid-push($i, $map);
             }
