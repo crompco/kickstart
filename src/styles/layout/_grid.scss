@@ -8,10 +8,6 @@
 @each $name, $map in $breakpoint-list {
     @include breakpoint($map) {
         @for $i from 1 through map-get($map, columns) {
-            .#{$name}-push-#{$i} {
-                @include grid-push($i, $map);
-            }
-
             $columns: map-get($map, columns);
 
             @if $i / $columns == 0.5 {
@@ -30,6 +26,10 @@
                 .#{$name}-#{$i} {
                     @include grid-column($i, $map);
                 }
+            }
+
+            .#{$name}-push-#{$i} {
+                @include grid-push($i, $map);
             }
         }
     }
