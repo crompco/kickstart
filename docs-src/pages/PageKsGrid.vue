@@ -29,10 +29,18 @@
                         <td>.lg-</td>
                         <td>.xlg-</td>
                     </tr>
-                <tr>
-                    <th>Gutter</th>
-                    <td colspan="5">1rem</td>
-                </tr>
+                    <tr>
+                        <th>Push</th>
+                        <td>.sm-push-</td>
+                        <td>.tab-push-</td>
+                        <td>.med-push-</td>
+                        <td>.lg-push-</td>
+                        <td>.xlg-push-</td>
+                    </tr>
+                    <tr>
+                        <th>Gutter</th>
+                        <td colspan="5">1rem</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -142,7 +150,7 @@
             <div class="col tab-6" style="background:#fff;padding:1rem;">
                 Here is col 2 of tab grid
             </div>
-            <div class="col tab-6 tab-push-2">I am pushed over 2 columns in tab</div>
+            <div class="col tab-6 tab-push-2">I am pushed over 2 columns above tab breakpoint</div>
         </div>
         <div>
             <code-block v-pre>
