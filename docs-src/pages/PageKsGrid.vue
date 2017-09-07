@@ -142,6 +142,7 @@
             <div class="col tab-6" style="background:#fff;padding:1rem;">
                 Here is col 2 of tab grid
             </div>
+            <div class="col tab-6 tab-push-2">I am pushed over 2 columns in tab</div>
         </div>
         <div>
             <code-block v-pre>
