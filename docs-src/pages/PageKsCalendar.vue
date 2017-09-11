@@ -253,6 +253,7 @@
 			return {
 				date1: '',
 				date2: '',
+				date3: '',
 				bday: "2017-03-22",
                 showFormat: false
 			};

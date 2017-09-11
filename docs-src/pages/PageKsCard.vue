@@ -2,7 +2,7 @@
     <div>
         <h2>Card</h2>
         <div class="row col">
-            <div class="sm-4">
+            <div class="sm-8 tab-4">
                 <div class="ks-card">
                     <div class="card-header">
                         Foo

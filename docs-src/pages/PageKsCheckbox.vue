@@ -326,7 +326,7 @@
         mounted() {
             api.get('/countries.json').then((data) => {
                 this.checkboxGroup = data.slice(0, 7);
-                this.buttonGroup = data.slice(0, 3);
+                this.buttonGroup = data.slice(0, 5);
             });
         },
         components: {}
