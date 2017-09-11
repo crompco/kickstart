@@ -62,7 +62,7 @@
 @mixin side-nav() {
 	@include row();
 	background-color: $side-nav-bg;
-	z-index: 5;
+	z-index: 6;
 	position: relative;
 
 	// Mobile First Stuff
@@ -102,7 +102,7 @@
 
 	.nav-links {
 		background: $side-nav-bg;
-		z-index: 6;
+		z-index: 7;
 		position: absolute;
 		width: 100%;
 		left: -100%;
