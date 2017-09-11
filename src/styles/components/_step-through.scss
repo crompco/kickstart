@@ -1,8 +1,13 @@
 @import "../functions/utils";
+@import "../mixins/grid";
 @import "../variables/step-through";
 
 .steps {
-    padding: 1em 2em;
+    padding: 1rem 0;
+
+    @include tab() {
+        padding: 1rem 2rem;
+    }
     > ul {
         display: flex;
         list-style: none;
@@ -33,7 +38,9 @@
             }
 
             p {
-                color: $steps-text-color
+                color: $steps-text-color;
+                padding-right: 0.25rem;
+                padding-left: 0.25rem;
             }
 
             &.active {
