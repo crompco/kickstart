@@ -3,7 +3,7 @@
 	<ks-side-nav id="sidebar" class="vertical">
 		<div class="brand">Kickstart</div>
 		<ul class="nav-links">
-			<li v-for="route in routes">
+			<li v-for="route in sorted_routes">
 				<router-link :to="{name: route.name}">
 					{{route.name}}
 			</router-link>
@@ -29,7 +29,15 @@
 			};
 		},
 
-		computed: {},
+		computed: {
+		    sorted_routes() {
+		        return this.routes.sort((a, b) => {
+					if ( a['name'] < b['name'] ) return -1;
+					if ( a['name'] > b['name'] ) return 1;
+					return 0;
+				});
+			}
+		},
 
 		mounted() {
 
