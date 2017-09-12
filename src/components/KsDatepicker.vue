@@ -143,6 +143,13 @@
 					this.is_open = false;
 				}
 			},
+            is_open() {
+			    // Reset the calendar when the datepicker is closed
+			    if ( !this.is_open ) {
+                    this.$refs.calendar.closeMonth();
+                    this.$refs.calendar.closeYear();
+                }
+            },
 			value_date() {
 			    this.calendar_date = this.value_date;
 			},
