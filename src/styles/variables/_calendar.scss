@@ -32,6 +32,10 @@ $calendar-month-hover-color: $state-default-bg !default;
 $calendar-month-hover-background: lighten($gray, 10%) !default;
 $calendar-month-border-color: lighten(get($brand, lighter), 15%) !default;
 
+// Selected Month
+$calendar-month-selected-color: $state-default-color;
+$calendar-month-selected-bg: $state-default-bg;
+
 // Inactive/Out of Scope colors
 $calendar-inactive-day-color: $med-gray !default;
 $calendar-inactive-day-background: $lighter-gray !default;

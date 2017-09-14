@@ -204,6 +204,12 @@ $calendar-grid: (
                     color: $calendar-month-hover-color;
                 }
             }
+            &.selected-month {
+                > div {
+                    color: $calendar-month-selected-color;
+                }
+                background: $calendar-month-selected-bg;
+            }
         }
     }
 
