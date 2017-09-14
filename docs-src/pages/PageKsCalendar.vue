@@ -36,11 +36,13 @@
 		</div>
 
         <div class="basic-block">
-            <h3>Interactive Days</h3>
+            <h3>Interactive Days and month+year picker</h3>
             <ks-calendar
                 v-model="date3"
                 week-height="80px"
                 :interactive-days="true"
+                :year-picker="true"
+                :month-picker="true"
             >
                 <div :slot="'2017-09-22'">
                     <strong>Patty's Birthday</strong>

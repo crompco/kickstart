@@ -82,7 +82,7 @@
                     </div>
                 </div>
             </div>
-            <div v-show="monthPickerOpen" class="month-selection">
+            <div v-show="monthPickerOpen" class="month-selection" :style="selectorStyle">
                 <div
                     v-for="(m, index) in lang.months.names"
                     :class="{ 'selected-month': m == month}"
@@ -93,7 +93,7 @@
                     <div>{{m}}</div>
                 </div>
             </div>
-            <div v-show="yearPickerOpen">
+            <div v-show="yearPickerOpen" :style="selectorStyle">
                 <ul class="year-selection">
                     <li
                         v-for="y in year_list"
@@ -172,6 +172,10 @@
                 default: "Y-m-d"
             },
             weekHeight: {
+                type: String,
+                default: 'auto'
+            },
+            selectorHeight: {
                 type: String,
                 default: 'auto'
             },
@@ -323,6 +327,17 @@
             },
             today() {
                 return this.formatDate(new Date());
+            },
+            selectorStyle() {
+                let style = '';
+                if ( this.selectorHeight != 'auto' ) {
+                    style = 'height: ' + this.selectorHeight;
+                } else if ( this.weekHeight != 'auto' ) {
+                    let unit = this.weekHeight.replace(/\d+/, '');
+                    let height = parseFloat(this.weekHeight.replace(/(px|rem|em|pt)/, '')) * this.weeks.length + 82;
+                    style = 'height: ' + height + unit + ';';
+                }
+                return style;
             }
         },
 
