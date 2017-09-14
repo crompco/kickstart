@@ -91,6 +91,7 @@
 						<th>Fourth</th>
 						<th>Fifth</th>
 						<th>Sixth</th>
+						<th></th>
 					</tr>
 					</thead>
 					<tbody>
@@ -101,6 +102,14 @@
 						<td data-title="Fourth">Lorem</td>
 						<td data-title="Fifth">Lorem ipsum dolor sit amet</td>
 						<td data-title="Sixth">Lorem ipsum dolor sit amet</td>
+						<td>
+							<ks-action-menu>
+								<a href="#" @click.prevent="action('New')" class="list-item">New</a>
+								<a href="#" @click.prevent="action('Add')" class="list-item">Add</a>
+								<a href="#" @click.prevent="action('Edit')" class="list-item disabled">Edit</a>
+								<a href="#" @click.prevent="action('Delete')" class="list-item separator danger">Delete Class Link</a>
+							</ks-action-menu>
+						</td>
 					</tr>
 					<tr>
 						<td data-title="First">10</td>
@@ -109,6 +118,14 @@
 						<td data-title="Fourth">Lorem</td>
 						<td data-title="Fifth">Lorem ipsum dolor sit amet</td>
 						<td data-title="Sixth">Lorem ipsum dolor sit amet</td>
+						<td>
+							<ks-action-menu>
+								<a href="#" @click.prevent="action('New')" class="list-item">New</a>
+								<a href="#" @click.prevent="action('Add')" class="list-item">Add</a>
+								<a href="#" @click.prevent="action('Edit')" class="list-item disabled">Edit</a>
+								<a href="#" @click.prevent="action('Delete')" class="list-item separator danger">Delete Class Link</a>
+							</ks-action-menu>
+						</td>
 					</tr>
 					<tr>
 						<td data-title="First">10</td>
@@ -117,6 +134,14 @@
 						<td data-title="Fourth">Lorem</td>
 						<td data-title="Fifth">Lorem ipsum dolor sit amet</td>
 						<td data-title="Sixth">Lorem ipsum dolor sit amet</td>
+						<td>
+							<ks-action-menu>
+								<a href="#" @click.prevent="action('New')" class="list-item">New</a>
+								<a href="#" @click.prevent="action('Add')" class="list-item">Add</a>
+								<a href="#" @click.prevent="action('Edit')" class="list-item disabled">Edit</a>
+								<a href="#" @click.prevent="action('Delete')" class="list-item separator danger">Delete Class Link</a>
+							</ks-action-menu>
+						</td>
 					</tr>
 					<tr>
 						<td data-title="First">10</td>
@@ -125,6 +150,14 @@
 						<td data-title="Fourth">Lorem</td>
 						<td data-title="Fifth">Lorem ipsum dolor sit amet</td>
 						<td data-title="Sixth">Lorem ipsum dolor sit amet</td>
+						<td>
+							<ks-action-menu>
+								<a href="#" @click.prevent="action('New')" class="list-item">New</a>
+								<a href="#" @click.prevent="action('Add')" class="list-item">Add</a>
+								<a href="#" @click.prevent="action('Edit')" class="list-item disabled">Edit</a>
+								<a href="#" @click.prevent="action('Delete')" class="list-item separator danger">Delete Class Link</a>
+							</ks-action-menu>
+						</td>
 					</tr>
 					</tbody>
 				</table>
@@ -396,8 +429,13 @@
     // External Dependencies
 
     // Internal Dependencies
+	import KsActionMenu from '../../../src/components/KsActionMenu.vue';
 
     export default {
-        name: 'Tables'
+        name: 'Tables',
+
+		components: {
+            KsActionMenu
+		}
     }
 </script>
