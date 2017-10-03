@@ -19,14 +19,14 @@
             </code-block>
 		</div>
 		<div class="basic-block">
-			<h3>Custom Week Start</h3>
+			<h3>Custom Week Start without controls</h3>
 			<ks-calendar
 				v-model="date2"
 				week-start="1"
 			    week-height="80px"
+                :show-controls="false"
 			></ks-calendar>
-
-            <code-block>
+            <code-block v-pre>
                 &lt;ks-calendar
                     v-model="date2"
                     week-start="1"
@@ -149,6 +149,14 @@
 							<td><pre>false</pre></td>
 							<td>Whether to allow the user to use the month picker. This makes the month in the header interactive</td>
 						</tr>
+                        <tr>
+                            <td>showControls</td>
+                            <td><pre>Boolean</pre></td>
+                            <td><pre>true</pre></td>
+                            <td>
+                                Whether to show the left and right navigation in the header
+                            </td>
+                        </tr>
 					</tbody>
 				</table>
 			</ks-tab>

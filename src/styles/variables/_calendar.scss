@@ -11,7 +11,7 @@ $calendar-header-padding: 0.5rem !default;
 $calendar-week-header-color: darken($gray, 10%) !default;
 
 // Day
-$calendar-day-border-color: $gray !default;
+$calendar-day-border-color: lighten($gray, 5%) !default;
 $calendar-today-color: get($brand, primary) !default;
 
 // Controls

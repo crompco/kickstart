@@ -24,6 +24,8 @@
 				:interactive="true"
                 :min-date="minDate"
                 :max-date="maxDate"
+                selector-height="auto"
+                :week-height="'2rem'"
 			    @select="selectDay"
 			></ks-calendar>
 		</div>
@@ -111,7 +113,6 @@
 
 		methods: {
 			selectDay(day) {
-			    console.log(day);
 				this.$emit('input', formatDate(day, this.dateFormat));
 				this.is_open = false;
 			},
