@@ -31,6 +31,7 @@
                     v-model="date2"
                     week-start="1"
                     week-height="80px"
+                    :show-controls="false"
                 >&lt;/ks-calendar>
             </code-block>
 		</div>
@@ -44,8 +45,8 @@
                 :year-picker="true"
                 :month-picker="true"
             >
-                <div :slot="'2017-09-22'">
-                    <strong>Patty's Birthday</strong>
+                <div :slot="bday">
+                    <strong>Today is special</strong>
                 </div>
             </ks-calendar>
 
@@ -53,8 +54,14 @@
                 &lt;ks-calendar
                     v-model="date3"
                     week-height="80px"
+                    :year-picker="true"
+                    :month-picker="true"
                     :interactive-days="true"
-                >&lt;/ks-calendar>
+                >
+                    &lt;div :slot="bday">
+                        &lt;strong>Today is special&lt;/strong>
+                    &lt;/div>
+                &lt;/ks-calendar>
             </code-block>
         </div>
 
@@ -253,6 +260,7 @@
 
 <script>
 	import KsCalendar from '../../src/components/KsCalendar';
+	import {formatDate} from '../../src/helpers/dates';
 
 	export default {
 		name: 'PageKsCalendar',
@@ -264,7 +272,7 @@
 				date1: '',
 				date2: '',
 				date3: '',
-				bday: "2017-03-22",
+				bday: formatDate(new Date(), 'Y-m-d'),
                 showFormat: false
 			};
 		},
