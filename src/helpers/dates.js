@@ -103,8 +103,8 @@ export function formatDate(date, format = 'Y-m-d', parse_format = format) {
 	if ( !(date instanceof Date) ) {
 		date = parseDate(date, parse_format);
 	}
-	let year = date.getFullYear();
-	let month = date.getMonth() + 1;
+	let year = date.getUTCFullYear();
+	let month = date.getUTCMonth() + 1;
 	let day = date.getUTCDate();
 
 	month = pad_left(month, '0', 2);
