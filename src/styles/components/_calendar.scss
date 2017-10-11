@@ -19,11 +19,12 @@ $calendar-grid: (
 		color: $calendar-header-color;
 		padding: rem($calendar-header-padding);
 		text-align: center;
+        font-size: 1.1rem;
 		a {
-			font-size: 1.2em;
-			color: white;
+			font-size: 1rem;
+			color: $calendar-header-color;
 			text-decoration: none;
-            padding: 0.4em;
+            padding: 0.25rem;
             &.open-picker {
                 @include state-default();
             }
@@ -31,8 +32,8 @@ $calendar-grid: (
 				vertical-align: bottom;
 				display: inline-block;
 				color: $calendar-header-color;
-				height: 1em;
-				width: 1em;
+				height: 1rem;
+				width: 1rem;
 				path {
 					fill: $calendar-header-color;
 				}
@@ -79,17 +80,28 @@ $calendar-grid: (
 		}
 	}
 
-	.ks-calendar-controls {
-		background: $calendar-controls-bg;
-		line-height: 1.5rem;
+	.ks-calendar-title {
 		position: relative;
-		padding: 0.5rem;
-		text-align: center;
-		button:first-child {
+        .ctrl-left, .ctrl-right {
+            font-family: "helvetica Neue", "Helvetica", sans-serif;
+            font-size: 1rem;
+            line-height: 1.25rem;
+            display: block;
+            padding: 0.25rem;
+            top: 0.25rem;
+            width: 2rem;
+            border-radius: 50%;
+            transition: background .125s ease-in;
+
+            &:hover {
+                background: $state-default-bg;
+            }
+        }
+		.ctrl-left:first-child {
 			position: absolute;
 			left: 0.5rem;
 		}
-		button:last-child {
+		.ctrl-right:last-child {
 			position: absolute;
 			right: 0.5rem;
 		}
@@ -99,6 +111,7 @@ $calendar-grid: (
 		width: 100%;
 		padding: 0.5rem;
 		border-collapse: collapse;
+        transition: height 0.2s ease-in-out;
 
 		.cal-week:first-of-type .cal-day:first-of-type {
 			//margin-left: 42.85714%;
@@ -125,6 +138,10 @@ $calendar-grid: (
 				display: block;
 				text-align: right;
 			}
+            &.cal-blank .day-num {
+                color: #DDD;
+                cursor: pointer;
+            }
             a.day-num {
                 display: inline-block;
                 font-size: 0.9rem;
@@ -172,6 +189,7 @@ $calendar-grid: (
         width: 100%;
         height: 100%;
         overflow: hidden;
+        transition: height 0.2s ease-in-out;
         > div {
             position: relative;
             display: inline-block;
@@ -217,7 +235,8 @@ $calendar-grid: (
 		list-style: none;
 		padding: 0;
 		margin: 0;
-		li {
+        transition: height 0.2s ease-in-out;
+        li {
 			width: 100%;
 			padding: 0.25rem 0.5rem;
 			font-size: 1.2rem;

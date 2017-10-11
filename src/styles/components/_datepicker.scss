@@ -12,7 +12,7 @@
 
 	.ks-calendar-view {
 		width: 17rem;
-		height: 17.5rem;
+		//height: 15.5rem;
 	}
 
 	.ks-datepicker-cal {
@@ -22,6 +22,10 @@
 		z-index: 100;
 		.cal-week {
 			min-height: 2rem;
+            .cal-day .day-num,
+            .cal-blank .day-num {
+                text-align: center;
+            }
 		}
 	}
 }

@@ -19,18 +19,19 @@
             </code-block>
 		</div>
 		<div class="basic-block">
-			<h3>Custom Week Start</h3>
+			<h3>Custom Week Start without controls</h3>
 			<ks-calendar
 				v-model="date2"
 				week-start="1"
 			    week-height="80px"
+                :show-controls="false"
 			></ks-calendar>
-
-            <code-block>
+            <code-block v-pre>
                 &lt;ks-calendar
                     v-model="date2"
                     week-start="1"
                     week-height="80px"
+                    :show-controls="false"
                 >&lt;/ks-calendar>
             </code-block>
 		</div>
@@ -44,8 +45,8 @@
                 :year-picker="true"
                 :month-picker="true"
             >
-                <div :slot="'2017-09-22'">
-                    <strong>Patty's Birthday</strong>
+                <div :slot="bday">
+                    <strong>Today is special</strong>
                 </div>
             </ks-calendar>
 
@@ -53,8 +54,14 @@
                 &lt;ks-calendar
                     v-model="date3"
                     week-height="80px"
+                    :year-picker="true"
+                    :month-picker="true"
                     :interactive-days="true"
-                >&lt;/ks-calendar>
+                >
+                    &lt;div :slot="bday">
+                        &lt;strong>Today is special&lt;/strong>
+                    &lt;/div>
+                &lt;/ks-calendar>
             </code-block>
         </div>
 
@@ -149,6 +156,14 @@
 							<td><pre>false</pre></td>
 							<td>Whether to allow the user to use the month picker. This makes the month in the header interactive</td>
 						</tr>
+                        <tr>
+                            <td>showControls</td>
+                            <td><pre>Boolean</pre></td>
+                            <td><pre>true</pre></td>
+                            <td>
+                                Whether to show the left and right navigation in the header
+                            </td>
+                        </tr>
 					</tbody>
 				</table>
 			</ks-tab>
@@ -245,6 +260,7 @@
 
 <script>
 	import KsCalendar from '../../src/components/KsCalendar';
+	import {formatDate} from '../../src/helpers/dates';
 
 	export default {
 		name: 'PageKsCalendar',
@@ -256,7 +272,7 @@
 				date1: '',
 				date2: '',
 				date3: '',
-				bday: "2017-03-22",
+				bday: formatDate(new Date(), 'Y-m-d'),
                 showFormat: false
 			};
 		},

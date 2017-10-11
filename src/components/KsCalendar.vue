@@ -1,7 +1,12 @@
 <template>
     <div class="ks-calendar" tabindex="-1">
         <div class="ks-calendar-title">
-            <a href=""
+            <a v-if="showControls" href="#" @click.prevent="previous" class="ctrl-left" ref="previous">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 2 20 20">
+                    <path d="M7.05 9.293L6.343 10 12 15.657l1.414-1.414L9.172 10l4.242-4.243L12 4.343z"/>
+                </svg>
+            </a>
+            <a href="#"
                v-if="monthPicker"
                @click.prevent="toggleMonthPicker"
                :class="{'open-picker': monthPickerOpen }"
@@ -11,7 +16,7 @@
             </a>
             <span v-else>{{month}}</span>
 
-            <a href=""
+            <a href="#"
                v-if="yearPicker"
                @click.prevent="toggleYearPicker"
                :class="{'open-picker': yearPickerOpen }"
@@ -20,6 +25,11 @@
                 <down-svg></down-svg>
             </a>
             <span v-else>{{year}}</span>
+            <a v-if="showControls" href="#" @click.prevent="next" class="ctrl-right" ref="next">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 2 20 20">
+                    <path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"/>
+                </svg>
+            </a>
         </div>
         <div
             class="ks-calendar-view"
@@ -27,16 +37,6 @@
             ref="calendar"
         >
             <div v-show="!yearPickerOpen && !monthPickerOpen">
-                <!-- Calendar Controls -->
-                <div class="ks-calendar-controls">
-                    <button @click.prevent="previous" class="ctrl-left" ref="previous">&lt;</button>
-
-                    <span class="ctrl-label">
-			            {{month}} {{year}}
-		            </span>
-
-                    <button @click.prevent="next" class="ctrl-right" ref="next">&gt;</button>
-                </div>
 
                 <!-- Month -->
                 <div class="ks-calendar-month">
@@ -77,7 +77,22 @@
                             </div>
                         </div>
 
-                        <div v-else class="cal-blank"></div>
+                        <div v-else
+                             class="cal-blank"
+                             :class="dayClass(day)"
+                             @click.prevent="selectDay(day)"
+                        >
+                            <div v-if="showTrailingDays">
+                                <div v-if="interactiveDays" class="row row-collapse">
+                                    <a href="#" class="day-num" @click.prevent.stop="dayClicked(day)">
+                                        {{day | day}}
+                                    </a>
+                                </div>
+                                <span v-else class="day-num">
+                                    {{day | day}}
+                                </span>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
@@ -197,6 +212,14 @@
             },
             minDate: {},
             maxDate: {},
+            showTrailingDays: {
+                type: Boolean,
+                default: true
+            },
+            showControls: {
+                type: Boolean,
+                default: true
+            }
         },
 
         data() {
@@ -333,8 +356,18 @@
                 if ( this.selectorHeight != 'auto' ) {
                     style = 'height: ' + this.selectorHeight;
                 } else if ( this.weekHeight != 'auto' ) {
-                    let unit = this.weekHeight.replace(/\d+/, '');
-                    let height = parseFloat(this.weekHeight.replace(/(px|rem|em|pt)/, '')) * this.weeks.length + 82;
+                    let modifier = 42;
+                    let unit = this.weekHeight.replace(/(\.|\d)+/, '');
+                    // Depending on the measurement we need to adjust for the heading
+                    switch ( unit ) {
+                        case 'rem':
+                        case 'em':
+                            modifier = 3;
+                            break;
+                        case 'px':
+                            modifier = 42;
+                    }
+                    let height = parseFloat(this.weekHeight.replace(/(px|rem|em|pt)/, '')) * this.weeks.length + modifier;
                     style = 'height: ' + height + unit + ';';
                 }
                 return style;
@@ -343,9 +376,9 @@
 
         mounted() {
             this.$nextTick(() => {
-                mouseHold(this.$refs.next, this.next);
-                mouseHold(this.$refs.previous, this.previous);
-                console.log('mounted: ', this.isDayInScope(new Date(2017, 7, 4)));
+                if ( this.showControls ) {
+                    this.setupMouseholdListeners();
+                }
             });
         },
 
@@ -356,6 +389,14 @@
         },
 
         methods: {
+            /**
+             * Sets up the mousehold events on the left and right controls in the header
+             */
+            setupMouseholdListeners() {
+                mouseHold(this.$refs.next, this.next);
+                mouseHold(this.$refs.previous, this.previous);
+            },
+
             /**
              * Set the language info
              *
@@ -454,7 +495,6 @@
              * Select from a click on the day number
              */
             dayClicked(date) {
-                console.log('dayClicked');
                 if ( this.isDayInScope(date) ) {
                     this.$emit('select-day', this.formatDate(date));
                 }
@@ -521,6 +561,14 @@
              */
             closeYear() {
                 this.yearPickerOpen = false;
+            }
+        },
+
+        watch: {
+            showControls() {
+                if ( this.showControls ) {
+                    this.setupMouseholdListeners();
+                }
             }
         },
 
