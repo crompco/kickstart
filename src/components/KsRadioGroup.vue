@@ -11,7 +11,7 @@
 					:label="option.label"
 					:checked="value"
                     @input="selectRadio($event)"
-				></ks-radio>
+				><slot v-if="$slots[option.value]" :name="option.value"></slot></ks-radio>
 			</template>
 		</div>
 	</div>

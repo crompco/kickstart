@@ -167,7 +167,8 @@
                 label-key="name"
                 v-model="values.group2"
             >
-                Radio button groups ( button style )
+                Radio button groups ( button style ) with custom button template
+                <div slot="AF">Afghanistan Man</div>
             </ks-radio-group>
 
             <code-block v-pre>
@@ -181,6 +182,7 @@
                     v-model="values.group2"
                 >
                     Radio button groups ( button style )
+                    &lt;div slot="AF">Afghanistan Man&lt;/div>
                 &lt;/ks-radio-group>
             </code-block>
         </div>
