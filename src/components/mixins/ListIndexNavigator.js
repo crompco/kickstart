@@ -347,12 +347,13 @@ export default {
         /**
          * Emits the search event with the given lookup name and attaches the new results
          *
+         * @param term
          * @param concat
          */
-        runSearch(concat = false) {
+        runSearch(term, concat = false) {
             // See if we can process the request from our cache
             if ( this.cacheResults ) {
-                let cached_list = this.findCache(this.lookup_name, this.page)
+                let cached_list = this.findCache(term, this.page)
                 if ( cached_list ) {
                     this.callback(cached_list, false, concat);
                     return;
@@ -360,7 +361,6 @@ export default {
             }
 
             this.loading = true;
-            let term = this.lookup_name;
             let page = this.page;
             this.$emit('search', {
                 term,
@@ -465,11 +465,13 @@ export default {
                 clearTimeout(this.timer);
             }
 
+            // Store the current lookup name for the search
+            let term = this.lookup_name;
             this.timer = setTimeout(() => {
                 // Reset page since the search term has changed
                 this.page = 1;
                 this.last_page = null;
-                this.runSearch();
+                this.runSearch(term);
             }, this.delay);
         },
 
@@ -530,7 +532,7 @@ export default {
             if ( this.paginated && this.last_index - this.paginateThreshold <= index ) {
                 if ( !this.list_exhausted ) {
                     this.page++;
-                    this.runSearch(true)
+                    this.runSearch(this.lookup_name, true)
                 }
             }
         },
