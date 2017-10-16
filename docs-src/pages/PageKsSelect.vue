@@ -109,13 +109,39 @@
                 <div class="label">Disabled Select</div>
                 <ks-select name="foo" :disabled="true" label-key="foo"></ks-select>
             </div>
+            <code-block v-pre>
+                &lt;ks-select name="foo" :disabled="true" label-key="foo">&lt;/ks-select>
+            </code-block>
+
+            <div class="form-group">
+                <div class="label">Forced value binding</div>
+                <ks-select
+                    name="code"
+                    :items="countries"
+                    label-key="name"
+                    v-model="forced_value"
+                    :force-values="true"
+                ></ks-select>
+                <pre v-if="forced_value === null"><strong>Value:</strong> NULL</pre>
+                <pre v-else><strong>Value:</strong> {{forced_value}}</pre>
+                <code-block v-pre>
+                    &lt;ks-select
+                        name="code"
+                        :items="countries"
+                        label-key="name"
+                        v-model="forced_value"
+                        :force-values="true"
+                    >&lt;/ks-select>
+                </code-block>
+            </div>
         </div>
         <div class="alert warning">
             <strong>Warning v-model usage:</strong>
             <p>
                 When binding values the select component can handle objects or plain values. If you don't pass a value
                 (meaning value is null or undefined) then the component will bind the value to an object. If you want to force
-                the component to bind only the key value then you should make sure to bind an empty string.
+                the component to bind only the key value then you should make sure to bind an empty string or use the prop
+                <strong>forceValues</strong>.
             </p>
         </div>
         <div class="alert info">
@@ -266,6 +292,26 @@
                             </td>
                             <td>
                                 Allows users to deselect a selected option.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>disabled</td>
+                            <td>Boolean</td>
+                            <td>
+                                <pre>false</pre>
+                            </td>
+                            <td>
+                                Disables the select
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>forceValues</td>
+                            <td>Boolean</td>
+                            <td>
+                                <pre>false</pre>
+                            </td>
+                            <td>
+                                When set to true the v-model will bind to the value key instead of the entire object.
                             </td>
                         </tr>
                         <tr>
@@ -492,6 +538,7 @@
                 country_code2: 'AW',
                 country_code3: '',
                 character: '',
+                forced_value: null,
                 short_countries: [
                     {
                         name: 'USA',

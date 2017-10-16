@@ -134,6 +134,14 @@
             disabled: {
 			    type: Boolean,
                 default: false
+            },
+            forceValues: {
+			    type: Boolean,
+                default: false,
+            },
+            forceObjects: {
+			    type: Boolean,
+                default: false,
             }
 		},
 
@@ -158,9 +166,13 @@
 			},
 
 			binds_objects() {
+			    if ( this.forceValues ) {
+			        return false;
+                }
+
 				// Try to determine what type of value the consumer expects
 				// If they don't provide a value then we will assume they want objects
-				if ( null === this.value || typeof this.value === "undefined" ) {
+				if ( this.forceObjects || null === this.value || typeof this.value === "undefined" ) {
 					return true;
 				}
 
