@@ -261,7 +261,7 @@
                             <td>itemFilter</td>
                             <td>Function, String</td>
                             <td>
-                                <pre>labelKey</pre>
+                                <pre>selectionKey</pre>
                             </td>
                             <td>
                                 When a function is provided it will be used when filtering results from the search box.
