@@ -115,6 +115,31 @@ export function formatDate(date, format = 'Y-m-d', parse_format = format) {
 
 /**
  *
+ * @param time
+ * @param to_format
+ * @return {string}
+ */
+export function formatTime(time, to_format = 'h:i a') {
+    time = time.replace(/\s/g, '');
+    let timeSplit = time.split(':');
+
+    let hour = parseInt(timeSplit[0]);
+    let min = timeSplit[1];
+    let meridiem = hour >= 12 ? 'pm' : 'am';
+    if ( hour == 0 ) {
+        hour = 12;
+    } else if ( hour > 12 ) {
+        hour -= 12;
+    }
+
+    return to_format
+        .replace('h', hour)
+        .replace('i', min)
+        .replace('a', meridiem);
+}
+
+/**
+ *
  * @param date
  * @param format
  * @return {Date|*}
@@ -201,5 +226,6 @@ export default {
 	addDays,
 	addMonths,
 	formatDate,
+    formatTime,
 	parseDate,
 }

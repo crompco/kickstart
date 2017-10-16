@@ -101,3 +101,10 @@ test('dates:formatDate', t => {
 	t.is(d1.getTime(), new Date(2017, 0, 31).getTime());
 	t.is(d2.getTime(), new Date(2017, 0, 31).getTime());
 });
+
+test('dates:formatTime', t => {
+    t.is('1:00 pm', dates.formatTime('13:00:00'));
+    t.is('12:00 am', dates.formatTime('00:00:00'));
+    t.is('12:30', dates.formatTime('12:30:00', 'h:i'));
+    t.is('pm 12:30', dates.formatTime('12:30:00', 'a h:i'));
+});
