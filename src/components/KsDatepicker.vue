@@ -101,7 +101,6 @@
 		},
 
 		mounted() {
-
 			this.$nextTick(() => {
 				smartFocusToggle(this.$el, (focus, e) => {
 					this.focused = focus;
@@ -175,7 +174,11 @@
 			            return;
                     }
 
-                    this.$emit('input', formatDate(this.input_date, this.dateFormat, this.displayFormat));
+                    // Make sure we aren't emitting a duplicate. On initial load when we set the value this can happen
+                    let new_date = formatDate(this.input_date, this.dateFormat, this.displayFormat);
+                    if ( this.value_date != new_date ) {
+                        this.$emit('input', new_date);
+                    }
 				}
 			}
 		},
