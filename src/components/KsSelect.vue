@@ -184,7 +184,7 @@
 					return false;
 				}
 
-				if ( !this.items ) {
+				if ( !this.items || this.paginated ) {
 					return true;
 				}
 
