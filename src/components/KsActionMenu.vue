@@ -189,9 +189,7 @@
             },
 
             destroyActionMenu() {
-                let menus = document.body.querySelectorAll('.ks-menu-list');
-
-                menus.forEach(menu => menu.remove());
+                this.$refs.menuList.remove();
 
                 this.active = false;
                 if ( this.tether !== false ) {
