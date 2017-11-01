@@ -179,7 +179,10 @@
                     if ( this.value_date != new_date ) {
                         this.$emit('input', new_date);
                     }
-				}
+				} else if ( this.input_date.length == '0' ) {
+			        // clear
+                    this.$emit('input', '');
+                }
 			}
 		},
 
