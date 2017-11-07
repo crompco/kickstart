@@ -115,6 +115,14 @@
                                     If set true the checkbox will be displayed inline
                                 </td>
                             </tr>
+                            <tr>
+                                <td>switchStyle</td>
+                                <td><pre>Boolean</pre></td>
+                                <td><pre>false</pre></td>
+                                <td>
+                                    If set to true the checkbox will use a switch style instead of a check
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </ks-tab>
