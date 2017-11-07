@@ -7,9 +7,12 @@
             :checked="isChecked"
             @click="toggle"
         >
-        <div class="ks-checkbox-input-wrapper">
-            <checkmark v-show="isChecked"></checkmark>
-        </div>
+        <div class="ks-checkbox-switch" v-if="switchStyle"></div>
+        <template v-else>
+            <div class="ks-checkbox-input-wrapper">
+                <checkmark v-show="isChecked"></checkmark>
+            </div>
+        </template>
         <div class="ks-checkbox-label-wrapper">
             <slot>{{label}}</slot>
         </div>
@@ -36,6 +39,11 @@
             name: String,
             label: String,
             value: {},
+            switchStyle: {
+                type: Boolean,
+                default: false,
+            },
+
             checked: {
                 type: [String, Array, Boolean, Number]
             },
@@ -59,6 +67,7 @@
             classStates() {
                 return {
                     "ks-state-active": this.isChecked,
+                    "switch": this.switchStyle,
                     "inline": this.inline
                 }
             }
