@@ -90,6 +90,10 @@
     $map: map-get($breakpoint-list, $name);
     // Hide breakpoints
     @if $i == 1 {
+        @if map-get($map, 'media') == null {
+            $map: map-get($breakpoint-list, nth($keys, $i + 1));
+        }
+
         @include breakpoint($map, true) {
             .#{$name}-hide {
                 display: none;
