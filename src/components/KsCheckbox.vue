@@ -47,12 +47,18 @@
             checked: {
                 type: [String, Array, Boolean, Number]
             },
+
             disabled: {
                 type: Boolean,
                 default: false
             },
+
             inline: {
                 type: Boolean,
+                default: false
+            },
+
+            falseValue: {
                 default: false
             }
         },
@@ -103,7 +109,7 @@
                         return checked;
                     }
                 } else {
-                    return false;
+                    return this.falseValue;
                 }
             },
             addValue(checked) {
