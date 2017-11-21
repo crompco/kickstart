@@ -4,7 +4,7 @@
 		<div class="content">
 			<ks-top-nav :has-sidebar="true" :fixed="true">
 				<div class="collapse">
-					<div class="form-group">
+					<div class="form-group" v-show="false">
 						<input type="text">
 
 						<button class="button none">Search</button>
