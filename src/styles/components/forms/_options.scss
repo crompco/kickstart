@@ -2,7 +2,7 @@
 @import "../../variables/_forms";
 
 .ks-checkbox, .ks-radio {
-	display: inline-flex;
+	display: flex;
 	align-items: center;
 	margin-bottom: rem($form-options-margin-bottom);
     user-select: none;
