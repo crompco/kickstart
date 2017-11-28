@@ -17,6 +17,7 @@ import PageKsAccordion from './pages/PageKsAccordion.vue';
 import PageKsRadio from './pages/PageKsRadio.vue';
 import PageKsCheckbox from './pages/PageKsCheckbox.vue';
 import PageKsTable from './pages/PageKsTable.vue';
+import PageKsButton from './pages/PageKsButton.vue';
 
 const routes = [
     {
@@ -29,6 +30,12 @@ const routes = [
         component: PageKsAutocomplete,
         name: 'KsAutocomplete',
         meta: {title: 'Kickstart Autocomplete'}
+    },
+    {
+        path: '/ks-button',
+        component: PageKsButton,
+        name: 'KsButton',
+        meta: {title: 'Kickstart Button'}
     },
     {
         path: '/ks-tabs',

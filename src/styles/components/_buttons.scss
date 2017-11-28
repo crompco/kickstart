@@ -22,7 +22,7 @@
 		@include state-hover;
 	}
 
-	&.disabled {
+	&.disabled, &:disabled {
 		@include disable;
 	}
 
@@ -30,6 +30,12 @@
         @include state-danger;
         &:hover {
             @include state-danger-hover();
+        }
+    }
+
+    &.spinning {
+        .ks-spin-loading {
+            border-top-color: darken($state-default-bg, 10%);
         }
     }
 
@@ -45,6 +51,13 @@
 				box-shadow: get($map, box-shadow);
 			}
 
+            &.spinning {
+                .ks-spin-loading {
+                    border-color: get($map, border-color);
+                    border-top-color: $bg-color;
+                }
+            }
+
 			&:hover:not(.disabled) {
 				border: 1px solid get($map, border-color);
 				background-color: darken($bg-color, 4%);
@@ -56,6 +69,12 @@
 				color: get($map, danger-color);
 				background-color: get($map, danger-bg);
 
+                &.spinning {
+                    .ks-spin-loading {
+                        border-color: get($map, danger-border-color);
+                        border-top-color: get($map, danger-bg);
+                    }
+                }
 
 				&:hover:not(.disabled) {
 					border-color: darken(get($map, danger-border-color), 12%);

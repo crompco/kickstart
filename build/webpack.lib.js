@@ -28,6 +28,7 @@ const config = {
         KsStepThrough: ['./src/components/KsStepThrough.vue'],
         KsAccordion: ['./src/components/KsAccordion'],
         KsAccordionRow: ['./src/components/KsAccordionRow'],
+        KsButton: ['./src/components/KsButton'],
         // Helpers
         api: ['./src/helpers/api.js'],
         strings: ['./src/helpers/strings.js'],

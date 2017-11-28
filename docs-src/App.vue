@@ -40,7 +40,7 @@
 		data() {
 			return {
 				showSidebar: false,
-				description: 'Foo'
+				description: 'Kickstart UI'
 			};
 		},
 

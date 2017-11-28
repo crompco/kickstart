@@ -16,42 +16,47 @@
 				default: false
 			},
             height: {
-			    type: String,
+                type: String,
+                default: 'auto'
+            },
+            width: {
+                type: String,
                 default: 'auto'
             },
             size: {
-			    type: String,
+                type: String,
                 default: null
             },
             color: {
-			    type: String,
+                type: String,
                 default: null
             },
             bg: {
-			    type: String,
+                type: String,
                 default: null
             }
 		},
 
 		computed: {
-		    wrapperStyle() {
-		        return {
-		            height: this.height,
+            wrapperStyle() {
+                return {
+                    height: this.height,
+                    width: this.width
                 }
             },
             spinnerStyle() {
-		        let style = "";
-		        if ( this.bg ) {
-		            style += `border-color: ${this.bg};`;
+                let style = "";
+                if ( this.bg ) {
+                    style += `border-color: ${this.bg};`;
                 }
-		        if ( this.color ) {
-		            style += `border-top-color: ${this.color}`;
+                if ( this.color ) {
+                    style += `border-top-color: ${this.color}`;
                 }
 
                 return style;
             },
             spinnerBlockStyle() {
-		        let style = '';
+                let style = '';
 
                 if ( this.height && this.height != 'auto' ) {
                     style += `position: absolute; top: 50%;` +
