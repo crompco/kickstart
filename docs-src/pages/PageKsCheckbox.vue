@@ -2,27 +2,31 @@
     <div>
         <h2>Checkbox Buttons</h2>
         <div class="basic-block">
-            <div class="form-group">
-                <div class="label">Single Checkbox</div>
-                <ks-checkbox label="Check Me" name="single" value="1" v-model="values.single"></ks-checkbox>
+            <div class="row row-collapse">
+                <div class="sm-6">
+                    <div class="form-group">
+                        <div class="label">Single Checkbox</div>
+                        <ks-checkbox label="Check Me" name="single" value="1" v-model="values.single" :switch-style="true"></ks-checkbox>
+                    </div>
+                    <code-block v-pre>
+                        &lt;ks-checkbox label="Check Me" name="single" value="1" v-model="values.single" :switch-style="true">&lt;/ks-checkbox>
+                    </code-block>
+                </div>
+                <div class="sm-6">
+                    <div class="form-group">
+                        <div class="label">Checkbox buttons</div>
+                        <ks-checkbox label="PHP" name="checkbox1" value="1" v-model="values.checkbox1"></ks-checkbox>
+                        <ks-checkbox label="JavaScript" name="checkbox1" value="2" v-model="values.checkbox1"></ks-checkbox>
+                    </div>
+                    <code-block v-pre>
+                        &lt;div class="form-group">
+                            &lt;div class="label">Checkbox buttons&lt;/div>
+                            &lt;ks-checkbox label="PHP" name="checkbox1" value="1" v-model="values.checkbox1">&lt;/ks-checkbox>
+                            &lt;ks-checkbox label="JavaScript" name="checkbox1" value="2" v-model="values.checkbox1">&lt;/ks-checkbox>
+                        &lt;/div>
+                    </code-block>
+                </div>
             </div>
-            <code-block v-pre>
-                &lt;ks-checkbox label="Check Me" name="single" value="1" v-model="values.single">&lt;/ks-checkbox>
-            </code-block>
-        </div>
-        <div class="basic-block">
-            <div class="form-group">
-                <div class="label">Checkbox buttons</div>
-                <ks-checkbox label="PHP" name="checkbox1" value="1" v-model="values.checkbox1"></ks-checkbox>
-                <ks-checkbox label="JavaScript" name="checkbox1" value="2" v-model="values.checkbox1"></ks-checkbox>
-            </div>
-            <code-block v-pre>
-                &lt;div class="form-group">
-                    &lt;div class="label">Checkbox buttons&lt;/div>
-                    &lt;ks-checkbox label="PHP" name="checkbox1" value="1" v-model="values.checkbox1">&lt;/ks-checkbox>
-                    &lt;ks-checkbox label="JavaScript" name="checkbox1" value="2" v-model="values.checkbox1">&lt;/ks-checkbox>
-                &lt;/div>
-            </code-block>
         </div>
         <div class="basic-block">
             <div class="form-group">
@@ -109,6 +113,14 @@
                                 <td><pre>false</pre></td>
                                 <td>
                                     If set true the checkbox will be displayed inline
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>switchStyle</td>
+                                <td><pre>Boolean</pre></td>
+                                <td><pre>false</pre></td>
+                                <td>
+                                    If set to true the checkbox will use a switch style instead of a check
                                 </td>
                             </tr>
                         </tbody>

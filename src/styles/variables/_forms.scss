@@ -53,6 +53,10 @@ $form-options-margin-right: 0.5rem !default;
 $form-radio-select-scale: 0.7 !default;
 // Checkbox
 $form-checkbox-check-fill: $white !default;
+// Checkbox switch styles
+$switch-active-color: $state-default-bg !default;
+$switch-background-color: white !default;
+
 
 // Error messages
 $form-error-color: $state-error !default;
