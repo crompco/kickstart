@@ -92,7 +92,8 @@
 			return {
 				isOpen: false,
                 isLoading: false,
-                classObj: {}
+				classObj: {},
+				updatePosition: false
 			};
 		},
 
@@ -115,6 +116,15 @@
 			});
 		},
 
+		beforeUpdate() {
+			if ( this.updatePosition && typeof this.$slots.default !== 'undefined' ) {
+				this.updatePosition = false;
+				setImmediate(() => {
+					this.positionModal();
+				});
+			}
+		},
+
 		methods: {
 			open() {
 				this.isOpen = true;
@@ -123,20 +133,11 @@
 				addClass(document.documentElement, 'modal-open');
 
                 this.$nextTick(() => {
-					let modal = this.$el.querySelectorAll('.ks-modal-wrapper');
-					let modal_height = modal[0].clientHeight;
-					let window_height = document.documentElement.clientHeight;
-					if ( modal_height > window_height ) {
-					    this.$set(this.classObj, 'modal-scroll', true);
-
-                        this.$nextTick(() => {
-                            let style = window.getComputedStyle(modal[0]);
-                            modal_height += parseFloat(style.marginTop) + parseFloat(style.marginBottom);
-                            this.$el.querySelectorAll('.ks-modal-mask')[0].style.height = `${modal_height}px`;
-						})
+					if ( typeof this.$slots.default === 'undefined' ) {
+						this.updatePosition = true;
+					} else {
+						this.positionModal();
 					}
-
-                    this.$el.scrollTop = 0;
 				});
             },
 			close() {
@@ -161,7 +162,23 @@
             loadingOff() {
                 this.isLoading = false;
                 return this;
-            }
+			},
+			positionModal() {
+				let modal = this.$el.querySelectorAll('.ks-modal-wrapper');
+				let modal_height = modal[0].clientHeight;
+				let window_height = document.documentElement.clientHeight;
+				if ( modal_height > window_height ) {
+					this.$set(this.classObj, 'modal-scroll', true);
+
+					this.$nextTick(() => {
+						let style = window.getComputedStyle(modal[0]);
+						modal_height += parseFloat(style.marginTop) + parseFloat(style.marginBottom);
+						this.$el.querySelectorAll('.ks-modal-mask')[0].style.height = `${modal_height}px`;
+					})
+				}
+
+				this.$el.scrollTop = 0;
+			}
 		},
 
         watch: {
@@ -171,7 +188,7 @@
                 } else {
                     this.loadingOff();
                 }
-            }
+			}
         },
 
 		components: {
