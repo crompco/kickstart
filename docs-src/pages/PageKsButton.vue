@@ -41,7 +41,6 @@
 
         <ks-tabs>
             <ks-tab title="Props">
-                <h3>Line</h3>
                 <table class="table striped">
                     <thead>
                         <tr>
