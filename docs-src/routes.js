@@ -18,6 +18,7 @@ import PageKsRadio from './pages/PageKsRadio.vue';
 import PageKsCheckbox from './pages/PageKsCheckbox.vue';
 import PageKsTable from './pages/PageKsTable.vue';
 import PageKsButton from './pages/PageKsButton.vue';
+import PageKsTooltip from './pages/PageKsTooltip.vue';
 
 const routes = [
     {
@@ -144,6 +145,12 @@ const routes = [
         component: PageKsTable,
         name: 'KsTable',
         meta: {title: 'Kickstart Tables'}
+    },
+    {
+        path: '/ks-tooltip',
+        component: PageKsTooltip,
+        name: 'KsTooltip',
+        meta: {title: 'Kickstart Tooltip'}
     }
 ];
 
