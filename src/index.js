@@ -85,6 +85,7 @@ const Kickstart = {
         Vue.component('ks-step-through', KsStepThrough)
 		Vue.component('ks-accordion', KsAccordion)
 		Vue.component('ks-accordion-row', KsAccordionRow)
+        Vue.component('ks-tooltip', KsTooltip)
 
 		for ( let i in animations ) {
 			Vue.component(i, animations[i]);
