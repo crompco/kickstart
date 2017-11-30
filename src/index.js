@@ -18,6 +18,7 @@ import KsActionMenu from './components/KsActionMenu.vue';
 import KsStepThrough from './components/KsStepThrough.vue';
 import KsAccordion from './components/KsAccordion.vue';
 import KsAccordionRow from './components/KsAccordionRow.vue';
+import KsTooltip from './components/KsTooltip.vue';
 import * as animations from './components/transitions/Transitions';
 import * as strings from './helpers/strings';
 
@@ -42,6 +43,7 @@ const Kickstart = {
     KsStepThrough,
     KsAccordion,
     KsAccordionRow,
+    KsTooltip,
 	install(Vue) {
         function open(propsData) {
             const Toast = Vue.extend(KsToast);
