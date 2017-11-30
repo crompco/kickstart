@@ -101,4 +101,22 @@
             }
         }
     }
+
+    &.combo-button {
+        position: relative;
+        padding-right: 2.5rem;
+        .combo-button-open {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 2rem;
+            text-align: center;
+            line-height: 2.5rem;
+            border-left: solid 2px darken($state-default-bg, 15%);
+            svg g {
+                fill: white;
+            }
+        }
+    }
  }

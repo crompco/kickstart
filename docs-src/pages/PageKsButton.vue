@@ -38,6 +38,20 @@
             </code-block>
         </div>
 
+        <div class="basic-block">
+            <h4>Combo Button</h4>
+            <div class="row row-collapse">
+                <div class="col sm-full">
+                    <ks-combo-button>
+                        Combo Button
+                        <div slot="options">
+                            <ks-button :danger="true">Delete</ks-button>
+                        </div>
+                    </ks-combo-button>
+                </div>
+            </div>
+        </div>
+
 
         <ks-tabs>
             <ks-tab title="Props">
@@ -137,6 +151,7 @@
 <script>
 
     import KsButton from '../../src/components/KsButton.vue';
+    import KsComboButton from '../../src/components/KsComboButton';
 
     export default {
         name: 'PageButton',
@@ -151,7 +166,8 @@
         },
 
         components: {
-            KsButton
+            KsButton,
+            KsComboButton
         }
     }
 </script>
