@@ -147,7 +147,7 @@
         methods: {
             show(type = 'info') {
                 this.$toast({
-                    message: `This is an ${type} toast`,
+                    message: `This is an <strong class="tiny-text">${type}</strong> toast`,
                     type: type,
                     limit: 4
                 });

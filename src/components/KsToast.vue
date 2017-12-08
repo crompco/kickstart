@@ -8,7 +8,9 @@
         leave-active-class="fadeOut">
         <div class="alert animated" :class="[type, duration === 0 ? 'has-close' : '']" v-show="active">
             <a @click.prevent="close()" class="close" v-if="duration === 0"><close></close></a>
-            {{message}}
+            <slot>
+                <span v-html="message"></span>
+            </slot>
         </div>
     </transition>
 </template>
