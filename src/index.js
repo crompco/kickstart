@@ -1,3 +1,4 @@
+import './helpers/polyfills';
 import KsAutocomplete from './components/KsAutocomplete.vue';
 import KsCalendar from './components/KsCalendar.vue';
 import KsCheckbox from './components/KsCheckbox.vue';
