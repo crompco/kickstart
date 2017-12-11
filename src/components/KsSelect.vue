@@ -33,6 +33,7 @@
 					v-model="lookup_name"
 				    :placeholder="placeholder"
 					@keyup.esc="clear"
+                    @keydown.space.stop
 					:class="{ 'is-multiple': multiple }"
 				>
 			</div>
@@ -317,7 +318,7 @@
 			blurred() {
 				this.close();
 			},
-			open() {
+			open(e) {
                 if ( this.disabled ) {
                     return false;
                 }
