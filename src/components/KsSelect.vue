@@ -8,6 +8,7 @@
         @keydown.tab="tabOpen"
         @keydown.down.prevent="openSelectDown"
         @keydown.up.prevent="openSelectUp"
+        @keydown="keyOpen"
         :disabled="disabled"
     >
 		<input type="hidden" :name="name" :value="value">
@@ -257,10 +258,10 @@
             },
 
 			toggleOpen() {
-			    if ( !this.isOpen ) {
-			        this.open();
+                if ( !this.isOpen ) {
+                    this.open();
                 } else {
-			        this.close();
+                    this.close();
                 }
 			},
             enterOpen(e) {
@@ -268,9 +269,9 @@
                     return false;
                 }
 
-			    if ( !this.isOpen ) {
-			        this.isOpen = true;
-			        return;
+                if ( !this.isOpen ) {
+                    this.isOpen = true;
+                    return;
                 }
 
                 this.selectItem(this.selected_index, e);
@@ -280,19 +281,38 @@
                     return false;
                 }
 
-			    if ( this.isOpen ) {
+                if ( this.isOpen ) {
                     this.selectItem(this.selected_index, e);
                 }
 
                 return true;
             },
             openSelectDown() {
-			    this.open();
-			    this.selectDown();
+                this.open();
+                this.selectDown();
             },
             openSelectUp() {
                 this.open();
                 this.selectUp();
+            },
+            keyOpen(e) {
+                if ( !this.isOpen && this.isTypeKey(e)) {
+                    this.open();
+                }
+            },
+            /**
+             * Determines whether the key should be handled as valid input
+             * @param e
+             * @returns {boolean}
+             */
+            isTypeKey(e) {
+                let keycode = e.keyCode;
+                return (keycode > 47 && keycode < 58)   || // number keys
+                    keycode == 32 || // spacebar
+                    (keycode > 64 && keycode < 91)   || // letter keys
+                    (keycode > 95 && keycode < 112)  || // numpad keys
+                    (keycode > 185 && keycode < 193) || // ;=,-./` (in order)
+                    (keycode > 218 && keycode < 223);   // [\]' (in order)
             },
 			blurred() {
 				this.close();
