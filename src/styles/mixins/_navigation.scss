@@ -211,28 +211,30 @@
 		width: 100%;
 		flex-direction: column;
 		display: none;
-		position: relative;
+		position: absolute;
 		background: $top-bar-bg;
+		top: $nav-height;
+
+		.nav-links, .dropdown {
+			flex-direction: column;
+			background: $top-bar-bg;
+			width: 100%;
+
+			li, a {
+				width: 100%;
+			}
+		}
 
 		@include breakpoint(map-get($breakpoint-list, $top-bar-breakpoint)) {
 			height: 100%;
 			flex-direction: row;
 			display: flex;
-		}
-
-		@include breakpoint(map-get($breakpoint-list, $top-bar-breakpoint), true) {
-			position: absolute;
-			top: $nav-height;
-			width: 100%;
+			position: relative;
+			top: 0;
 
 			.nav-links, .dropdown {
-				flex-direction: column;
-				background: $top-bar-bg;
-				width: 100%;
-
-				li, a {
-					width: 100%;
-				}
+				flex-direction: unset;
+				width: unset;
 			}
 		}
 	}
@@ -263,9 +265,10 @@
 			height: 100%;
 			display: flex;
 			align-items: center;
+			flex-direction: column;
 
-			@include breakpoint(map-get($breakpoint-list, $top-bar-breakpoint), true) {
-				flex-direction: column;
+			@include breakpoint(map-get($breakpoint-list, $top-bar-breakpoint)) {
+				flex-direction: row;
 			}
 		}
 
