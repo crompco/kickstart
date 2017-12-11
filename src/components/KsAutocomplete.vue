@@ -282,7 +282,7 @@
 			 * Returns the current selection
 			 */
 			getSelection() {
-			    return this.selection;
+                return this.selection;
 			},
 
             /**
@@ -292,7 +292,7 @@
              * @returns {*}
              */
 			getSelectionLabel(s) {
-			    if ( s instanceof Object ) {
+                if ( s instanceof Object ) {
 					return object_get(s, this.selectionKey);
 				}
 
@@ -300,12 +300,12 @@
 			},
 
             editSelection() {
-			    if ( this.lookup_name == '' && !this.is_multiple ) {
-			        this.lookup_name = this.getSelectionLabel(this.selection[0]);
-			        this.selection = [];
-			        this.$emit('input', '');
+                if ( this.lookup_name == '' && !this.is_multiple ) {
+                    this.lookup_name = this.getSelectionLabel(this.selection[0]);
+                    this.selection = [];
+                    this.$emit('input', '');
 
-			        this.$nextTick(() => {
+                    this.$nextTick(() => {
                         this.setFocus('lookup');
 					});
 				}

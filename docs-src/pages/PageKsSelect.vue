@@ -2,7 +2,6 @@
 	<div class="sm-full">
 		<h2>Select</h2>
         <div class="basic-block">
-
             <p>Autocomplete and pagination (with slots: default, label)</p>
             <div class="form-group">
                 <div class="label">
