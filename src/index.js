@@ -1,3 +1,4 @@
+import 'helpers/polyfills';
 import KsAutocomplete from './components/KsAutocomplete.vue';
 import KsCalendar from './components/KsCalendar.vue';
 import KsCheckbox from './components/KsCheckbox.vue';
@@ -21,6 +22,7 @@ import KsAccordionRow from './components/KsAccordionRow.vue';
 import KsTooltip from './components/KsTooltip.vue';
 import * as animations from './components/transitions/Transitions';
 import * as strings from './helpers/strings';
+
 
 require('./styles/app.scss');
 
