@@ -1,30 +1,31 @@
 <template>
 	<div id="app" class="kickstart-docs">
+		<ks-top-nav :has-sidebar="true" :fixed="true">
+			<div class="brand">Kickstart</div>
+			<div class="collapse">
+				<div class="form-group" v-show="false">
+					<input type="text">
+
+					<button class="button none">Search</button>
+				</div>
+				<ul class="dropdown right">
+					<li><a href="#">admin</a></li>
+					<li>
+						<a href="#" class="dropdown-toggle">jimbo.jones@email.com</a>
+						<ul class="sub-dropdown">
+							<li><a href="#">Profile</a></li>
+							<li>
+								<form action="/">
+									<button type="submit">Logout</button>
+								</form>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</ks-top-nav>
 		<sidebar></sidebar>
 		<div class="content">
-			<ks-top-nav :has-sidebar="true" :fixed="true">
-				<div class="collapse">
-					<div class="form-group" v-show="false">
-						<input type="text">
-
-						<button class="button none">Search</button>
-					</div>
-					<ul class="dropdown right">
-						<li><a href="#">admin</a></li>
-						<li>
-							<a href="#" class="dropdown-toggle">jimbo.jones@email.com</a>
-							<ul class="sub-dropdown">
-								<li><a href="#">Profile</a></li>
-								<li>
-									<form action="/">
-										<button type="submit">Logout</button>
-									</form>
-								</li>
-							</ul>
-						</li>
-					</ul>
-				</div>
-			</ks-top-nav>
 			<router-view ref="pageContent" class="sm-12 med-12"></router-view>
 		</div>
 	</div>

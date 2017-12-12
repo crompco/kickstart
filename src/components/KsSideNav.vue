@@ -40,18 +40,27 @@
             if ( $element != null ) {
                 addEvent($element, 'click', function (e) {
                     removeClass(parent(this, '.side-nav'), 'show');
+                    removeClass(document.body, 'side-nav-open');
                 });
             }
-		},
+
+            window.addEventListener('resize', this.windowResize);
+        },
 
 		methods: {
 	  		showLinks() {
 				this.classObj.show = !this.classObj.show;
 
 				if ( this.classObj.show ) {
-					addClass(document.body, 'side-nav-open')
+					addClass(document.body, 'side-nav-open');
 				} else {
-                    removeClass(document.body, 'side-nav-open')
+                    removeClass(document.body, 'side-nav-open');
+				}
+			},
+
+			windowResize(e) {
+	  		    if ( this.classObj.show ) {
+                    console.log('window resize: ', e);
 				}
 			}
 		},

@@ -160,12 +160,10 @@
 
 		.nav-links {
 			left: 0;
-			top: $nav-height;
 		}
 
 		~ .content {
 			background: $body-bg;
-			z-index: 100;
 			margin-left: 0;
 			transition: margin .3s ease;
 			position: relative;
@@ -216,17 +214,27 @@
 	}
 
 	.brand {
+		text-align: center;
 		display: flex;
-		justify-content: center;
 		align-items: center;
-		padding: 0.25rem 0.5rem;
-		white-space: nowrap;
-		width: 100%;
+		justify-content: center;
 		height: 100%;
+		margin: 0 auto;
 
-		@include breakpoint(map-get($breakpoint-list, $top-bar-breakpoint)) {
-			width: auto;
+		@include breakpoint(map-get($breakpoint-list, $side-nav-breakpoint)) {
+			background-color: $nav-brand-bg;
+			height: $nav-height;
+			color: $nav-brand-color;
+			width: $nav-width;
+
+			~ .collapse {
+				width: calc(100% - #{$nav-width});
+			}
+		}
+
+		img {
 			height: 100%;
+			width: auto;
 		}
 	}
 
@@ -270,6 +278,12 @@
 			right: 0;
 			width: 100%;
 			box-shadow: none;
+
+			& ~ .brand {
+				width: calc(100% - #{$nav-width});
+			}
+
+
 
 			.nav-links, .dropdown {
 				flex-direction: unset;

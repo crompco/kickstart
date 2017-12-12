@@ -18,7 +18,7 @@
 
     // Internal Dependencies
     import {addEvent} from '../helpers/events';
-    import {toggleClass, parent} from '../helpers/dom';
+    import {toggleClass, parent, removeClass} from '../helpers/dom';
 
     export default {
         name: 'KsTopNav',
@@ -39,17 +39,19 @@
             return {
                 classObj: {
 					fixed: this.fixed
-                }
+                },
+				selector: null
             }
         },
 
         mounted() {
-            let $selector = this.hasSidebar ? '.side-nav' : '.top-bar';
+            this.selector = this.hasSidebar ? '.side-nav' : '.top-bar';
             addEvent(this.$el.querySelector('.mobile-menu'), 'click', (e) => {
                 e.preventDefault();
 
-                toggleClass(document.querySelector($selector), 'show');
+                toggleClass(document.querySelector(this.selector), 'show');
                 toggleClass(document.body, 'side-nav-open');
+                window.addEventListener('resize', this.windowResize);
             });
 
             addEvent(this.$el.querySelector('.dropdown-toggle'), 'click', function(e) {
@@ -66,6 +68,18 @@
 				});
 			}
         },
+
+		methods: {
+	  		windowResize() {
+	  		    let style = window.getComputedStyle(this.$el.querySelector('.mobile-menu'));
+
+	  		    if ( style.display == 'none' ) {
+					removeClass(document.body, 'side-nav-open');
+					removeClass(document.querySelector(this.selector), 'show');
+					window.removeEventListener('resize', this.windowResize);
+				}
+			}
+		},
 
 		components: {
             MenuSvg,

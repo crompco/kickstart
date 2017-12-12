@@ -1,7 +1,6 @@
 
 <template>
 	<ks-side-nav id="sidebar" class="vertical">
-		<div class="brand">Kickstart</div>
 		<ul class="nav-links">
 			<li v-for="route in sorted_routes">
 				<router-link :to="{name: route.name}">
