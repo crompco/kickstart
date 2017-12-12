@@ -13,7 +13,7 @@
 
     // Internal Dependencies
 	import {addEvent} from '../helpers/events';
-	import {removeClass, parent} from '../helpers/dom';
+	import {removeClass, parent, addClass} from '../helpers/dom';
 
     export default {
         name: 'KsSideNav',
@@ -47,6 +47,12 @@
 		methods: {
 	  		showLinks() {
 				this.classObj.show = !this.classObj.show;
+
+				if ( this.classObj.show ) {
+					addClass(document.body, 'side-nav-open')
+				} else {
+                    removeClass(document.body, 'side-nav-open')
+				}
 			}
 		},
 

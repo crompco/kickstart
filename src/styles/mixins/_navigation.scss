@@ -27,10 +27,12 @@
 
 %show-dropdown-nav {
 	ul.sub-dropdown {
-		padding: 0;
+		padding: 0 0 0 1rem;
 		margin: 0;
-		background: $top-bar-dd-bg;
+		background: darken($top-bar-dd-bg, 5%);
 		width: 100%;
+		display: flex;
+		flex-direction: column;
 
 		@if $top-bar-dd-box-shadow != false {
 			box-shadow: $top-bar-dd-box-shadow;
@@ -40,16 +42,16 @@
 			display: block;
 			top: $nav-height;
 			position: absolute;
-		}
-
-		@include breakpoint(map-get($breakpoint-list, $top-bar-breakpoint), true) {
-			display: flex;
-			flex-direction: column;
+			padding-left: 0;
 		}
 
 		a, button {
-			padding: rem($top-bar-dd-link-padding);
-			line-height: ($nav-height / 2);
+			padding: rem($top-bar-dd-link-padding / 2);
+			line-height: rem(($nav-height / 2));
+
+			@include breakpoint(map-get($breakpoint-list, $top-bar-breakpoint)) {
+				padding: rem($top-bar-dd-link-padding);
+			}
 
 			&:hover {
 				background-color: $top-bar-dd-hover;
@@ -66,9 +68,15 @@
 	position: relative;
 
 	// Mobile First Stuff
-	width: 100%;
+	width: 60%;
 	height: $nav-height;
 	padding-top: 0;
+	margin-left: -60%;
+
+	@include tab() {
+		margin-left: 0;
+		display: block;
+	}
 
 	.mobile-menu {
 		@extend %mobile-menu;
@@ -135,9 +143,35 @@
 
 	&.show {
 		@include breakpoint(map-get($breakpoint-list, $side-nav-breakpoint), true) {
-			.nav-links {
+			display: block;
+			overflow-y: auto;
+			margin-left: 0;
+		}
+
+		~ .content {
+			margin-left: 60%;
+			overflow: hidden;
+		}
+	}
+
+	@include breakpoint(map-get($breakpoint-list, $side-nav-breakpoint), true) {
+		height: 100%;
+		transition: margin .3s ease;
+
+		.nav-links {
+			left: 0;
+			top: $nav-height;
+		}
+
+		~ .content {
+			background: $body-bg;
+			z-index: 100;
+			margin-left: 0;
+			transition: margin .3s ease;
+			position: relative;
+
+			.top-bar {
 				left: 0;
-				top: $nav-height;
 			}
 		}
 	}
@@ -208,12 +242,14 @@
 	}
 
 	.collapse {
-		width: 100%;
+		width: 70%;
 		flex-direction: column;
-		display: none;
 		position: absolute;
 		background: $top-bar-bg;
 		top: $nav-height;
+		right: -100%;
+		transition: right .3s ease;
+		box-shadow: -2px 3px 3px 0px rgba(0,0,0,0.2);
 
 		.nav-links, .dropdown {
 			flex-direction: column;
@@ -231,6 +267,9 @@
 			display: flex;
 			position: relative;
 			top: 0;
+			right: 0;
+			width: 100%;
+			box-shadow: none;
 
 			.nav-links, .dropdown {
 				flex-direction: unset;
@@ -243,6 +282,7 @@
 		.collapse {
 			@include breakpoint(map-get($breakpoint-list, $top-bar-breakpoint), true) {
 				display: block;
+				right: 0;
 			}
 		}
 	}
@@ -299,6 +339,20 @@
 				border: 0;
 				background: $top-bar-dd-bg;
 				cursor: pointer;
+				position: relative;
+
+				&.dropdown-toggle:after {
+					content: '';
+					position: absolute;
+					right: 5%;
+					@include triangle-down($top-bar-color, 8px);
+
+					@include breakpoint(map-get($breakpoint-list, $top-bar-breakpoint)) {
+						position: relative;
+						right: 0;
+						margin-left: rem(5px);
+					}
+				}
 
 				&:hover {
 					background-color: $top-bar-hover-bg;
@@ -357,4 +411,8 @@
 			}
 		}
 	}
+}
+
+body.side-nav-open {
+	overflow: hidden;
 }

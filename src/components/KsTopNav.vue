@@ -49,6 +49,7 @@
                 e.preventDefault();
 
                 toggleClass(document.querySelector($selector), 'show');
+                toggleClass(document.body, 'side-nav-open');
             });
 
             addEvent(this.$el.querySelector('.dropdown-toggle'), 'click', function(e) {
