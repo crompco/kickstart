@@ -39,6 +39,10 @@
         }
     }
 
+    .button-label {
+        display: inline-block;
+    }
+
 	@each $name, $map in $buttons {
 		$bg-color: get($map, background-color);
 
