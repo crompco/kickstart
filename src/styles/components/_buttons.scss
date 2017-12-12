@@ -34,6 +34,7 @@
     }
 
     &.spinning {
+        position: relative;
         .ks-spin-loading {
             border-top-color: darken($state-default-bg, 10%);
         }
@@ -41,6 +42,9 @@
 
     .button-label {
         display: inline-block;
+        &.hidden {
+            visibility: hidden;
+        }
     }
 
 	@each $name, $map in $buttons {
