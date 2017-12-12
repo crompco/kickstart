@@ -15,7 +15,7 @@
             :height=loaderHeight
             :width="loaderWidth"
         ></ks-loader-spin>
-        <span ref="label" v-show="!spin">
+        <span class="button-label" ref="label" v-show="!spin">
             <slot></slot>
         </span>
     </button>
@@ -103,8 +103,10 @@
 
         methods: {
             calculateLabelWidth() {
-                this.loaderWidth = (this.$refs.label.offsetWidth || 60) + 'px';
-                this.loaderHeight = (this.$refs.label.offsetHeight || 60) + 'px';
+                if ( this.$refs.label ) {
+                    this.loaderWidth = (this.$refs.label.offsetWidth || 60) + 'px';
+                    this.loaderHeight = (this.$refs.label.offsetHeight || 60) + 'px';
+                }
             }
         },
 
