@@ -46,6 +46,7 @@
             },
 
             target: {
+                type: String,
                 default: false
             }
         },
@@ -75,7 +76,17 @@
 
         mounted() {
             this.$nextTick(() => {
-                this.target_element = this.target === false ? parent(this.$el) : this.target;
+                this.setUpTooltip();
+            });
+        },
+
+        beforeDestroy() {
+            this.destroyTooltip();
+        },
+
+        methods: {
+            setUpTooltip() {
+                this.target_element = this.target === false ? parent(this.$el) : this.$parent.$refs[this.target];
 
                 if ( this.trigger == 'hover' ) {
                     this.target_element.addEventListener('mouseenter', this.showTooltip);
@@ -83,19 +94,8 @@
                 } else {
                     this.target_element.addEventListener('click', this.toggleTooltip);
                 }
-            });
-        },
+            },
 
-        beforeDestroy() {
-            if ( this.trigger == 'hover' ) {
-                this.target_element.removeEventListener('mouseenter', this.showTooltip);
-                this.target_element.removeEventListener('mouseleave', this.hideTooltip);
-            } else {
-                this.target_element.removeEventListener('click', this.toggleTooltip);
-            }
-        },
-
-        methods: {
             showTooltip() {
                 if ( this.isActive == false ) {
                     return;
@@ -122,6 +122,23 @@
 
             toggleTooltip() {
                 this.showing ? this.hideTooltip() : this.showTooltip();
+            },
+
+            destroyTooltip() {
+                this.$el.remove();
+
+                if ( this.tether !== false ) {
+                    this.tether.destroy();
+                }
+
+                if ( this.trigger == 'hover' ) {
+                    this.target_element.removeEventListener('mouseenter', this.showTooltip);
+                    this.target_element.removeEventListener('mouseleave', this.hideTooltip);
+                } else {
+                    this.target_element.removeEventListener('click', this.toggleTooltip);
+                }
+
+                this.target_element = false;
             }
         }
     }

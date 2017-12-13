@@ -111,14 +111,14 @@ Vue.directive('ks-tooltip', {
         }
     },
 
-    update(el, binding, vnode) {
-        // const props = object_get(vnode.data, 'attrs.props', false);
-
-        // console.log('update vnode', vnode.data.attrs.props);
-    },
-
     unbind(el, binding, vnode) {
         props = object_get(vnode.data, 'attrs.props', false);
+
+        el.remove();
+
+        if ( tether !== false ) {
+            tether.destroy();
+        }
 
         if ( useClickEvent(props) ) {
             el.removeEventListener('click', event.click)
@@ -126,5 +126,7 @@ Vue.directive('ks-tooltip', {
             el.removeEventListener('mouseenter', events.mouseenter);
             el.removeEventListener('mouseleave', events.mouseleave);
         }
+
+        tether = false;
     }
 });

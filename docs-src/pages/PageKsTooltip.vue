@@ -8,7 +8,7 @@
                     Hover Over
                 </button>
 
-                <ks-tooltip :target="$refs.tooltipTarget" trigger="click">
+                <ks-tooltip target="tooltipTarget">
                     <div>Another tooltip right here</div>
                 </ks-tooltip>
 
@@ -27,9 +27,9 @@
         name: 'PageKsTooltip',
 
         data() {
-          return {
+            return {
               active: false
-          }
+            }
         },
 
         components: {
