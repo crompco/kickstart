@@ -13,25 +13,35 @@
 		height: 100%;
 		background: rgba($modal-mask-bg, $modal-mask-opacity);
 	}
-    //
+
 	.ks-modal-wrapper {
 		position: absolute;
 		margin: 0 auto;
-		left: 50%;
+		left: 0;
+		right: 0;
 		top: 25%;
-		transform: translate(-50%, -25%);
+		transform: translate(0, -25%);
 		overflow-y: initial !important;
 		background-color: $modal-wrapper-bg;
 		@if $modal-wrapper-box-shadow != false {
 			box-shadow: $modal-wrapper-box-shadow;
 		}
 		outline: none;
+
+		@include tab() {
+			left: 50%;
+			transform: translate(0, -25%);
+		}
 	}
 
 	&.modal-scroll .ks-modal-wrapper {
 		top: 0;
-		transform: translate(-50%, 0);
+		transform: translate(0, 0);
 		margin: 1rem auto;
+
+		@include tab() {
+			transform: translate(-50%, 0);
+		}
 	}
 
 	.ks-modal-header {

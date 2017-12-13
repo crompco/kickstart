@@ -60,7 +60,7 @@
 				default: true
 			},
 			maxWidth: {
-				default: '50%'
+				default: '85%'
 			},
             minWidth: {
 			    type: String,
@@ -111,6 +111,8 @@
 		mounted() {
 			this.$on('open', () => {
 			    document.body.appendChild(this.$el);
+
+			    window.addEventListener('resize', this.windowResize);
 
 				this.$nextTick(() => {
 					this.$refs.container.focus();
@@ -173,18 +175,27 @@
 				let modal = this.$el.querySelectorAll('.ks-modal-wrapper');
 				let modal_height = modal[0].clientHeight;
 				let window_height = document.documentElement.clientHeight;
-				if ( modal_height > window_height ) {
+                let style = window.getComputedStyle(modal[0]);
+
+                if ( modal_height > window_height ) {
 					this.$set(this.classObj, 'modal-scroll', true);
 
-					this.$nextTick(() => {
-						let style = window.getComputedStyle(modal[0]);
-						modal_height += parseFloat(style.marginTop) + parseFloat(style.marginBottom);
-						this.$el.querySelectorAll('.ks-modal-mask')[0].style.height = `${modal_height}px`;
-					})
+                    modal_height += parseFloat(style.marginTop) + parseFloat(style.marginBottom);
+                    modal_height = `${modal_height}px`;
+                } else {
+                    this.$set(this.classObj, 'modal-scroll', false);
+                    modal_height = '';
 				}
 
+                this.$nextTick(() => {
+                    this.$el.querySelectorAll('.ks-modal-mask')[0].style.height = modal_height;
+                });
+
 				this.$el.scrollTop = 0;
-			}
+			},
+            windowResize() {
+				this.positionModal();
+			},
 		},
 
         watch: {
