@@ -110,10 +110,16 @@
 
 		mounted() {
 			this.$on('open', () => {
+			    document.body.appendChild(this.$el);
+
 				this.$nextTick(() => {
 					this.$refs.container.focus();
 				});
 			});
+		},
+
+		beforeDestroy() {
+			this.$el.remove();
 		},
 
 		beforeUpdate() {
