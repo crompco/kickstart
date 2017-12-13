@@ -7,15 +7,21 @@
         @blur="$emit('blur', $event)"
         :disabled="disabled || spin"
     >
-        <ks-loader-spin
-            :show="spin"
-            size="small"
-            :color="spinColor"
-            :bg="spinBackground"
-            :height=loaderHeight
-            :width="loaderWidth"
-        ></ks-loader-spin>
-        <span class="button-label" ref="label" v-show="!spin">
+        <span
+            ref="spinWrapper"
+            v-show="spin"
+            style="width: calc(100% - 1.2rem);text-align: center;position:absolute"
+        >
+            <ks-loader-spin
+                :show="spin"
+                size="small"
+                :color="spinColor"
+                :bg="spinBackground"
+                :height="''"
+                :width="'100%'"
+            ></ks-loader-spin>
+        </span>
+        <span class="button-label" ref="label" :class="{ hidden: spin }">
             <slot></slot>
         </span>
     </button>
@@ -85,27 +91,10 @@
             }
         },
 
-        data() {
-            return {
-                loaderWidth: '60px',
-                loaderHeight: '1.125rem',
-            }
-        },
-
-        mounted() {
-            this.$nextTick(() => {
-                this.calculateLabelWidth();
-                window.addEventListener('resize', () => {
-                    this.calculateLabelWidth();
-                });
-            })
-        },
-
-        methods: {
-            calculateLabelWidth() {
-                if ( this.$refs.label ) {
-                    this.loaderWidth = (this.$refs.label.offsetWidth || 60) + 'px';
-                    this.loaderHeight = (this.$refs.label.offsetHeight || 60) + 'px';
+        watch: {
+            spin() {
+                if ( this.$refs.label.offsetWidth ) {
+                    this.$refs.spinWrapper.style.width = (this.$refs.label.offsetWidth || 60) + 'px';
                 }
             }
         },

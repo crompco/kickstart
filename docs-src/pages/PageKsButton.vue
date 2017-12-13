@@ -38,6 +38,28 @@
             </code-block>
         </div>
 
+        <div class="basic-block">
+            <h4>Loading Button in modal</h4>
+            <div class="row">
+                <ks-button @click="$refs.modal.open()">Open Modal</ks-button>
+                <ks-modal ref="modal">
+                    <div slot="footer">
+                        <ks-button @click.prevent="spinModal = true" class="button" :spin="spinModal">Yes</ks-button>
+                        <ks-button :outline="true" class="button outline" @click.prevent="spinModal = false">Stop</ks-button>
+                    </div>
+                </ks-modal>
+            </div>
+            <pre>Spinning: {{spinModal}}</pre>
+            <code-block>
+                &lt;ks-button @click="$refs.modal.open()">Open Modal&lt;/ks-button>
+                &lt;ks-modal ref="modal">
+                    &lt;div slot="footer">
+                        &lt;ks-button @click.prevent="spinModal = true" class="button" :spin="spinModal">Yes&lt;/ks-button>
+                        &lt;ks-button :outline="true" class="button outline" @click.prevent="spinModal = false">Stop&lt;/ks-button>
+                    &lt;/div>
+                &lt;/ks-modal>
+            </code-block>
+        </div>
 
         <ks-tabs>
             <ks-tab title="Props">
@@ -146,7 +168,8 @@
         data() {
             return {
                 spinning: false,
-                click_count: 0
+                click_count: 0,
+                spinModal: false
             }
         },
 
