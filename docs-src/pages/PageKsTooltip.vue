@@ -10,6 +10,8 @@
 
                 <ks-tooltip target="tooltipTarget">
                     <div>Another tooltip right here</div>
+                    <h2>Title tag</h2>
+                    <button class="button">iButton</button>
                 </ks-tooltip>
 
                 <button class="button" v-ks-tooltip="'Tooltip text, add more text'" :props="{trigger: 'click'}">

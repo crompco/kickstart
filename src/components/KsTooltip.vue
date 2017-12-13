@@ -2,6 +2,8 @@
     <div v-show="showing"
          class="ks-tooltip"
          :style="tooltip_styles"
+         @mouseenter="clearTimeout"
+         @mouseleave="hideTooltip"
     >
         <div class="ks-tooltip-arrow"></div>
         <slot></slot>
@@ -71,6 +73,7 @@
                 tether: false,
                 showing: false,
                 target_element: false,
+                timeout: false,
             }
         },
 
@@ -101,6 +104,7 @@
                     return;
                 }
 
+                this.clearTimeout();
                 this.showing = true;
 
                 if ( this.tether == false ) {
@@ -115,9 +119,15 @@
             },
 
             hideTooltip() {
-                this.showing = false;
+                this.timeout = setTimeout(() => {
+                    this.showing = false;
 
-                this.$emit('tooltip-hidden');
+                    this.$emit('tooltip-hidden');
+                }, 150);
+            },
+
+            clearTimeout() {
+                clearTimeout(this.timeout);
             },
 
             toggleTooltip() {
