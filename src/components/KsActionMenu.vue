@@ -15,7 +15,6 @@
     import Tether from 'tether';
 
     // Internal Dependencies
-    import {addEvent} from '../helpers/events';
     import '../helpers/tether-constraints';
 
     export default {
@@ -25,6 +24,14 @@
             show: {
                 type: Boolean,
                 default: false
+            },
+            actionsAttachment: {
+                type: String,
+                default: 'top left'
+            },
+            targetAttachment: {
+                type: String,
+                default: 'bottom left'
             }
         },
 
@@ -68,8 +75,8 @@
                 this.tether = new Tether({
                     element: this.$refs.menuList,
                     target: this.$refs.menu,
-                    attachment: 'top left',
-                    targetAttachment: 'bottom left',
+                    attachment: this.actionsAttachment,
+                    targetAttachment: this.targetAttachment,
                     constraints: [
                         {
                             to: 'scrollParent',

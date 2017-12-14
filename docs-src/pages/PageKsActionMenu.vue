@@ -2,37 +2,47 @@
     <div>
         <h2>Action Menu</h2>
 
-        <div class="row col">
-            <div class="sm-8">
-                <ks-action-menu>
-                    <a href="#" @click.prevent="action('New')" class="list-item">New</a>
-                    <a href="#" @click.prevent="action('Add')" class="list-item">Add</a>
-                    <a href="#" @click.prevent="action('Edit')" class="list-item disabled">Edit</a>
-                    <a href="#" @click.prevent="action('Delete')" class="list-item separator danger">Delete Class Link</a>
-                </ks-action-menu>
+        <div class="basic-block">
+            <h3>Basic Usage</h3>
+            <div class="row col">
+                <div class="sm-8">
+                    <ks-action-menu>
+                        <a href="#" @click.prevent="action('New')" class="list-item">New</a>
+                        <a href="#" @click.prevent="action('Add')" class="list-item">Add</a>
+                        <a href="#" @click.prevent="action('Edit')" class="list-item disabled">Edit</a>
+                        <a href="#" @click.prevent="action('Delete')" class="list-item separator danger">Delete Class Link</a>
+                    </ks-action-menu>
+                </div>
+                <div class="sm-4 t-right">
+                    <ks-action-menu>
+                        <div slot="menu">Menu</div>
+                        <a href="#" @click.prevent="action('New')" class="list-item">New</a>
+                        <a href="#" @click.prevent="action('Add')" class="list-item">Add</a>
+                        <a href="#" @click.prevent="action('Edit')" class="list-item">Edit</a>
+                        <a href="#" @click.prevent="action('Delete')" class="list-item separator">Delete</a>
+                    </ks-action-menu>
+                </div>
             </div>
-            <div class="sm-4 t-right">
-                <ks-action-menu>
-                    <div slot="menu">Menu</div>
-                    <a href="#" @click.prevent="action('New')" class="list-item">New</a>
-                    <a href="#" @click.prevent="action('Add')" class="list-item">Add</a>
-                    <a href="#" @click.prevent="action('Edit')" class="list-item">Edit</a>
-                    <a href="#" @click.prevent="action('Delete')" class="list-item separator">Delete</a>
-                </ks-action-menu>
+            <div class="row col">
+                <code-block v-pre>
+                    &lt;ks-action-menu>
+                        &lt;a href="#" @click.prevent="action('New')" class="list-item">New&lt;/a>
+                        &lt;a href="#" @click.prevent="action('Add')" class="list-item">Add&lt;/a>
+                        &lt;a href="#" @click.prevent="action('Edit')" class="list-item disabled">Edit&lt;/a>
+                        &lt;a href="#" @click.prevent="action('Delete')" class="list-item separator danger">Delete Class Link&lt;/a>
+                    &lt;/ks-action-menu>
+
+                    &lt;ks-action-menu>
+                        &lt;div slot="menu">Menu&lt;/div>
+                        &lt;a href="#" class="list-item">New&lt;/a>
+                        &lt;a href="#" class="list-item">Add&lt;/a>
+                        &lt;a href="#" class="list-item disabled">Edit&lt;/a>
+                        &lt;a href="#" class="list-item separator danger">Delete&lt;/a>
+                    &lt;/ks-action-menu>
+                </code-block>
             </div>
         </div>
 
-        <div class="row col">
-            <code-block v-pre>
-                &lt;ks-action-menu>
-                    &lt;div slot="menu">Menu&lt;/div>
-                    &lt;a href="#" class="list-item">New&lt;/a>
-                    &lt;a href="#" class="list-item">Add&lt;/a>
-                    &lt;a href="#" class="list-item disabled">Edit&lt;/a>
-                    &lt;a href="#" class="list-item separator danger">Delete&lt;/a>
-                &lt;/ks-action-menu>
-            </code-block>
-        </div>
 
         <div class="row">
             <ks-tabs>
@@ -52,6 +62,18 @@
                                 <td>Boolean</td>
                                 <td>false</td>
                                 <td>This will open the menu</td>
+                            </tr>
+                            <tr>
+                                <td>actionsAttachment</td>
+                                <td>String</td>
+                                <td>top left</td>
+                                <td>The position on the actions list that you want attached to the button/target</td>
+                            </tr>
+                            <tr>
+                                <td>targetAttachment</td>
+                                <td>String</td>
+                                <td>bottom left</td>
+                                <td>The position on the target that you want the actions attached to</td>
                             </tr>
                         </tbody>
                     </table>
