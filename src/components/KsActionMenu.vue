@@ -136,6 +136,13 @@
                 if (!this.show) {
                     this.active = false;
                 }
+            },
+            active() {
+                if ( this.active ) {
+                    this.$emit('open');
+                } else {
+                    this.$emit('close');
+                }
             }
         },
 

@@ -114,6 +114,26 @@
                         </tbody>
                     </table>
                 </ks-tab>
+                <ks-tab title="Events">
+                    <table class="table striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>open</td>
+                                <td>Fired when the menu is opened</td>
+                            </tr>
+                            <tr>
+                                <td>close</td>
+                                <td>Fired when the menu is closed</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </ks-tab>
             </ks-tabs>
         </div>
     </div>
