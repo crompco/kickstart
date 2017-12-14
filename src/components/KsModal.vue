@@ -94,6 +94,7 @@
 				classObj: {},
 				updatePosition: false,
 				modalObj: {},
+				width: null,
 			};
 		},
 
@@ -131,6 +132,12 @@
 					this.positionModal();
 				});
 			}
+
+            this.$nextTick(() => {
+			    if ( this.isOpen && this.width !== null && this.width != this.$refs.container.getBoundingClientRect().width ) {
+                    this.positionModal();
+                }
+            });
 		},
 
 		methods: {
@@ -193,6 +200,7 @@
 
                 this.$nextTick(() => {
                     const rect = modal.getBoundingClientRect();
+                    this.width = rect.width;
 
                     this.$set(this.modalObj, 'left', ((100 - ((rect.width / window_width)*100))/2).toFixed(3)+'%');
                     this.$refs.mask.style.height = modal_height;

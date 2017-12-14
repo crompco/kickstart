@@ -29,12 +29,13 @@
                     </code-block>
                 </div>
                 <div class="col sm-full med-half">
-                    <button class="button" @click.prevent="$refs.modal2.open()">
+                    <button class="button" @click.prevent="openModal2()">
                         Modal with buttons
                     </button>
 
                     <ks-modal title="Modal with buttons" ref="modal2" >
-                        <p>
+                        <ks-loader-spin size="medium" :show="showLoader"></ks-loader-spin>
+                        <p v-show="!showLoader">
                             This is a simple modal with just a title and content
                         </p>
                         <div slot="footer">
@@ -459,6 +460,7 @@
 	import KsTab from '../../src/components/KsTab.vue';
 	import KsSelect from '../../src/components/KsSelect.vue';
 	import api from '../../src/helpers/api';
+	import KsLoaderSpin from '../../src/components/KsLoaderSpin.vue';
 
 	export default {
 		name: 'PageKsModal',
@@ -468,7 +470,8 @@
 		data() {
 			return {
 			    countries: [],
-				country_code: ''
+				country_code: '',
+                showLoader: false,
 			};
 		},
 
@@ -486,7 +489,15 @@
 			},
 			closeModal(modal) {
 				this.$refs[modal].close();
-			}
+			},
+            openModal2() {
+			    this.showLoader = true
+                this.$refs.modal2.open()
+
+                setTimeout(() => {
+                    this.showLoader = false
+                }, 200);
+            }
 		},
 
 		watch: {},
@@ -495,7 +506,8 @@
 			KsModal,
 			KsTabs,
 			KsTab,
-			KsSelect
+			KsSelect,
+            KsLoaderSpin,
 		}
 	}
 </script>
