@@ -1,9 +1,9 @@
 <template>
 	<div class="ks-modal" v-show="isOpen" :class="[{ 'danger': danger }, classObj]">
-		<div class="ks-modal-mask" @click.prevent="close"></div>
+		<div class="ks-modal-mask" @click.prevent="close" ref="mask"></div>
 
 		<div class="ks-modal-wrapper"
-			 :style="modalStyle"
+			 :style="[modalStyle, modalObj]"
 			 tabindex="-1"
 			 ref="container"
 			 @click.stop
@@ -40,7 +40,6 @@
 	import Close from '../svg/close.svg';
 
 	// Internal Dependencies
-	import {addEvent, stopParentScroll} from '../helpers/events';
 	import {addClass, removeClass} from '../helpers/dom';
 
 	export default {
@@ -60,7 +59,7 @@
 				default: true
 			},
 			maxWidth: {
-				default: '85%'
+				default: '75%'
 			},
             minWidth: {
 			    type: String,
@@ -93,7 +92,8 @@
 				isOpen: false,
                 isLoading: false,
 				classObj: {},
-				updatePosition: false
+				updatePosition: false,
+				modalObj: {},
 			};
 		},
 
@@ -152,6 +152,8 @@
 				this.isOpen = false;
 				this.$emit('close');
 
+                window.removeEventListener('resize', this.windowResize);
+
                 removeClass(document.documentElement, 'modal-open');
 
                 this.$nextTick(() => {
@@ -172,10 +174,12 @@
                 return this;
 			},
 			positionModal() {
-				let modal = this.$el.querySelectorAll('.ks-modal-wrapper');
-				let modal_height = modal[0].clientHeight;
-				let window_height = document.documentElement.clientHeight;
-                let style = window.getComputedStyle(modal[0]);
+			    const $doc = document.documentElement;
+				let modal = this.$refs.container;
+				let modal_height = modal.clientHeight;
+				let window_height = $doc.clientHeight;
+				let window_width = $doc.clientWidth;
+                let style = window.getComputedStyle(modal);
 
                 if ( modal_height > window_height ) {
 					this.$set(this.classObj, 'modal-scroll', true);
@@ -188,7 +192,10 @@
 				}
 
                 this.$nextTick(() => {
-                    this.$el.querySelectorAll('.ks-modal-mask')[0].style.height = modal_height;
+                    const rect = modal.getBoundingClientRect();
+
+                    this.$set(this.modalObj, 'left', ((100 - ((rect.width / window_width)*100))/2).toFixed(3)+'%');
+                    this.$refs.mask.style.height = modal_height;
                 });
 
 				this.$el.scrollTop = 0;
