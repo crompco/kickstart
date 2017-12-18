@@ -1,5 +1,5 @@
 <template>
-    <div class="ks-action-menu" @click.stop>
+    <div class="ks-action-menu" @click.stop :class="actionMenuClass">
         <button class="menu-button" @click.prevent="toggle()" ref="menu">
             <slot name="menu"><menu-svg></menu-svg></slot>
         </button>
@@ -32,7 +32,19 @@
             targetAttachment: {
                 type: String,
                 default: 'bottom left'
+            },
+            openClass: {
+                type: String,
+                default: ''
             }
+        },
+
+        computed: {
+            actionMenuClass() {
+                let classObj = {};
+                classObj[this.openClass] = this.active;
+                return classObj;
+            },
         },
 
         data() {
@@ -138,11 +150,7 @@
                 }
             },
             active() {
-                if ( this.active ) {
-                    this.$emit('open');
-                } else {
-                    this.$emit('close');
-                }
+                this.$emit('active', this.active);
             }
         },
 

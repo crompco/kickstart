@@ -75,6 +75,12 @@
                                 <td>bottom left</td>
                                 <td>The position on the target that you want the actions attached to</td>
                             </tr>
+                            <tr>
+                                <td>openClass</td>
+                                <td>String</td>
+                                <td></td>
+                                <td>The class to attach when the menu is opened</td>
+                            </tr>
                         </tbody>
                     </table>
                 </ks-tab>
