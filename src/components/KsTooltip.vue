@@ -49,7 +49,7 @@
 
             target: {
                 type: String,
-                default: false
+                default: ''
             }
         },
 
@@ -89,7 +89,7 @@
 
         methods: {
             setUpTooltip() {
-                this.target_element = this.target === false ? parent(this.$el) : this.$parent.$refs[this.target];
+                this.target_element = this.target === '' ? parent(this.$el) : this.$parent.$refs[this.target];
 
                 if ( this.trigger == 'hover' ) {
                     this.target_element.addEventListener('mouseenter', this.showTooltip);
