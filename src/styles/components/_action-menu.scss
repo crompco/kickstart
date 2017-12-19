@@ -61,5 +61,14 @@
                 color: $state-danger-color;
             }
         }
+
+        &.success {
+            color: $state-success;
+
+            &:hover {
+                background: lighten($state-success, 10%);
+                color: $white;
+            }
+        }
     }
 }

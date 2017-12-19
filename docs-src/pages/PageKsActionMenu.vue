@@ -5,7 +5,7 @@
         <div class="row col">
             <div class="sm-8">
                 <ks-action-menu>
-                    <a href="#" @click.prevent="action('New')" class="list-item">New</a>
+                    <a href="#" @click.prevent="action('New')" class="list-item success">New</a>
                     <a href="#" @click.prevent="action('Add')" class="list-item">Add</a>
                     <a href="#" @click.prevent="action('Edit')" class="list-item disabled">Edit</a>
                     <a href="#" @click.prevent="action('Delete')" class="list-item separator danger">Delete Class Link</a>

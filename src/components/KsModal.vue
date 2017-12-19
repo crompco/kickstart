@@ -190,9 +190,10 @@
 
                 if ( modal_height > window_height ) {
 					this.$set(this.classObj, 'modal-scroll', true);
-
-                    modal_height += parseFloat(style.marginTop) + parseFloat(style.marginBottom);
-                    modal_height = `${modal_height}px`;
+					this.$nextTick(() => {
+                        modal_height += parseFloat(style.marginTop) + parseFloat(style.marginBottom);
+                        modal_height = `${modal_height}px`;
+                    });
                 } else {
                     this.$set(this.classObj, 'modal-scroll', false);
                     modal_height = '';
