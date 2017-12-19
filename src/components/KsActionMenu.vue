@@ -1,5 +1,5 @@
 <template>
-    <div class="ks-action-menu" @click.stop>
+    <div class="ks-action-menu" @click.stop :class="actionMenuClass">
         <button class="menu-button" @click.prevent="toggle()" ref="menu">
             <slot name="menu"><menu-svg></menu-svg></slot>
         </button>
@@ -15,7 +15,6 @@
     import Tether from 'tether';
 
     // Internal Dependencies
-    import {addEvent} from '../helpers/events';
     import '../helpers/tether-constraints';
 
     export default {
@@ -25,7 +24,27 @@
             show: {
                 type: Boolean,
                 default: false
+            },
+            actionsAttachment: {
+                type: String,
+                default: 'top left'
+            },
+            targetAttachment: {
+                type: String,
+                default: 'bottom left'
+            },
+            openClass: {
+                type: String,
+                default: ''
             }
+        },
+
+        computed: {
+            actionMenuClass() {
+                let classObj = {};
+                classObj[this.openClass] = this.active;
+                return classObj;
+            },
         },
 
         data() {
@@ -68,8 +87,8 @@
                 this.tether = new Tether({
                     element: this.$refs.menuList,
                     target: this.$refs.menu,
-                    attachment: 'top left',
-                    targetAttachment: 'bottom left',
+                    attachment: this.actionsAttachment,
+                    targetAttachment: this.targetAttachment,
                     constraints: [
                         {
                             to: 'scrollParent',
@@ -129,6 +148,9 @@
                 if (!this.show) {
                     this.active = false;
                 }
+            },
+            active() {
+                this.$emit('active', this.active);
             }
         },
 
