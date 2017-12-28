@@ -119,11 +119,17 @@
             },
 
             hideTooltip() {
-                this.timeout = setTimeout(() => {
-                    this.showing = false;
+                if ( this.trigger == 'hover' ) {
+                    this.timeout = setTimeout(() => {
+                        this.triggerHide();
+                    }, 150);
+                }
+            },
 
-                    this.$emit('tooltip-hidden');
-                }, 150);
+            triggerHide() {
+                this.showing = false;
+
+                this.$emit('tooltip-hidden');
             },
 
             clearTimeout() {
@@ -131,7 +137,7 @@
             },
 
             toggleTooltip() {
-                this.showing ? this.hideTooltip() : this.showTooltip();
+                this.showing ? this.triggerHide() : this.showTooltip();
             },
 
             destroyTooltip() {
