@@ -123,6 +123,8 @@
 
 		beforeDestroy() {
 			this.$el.remove();
+
+			this.close();
 		},
 
 		beforeUpdate() {
