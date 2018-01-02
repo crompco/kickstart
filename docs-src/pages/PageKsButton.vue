@@ -39,10 +39,41 @@
         </div>
 
         <div class="basic-block">
+            <h4>Loading Button smaller size</h4>
+            <div class="row row-collapse">
+                <div class="col sm-6">
+                    <ks-button
+                        :spin="spinSmall"
+                        @click.prevent="spinSmall = !spinSmall"
+                        spin-size="tiny"
+                    >
+                        &checkmark;
+                    </ks-button>
+                </div>
+                <div class="col sm-6">
+                    <ks-button @click.prevent.stop="spinSmall = !spinSmall">
+                        <template v-if="spinSmall">Stop</template>
+                        <template v-else>Start</template>
+                    </ks-button>
+                </div>
+            </div>
+            <pre>Spinning (small): {{spinSmall}}</pre>
+            <code-block>
+                &lt;ks-button
+                    :spin="spinning"
+                    @click.prevent="spinSmall = !spinSmall"
+                >
+                    &checkmark;
+                &lt;/ks-button>
+            </code-block>
+        </div>
+
+        <div class="basic-block">
             <h4>Loading Button in modal</h4>
             <div class="row">
                 <ks-button @click="$refs.modal.open()">Open Modal</ks-button>
                 <ks-modal ref="modal">
+                    <p>Some thing that needs to load</p>
                     <div slot="footer">
                         <ks-button @click.prevent="spinModal = true" class="button" :spin="spinModal">Yes</ks-button>
                         <ks-button :outline="true" class="button outline" @click.prevent="spinModal = false">Stop</ks-button>
@@ -167,9 +198,10 @@
 
         data() {
             return {
-                spinning: false,
                 click_count: 0,
-                spinModal: false
+                spinning: false,
+                spinSmall: false,
+                spinModal: false,
             }
         },
 

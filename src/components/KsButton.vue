@@ -10,11 +10,11 @@
         <span
             ref="spinWrapper"
             v-show="spin"
-            style="width: calc(100% - 1.2rem);text-align: center;position:absolute"
+            style="width: calc(100% - 1.2rem);text-align: center;position:absolute;"
         >
             <ks-loader-spin
                 :show="spin"
-                size="small"
+                :size="spinSize"
                 :color="spinColor"
                 :bg="spinBackground"
                 :height="''"
@@ -67,6 +67,10 @@
             spin: {
                 type: Boolean,
                 default: false
+            },
+            spinSize: {
+                type: String,
+                default: 'small'
             },
             spinColor: {
                 type: String,
