@@ -4,6 +4,7 @@
          :style="tooltip_styles"
          @mouseenter="clearTimeout"
          @mouseleave="hideTooltip"
+         @click.prevent.stop
     >
         <div class="ks-tooltip-arrow"></div>
         <slot></slot>
