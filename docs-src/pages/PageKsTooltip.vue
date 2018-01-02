@@ -19,6 +19,19 @@
                 </button>
             </div>
         </div>
+        <div class="basic-block">
+            <div class="row">
+
+                <ks-button>
+                    Tooltip (click)
+                    <ks-tooltip trigger="click">
+                        <p>
+                            A tooltip triggered on click
+                        </p>
+                    </ks-tooltip>
+                </ks-button>
+            </div>
+        </div>
     </div>
 </template>
 
