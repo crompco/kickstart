@@ -97,10 +97,7 @@
                     this.target_element.addEventListener('mouseleave', this.hideTooltip);
                 } else {
                     this.target_element.addEventListener('click', this.toggleTooltip);
-
-                    document.addEventListener('click', () => {
-                        this.triggerHide();
-                    });
+                    document.addEventListener('click', this.triggerHide);
                 }
             },
 
@@ -159,6 +156,7 @@
                     this.target_element.removeEventListener('mouseleave', this.hideTooltip);
                 } else {
                     this.target_element.removeEventListener('click', this.toggleTooltip);
+                    document.removeEventListener('click', this.triggerHide);
                 }
 
                 this.target_element = false;
