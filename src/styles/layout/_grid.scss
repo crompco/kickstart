@@ -115,6 +115,16 @@
                 display: none;
             }
         }
+        @include breakpoint($map) {
+            .#{$name}-hide-up {
+                display: none;
+            }
+        }
+        @include breakpoint($max-map, true) {
+            .#{$name}-hide-down {
+                display: none;
+            }
+        }
     }
 
     // Show breakpoints
