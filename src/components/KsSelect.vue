@@ -77,8 +77,8 @@
 					</li>
 				</template>
                 <!-- Slot for empty search results-->
-                <li v-if="!loading && list.length == 0" class="empty-list-message">
-                    <slot name="empty" :term="lookup_name">{{emptyMessage}}</slot>
+                <li v-if="hasEmptyMessage && !loading && list.length == 0" class="empty-list-message">
+                    <slot :term="lookup_name" name="empty">{{emptyMessage}}</slot>
                 </li>
 			</ul>
 		</div>
@@ -206,6 +206,10 @@
 			},
             showDeselect() {
                 return !this.multiple && this.singleDeselect && this.selected ? true : false;
+            },
+
+            hasEmptyMessage() {
+                return this.emptyMessage || this.$slots.empty || this.$scopedSlots.empty;
             }
 		},
 
