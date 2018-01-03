@@ -76,6 +76,10 @@
 						<slot :item="item">{{item[labelKey]}}</slot>
 					</li>
 				</template>
+                <!-- Slot for empty search results-->
+                <li v-if="!loading && list.length == 0" class="empty-list-message">
+                    <slot name="empty" :term="lookup_name">{{emptyMessage}}</slot>
+                </li>
 			</ul>
 		</div>
 	</div>
@@ -130,26 +134,30 @@
 				default: false
 			},
             singleDeselect: {
-			    type: Boolean,
+                type: Boolean,
                 default: false
             },
             disabled: {
-			    type: Boolean,
+                type: Boolean,
                 default: false
             },
             forceValues: {
-			    type: Boolean,
+                type: Boolean,
                 default: false,
             },
             forceObjects: {
-			    type: Boolean,
+                type: Boolean,
                 default: false,
+            },
+            emptyMessage: {
+                type: String,
+                default: ''
             }
 		},
 
 		data () {
 			return {
-			    clear_on_close: false,
+                clear_on_close: false,
 				loading: false,
 				selected: null,
                 startIndex: 0,
@@ -168,8 +176,8 @@
 			},
 
 			binds_objects() {
-			    if ( this.forceValues ) {
-			        return false;
+                if ( this.forceValues ) {
+                    return false;
                 }
 
 				// Try to determine what type of value the consumer expects
@@ -221,7 +229,7 @@
 			});
 
 			this.$on('clear', () => {
-			    this.isOpen = false;
+                this.isOpen = false;
 			});
 
 		},

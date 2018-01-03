@@ -49,6 +49,10 @@
 						padding-left: 1rem;
 					}
 				}
+                &.empty-list-message {
+                    color: $select-empty-message-color;
+                    font-style: $select-empty-message-style;
+                }
 			}
 		}
 	}

@@ -20,6 +20,9 @@
                     <template scope="props">
                         {{props.item.name}}
                     </template>
+                    <template slot="empty" scope="props">
+                        No results for "{{props.term}}"
+                    </template>
                 </ks-select>
 
                <code-block v-pre>
@@ -33,9 +36,12 @@
                        &lt;template slot="label" scope="{value, label}">
                            {{value}}: {{label}}
                        &lt;/template>
-                        &lt;template scope="props">
+                       &lt;template scope="props">
                             {{props.item.name}}
-                        &lt;/template>
+                       &lt;/template>
+                       &lt;template slot="empty" scope="props">
+                           No results for "{{props.term}}"
+                       &lt;/template>
                     &lt;/ks-select>
                </code-block>
             </div>
@@ -130,6 +136,26 @@
                         label-key="name"
                         v-model="forced_value"
                         :force-values="true"
+                    >&lt;/ks-select>
+                </code-block>
+            </div>
+        </div>
+
+        <div class="basic-block">
+            <div class="form-group">
+                <div class="label">Select with no options</div>
+                <ks-select
+                    name="empty"
+                    :items="[]"
+                    label-key="name"
+                    empty-message="No options here"
+                ></ks-select>
+                <code-block v-pre>
+                    &lt;ks-select
+                        name="empty"
+                        :items="[]"
+                        label-key="name"
+                        empty-message="No options here"
                     >&lt;/ks-select>
                 </code-block>
             </div>
@@ -364,6 +390,14 @@
                             <td>
                                 When set to true the list will automatically prevent the parent container from scrolling
                                 when the list scroll has reached the bottom.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>emptyMessage</td>
+                            <td>String</td>
+                            <td></td>
+                            <td>
+                                A message to use when the select is empty. (ex: "No Results"). If left blank then no message will show up.
                             </td>
                         </tr>
                     </tbody>
