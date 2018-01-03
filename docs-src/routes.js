@@ -19,6 +19,7 @@ import PageKsCheckbox from './pages/PageKsCheckbox.vue';
 import PageKsTable from './pages/PageKsTable.vue';
 import PageKsButton from './pages/PageKsButton.vue';
 import PageKsTooltip from './pages/PageKsTooltip.vue';
+import PageKsTimepicker from './pages/PageKsTimepicker.vue';
 
 const routes = [
     {
@@ -145,6 +146,12 @@ const routes = [
         component: PageKsTable,
         name: 'KsTable',
         meta: {title: 'Kickstart Tables'}
+    },
+    {
+        path: '/ks-timepicker',
+        component: PageKsTimepicker,
+        name: 'KsTimepicker',
+        meta: {title: 'Kickstart Timepicker'}
     },
     {
         path: '/ks-tooltip',
