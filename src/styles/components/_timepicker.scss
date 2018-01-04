@@ -2,7 +2,58 @@
 @import "../variables/_timepicker";
 
 .ks-timepicker {
+    position: relative;
     input[type=text] {
         @include ks-autocomplete-input;
+    }
+    > ul {
+        margin: 0;
+        z-index: 100;
+        padding: 0;
+        width: 100%;
+        background-color: $timepicker-bg;
+        position: absolute;
+        list-style: none;
+        border: solid 1px $timepicker-list-border;
+        border-top: 0;
+        overflow-y: auto;
+        left: 0;
+        li {
+            padding: rem($timepicker-list-item-padding);
+            border: 1px solid transparent;
+            border-bottom-color: $timepicker-list-item-border;
+            // If its the last child or an option group then we disable the border
+            &:last-child,
+            &.opt-group {
+                border-bottom-color: transparent;
+            }
+            &.opt-group {
+                padding-bottom: 0;
+                strong {
+                    display: block;
+                    padding: 0.15rem;
+                }
+                &:first-child strong {
+                    padding-top: 0;
+                }
+            }
+            &.selected-item {
+                @include state-hover();
+                color: $timepicker-list-selected-color;
+            }
+            &:hover {
+                //@include state-hover();
+                //background: $timepicker-list-item-hover-bg;
+            }
+            // Handle nested lists
+            ul {
+                list-style: none;
+                padding: 0;
+                li {
+                    padding-left: 1rem;
+                }
+            }
+        }
+
     }
 }

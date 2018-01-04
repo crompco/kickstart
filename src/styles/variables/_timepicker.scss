@@ -1,0 +1,10 @@
+@import "autocomplete";
+
+$timepicker-bg: white !default;
+
+$timepicker-list-bg: $white !default;
+$timepicker-list-border: $gray !default;
+$timepicker-list-item-border: $gray !default;
+$timepicker-list-item-padding: 0.25rem 0.5rem 0.25rem 0.2rem !default;
+$timepicker-list-selected-color: $white !default;
+$timepicker-list-item-hover-bg: darken(get($brand, light), 2%) !default;
