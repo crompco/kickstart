@@ -120,22 +120,12 @@ export function formatDate(date, format = 'Y-m-d', parse_format = format) {
  * @return {string}
  */
 export function formatTime(time, to_format = 'h:i a') {
-    time = time.replace(/\s/g, '');
-    let timeSplit = time.split(':');
-
-    let hour = parseInt(timeSplit[0]);
-    let min = timeSplit[1];
-    let meridiem = hour >= 12 ? 'pm' : 'am';
-    if ( hour == 0 ) {
-        hour = 12;
-    } else if ( hour > 12 ) {
-        hour -= 12;
-    }
-
-    return to_format
-        .replace('h', hour)
-        .replace('i', min)
-        .replace('a', meridiem);
+    let time_info = parseTime(time);
+    return to_format.replace('H', time_info.full_hour)
+        .replace('h', String(time_info.hour).padStart(2, '0'))
+        .replace('i', String(time_info.minute).padStart(2, '0'))
+        .replace('a', time_info.meridiem.toLowerCase())
+        .replace('A', time_info.meridiem.toUpperCase());
 }
 
 /**
@@ -216,6 +206,33 @@ export function dateModify(d, increment, val) {
 	return d;
 }
 
+export function parseTime(time) {
+    let time_parts = time.match(/([0-9]{1,2})\:([0-9]{1,2})\:*[0-9]*\s*(am|pm)/i);
+    if ( !time_parts ) {
+        time_parts = time.match(/([0-9]{1,2})\:([0-9]{1,2})/i);
+        if ( !time_parts ) {
+            console.error('Could not parse time');
+        }
+    }
+
+    // Setup the time parts
+    let hour = parseInt(time_parts[1] || '00');
+    let minute = parseInt(time_parts[2] || '00');
+    let meridiem = (time_parts[3] || '').toLowerCase();
+
+    // If we can't parse a meridiem value then we can only assume one and hope they don't expect that format
+    meridiem = meridiem ? meridiem : (hour < 12 ? 'am' : 'pm')
+
+    let full_hour = parseInt(meridiem == 'pm' ? hour + 12 : hour);
+
+    // Adjust plain hour for 12 hour format
+    hour = hour > 12 ? hour - 12 : (hour == 0 ? 12 : hour);
+
+    return {
+        hour, minute, meridiem, full_hour
+    };
+}
+
 export default {
 	defaultLocale,
 	getDaysInMonth,
@@ -228,4 +245,5 @@ export default {
 	formatDate,
     formatTime,
 	parseDate,
+    parseTime,
 }

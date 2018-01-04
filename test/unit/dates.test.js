@@ -103,8 +103,14 @@ test('dates:formatDate', t => {
 });
 
 test('dates:formatTime', t => {
-    t.is('1:00 pm', dates.formatTime('13:00:00'));
+    t.is('01:00 pm', dates.formatTime('13:00:00'));
     t.is('12:00 am', dates.formatTime('00:00:00'));
     t.is('12:30', dates.formatTime('12:30:00', 'h:i'));
     t.is('pm 12:30', dates.formatTime('12:30:00', 'a h:i'));
 });
+
+
+test('dates:parseTime', t => {
+    t.is(13, dates.parseTime('1:00 PM').full_hour);
+    t.is(14, dates.parseTime('1:14 PM').minute);
+})

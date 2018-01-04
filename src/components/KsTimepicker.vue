@@ -1,19 +1,20 @@
 <template>
     <div class="ks-timepicker">
-        <input type="text" v-model="display_value" @input="">
-        <input type="hidden" :name="name">
-        <!--<ks-tooltip trigger="click">-->
-            <!--<ul>-->
-                <!--<li>09:00</li>-->
-                <!--<li>10:00</li>-->
-            <!--</ul>-->
-        <!--</ks-tooltip>-->
+        <input type="text" v-model="display_value" @input="" @focus="isOpen = true">
+        <input type="hidden" :name="name" :value="value" @input="$emit('input', $event)">
+        <ul v-show="isOpen">
+            <li v-for="time in timeOptions" :key="time" @click.prevent.stop="setTime(time)">
+                {{time}}
+            </li>
+        </ul>
     </div>
 </template>
 
 <script>
 
     import KsTooltip from './KsTooltip';
+    import {smartFocusToggle} from "../helpers/events";
+    import {parseTime, formatTime} from "../helpers/dates";
 
     export default {
         name: 'KsTimepicker',
@@ -32,50 +33,60 @@
             displayFormat: {
                 type: String,
                 default: 'h:i a'
+            },
+            minTime: {
+                type: String,
+                default: '04:00'
+            },
+            maxTime: {
+                type: String,
+                default: '24:00'
             }
         },
 
         computed: {
             timeOptions() {
+                let min_time = parseTime(this.minTime);
+                let max_time = parseTime(this.maxTime);
 
+                let options = [];
+
+                for ( var i = min_time.full_hour; i < max_time.full_hour; i++ ) {
+                    for ( var j = 0; j < 60; j += parseInt(this.timeStep) ) {
+                        options.push(
+                            this.formatTimeValue(`${i}:${j}`, this.displayFormat)
+                        )
+                    }
+                }
+
+                return options;
             },
         },
 
         data() {
             return {
+                isOpen: false,
+                focused: false,
                 display_value: this.formatTimeValue(this.value, this.displayFormat)
             }
+        },
+
+        mounted() {
+            this.$nextTick(() => {
+                smartFocusToggle(this.$el, (focus, e) => {
+                    this.focused = focus;
+                }, 150);
+            });
         },
 
         methods: {
 
             formatTimeValue(time, format) {
-                let time_info = this.parseTime(time);
-                return format.replace('H', time_info.full_hour)
-                    .replace('h', time_info.hour)
-                    .replace('i', time_info.minute)
-                    .replace('a', time_info.meridiem.toLowerCase())
-                    .replace('A', time_info.meridiem.toUpperCase());
+                return formatTime(time, format);
             },
 
-            parseTime(time) {
-                let time_parts = time.match(/([0-9]{1,2})\:([0-9]{1,2})\s*(am|pm)/i);
-
-                // Setup the time parts
-                let hour = time_parts[1];
-                let minute = time_parts[2] || '00';
-                let meridiem = time_parts[3] || '';
-                let military = meridiem ? false : true;
-                let full_hour;
-
-                if ( military ) {
-                    full_hour = meridiem.toLowerCase() == 'pm' ? hour + 12 : hour;
-                } else {
-                    full_hour = hour;
-                }
-                return {
-                    hour, minute, meridiem, military, full_hour
-                };
+            setTime(time) {
+                this.$emit('input', formatTime(time, this.timeFormat));
             }
         },
 
@@ -91,8 +102,13 @@
                 this.$emit('input', this.formatTimeValue(this.value, this.timeFormat))
             },
             value() {
-
-            }
+                this.display_value = this.formatTimeValue(this.value, this.displayFormat);
+            },
+            focused() {
+                if ( !this.focused ) {
+                    this.isOpen = false;
+                }
+            },
         }
     }
 </script>

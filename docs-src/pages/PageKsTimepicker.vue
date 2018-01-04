@@ -4,7 +4,8 @@
         <div class="basic-block">
             <ks-timepicker
                 name="start_time"
-                time-format="h:i"
+                time-format="H:i"
+                display-format="h:i A"
                 time-step="30"
                 v-model="start_time"
             ></ks-timepicker>
