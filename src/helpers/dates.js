@@ -206,12 +206,20 @@ export function dateModify(d, increment, val) {
 	return d;
 }
 
-export function parseTime(time) {
+/**
+ * Parses a time for hour, minutes, meridiem, 24hr_hour (full_hour)
+ *
+ * @param String time
+ * @param mixed default_value a value to use when the time can not be parsed
+ * @returns Boolean|{hour, minute, meridiem, full_hour}
+ */
+export function parseTime(time, default_value = false) {
     let time_parts = time.match(/([0-9]{1,2})\:([0-9]{1,2})\:*[0-9]*\s*(am|pm)/i);
     if ( !time_parts ) {
         time_parts = time.match(/([0-9]{1,2})\:([0-9]{1,2})/i);
         if ( !time_parts ) {
             console.error('Could not parse time');
+            return default_value;
         }
     }
 
@@ -219,11 +227,10 @@ export function parseTime(time) {
     let hour = parseInt(time_parts[1] || '00');
     let minute = parseInt(time_parts[2] || '00');
     let meridiem = (time_parts[3] || '').toLowerCase();
+    let full_hour = parseInt(meridiem == 'pm' ? hour + 12 : hour);
 
     // If we can't parse a meridiem value then we can only assume one and hope they don't expect that format
     meridiem = meridiem ? meridiem : (hour < 12 ? 'am' : 'pm')
-
-    let full_hour = parseInt(meridiem == 'pm' ? hour + 12 : hour);
 
     // Adjust plain hour for 12 hour format
     hour = hour > 12 ? hour - 12 : (hour == 0 ? 12 : hour);
