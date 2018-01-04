@@ -29,6 +29,7 @@ const config = {
         KsAccordion: ['./src/components/KsAccordion'],
         KsAccordionRow: ['./src/components/KsAccordionRow'],
         KsButton: ['./src/components/KsButton'],
+        KsTimepicker: ['./src/components/KsTimepicker'],
         // Helpers
         api: ['./src/helpers/api.js'],
         strings: ['./src/helpers/strings.js'],
