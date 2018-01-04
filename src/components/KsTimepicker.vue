@@ -247,6 +247,14 @@
                     // If it does validate then we should emit a new value
                     this.setTime(this.display_value);
                 }
+            },
+
+            close() {
+                this.isOpen = false;
+            },
+
+            open() {
+                this.isOpen = true;
             }
         },
 
