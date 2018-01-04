@@ -39,7 +39,6 @@
 
 <script>
 
-    import KsTooltip from './KsTooltip';
     import {smartFocusToggle} from "../helpers/events";
     import {parseTime, formatTime} from "../helpers/dates";
     import ListIndexNavigator from './mixins/ListIndexNavigator';
@@ -256,10 +255,6 @@
             open() {
                 this.isOpen = true;
             }
-        },
-
-        components: {
-            KsTooltip
         },
 
         watch: {

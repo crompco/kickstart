@@ -21,6 +21,7 @@ import KsAccordion from './components/KsAccordion.vue';
 import KsAccordionRow from './components/KsAccordionRow.vue';
 import KsTooltip from './components/KsTooltip.vue';
 import KsButton from './components/KsButton.vue';
+import KsTimepicker from './components/KsTimepicker.vue';
 import * as animations from './components/transitions/Transitions';
 import * as strings from './helpers/strings';
 
@@ -47,6 +48,7 @@ const Kickstart = {
     KsAccordionRow,
     KsTooltip,
 	KsButton,
+    KsTimepicker,
 	install(Vue) {
         function open(propsData) {
             const Toast = Vue.extend(KsToast);
@@ -70,26 +72,27 @@ const Kickstart = {
 			}, params))
 		};
 
-		Vue.component('ks-autocomplete', KsAutocomplete)
-		Vue.component('ks-calendar', KsCalendar)
+        Vue.component('ks-autocomplete', KsAutocomplete)
+        Vue.component('ks-calendar', KsCalendar)
         Vue.component('ks-checkbox', KsCheckbox)
         Vue.component('ks-checkbox-group', KsCheckboxGroup)
-		Vue.component('ks-datepicker', KsDatepicker)
-		Vue.component('ks-loader-spin', KsLoaderSpin)
-		Vue.component('ks-loader-line', KsLoaderLine)
-		Vue.component('ks-modal', KsModal)
-		Vue.component('ks-radio', KsRadio)
-		Vue.component('ks-radio-group', KsRadioGroup)
-		Vue.component('ks-select', KsSelect)
-		Vue.component('ks-tab', KsTab)
+        Vue.component('ks-datepicker', KsDatepicker)
+        Vue.component('ks-loader-spin', KsLoaderSpin)
+        Vue.component('ks-loader-line', KsLoaderLine)
+        Vue.component('ks-modal', KsModal)
+        Vue.component('ks-radio', KsRadio)
+        Vue.component('ks-radio-group', KsRadioGroup)
+        Vue.component('ks-select', KsSelect)
+        Vue.component('ks-tab', KsTab)
         Vue.component('ks-tabs', KsTabs)
         Vue.component('ks-paginator', KsPaginator)
         Vue.component('ks-action-menu', KsActionMenu)
         Vue.component('ks-step-through', KsStepThrough)
-		Vue.component('ks-accordion', KsAccordion)
-		Vue.component('ks-accordion-row', KsAccordionRow)
+        Vue.component('ks-accordion', KsAccordion)
+        Vue.component('ks-accordion-row', KsAccordionRow)
         Vue.component('ks-tooltip', KsTooltip)
-		Vue.component('ks-button', KsButton);
+        Vue.component('ks-button', KsButton);
+        Vue.component('ks-timepicker', KsTimepicker);
 
 		for ( let i in animations ) {
 			Vue.component(i, animations[i]);
@@ -105,9 +108,9 @@ const Kickstart = {
         Vue.filter('posesses', function (value) {
             return strings.posesses(value);
         });
-		Vue.filter('currency', function (value, symbol = '$') {
-			return strings.currency(value, symbol);
-		});
+        Vue.filter('currency', function (value, symbol = '$') {
+            return strings.currency(value, symbol);
+        });
         Vue.filter('pad_left', function (value, pad_width, pad_length) {
             return strings.pad_left(value, pad_width, pad_length);
         });
