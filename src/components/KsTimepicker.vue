@@ -5,18 +5,21 @@
         @keydown.down.prevent="selectDownOpen"
         @keydown.up.prevent="selectUpOpen"
         @keydown.enter.prevent="selectItemAtIndex(null)"
-        @keydown.esc.prevent.stop="resetFocus"
+        @keydown.tab="selectItemAtIndex(null, $event)"
+        @keydown.esc.prevent="resetFocus(true)"
+        @keydown="startTyping($event)"
+        @keydown.8.prevent.stop="clearAndFocus"
     >
         <input
+            tabindex="-1"
             ref="lookup"
             type="text"
             v-model="display_value"
             @input=""
             @focus="isOpen = true"
             autocomplete="off"
-            @keyup.enter="selectItemAtIndex(null)"
-            @keyup.tab="selectItemAtIndex(null)"
-            @keyup="searchTime"
+            @keydown.8.stop
+            @keyup.stop="searchTime"
         />
         <input type="hidden" :name="name" :value="value" @input="$emit('input', $event)">
         <ul
@@ -106,7 +109,11 @@
             return {
                 isOpen: false,
                 focused: false,
+                tmp_type: '',
+                timer: null,
                 list: [],
+                minIndex: 0,
+                startIndex: 0,
                 display_value: this.formatTimeValue(this.value, this.displayFormat)
             }
         },
@@ -129,6 +136,32 @@
         },
 
         methods: {
+            /**
+             * Catch key presses on the focused parent and autofill the search
+             */
+            startTyping(e) {
+                if ((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 96 && e.keyCode <= 105)) {
+                    this.tmp_type += String.fromCharCode(e.keyCode);
+                    if ( document.activeElement != this.$refs.lookup ) {
+                        clearTimeout(this.timer);
+                        this.timer = setTimeout(() => {
+                            this.display_value = this.tmp_type;
+                            this.tmp_type = '';
+                            this.$nextTick(() => {
+                                this.$refs.lookup.focus();
+                                this.searchTime(e);
+                            })
+                        }, 75);
+                    }
+                }
+            },
+
+            clearAndFocus() {
+                this.setTime('');
+                this.$nextTick(() => {
+                    this.$refs.lookup.focus();
+                })
+            },
 
             /**
              * Parses and Formats a time
@@ -138,6 +171,9 @@
              * @returns {string}
              */
             formatTimeValue(time, format) {
+                if ( !time ) {
+                    return '';
+                }
                 return formatTime(time, format);
             },
 
@@ -145,7 +181,7 @@
              * Resets the display value back to the formatted value
              */
             resetDisplayValue() {
-                this.display_value = formatTime(this.value, this.displayFormat);
+                this.display_value = this.formatTimeValue(this.value, this.displayFormat);
             },
 
             /**
@@ -154,7 +190,7 @@
              * @param time
              */
             setTime(time) {
-                let time_formatted = formatTime(time, this.timeFormat);
+                let time_formatted = this.formatTimeValue(time, this.timeFormat);
                 if ( time_formatted != this.value ) {
                     this.$emit('input', time_formatted);
                 }
@@ -165,13 +201,22 @@
              *
              * @param int|null index
              */
-            selectItemAtIndex(index = null) {
+            selectItemAtIndex(index = null, event = null) {
+                if ( event && event.keyCode == 9 ) {
+                    if ( !this.isOpen ) {
+                        return;
+                    }
+
+                    event.preventDefault();
+                }
+
                 if ( !this.isOpen ) {
                     this.isOpen = true;
                     return;
                 }
 
                 index = index || this.selected_index;
+
                 if ( this.list[index] ) {
                     this.setTime(this.list[index]);
                     this.resetFocus();
@@ -182,22 +227,30 @@
                 this.list = this.timeOptions.slice(0);
             },
 
-            resetFocus() {
+            resetFocus(validate = false) {
                 this.$nextTick(() => {
                     this.$el.focus();
                     this.$nextTick(() => {
                         this.isOpen = false;
+                        if ( validate ) {
+                            this.validateDisplayValue();
+                        }
                     })
                 })
             },
 
             searchTime(e) {
                 // Ignore navigation keys
-                if ( e.keyCode == 38 || e.keyCode == 40 ) {
+                if ( e.keyCode == 38 || e.keyCode == 40 || e.keyCode == 9 ) {
                     return;
                 }
+
+                this.selected_index = this.startIndex;
                 this.lookup_name = this.display_value;
                 this.filterList();
+
+                // Force the clearing of the tmp type on parent
+                this.tmp_type = '';
             },
 
             /**
@@ -301,8 +354,16 @@
              * Reset the list when it's closed
              */
             isOpen() {
-                if ( !this.isOpen ) {
+                if ( this.isOpen ) {
                     this.resetList();
+                    // If it's opening then let's pre-select the current time
+                    var index = this.list.indexOf(this.display_value)
+                    if ( -1 != index ) {
+                        this.selected_index = index;
+                        this.$nextTick(() => {
+                            this.initListScrollTo(index);
+                        })
+                    }
                 }
             }
         }

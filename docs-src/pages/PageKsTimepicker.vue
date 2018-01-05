@@ -129,7 +129,7 @@
         data() {
             return {
                 time_format: 'H:i',
-                start_time: '9:00 am'
+                start_time: ''
             }
         },
 
