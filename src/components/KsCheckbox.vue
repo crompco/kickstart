@@ -6,6 +6,7 @@
             :value="value"
             :checked="isChecked"
             @click="toggle"
+            :disabled="disabled"
         >
         <div class="ks-checkbox-switch" v-if="switchStyle"></div>
         <template v-else>
@@ -93,6 +94,10 @@
                 this.isChecked = String(this.value) == String(this.checked);
             },
             toggle(e) {
+                if ( this.disabled ) {
+                    e.preventDefault();
+                    return false;
+                }
                 this.isChecked = e.target.checked;
 
                 if ( this.isChecked ) {
