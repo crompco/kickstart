@@ -149,6 +149,7 @@
         margin-left: 0.25rem;
         display: inline-block;
         vertical-align: 0.3rem;
+        transition: all 0.2s;
     }
 
     input[type="checkbox"] {
@@ -214,6 +215,18 @@
                 &::after {
                     left: $switch-width - $knob-width - ($switch-padding);
                 }
+            }
+        }
+
+        &:disabled {
+            + .ks-checkbox-switch {
+                &::before {
+                    background: $switch-disabled-color;
+                }
+            }
+            ~ .ks-checkbox-label-wrapper {
+                opacity: 0.5;
+                font-style: italic;
             }
         }
     }

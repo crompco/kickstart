@@ -4,9 +4,19 @@
         <div class="basic-block">
             <div class="row row-collapse">
                 <div class="sm-6">
+                    <div class="right">
+                        <ks-button v-model="disable_switch" @click.prevent="disable_switch = !disable_switch">Disable</ks-button>
+                    </div>
                     <div class="form-group">
                         <div class="label">Single Checkbox</div>
-                        <ks-checkbox label="Check Me" name="single" value="1" v-model="values.single" :switch-style="true"></ks-checkbox>
+                        <ks-checkbox
+                            label="Check Me"
+                            name="single"
+                            value="1"
+                            v-model="values.single"
+                            :switch-style="true"
+                            :disabled="disable_switch"
+                        ></ks-checkbox>
                     </div>
                     <code-block v-pre>
                         &lt;ks-checkbox label="Check Me" name="single" value="1" v-model="values.single" :switch-style="true">&lt;/ks-checkbox>
@@ -332,6 +342,7 @@
                 },
                 checkboxGroup: [],
                 buttonGroup: [],
+                disable_switch: false
             }
         },
 
