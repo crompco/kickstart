@@ -43,6 +43,7 @@ export const slideUp = (el, timing = '0.4s ease', cb = null) => {
     // Add transition
     el.style.webkitTransition = 'all ' + timing + ' 0s';
     el.style.transition = 'all ' + timing + ' 0s';
+    el.style.overflow = 'hidden';
 
     let endingTransition = (e) => {
         el.style.opacity = '0';
