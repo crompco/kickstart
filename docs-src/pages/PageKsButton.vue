@@ -62,6 +62,7 @@
                 &lt;ks-button
                     :spin="spinning"
                     @click.prevent="spinSmall = !spinSmall"
+                    spin-size="tiny"
                 >
                     &checkmark;
                 &lt;/ks-button>
@@ -133,6 +134,12 @@
                             <td>String</td>
                             <td>null</td>
                             <td>The color of the spinner</td>
+                        </tr>
+                        <tr>
+                            <td>spinSize</td>
+                            <td>String</td>
+                            <td>small</td>
+                            <td>The size of the button spinner (small, tiny). Tiny is helpful for smaller width buttons</td>
                         </tr>
                         <tr>
                             <td>tiny</td>
