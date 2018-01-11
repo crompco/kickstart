@@ -82,6 +82,9 @@
                         <slot :item="item">{{item[selectionKey]}}</slot>
                     </li>
                 </template>
+                <li v-if="hasEmptyMessage && !loading && list.length == 0" class="empty-list-message">
+                    <slot :term="lookup_name" name="empty">{{emptyMessage}}</slot>
+                </li>
 			</ul>
 		</div>
 	</div>
@@ -90,7 +93,6 @@
 <script>
 	// Internal
 	import LoaderLine from './KsLoaderLine.vue';
-	import {addEvent, keyCode} from '../helpers/events';
     import {object_get} from '../helpers/objects';
     import ListIndexNavigatior from './mixins/ListIndexNavigator';
 
@@ -120,16 +122,20 @@
 				default: 1
 			},
 			focus: {
-			    type: Boolean,
+                type: Boolean,
 				default: false
 			},
             showTagInList: {
-			    type: Boolean,
+                type: Boolean,
 				default: false
 			},
             keepTextOnDelete: {
-			    type: Boolean,
+                type: Boolean,
                 default: false
+            },
+            emptyMessage: {
+                type: String,
+                default: null
             }
 		},
 
@@ -161,7 +167,10 @@
 				}
 
 				return this.placeholder;
-			}
+			},
+            hasEmptyMessage() {
+                return this.emptyMessage || this.$slots.empty || this.$scopedSlots.empty;
+            }
 		},
 
 		mounted() {
@@ -171,7 +180,7 @@
 			this.refreshSelection();
 
 			this.$nextTick(() => {
-			    this.initListNavigation({
+                this.initListNavigation({
 					lookup: 'lookup',
 					list: 'list'
 				});
@@ -181,7 +190,7 @@
 		methods: {
 
 			clearSelection(s) {
-			    let popped = null;
+                let popped = null;
 
 				if ( this.is_multiple ) {
 					let index = this.selection.indexOf(s);
@@ -191,7 +200,7 @@
                         this.$emit('input', this.selection);
                     }
 				} else {
-				    popped = this.selection;
+                    popped = this.selection;
 					this.selection = null;
 					this.$emit('input', this.selection);
 				}

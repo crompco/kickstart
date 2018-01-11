@@ -13,6 +13,7 @@
                     @search="runSearch"
                     :paginated="true"
                     :min-search="0"
+                    empty-message="Nothing found"
                 ></ks-autocomplete>
                 <code-block v-pre>
                     &lt;ks-autocomplete
@@ -20,6 +21,7 @@
                         v-model="value1"
                         @search="runSearch"
                         :paginated="true"
+                        empty-message="Nothing found"
                     >&lt;/ks-autocomplete>
                 </code-block>
             </div>
@@ -330,6 +332,14 @@
                             <td>
                                 When set to true the list will automatically prevent the parent container from scrolling
                                 when the list scroll has reached the bottom.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>emptyMessage</td>
+                            <td>String</td>
+                            <td></td>
+                            <td>
+                                A message to use when the select is empty. (ex: "No Results"). If left blank then no message will show up.
                             </td>
                         </tr>
                     </tbody>

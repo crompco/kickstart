@@ -37,6 +37,8 @@ $ac-list-item-border: $gray !default;
 $ac-list-item-padding: 0.25rem 0.5rem 0.25rem 0.2rem !default;
 $ac-list-selected-color: $white !default;
 $ac-list-item-hover-bg: darken(get($brand, light), 2%) !default;
+$ac-empty-message-color: $med-gray !default;
+$ac-empty-message-style: italic !default;
 
 //
 // Multiple

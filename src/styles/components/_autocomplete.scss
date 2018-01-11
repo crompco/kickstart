@@ -163,6 +163,12 @@
             //@include state-hover();
             //background: $ac-list-item-hover-bg;
         }
+
+        &.empty-list-message {
+            color: $ac-empty-message-color;
+            font-style: $ac-empty-message-style;
+        }
+
         // Handle nested lists
         ul {
             list-style: none;
