@@ -292,7 +292,7 @@
                     .replace(':', '\\:+')
                     .replace(/a/i, '(am|pm)'));
 
-                if ( !this.display_value.match(validationRegex) ) {
+                if ( !this.display_value.match(validationRegex) || isNaN(new Date(this.display_value).getTime()) ) {
                     // If it doesn't match the format then reset it
                     this.resetDisplayValue();
                 } else {
