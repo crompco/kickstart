@@ -308,7 +308,10 @@ export default {
          * @param ref
          */
         setFocus(ref) {
-            this.$refs[ref || this.ref_lookup].focus();
+            const reference = this.$refs[ref || this.ref_lookup];
+            if ( typeof reference !== 'undefined' ) {
+                reference.focus();
+            }
             this.$emit('focus');
         },
 
@@ -492,6 +495,10 @@ export default {
          * Resets the scroll of the given reference
          */
         resetList() {
+            if ( typeof this.$refs[this.ref_list] === 'undefined' ) {
+                return;
+            }
+
             this.$refs[this.ref_list].scrollTop = 0;
             this.selected_index = parseInt(this.startIndex);
         },
