@@ -121,6 +121,7 @@ export function formatDate(date, format = 'Y-m-d', parse_format = format) {
  */
 export function formatTime(time, to_format = 'h:i a') {
     let time_info = parseTime(time);
+    console.log('TI: ', time_info);
     return to_format.replace('H', time_info.full_hour)
         .replace('h', String(time_info.hour).padStart(2, '0'))
         .replace('i', String(time_info.minute).padStart(2, '0'))
@@ -227,10 +228,10 @@ export function parseTime(time, default_value = false) {
     let hour = parseInt(time_parts[1] || '00');
     let minute = parseInt(time_parts[2] || '00');
     let meridiem = (time_parts[3] || '').toLowerCase();
-    let full_hour = parseInt(meridiem == 'pm' && hour != 12 ? hour + 12 : meridiem == 'am' && hour == 12 ? 0 : hour);
+    let full_hour = parseInt(meridiem == 'pm' ? hour + 12 : hour);
 
     // If we can't parse a meridiem value then we can only assume one and hope they don't expect that format
-    meridiem = meridiem ? meridiem : (hour < 12 ? 'am' : 'pm');
+    meridiem = meridiem ? meridiem : (hour < 12 ? 'am' : 'pm')
 
     // Adjust plain hour for 12 hour format
     hour = hour > 12 ? hour - 12 : (hour == 0 ? 12 : hour);
