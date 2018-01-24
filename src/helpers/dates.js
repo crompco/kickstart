@@ -227,7 +227,7 @@ export function parseTime(time, default_value = false) {
     let hour = parseInt(time_parts[1] || '00');
     let minute = parseInt(time_parts[2] || '00');
     let meridiem = (time_parts[3] || '').toLowerCase();
-    let full_hour = parseInt(meridiem == 'pm' ? hour + 12 : hour);
+    let full_hour = parseInt(meridiem == 'pm' && hour != 12 ? hour + 12 : meridiem == 'am' && hour == 12 ? 0 : hour);
 
     // If we can't parse a meridiem value then we can only assume one and hope they don't expect that format
     meridiem = meridiem ? meridiem : (hour < 12 ? 'am' : 'pm')
