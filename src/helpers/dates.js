@@ -121,7 +121,6 @@ export function formatDate(date, format = 'Y-m-d', parse_format = format) {
  */
 export function formatTime(time, to_format = 'h:i a') {
     let time_info = parseTime(time);
-    console.log('TI: ', time_info);
     return to_format.replace('H', time_info.full_hour)
         .replace('h', String(time_info.hour).padStart(2, '0'))
         .replace('i', String(time_info.minute).padStart(2, '0'))
