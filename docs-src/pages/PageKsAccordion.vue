@@ -108,6 +108,43 @@
                     </table>
                 </ks-tab>
 
+                <ks-tab title="Methods">
+                    <h3>Accordion</h3>
+                    <table class="table striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>collapseAll()</td>
+                                <td>Closes all accordion rows</td>
+                            </tr>
+                            <tr>
+                                <td>setActiveAccordion(accordion)</td>
+                                <td>Activates the passed accordion row</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h3>Accordion Row</h3>
+                    <table class="table striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>setActive((boolean) active)</td>
+                                <td>Toggles the active status of the row. Takes a boolean</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </ks-tab>
+
                 <ks-tab title="Slots">
                     <h3>Accordion</h3>
                     <table class="table striped">

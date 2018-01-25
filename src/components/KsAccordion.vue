@@ -46,6 +46,12 @@
                 } else {
                     accordion.setActive(!accordion.$data.showContent);
                 }
+            },
+
+            collapseAll() {
+                for ( let acc of this.accordions ) {
+                    acc.setActive(false);
+                }
             }
         }
     }
