@@ -11,6 +11,19 @@ let showing = false;
 let props = false;
 let events = {};
 
+// vertical = middle, top, bottom, horizontal = center, left, right
+
+export const defaultOptions = {
+    attachment: 'top center',
+    targetAttachment: 'bottom center',
+    constraints: [
+        {
+            to: 'window',
+            attachment: 'together ks-together'
+        }
+    ],
+};
+
 function hasClass($el, className) {
     if ( $el.classList ) {
         return $el.classList.contains(className);
@@ -26,24 +39,22 @@ function isUndefined(item) {
 function createTooltipDiv(wrapper, binding) {
     let new_div = wrapper.appendChild(document.createElement('div'));
     new_div.className = 'ks-tooltip';
-    new_div.innerHTML += '<div class="ks-tooltip-arrow"></div>';
+
+    if ( isUndefined(props.showArrow) || props.showArrow ) {
+        new_div.className += ' show-arrow';
+        new_div.innerHTML += '<div class="ks-tooltip-arrow"></div>';
+    }
+
     new_div.innerHTML += binding.value;
 
     return new_div;
 }
 
-export function initTether(el, target) {
-    return new Tether({
+export function initTether(el, target, options = {}) {
+    return new Tether(Object.assign({
         element: el,
         target: target,
-        attachment: 'top center',
-        constraints: [
-            {
-                to: 'window',
-                attachment: 'together ks-together'
-            }
-        ]
-    });
+    }, defaultOptions, options));
 }
 
 function showTooltip(el, binding) {

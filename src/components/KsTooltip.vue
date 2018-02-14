@@ -5,8 +5,9 @@
          @mouseenter="clearTimeout"
          @mouseleave="hideTooltip"
          @click.prevent.stop
+         :class="{'show-arrow': showArrow}"
     >
-        <div class="ks-tooltip-arrow"></div>
+        <div class="ks-tooltip-arrow" v-if="showArrow"></div>
         <slot></slot>
     </div>
 </template>
@@ -15,7 +16,7 @@
     // External Dependencies
 
     // Internal Dependencies
-    import {initTether} from '../directives/KsTooltip';
+    import {initTether, defaultOptions} from '../directives/KsTooltip';
     import {parent} from '../helpers/dom';
 
     export default {
@@ -51,7 +52,29 @@
             target: {
                 type: String,
                 default: ''
-            }
+            },
+
+            attachment: {
+                type: String,
+                default: defaultOptions.attachment
+            },
+
+            targetAttachment: {
+                type: String,
+                default: defaultOptions.targetAttachment
+            },
+
+            constraints: {
+                type: [Array, Object],
+                default() {
+                    return defaultOptions.constraints;
+                }
+            },
+
+            showArrow: {
+                type: Boolean,
+                default: true,
+            },
         },
 
         computed: {
@@ -110,7 +133,11 @@
                 this.showing = true;
 
                 if ( this.tether == false ) {
-                    this.tether = initTether(this.$el, this.target_element);
+                    this.tether = initTether(this.$el, this.target_element, {
+                        attachment: this.attachment,
+                        targetAttachment: this.targetAttachment,
+                        constraints: this.constraints,
+                    });
                 }
 
                 this.$nextTick(() => {

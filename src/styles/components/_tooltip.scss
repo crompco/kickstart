@@ -3,7 +3,6 @@
     border: 1px solid #aaa;
     padding: 0.25rem 0.5rem;
     border-radius: 3px;
-    margin-top: 0.25rem;
     z-index: 12;
     color: $text-color;
 
@@ -30,15 +29,55 @@
         }
     }
 
-    &.tether-target-attached-right {
+    &.tether-element-attached-right {
         .ks-tooltip-arrow {
-            right: 1px;
+            right: -1px;
             left: auto;
+        }
+    }
+
+    &.tether-element-attached-left {
+        .ks-tooltip-arrow {
+            left: -1px;
+            right: auto;
         }
     }
 
     &.tether-target-attached-bottom {
         box-shadow: 0 2px 2px rgba(0,0,0,0.3);
+
+        &.show-arrow {
+            margin-top: 7px;
+        }
+
+        &.tether-target-attached-right.tether-element-attached-left, &.tether-target-attached-left.tether-element-attached-left  {
+            border-top-left-radius: 0;
+
+            .ks-tooltip-arrow {
+                border-left: none;
+
+                &:before {
+                    border-left: none;
+                    left: 1px;
+                    top: 2px;
+                }
+            }
+        }
+
+        &.tether-target-attached-left.tether-element-attached-right, &.tether-target-attached-right.tether-element-attached-right {
+            border-top-right-radius: 0;
+
+            .ks-tooltip-arrow {
+                border-right: none;
+
+                &:before {
+                    border-right: none;
+                    right: 1px;
+                    top: 2px;
+                    left: unset;
+                }
+            }
+        }
 
         .ks-tooltip-arrow {
             border-bottom: 7px solid #aaa;
@@ -54,6 +93,39 @@
 
     &.tether-target-attached-top {
         box-shadow: 0 0 2px rgba(0,0,0,0.3);
+
+        &.show-arrow {
+            margin-top: -7px;
+        }
+
+        &.tether-target-attached-right.tether-element-attached-left, &.tether-target-attached-left.tether-element-attached-left {
+            border-bottom-left-radius: 0;
+
+            .ks-tooltip-arrow {
+                border-left: none;
+
+                &:before {
+                    border-left: none;
+                    left: 1px;
+                    bottom: 2px;
+                }
+            }
+        }
+
+        &.tether-target-attached-left.tether-element-attached-right, &.tether-target-attached-right.tether-element-attached-right {
+            border-bottom-right-radius: 0;
+
+            .ks-tooltip-arrow {
+                border-right: none;
+
+                &:before {
+                    border-right: none;
+                    right: 1px;
+                    bottom: 2px;
+                    left: unset;
+                }
+            }
+        }
 
         .ks-tooltip-arrow {
             border-top: 7px solid #aaa;
