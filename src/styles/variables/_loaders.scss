@@ -5,7 +5,7 @@
 $line-loader-height: 4px;
 $line-loader-width: 100%;
 $line-loader-bg: #ddd;
-$line-loader-bg-active: get($brand, secondary);
+$line-loader-bg-active: #7b699f;
 $line-loader-speed: 1.5;
 $line-loader-animation-style: linear;
 $line-loader-animation-length: infinite;
@@ -14,7 +14,7 @@ $line-loader-animation-length: infinite;
 $spinner-size: 28px;
 $spinner-border: #ddd;
 $spinner-border-width: .25rem;
-$spinner-border-active: get($brand, secondary);
+$spinner-border-active: #7b699f;
 $spinner-speed: 1;
 $spinner-animation-style: linear;
 $spinner-animation-length: infinite;
