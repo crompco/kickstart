@@ -88,8 +88,7 @@
 .ks-radio-group.option-buttons, .ks-checkbox-group.option-buttons {
     .ks-radio, .ks-checkbox {
         display: inline-block;
-        // Using a hard pixel value to get a precise matching height to the other form elements
-        padding: 8.5px 0.5rem;
+        padding: 0.532rem 0.5rem;
         border: solid 1px $gray;
         border-left-width: 0;
         color: lighten($text-color, 10%);
