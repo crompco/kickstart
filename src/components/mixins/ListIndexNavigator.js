@@ -259,15 +259,16 @@ export default {
 
         /**
          * Clear the lookup
+         * @param keep_focus_or_event
          */
-        clear(keep_focus = false) {
+        clear(keep_focus_or_event = false) {
             this.resetList();
             this.lookup_name = '';
             this.list = [];
-            if ( this.$refs[this.ref_lookup] === document.activeElement && !keep_focus) {
+            if ( this.$refs[this.ref_lookup] === document.activeElement && !keep_focus_or_event) {
                 this.$refs[this.ref_lookup].blur();
             }
-            this.$emit('clear');
+            this.$emit('clear', keep_focus_or_event);
         },
 
         /**
