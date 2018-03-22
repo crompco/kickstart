@@ -86,6 +86,7 @@
 }
 // Option buttons
 .ks-radio-group.option-buttons, .ks-checkbox-group.option-buttons {
+    display: inline-block;
     .ks-radio, .ks-checkbox {
         display: inline-block;
         padding: 0.532rem 0.5rem;
