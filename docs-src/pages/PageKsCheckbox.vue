@@ -12,14 +12,15 @@
                         <ks-checkbox
                             label="Check Me"
                             name="single"
-                            value="1"
+                            :value="true"
                             v-model="values.single"
                             :switch-style="true"
                             :disabled="disable_switch"
                         ></ks-checkbox>
+                        <pre>{{typeof values.single}} {{values.single}}</pre>
                     </div>
                     <code-block v-pre>
-                        &lt;ks-checkbox label="Check Me" name="single" value="1" v-model="values.single" :switch-style="true">&lt;/ks-checkbox>
+                        &lt;ks-checkbox label="Check Me" name="single" :value="true" v-model="values.single" :switch-style="true">&lt;/ks-checkbox>
                     </code-block>
                 </div>
                 <div class="sm-6">

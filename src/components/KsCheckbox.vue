@@ -123,7 +123,7 @@
                     return checked;
                 }
 
-                return String(this.value);
+                return this.value;
             }
         },
 
