@@ -30,6 +30,8 @@ const config = {
         KsAccordionRow: ['./src/components/KsAccordionRow'],
         KsButton: ['./src/components/KsButton'],
         KsTimepicker: ['./src/components/KsTimepicker'],
+        KsDraggable: ['./src/components/KsDraggable'],
+        KsDroppable: ['./src/components/KsDroppable'],
         // Helpers
         api: ['./src/helpers/api.js'],
         strings: ['./src/helpers/strings.js'],

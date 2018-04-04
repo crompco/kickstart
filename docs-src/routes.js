@@ -20,6 +20,7 @@ import PageKsTable from './pages/PageKsTable.vue';
 import PageKsButton from './pages/PageKsButton.vue';
 import PageKsTooltip from './pages/PageKsTooltip.vue';
 import PageKsTimepicker from './pages/PageKsTimepicker.vue';
+import PageKsDragAndDrop from './pages/PageKsDragAndDrop.vue';
 
 const routes = [
     {
@@ -85,6 +86,12 @@ const routes = [
         path: '/ks-datepicker',
         component: PageKsDatepicker,
         name: 'KsDatepicker',
+        meta: {title: 'Kickstart Datepicker'}
+    },
+    {
+        path: '/ks-drag-drop',
+        component: PageKsDragAndDrop,
+        name: 'KsDragAndDrop',
         meta: {title: 'Kickstart Datepicker'}
     },
     {

@@ -1,0 +1,12 @@
+@import "../variables/drag_and_drop";
+
+.drop-zone-active {
+    outline: $drop-zone-outline-color dashed;
+}
+[draggable] {
+    transition: all 150ms ease-out;
+}
+.dragging {
+    transform: scale(0.8);
+    opacity: 0.8;
+}

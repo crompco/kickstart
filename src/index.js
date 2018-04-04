@@ -22,6 +22,8 @@ import KsAccordionRow from './components/KsAccordionRow.vue';
 import KsTooltip from './components/KsTooltip.vue';
 import KsButton from './components/KsButton.vue';
 import KsTimepicker from './components/KsTimepicker.vue';
+import KsDraggable from './components/KsDraggable.vue';
+import KsDroppable from './components/KsDroppable.vue';
 import * as animations from './components/transitions/Transitions';
 import * as strings from './helpers/strings';
 
@@ -49,6 +51,8 @@ const Kickstart = {
     KsTooltip,
 	KsButton,
     KsTimepicker,
+    KsDraggable,
+    KsDroppable,
 	install(Vue) {
         function open(propsData) {
             const Toast = Vue.extend(KsToast);
@@ -93,6 +97,8 @@ const Kickstart = {
         Vue.component('ks-tooltip', KsTooltip)
         Vue.component('ks-button', KsButton);
         Vue.component('ks-timepicker', KsTimepicker);
+        Vue.component('ks-draggable', KsDraggable);
+        Vue.component('ks-droppable', KsDroppable);
 
 		for ( let i in animations ) {
 			Vue.component(i, animations[i]);
