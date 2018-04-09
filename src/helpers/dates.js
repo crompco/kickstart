@@ -105,12 +105,21 @@ export function formatDate(date, format = 'Y-m-d', parse_format = format) {
 	}
 	let year = date.getUTCFullYear();
 	let month = date.getUTCMonth() + 1;
-	let day = date.getUTCDate();
+	let cal_day = date.getUTCDate();
+	let day = date.getUTCDay()
+
+    let day_abbrev = defaultLocale.days.abbreviations[day];
+    let day_long = defaultLocale.days.names[day];
 
 	month = pad_left(month, '0', 2);
-	day = pad_left(day, '0', 2);
+	cal_day = pad_left(cal_day, '0', 2);
 
-	return format.toLowerCase().replace('y', year).replace('m', month).replace('d', day);
+	return format
+        .replace(/y/i, year)
+        .replace(/m/i, month)
+        .replace('d', cal_day)
+        .replace('D', day_abbrev)
+        .replace('l', day_long);
 }
 
 /**

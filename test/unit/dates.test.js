@@ -84,15 +84,19 @@ test('dates:addMonths', t => {
 test('dates:formatDate', t => {
 	let f1 = dates.formatDate(new Date(2017, 0, 31), 'Y-m-d');
 	let f2 = dates.formatDate(new Date(2017, 0, 31), 'm/d/Y');
-	let f3 = dates.formatDate(new Date(2017, 0, 31), 'm d, Y');
+    let f3 = dates.formatDate(new Date(2017, 0, 31), 'm d, Y');
+    let f4 = dates.formatDate(new Date(2017, 0, 31), 'D m/d/Y');
+    let f5 = dates.formatDate(new Date(2017, 0, 31), 'l m/d/Y');
 
 	t.is(f1, '2017-01-31');
 	t.is(f2, '01/31/2017');
-	t.is(f3, '01 31, 2017');
+    t.is(f3, '01 31, 2017');
+    t.is(f4, 'Tue 01/31/2017');
+    t.is(f5, 'Tuesday 01/31/2017');
 });
 
 
-test('dates:formatDate', t => {
+test('dates:parseDate', t => {
 	let d1 = dates.parseDate("2017-01-31", 'Y-m-d');
 	let d2 = dates.parseDate("01/31/2017", 'm/d/Y');
 
