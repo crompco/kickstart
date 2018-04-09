@@ -168,15 +168,14 @@
                     name="id"
                     :items="[{id: 1, name: 'This is a really long option for the select to test the breakdown, and some more stuff to make this extra long for big screens to have touble '}]"
                     label-key="name"
-                    empty-message="No options here"
                     v-model="long"
                 ></ks-select>
                 <code-block v-pre>
                     &lt;ks-select
-                    name="empty"
-                    :items="[]"
-                    label-key="name"
-                    empty-message="No options here"
+                        name="id"
+                        :items="[{id: 1, name: 'This is a really long option for the select to test the breakdown, and some more stuff to make this extra long for big screens to have touble '}]"
+                        label-key="name"
+                        v-model="long"
                     >&lt;/ks-select>
                 </code-block>
             </div>
