@@ -160,6 +160,28 @@
                 </code-block>
             </div>
         </div>
+
+        <div class="basic-block">
+            <div class="form-group">
+                <div class="label">Select with long option name</div>
+                <ks-select
+                    name="id"
+                    :items="[{id: 1, name: 'This is a really long option for the select to test the breakdown, and some more stuff to make this extra long for big screens to have touble '}]"
+                    label-key="name"
+                    empty-message="No options here"
+                    v-model="long"
+                ></ks-select>
+                <code-block v-pre>
+                    &lt;ks-select
+                    name="empty"
+                    :items="[]"
+                    label-key="name"
+                    empty-message="No options here"
+                    >&lt;/ks-select>
+                </code-block>
+            </div>
+        </div>
+
         <div class="alert warning">
             <strong>Warning v-model usage:</strong>
             <p>
@@ -581,7 +603,8 @@
                         name: 'Canada',
                         code: 'Canada'
                     },
-                ]
+                ],
+                long: null
 			};
 		},
 

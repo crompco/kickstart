@@ -59,13 +59,17 @@
 
 	.ks-select-selection {
 		position: relative;
-		padding: rem($select-selected-padding);
-		border: none;
+        border: none;
+        padding: rem($select-selected-padding) 1.25rem rem($select-selected-padding) rem($select-selected-padding);
+        text-overflow: ellipsis;
+        overflow: hidden;
+        width: 100%;
+        white-space: nowrap;
 
 		.ks-select-arrow {
 			@include triangle-down($size: rem(9px), $color: $select-arrow-color);
 			@include v-center();
-			right: 1rem;
+			right: 0.75rem;
 		}
         .ks-select-deselect {
             display: inline-block;
