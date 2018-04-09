@@ -99,7 +99,7 @@ export function addMonths(date, months = 1) {
  * @param date
  * @return {string}
  */
-export function formatDate(date, format = 'Y-m-d', parse_format = format) {
+export function formatDate(date, format = 'Y-m-d', parse_format = format, locale = defaultLocale) {
 	if ( !(date instanceof Date) ) {
 		date = parseDate(date, parse_format);
 	}
@@ -108,8 +108,8 @@ export function formatDate(date, format = 'Y-m-d', parse_format = format) {
 	let cal_day = date.getUTCDate();
 	let day = date.getUTCDay()
 
-    let day_abbrev = defaultLocale.days.abbreviations[day];
-    let day_long = defaultLocale.days.names[day];
+    let day_abbrev = locale.days.abbreviations[day];
+    let day_long = locale.days.names[day];
 
 	month = pad_left(month, '0', 2);
 	cal_day = pad_left(cal_day, '0', 2);
