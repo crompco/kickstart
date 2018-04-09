@@ -156,9 +156,10 @@
             },
 
             triggerHide() {
-                this.showing = false;
-
-                this.$emit('tooltip-hidden');
+                if ( this.showing ) {
+                    this.showing = false;
+                    this.$emit('tooltip-hidden');
+                }
             },
 
             clearTimeout() {
