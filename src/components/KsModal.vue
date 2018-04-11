@@ -1,6 +1,6 @@
 <template>
 	<div class="ks-modal" v-show="isOpen" :class="[{ 'danger': danger }, classObj]">
-		<div class="ks-modal-mask" @click.prevent="close" ref="mask"></div>
+		<div class="ks-modal-mask" @click.prevent="maskClick" ref="mask"></div>
 
 		<div class="ks-modal-wrapper"
 			 :style="[modalStyle, modalObj]"
@@ -84,6 +84,10 @@
             loading: {
                 type: Boolean,
                 default: false
+            },
+            closeOnMaskClick: {
+                type: Boolean,
+                default: true
             },
 		},
 
@@ -174,6 +178,11 @@
 					this.close();
 				}
 			},
+            maskClick() {
+                if ( this.closeOnMaskClick ) {
+                    this.close();
+                }
+            },
             loadingOn() {
                 this.isLoading = true;
                 return this;

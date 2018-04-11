@@ -365,6 +365,12 @@
                                 <td><pre>false</pre></td>
                                 <td>Whether to show a loading bar in the modal</td>
                             </tr>
+                            <tr>
+                                <td>closeOnMaskClick</td>
+                                <td>Boolean</td>
+                                <td><pre>true</pre></td>
+                                <td>Whether to close the modal when a user clicks on the mask</td>
+                            </tr>
 						</tbody>
 					</table>
 				</ks-tab>
