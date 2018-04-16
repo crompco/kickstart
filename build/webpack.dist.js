@@ -21,10 +21,6 @@ const config = {
         rules: base.module.rules
     },
 
-    externals: {
-        vue: './Vue'
-    },
-
     plugins: [
         new ExtractTextPlugin({
             filename: 'kickstart-ui.min.css'
