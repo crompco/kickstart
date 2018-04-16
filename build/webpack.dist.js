@@ -22,7 +22,7 @@ const config = {
     },
 
     externals: {
-        vue: 'Vue'
+        vue: './Vue'
     },
 
     plugins: [
