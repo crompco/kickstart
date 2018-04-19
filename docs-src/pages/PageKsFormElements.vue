@@ -90,7 +90,7 @@
                     <div class="tab-half">
                         <div class="form-group">
                             <div class="label">select</div>
-                            <ks-select></ks-select>
+                            <ks-select name="foo" label-key="foo"></ks-select>
                         </div>
                         <div class="form-group">
                             <div class="label">Password Confirmation</div>
@@ -179,6 +179,59 @@
         </div>
 
 
+        <h3>Location Form</h3>
+        <form class="basic-block">
+            <div class="row">
+                <div class="tab-half">
+                    <div class="form-group">
+                        <div class="label">Address</div>
+                        <input type="text" name="address1" placeholder="Address 1">
+                        <input type="text" name="address2" placeholder="Address 2">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="tab-half">
+                    <div class="form-group">
+                        <div class="label">City</div>
+                        <input type="text" name="city" placeholder="City">
+                    </div>
+                </div>
+                <div class="tab-half">
+                    <div class="form-group">
+                        <div class="label">State</div>
+                        <ks-select
+                            name="state"
+                            :items="states"
+                            placeholder="Select State..."
+                            label-key="state_name"
+                            v-model="location.state"
+                        ></ks-select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="tab-half">
+                    <div class="form-group">
+                        <div class="label">Zip</div>
+                        <input type="text" name="zip" placeholder="Zip Code">
+                    </div>
+                </div>
+                <div class="tab-half">
+                    <div class="form-group">
+                        <div class="label">Country</div>
+                        <ks-select
+                            name="country"
+                            :items="countries"
+                            label-key="country_name"
+                            v-model="location.country"
+                        ></ks-select>
+                    </div>
+                </div>
+            </div>
+            <ks-button>submit</ks-button>
+        </form>
+
 		<div style="height: 300px;"></div>
 	</div>
 </template>
@@ -191,6 +244,7 @@
 	import KsCheckbox from '../../src/components/KsCheckbox.vue';
 	import api from '../../src/helpers/api';
 	import KsAutocomplete from '../../src/components/KsAutocomplete.vue';
+	import states from '../../src/helpers/states';
 
 	export default {
 		name: 'PageKsFormElements',
@@ -213,8 +267,27 @@
                     checkboxButtons: [],
                     radioButtons: []
 				},
+                location: {
+                    address1: '',
+                    address2: '',
+                    city: '',
+                    state: null,
+                    zip: '',
+                    country: null,
+                },
 				radioGroup: [],
                 buttonGroup: [],
+                states: states,
+                countries: [
+                    {
+                        country: 'United States',
+                        country_name: 'United States'
+                    },
+                    {
+                        country: 'Canada',
+                        country_name: "Canada"
+                    }
+                ]
 			};
 		},
 

@@ -11,7 +11,7 @@
         @keydown="keyOpen"
         :disabled="disabled"
     >
-		<input type="hidden" :name="name" :value="value">
+		<input type="text" :name="name" :value="inputValue" @input="filledInput" class="select-input-field" tabindex="-1">
 		<div class="ks-select-selection" @click.prevent="toggleOpen">
                 <div class="ks-select-placeholder" v-if="!value">{{placeholder}}</div>
                 <template v-else>
@@ -28,7 +28,7 @@
 			<div class="ks-select-dropdown-input" v-show="show_search">
 				<input
 					type="text"
-					autocomplete="off"
+					autocomplete="new-password"
 					ref="lookup"
 					v-model="lookup_name"
 				    :placeholder="placeholder"
@@ -171,6 +171,12 @@
 		},
 
 		computed: {
+            inputValue() {
+                if ( this.value instanceof Object ) {
+                    return this.keyName in this.value ? this.value[this.keyName] : this.value;
+                }
+            },
+
 			using_items() {
 				return this.items ? true : false;
 			},
@@ -239,6 +245,14 @@
 		},
 
 		methods: {
+            filledInput(e) {
+                this.list.find((item, index) => {
+                    if ( this.keyName in item && e.target.value == item[this.keyName] ) {
+                        this.selectItem(index, e, false);
+                        return;
+                    }
+                });
+            },
             /**
              * Clear the lookup
              */
@@ -342,7 +356,7 @@
 				this.isOpen = false;
 			},
 
-			selectItem(index, e) {
+			selectItem(index, e, reset = true) {
 				if ( !this.handleSelectEvent(e) ) {
 					return;
 				}
@@ -350,8 +364,8 @@
 				// If user is selecting index -1 then we should just clear the selection
                 // This should only happen when single deselect is active
 				if ( index == -1 ) {
-				    this.clearSelection();
-				    return this.resetSelect();
+                    this.clearSelection();
+                    return this.resetSelect();
                 }
 
                 // Find the item by the given index
@@ -368,7 +382,9 @@
                 }
 
                 // Reset the select to it starting state
-                this.resetSelect();
+                if ( reset ) {
+                    this.resetSelect();
+                }
 			},
 
             resetSelect() {
