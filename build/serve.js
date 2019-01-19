@@ -16,11 +16,15 @@ module.exports = (app) => {
 		let page = parseInt(typeof req.query.page != 'undefined' ? req.query.page : 1);
 		let slice_start = (page - 1) * limit;
 
-		let i = 0;
-		res.json(
-			countries.filter((o) => {
-				return o.name.match(name_regex) ? true : false;
-			}).slice(slice_start, slice_start + limit)
-		);
+        let i = 0;
+		setTimeout(function () {
+		    console.log('serving countries');
+            res.json({
+                data: countries.filter((o) => {
+                    return o.name.match(name_regex) ? true : false;
+                }).slice(slice_start, slice_start + limit)
+            });
+
+        }, 300);
 	});
 }

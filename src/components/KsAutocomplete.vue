@@ -56,11 +56,12 @@
 					Add "<em v-text="lookup_name"></em>"
 				</li>
                 <template v-if="groupBy">
-                    <li v-for="(group_list, group) in groups" class="opt-group">
+                    <li v-for="(group_list, group) in groups" class="opt-group" :key="group">
                         <strong>{{group}}</strong>
                         <ul>
                             <li
                                 v-for="(item, index) in group_list"
+								:key="index"
                                 :class="{ 'selected-item': item._index == selected_index }"
                                 @click.prevent="selectItem(item._index, $event)"
                                 @mouseover="setHoverIndex(item._index)"
@@ -74,6 +75,7 @@
                 <template v-else>
                     <li
                         v-for="(item, index) in list"
+						:key="index"
                         :class="{ 'selected-item': index == selected_index }"
                         @click.prevent="selectItem(index, $event)"
                         @mouseover="setHoverIndex(index)"

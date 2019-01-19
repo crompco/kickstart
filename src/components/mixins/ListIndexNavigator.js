@@ -1,6 +1,7 @@
 import {object_get} from '../../helpers/objects';
 import {addEvent, smartFocusToggle, keyCode, stopParentScroll, scrolledToBottom} from '../../helpers/events';
 import {escapeRegExp} from '../../helpers/strings';
+import axios from 'axios';
 
 export default {
 
@@ -81,6 +82,7 @@ export default {
             mousescroll_delay: 100,
             navigating_with_keys: false,
             key_pressed_timer: '',
+            cancel_token_source: null
         };
     },
 
@@ -369,10 +371,34 @@ export default {
             this.$emit('search', {
                 term,
                 page,
-                callback: (list) => {
-                    this.callback(list, true, concat);
+                callback: (endpoint) => {
+
+                    let cancel_token = this.setupCancelToken();
+
+                    axios.get(endpoint, {
+                        cancelToken: cancel_token.token
+                    }).then(({data}) => {
+                        this.callback(data.data, true, concat);
+                    }).catch((e) => {
+                        if ( e !== "KS-ABORT" ) {
+                            console.error(e);
+                        }
+                    })
                 }
             });
+        },
+
+        /**
+         *
+         * @returns {*}
+         */
+        setupCancelToken() {
+            if ( this.cancel_token_source ) {
+                this.cancel_token_source.cancel('KS-ABORT');
+            }
+            let CancelToken = axios.CancelToken;
+
+            return this.cancel_token_source = CancelToken.source();
         },
 
         /**

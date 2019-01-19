@@ -539,11 +539,12 @@
 
 		methods: {
 			runSearch({term, callback, page}) {
-				api.get(`/countries?q=${term}&page=${page}`).then((data) => {
-					callback(data);
-				}).catch((error) => {
-					callback([]);
-				})
+			    callback(`/countries?q=${term}&page=${page}`);
+				// api.get(`/countries?q=${term}&page=${page}`).then((data) => {
+				// 	callback(data);
+				// }).catch((error) => {
+				// 	callback([]);
+				// })
 			}
 		},
 
