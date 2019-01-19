@@ -380,7 +380,7 @@ export default {
                     }).then(({data}) => {
                         this.callback(data.data, true, concat);
                     }).catch((e) => {
-                        if ( e !== "KS-ABORT" ) {
+                        if ( e.message !== "KS-ABORT" ) {
                             console.error(e);
                         }
                     })

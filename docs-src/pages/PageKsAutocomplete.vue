@@ -394,13 +394,14 @@
                                 Fired when the input field is expecting a search to be performed.
                                 (depends on the minSearch prop) The payload is as follows...
                                 <pre>
-        {
-            term: term, // the term used in the search
-            page: page, // the page of the search being requested
-            callback: function
-            // The callback to use when the search is completed.
-            // This should pass the new list of items
-        }
+    {
+        term: term, // the term used in the search
+        page: page, // the page of the search being requested
+        callback: function
+        // The callback function should be called with the proper endpoint to use
+        // an optional data key param can be sent as second parameter
+        // example: callback(`countries?q=${term}&page=${page}`, 'results')
+    }
     </pre>
                             </td>
                         </tr>
