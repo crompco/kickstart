@@ -375,7 +375,7 @@ export default {
 
                     let cancel_token = this.setupCancelToken();
 
-                    axios.get(endpoint, {
+                    return axios.get(endpoint, {
                         cancelToken: cancel_token.token
                     }).then(({data}) => {
                         this.callback(data.data, true, concat);
