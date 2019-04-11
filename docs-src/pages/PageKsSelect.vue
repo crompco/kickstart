@@ -14,14 +14,14 @@
                     :paginated="true"
                     @search="runSearch"
                 >
-                    <template slot="label" scope="{value, label}">
+                    <template v-slot:label="{value, label}">
                         {{value}}: {{label}}
                     </template>
-                    <template scope="props">
-                        {{props.item.name}}
+                    <template v-slot:default="{item}">
+                        {{item.name}}
                     </template>
-                    <template slot="empty" scope="props">
-                        No results for "{{props.term}}"
+                    <template v-slot:empty="{term}">
+                        No results for "{{term}}"
                     </template>
                 </ks-select>
 
@@ -33,14 +33,14 @@
                     :paginated="true"
                     @search="runSearch"
                     >
-                    &lt;template slot="label" scope="{value, label}">
+                    &lt;template v-slot:label="{value, label}">
                     {{value}}: {{label}}
                     &lt;/template>
-                    &lt;template scope="props">
-                    {{props.item.name}}
+                    &lt;template v-slot:default="{item}">
+                    {{item.name}}
                     &lt;/template>
-                    &lt;template slot="empty" scope="props">
-                    No results for "{{props.term}}"
+                    &lt;template v-slot:empty="{term}">
+                    No results for "{{term}}"
                     &lt;/template>
                     &lt;/ks-select>
                 </code-block>

@@ -55,7 +55,7 @@
                     v-model="value3"
                     @search="runSearch"
                 >
-                    <template scope="props">
+                    <template v-slot="props">
                         <strong>{{props.item.name}}</strong> <em>{{props.item.code}}</em>
                     </template>
                 </ks-autocomplete>
@@ -68,7 +68,7 @@
                         v-model="value3"
                         @search="runSearch"
                     >
-                        &lt;template scope="props">
+                        &lt;template v-slot="props">
                             &lt;strong>{{props.item.name}}&lt;/strong> &lt;em>{{props.item.code}}&lt;/em>
                         &lt;/template>
                     &lt;/ks-autocomplete>
@@ -88,7 +88,7 @@
                     :show-tag-in-list="true"
                     @search="runSearch"
                 >
-                    <template scope="props">
+                    <template v-slot="props">
                         <strong>{{props.item.name}}</strong> <em>{{props.item.code}}</em>
                     </template>
                 </ks-autocomplete>
@@ -104,7 +104,7 @@
                         :show-tag-in-list="true"
                         @search="runSearch"
                     >
-                        &lt;template scope="props">
+                        &lt;template v-slot="props">
                             &lt;strong>{{props.item.name}}&lt;/strong> &lt;em>{{props.item.code}}&lt;/em>
                         &lt;/template>
                     &lt;/ks-autocomplete>
