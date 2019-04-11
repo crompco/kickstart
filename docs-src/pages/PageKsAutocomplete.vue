@@ -16,13 +16,15 @@
                     empty-message="Nothing found"
                 ></ks-autocomplete>
                 <code-block>
-                    &lt;ks-autocomplete
-                        selection-key="name"
-                        v-model="value1"
-                        @search="runSearch"
-                        :paginated="true"
-                        empty-message="Nothing found"
-                    >&lt;/ks-autocomplete>
+                    <template v-pre>
+                        &lt;ks-autocomplete
+                            selection-key="name"
+                            v-model="value1"
+                            @search="runSearch"
+                            :paginated="true"
+                            empty-message="Nothing found"
+                        >&lt;/ks-autocomplete>
+                    </template>
                 </code-block>
             </div>
 
@@ -36,11 +38,13 @@
                 ></ks-autocomplete>
 
                 <code-block>
-                     &lt;ks-autocomplete
-                        :items="countries"
-                        selection-key="name"
-                        v-model="value2"
-                    >&lt;/ks-autocomplete>
+                    <template v-pre>
+                         &lt;ks-autocomplete
+                            :items="countries"
+                            selection-key="name"
+                            v-model="value2"
+                        >&lt;/ks-autocomplete>
+                    </template>
                 </code-block>
             </div>
 
@@ -61,17 +65,19 @@
                 </ks-autocomplete>
 
                 <code-block>
-                    &lt;ks-autocomplete
-                        :items="countries"
-                        selection-key="name"
-                        :multiple="true"
-                        v-model="value3"
-                        @search="runSearch"
-                    >
-                        &lt;template v-slot="props">
-                            &lt;strong>{{props.item.name}}&lt;/strong> &lt;em>{{props.item.code}}&lt;/em>
-                        &lt;/template>
-                    &lt;/ks-autocomplete>
+                    <template v-pre>
+                        &lt;ks-autocomplete
+                            :items="countries"
+                            selection-key="name"
+                            :multiple="true"
+                            v-model="value3"
+                            @search="runSearch"
+                        >
+                            &lt;template v-slot="props">
+                                &lt;strong>{{props.item.name}}&lt;/strong> &lt;em>{{props.item.code}}&lt;/em>
+                            &lt;/template>
+                        &lt;/ks-autocomplete>
+                    </template>
                 </code-block>
                 <pre>{{value3}}</pre>
             </div>
@@ -95,6 +101,8 @@
 
 
                 <code-block>
+                    <template v-pre>
+
                     &lt;ks-autocomplete
                         :min-search="0"
                         :taggable="true"
@@ -108,6 +116,7 @@
                             &lt;strong>{{props.item.name}}&lt;/strong> &lt;em>{{props.item.code}}&lt;/em>
                         &lt;/template>
                     &lt;/ks-autocomplete>
+                    </template>
                 </code-block>
             </div>
 
@@ -123,6 +132,7 @@
                     group-by="show"
                 ></ks-autocomplete>
                 <code-block>
+                    <template v-pre>
                     &lt;ks-autocomplete
                         :min-search="0"
                         :taggable="true"
@@ -133,6 +143,7 @@
                         :items="characters"
                         group-by="show"
                     >&lt;/ks-autocomplete>
+                    </template>
                 </code-block>
             </div>
         </div>

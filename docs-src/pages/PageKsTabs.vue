@@ -24,25 +24,27 @@
 				</ks-tab>
 			</ks-tabs>
             <code-block>
-                &lt;ks-tabs>
-                    &lt;ks-tab title="Foo">
-                        &lt;p>
-                            This is the first tab which auto selected
-                        &lt;/p>
-                    &lt;/ks-tab>
+                <template v-pre>
+                    &lt;ks-tabs>
+                        &lt;ks-tab title="Foo">
+                            &lt;p>
+                                This is the first tab which auto selected
+                            &lt;/p>
+                        &lt;/ks-tab>
 
-                    &lt;ks-tab title="Bar">
-                        &lt;p>
-                            This is a tab with some content
-                        &lt;/p>
-                    &lt;/ks-tab>
+                        &lt;ks-tab title="Bar">
+                            &lt;p>
+                                This is a tab with some content
+                            &lt;/p>
+                        &lt;/ks-tab>
 
-                    &lt;ks-tab title="Baz">
-                        &lt;p>
-                            This the last tab with some content
-                        &lt;/p>
-                    &lt;/ks-tab>
-                &lt;/ks-tabs>
+                        &lt;ks-tab title="Baz">
+                            &lt;p>
+                                This the last tab with some content
+                            &lt;/p>
+                        &lt;/ks-tab>
+                    &lt;/ks-tabs>
+                </template>
             </code-block>
 		</div>
 		<br>
@@ -68,25 +70,27 @@
 			</ks-tabs>
 
             <code-block>
-                &lt;ks-tabs :expand="true" id="foo-example">
-                    &lt;ks-tab title="Foo">
-                        &lt;p>
-                            This is the first tab which auto selected
-                        &lt;/p>
-                    &lt;/ks-tab>
+                <template v-pre>
+                    &lt;ks-tabs :expand="true" id="foo-example">
+                        &lt;ks-tab title="Foo">
+                            &lt;p>
+                                This is the first tab which auto selected
+                            &lt;/p>
+                        &lt;/ks-tab>
 
-                    &lt;ks-tab title="Bar">
-                        &lt;p>
-                            This is a tab with some content
-                        &lt;/p>
-                    &lt;/ks-tab>
+                        &lt;ks-tab title="Bar">
+                            &lt;p>
+                                This is a tab with some content
+                            &lt;/p>
+                        &lt;/ks-tab>
 
-                    &lt;ks-tab title="Baz">
-                        &lt;p>
-                            This the last tab with some content
-                        &lt;/p>
-                    &lt;/ks-tab>
-                &lt;/ks-tabs>
+                        &lt;ks-tab title="Baz">
+                            &lt;p>
+                                This the last tab with some content
+                            &lt;/p>
+                        &lt;/ks-tab>
+                    &lt;/ks-tabs>
+                </template>
             </code-block>
 
             <ks-tabs>

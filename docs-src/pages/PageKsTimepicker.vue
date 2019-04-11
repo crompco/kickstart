@@ -16,13 +16,15 @@
             <pre>v-model: {{start_time}}</pre>
 
             <code-block>
-                &lt;ks-timepicker
-                    name="start_time"
-                    :time-format="time_format"
-                    display-format="h:i A"
-                    time-step="30"
-                    v-model="start_time"
-                >&lt;/ks-timepicker>
+                <template v-pre>
+                    &lt;ks-timepicker
+                        name="start_time"
+                        :time-format="time_format"
+                        display-format="h:i A"
+                        time-step="30"
+                        v-model="start_time"
+                    >&lt;/ks-timepicker>
+                </template>
             </code-block>
         </div>
 

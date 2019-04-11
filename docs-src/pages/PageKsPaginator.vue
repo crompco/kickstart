@@ -10,10 +10,12 @@
 
             <div class="row">
                 <code-block>
-                    &lt;ks-paginator
-                        :pagination="pagination"
-                        @input="pagination.current_page=$event"
-                    >&lt;/ks-paginator>
+                    <template v-pre>
+                        &lt;ks-paginator
+                            :pagination="pagination"
+                            @input="pagination.current_page=$event"
+                        >&lt;/ks-paginator>
+                    </template>
                 </code-block>
             </div>
         </div>
@@ -28,11 +30,13 @@
 
             <div class="row">
                 <code-block>
-                    &lt;ks-paginator
-                        :pagination="pagination2"
-                        :routed="true"
-                        @input="pagination.current_page=$event"
-                    >&lt;/ks-paginator>
+                    <template v-pre>
+                        &lt;ks-paginator
+                            :pagination="pagination2"
+                            :routed="true"
+                            @input="pagination.current_page=$event"
+                        >&lt;/ks-paginator>
+                    </template>
                 </code-block>
             </div>
         </div>

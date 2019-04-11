@@ -8,11 +8,13 @@
                 <ks-radio label="JavaScript" name="radio1" value="2" v-model="values.radio1"></ks-radio>
             </div>
             <code-block>
-                &lt;div class="form-group">
-                    &lt;div class="label">Which do you prefer&lt;/div>
-                    &lt;ks-radio label="PHP" name="radio1" value="1" v-model="values.radio1">&lt;/ks-radio>
-                    &lt;ks-radio label="JavaScript" name="radio1" value="2" v-model="values.radio1">&lt;/ks-radio>
-                &lt;/div>
+                <template v-pre>
+                    &lt;div class="form-group">
+                        &lt;div class="label">Which do you prefer&lt;/div>
+                        &lt;ks-radio label="PHP" name="radio1" value="1" v-model="values.radio1">&lt;/ks-radio>
+                        &lt;ks-radio label="JavaScript" name="radio1" value="2" v-model="values.radio1">&lt;/ks-radio>
+                    &lt;/div>
+                </template>
             </code-block>
         </div>
         <div class="basic-block">
@@ -22,11 +24,13 @@
                 <ks-radio :inline="true" label="JavaScript" name="radio2" value="2" v-model="values.radio2"></ks-radio>
             </div>
             <code-block>
-                &lt;div class="form-group">
-                    &lt;div class="label">Radio buttons (inline)&lt;/div>
-                    &lt;ks-radio :inline="true" label="PHP" name="radio1" value="1" v-model="values.radio1">&lt;/ks-radio>
-                    &lt;ks-radio :inline="true" label="JavaScript" name="radio1" value="2" v-model="values.radio1">&lt;/ks-radio>
-                &lt;/div>
+                <template v-pre>
+                    &lt;div class="form-group">
+                        &lt;div class="label">Radio buttons (inline)&lt;/div>
+                        &lt;ks-radio :inline="true" label="PHP" name="radio1" value="1" v-model="values.radio1">&lt;/ks-radio>
+                        &lt;ks-radio :inline="true" label="JavaScript" name="radio1" value="2" v-model="values.radio1">&lt;/ks-radio>
+                    &lt;/div>
+                </template>
             </code-block>
         </div>
 

@@ -20,26 +20,28 @@
 
 			<div>
 				<code-block>
-                    &lt;div class="alert success">
-                        &lt;strong>Success&lt;/strong>
-                        this is a success message
-                    &lt;/div>
+                    <template v-pre>
+                        &lt;div class="alert success">
+                            &lt;strong>Success&lt;/strong>
+                            this is a success message
+                        &lt;/div>
 
-                    &lt;div class="alert error">
-                        &lt;strong>Error&lt;/strong>
-                        this is a error message
-                    &lt;/div>
+                        &lt;div class="alert error">
+                            &lt;strong>Error&lt;/strong>
+                            this is a error message
+                        &lt;/div>
 
-                    &lt;div class="alert info">
-                        &lt;strong>Info&lt;/strong>
-                        this is a info message
-                    &lt;/div>
+                        &lt;div class="alert info">
+                            &lt;strong>Info&lt;/strong>
+                            this is a info message
+                        &lt;/div>
 
-                    &lt;div class="alert warning">
-                        &lt;strong>Warning&lt;/strong>
-                        this is a warning message
-                    &lt;/div>
-				</code-block>
+                        &lt;div class="alert warning">
+                            &lt;strong>Warning&lt;/strong>
+                            this is a warning message
+                        &lt;/div>
+                    </template>
+                </code-block>
 			</div>
 		</div>
 	</div>

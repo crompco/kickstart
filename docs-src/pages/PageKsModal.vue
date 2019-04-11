@@ -17,6 +17,7 @@
                         </p>
                     </ks-modal>
                     <code-block>
+                        <template v-pre>
                             &lt;button class="button" @click.prevent="$refs.modal1.open()">
                                 Simple Modal
                             &lt;/button>
@@ -26,6 +27,7 @@
                                     This is a simple modal with just a title and content
                                 &lt;/p>
                             &lt;/ks-modal>
+                        </template>
                     </code-block>
                 </div>
                 <div class="col sm-full med-half">
@@ -45,19 +47,21 @@
                     </ks-modal>
 
                     <code-block>
+                        <template v-pre>
                             &lt;button class="button" @click.prevent="$refs.modal2.open()">
-                                Modal with buttons
+                             Modal with buttons
                             &lt;/button>
 
                             &lt;ks-modal title="Modal with buttons" ref="modal2" >
                                 &lt;p>
-                                    This is a simple modal with just a title and content
+                                  This is a simple modal with just a title and content
                                 &lt;/p>
                                 &lt;div slot="footer">
                                     &lt;button class="button">Yes&lt;/button>
                                     &lt;button class="button" @click.prevent="$refs.modal2.close()">Cancel&lt;/button>
                                 &lt;/div>
                             &lt;/ks-modal>
+                        </template>
                     </code-block>
                 </div>
 
@@ -78,8 +82,9 @@
                     </ks-modal>
 
                     <code-block>
+                        <template v-pre>
                             &lt;button class="button danger" @click.prevent="$refs.modal_danger.open()">
-                                Danger Modal
+                               Danger Modal
                             &lt;/button>
 
                             &lt;ks-modal title="Modal Danger" ref="modal_danger" :danger="true">
@@ -91,6 +96,7 @@
                                     &lt;button class="button" @click.prevent="$refs.modal_danger.close()">Cancel&lt;/button>
                                 &lt;/div>
                             &lt;/ks-modal>
+                        </template>
                     </code-block>
                 </div>
                 <div class="col sm-full med-half">
@@ -108,18 +114,20 @@
                     </ks-modal>
 
                     <code-block>
+                        <template v-pre>
                             &lt;button class="button" @click.prevent="$refs.modal3.open()">
                                 Modal without header
                             &lt;/button>
 
                             &lt;ks-modal :show-header="false" ref="modal3">
                                 &lt;p>
-                                    This is a simple modal without a title and only content
+                                   This is a simple modal without a title and only content
                                 &lt;/p>
                                 &lt;em>
                                     Click on the mask to close
                                 &lt;/em>
                             &lt;/ks-modal>
+                        </template>
                     </code-block>
                 </div>
                 <div class="col sm-full med-half">
@@ -213,6 +221,7 @@
                     </ks-modal>
 
                     <code-block>
+                        <template v-pre>
                             &lt;button class="button" @click.prevent="$refs.modal4.open()">
                                 Modal with a lot of content
                             &lt;/button>
@@ -220,21 +229,22 @@
                             &lt;ks-modal title="Modal with buttons" ref="modal4">
                                 &lt;div>
 
-                                    &lt;p>
-                                        Lorem ipsum dolor sit amet, quo virtute admodum persecuti in.
-                                        Eu ullum vivendo est, praesent dignissim ut quo, sed inermis conclusionemque te.
-                                        Has an epicuri appellantur. Vel eu argumentum persequeris.
-                                        Ex sed quas atomorum, et consul epicuri vituperata vel. Mel ex dicit bonorum reprehendunt.
-                                        Accumsan constituam te vim, ut malis soleat doming est.
-                                    &lt;/p>
+                                &lt;p>
+                                    Lorem ipsum dolor sit amet, quo virtute admodum persecuti in.
+                                    Eu ullum vivendo est, praesent dignissim ut quo, sed inermis conclusionemque te.
+                                    Has an epicuri appellantur. Vel eu argumentum persequeris.
+                                    Ex sed quas atomorum, et consul epicuri vituperata vel. Mel ex dicit bonorum reprehendunt.
+                                    Accumsan constituam te vim, ut malis soleat doming est.
+                                &lt;/p>
 
-                                    ...
+                                ...
                                 &lt;/div>
                                 &lt;div slot="footer">
                                     &lt;button class="button">Yes&lt;/button>
                                     &lt;button class="button" @click.prevent="$refs.modal4.close()">Cancel&lt;/button>
                                 &lt;/div>
                             &lt;/ks-modal>
+                        </template>
                     </code-block>
                 </div>
                 <div class="col sm-full med-half">
@@ -263,6 +273,7 @@
                     </ks-modal>
 
                     <code-block>
+                        <template v-pre>
                             &lt;button class="button" @click.prevent="$refs.modal5.open()">
                                 Modal with Select
                             &lt;/button>
@@ -286,6 +297,7 @@
                                     &lt;button class="button" @click.prevent="$refs.modal5.close()">Cancel&lt;/button>
                                 &lt;/div>
                             &lt;/ks-modal>
+                        </template>
                     </code-block>
 
                 </div>

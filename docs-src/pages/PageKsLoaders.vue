@@ -17,7 +17,9 @@
 			</p>
 
             <code-block>
+                <template v-pre>
                     &lt;ks-loader-line :show="show">&lt;/ks-loader-line>
+                </template>
             </code-block>
 		</div>
         <ks-tabs>
@@ -107,11 +109,13 @@
 			</p>
 
             <code-block>
+                <template v-pre>
                     &lt;ks-loader-spin
                         :show="show_spin"
                         :size="size"
                         :height="height"
                     >&lt;/ks-loader-spin>
+                </template>
             </code-block>
             <div class="row">
                 <div class="sm-full med-half">

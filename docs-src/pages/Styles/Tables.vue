@@ -40,43 +40,46 @@
 
 			<div>
 				<code-block>
-                    &lt;table class="table responsive">
-                        &lt;thead>
-                            &lt;tr>
-                                &lt;th>First&lt;/th>
-                                &lt;th>Second&lt;/th>
-                                &lt;th>Third&lt;/th>
-                                &lt;th>Fourth&lt;/th>
-                            &lt;/tr>
-                        &lt;/thead>
-                        &lt;tbody>
-                            &lt;tr>
-                                &lt;td data-title="First">10&lt;/td>
-                                &lt;td data-title="Second">Lorem ipsum dolor sit amet&lt;/td>
-                                &lt;td data-title="Third">Lorem ipsum&lt;/td>
-                                &lt;td data-title="Fourth">Lorem&lt;/td>
-                            &lt;/tr>
-                            &lt;tr>
-                                &lt;td data-title="First">10&lt;/td>
-                                &lt;td data-title="Second">Lorem ipsum dolor sit amet&lt;/td>
-                                &lt;td data-title="Third">Lorem ipsum&lt;/td>
-                                &lt;td data-title="Fourth">Lorem&lt;/td>
-                            &lt;/tr>
-                            &lt;tr>
-                                &lt;td data-title="First">10&lt;/td>
-                                &lt;td data-title="Second">Lorem ipsum dolor sit amet&lt;/td>
-                                &lt;td data-title="Third">Lorem ipsum&lt;/td>
-                                &lt;td data-title="Fourth">Lorem&lt;/td>
-                            &lt;/tr>
-                            &lt;tr>
-                                &lt;td data-title="First">10&lt;/td>
-                                &lt;td data-title="Second">Lorem ipsum dolor sit amet&lt;/td>
-                                &lt;td data-title="Third">Lorem ipsum&lt;/td>
-                                &lt;td data-title="Fourth">Lorem&lt;/td>
-                            &lt;/tr>
-                        &lt;/tbody>
-                    &lt;/table>
-				</code-block>
+                    <template v-pre>
+
+                        &lt;table class="table responsive">
+                            &lt;thead>
+                                &lt;tr>
+                                    &lt;th>First&lt;/th>
+                                    &lt;th>Second&lt;/th>
+                                    &lt;th>Third&lt;/th>
+                                    &lt;th>Fourth&lt;/th>
+                                &lt;/tr>
+                            &lt;/thead>
+                            &lt;tbody>
+                                &lt;tr>
+                                    &lt;td data-title="First">10&lt;/td>
+                                    &lt;td data-title="Second">Lorem ipsum dolor sit amet&lt;/td>
+                                    &lt;td data-title="Third">Lorem ipsum&lt;/td>
+                                    &lt;td data-title="Fourth">Lorem&lt;/td>
+                                &lt;/tr>
+                                &lt;tr>
+                                    &lt;td data-title="First">10&lt;/td>
+                                    &lt;td data-title="Second">Lorem ipsum dolor sit amet&lt;/td>
+                                    &lt;td data-title="Third">Lorem ipsum&lt;/td>
+                                    &lt;td data-title="Fourth">Lorem&lt;/td>
+                                &lt;/tr>
+                                &lt;tr>
+                                    &lt;td data-title="First">10&lt;/td>
+                                    &lt;td data-title="Second">Lorem ipsum dolor sit amet&lt;/td>
+                                    &lt;td data-title="Third">Lorem ipsum&lt;/td>
+                                    &lt;td data-title="Fourth">Lorem&lt;/td>
+                                &lt;/tr>
+                                &lt;tr>
+                                    &lt;td data-title="First">10&lt;/td>
+                                    &lt;td data-title="Second">Lorem ipsum dolor sit amet&lt;/td>
+                                    &lt;td data-title="Third">Lorem ipsum&lt;/td>
+                                    &lt;td data-title="Fourth">Lorem&lt;/td>
+                                &lt;/tr>
+                            &lt;/tbody>
+                        &lt;/table>
+                    </template>
+                </code-block>
 			</div>
 		</div>
 
@@ -164,52 +167,54 @@
 
                 <div>
                     <code-block>
-                        &lt;table class="table striped">
-                            &lt;thead>
-                                &lt;tr>
-                                    &lt;th>First&lt;/th>
-                                    &lt;th>Second&lt;/th>
-                                    &lt;th>Third&lt;/th>
-                                    &lt;th>Fourth&lt;/th>
-                                    &lt;th>Fifth&lt;/th>
-                                    &lt;th>Sixth&lt;/th>
-                                &lt;/tr>
-                            &lt;/thead>
-                            &lt;tbody>
-                                &lt;tr>
-                                    &lt;td>10&lt;/td>
-                                    &lt;td>Lorem ipsum dolor sit amet&lt;/td>
-                                    &lt;td>Lorem ipsum&lt;/td>
-                                    &lt;td>Lorem&lt;/td>
-                                    &lt;td>Lorem ipsum dolor sit amet&lt;/td>
-                                    &lt;td>Lorem ipsum dolor sit amet&lt;/td>
-                                &lt;/tr>
-                                &lt;tr>
-                                    &lt;td>10&lt;/td>
-                                    &lt;td>Lorem ipsum dolor sit amet&lt;/td>
-                                    &lt;td>Lorem ipsum&lt;/td>
-                                    &lt;td>Lorem&lt;/td>
-                                    &lt;td>Lorem ipsum dolor sit amet&lt;/td>
-                                    &lt;td>Lorem ipsum dolor sit amet&lt;/td>
-                                &lt;/tr>
-                                &lt;tr>
-                                    &lt;td>10&lt;/td>
-                                    &lt;td>Lorem ipsum dolor sit amet&lt;/td>
-                                    &lt;td>Lorem ipsum&lt;/td>
-                                    &lt;td>Lorem&lt;/td>
-                                    &lt;td>Lorem ipsum dolor sit amet&lt;/td>
-                                    &lt;td>Lorem ipsum dolor sit amet&lt;/td>
-                                &lt;/tr>
-                                &lt;tr>
-                                    &lt;td>10&lt;/td>
-                                    &lt;td>Lorem ipsum dolor sit amet&lt;/td>
-                                    &lt;td>Lorem ipsum&lt;/td>
-                                    &lt;td>Lorem&lt;/td>
-                                    &lt;td>Lorem ipsum dolor sit amet&lt;/td>
-                                    &lt;td>Lorem ipsum dolor sit amet&lt;/td>
-                                &lt;/tr>
-                            &lt;/tbody>
-                        &lt;/table>
+                        <template v-pre>
+                            &lt;table class="table striped">
+                                &lt;thead>
+                                    &lt;tr>
+                                        &lt;th>First&lt;/th>
+                                        &lt;th>Second&lt;/th>
+                                        &lt;th>Third&lt;/th>
+                                        &lt;th>Fourth&lt;/th>
+                                        &lt;th>Fifth&lt;/th>
+                                        &lt;th>Sixth&lt;/th>
+                                    &lt;/tr>
+                                &lt;/thead>
+                                &lt;tbody>
+                                    &lt;tr>
+                                        &lt;td>10&lt;/td>
+                                        &lt;td>Lorem ipsum dolor sit amet&lt;/td>
+                                        &lt;td>Lorem ipsum&lt;/td>
+                                        &lt;td>Lorem&lt;/td>
+                                        &lt;td>Lorem ipsum dolor sit amet&lt;/td>
+                                        &lt;td>Lorem ipsum dolor sit amet&lt;/td>
+                                    &lt;/tr>
+                                    &lt;tr>
+                                        &lt;td>10&lt;/td>
+                                        &lt;td>Lorem ipsum dolor sit amet&lt;/td>
+                                        &lt;td>Lorem ipsum&lt;/td>
+                                        &lt;td>Lorem&lt;/td>
+                                        &lt;td>Lorem ipsum dolor sit amet&lt;/td>
+                                        &lt;td>Lorem ipsum dolor sit amet&lt;/td>
+                                    &lt;/tr>
+                                    &lt;tr>
+                                        &lt;td>10&lt;/td>
+                                        &lt;td>Lorem ipsum dolor sit amet&lt;/td>
+                                        &lt;td>Lorem ipsum&lt;/td>
+                                        &lt;td>Lorem&lt;/td>
+                                        &lt;td>Lorem ipsum dolor sit amet&lt;/td>
+                                        &lt;td>Lorem ipsum dolor sit amet&lt;/td>
+                                    &lt;/tr>
+                                    &lt;tr>
+                                        &lt;td>10&lt;/td>
+                                        &lt;td>Lorem ipsum dolor sit amet&lt;/td>
+                                        &lt;td>Lorem ipsum&lt;/td>
+                                        &lt;td>Lorem&lt;/td>
+                                        &lt;td>Lorem ipsum dolor sit amet&lt;/td>
+                                        &lt;td>Lorem ipsum dolor sit amet&lt;/td>
+                                    &lt;/tr>
+                                &lt;/tbody>
+                            &lt;/table>
+                        </template>
                     </code-block>
                 </div>
 			</div>
@@ -250,37 +255,39 @@
 
             <div>
                 <code-block>
-                    &lt;table class="table bordered">
-                        &lt;thead>
-                            &lt;tr>
-                                &lt;th>First&lt;/th>
-                                &lt;th>Second&lt;/th>
-                                &lt;th>Third&lt;/th>
-                            &lt;/tr>
-                        &lt;/thead>
-                        &lt;tbody>
-                            &lt;tr>
-                                &lt;td>10&lt;/td>
-                                &lt;td>10&lt;/td>
-                                &lt;td>10&lt;/td>
-                            &lt;/tr>
-                            &lt;tr>
-                                &lt;td>20&lt;/td>
-                                &lt;td>20&lt;/td>
-                                &lt;td>20&lt;/td>
-                            &lt;/tr>
-                            &lt;tr>
-                                &lt;td>30&lt;/td>
-                                &lt;td>30&lt;/td>
-                                &lt;td>30&lt;/td>
-                            &lt;/tr>
-                            &lt;tr>
-                                &lt;td>40&lt;/td>
-                                &lt;td>40&lt;/td>
-                                &lt;td>40&lt;/td>
-                            &lt;/tr>
-                        &lt;/tbody>
-                    &lt;/table>
+                    <template v-pre>
+                        &lt;table class="table bordered">
+                            &lt;thead>
+                                &lt;tr>
+                                    &lt;th>First&lt;/th>
+                                    &lt;th>Second&lt;/th>
+                                    &lt;th>Third&lt;/th>
+                                &lt;/tr>
+                            &lt;/thead>
+                            &lt;tbody>
+                                &lt;tr>
+                                    &lt;td>10&lt;/td>
+                                    &lt;td>10&lt;/td>
+                                    &lt;td>10&lt;/td>
+                                &lt;/tr>
+                                &lt;tr>
+                                    &lt;td>20&lt;/td>
+                                    &lt;td>20&lt;/td>
+                                    &lt;td>20&lt;/td>
+                                &lt;/tr>
+                                &lt;tr>
+                                    &lt;td>30&lt;/td>
+                                    &lt;td>30&lt;/td>
+                                    &lt;td>30&lt;/td>
+                                &lt;/tr>
+                                &lt;tr>
+                                    &lt;td>40&lt;/td>
+                                    &lt;td>40&lt;/td>
+                                    &lt;td>40&lt;/td>
+                                &lt;/tr>
+                            &lt;/tbody>
+                        &lt;/table>
+                    </template>
                 </code-block>
             </div>
 		</div>
@@ -319,37 +326,39 @@
 			</table>
             <div>
                 <code-block>
-                    &lt;table class="table shadow">
-                        &lt;thead>
-                            &lt;tr>
-                                &lt;th>First&lt;/th>
-                                &lt;th>Second&lt;/th>
-                                &lt;th>Third&lt;/th>
-                            &lt;/tr>
-                        &lt;/thead>
-                        &lt;tbody>
-                            &lt;tr>
-                                &lt;td>10&lt;/td>
-                                &lt;td>10&lt;/td>
-                                &lt;td>10&lt;/td>
-                            &lt;/tr>
-                            &lt;tr>
-                                &lt;td>20&lt;/td>
-                                &lt;td>20&lt;/td>
-                                &lt;td>20&lt;/td>
-                            &lt;/tr>
-                            &lt;tr>
-                                &lt;td>30&lt;/td>
-                                &lt;td>30&lt;/td>
-                                &lt;td>30&lt;/td>
-                            &lt;/tr>
-                            &lt;tr>
-                                &lt;td>40&lt;/td>
-                                &lt;td>40&lt;/td>
-                                &lt;td>40&lt;/td>
-                            &lt;/tr>
-                        &lt;/tbody>
-                    &lt;/table>
+                    <template v-pre>
+                        &lt;table class="table shadow">
+                            &lt;thead>
+                                &lt;tr>
+                                    &lt;th>First&lt;/th>
+                                    &lt;th>Second&lt;/th>
+                                    &lt;th>Third&lt;/th>
+                                &lt;/tr>
+                            &lt;/thead>
+                            &lt;tbody>
+                                &lt;tr>
+                                    &lt;td>10&lt;/td>
+                                    &lt;td>10&lt;/td>
+                                    &lt;td>10&lt;/td>
+                                &lt;/tr>
+                                &lt;tr>
+                                    &lt;td>20&lt;/td>
+                                    &lt;td>20&lt;/td>
+                                    &lt;td>20&lt;/td>
+                                &lt;/tr>
+                                &lt;tr>
+                                    &lt;td>30&lt;/td>
+                                    &lt;td>30&lt;/td>
+                                    &lt;td>30&lt;/td>
+                                &lt;/tr>
+                                &lt;tr>
+                                    &lt;td>40&lt;/td>
+                                    &lt;td>40&lt;/td>
+                                    &lt;td>40&lt;/td>
+                                &lt;/tr>
+                            &lt;/tbody>
+                        &lt;/table>
+                    </template>
                 </code-block>
             </div>
 		</div>
@@ -388,37 +397,39 @@
 			</table>
             <div>
                 <code-block>
-                    &lt;table class="table primary bordered striped">
-                        &lt;thead>
-                            &lt;tr>
-                                &lt;th>First&lt;/th>
-                                &lt;th>Second&lt;/th>
-                                &lt;th>Third&lt;/th>
-                            &lt;/tr>
-                        &lt;/thead>
-                        &lt;tbody>
-                            &lt;tr>
-                                &lt;td>10&lt;/td>
-                                &lt;td>10&lt;/td>
-                                &lt;td>10&lt;/td>
-                            &lt;/tr>
-                            &lt;tr>
-                                &lt;td>20&lt;/td>
-                                &lt;td>20&lt;/td>
-                                &lt;td>20&lt;/td>
-                            &lt;/tr>
-                            &lt;tr>
-                                &lt;td>30&lt;/td>
-                                &lt;td>30&lt;/td>
-                                &lt;td>30&lt;/td>
-                            &lt;/tr>
-                            &lt;tr>
-                                &lt;td>40&lt;/td>
-                                &lt;td>40&lt;/td>
-                                &lt;td>40&lt;/td>
-                            &lt;/tr>
-                        &lt;/tbody>
-                    &lt;/table>
+                    <template v-pre>
+                        &lt;table class="table primary bordered striped">
+                            &lt;thead>
+                                &lt;tr>
+                                    &lt;th>First&lt;/th>
+                                    &lt;th>Second&lt;/th>
+                                    &lt;th>Third&lt;/th>
+                                &lt;/tr>
+                            &lt;/thead>
+                            &lt;tbody>
+                                &lt;tr>
+                                    &lt;td>10&lt;/td>
+                                    &lt;td>10&lt;/td>
+                                    &lt;td>10&lt;/td>
+                                &lt;/tr>
+                                &lt;tr>
+                                    &lt;td>20&lt;/td>
+                                    &lt;td>20&lt;/td>
+                                    &lt;td>20&lt;/td>
+                                &lt;/tr>
+                                &lt;tr>
+                                    &lt;td>30&lt;/td>
+                                    &lt;td>30&lt;/td>
+                                    &lt;td>30&lt;/td>
+                                &lt;/tr>
+                                &lt;tr>
+                                    &lt;td>40&lt;/td>
+                                    &lt;td>40&lt;/td>
+                                    &lt;td>40&lt;/td>
+                                &lt;/tr>
+                            &lt;/tbody>
+                        &lt;/table>
+                    </template>
                 </code-block>
             </div>
 		</div>

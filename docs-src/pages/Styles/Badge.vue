@@ -17,17 +17,19 @@
             <div class="ks-badge error">Tag</div>
 
             <code-block style="margin-top:1rem;">
-                &lt;div class="ks-badge">10&lt;/div>
-                &lt;div class="ks-badge success">10&lt;/div>
-                &lt;div class="ks-badge info">10&lt;/div>
-                &lt;div class="ks-badge warning">10&lt;/div>
-                &lt;div class="ks-badge error">10&lt;/div>
-                <br>
-                &lt;div class="ks-badge">Tag&lt;/div>
-                &lt;div class="ks-badge success">Tag&lt;/div>
-                &lt;div class="ks-badge info">Tag&lt;/div>
-                &lt;div class="ks-badge warning">Tag&lt;/div>
-                &lt;div class="ks-badge error">Tag&lt;/div>
+                <template v-pre>
+                    &lt;div class="ks-badge">10&lt;/div>
+                    &lt;div class="ks-badge success">10&lt;/div>
+                    &lt;div class="ks-badge info">10&lt;/div>
+                    &lt;div class="ks-badge warning">10&lt;/div>
+                    &lt;div class="ks-badge error">10&lt;/div>
+                    <br>
+                    &lt;div class="ks-badge">Tag&lt;/div>
+                    &lt;div class="ks-badge success">Tag&lt;/div>
+                    &lt;div class="ks-badge info">Tag&lt;/div>
+                    &lt;div class="ks-badge warning">Tag&lt;/div>
+                    &lt;div class="ks-badge error">Tag&lt;/div>
+                </template>
             </code-block>
         </div>
     </div>

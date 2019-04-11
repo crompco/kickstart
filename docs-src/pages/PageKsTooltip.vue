@@ -24,19 +24,21 @@
             </div>
             <div class="row col">
                 <code-block>
-                    &lt;button class="button" ref="tooltipTarget" @click="active = !active">
-                        Hover Over
-                    &lt;/button>
+                    <template v-pre>
+                        &lt;button class="button" ref="tooltipTarget" @click="active = !active">
+                            Hover Over
+                        &lt;/button>
 
-                    &lt;ks-tooltip target="tooltipTarget">
-                        &lt;div>Another tooltip right here&lt;/div>
-                        &lt;h2>Title tag&lt;/h2>
-                        &lt;button class="button">iButton&lt;/button>
-                    &lt;/ks-tooltip>
+                        &lt;ks-tooltip target="tooltipTarget">
+                            &lt;div>Another tooltip right here&lt;/div>
+                            &lt;h2>Title tag&lt;/h2>
+                            &lt;button class="button">iButton&lt;/button>
+                        &lt;/ks-tooltip>
 
-                    &lt;button class="button" v-ks-tooltip="'Tooltip text, add more text'" :props="{trigger: 'click'}">
-                        Directive
-                    &lt;/button>
+                        &lt;button class="button" v-ks-tooltip="'Tooltip text, add more text'" :props="{trigger: 'click'}">
+                            Directive
+                        &lt;/button>
+                    </template>
                 </code-block>
             </div>
         </div>
@@ -54,14 +56,16 @@
             </div>
             <div class="row">
                 <code-block>
-                    &lt;ks-button>
-                        Tooltip (click)
-                        &lt;ks-tooltip trigger="click">
-                            &lt;p>
-                                A tooltip triggered on click
-                            &lt;/p>
-                        &lt;/ks-tooltip>
-                    &lt;/ks-button>
+                    <template v-pre>
+                        &lt;ks-button>
+                            Tooltip (click)
+                            &lt;ks-tooltip trigger="click">
+                                &lt;p>
+                                    A tooltip triggered on click
+                                &lt;/p>
+                            &lt;/ks-tooltip>
+                        &lt;/ks-button>
+                    </template>
 
                 </code-block>
             </div>
