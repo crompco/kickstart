@@ -42,6 +42,7 @@
 
         <div class="row">
             <code-block>
+                <template v-pre>
                 &lt;ks-accordion>
                     &lt;ks-accordion-row title="Row 1">
                         &lt;div slot="actions">
@@ -60,6 +61,7 @@
                         Content Here...
                     &lt;/ks-accordion-row>
                 &lt;/ks-accordion>
+                </template>
             </code-block>
         </div>
 

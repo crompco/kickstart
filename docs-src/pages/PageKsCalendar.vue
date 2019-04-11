@@ -11,11 +11,13 @@
 				</div>
 			</ks-calendar>
             <code-block>
+				<template v-pre>
                 &lt;ks-calendar v-model="date1">
                     &lt;div :slot="'2017-03-22'">
                         &lt;strong>Patty's Birthday&lt;/strong>
                     &lt;/div>
                 &lt;/ks-calendar>
+				</template>
             </code-block>
 		</div>
 		<div class="basic-block">
@@ -27,12 +29,14 @@
                 :show-controls="false"
 			></ks-calendar>
             <code-block>
+				<template v-pre>
                 &lt;ks-calendar
                     v-model="date2"
                     week-start="1"
                     week-height="80px"
                     :show-controls="false"
                 >&lt;/ks-calendar>
+				</template>
             </code-block>
 		</div>
 
@@ -51,6 +55,7 @@
             </ks-calendar>
 
             <code-block>
+				<template v-pre>
                 &lt;ks-calendar
                     v-model="date3"
                     week-height="80px"
@@ -62,6 +67,7 @@
                         &lt;strong>Today is special&lt;/strong>
                     &lt;/div>
                 &lt;/ks-calendar>
+				</template>
             </code-block>
         </div>
 

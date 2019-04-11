@@ -6,7 +6,9 @@
             <ks-button @click.prevent.stop="click_count++">Basic button</ks-button>
             <pre>Click Count: {{click_count}}</pre>
             <code-block>
+                <template v-pre>
                 &lt;ks-button @click.prevent.stop="click_count++">Basic button&lt;/ks-button>
+                </template>
             </code-block>
         </div>
         <div class="basic-block">
@@ -29,12 +31,14 @@
             </div>
             <pre>Spinning: {{spinning}}</pre>
             <code-block>
+                <template v-pre>
                 &lt;ks-button
                     :spin="spinning"
                     @click.prevent="spinning = !spinning"
                 >
                     Spinning button
                 &lt;/ks-button>
+                </template>
             </code-block>
         </div>
 
@@ -59,6 +63,7 @@
             </div>
             <pre>Spinning (small): {{spinSmall}}</pre>
             <code-block>
+                <template v-pre>
                 &lt;ks-button
                     :spin="spinning"
                     @click.prevent="spinSmall = !spinSmall"
@@ -66,6 +71,7 @@
                 >
                     &checkmark;
                 &lt;/ks-button>
+                </template>
             </code-block>
         </div>
 
@@ -83,6 +89,7 @@
             </div>
             <pre>Spinning: {{spinModal}}</pre>
             <code-block>
+                <template v-pre>
                 &lt;ks-button @click="$refs.modal.open()">Open Modal&lt;/ks-button>
                 &lt;ks-modal ref="modal">
                     &lt;div slot="footer">
@@ -90,6 +97,7 @@
                         &lt;ks-button :outline="true" class="button outline" @click.prevent="spinModal = false">Stop&lt;/ks-button>
                     &lt;/div>
                 &lt;/ks-modal>
+                </template>
             </code-block>
         </div>
 

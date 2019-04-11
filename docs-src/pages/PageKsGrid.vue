@@ -202,6 +202,7 @@
         </div>
         <div>
             <code-block>
+                <template v-pre>
                 &lt;div class="row col">
                     &lt;div class="col tab-6" style="background:#fff;padding:1rem;">
                         Here is col 1 of tab grid
@@ -210,6 +211,7 @@
                         Here is col 2 of tab grid
                     &lt;/div>
                 &lt;/div>
+                </template>
             </code-block>
         </div>
 
@@ -225,6 +227,7 @@
         <div class="row">
             <div class="col">
                 <code-block>
+                    <template v-pre>
                     &lt;div class="row col row-collapse">
                         &lt;div class="col tab-6" style="background:#fff;padding:1rem;">
                             Here is col 1 of tab grid
@@ -233,6 +236,7 @@
                             Here is col 2 of tab grid
                         &lt;/div>
                     &lt;/div>
+                    </template>
                 </code-block>
             </div>
         </div>

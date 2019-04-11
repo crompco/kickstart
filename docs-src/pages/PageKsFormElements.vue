@@ -100,6 +100,7 @@
                 </div>
             </form>
             <code-block>
+                <template v-pre>
                 &lt;form>
                     &lt;div class="row">
                         &lt;div class="tab-full">
@@ -175,6 +176,7 @@
                         &lt;/div>
                     &lt;/div>
                 &lt;/form>
+                </template>
             </code-block>
         </div>
 
