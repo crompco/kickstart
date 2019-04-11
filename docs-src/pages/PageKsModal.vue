@@ -254,7 +254,7 @@
                             v-model="country_code"
                             list-height="150px"
                         >
-                            <template scope="props">{{props.item.name}}</template>
+                            <template v-slot="{item}">{{item.name}}</template>
                         </ks-select>
                         <div slot="footer">
                             <button class="button error">Yes</button>
@@ -279,7 +279,7 @@
                                     v-model="country_code"
                                     list-height="150px"
                                 >
-                                    &lt;template scope="props">{{props.item.name}}&lt;/template>
+                                    &lt;template v-slot="{item}">{{item.name}}&lt;/template>
                                 &lt;/ks-select>
                                 &lt;div slot="footer">
                                     &lt;button class="button error">Yes&lt;/button>
