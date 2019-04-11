@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="row col">
-                <code-block v-pre>
+                <code-block>
                     &lt;button class="button" ref="tooltipTarget" @click="active = !active">
                         Hover Over
                     &lt;/button>
@@ -53,7 +53,7 @@
                 </ks-button>
             </div>
             <div class="row">
-                <code-block v-pre>
+                <code-block>
                     &lt;ks-button>
                         Tooltip (click)
                         &lt;ks-tooltip trigger="click">

@@ -24,7 +24,7 @@
         </div>
 
         <div class="row">
-            <code-block v-pre>
+            <code-block>
                 &lt;div class="ks-card">
                     &lt;div class="card-header">
                         Foo

@@ -201,7 +201,7 @@
             <div class="col tab-6 tab-push-2">I am pushed over 2 columns above tab breakpoint</div>
         </div>
         <div>
-            <code-block v-pre>
+            <code-block>
                 &lt;div class="row col">
                     &lt;div class="col tab-6" style="background:#fff;padding:1rem;">
                         Here is col 1 of tab grid
@@ -224,7 +224,7 @@
         </div>
         <div class="row">
             <div class="col">
-                <code-block v-pre>
+                <code-block>
                     &lt;div class="row col row-collapse">
                         &lt;div class="col tab-6" style="background:#fff;padding:1rem;">
                             Here is col 1 of tab grid

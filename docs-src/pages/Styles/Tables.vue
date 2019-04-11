@@ -39,7 +39,7 @@
 			</table>
 
 			<div>
-				<code-block v-pre>
+				<code-block>
                     &lt;table class="table responsive">
                         &lt;thead>
                             &lt;tr>
@@ -163,7 +163,7 @@
 				</table>
 
                 <div>
-                    <code-block v-pre>
+                    <code-block>
                         &lt;table class="table striped">
                             &lt;thead>
                                 &lt;tr>
@@ -249,7 +249,7 @@
 			</table>
 
             <div>
-                <code-block v-pre>
+                <code-block>
                     &lt;table class="table bordered">
                         &lt;thead>
                             &lt;tr>
@@ -318,7 +318,7 @@
 				</tbody>
 			</table>
             <div>
-                <code-block v-pre>
+                <code-block>
                     &lt;table class="table shadow">
                         &lt;thead>
                             &lt;tr>
@@ -387,7 +387,7 @@
 				</tbody>
 			</table>
             <div>
-                <code-block v-pre>
+                <code-block>
                     &lt;table class="table primary bordered striped">
                         &lt;thead>
                             &lt;tr>

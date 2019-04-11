@@ -41,7 +41,7 @@
         </div>
 
         <div class="row">
-            <code-block v-pre>
+            <code-block>
                 &lt;ks-accordion>
                     &lt;ks-accordion-row title="Row 1">
                         &lt;div slot="actions">

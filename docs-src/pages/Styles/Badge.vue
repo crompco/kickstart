@@ -16,7 +16,7 @@
             <div class="ks-badge warning">Tag</div>
             <div class="ks-badge error">Tag</div>
 
-            <code-block style="margin-top:1rem;" v-pre>
+            <code-block style="margin-top:1rem;">
                 &lt;div class="ks-badge">10&lt;/div>
                 &lt;div class="ks-badge success">10&lt;/div>
                 &lt;div class="ks-badge info">10&lt;/div>

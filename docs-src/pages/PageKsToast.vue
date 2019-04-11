@@ -10,7 +10,7 @@
         </div>
 
         <div class="row">
-            <code-block v-pre>
+            <code-block>
                 &lt;!-- Success -->
                 &lt;ks-toast
                     message="This is an success toast"
@@ -40,7 +40,7 @@
             There are multiple ways to use this components. There is a property on the vue instance if you use kickstart as a plugin.
         </div>
         <div class="row">
-            <code-block lang="language-js" v-pre>
+            <code-block lang="language-js">
                 this.$toast({
                     type: 'success',
                     message: 'Success message',

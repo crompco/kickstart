@@ -25,7 +25,7 @@
                     </template>
                 </ks-select>
 
-                <code-block v-pre>
+                <code-block>
                     &lt;ks-select
                     name="code"
                     label-key="name"
@@ -55,7 +55,7 @@
                     v-model="country_code2"
                 ></ks-select>
 
-                <code-block v-pre>
+                <code-block>
                     &lt;ks-select
                     name="code"
                     :items="countries"
@@ -76,7 +76,7 @@
                     v-model="country_code3"
                 ></ks-select>
 
-                <code-block v-pre>
+                <code-block>
                     &lt;ks-select
                     name="code"
                     :items="short_countries"
@@ -98,7 +98,7 @@
                     v-model="character"
                     :single-deselect="true"
                 ></ks-select>
-                <code-block v-pre>
+                <code-block>
                     &lt;ks-select
                     name="name"
                     :items="characters"
@@ -114,7 +114,7 @@
                 <div class="label">Disabled Select</div>
                 <ks-select name="foo" :disabled="true" label-key="foo"></ks-select>
             </div>
-            <code-block v-pre>
+            <code-block>
                 &lt;ks-select name="foo" :disabled="true" label-key="foo">&lt;/ks-select>
             </code-block>
 
@@ -129,7 +129,7 @@
                 ></ks-select>
                 <pre v-if="forced_value === null"><strong>Value:</strong> NULL</pre>
                 <pre v-else><strong>Value:</strong> {{forced_value}}</pre>
-                <code-block v-pre>
+                <code-block>
                     &lt;ks-select
                     name="code"
                     :items="countries"
@@ -150,7 +150,7 @@
                     label-key="name"
                     empty-message="No options here"
                 ></ks-select>
-                <code-block v-pre>
+                <code-block>
                     &lt;ks-select
                     name="empty"
                     :items="[]"
@@ -170,7 +170,7 @@
                     label-key="name"
                     v-model="long"
                 ></ks-select>
-                <code-block v-pre>
+                <code-block>
                     &lt;ks-select
                     name="id"
                     :items="[{id: 1, name: 'This is a really long option for the select to test the breakdown, and some

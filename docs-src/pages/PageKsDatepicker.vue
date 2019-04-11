@@ -20,7 +20,7 @@
 			</div>
 
             <div class="med-12">
-                <code-block v-pre>
+                <code-block>
                         &lt;ks-datepicker v-model="date1">&lt;/ks-datepicker>
                 </code-block>
             </div>
@@ -47,7 +47,7 @@
 			</div>
 
             <div class="med-12">
-                <code-block v-pre>
+                <code-block>
                         &lt;ks-datepicker
                             v-model="date2"
                             :year-picker="true"
@@ -79,7 +79,7 @@
             </div>
 
             <div class="med-12">
-                <code-block v-pre>
+                <code-block>
                     &lt;ks-datepicker
                         v-model="date3"
                         :year-picker="true"
@@ -92,7 +92,7 @@
             </div>
         </div>
 
-        <code-block v-pre title="Page Code" lang="language-js">
+        <code-block title="Page Code" lang="language-js">
             import KsDatepicker from '../../src/components/KsDatepicker.vue';
             import KsTabs from '../../src/components/KsTabs.vue';
             import KsTab from '../../src/components/KsTab.vue';

@@ -19,7 +19,7 @@
 			</div>
 
 			<div>
-				<code-block v-pre>
+				<code-block>
                     &lt;div class="alert success">
                         &lt;strong>Success&lt;/strong>
                         this is a success message

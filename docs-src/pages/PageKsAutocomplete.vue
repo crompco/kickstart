@@ -15,7 +15,7 @@
                     :min-search="0"
                     empty-message="Nothing found"
                 ></ks-autocomplete>
-                <code-block v-pre>
+                <code-block>
                     &lt;ks-autocomplete
                         selection-key="name"
                         v-model="value1"
@@ -35,7 +35,7 @@
                     v-model="value2"
                 ></ks-autocomplete>
 
-                <code-block v-pre>
+                <code-block>
                      &lt;ks-autocomplete
                         :items="countries"
                         selection-key="name"
@@ -60,7 +60,7 @@
                     </template>
                 </ks-autocomplete>
 
-                <code-block v-pre>
+                <code-block>
                     &lt;ks-autocomplete
                         :items="countries"
                         selection-key="name"
@@ -94,7 +94,7 @@
                 </ks-autocomplete>
 
 
-                <code-block v-pre>
+                <code-block>
                     &lt;ks-autocomplete
                         :min-search="0"
                         :taggable="true"
@@ -122,7 +122,7 @@
                     :show-tag-in-list="true"
                     group-by="show"
                 ></ks-autocomplete>
-                <code-block v-pre>
+                <code-block>
                     &lt;ks-autocomplete
                         :min-search="0"
                         :taggable="true"

@@ -19,7 +19,7 @@
                         ></ks-checkbox>
                         <pre>{{typeof values.single}} {{values.single}}</pre>
                     </div>
-                    <code-block v-pre>
+                    <code-block>
                         &lt;ks-checkbox label="Check Me" name="single" :value="true" v-model="values.single" :switch-style="true">&lt;/ks-checkbox>
                     </code-block>
                 </div>
@@ -29,7 +29,7 @@
                         <ks-checkbox label="PHP" name="checkbox1" value="1" v-model="values.checkbox1"></ks-checkbox>
                         <ks-checkbox label="JavaScript" name="checkbox1" value="2" v-model="values.checkbox1"></ks-checkbox>
                     </div>
-                    <code-block v-pre>
+                    <code-block>
                         &lt;div class="form-group">
                             &lt;div class="label">Checkbox buttons&lt;/div>
                             &lt;ks-checkbox label="PHP" name="checkbox1" value="1" v-model="values.checkbox1">&lt;/ks-checkbox>
@@ -45,7 +45,7 @@
                 <ks-checkbox :inline="true" label="PHP" name="checkbox2" value="1" v-model="values.checkbox2"></ks-checkbox>
                 <ks-checkbox :inline="true" label="JavaScript" name="checkbox2" value="2" v-model="values.checkbox2"></ks-checkbox>
             </div>
-            <code-block v-pre>
+            <code-block>
                 &lt;div class="form-group">
                     &lt;div class="label">Checkbox buttons (inline)&lt;/div>
                     &lt;ks-checkbox :inline="true" label="PHP" name="checkbox2" value="1" v-model="values.checkbox2">&lt;/ks-checkbox>
@@ -188,7 +188,7 @@
                 Checkbox button groups
             </ks-checkbox-group>
 
-            <code-block v-pre>
+            <code-block>
                 &lt;ks-checkbox-group
                     class="form-group"
                     name="group1"
@@ -215,7 +215,7 @@
                 Checkbox button groups ( button style )
             </ks-checkbox-group>
 
-            <code-block v-pre>
+            <code-block>
                 &lt;ks-checkbox-group
                     class="form-group"
                     name="group2"

@@ -26,7 +26,7 @@
 			    week-height="80px"
                 :show-controls="false"
 			></ks-calendar>
-            <code-block v-pre>
+            <code-block>
                 &lt;ks-calendar
                     v-model="date2"
                     week-start="1"

@@ -16,7 +16,7 @@
                             This is a simple modal with just a title and content
                         </p>
                     </ks-modal>
-                    <code-block v-pre>
+                    <code-block>
                             &lt;button class="button" @click.prevent="$refs.modal1.open()">
                                 Simple Modal
                             &lt;/button>
@@ -44,7 +44,7 @@
                         </div>
                     </ks-modal>
 
-                    <code-block v-pre>
+                    <code-block>
                             &lt;button class="button" @click.prevent="$refs.modal2.open()">
                                 Modal with buttons
                             &lt;/button>
@@ -77,7 +77,7 @@
                         </div>
                     </ks-modal>
 
-                    <code-block v-pre>
+                    <code-block>
                             &lt;button class="button danger" @click.prevent="$refs.modal_danger.open()">
                                 Danger Modal
                             &lt;/button>
@@ -107,7 +107,7 @@
                         </em>
                     </ks-modal>
 
-                    <code-block v-pre>
+                    <code-block>
                             &lt;button class="button" @click.prevent="$refs.modal3.open()">
                                 Modal without header
                             &lt;/button>
@@ -212,7 +212,7 @@
                         </div>
                     </ks-modal>
 
-                    <code-block v-pre>
+                    <code-block>
                             &lt;button class="button" @click.prevent="$refs.modal4.open()">
                                 Modal with a lot of content
                             &lt;/button>
@@ -262,7 +262,7 @@
                         </div>
                     </ks-modal>
 
-                    <code-block v-pre>
+                    <code-block>
                             &lt;button class="button" @click.prevent="$refs.modal5.open()">
                                 Modal with Select
                             &lt;/button>

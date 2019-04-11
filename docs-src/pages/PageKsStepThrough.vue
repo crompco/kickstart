@@ -34,7 +34,7 @@
         </div>
 
         <div class="row">
-            <code-block v-pre>
+            <code-block>
                 &lt;ks-step-through
                     ref="steps"
                     :steps="['Create Idea', 'Build Idea', 'Profit']"

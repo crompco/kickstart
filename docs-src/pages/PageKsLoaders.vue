@@ -16,7 +16,7 @@
 				<ks-loader-line :show="show"></ks-loader-line>
 			</p>
 
-            <code-block v-pre>
+            <code-block>
                     &lt;ks-loader-line :show="show">&lt;/ks-loader-line>
             </code-block>
 		</div>
@@ -106,7 +106,7 @@
 				<ks-loader-spin :show="show_spin" :size="size" :height="height"></ks-loader-spin>
 			</p>
 
-            <code-block v-pre>
+            <code-block>
                     &lt;ks-loader-spin
                         :show="show_spin"
                         :size="size"

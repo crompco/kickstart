@@ -24,7 +24,7 @@
                 </div>
             </div>
             <div class="row col">
-                <code-block v-pre>
+                <code-block>
                     &lt;ks-action-menu>
                         &lt;a href="#" @click.prevent="action('New')" class="list-item">New&lt;/a>
                         &lt;a href="#" @click.prevent="action('Add')" class="list-item">Add&lt;/a>

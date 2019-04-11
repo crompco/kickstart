@@ -99,7 +99,7 @@
                     </div>
                 </div>
             </form>
-            <code-block v-pre>
+            <code-block>
                 &lt;form>
                     &lt;div class="row">
                         &lt;div class="tab-full">

@@ -15,7 +15,7 @@
             <pre>format: {{time_format}}</pre>
             <pre>v-model: {{start_time}}</pre>
 
-            <code-block v-pre>
+            <code-block>
                 &lt;ks-timepicker
                     name="start_time"
                     :time-format="time_format"

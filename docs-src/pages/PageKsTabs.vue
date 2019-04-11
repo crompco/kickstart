@@ -23,7 +23,7 @@
                     </p>
 				</ks-tab>
 			</ks-tabs>
-            <code-block v-pre>
+            <code-block>
                 &lt;ks-tabs>
                     &lt;ks-tab title="Foo">
                         &lt;p>
@@ -67,7 +67,7 @@
 				</ks-tab>
 			</ks-tabs>
 
-            <code-block v-pre>
+            <code-block>
                 &lt;ks-tabs :expand="true" id="foo-example">
                     &lt;ks-tab title="Foo">
                         &lt;p>

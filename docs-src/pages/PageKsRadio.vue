@@ -7,7 +7,7 @@
                 <ks-radio label="PHP" name="radio1" value="1" v-model="values.radio1"></ks-radio>
                 <ks-radio label="JavaScript" name="radio1" value="2" v-model="values.radio1"></ks-radio>
             </div>
-            <code-block v-pre>
+            <code-block>
                 &lt;div class="form-group">
                     &lt;div class="label">Which do you prefer&lt;/div>
                     &lt;ks-radio label="PHP" name="radio1" value="1" v-model="values.radio1">&lt;/ks-radio>
@@ -21,7 +21,7 @@
                 <ks-radio :inline="true" label="PHP" name="radio2" value="1" v-model="values.radio2"></ks-radio>
                 <ks-radio :inline="true" label="JavaScript" name="radio2" value="2" v-model="values.radio2"></ks-radio>
             </div>
-            <code-block v-pre>
+            <code-block>
                 &lt;div class="form-group">
                     &lt;div class="label">Radio buttons (inline)&lt;/div>
                     &lt;ks-radio :inline="true" label="PHP" name="radio1" value="1" v-model="values.radio1">&lt;/ks-radio>
@@ -143,7 +143,7 @@
                 Radio button groups
             </ks-radio-group>
 
-            <code-block v-pre>
+            <code-block>
                 &lt;ks-radio-group
                     class="form-group"
                     name="group1"
@@ -171,7 +171,7 @@
                 <div slot="AF">Afghanistan Man</div>
             </ks-radio-group>
 
-            <code-block v-pre>
+            <code-block>
                 &lt;ks-radio-group
                     class="form-group"
                     name="group2"

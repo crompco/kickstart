@@ -9,7 +9,7 @@
             ></ks-paginator>
 
             <div class="row">
-                <code-block v-pre>
+                <code-block>
                     &lt;ks-paginator
                         :pagination="pagination"
                         @input="pagination.current_page=$event"
@@ -27,7 +27,7 @@
             ></ks-paginator>
 
             <div class="row">
-                <code-block v-pre>
+                <code-block>
                     &lt;ks-paginator
                         :pagination="pagination2"
                         :routed="true"
