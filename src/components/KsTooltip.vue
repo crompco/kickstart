@@ -115,6 +115,10 @@
             setUpTooltip() {
                 this.target_element = this.target === '' ? parent(this.$el) : this.$parent.$refs[this.target];
 
+                if ( this.target_element == null ) {
+                    return;
+                }
+
                 if ( this.trigger == 'hover' ) {
                     this.target_element.addEventListener('mouseenter', this.showTooltip);
                     this.target_element.addEventListener('mouseleave', this.hideTooltip);
@@ -173,6 +177,10 @@
             },
 
             destroyTooltip() {
+                if ( typeof this.target_element != 'function' ) {
+                    return;
+                }
+
                 this.$el.remove();
 
                 if ( this.tether !== false ) {
