@@ -191,6 +191,32 @@
             </code-block>
         </div>
 
+        <div class="basic-block">
+            <div class="row">
+                <p>Radio button group with no label</p>
+            </div>
+            <ks-radio-group
+                    class="form-group"
+                    name="group1"
+                    :options="radioGroup"
+                    value-key="code"
+                    label-key="name"
+                    v-model="values.group1"
+            ></ks-radio-group>
+
+            <code-block v-pre>
+                &lt;ks-radio-group
+                class="form-group"
+                name="group1"
+                :options="radioGroup"
+                value-key="code"
+                label-key="name"
+                v-model="values.group1"
+                >&lt;/ks-radio-group>
+            </code-block>
+        </div>
+
+
         <div class="row row-collapse">
             <ks-tabs class="col sm-full">
                 <ks-tab title="Props">
