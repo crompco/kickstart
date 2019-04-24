@@ -1,6 +1,6 @@
 <template>
 	<div class="ks-radio-group" :class="groupClass">
-		<label class="ks-radio-group-title label">
+		<label class="ks-radio-group-title label" v-if="$slots['default'] || label">
 			<slot>{{label}}</slot>
 		</label>
 		<div class="radio">
@@ -33,7 +33,10 @@
 
 		props: {
 			value: {},
-			label: String,
+			label: {
+				type: String,
+				default: ''
+			},
 			name: {
 				type: String,
 				required: true

@@ -76,6 +76,12 @@
                             <td>200px</td>
                             <td>The height of the options list</td>
                         </tr>
+                        <tr>
+                            <td>disabled</td>
+                            <td>Boolean</td>
+                            <td>false</td>
+                            <td>Whether or not disable the input</td>
+                        </tr>
                     </tbody>
                 </table>
             </ks-tab>
