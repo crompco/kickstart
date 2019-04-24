@@ -65,6 +65,7 @@
             },
             dropEvent(e) {
                 e.stopPropagation();
+                e.preventDefault();
                 this.$emit('drop', e);
                 this.active = false;
             },
