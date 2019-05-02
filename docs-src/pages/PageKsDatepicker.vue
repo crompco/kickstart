@@ -192,6 +192,12 @@
                             <td><pre>NULL</pre></td>
                             <td>The maximum date that can be selected. Should be in the same format as `dateFormat`</td>
                         </tr>
+                        <tr>
+                            <td>disabled</td>
+                            <td><pre>Boolean</pre></td>
+                            <td><pre>false</pre></td>
+                            <td>Whether or not to disable the input field of the date.</td>
+                        </tr>
 					</tbody>
 				</table>
 			</ks-tab>

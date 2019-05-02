@@ -10,6 +10,7 @@
 		       @focus="open"
 		       ref="display"
                type="text"
+               :disabled="disabled"
 		>
 
 		<!-- Calendar -->
@@ -64,7 +65,11 @@
 			monthPicker: {
 				type: Boolean,
 				default: false
-			}
+			},
+            disabled: {
+                type: Boolean,
+                default: false
+            }
 		},
 
 		data() {
