@@ -118,3 +118,8 @@ test('dates:parseTime', t => {
     t.is(13, dates.parseTime('1:00 PM').full_hour);
     t.is(14, dates.parseTime('1:14 PM').minute);
 })
+
+test('dates:diffInDays', t => {
+    t.is(1, dates.diffInDays('2019-01-01', '2018-12-31'));
+    t.is(30, dates.diffInDays('2019-12-31', '2019-12-01'));
+})
