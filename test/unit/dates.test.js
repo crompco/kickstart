@@ -120,6 +120,9 @@ test('dates:parseTime', t => {
 })
 
 test('dates:diffInDays', t => {
-    t.is(1, dates.diffInDays('2019-01-01', '2018-12-31'));
-    t.is(30, dates.diffInDays('2019-12-31', '2019-12-01'));
+    t.is(-1, dates.diffInDays('2019-01-01', '2018-12-31'));
+    t.is(-30, dates.diffInDays('2019-12-31', '2019-12-01'));
+    t.is(30, dates.diffInDays('2019-12-01', '2019-12-31'));
+    t.is(1, dates.diffInDays('2018-12-31', '2019-01-01'));
+    t.is(0, dates.diffInDays('2018-12-31', '2018-12-31'));
 })

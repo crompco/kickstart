@@ -259,8 +259,8 @@ export function diffInDays(date1, date2, format = 'Y-m-d') {
 	date2 = date2 instanceof Date ? date2 : parseDate(date2, format);
 
 	// Use the Time difference to determine days diff
-	let diffTime = Math.abs(date2.getTime() - date1.getTime());
-	return Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+	let diffTime = date2.getTime() - date1.getTime();
+	return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 }
 
 export default {
