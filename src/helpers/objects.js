@@ -25,6 +25,33 @@ export function object_get(obj, expression, default_val = '') {
 /**
  *
  * @param obj
+ * @param expression
+ * @param value
+ * @returns {*}
+ */
+export function object_set(obj, expression, value) {
+    let reference = obj
+    let keys = expression.split('.');
+
+    if ( keys.length > 1 ) {
+        if ( typeof reference[keys[0]] == 'undefined' ) {
+            reference[keys[0]] = {};
+        }
+        reference[keys[0]] = object_set(reference[keys[0]], keys.splice(1).join('.'), value);
+    } else {
+        if ( Object.prototype.toString.call(reference[keys[0]]) === '[object Array]' ) {
+            reference[keys[0]].push(value);
+        } else {
+            reference[keys[0]] = value;
+        }
+    }
+
+    return reference;
+}
+
+/**
+ *
+ * @param obj
  * @param only
  * @return {{}}
  */
@@ -72,5 +99,6 @@ export default {
 	object_get,
     object_only,
 	looseIndexOf,
+    object_set,
     groupBy
 }

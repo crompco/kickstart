@@ -75,3 +75,20 @@ test('objects:groupBy', t => {
     let grouped = objects.groupBy(list, 'show');
 	t.deepEqual(listGroup, grouped);
 });
+
+test('objects:object_set', t => {
+    let obj = {};
+
+    obj = objects.object_set(obj, 'foo.bar', 'baz');
+    t.deepEqual({foo: {bar: 'baz'}}, obj);
+
+    obj = {};
+    obj = objects.object_set(obj, 'foo', 'bar');
+    t.deepEqual({foo: 'bar'}, obj);
+
+    obj = {
+        foo: ['bar']
+    };
+    obj = objects.object_set(obj, 'foo', 'baz');
+    t.deepEqual({foo: ['bar', 'baz']}, obj);
+})
