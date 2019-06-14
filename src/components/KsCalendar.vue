@@ -54,45 +54,55 @@
                          :style="week_style"
                     >
 
-                        <div v-for="day in week"
-                             v-if="isInMonth(day)"
-                             class="cal-day"
-                             :tabindex="tabindex && isDayInScope(day)"
-                             :class="dayClass(day)"
-                             @click.prevent="selectDay(day)"
-                             @keydown.enter="selectDay(day)"
+                        <component :is="droppableDays ? 'ks-droppable' : 'div'"
+                                 v-for="day in week"
+                                 v-if="isInMonth(day)"
+                                 class="cal-day"
+                                 :tabindex="tabindex && isDayInScope(day)"
+                                 :class="dayClass(day)"
+                                 @click.prevent="selectDay(day)"
+                                 @keydown.enter="selectDay(day)"
+                                 :active-class="droppable_active_class"
+                                 :inactive-class="droppable_inactive_class"
+                                 @drop.stop="forwardDropEvent(day, $event)"
+                                 :key="`droppable-${formatDate(day)}`"
                         >
+
                             <div>
                                 <div v-if="interactiveDays" class="row row-collapse">
                                     <a href="#" class="day-num" @click.prevent.stop="dayClicked(day)">
                                         {{day | day}}
                                     </a>
                                 </div>
-                                <span v-else class="day-num">
-                                    {{day | day}}
-                                </span>
-
+                                <span v-else class="day-num">{{day | day}}</span>
 
                                 <slot :name="formatDate(day)"></slot>
-                            </div>
-                        </div>
 
-                        <div v-else
-                             class="cal-blank"
-                             :class="dayClass(day)"
-                             @click.prevent="selectDay(day)"
+                            </div>
+
+                        </component>
+
+                        <component :is="droppableDays ? 'ks-droppable' : 'div'"
+                            v-else
+                            class="cal-blank"
+                            :class="dayClass(day)"
+                            @click.prevent="selectDay(day)"
+                            :active-class="droppable_active_class"
+                            :inactive-class="droppable_inactive_class"
+                            @drop.stop="forwardDropEvent(day, $event)"
+                            :key="`droppable-${formatDate(day)}`"
                         >
+
                             <div v-if="showTrailingDays">
                                 <div v-if="interactiveDays" class="row row-collapse">
                                     <a href="#" class="day-num" @click.prevent.stop="dayClicked(day)">
                                         {{day | day}}
                                     </a>
                                 </div>
-                                <span v-else class="day-num">
-                                    {{day | day}}
-                                </span>
+                                <span v-else class="day-num">{{day | day}}</span>
                             </div>
-                        </div>
+
+                        </component>
 
                     </div>
                 </div>
@@ -138,7 +148,6 @@
         cloneDate,
     } from '../helpers/dates';
     import {mouseHold} from '../helpers/events';
-    import {pad_left} from '../helpers/strings';
     import DownSvg from '../svg/cheveron-down.svg';
 
     export default {
@@ -219,6 +228,18 @@
             showControls: {
                 type: Boolean,
                 default: true
+            },
+            droppableDays: {
+                type: Boolean,
+                default: false
+            },
+            droppableActiveClass: {
+                type: String,
+                default: 'drop-zone-active'
+            },
+            droppableInactiveClass: {
+                type: String,
+                default: ''
             }
         },
 
@@ -371,6 +392,14 @@
                     style = 'height: ' + height + unit + ';';
                 }
                 return style;
+            },
+
+            droppable_active_class() {
+                return this.droppableDays ? this.droppableActiveClass : '';
+            },
+
+            droppable_inactive_class() {
+                return this.droppableDays ? this.droppableInactiveClass : '';
             }
         },
 
@@ -561,6 +590,18 @@
              */
             closeYear() {
                 this.yearPickerOpen = false;
+            },
+
+            /**
+             * emits a drop event if drag+drop is enabled
+             *
+             * @param day
+             * @param drop_data
+             */
+            forwardDropEvent(day, drop_data) {
+                if (this.droppableDays) {
+                    this.$emit('drop-on-date', day);
+                }
             }
         },
 
