@@ -7,7 +7,7 @@
 <script>
 
     export default {
-        name: 'KsDraggable',
+        name: 'KsDroppable',
 
         props: {
             tag: {
