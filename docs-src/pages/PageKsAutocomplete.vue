@@ -517,7 +517,6 @@
 	import KsAutocomplete from '../../src/components/KsAutocomplete.vue';
 	import KsTabs from '../../src/components/KsTabs.vue';
 	import KsTab from '../../src/components/KsTab.vue';
-	import {escapeRegExp} from '../../src/helpers/strings';
     import KsAccordion from '../../src/components/KsAccordion.vue';
     import KsAccordionRow from '../../src/components/KsAccordionRow.vue';
 
@@ -551,12 +550,7 @@
 
 		methods: {
 			runSearch({term, callback, page}) {
-			    callback(`/countries?q=${term}&page=${page}`);
-				// api.get(`/countries?q=${term}&page=${page}`).then((data) => {
-				// 	callback(data);
-				// }).catch((error) => {
-				// 	callback([]);
-				// })
+                callback(`/countries?q=${term}&page=${page}`);
 			}
 		},
 
