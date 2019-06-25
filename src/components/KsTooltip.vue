@@ -111,6 +111,10 @@
             this.destroyTooltip();
         },
 
+        destroyed() {
+            this.$el.remove();
+        },
+
         methods: {
             setUpTooltip() {
                 this.target_element = this.target === '' ? parent(this.$el) : this.$parent.$refs[this.target];
@@ -180,8 +184,6 @@
                 if ( typeof this.target_element != 'function' ) {
                     return;
                 }
-
-                this.$el.remove();
 
                 if ( this.tether !== false ) {
                     this.tether.destroy();
