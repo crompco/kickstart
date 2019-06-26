@@ -227,8 +227,8 @@
                             child.focus();
                         }
 					} else {
-					    this.clear(true);
-                    }
+						this.clear(true);
+					}
 				}
 			},
 
@@ -263,15 +263,15 @@
 
 				// If min search is 0 and it supports multiple then we need to open the search right back up
 				if ( this.minSearch == 0 && this.is_multiple ) {
-				    this.startSearch();
-                }
+					this.startSearch();
+				}
 
-                if ( !this.is_multiple && e && 'type' in e && e.type == 'click' ) {
-				    // When clicking on selections it can casue an issue
-                    // where the list is pulled and multiple selections can be made
-                    // To avoid this bug I will tell the autocomplete that it's not focused even though it is
-                    this.focused = false;
-                }
+				if ( !this.is_multiple && e && 'type' in e && e.type == 'click' ) {
+					// When clicking on selections it can casue an issue
+					// where the list is pulled and multiple selections can be made
+					// To avoid this bug I will tell the autocomplete that it's not focused even though it is
+					this.focused = false;
+				}
 			},
 
 			/**
@@ -354,7 +354,7 @@
 		watch: {
 			lookup_name(newVal, oldVal) {
 				if ( newVal != oldVal ) {
-				    // when the lookup name changes we trigger the run lookup
+					// when the lookup name changes we trigger the run lookup
                     if ( !this.has_selections || this.is_multiple ) {
                         this.startSearch();
                     }
@@ -367,23 +367,23 @@
 			},
 
 			list() {
-			    // Auto select when 1 element is available
-			    if ( this.taggable && this.list.length == 1 ) {
-			        let typed_name = String(this.lookup_name).toLowerCase();
-			        let list_name = String(this.getSelectionLabel(this.getItemByIndex(0))).toLowerCase();
+				// Auto select when 1 element is available
+				if ( this.taggable && this.list.length == 1 ) {
+					let typed_name = String(this.lookup_name).toLowerCase();
+					let list_name = String(this.getSelectionLabel(this.getItemByIndex(0))).toLowerCase();
 
-			        // Only auto select when the typed name matches the first element
-			        if ( typed_name === list_name ) {
-                        this.selected_index = 0;
+					// Only auto select when the typed name matches the first element
+					if ( typed_name === list_name ) {
+						this.selected_index = 0;
 					}
 				}
 			},
 
 			focused() {
-			    if ( this.focused && this.minSearch == 0 && this.lookup_name.length == 0 ) {
-			        if ( !this.has_selections || this.is_multiple ) {
-                        this.startSearch();
-                    }
+				if ( this.focused && this.minSearch == 0 && this.lookup_name.length == 0 ) {
+					if ( !this.has_selections || this.is_multiple ) {
+						this.startSearch();
+					}
 				}
 			},
 
