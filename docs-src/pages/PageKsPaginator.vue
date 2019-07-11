@@ -41,6 +41,26 @@
             </div>
         </div>
 
+        <div class="basic-block">
+            Simple Paginator
+
+            <ks-simple-paginator
+                :pagination="simple_paginator"
+                :routed="true"
+            ></ks-simple-paginator>
+
+            <div class="row">
+                <code-block>
+                    <template v-pre>
+                        &lt;ks-simple-paginator
+                            :pagination="simple_paginator"
+                            :routed="true"
+                        >&lt;/ks-simple-paginator>
+                    </template>
+                </code-block>
+            </div>
+        </div>
+
         <div class="alert info">
             This component works in 2 ways. By default it will emit an event when the page is changed.
             You can also set the "routed" prop to true it will re-write the url with the proper "page" as a query param
@@ -119,6 +139,7 @@
     import KsPaginator from '../../src/components/KsPaginator.vue';
     import KsTabs from '../../src/components/KsTabs.vue'
     import KsTab from '../../src/components/KsTab.vue'
+    import KsSimplePaginator from '../../src/components/KsSimplePaginator.vue';
 
     export default {
         name: 'PageKsPaginator',
@@ -136,6 +157,11 @@
                     total_count: 902,
                     total_pages: 15,
                     current_page: 1,
+                },
+                simple_paginator: {
+                    current_page: 1,
+                    next_page: '?page=2',
+                    previous_page: null,
                 }
             }
         },
@@ -143,7 +169,8 @@
         components: {
             KsPaginator,
             KsTabs,
-            KsTab
+            KsTab,
+            KsSimplePaginator,
         }
     }
 </script>

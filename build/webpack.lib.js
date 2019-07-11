@@ -24,6 +24,7 @@ const config = {
         KsSelect: ['./src/components/KsSelect.vue'],
         KsToast: ['./src/components/KsToast.vue'],
         KsPaginator: ['./src/components/KsPaginator.vue'],
+        KsSimplePaginator: ['./src/components/KsSimplePaginator.vue'],
         KsActionMenu: ['./src/components/KsActionMenu.vue'],
         KsStepThrough: ['./src/components/KsStepThrough.vue'],
         KsAccordion: ['./src/components/KsAccordion'],
