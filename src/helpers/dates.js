@@ -115,7 +115,8 @@ export function formatDate(date, format = 'Y-m-d', parse_format = format, locale
 	cal_day = pad_left(cal_day, '0', 2);
 
 	return format
-        .replace(/y/i, year)
+        .replace('Y', year)
+        .replace('y', String(year).substring(2, 4))
         .replace(/m/i, month)
         .replace('d', cal_day)
         .replace('D', day_abbrev)

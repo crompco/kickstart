@@ -87,12 +87,14 @@ test('dates:formatDate', t => {
     let f3 = dates.formatDate(new Date(2017, 0, 31), 'm d, Y');
     let f4 = dates.formatDate(new Date(2017, 0, 31), 'D m/d/Y');
     let f5 = dates.formatDate(new Date(2017, 0, 31), 'l m/d/Y');
+    let f6 = dates.formatDate(new Date(2017, 0, 31), 'm/d/y');
 
 	t.is(f1, '2017-01-31');
 	t.is(f2, '01/31/2017');
     t.is(f3, '01 31, 2017');
     t.is(f4, 'Tue 01/31/2017');
     t.is(f5, 'Tuesday 01/31/2017');
+    t.is(f6, '01/31/17');
 });
 
 
