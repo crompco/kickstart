@@ -4,7 +4,7 @@ const instance = axios.create();
 
 export default {
 	get(url, request, config = {}) {
-		return instance.get(url, request, config)
+		return instance.get(url, {...config, ...request})
 			.then((response) => Promise.resolve(response.data))
 			.catch((error) => Promise.reject(error));
 	},
