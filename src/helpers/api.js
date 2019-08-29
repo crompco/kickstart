@@ -1,32 +1,34 @@
 import axios from 'axios';
 
+const instance = axios.create();
+
 export default {
 	get(url, request, config = {}) {
-		return axios.get(url, request, config)
+		return instance.get(url, request, config)
 			.then((response) => Promise.resolve(response.data))
 			.catch((error) => Promise.reject(error));
 	},
 
 	post(url, request, config = {}) {
-		return axios.post(url, request, config)
+		return instance.post(url, request, config)
 			.then((response) => Promise.resolve(response))
 			.catch((error) => Promise.reject(error));
 	},
 
     put(url, request, config = {}) {
-		return axios.put(url, request, config)
+		return instance.put(url, request, config)
 			.then((response) => Promise.resolve(response))
 			.catch((error) => Promise.reject(error));
 	},
 
     patch(url, request, config = {}) {
-        return axios.patch(url, request, config)
+        return instance.patch(url, request, config)
             .then((response) => Promise.resolve(response))
             .catch((error) => Promise.reject(error));
     },
 
 	delete(url, request) {
-		return axios.delete(url, request)
+		return instance.delete(url, request)
 			.then((response) => Promise.resolve(response))
 			.catch((error) => Promise.reject(error));
 	},
@@ -35,9 +37,13 @@ export default {
 		axios.defaults.baseURL = url;
 	},
 
+	getInstance() {
+		return instance;
+	},
+
 	interceptors: {
 		request(options, onRejected = false) {
-			return axios.interceptors.request.use(config => {
+			return instance.interceptors.request.use(config => {
 					if ( typeof options === 'function' ) {
                         return options(config);
                     }
@@ -53,7 +59,7 @@ export default {
         },
 
 		response(onFulfilled, onRejected = false) {
-			return axios.interceptors.response.use(response => {
+			return instance.interceptors.response.use(response => {
 				return onFulfilled(response);
 			}, error => {
 				if ( onRejected !== false ) {
