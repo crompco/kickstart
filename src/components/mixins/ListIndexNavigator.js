@@ -2,6 +2,7 @@ import {object_get} from '../../helpers/objects';
 import {addEvent, smartFocusToggle, keyCode, stopParentScroll, scrolledToBottom} from '../../helpers/events';
 import {escapeRegExp} from '../../helpers/strings';
 import axios from 'axios';
+import api from '../../helpers/api';
 
 export default {
 
@@ -375,7 +376,7 @@ export default {
 
                     let cancel_token = this.setupCancelToken();
 
-                    return axios.get(endpoint, {
+                    return api.getInstance().get(endpoint, {
                         cancelToken: cancel_token.token
                     }).then(({data}) => {
                         this.callback(data.data, true, concat);
