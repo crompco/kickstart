@@ -195,13 +195,17 @@
                 <code-block>
                     <template v-pre>
                         &lt;ks-select
-                        name="empty"
-                        :items="[]"
-                        label-key="name"
-                        empty-message="No options here"
-                        :accept-empty-selection="true"
-
-                        >&lt;/ks-select>
+                            name="empty"
+                            :items="[]"
+                            label-key="name"
+                            empty-message="No options here"
+                            :accept-empty-selection="true"
+                            @selected-empty="emptySelected = 1"
+                        >
+                            &lt;template v-slot:empty="{term}">
+                                Empty {{term}}
+                            &lt;/template>
+                        &lt;/ks-select>
                     </template>
                 </code-block>
             </div>
