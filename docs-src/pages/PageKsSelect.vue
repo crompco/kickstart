@@ -159,10 +159,15 @@
                 <div class="label">Select with no options</div>
                 <ks-select
                     name="empty"
-                    :items="[]"
+                    :items="emptyItems"
                     label-key="name"
                     empty-message="No options here"
-                ></ks-select>
+                    :accept-empty-selection="true"
+                >
+                    <template v-slot:empty="{term}">
+                        Empty {term}
+                    </template>
+                </ks-select>
                 <code-block>
                     <template v-pre>
                         &lt;ks-select
@@ -446,6 +451,14 @@
                             will show up.
                         </td>
                     </tr>
+                    <tr>
+                        <td>acceptEmptySelection</td>
+                        <td>Boolean</td>
+                        <td></td>
+                        <td>
+                            Works with the emptyMessage property. If this is set to true the empty option will be a selectable item instead of just text.
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             </ks-tab>
@@ -650,6 +663,8 @@
 
         data() {
             return {
+                emptyItems: [],
+                emptySelected: false,
                 countries: [],
                 characters: [],
                 country: '',
