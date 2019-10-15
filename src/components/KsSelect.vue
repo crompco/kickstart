@@ -9,6 +9,7 @@
         @keydown.down.prevent="openSelectDown"
         @keydown.up.prevent="openSelectUp"
         @keydown="keyOpen"
+        @keyup.esc="close"
         :disabled="disabled"
     >
         <input type="text" :name="name" :value="inputValue" @input="filledInput" class="select-input-field"
@@ -33,7 +34,7 @@
                     ref="lookup"
                     v-model="lookup_name"
                     :placeholder="placeholder"
-                    @keyup.esc="clear"
+                    @keyup.esc.stop="clear"
                     @keydown.space.stop
                     :class="{ 'is-multiple': multiple }"
                 >
@@ -56,13 +57,12 @@
                         <ul>
                             <li
                                 v-for="(item, index) in group_list"
-                                :class="{ 'selected-item': item._index == selected_index, 'empty-select-item': item['__empty']  }"
+                                :class="{ 'selected-item': item._index == selected_index }"
                                 @click.prevent="selectItem(item._index, $event)"
                                 @mouseover="setHoverIndex(item._index)"
                             >
                                 <!-- Scoped slot -->
-                                <slot :term="lookup_name" name="empty" v-if="acceptEmptySelection && item['__empty']">{{emptyMessage}}</slot>
-                                <slot v-else :item="item">{{item[labelKey]}}</slot>
+                                <slot :item="item">{{item[labelKey]}}</slot>
                             </li>
                         </ul>
                     </li>
@@ -70,17 +70,24 @@
                 <template v-else>
                     <li
                         v-for="(item, index) in list"
-                        :class="{ 'selected-item': index == selected_index, 'empty-select-item': item['__empty'] }"
+                        :class="{ 'selected-item': index == selected_index }"
                         @click.prevent="selectItem(index)"
                         @mouseover="setHoverIndex(index)"
                     >
                         <!-- Scoped slot  that defaults to the labelKey-->
-                        <slot :term="lookup_name" name="empty" v-if="acceptEmptySelection && item['__empty']">{{emptyMessage}}</slot>
-                        <slot v-else :item="item">{{item[labelKey]}}</slot>
+                        <slot :item="item">{{item[labelKey]}}</slot>
                     </li>
                 </template>
                 <!-- Slot for empty search results-->
                 <li v-if="!acceptEmptySelection && hasEmptyMessage && !loading && list.length == 0" class="empty-list-message">
+                    <slot :term="lookup_name" name="empty">{{emptyMessage}}</slot>
+                </li>
+                <li
+                    v-if="acceptEmptySelection && hasEmptyMessage && !loading && list.length == 0"
+                    class="empty-list-message active-empty-list-message"
+                    :class="{ 'selected-item': selected_empty }"
+                    @click.prevent="selectEmpty(true)"
+                >
                     <slot :term="lookup_name" name="empty">{{emptyMessage}}</slot>
                 </li>
             </ul>
@@ -173,7 +180,8 @@
                 keyName: this.itemKey,
                 filter: this.itemFilter,
                 isOpen: false,
-                needs_new_search: true
+                needs_new_search: true,
+                selected_empty: false,
             };
         },
 
@@ -248,7 +256,6 @@
             this.$on('clear', () => {
                 this.isOpen = false;
             });
-
         },
 
         methods: {
@@ -361,6 +368,7 @@
 
             close() {
                 this.isOpen = false;
+                this.selected_empty = false;
             },
 
             selectItem(index, e, reset = true) {
@@ -377,11 +385,11 @@
 
                 // Find the item by the given index
                 let item = this.getItemByIndex(index);
-                if ( !(this.keyName in item) ) {
+                if ( item != null && !(this.keyName in item) ) {
                     console.error('KsSelect: Could not find key: ' + this.keyName, item);
                 }
 
-                if ( item['__empty'] ) {
+                if ( this.selected_empty ) {
                     this.$emit('selected-empty', true);
                 } else {
                     // Determine what value to emit
@@ -445,24 +453,22 @@
                 return -1;
             },
 
-            refreshEmptySelectionItem() {
-                // When we aren't loading, have an empty list, and the accept empty selection are all matched
-                if ( !this.loading && this.list.length == 0 && this.acceptEmptySelection ) {
-                    // Push an empty item to our list for selection.
-                    this.list.push({
-                        [this.keyName]: 0,
-                        [this.labelKey]: this.emptyMessage,
-                        __empty: true
-                    })
-                } else if ( this.list.length && !this.acceptEmptySelection ) {
-                    let empty_item = this.list.find((item) => {
-                        return item['__empty'];
-                    });
+            selectEmpty(selected_empty) {
+                this.selected_empty = selected_empty;
+                if ( this.selected_empty ) {
+                    this.selectItem();
+                }
+            },
 
-                    let item_index = this.list.indexOf(empty_item);
-                    if ( -1 != item_index ) {
-                        this.list.splice(item_index, 1);
-                    }
+            onSelectEndBoundary() {
+                if ( this.list.length == 0 && this.acceptEmptySelection ) {
+                    this.selected_empty = true;
+                }
+            },
+
+            onSelectStartBoundary() {
+                if ( this.list.length == 0 && this.acceptEmptySelection ) {
+                    this.selected_empty = false;
                 }
             }
         },
@@ -504,18 +510,6 @@
                     });
                 }
             },
-
-            list() {
-                if ( !this.loading && this.list.length == 0 && this.acceptEmptySelection ) {
-                    this.$nextTick(() => {
-                        this.refreshEmptySelectionItem();
-                    });
-                }
-            },
-
-            acceptEmptySelection() {
-                this.refreshEmptySelectionItem();
-            }
         },
 
         components: {

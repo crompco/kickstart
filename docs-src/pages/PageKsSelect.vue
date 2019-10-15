@@ -162,12 +162,7 @@
                     :items="emptyItems"
                     label-key="name"
                     empty-message="No options here"
-                    :accept-empty-selection="true"
-                >
-                    <template v-slot:empty="{term}">
-                        Empty {term}
-                    </template>
-                </ks-select>
+                ></ks-select>
                 <code-block>
                     <template v-pre>
                         &lt;ks-select
@@ -175,6 +170,37 @@
                             :items="[]"
                             label-key="name"
                             empty-message="No options here"
+                        >&lt;/ks-select>
+                    </template>
+                </code-block>
+            </div>
+
+            <div class="form-group">
+                <div class="label">Select with no options, selectable empty item</div>
+                <ks-select
+                    name="empty"
+                    :items="emptyItems"
+                    label-key="name"
+                    empty-message="No options here"
+                    :accept-empty-selection="true"
+                    @selected-empty="emptySelected = 1"
+                >
+                    <template v-slot:empty="{term}">
+                        Empty {{term}}
+                    </template>
+                </ks-select>
+                <div>
+                    <pre><strong>Empty Selected:</strong> {{emptySelected ? 'Yes' : 'No'}}</pre>
+                </div>
+                <code-block>
+                    <template v-pre>
+                        &lt;ks-select
+                        name="empty"
+                        :items="[]"
+                        label-key="name"
+                        empty-message="No options here"
+                        :accept-empty-selection="true"
+
                         >&lt;/ks-select>
                     </template>
                 </code-block>
@@ -664,7 +690,7 @@
         data() {
             return {
                 emptyItems: [],
-                emptySelected: false,
+                emptySelected: 0,
                 countries: [],
                 characters: [],
                 country: '',

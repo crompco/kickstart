@@ -169,6 +169,12 @@ export default {
     },
 
     methods: {
+        callHookMethod(method_name, params = []) {
+            if ( typeof this[method_name] == 'function' ) {
+                this[method_name].apply(this, params);
+            }
+        },
+
         initListNavigation(options) {
             this.ref_lookup = options.lookup || 'lookup';
             this.ref_list = options.list || 'list';
@@ -231,6 +237,9 @@ export default {
             let index = this.selected_index - 1;
             if ( !(index < this.minIndex) ) {
                 this.selected_index -= 1;
+                this.callHookMethod('onSelectUp');
+            } else {
+                this.callHookMethod('onSelectStartBoundary');
             }
 
             // Auto scroll
@@ -250,6 +259,9 @@ export default {
 
             if ( index <= this.last_index ) {
                 this.selected_index += 1;
+                this.callHookMethod('onSelectDown');
+            } else {
+                this.callHookMethod('onSelectEndBoundary');
             }
 
             // Auto scroll
