@@ -136,6 +136,7 @@
     border-top: 0;
     overflow-y: auto;
     left: 0;
+    transition: top 0.3s;
     li {
         padding: rem($ac-list-item-padding);
         border: 1px solid transparent;

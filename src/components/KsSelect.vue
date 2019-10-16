@@ -169,7 +169,7 @@
             },
             invertOffsetRatio: {
                 type: Number,
-                default: .65
+                default: .75
             }
         },
 
@@ -276,16 +276,25 @@
 
             handleScroll() {
                 let list_height = parseInt(this.$refs.list.offsetHeight);
+                let element_height = this.$el.offsetHeight;
                 if ( list_height == 0 ) {
                     this.list_style.top = false;
                     return;
                 }
 
-                let bottom_of_element = this.$el.getBoundingClientRect().top + list_height;
-                if ( bottom_of_element > ((window.innerHeight + window.scrollY) - (list_height / this.invertOffsetRatio)) ) {
+                let bottom_of_element = this.$el.getBoundingClientRect().top + (list_height * this.invertOffsetRatio) + window.scrollY;
+
+                if ( bottom_of_element > ((window.innerHeight + window.scrollY)) ) {
                     this.list_style.top = `calc(-${list_height}px - 2.125rem)`
                 } else {
-                    this.list_style.top = null;
+                    let operator = '+';
+                    let adjustment = 1;
+                    if ( !this.show_search ) {
+                        operator = '-';
+                        adjustment = 2.125;
+                    }
+
+                    this.list_style.top = `calc(${element_height}px ${operator} ${adjustment}rem)`;
                 }
             },
 
@@ -507,6 +516,11 @@
             lookup_name() {
                 this.startSearch();
                 this.needs_new_search = true;
+            },
+            list() {
+                this.$nextTick(() => {
+                    this.handleScroll();
+                });
             },
             value() {
                 this.refreshSelected();
