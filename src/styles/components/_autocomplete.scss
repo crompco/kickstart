@@ -133,7 +133,12 @@
     position: absolute;
     list-style: none;
     border: solid 1px $ac-list-border;
-    border-top: 0;
+    &.inverted {
+        border-bottom: 0;
+    }
+    &:not(.inverted) {
+        border-top: 0;
+    }
     overflow-y: auto;
     left: 0;
     transition: top 0.3s;

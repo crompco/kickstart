@@ -50,6 +50,7 @@
                 <ul
                     ref="list"
                     class="autocomplete-list"
+                    :class="{'inverted': this.inverted}"
                     :style="list_style"
                 >
                     <template v-if="groupBy">
@@ -237,6 +238,7 @@
                 isOpen: false,
                 needs_new_search: true,
                 selected_empty: false,
+                inverted: false,
                 list_style: {
                     'max-height': this.listHeight,
                     top: null,
@@ -287,8 +289,10 @@
                 let bottom_of_element = this.$el.getBoundingClientRect().top + (list_height * this.invertOffsetRatio) + window.scrollY;
 
                 if ( bottom_of_element > ((window.innerHeight + window.scrollY)) ) {
-                    this.list_style.top = `calc(-${list_height}px - 2.125rem)`
+                    this.inverted = true;
+                    this.list_style.top = `calc(-${list_height}px - 2.135rem)`
                 } else {
+                    this.inverted = false;
                     let operator = '+';
                     let adjustment = 1;
                     if ( !this.show_search ) {
