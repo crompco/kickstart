@@ -49,7 +49,7 @@
             <ul
                 ref="list"
                 class="autocomplete-list"
-                :style="'max-height:'+this.listHeight"
+                :style="list_style"
             >
                 <template v-if="groupBy">
                     <li v-for="(group_list, group) in groups" class="opt-group">
@@ -166,23 +166,11 @@
             acceptEmptySelection: {
                 type: Boolean,
                 default: false,
+            },
+            invertOffsetRatio: {
+                type: Number,
+                default: .65
             }
-        },
-
-        data() {
-            return {
-                clear_on_close: false,
-                loading: false,
-                selected: null,
-                startIndex: 0,
-                minIndex: 0,
-                selected_index: 0,
-                keyName: this.itemKey,
-                filter: this.itemFilter,
-                isOpen: false,
-                needs_new_search: true,
-                selected_empty: false,
-            };
         },
 
         computed: {
@@ -234,6 +222,26 @@
             }
         },
 
+        data() {
+            return {
+                clear_on_close: false,
+                loading: false,
+                selected: null,
+                startIndex: 0,
+                minIndex: 0,
+                selected_index: 0,
+                keyName: this.itemKey,
+                filter: this.itemFilter,
+                isOpen: false,
+                needs_new_search: true,
+                selected_empty: false,
+                list_style: {
+                    'max-height': this.listHeight,
+                    top: null,
+                }
+            };
+        },
+
         mounted() {
             if ( !this.itemKey ) {
                 this.keyName = this.name;
@@ -256,9 +264,31 @@
             this.$on('clear', () => {
                 this.isOpen = false;
             });
+
+            window.addEventListener('scroll', this.handleScroll);
+        },
+
+        beforeDestroy() {
+            window.removeEventListener('scroll', this.handleScroll);
         },
 
         methods: {
+
+            handleScroll() {
+                let list_height = parseInt(this.$refs.list.offsetHeight);
+                if ( list_height == 0 ) {
+                    this.list_style.top = false;
+                    return;
+                }
+
+                let bottom_of_element = this.$el.getBoundingClientRect().top + list_height;
+                if ( bottom_of_element > ((window.innerHeight + window.scrollY) - (list_height / this.invertOffsetRatio)) ) {
+                    this.list_style.top = `calc(-${list_height}px - 2.125rem)`
+                } else {
+                    this.list_style.top = null;
+                }
+            },
+
             filledInput(e) {
                 this.list.find((item, index) => {
                     if ( this.keyName in item && e.target.value == item[this.keyName] ) {
@@ -506,6 +536,7 @@
                                 this.selected_index = value_index;
                                 this.initListScrollTo(this.selected_index);
                             }
+                            this.handleScroll();
                         }
                     });
                 }
