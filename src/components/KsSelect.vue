@@ -46,51 +46,53 @@
             </div>
 
             <!-- Autocomplete list-->
-            <ul
-                ref="list"
-                class="autocomplete-list"
-                :style="list_style"
-            >
-                <template v-if="groupBy">
-                    <li v-for="(group_list, group) in groups" class="opt-group">
-                        <strong>{{group}}</strong>
-                        <ul>
-                            <li
-                                v-for="(item, index) in group_list"
-                                :class="{ 'selected-item': item._index == selected_index }"
-                                @click.prevent="selectItem(item._index, $event)"
-                                @mouseover="setHoverIndex(item._index)"
-                            >
-                                <!-- Scoped slot -->
-                                <slot :item="item">{{item[labelKey]}}</slot>
-                            </li>
-                        </ul>
-                    </li>
-                </template>
-                <template v-else>
-                    <li
-                        v-for="(item, index) in list"
-                        :class="{ 'selected-item': index == selected_index }"
-                        @click.prevent="selectItem(index)"
-                        @mouseover="setHoverIndex(index)"
-                    >
-                        <!-- Scoped slot  that defaults to the labelKey-->
-                        <slot :item="item">{{item[labelKey]}}</slot>
-                    </li>
-                </template>
-                <!-- Slot for empty search results-->
-                <li v-if="!acceptEmptySelection && hasEmptyMessage && !loading && list.length == 0" class="empty-list-message">
-                    <slot :term="lookup_name" name="empty">{{emptyMessage}}</slot>
-                </li>
-                <li
-                    v-if="acceptEmptySelection && hasEmptyMessage && !loading && list.length == 0"
-                    class="empty-list-message active-empty-list-message"
-                    :class="{ 'selected-item': selected_empty }"
-                    @click.prevent="selectEmpty(true)"
+            <div class="ks-select-list">
+                <ul
+                    ref="list"
+                    class="autocomplete-list"
+                    :style="list_style"
                 >
-                    <slot :term="lookup_name" name="empty">{{emptyMessage}}</slot>
-                </li>
-            </ul>
+                    <template v-if="groupBy">
+                        <li v-for="(group_list, group) in groups" class="opt-group">
+                            <strong>{{group}}</strong>
+                            <ul>
+                                <li
+                                    v-for="(item, index) in group_list"
+                                    :class="{ 'selected-item': item._index == selected_index }"
+                                    @click.prevent="selectItem(item._index, $event)"
+                                    @mouseover="setHoverIndex(item._index)"
+                                >
+                                    <!-- Scoped slot -->
+                                    <slot :item="item">{{item[labelKey]}}</slot>
+                                </li>
+                            </ul>
+                        </li>
+                    </template>
+                    <template v-else>
+                        <li
+                            v-for="(item, index) in list"
+                            :class="{ 'selected-item': index == selected_index }"
+                            @click.prevent="selectItem(index)"
+                            @mouseover="setHoverIndex(index)"
+                        >
+                            <!-- Scoped slot  that defaults to the labelKey-->
+                            <slot :item="item">{{item[labelKey]}}</slot>
+                        </li>
+                    </template>
+                    <!-- Slot for empty search results-->
+                    <li v-if="!acceptEmptySelection && hasEmptyMessage && !loading && list.length == 0" class="empty-list-message">
+                        <slot :term="lookup_name" name="empty">{{emptyMessage}}</slot>
+                    </li>
+                    <li
+                        v-if="acceptEmptySelection && hasEmptyMessage && !loading && list.length == 0"
+                        class="empty-list-message active-empty-list-message"
+                        :class="{ 'selected-item': selected_empty }"
+                        @click.prevent="selectEmpty(true)"
+                    >
+                        <slot :term="lookup_name" name="empty">{{emptyMessage}}</slot>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </template>
