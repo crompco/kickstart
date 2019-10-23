@@ -46,51 +46,54 @@
             </div>
 
             <!-- Autocomplete list-->
-            <ul
-                ref="list"
-                class="autocomplete-list"
-                :style="'max-height:'+this.listHeight"
-            >
-                <template v-if="groupBy">
-                    <li v-for="(group_list, group) in groups" class="opt-group">
-                        <strong>{{group}}</strong>
-                        <ul>
-                            <li
-                                v-for="(item, index) in group_list"
-                                :class="{ 'selected-item': item._index == selected_index }"
-                                @click.prevent="selectItem(item._index, $event)"
-                                @mouseover="setHoverIndex(item._index)"
-                            >
-                                <!-- Scoped slot -->
-                                <slot :item="item">{{item[labelKey]}}</slot>
-                            </li>
-                        </ul>
-                    </li>
-                </template>
-                <template v-else>
-                    <li
-                        v-for="(item, index) in list"
-                        :class="{ 'selected-item': index == selected_index }"
-                        @click.prevent="selectItem(index)"
-                        @mouseover="setHoverIndex(index)"
-                    >
-                        <!-- Scoped slot  that defaults to the labelKey-->
-                        <slot :item="item">{{item[labelKey]}}</slot>
-                    </li>
-                </template>
-                <!-- Slot for empty search results-->
-                <li v-if="!acceptEmptySelection && hasEmptyMessage && !loading && list.length == 0" class="empty-list-message">
-                    <slot :term="lookup_name" name="empty">{{emptyMessage}}</slot>
-                </li>
-                <li
-                    v-if="acceptEmptySelection && hasEmptyMessage && !loading && list.length == 0"
-                    class="empty-list-message active-empty-list-message"
-                    :class="{ 'selected-item': selected_empty }"
-                    @click.prevent="selectEmpty(true)"
+            <div class="ks-select-list">
+                <ul
+                    ref="list"
+                    class="autocomplete-list"
+                    :class="{'inverted': this.inverted}"
+                    :style="list_style"
                 >
-                    <slot :term="lookup_name" name="empty">{{emptyMessage}}</slot>
-                </li>
-            </ul>
+                    <template v-if="groupBy">
+                        <li v-for="(group_list, group) in groups" class="opt-group">
+                            <strong>{{group}}</strong>
+                            <ul>
+                                <li
+                                    v-for="(item, index) in group_list"
+                                    :class="{ 'selected-item': item._index == selected_index }"
+                                    @click.prevent="selectItem(item._index, $event)"
+                                    @mouseover="setHoverIndex(item._index)"
+                                >
+                                    <!-- Scoped slot -->
+                                    <slot :item="item">{{item[labelKey]}}</slot>
+                                </li>
+                            </ul>
+                        </li>
+                    </template>
+                    <template v-else>
+                        <li
+                            v-for="(item, index) in list"
+                            :class="{ 'selected-item': index == selected_index }"
+                            @click.prevent="selectItem(index)"
+                            @mouseover="setHoverIndex(index)"
+                        >
+                            <!-- Scoped slot  that defaults to the labelKey-->
+                            <slot :item="item">{{item[labelKey]}}</slot>
+                        </li>
+                    </template>
+                    <!-- Slot for empty search results-->
+                    <li v-if="!acceptEmptySelection && hasEmptyMessage && !loading && list.length == 0" class="empty-list-message">
+                        <slot :term="lookup_name" name="empty">{{emptyMessage}}</slot>
+                    </li>
+                    <li
+                        v-if="acceptEmptySelection && hasEmptyMessage && !loading && list.length == 0"
+                        class="empty-list-message active-empty-list-message"
+                        :class="{ 'selected-item': selected_empty }"
+                        @click.prevent="selectEmpty(true)"
+                    >
+                        <slot :term="lookup_name" name="empty">{{emptyMessage}}</slot>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </template>
@@ -166,23 +169,11 @@
             acceptEmptySelection: {
                 type: Boolean,
                 default: false,
+            },
+            invertOffsetRatio: {
+                type: Number,
+                default: .75
             }
-        },
-
-        data() {
-            return {
-                clear_on_close: false,
-                loading: false,
-                selected: null,
-                startIndex: 0,
-                minIndex: 0,
-                selected_index: 0,
-                keyName: this.itemKey,
-                filter: this.itemFilter,
-                isOpen: false,
-                needs_new_search: true,
-                selected_empty: false,
-            };
         },
 
         computed: {
@@ -234,6 +225,27 @@
             }
         },
 
+        data() {
+            return {
+                clear_on_close: false,
+                loading: false,
+                selected: null,
+                startIndex: 0,
+                minIndex: 0,
+                selected_index: 0,
+                keyName: this.itemKey,
+                filter: this.itemFilter,
+                isOpen: false,
+                needs_new_search: true,
+                selected_empty: false,
+                inverted: false,
+                list_style: {
+                    'max-height': this.listHeight,
+                    top: null,
+                }
+            };
+        },
+
         mounted() {
             if ( !this.itemKey ) {
                 this.keyName = this.name;
@@ -256,9 +268,44 @@
             this.$on('clear', () => {
                 this.isOpen = false;
             });
+
+            window.addEventListener('scroll', this.handleScroll);
+        },
+
+        beforeDestroy() {
+            window.removeEventListener('scroll', this.handleScroll);
         },
 
         methods: {
+
+            handleScroll() {
+                let list_height = parseInt(this.$refs.list.offsetHeight);
+                let element_height = this.$el.offsetHeight;
+                if ( list_height == 0 ) {
+                    this.list_style.top = false;
+                    return;
+                }
+
+                let bottom_of_element = this.$el.getBoundingClientRect().top + (list_height * this.invertOffsetRatio) + window.scrollY;
+
+                // Chect that the overall window height vs the list_height is large enough to even considering flipping the screen
+                // Then see if the bottom of the element is passed our scrolled height
+                if ( (window.innerHeight > list_height + 115) && bottom_of_element > ((window.innerHeight + window.scrollY)) ) {
+                    this.inverted = true;
+                    this.list_style.top = `calc(-${list_height}px - 2.135rem)`
+                } else {
+                    this.inverted = false;
+                    let operator = '+';
+                    let adjustment = 0.875;
+                    if ( !this.show_search ) {
+                        operator = '-';
+                        adjustment = 2.125;
+                    }
+
+                    this.list_style.top = `calc(${element_height -1}px ${operator} ${adjustment}rem)`;
+                }
+            },
+
             filledInput(e) {
                 this.list.find((item, index) => {
                     if ( this.keyName in item && e.target.value == item[this.keyName] ) {
@@ -478,6 +525,11 @@
                 this.startSearch();
                 this.needs_new_search = true;
             },
+            list() {
+                this.$nextTick(() => {
+                    this.handleScroll();
+                });
+            },
             value() {
                 this.refreshSelected();
                 if ( !this.value ) {
@@ -506,6 +558,7 @@
                                 this.selected_index = value_index;
                                 this.initListScrollTo(this.selected_index);
                             }
+                            this.handleScroll();
                         }
                     });
                 }
