@@ -288,19 +288,21 @@
 
                 let bottom_of_element = this.$el.getBoundingClientRect().top + (list_height * this.invertOffsetRatio) + window.scrollY;
 
-                if ( bottom_of_element > ((window.innerHeight + window.scrollY)) ) {
+                // Chect that the overall window height vs the list_height is large enough to even considering flipping the screen
+                // Then see if the bottom of the element is passed our scrolled height
+                if ( (window.innerHeight > list_height + 115) && bottom_of_element > ((window.innerHeight + window.scrollY)) ) {
                     this.inverted = true;
                     this.list_style.top = `calc(-${list_height}px - 2.135rem)`
                 } else {
                     this.inverted = false;
                     let operator = '+';
-                    let adjustment = 1;
+                    let adjustment = 0.875;
                     if ( !this.show_search ) {
                         operator = '-';
                         adjustment = 2.125;
                     }
 
-                    this.list_style.top = `calc(${element_height}px ${operator} ${adjustment}rem)`;
+                    this.list_style.top = `calc(${element_height -1}px ${operator} ${adjustment}rem)`;
                 }
             },
 

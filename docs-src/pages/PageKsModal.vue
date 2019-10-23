@@ -254,7 +254,14 @@
 
                     <ks-modal title="Modal with buttons" ref="modal5" >
                         <p>
-                            This is a simple modal with a select
+                            This is a simple modal with a select.
+                        </p>
+
+                        <p>
+                            Adding more text to push the modal down
+                        </p>
+                        <p>
+                            to test behaviour at the bottom of the modal.
                         </p>
 
                         <ks-select
@@ -262,7 +269,7 @@
                             :items="countries"
                             label-key="name"
                             v-model="country_code"
-                            list-height="150px"
+                            list-height="250px"
                         >
                             <template v-slot="{item}">{{item.name}}</template>
                         </ks-select>
