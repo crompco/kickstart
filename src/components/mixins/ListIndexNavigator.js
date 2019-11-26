@@ -392,6 +392,8 @@ export default {
                         cancelToken: cancel_token.token
                     }).then(({data}) => {
                         this.callback(data.data, true, concat);
+
+                        return data;
                     }).catch((e) => {
                         if ( e.message !== "KS-ABORT" ) {
                             console.error(e);
