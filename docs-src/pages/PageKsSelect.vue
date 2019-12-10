@@ -159,7 +159,7 @@
                 <div class="label">Select with no options</div>
                 <ks-select
                     name="empty"
-                    :items="[]"
+                    :items="emptyItems"
                     label-key="name"
                     empty-message="No options here"
                 ></ks-select>
@@ -171,6 +171,41 @@
                             label-key="name"
                             empty-message="No options here"
                         >&lt;/ks-select>
+                    </template>
+                </code-block>
+            </div>
+
+            <div class="form-group">
+                <div class="label">Select with no options, selectable empty item</div>
+                <ks-select
+                    name="empty"
+                    :items="emptyItems"
+                    label-key="name"
+                    empty-message="No options here"
+                    :accept-empty-selection="true"
+                    @selected-empty="emptySelected = 1"
+                >
+                    <template v-slot:empty="{term}">
+                        Empty {{term}}
+                    </template>
+                </ks-select>
+                <div>
+                    <pre><strong>Empty Selected:</strong> {{emptySelected ? 'Yes' : 'No'}}</pre>
+                </div>
+                <code-block>
+                    <template v-pre>
+                        &lt;ks-select
+                            name="empty"
+                            :items="[]"
+                            label-key="name"
+                            empty-message="No options here"
+                            :accept-empty-selection="true"
+                            @selected-empty="emptySelected = 1"
+                        >
+                            &lt;template v-slot:empty="{term}">
+                                Empty {{term}}
+                            &lt;/template>
+                        &lt;/ks-select>
                     </template>
                 </code-block>
             </div>
@@ -446,6 +481,14 @@
                             will show up.
                         </td>
                     </tr>
+                    <tr>
+                        <td>acceptEmptySelection</td>
+                        <td>Boolean</td>
+                        <td></td>
+                        <td>
+                            Works with the emptyMessage property. If this is set to true the empty option will be a selectable item instead of just text.
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             </ks-tab>
@@ -650,6 +693,8 @@
 
         data() {
             return {
+                emptyItems: [],
+                emptySelected: 0,
                 countries: [],
                 characters: [],
                 country: '',

@@ -15,6 +15,10 @@ export default {
             default: false
         },
         classNames: String,
+        disabled: {
+            type: Boolean,
+            default: false
+        },
     },
 
     computed: {
@@ -59,6 +63,11 @@ export default {
             if ( this.classNames ) {
                 classes[this.classNames] = true;
             }
+
+            if ( this.disabled ) {
+                classes['disabled'] = true;
+            }
+
             return classes;
         }
     },
