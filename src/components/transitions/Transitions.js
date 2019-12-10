@@ -12,6 +12,7 @@ const SlideTransition = {
                 name: 'slide-transition',
                 mode: 'in-out',
                 css: false,
+                duration: 500,
             },
 
             on: {
