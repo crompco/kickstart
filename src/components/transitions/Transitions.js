@@ -10,7 +10,8 @@ const SlideTransition = {
         let data = {
             props: {
                 name: 'slide-transition',
-                mode: 'out-in'
+                mode: 'in-out',
+                css: false,
             },
 
             on: {
