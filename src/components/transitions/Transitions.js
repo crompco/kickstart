@@ -1,7 +1,7 @@
 // External Dependencies
+import Velocity from 'velocity-animate';
 
 // Internal Dependencies
-import {slideDown, slideUp} from '../../helpers/animations';
 
 const SlideTransition = {
     functional: true,
@@ -12,17 +12,30 @@ const SlideTransition = {
                 name: 'slide-transition',
                 mode: 'in-out',
                 css: false,
-                duration: 500,
             },
 
             on: {
                 beforeEnter(el) {
-                    slideDown(el);
+                    el.style.display = '';
+                    el.style.maxHeight = 'none';
+                    el.style.overflow = 'hidden';
+                    el.style.opacity = '0';
+                },
+
+                enter(el, done) {
+                    const height = el.offsetHeight;
+
+                    Velocity(el, {opacity: 1, maxHeight: `${height}px`}, {duration: 400, complete: done});
                 },
 
                 leave(el, done) {
-                    slideUp(el, () => done());
-                }
+                    Velocity(el, {opacity: 0, maxHeight: 0, paddingTop: 0, paddingBottom: 0}, {duration: 400, complete: done});
+                },
+
+                afterLeave(el) {
+                    el.style.removeProperty('padding-top');
+                    el.style.removeProperty('padding-bottom');
+                },
             }
         };
 
