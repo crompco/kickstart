@@ -28,6 +28,14 @@ const SlideTransition = {
                     Velocity(el, {opacity: 1, maxHeight: `${height}px`}, {duration: 400, complete: done});
                 },
 
+                afterEnter(el) {
+                    el.style.removeProperty('overflow');
+                },
+
+                beforeLeave(el) {
+                    el.style.overflow = 'hidden';
+                },
+
                 leave(el, done) {
                     Velocity(el, {opacity: 0, maxHeight: 0, paddingTop: 0, paddingBottom: 0}, {duration: 400, complete: done});
                 },
@@ -35,6 +43,7 @@ const SlideTransition = {
                 afterLeave(el) {
                     el.style.removeProperty('padding-top');
                     el.style.removeProperty('padding-bottom');
+                    el.style.removeProperty('overflow');
                 },
             }
         };
