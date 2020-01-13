@@ -18,6 +18,9 @@
 					<a href="#" class="button large danger">
 						I'm a large button
 					</a>
+                    <a href="#" class="button large success">
+                        I'm a large button
+                    </a>
 				</div>
 			</div>
 			<br>
@@ -37,6 +40,9 @@
 					<a href="#" class="button outline large danger">
 						I'm a large button
 					</a>
+                    <a href="#" class="button outline large success">
+                        I'm a large button
+                    </a>
 				</div>
 			</div>
 			<br>
@@ -56,6 +62,9 @@
 					<a href="#" class="button none large danger">
 						I'm a large button
 					</a>
+                    <a href="#" class="button none large success">
+                        I'm a large button
+                    </a>
 				</div>
 			</div>
 		</div>
