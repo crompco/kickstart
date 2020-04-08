@@ -30,6 +30,7 @@ const SlideTransition = {
 
                 afterEnter(el) {
                     el.style.removeProperty('overflow');
+                    el.style.removeProperty('max-height');
                 },
 
                 beforeLeave(el) {
