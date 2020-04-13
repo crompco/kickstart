@@ -3,7 +3,7 @@
         <button class="menu-button" @click.prevent="toggle()" ref="menu">
             <slot name="menu"><menu-svg></menu-svg></slot>
         </button>
-        <div class="ks-menu-list" ref="menuList" :class="{'active': active}" @click="close()">
+        <div class="ks-menu-list" ref="menuList" :class="menuListClass" @click="close()">
             <slot></slot>
         </div>
     </div>
@@ -36,6 +36,10 @@
             openClass: {
                 type: String,
                 default: ''
+            },
+            listClass: {
+                type: String,
+                default: ''
             }
         },
 
@@ -45,6 +49,12 @@
                 classObj[this.openClass] = this.active;
                 return classObj;
             },
+            menuListClass() {
+                return [
+                    {'active': this.active},
+                    this.listClass,
+                ];
+            }
         },
 
         data() {
