@@ -35,6 +35,7 @@ const SlideTransition = {
 
                 beforeLeave(el) {
                     el.style.overflow = 'hidden';
+                    el.style.maxHeight = `${el.offsetHeight}px`;
                 },
 
                 leave(el, done) {
@@ -45,6 +46,7 @@ const SlideTransition = {
                     el.style.removeProperty('padding-top');
                     el.style.removeProperty('padding-bottom');
                     el.style.removeProperty('overflow');
+                    el.style.removeProperty('max-height');
                 },
             }
         };
