@@ -541,6 +541,7 @@
                     this.list = this.items;
                     this.refreshSelected();
                     this.clearCache();
+                    this.selected_empty = false;
                 }
             },
             isOpen(open, oldOpen) {
