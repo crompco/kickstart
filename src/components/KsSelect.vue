@@ -517,6 +517,14 @@
                 if ( this.list.length == 0 && this.acceptEmptySelection ) {
                     this.selected_empty = false;
                 }
+            },
+
+            onSelectUp() {
+                this.selected_empty = false;
+            },
+
+            onSelectDown() {
+                this.selected_empty = false;
             }
         },
 
