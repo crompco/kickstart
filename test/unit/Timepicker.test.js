@@ -6,7 +6,6 @@ test('Timepicker:computed', t => {
 	resetDocument();
 
 	let vm = component(KsTimepicker, {
-		// value: '08:30 am',
 		minTime: '08:30 am'
 	});
 
