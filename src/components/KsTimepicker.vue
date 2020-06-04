@@ -93,7 +93,7 @@
                 let options = [];
 
                 for ( var i = min_time.full_hour; i < max_time.full_hour; i++ ) {
-                    for ( var j = 0; j < 60; j += parseInt(this.timeStep) ) {
+                    for ( var j = min_time.minute; j < 60; j += parseInt(this.timeStep) ) {
                         options.push(
                             this.formatTimeValue(`${i}:${j}`, this.displayFormat)
                         )
