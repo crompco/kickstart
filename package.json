@@ -34,7 +34,7 @@
     "cross-env": "^3.2.3",
     "css-loader": "^0.27.3",
     "deep-assign": "^2.0.0",
-    "eslint": "^3.19.0",
+    "eslint": "^4.18.2",
     "eslint-plugin-vue": "^2.0.1",
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.11.1",
