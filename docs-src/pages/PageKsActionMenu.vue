@@ -24,7 +24,8 @@
                 </div>
             </div>
             <div class="row col">
-                <code-block v-pre>
+                <code-block>
+                <template v-pre>
                     &lt;ks-action-menu>
                         &lt;a href="#" @click.prevent="action('New')" class="list-item">New&lt;/a>
                         &lt;a href="#" @click.prevent="action('Add')" class="list-item">Add&lt;/a>
@@ -39,6 +40,7 @@
                         &lt;a href="#" class="list-item disabled">Edit&lt;/a>
                         &lt;a href="#" class="list-item separator danger">Delete&lt;/a>
                     &lt;/ks-action-menu>
+                </template>
                 </code-block>
             </div>
         </div>

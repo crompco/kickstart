@@ -20,8 +20,10 @@
 			</div>
 
             <div class="med-12">
-                <code-block v-pre>
+                <code-block>
+					<template v-pre>
                         &lt;ks-datepicker v-model="date1">&lt;/ks-datepicker>
+					</template>
                 </code-block>
             </div>
 		</div>
@@ -47,13 +49,15 @@
 			</div>
 
             <div class="med-12">
-                <code-block v-pre>
+                <code-block>
+					<template v-pre>
                         &lt;ks-datepicker
                             v-model="date2"
                             :year-picker="true"
                             :month-picker="true"
                             date-format="m/d/Y"
                         >&lt;/ks-datepicker>
+					</template>
                 </code-block>
             </div>
 		</div>
@@ -79,7 +83,8 @@
             </div>
 
             <div class="med-12">
-                <code-block v-pre>
+                <code-block>
+					<template v-pre>
                     &lt;ks-datepicker
                         v-model="date3"
                         :year-picker="true"
@@ -88,11 +93,12 @@
                         :max-date="maxDate"
                         @input-error="$toast({type: 'error', message: 'Invalid date provided'})"
                     >&lt;/ks-datepicker>
+					</template>
                 </code-block>
             </div>
         </div>
 
-        <code-block v-pre title="Page Code" lang="language-js">
+        <code-block title="Page Code" lang="language-js">
             import KsDatepicker from '../../src/components/KsDatepicker.vue';
             import KsTabs from '../../src/components/KsTabs.vue';
             import KsTab from '../../src/components/KsTab.vue';
@@ -185,6 +191,12 @@
                             <td><pre>String</pre></td>
                             <td><pre>NULL</pre></td>
                             <td>The maximum date that can be selected. Should be in the same format as `dateFormat`</td>
+                        </tr>
+                        <tr>
+                            <td>disabled</td>
+                            <td><pre>Boolean</pre></td>
+                            <td><pre>false</pre></td>
+                            <td>Whether or not to disable the input field of the date.</td>
                         </tr>
 					</tbody>
 				</table>

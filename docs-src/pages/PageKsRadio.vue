@@ -7,12 +7,14 @@
                 <ks-radio label="PHP" name="radio1" value="1" v-model="values.radio1"></ks-radio>
                 <ks-radio label="JavaScript" name="radio1" value="2" v-model="values.radio1"></ks-radio>
             </div>
-            <code-block v-pre>
-                &lt;div class="form-group">
-                    &lt;div class="label">Which do you prefer&lt;/div>
-                    &lt;ks-radio label="PHP" name="radio1" value="1" v-model="values.radio1">&lt;/ks-radio>
-                    &lt;ks-radio label="JavaScript" name="radio1" value="2" v-model="values.radio1">&lt;/ks-radio>
-                &lt;/div>
+            <code-block>
+                <template v-pre>
+                    &lt;div class="form-group">
+                        &lt;div class="label">Which do you prefer&lt;/div>
+                        &lt;ks-radio label="PHP" name="radio1" value="1" v-model="values.radio1">&lt;/ks-radio>
+                        &lt;ks-radio label="JavaScript" name="radio1" value="2" v-model="values.radio1">&lt;/ks-radio>
+                    &lt;/div>
+                </template>
             </code-block>
         </div>
         <div class="basic-block">
@@ -21,12 +23,14 @@
                 <ks-radio :inline="true" label="PHP" name="radio2" value="1" v-model="values.radio2"></ks-radio>
                 <ks-radio :inline="true" label="JavaScript" name="radio2" value="2" v-model="values.radio2"></ks-radio>
             </div>
-            <code-block v-pre>
-                &lt;div class="form-group">
-                    &lt;div class="label">Radio buttons (inline)&lt;/div>
-                    &lt;ks-radio :inline="true" label="PHP" name="radio1" value="1" v-model="values.radio1">&lt;/ks-radio>
-                    &lt;ks-radio :inline="true" label="JavaScript" name="radio1" value="2" v-model="values.radio1">&lt;/ks-radio>
-                &lt;/div>
+            <code-block>
+                <template v-pre>
+                    &lt;div class="form-group">
+                        &lt;div class="label">Radio buttons (inline)&lt;/div>
+                        &lt;ks-radio :inline="true" label="PHP" name="radio1" value="1" v-model="values.radio1">&lt;/ks-radio>
+                        &lt;ks-radio :inline="true" label="JavaScript" name="radio1" value="2" v-model="values.radio1">&lt;/ks-radio>
+                    &lt;/div>
+                </template>
             </code-block>
         </div>
 
@@ -143,7 +147,7 @@
                 Radio button groups
             </ks-radio-group>
 
-            <code-block v-pre>
+            <code-block>
                 &lt;ks-radio-group
                     class="form-group"
                     name="group1"
@@ -171,7 +175,7 @@
                 <div slot="AF">Afghanistan Man</div>
             </ks-radio-group>
 
-            <code-block v-pre>
+            <code-block>
                 &lt;ks-radio-group
                     class="form-group"
                     name="group2"
@@ -183,6 +187,61 @@
                 >
                     Radio button groups ( button style )
                     &lt;div slot="AF">Afghanistan Man&lt;/div>
+                &lt;/ks-radio-group>
+            </code-block>
+        </div>
+
+        <div class="basic-block">
+            <div class="row">
+                <p>Radio button group with no label</p>
+            </div>
+            <ks-radio-group
+                class="form-group"
+                name="group1"
+                :options="radioGroup"
+                value-key="code"
+                label-key="name"
+                v-model="values.group1"
+            ></ks-radio-group>
+
+            <code-block>
+                &lt;ks-radio-group
+                    class="form-group"
+                    name="group1"
+                    :options="radioGroup"
+                    value-key="code"
+                    label-key="name"
+                    v-model="values.group1"
+                >&lt;/ks-radio-group>
+            </code-block>
+        </div>
+
+
+        <div class="basic-block">
+            <div class="row">
+                <p>Radio button group with slot buttons</p>
+            </div>
+            <ks-radio-group
+                class="form-group"
+                name="group1"
+                :options="radioGroup"
+                value-key="code"
+                label-key="name"
+                v-model="values.group1"
+            >
+                <span slot="AW">Foo (Actually Aruba)</span>
+            </ks-radio-group>
+
+            <code-block>
+                &lt;ks-radio-group
+                    class="form-group"
+                    name="group1"
+                    :options="radioGroup"
+                    value-key="code"
+                    label-key="name"
+                    v-model="values.group1"
+                >
+                    &lt;span slot="AW">Foo (Actually Aruba)&lt;/span>
                 &lt;/ks-radio-group>
             </code-block>
         </div>

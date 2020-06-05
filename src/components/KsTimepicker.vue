@@ -20,8 +20,9 @@
             autocomplete="off"
             @keydown.8.stop
             @keyup.stop="searchTime"
+            :disabled="disabled"
         />
-        <input type="hidden" :name="name" :value="value" @input="$emit('input', $event)">
+        <input type="hidden" :name="name" :value="value" @input="$emit('input', $event)" :disabled="disabled">
         <ul
             v-show="isOpen"
             ref="list"
@@ -54,6 +55,10 @@
         props: {
             name: {},
             value: {},
+            disabled: {
+                type: Boolean,
+                default: false
+            },
             timeStep: {
                 type: [Number, String],
                 default: 30

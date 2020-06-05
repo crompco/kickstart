@@ -126,6 +126,7 @@
 
 .autocomplete-list {
     margin: 0;
+    margin-bottom: 0.5rem;
     z-index: 100;
     padding: 0;
     width: 100%;
@@ -133,9 +134,15 @@
     position: absolute;
     list-style: none;
     border: solid 1px $ac-list-border;
-    border-top: 0;
+    &.inverted {
+        border-bottom: 0;
+    }
+    &:not(.inverted) {
+        border-top: 0;
+    }
     overflow-y: auto;
     left: 0;
+    transition: top 0.3s;
     li {
         padding: rem($ac-list-item-padding);
         border: 1px solid transparent;

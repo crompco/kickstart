@@ -14,35 +14,38 @@
                     :paginated="true"
                     @search="runSearch"
                 >
-                    <template slot="label" scope="{value, label}">
+                    <template v-slot:label="{value, label}">
                         {{value}}: {{label}}
                     </template>
-                    <template scope="props">
-                        {{props.item.name}}
+                    <template v-slot:default="{item}">
+                        {{item.name}}
                     </template>
-                    <template slot="empty" scope="props">
-                        No results for "{{props.term}}"
+                    <template v-slot:empty="{term}">
+                        No results for "{{term}}"
                     </template>
                 </ks-select>
 
-                <code-block v-pre>
-                    &lt;ks-select
-                    name="code"
-                    label-key="name"
-                    v-model="country"
-                    :paginated="true"
-                    @search="runSearch"
-                    >
-                    &lt;template slot="label" scope="{value, label}">
-                    {{value}}: {{label}}
-                    &lt;/template>
-                    &lt;template scope="props">
-                    {{props.item.name}}
-                    &lt;/template>
-                    &lt;template slot="empty" scope="props">
-                    No results for "{{props.term}}"
-                    &lt;/template>
-                    &lt;/ks-select>
+                <code-block>
+                    <template v-pre>
+                        &lt;ks-select
+                            name="code"
+                            label-key="name"
+                            v-model="country"
+                            :paginated="true"
+                            @search="runSearch"
+                        >
+                            &lt;template v-slot:label="{value, label}">
+                            {{value}}: {{label}}
+                            &lt;/template>
+                            &lt;template v-slot:default="{item}">
+                            {{item.name}}
+                            &lt;/template>
+                            &lt;template v-slot:empty="{term}">
+                            No results for "{{term}}"
+                            &lt;/template>
+                        &lt;/ks-select>
+                    </template>
+
                 </code-block>
             </div>
             <p>Plain select</p>
@@ -55,13 +58,15 @@
                     v-model="country_code2"
                 ></ks-select>
 
-                <code-block v-pre>
-                    &lt;ks-select
-                    name="code"
-                    :items="countries"
-                    label-key="name"
-                    v-model="country_code2"
-                    >&lt;/ks-select>
+                <code-block>
+                    <template v-pre>
+                        &lt;ks-select
+                            name="code"
+                            :items="countries"
+                            label-key="name"
+                            v-model="country_code2"
+                        >&lt;/ks-select>
+                    </template>
                 </code-block>
             </div>
 
@@ -76,14 +81,16 @@
                     v-model="country_code3"
                 ></ks-select>
 
-                <code-block v-pre>
-                    &lt;ks-select
-                    name="code"
-                    :items="short_countries"
-                    label-key="name"
-                    :single-deselect="true"
-                    v-model="country_code3"
-                    >&lt;/ks-select>
+                <code-block>
+                    <template v-pre>
+                        &lt;ks-select
+                            name="code"
+                            :items="short_countries"
+                            label-key="name"
+                            :single-deselect="true"
+                            v-model="country_code3"
+                        >&lt;/ks-select>
+                    </template>
                 </code-block>
             </div>
 
@@ -98,15 +105,17 @@
                     v-model="character"
                     :single-deselect="true"
                 ></ks-select>
-                <code-block v-pre>
-                    &lt;ks-select
-                    name="name"
-                    :items="characters"
-                    label-key="name"
-                    v-model="character"
-                    group-by="show"
-                    :single-deselect="true"
-                    >&lt;/ks-select>
+                <code-block>
+                    <template v-pre>
+                        &lt;ks-select
+                            name="name"
+                            :items="characters"
+                            label-key="name"
+                            v-model="character"
+                            group-by="show"
+                            :single-deselect="true"
+                        >&lt;/ks-select>
+                    </template>
                 </code-block>
             </div>
 
@@ -114,8 +123,10 @@
                 <div class="label">Disabled Select</div>
                 <ks-select name="foo" :disabled="true" label-key="foo"></ks-select>
             </div>
-            <code-block v-pre>
-                &lt;ks-select name="foo" :disabled="true" label-key="foo">&lt;/ks-select>
+            <code-block>
+                <template v-pre>
+                    &lt;ks-select name="foo" :disabled="true" label-key="foo">&lt;/ks-select>
+                </template>
             </code-block>
 
             <div class="form-group">
@@ -129,14 +140,16 @@
                 ></ks-select>
                 <pre v-if="forced_value === null"><strong>Value:</strong> NULL</pre>
                 <pre v-else><strong>Value:</strong> {{forced_value}}</pre>
-                <code-block v-pre>
-                    &lt;ks-select
-                    name="code"
-                    :items="countries"
-                    label-key="name"
-                    v-model="forced_value"
-                    :force-values="true"
-                    >&lt;/ks-select>
+                <code-block>
+                    <template v-pre>
+                        &lt;ks-select
+                            name="code"
+                            :items="countries"
+                            label-key="name"
+                            v-model="forced_value"
+                            :force-values="true"
+                        >&lt;/ks-select>
+                    </template>
                 </code-block>
             </div>
         </div>
@@ -146,17 +159,54 @@
                 <div class="label">Select with no options</div>
                 <ks-select
                     name="empty"
-                    :items="[]"
+                    :items="emptyItems"
                     label-key="name"
                     empty-message="No options here"
                 ></ks-select>
-                <code-block v-pre>
-                    &lt;ks-select
+                <code-block>
+                    <template v-pre>
+                        &lt;ks-select
+                            name="empty"
+                            :items="[]"
+                            label-key="name"
+                            empty-message="No options here"
+                        >&lt;/ks-select>
+                    </template>
+                </code-block>
+            </div>
+
+            <div class="form-group">
+                <div class="label">Select with no options, selectable empty item</div>
+                <ks-select
                     name="empty"
-                    :items="[]"
+                    :items="emptyItems"
                     label-key="name"
                     empty-message="No options here"
-                    >&lt;/ks-select>
+                    :accept-empty-selection="true"
+                    @selected-empty="emptySelected = 1"
+                >
+                    <template v-slot:empty="{term}">
+                        Empty {{term}}
+                    </template>
+                </ks-select>
+                <div>
+                    <pre><strong>Empty Selected:</strong> {{emptySelected ? 'Yes' : 'No'}}</pre>
+                </div>
+                <code-block>
+                    <template v-pre>
+                        &lt;ks-select
+                            name="empty"
+                            :items="[]"
+                            label-key="name"
+                            empty-message="No options here"
+                            :accept-empty-selection="true"
+                            @selected-empty="emptySelected = 1"
+                        >
+                            &lt;template v-slot:empty="{term}">
+                                Empty {{term}}
+                            &lt;/template>
+                        &lt;/ks-select>
+                    </template>
                 </code-block>
             </div>
         </div>
@@ -170,14 +220,16 @@
                     label-key="name"
                     v-model="long"
                 ></ks-select>
-                <code-block v-pre>
-                    &lt;ks-select
-                    name="id"
-                    :items="[{id: 1, name: 'This is a really long option for the select to test the breakdown, and some
-                    more stuff to make this extra long for big screens to have touble '}]"
-                    label-key="name"
-                    v-model="long"
-                    >&lt;/ks-select>
+                <code-block>
+                    <template v-pre>
+                        &lt;ks-select
+                            name="id"
+                            :items="[{id: 1, name: 'This is a really long option for the select to test the breakdown, and some
+                            more stuff to make this extra long for big screens to have touble '}]"
+                            label-key="name"
+                            v-model="long"
+                        >&lt;/ks-select>
+                    </template>
                 </code-block>
             </div>
         </div>
@@ -429,6 +481,14 @@
                             will show up.
                         </td>
                     </tr>
+                    <tr>
+                        <td>acceptEmptySelection</td>
+                        <td>Boolean</td>
+                        <td></td>
+                        <td>
+                            Works with the emptyMessage property. If this is set to true the empty option will be a selectable item instead of just text.
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             </ks-tab>
@@ -633,6 +693,8 @@
 
         data() {
             return {
+                emptyItems: [],
+                emptySelected: 0,
                 countries: [],
                 characters: [],
                 country: '',

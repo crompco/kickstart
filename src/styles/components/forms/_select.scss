@@ -6,13 +6,13 @@
 @import "../../variables/_select";
 
 .ks-select {
-	cursor: pointer;
-	position: relative;
-	display: inline-block;
-	@include form-input(false);
-	background: $select-bg;
-	padding: 0;
-	margin-bottom: rem($form-block-margin-bottom);
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    @include form-input(false);
+    background: $select-bg;
+    padding: 0;
+    margin-bottom: rem($form-block-margin-bottom);
 
     // Completely hide this field
     // in order to allow autofill though it needs to be there
@@ -25,51 +25,59 @@
         opacity: 0;
     }
 
-	.ks-select-dropdown {
+    .ks-select-dropdown {
         border: 0;
-		position: absolute;
-		width: 100%;
-		background: $select-bg;
-		z-index: 2;
+        position: absolute;
+        width: 100%;
+        background: $select-bg;
+        z-index: 2;
 
-		.ks-select-dropdown-input {
-			padding: rem($select-input-padding);
-			box-shadow: 0px -1px 0 0px #fff, 0 0 0 1px #aaa;
-			background: $select-bg;
+        .ks-select-dropdown-input {
+            padding: rem($select-input-padding);
+            box-shadow: 0px -1px 0 0px #fff, 0 0 0 1px #aaa;
+            background: $select-bg;
 
-			> input:not(.is-multiple) {
-				@include ks-autocomplete-input;
-			}
+            > input:not(.is-multiple) {
+                @include ks-autocomplete-input;
+            }
 
-			> input.is-multiple {
-				border: 0;
-				outline: none;
-			}
-		}
+            > input.is-multiple {
+                border: 0;
+                outline: none;
+            }
+        }
 
-		.autocomplete-list {
-			li {
-				border: 1px solid transparent;
+        .autocomplete-list {
+            li {
+                border: 1px solid transparent;
+
                 &.placeholder-option {
                     color: darken($gray, 10%);
                 }
-				ul {
-					list-style: none;
-					padding: 0;
-					li {
-						padding-left: 1rem;
-					}
-				}
+
+                ul {
+                    list-style: none;
+                    padding: 0;
+
+                    li {
+                        padding-left: 1rem;
+                    }
+                }
+
                 &.empty-list-message {
                     color: $select-empty-message-color;
                     font-style: $select-empty-message-style;
-                }
-			}
-		}
-	}
 
-	.ks-select-selection {
-		position: relative;
+                    &.active-empty-list-message:hover, &.selected-item {
+                        @extend .selected-item;
+                    }
+                }
+            }
+        }
+    }
+
+    .ks-select-selection {
+        position: relative;
         border: none;
         padding: rem($select-selected-padding) 1.25rem rem($select-selected-padding) rem($select-selected-padding);
         text-overflow: ellipsis;
@@ -77,11 +85,12 @@
         width: 100%;
         white-space: nowrap;
 
-		.ks-select-arrow {
-			@include triangle-down($size: rem(9px), $color: $select-arrow-color);
-			@include v-center();
-			right: 0.75rem;
-		}
+        .ks-select-arrow {
+            @include triangle-down($size: rem(9px), $color: $select-arrow-color);
+            @include v-center();
+            right: 0.75rem;
+        }
+
         .ks-select-deselect {
             display: inline-block;
             font-weight: bold;
@@ -106,6 +115,5 @@
                 border: solid 1px $select-deselect-hover-border-color;
             }
         }
-	}
-
+    }
 }

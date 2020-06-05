@@ -15,6 +15,7 @@ import KsTabs from './components/KsTabs.vue';
 import API from './helpers/api';
 import KsToast from './components/KsToast.vue';
 import KsPaginator from './components/KsPaginator.vue';
+import KsSimplePaginator from './components/KsSimplePaginator.vue';
 import KsActionMenu from './components/KsActionMenu.vue';
 import KsStepThrough from './components/KsStepThrough.vue';
 import KsAccordion from './components/KsAccordion.vue';
@@ -53,6 +54,7 @@ const Kickstart = {
     KsTimepicker,
     KsDraggable,
     KsDroppable,
+    KsSimplePaginator,
 	install(Vue) {
         function open(propsData) {
             const Toast = Vue.extend(KsToast);
@@ -90,6 +92,7 @@ const Kickstart = {
         Vue.component('ks-tab', KsTab)
         Vue.component('ks-tabs', KsTabs)
         Vue.component('ks-paginator', KsPaginator)
+        Vue.component('ks-simple-paginator', KsSimplePaginator)
         Vue.component('ks-action-menu', KsActionMenu)
         Vue.component('ks-step-through', KsStepThrough)
         Vue.component('ks-accordion', KsAccordion)

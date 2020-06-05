@@ -24,7 +24,8 @@
         </div>
 
         <div class="row">
-            <code-block v-pre>
+            <code-block>
+                <template v-pre>
                 &lt;div class="ks-card">
                     &lt;div class="card-header">
                         Foo
@@ -38,6 +39,7 @@
                         &lt;button class="danger">Delete&lt;/button>
                     &lt;/div>
                 &lt;/div>
+                </template>
             </code-block>
         </div>
     </div>

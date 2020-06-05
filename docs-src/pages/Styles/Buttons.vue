@@ -18,6 +18,9 @@
 					<a href="#" class="button large danger">
 						I'm a large button
 					</a>
+                    <a href="#" class="button large success">
+                        I'm a large button
+                    </a>
 				</div>
 			</div>
 			<br>
@@ -37,6 +40,9 @@
 					<a href="#" class="button outline large danger">
 						I'm a large button
 					</a>
+                    <a href="#" class="button outline large success">
+                        I'm a large button
+                    </a>
 				</div>
 			</div>
 			<br>
@@ -56,6 +62,9 @@
 					<a href="#" class="button none large danger">
 						I'm a large button
 					</a>
+                    <a href="#" class="button none large success">
+                        I'm a large button
+                    </a>
 				</div>
 			</div>
 		</div>
@@ -65,54 +74,61 @@
 				Can be used with an anchor tag or button tag
 				<pre>
                     <code class="language-markup">
-						&lt;button class="button">
-							I'm a default button
-						&lt;/button>
-						&lt;a href="#" class="button tiny">
-							I'm a tiny button
-						&lt;/a>
-						&lt;a href="#" class="button small">
-							I'm a small button
-						&lt;/a>
-						&lt;a href="#" class="button large danger">
-							I'm a large button
-						&lt;/a>
+                        <template v-pre>
+                            &lt;button class="button">
+                                I'm a default button
+                            &lt;/button>
+                            &lt;a href="#" class="button tiny">
+                                I'm a tiny button
+                            &lt;/a>
+                            &lt;a href="#" class="button small">
+                                I'm a small button
+                            &lt;/a>
+                            &lt;a href="#" class="button large danger">
+                                I'm a large button
+                            &lt;/a>
+                        </template>
+
                     </code>
                 </pre>
 			</ks-accordion-row>
 			<ks-accordion-row title="Show Code Outline">
 				<pre>
                     <code class="language-markup">
-						&lt;button class="button outline disabled" disabled="disabled">
-							I'm a default button
-						&lt;/button>
-						&lt;a href="#" class="button outline tiny">
-							I'm a tiny button
-						&lt;/a>
-						&lt;a href="#" class="button outline small">
-							I'm a small button
-						&lt;/a>
-						&lt;a href="#" class="button outline large danger">
-							I'm a large button
-						&lt;/a>
+                        <template v-pre>
+                            &lt;button class="button outline disabled" disabled="disabled">
+                                I'm a default button
+                            &lt;/button>
+                            &lt;a href="#" class="button outline tiny">
+                                I'm a tiny button
+                            &lt;/a>
+                            &lt;a href="#" class="button outline small">
+                                I'm a small button
+                            &lt;/a>
+                            &lt;a href="#" class="button outline large danger">
+                                I'm a large button
+                            &lt;/a>
+                        </template>
                     </code>
                 </pre>
 			</ks-accordion-row>
 			<ks-accordion-row title="Show Code None">
 				<pre>
                     <code class="language-markup">
-						&lt;button class="button none disabled">
-							I'm a default button
-						&lt;/button>
-						&lt;a href="#" class="button none tiny">
-							I'm a tiny button
-						&lt;/a>
-						&lt;a href="#" class="button none small">
-							I'm a small button
-						&lt;/a>
-						&lt;a href="#" class="button none large danger">
-							I'm a large button
-						&lt;/a>
+                        <template v-pre>
+                            &lt;button class="button none disabled">
+                                I'm a default button
+                            &lt;/button>
+                            &lt;a href="#" class="button none tiny">
+                                I'm a tiny button
+                            &lt;/a>
+                            &lt;a href="#" class="button none small">
+                                I'm a small button
+                            &lt;/a>
+                            &lt;a href="#" class="button none large danger">
+                                I'm a large button
+                            &lt;/a>
+                        </template>
                     </code>
                 </pre>
 			</ks-accordion-row>

@@ -75,6 +75,16 @@
                 type: Boolean,
                 default: true,
             },
+
+            hoverDelay: {
+                type: Number,
+                default: null
+            },
+
+            hideDelay: {
+                type: Number,
+                default: 150
+            }
         },
 
         computed: {
@@ -98,6 +108,7 @@
                 showing: false,
                 target_element: false,
                 timeout: false,
+                show_timeout: false,
             }
         },
 
@@ -111,9 +122,17 @@
             this.destroyTooltip();
         },
 
+        destroyed() {
+            this.$el.remove();
+        },
+
         methods: {
             setUpTooltip() {
                 this.target_element = this.target === '' ? parent(this.$el) : this.$parent.$refs[this.target];
+
+                if ( this.target_element == null ) {
+                    return;
+                }
 
                 if ( this.trigger == 'hover' ) {
                     this.target_element.addEventListener('mouseenter', this.showTooltip);
@@ -130,6 +149,17 @@
                 }
 
                 this.clearTimeout();
+                if ( this.hoverDelay ) {
+                    this.show_timeout = setTimeout(() => {
+                        this.showNow();
+                    }, this.hoverDelay);
+                } else {
+                    this.showNow();
+                }
+
+            },
+
+            showNow() {
                 this.showing = true;
 
                 if ( this.tether == false ) {
@@ -148,10 +178,13 @@
             },
 
             hideTooltip() {
+                // Clear the show timeout for when users hover over and out before it shows
+                clearTimeout(this.show_timeout);
+
                 if ( this.trigger == 'hover' ) {
                     this.timeout = setTimeout(() => {
                         this.triggerHide();
-                    }, 150);
+                    }, this.hideDelay);
                 }
             },
 
@@ -173,7 +206,9 @@
             },
 
             destroyTooltip() {
-                this.$el.remove();
+                if ( typeof this.target_element != 'function' ) {
+                    return;
+                }
 
                 if ( this.tether !== false ) {
                     this.tether.destroy();

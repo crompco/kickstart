@@ -63,7 +63,7 @@ export function keyCode(e) {
  * @param el
  */
 export function stopParentScroll(el) {
-	addEvent(el, 'mousewheel', (e) => {
+	addEvent(el, 'wheel', (e) => {
 		let offsetHeight = el.offsetHeight;
 		let scrollHeight = el.scrollHeight;
 		let scrollTop = el.scrollTop;

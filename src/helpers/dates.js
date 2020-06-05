@@ -115,7 +115,8 @@ export function formatDate(date, format = 'Y-m-d', parse_format = format, locale
 	cal_day = pad_left(cal_day, '0', 2);
 
 	return format
-        .replace(/y/i, year)
+        .replace('Y', year)
+        .replace('y', String(year).substring(2, 4))
         .replace(/m/i, month)
         .replace('d', cal_day)
         .replace('D', day_abbrev)
@@ -254,6 +255,15 @@ export function parseTime(time, default_value = false) {
     };
 }
 
+export function diffInDays(date1, date2, format = 'Y-m-d') {
+	date1 = date1 instanceof Date ? date1 : parseDate(date1, format);
+	date2 = date2 instanceof Date ? date2 : parseDate(date2, format);
+
+	// Use the Time difference to determine days diff
+	let diffTime = date2.getTime() - date1.getTime();
+	return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+}
+
 export default {
 	defaultLocale,
 	getDaysInMonth,
@@ -266,5 +276,6 @@ export default {
 	formatDate,
     formatTime,
 	parseDate,
-    parseTime,
+	parseTime,
+	diffInDays
 }

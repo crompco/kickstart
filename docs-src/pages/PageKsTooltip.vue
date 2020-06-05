@@ -23,23 +23,55 @@
                 </div>
             </div>
             <div class="row col">
-                <code-block v-pre>
-                    &lt;button class="button" ref="tooltipTarget" @click="active = !active">
-                        Hover Over
-                    &lt;/button>
+                <code-block>
+                    <template v-pre>
+                        &lt;button class="button" ref="tooltipTarget" @click="active = !active">
+                            Hover Over
+                        &lt;/button>
 
-                    &lt;ks-tooltip target="tooltipTarget">
-                        &lt;div>Another tooltip right here&lt;/div>
-                        &lt;h2>Title tag&lt;/h2>
-                        &lt;button class="button">iButton&lt;/button>
-                    &lt;/ks-tooltip>
+                        &lt;ks-tooltip target="tooltipTarget">
+                            &lt;div>Another tooltip right here&lt;/div>
+                            &lt;h2>Title tag&lt;/h2>
+                            &lt;button class="button">iButton&lt;/button>
+                        &lt;/ks-tooltip>
 
-                    &lt;button class="button" v-ks-tooltip="'Tooltip text, add more text'" :props="{trigger: 'click'}">
-                        Directive
-                    &lt;/button>
+                        &lt;button class="button" v-ks-tooltip="'Tooltip text, add more text'" :props="{trigger: 'click'}">
+                            Directive
+                        &lt;/button>
+                    </template>
                 </code-block>
             </div>
         </div>
+
+        <div class="basic-block">
+            <div class="row col row-collapse">
+                <div class="sm-12">
+                    <button class="button">
+                        Hover Over (Delayed)
+                        <ks-tooltip :hover-delay="500">
+                            <div>Another tooltip right here (delayed)</div>
+                            <h2>Title tag</h2>
+                            <button class="button">iButton</button>
+                        </ks-tooltip>
+                    </button>
+                </div>
+            </div>
+            <div class="row col">
+                <code-block>
+                    <template v-pre>
+                        &lt;button class="button">
+                            Hover Over (Delayed)
+                            &lt;ks-tooltip :hover-delay="500">
+                                &lt;div>Another tooltip right here (delayed)&lt;/div>
+                                &lt;h2>Title tag&lt;/h2>
+                                &lt;button class="button">iButton&lt;/button>
+                            &lt;/ks-tooltip>
+                        &lt;/button>
+                    </template>
+                </code-block>
+            </div>
+        </div>
+
         <div class="basic-block">
             <p>Example using a slot</p>
             <div class="row col">
@@ -53,15 +85,17 @@
                 </ks-button>
             </div>
             <div class="row">
-                <code-block v-pre>
-                    &lt;ks-button>
-                        Tooltip (click)
-                        &lt;ks-tooltip trigger="click">
-                            &lt;p>
-                                A tooltip triggered on click
-                            &lt;/p>
-                        &lt;/ks-tooltip>
-                    &lt;/ks-button>
+                <code-block>
+                    <template v-pre>
+                        &lt;ks-button>
+                            Tooltip (click)
+                            &lt;ks-tooltip trigger="click">
+                                &lt;p>
+                                    A tooltip triggered on click
+                                &lt;/p>
+                            &lt;/ks-tooltip>
+                        &lt;/ks-button>
+                    </template>
 
                 </code-block>
             </div>
@@ -112,6 +146,22 @@
                                 if left blank it will assume the parent is the target
                             </td>
                         </tr>
+                        <tr>
+                            <td>hideDelay</td>
+                            <td>Number</td>
+                            <td>150</td>
+                            <td>
+                                Delay in ms for hiding the tooltip
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>hoverDelay</td>
+                            <td>Number</td>
+                            <td></td>
+                            <td>
+                                When set, Delay in ms for showing the tooltip.
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </ks-tab>
@@ -151,12 +201,12 @@
 
         data() {
             return {
-              active: false
-            }
+                active: false,
+            };
         },
 
         components: {
-            KsTooltip
-        }
-    }
+            KsTooltip,
+        },
+    };
 </script>

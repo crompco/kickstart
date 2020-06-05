@@ -87,12 +87,14 @@ test('dates:formatDate', t => {
     let f3 = dates.formatDate(new Date(2017, 0, 31), 'm d, Y');
     let f4 = dates.formatDate(new Date(2017, 0, 31), 'D m/d/Y');
     let f5 = dates.formatDate(new Date(2017, 0, 31), 'l m/d/Y');
+    let f6 = dates.formatDate(new Date(2017, 0, 31), 'm/d/y');
 
 	t.is(f1, '2017-01-31');
 	t.is(f2, '01/31/2017');
     t.is(f3, '01 31, 2017');
     t.is(f4, 'Tue 01/31/2017');
     t.is(f5, 'Tuesday 01/31/2017');
+    t.is(f6, '01/31/17');
 });
 
 
@@ -117,4 +119,12 @@ test('dates:formatTime', t => {
 test('dates:parseTime', t => {
     t.is(13, dates.parseTime('1:00 PM').full_hour);
     t.is(14, dates.parseTime('1:14 PM').minute);
+})
+
+test('dates:diffInDays', t => {
+    t.is(-1, dates.diffInDays('2019-01-01', '2018-12-31'));
+    t.is(-30, dates.diffInDays('2019-12-31', '2019-12-01'));
+    t.is(30, dates.diffInDays('2019-12-01', '2019-12-31'));
+    t.is(1, dates.diffInDays('2018-12-31', '2019-01-01'));
+    t.is(0, dates.diffInDays('2018-12-31', '2018-12-31'));
 })

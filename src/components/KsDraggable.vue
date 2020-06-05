@@ -50,6 +50,7 @@
 
         methods: {
             dragStart(e) {
+                e.dataTransfer.setData('text/plain', null);
                 this.$emit('dragstart', e, false);
                 this.dragging = true;
             },

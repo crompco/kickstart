@@ -15,14 +15,16 @@
             <pre>format: {{time_format}}</pre>
             <pre>v-model: {{start_time}}</pre>
 
-            <code-block v-pre>
-                &lt;ks-timepicker
-                    name="start_time"
-                    :time-format="time_format"
-                    display-format="h:i A"
-                    time-step="30"
-                    v-model="start_time"
-                >&lt;/ks-timepicker>
+            <code-block>
+                <template v-pre>
+                    &lt;ks-timepicker
+                        name="start_time"
+                        :time-format="time_format"
+                        display-format="h:i A"
+                        time-step="30"
+                        v-model="start_time"
+                    >&lt;/ks-timepicker>
+                </template>
             </code-block>
         </div>
 
@@ -73,6 +75,12 @@
                             <td>String</td>
                             <td>200px</td>
                             <td>The height of the options list</td>
+                        </tr>
+                        <tr>
+                            <td>disabled</td>
+                            <td>Boolean</td>
+                            <td>false</td>
+                            <td>Whether or not disable the input</td>
                         </tr>
                     </tbody>
                 </table>

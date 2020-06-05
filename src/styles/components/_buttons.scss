@@ -90,6 +90,25 @@
 					background-color: darken($bg-color, 4%);
 				}
 			}
+
+            &.success {
+                border-color: get($map, success-border-color);
+                color: get($map, success-color);
+                background-color: get($map, success-bg);
+
+                &.spinning {
+                    .ks-spin-loading {
+                        border-color: get($map, success-border-color);
+                        border-top-color: get($map, success-bg);
+                    }
+                }
+
+                &:hover:not(.disabled) {
+                    border-color: darken(get($map, success-border-color), 12%);
+                    color: darken(get($map, success-color), 12%);
+                    background-color: darken($bg-color, 4%);
+                }
+            }
 		}
 	}
 
