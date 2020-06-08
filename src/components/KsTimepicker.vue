@@ -95,7 +95,6 @@
             timeOptions() {
                 let min_time = parseTime(this.minTime);
                 let max_time = parseTime(this.maxTime);
-                let time = 0;
 
                 let options = [];
 
