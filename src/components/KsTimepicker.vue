@@ -78,7 +78,7 @@
             },
             maxTime: {
                 type: String,
-                default: '24:00'
+                default: '23:59'
             },
             listHeight: {
                 type: String,
