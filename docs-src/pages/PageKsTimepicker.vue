@@ -44,7 +44,12 @@
                             <td>timeStep</td>
                             <td>Number,String</td>
                             <td>30</td>
-                            <td>The number of minutes to step through for the list of options</td>
+                            <td>
+                                The number of minutes to step through for the list of options.
+                                ***Note: This implementation assumes nice round numbers for timeStep (e.g. 15 or 30
+                                minutes) and minTime (e.g. 9:30 am).  It is not bulletproof and may produce an invalid
+                                timeOptions computed property otherwise.
+                            </td>
                         </tr>
                         <tr>
                             <td>timeFormat</td>

@@ -6,8 +6,15 @@ test('Timepicker:computed', t => {
 	resetDocument();
 
 	let vm = component(KsTimepicker, {
-		minTime: '08:30 am'
+		minTime: '08:30 am',
+		timeStep: '15',
+		maxTime: '9:15 am'
 	});
 
-	t.is(vm.timeOptions[0], '08:30 am');
+	t.deepEqual(vm.timeOptions, [
+		'08:30 am',
+		'08:45 am',
+		'09:00 am',
+		'09:15 am'
+	]);
 });
