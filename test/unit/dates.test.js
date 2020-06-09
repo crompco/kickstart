@@ -115,10 +115,11 @@ test('dates:formatTime', t => {
     t.is('pm 12:30', dates.formatTime('12:30:00', 'a h:i'));
 });
 
-
 test('dates:parseTime', t => {
     t.is(13, dates.parseTime('1:00 PM').full_hour);
     t.is(14, dates.parseTime('1:14 PM').minute);
+    t.is(12, dates.parseTime('24:00').hour);
+    t.is("am", dates.parseTime('24:00').meridiem);
 })
 
 test('dates:diffInDays', t => {
