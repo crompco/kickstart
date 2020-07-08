@@ -7,21 +7,7 @@
 }
 
 html {
-	// Set font-size to 14px base
-	font-size: $global-font-size * 0.875;
-
-	@include tab() {
-		// Set font size to 16px base
-		font-size: $global-font-size;
-	}
-}
-
-body {
-	font-size: rem(14px);
-
-	@include tab() {
-		font-size: rem(16px);
-	}
+	font-size: $global-font-size;
 }
 
 html, body {
