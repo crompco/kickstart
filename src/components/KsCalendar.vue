@@ -70,11 +70,11 @@
 
                             <div>
                                 <div v-if="interactiveDays" class="row row-collapse">
-                                    <a href="#" class="day-num" @click.prevent.stop="dayClicked(day)">
+                                    <a href="#" class="day-num" :class="'date-' + formatDate(day)" @click.prevent.stop="dayClicked(day)">
                                         {{day | day}}
                                     </a>
                                 </div>
-                                <span v-else class="day-num">{{day | day}}</span>
+                                <span v-else class="day-num" :class="'date-' + formatDate(day)">{{day | day}}</span>
 
                                 <slot :name="formatDate(day)"></slot>
 
@@ -95,11 +95,11 @@
 
                             <div v-if="showTrailingDays">
                                 <div v-if="interactiveDays" class="row row-collapse">
-                                    <a href="#" class="day-num" @click.prevent.stop="dayClicked(day)">
+                                    <a href="#" class="day-num" :class="'date-' + formatDate(day)" @click.prevent.stop="dayClicked(day)">
                                         {{day | day}}
                                     </a>
                                 </div>
-                                <span v-else class="day-num">{{day | day}}</span>
+                                <span v-else class="day-num" :class="'date-' + formatDate(day)">{{day | day}}</span>
                             </div>
 
                         </component>
