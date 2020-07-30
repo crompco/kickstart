@@ -132,7 +132,7 @@ Vue.directive('ks-tooltip', {
         }
 
         if ( useClickEvent(props) ) {
-            el.removeEventListener('click', event.click)
+            el.removeEventListener('click', events.click)
         } else {
             el.removeEventListener('mouseenter', events.mouseenter);
             el.removeEventListener('mouseleave', events.mouseleave);
