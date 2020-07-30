@@ -61,7 +61,11 @@ export default {
         groupBy: {
             type: [String],
             default: null
-        }
+        },
+        acceptEmptySelection: {
+            type: Boolean,
+            default: false,
+        },
     },
 
     data() {
@@ -83,7 +87,8 @@ export default {
             mousescroll_delay: 100,
             navigating_with_keys: false,
             key_pressed_timer: '',
-            cancel_token_source: null
+            cancel_token_source: null,
+            selected_empty: false,
         };
     },
 
@@ -621,7 +626,34 @@ export default {
             this.clearSelection();
             this.clear();
             this.clearCache();
-        }
+        },
+
+        selectEmpty(selected_empty) {
+            this.selected_empty = selected_empty;
+            if ( this.selected_empty ) {
+                this.selectItem();
+            }
+        },
+
+        onSelectEndBoundary() {
+            if ( this.list.length == 0 && this.acceptEmptySelection ) {
+                this.selected_empty = true;
+            }
+        },
+
+        onSelectStartBoundary() {
+            if ( this.list.length == 0 && this.acceptEmptySelection ) {
+                this.selected_empty = false;
+            }
+        },
+
+        onSelectUp() {
+            this.selected_empty = false;
+        },
+
+        onSelectDown() {
+            this.selected_empty = false;
+        },
     },
 
     watch: {

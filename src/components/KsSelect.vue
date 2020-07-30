@@ -166,10 +166,6 @@
                 type: String,
                 default: ''
             },
-            acceptEmptySelection: {
-                type: Boolean,
-                default: false,
-            },
             invertOffsetRatio: {
                 type: Number,
                 default: .75
@@ -237,7 +233,6 @@
                 filter: this.itemFilter,
                 isOpen: false,
                 needs_new_search: true,
-                selected_empty: false,
                 inverted: false,
                 list_style: {
                     'max-height': this.listHeight,
@@ -499,33 +494,6 @@
 
                 return -1;
             },
-
-            selectEmpty(selected_empty) {
-                this.selected_empty = selected_empty;
-                if ( this.selected_empty ) {
-                    this.selectItem();
-                }
-            },
-
-            onSelectEndBoundary() {
-                if ( this.list.length == 0 && this.acceptEmptySelection ) {
-                    this.selected_empty = true;
-                }
-            },
-
-            onSelectStartBoundary() {
-                if ( this.list.length == 0 && this.acceptEmptySelection ) {
-                    this.selected_empty = false;
-                }
-            },
-
-            onSelectUp() {
-                this.selected_empty = false;
-            },
-
-            onSelectDown() {
-                this.selected_empty = false;
-            }
         },
 
         watch: {
