@@ -537,6 +537,10 @@
                 this.$nextTick(() => {
                     this.handleScroll();
                 });
+
+                if ( this.list.length > 0 ) {
+                    this.selected_empty = false;
+                }
             },
             value() {
                 this.refreshSelected();
