@@ -84,7 +84,14 @@
                         <slot :item="item">{{item[selectionKey]}}</slot>
                     </li>
                 </template>
-                <li v-if="hasEmptyMessage && !loading && list.length == 0" class="empty-list-message">
+                <li v-if="!acceptEmptySelection && hasEmptyMessage && !loading && list.length == 0" class="empty-list-message">
+                    <slot :term="lookup_name" name="empty">{{emptyMessage}}</slot>
+                </li>
+                <li v-if="acceptEmptySelection && hasEmptyMessage && !loading && list.length == 0"
+                    class="empty-list-message active-empty-list-message"
+                    :class="{'selected-item': selected_empty}"
+                    @click.prevent="selectEmpty(true)"
+                >
                     <slot :term="lookup_name" name="empty">{{emptyMessage}}</slot>
                 </li>
 			</ul>
@@ -135,10 +142,6 @@
                 type: Boolean,
                 default: false
             },
-            emptyMessage: {
-                type: String,
-                default: null
-            }
 		},
 
 		data() {
@@ -170,9 +173,6 @@
 
 				return this.placeholder;
 			},
-            hasEmptyMessage() {
-                return this.emptyMessage || this.$slots.empty || this.$scopedSlots.empty;
-            }
 		},
 
 		mounted() {
@@ -246,7 +246,7 @@
                 if ( this.taggable && index == -1 && this.lookup_name.length ) {
                     this.tagSelection();
                     return;
-                } else if ( !this.list[index] ) {
+                } else if ( !this.list[index] && !this.selected_empty ) {
                     return;
                 }
 
@@ -255,7 +255,12 @@
 				this.addSelection(selection);
 
 				// Emit input event
-				this.$emit('input', this.selectionValue());
+                if ( this.selected_empty ) {
+                    this.$emit('selected-empty', true);
+                    this.focused = false;
+                } else {
+				    this.$emit('input', this.selectionValue());
+                }
 
 				// Reset the input and list
 				this.lookup_name = '';
@@ -284,7 +289,7 @@
 					this.selection  = [];
 				}
 				// Prevent duplicate adds
-				if ( -1 == this.selection.indexOf(selection) ) {
+				if ( -1 == this.selection.indexOf(selection) && typeof selection !== 'undefined' ) {
                     this.selection.push(selection);
                 }
 			},
@@ -376,7 +381,9 @@
 					if ( typed_name === list_name ) {
 						this.selected_index = 0;
 					}
-				}
+				} else if ( this.list.length > 0 ) {
+				    this.selected_empty = false;
+                }
 			},
 
 			focused() {

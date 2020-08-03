@@ -353,6 +353,12 @@
                                 A message to use when the select is empty. (ex: "No Results"). If left blank then no message will show up.
                             </td>
                         </tr>
+                        <tr>
+                            <td>acceptEmptySelection</td>
+                            <td>Boolean</td>
+                            <td><pre>false</pre></td>
+                            <td>Works with the emptyMessage property. If this is set to true the empty option will be a selectable item instead of just text.</td>
+                        </tr>
                     </tbody>
                 </table>
             </ks-tab>
@@ -397,6 +403,12 @@
                             <td><pre>clear</pre></td>
                             <td>
                                 Fired when the list is cleared
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre>selected-empty</pre></td>
+                            <td>
+                                Fired when <code>acceptEmptySelection</code> prop is set to true and the autocomplete term is not in the list.
                             </td>
                         </tr>
                         <tr>
