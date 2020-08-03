@@ -66,6 +66,10 @@ export default {
             type: Boolean,
             default: false,
         },
+        emptyMessage: {
+            type: String,
+            default: ''
+        },
     },
 
     data() {
@@ -170,7 +174,11 @@ export default {
             }
 
             return groups;
-        }
+        },
+
+        hasEmptyMessage() {
+            return this.emptyMessage || this.$slots.empty || this.$scopedSlots.empty;
+        },
     },
 
     methods: {

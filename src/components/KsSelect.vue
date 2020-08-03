@@ -162,10 +162,6 @@
                 type: Boolean,
                 default: false,
             },
-            emptyMessage: {
-                type: String,
-                default: ''
-            },
             invertOffsetRatio: {
                 type: Number,
                 default: .75
@@ -215,10 +211,6 @@
             showDeselect() {
                 return !this.multiple && this.singleDeselect && this.selected ? true : false;
             },
-
-            hasEmptyMessage() {
-                return this.emptyMessage || this.$slots.empty || this.$scopedSlots.empty;
-            }
         },
 
         data() {

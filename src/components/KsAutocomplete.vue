@@ -142,10 +142,6 @@
                 type: Boolean,
                 default: false
             },
-            emptyMessage: {
-                type: String,
-                default: null
-            }
 		},
 
 		data() {
@@ -177,9 +173,6 @@
 
 				return this.placeholder;
 			},
-            hasEmptyMessage() {
-                return this.emptyMessage || this.$slots.empty || this.$scopedSlots.empty;
-            }
 		},
 
 		mounted() {
