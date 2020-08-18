@@ -9,6 +9,7 @@
             <a href="#"
                v-if="monthPicker"
                @click.prevent="toggleMonthPicker"
+               class="ks-calendar-month-picker"
                :class="{'open-picker': monthPickerOpen }"
             >
                 {{month}}
@@ -19,6 +20,7 @@
             <a href="#"
                v-if="yearPicker"
                @click.prevent="toggleYearPicker"
+               class="ks-calendar-year-picker"
                :class="{'open-picker': yearPickerOpen }"
             >
                 {{year}}
