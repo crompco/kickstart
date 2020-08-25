@@ -20,7 +20,7 @@
             <a href="#"
                v-if="yearPicker"
                @click.prevent="toggleYearPicker"
-               class="ks-calendar-year"
+               class="ks-calendar-year-picker"
                :class="{'open-picker': yearPickerOpen }"
             >
                 {{year}}
