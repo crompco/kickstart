@@ -15,18 +15,19 @@
                 {{month}}
                 <down-svg></down-svg>
             </a>
-            <span v-else>{{month}}</span>
+            <span v-else class="ks-calendar-month-picker">{{month}}</span>
 
             <a href="#"
                v-if="yearPicker"
                @click.prevent="toggleYearPicker"
-               class="ks-calendar-year-picker"
+               class="ks-calendar-year"
                :class="{'open-picker': yearPickerOpen }"
             >
                 {{year}}
                 <down-svg></down-svg>
             </a>
-            <span v-else>{{year}}</span>
+            <span v-else class="ks-calendar-year-picker">{{year}}</span>
+
             <a v-if="showControls" href="#" @click.prevent="next" class="ctrl-right" ref="next">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 2 20 20">
                     <path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"/>
