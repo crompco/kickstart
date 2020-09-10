@@ -18,20 +18,38 @@ export function addEvent(el, eventName, callback, event_capturing = false) {
 };
 
 /**
+ * Remove event listener
+ *
+ * @param el
+ * @param eventName
+ * @param callback
+ * @param event_capturing
+ */
+export function removeEvent(el, eventName, callback, event_capturing = false) {
+	if ( el.removeEventListener ) {
+		el.removeEventListener(eventName, callback, event_capturing);
+		if ( eventName == 'mousewheel' ) {
+			el.removeEventListener("DOMMouseScroll", callback, event_capturing);
+		}
+	} else {
+		el.detachEvent(eventName, callback)
+	}
+}
+
+/**
  *
  * @param el
  * @param callback
  * @param delay
+ * @param remove_event
  */
-export function smartFocusToggle(el, callback, delay = 150) {
-	let focused = [];
-
-	addEvent(el, 'focus', (e) => {
+export function smartFocusToggle(el, callback, delay = 150, remove_event = false) {
+	const focused = [];
+	const focus = (e) => {
 		callback(true, e);
 		focused.push(e.target);
-	}, true);
-
-	addEvent(el, 'blur', (e) => {
+	}
+	const blur = (e) => {
 		let index = focused.indexOf(e.target);
 		if ( index !== -1 ) {
 			focused.splice(index, 1);
@@ -43,7 +61,15 @@ export function smartFocusToggle(el, callback, delay = 150) {
 				}
 			}
 		}, delay);
-	}, true);
+	}
+
+	if ( remove_event ) {
+		removeEvent(el, 'focus', focus, true);
+		removeEvent(el, 'blur', blur, true);
+	} else {
+		addEvent(el, 'focus', focus, true);
+		addEvent(el, 'blur', blur, true);
+	}
 }
 
 /**
@@ -59,7 +85,7 @@ export function keyCode(e) {
 /**
  * Stop the parent element from scrolling on the wheel scroll
  *
- * @param e
+ * @param el
  * @param el
  */
 export function stopParentScroll(el) {
