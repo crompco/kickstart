@@ -41,35 +41,48 @@ export function removeEvent(el, eventName, callback, event_capturing = false) {
  * @param el
  * @param callback
  * @param delay
- * @param remove_event
+ * @return {{focus}, {blur}}
  */
-export function smartFocusToggle(el, callback, delay = 150, remove_event = false) {
+export function smartFocusToggle(el, callback, delay = 150) {
 	const focused = [];
-	const focus = (e) => {
-		callback(true, e);
-		focused.push(e.target);
-	}
-	const blur = (e) => {
-		let index = focused.indexOf(e.target);
-		if ( index !== -1 ) {
-			focused.splice(index, 1);
-		}
-		setTimeout(() => {
-			if ( 0 == focused.length ) {
-				if ( el !== document.activeElement ) {
-					callback(false, e);
-				}
-			}
-		}, delay);
-	}
+    const smart_focus_toggle = {
+        el,
+        focus: (e) => {
+            callback(true, e);
+            focused.push(e.target);
+        },
+        blur: (e) => {
+            let index = focused.indexOf(e.target);
+            if ( index !== -1 ) {
+                focused.splice(index, 1);
+            }
+            setTimeout(() => {
+                if ( 0 === focused.length ) {
+                    if ( el !== document.activeElement ) {
+                        callback(false, e);
+                    }
+                }
+            }, delay);
+        }
+    }
 
-	if ( remove_event ) {
-		removeEvent(el, 'focus', focus, true);
-		removeEvent(el, 'blur', blur, true);
-	} else {
-		addEvent(el, 'focus', focus, true);
-		addEvent(el, 'blur', blur, true);
-	}
+    addEvent(el, 'focus', smart_focus_toggle.focus, true);
+    addEvent(el, 'blur', smart_focus_toggle.blur, true);
+
+    return smart_focus_toggle;
+}
+
+/**
+ * Removes the events setup by the smartFocusToggle function.
+ * Expects an object that was returned from the smartFocusToggle method.
+ *
+ * @param o
+ */
+export function removeSmartFocusToggle(o) {
+    if ( o && o.focus && o.blur && o.el ) {
+        removeEvent(o.el, o.focus);
+        removeEvent(o.el, o.blur);
+    }
 }
 
 /**
@@ -200,6 +213,7 @@ export function mouseHold(el, callback, delay = 300, speed = 300) {
 export default {
 	addEvent,
 	smartFocusToggle,
+    removeSmartFocusToggle,
 	keyCode,
 	stopParentScroll,
 	scrolledToBottom,

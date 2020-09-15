@@ -37,7 +37,7 @@
 
     import KsCalendar from './KsCalendar.vue';
     import {formatDate, parseDate} from '../helpers/dates';
-    import {addEvent, smartFocusToggle} from '../helpers/events';
+    import {smartFocusToggle, removeSmartFocusToggle} from '../helpers/events';
 
     export default {
         name: 'KsDatepicker',
@@ -74,6 +74,7 @@
 
         data() {
             return {
+                focus_toggle_event: null,
                 is_open: false,
                 focused: false,
                 input_date: this.display_date,
@@ -106,12 +107,14 @@
         },
 
         beforeDestroy() {
-            smartFocusToggle(this.$el, this.handleFocusToggle, 50, true);
+            if ( this.focus_toggle_event ) {
+                removeSmartFocusToggle(this.focus_toggle_event);
+            }
         },
 
         mounted() {
             this.$nextTick(() => {
-                smartFocusToggle(this.$el, this.handleFocusToggle, 50);
+                this.focus_toggle_event = smartFocusToggle(this.$el, this.handleFocusToggle, 50);
                 this.input_date = this.display_date;
             });
             this.calendar_date = this.value_date;
