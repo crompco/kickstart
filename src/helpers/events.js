@@ -18,32 +18,71 @@ export function addEvent(el, eventName, callback, event_capturing = false) {
 };
 
 /**
+ * Remove event listener
+ *
+ * @param el
+ * @param eventName
+ * @param callback
+ * @param event_capturing
+ */
+export function removeEvent(el, eventName, callback, event_capturing = false) {
+	if ( el.removeEventListener ) {
+		el.removeEventListener(eventName, callback, event_capturing);
+		if ( eventName == 'mousewheel' ) {
+			el.removeEventListener("DOMMouseScroll", callback, event_capturing);
+		}
+	} else {
+		el.detachEvent(eventName, callback)
+	}
+}
+
+/**
  *
  * @param el
  * @param callback
  * @param delay
+ * @return {{focus}, {blur}}
  */
 export function smartFocusToggle(el, callback, delay = 150) {
-	let focused = [];
+	const focused = [];
+    const smart_focus_toggle = {
+        el,
+        focus: (e) => {
+            callback(true, e);
+            focused.push(e.target);
+        },
+        blur: (e) => {
+            let index = focused.indexOf(e.target);
+            if ( index !== -1 ) {
+                focused.splice(index, 1);
+            }
+            setTimeout(() => {
+                if ( 0 === focused.length ) {
+                    if ( el !== document.activeElement ) {
+                        callback(false, e);
+                    }
+                }
+            }, delay);
+        }
+    }
 
-	addEvent(el, 'focus', (e) => {
-		callback(true, e);
-		focused.push(e.target);
-	}, true);
+    addEvent(el, 'focus', smart_focus_toggle.focus, true);
+    addEvent(el, 'blur', smart_focus_toggle.blur, true);
 
-	addEvent(el, 'blur', (e) => {
-		let index = focused.indexOf(e.target);
-		if ( index !== -1 ) {
-			focused.splice(index, 1);
-		}
-		setTimeout(() => {
-			if ( 0 == focused.length ) {
-				if ( el !== document.activeElement ) {
-					callback(false, e);
-				}
-			}
-		}, delay);
-	}, true);
+    return smart_focus_toggle;
+}
+
+/**
+ * Removes the events setup by the smartFocusToggle function.
+ * Expects an object that was returned from the smartFocusToggle method.
+ *
+ * @param o
+ */
+export function removeSmartFocusToggle(o) {
+    if ( o && o.focus && o.blur && o.el ) {
+        removeEvent(o.el, o.focus);
+        removeEvent(o.el, o.blur);
+    }
 }
 
 /**
@@ -59,7 +98,7 @@ export function keyCode(e) {
 /**
  * Stop the parent element from scrolling on the wheel scroll
  *
- * @param e
+ * @param el
  * @param el
  */
 export function stopParentScroll(el) {
@@ -174,6 +213,7 @@ export function mouseHold(el, callback, delay = 300, speed = 300) {
 export default {
 	addEvent,
 	smartFocusToggle,
+    removeSmartFocusToggle,
 	keyCode,
 	stopParentScroll,
 	scrolledToBottom,
