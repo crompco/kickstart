@@ -1,6 +1,6 @@
 <template>
 	<div class="autocomplete-holder"
-		 :class="{ 'is-selected': has_selections, 'is-multiple': is_multiple }"
+		 :class="{ 'is-selected': has_selections, 'is-multiple': is_multiple, 'disabled': disabled}"
 		 @click.prevent="setFocus('lookup')"
          @keydown.enter.prevent.stop="editSelection"
 	     tabindex="-1"
@@ -142,6 +142,10 @@
                 type: Boolean,
                 default: false
             },
+            disabled: {
+                type: Boolean,
+                default: false,
+            }
 		},
 
 		data() {
