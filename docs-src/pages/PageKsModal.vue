@@ -390,6 +390,12 @@
                                 <td><pre>true</pre></td>
                                 <td>Whether to close the modal when a user clicks on the mask</td>
                             </tr>
+                            <tr>
+                                <td>forceScroll</td>
+                                <td>Boolean</td>
+                                <td><pre>false</pre></td>
+                                <td>Whether to force the modal in a scrollable state. This is the same when a modal is higher than the window. This option helps with modals jumping when content is dynamic.</td>
+                            </tr>
 						</tbody>
 					</table>
 				</ks-tab>
