@@ -93,6 +93,10 @@
                 type: Boolean,
                 default: true
             },
+            forceScroll: {
+                type: Boolean,
+                default: false
+            }
         },
 
         data() {
@@ -202,14 +206,17 @@
                 let window_height = $doc.clientHeight;
                 let window_width = $doc.clientWidth;
                 let style = window.getComputedStyle(modal);
+                const modal_is_bigger = modal_height > window_height;
+                let scroll_to_top = false;
 
-                if ( modal_height > window_height ) {
+                if ( modal_is_bigger || this.forceScroll ) {
                     this.$set(this.classObj, 'modal-scroll', true);
                     this.$nextTick(() => {
                         modal_height += parseFloat(style.marginTop) + parseFloat(style.marginBottom);
-                        modal_height = `${modal_height}px`;
+                        modal_height = modal_is_bigger ? `${modal_height}px` : '';
                     });
                 } else {
+                    scroll_to_top = true;
                     this.$set(this.classObj, 'modal-scroll', false);
                     modal_height = '';
                 }
@@ -222,7 +229,9 @@
                     this.$refs.mask.style.height = modal_height;
                 });
 
-                this.$el.scrollTop = 0;
+                if ( !this.forceScroll && scroll_to_top ) {
+                    this.$el.scrollTop = 0;
+                }
             },
             windowResize() {
                 this.positionModal();
