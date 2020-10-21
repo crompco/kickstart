@@ -175,9 +175,13 @@
 
                 window.removeEventListener('resize', this.windowResize);
 
-                removeClass(document.documentElement, 'modal-open');
-
                 this.$nextTick(() => {
+                    const other_modal_open = [...document.querySelectorAll('.ks-modal')]
+                        .filter(modal => modal.offsetHeight !== 0)
+
+                    if ( other_modal_open.length === 0 ) {
+                        removeClass(document.documentElement, 'modal-open');
+                    }
                     this.$set(this.classObj, 'modal-scroll', false);
                 })
             },
