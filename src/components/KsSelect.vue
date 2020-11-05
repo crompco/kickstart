@@ -102,14 +102,14 @@
 <script>
 
     import KsAutocomplete from './KsAutocomplete.vue';
-    import ListIndexNavigatior from './mixins/ListIndexNavigator';
+    import ListIndexNavigator from './mixins/ListIndexNavigator';
     import LoaderLine from './KsLoaderLine.vue';
     import {object_get} from '../helpers/objects';
 
     export default {
         name: 'KsSelect',
 
-        mixins: [ListIndexNavigatior],
+        mixins: [ListIndexNavigator],
 
         props: {
             name: {
@@ -173,6 +173,8 @@
                 if ( this.value instanceof Object ) {
                     return this.keyName in this.value ? this.value[this.keyName] : this.value;
                 }
+
+                return this.value;
             },
 
             using_items() {
