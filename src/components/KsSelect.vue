@@ -243,7 +243,7 @@
                 this.filter = this.labelKey;
             }
 
-            if ( this.items ) {
+            if ( Array.isArray(this.items) ) {
                 this.list = this.items;
             }
 
@@ -511,7 +511,7 @@
                 }
             },
             items() {
-                if ( this.items && this.items.length ) {
+                if ( Array.isArray(this.items) ) {
                     this.list = this.items;
                     this.refreshSelected();
                     this.clearCache();
