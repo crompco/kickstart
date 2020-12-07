@@ -243,7 +243,7 @@
                 this.filter = this.labelKey;
             }
 
-            if ( this.items ) {
+            if ( Array.isArray(this.items) ) {
                 this.list = this.items;
             }
 
@@ -511,12 +511,13 @@
                 }
             },
             items() {
-                if ( this.items && this.items.length ) {
-                    this.list = this.items;
-                    this.refreshSelected();
-                    this.clearCache();
-                    this.selected_empty = false;
+                this.list = ( Array.isArray(this.items) && this.items.length > 0 ) ? this.items : [];
+                if ( this.value_index() === -1 ) {
+                    this.clearSelection();
                 }
+                this.clearCache();
+                this.refreshSelected();
+                this.selected_empty = false;
             },
             isOpen(open, oldOpen) {
                 if ( open ) {
