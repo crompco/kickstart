@@ -512,9 +512,6 @@
             },
             items() {
                 this.list = ( Array.isArray(this.items) && this.items.length > 0 ) ? this.items : [];
-                if ( this.value_index() === -1 ) {
-                    this.clearSelection();
-                }
                 this.clearCache();
                 this.refreshSelected();
                 this.selected_empty = false;
