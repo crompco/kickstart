@@ -511,9 +511,7 @@
                 }
             },
             items() {
-                this.list = ( Array.isArray(this.items) && this.items.length > 0 ) ?
-                    this.list = this.items :
-                    this.list = [];
+                this.list = ( Array.isArray(this.items) && this.items.length > 0 ) ? this.items : [];
                 if ( this.value_index() === -1 ) {
                     this.clearSelection();
                 }
