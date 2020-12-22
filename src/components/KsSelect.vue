@@ -211,7 +211,11 @@
                 return false;
             },
             showDeselect() {
-                return !this.multiple && this.singleDeselect && this.selected ? true : false;
+                if ( this.multiple ) {
+                    return false;
+                }
+
+                return this.singleDeselect && this.inputValue;
             },
         },
 
@@ -247,7 +251,9 @@
                 this.list = this.items;
             }
 
-            this.refreshSelected();
+            this.$nextTick(() => {
+                this.refreshSelected();
+            })
 
             this.initListNavigation({
                 lookup: 'lookup',
@@ -458,16 +464,25 @@
 
                 if ( this.binds_objects ) {
                     this.selected = object_get(this.value, this.labelKey, null);
-                    return;
-                }
-
-                for ( var i in this.list ) {
-                    if ( this.list[i][this.keyName] == this.value ) {
-                        this.selected = this.list[i][this.labelKey];
-                        return;
+                } else if ( this.list.length === 0 ) {
+                    this.selected = '';
+                } else {
+                    for ( let i in this.list ) {
+                        if ( this.list[i][this.keyName] == this.value ) {
+                            this.selected = object_get(this.list[i], this.labelKey, null);
+                            break;
+                        }
                     }
                 }
 
+                // Validate the selection
+                if ( null === this.selected ) {
+                    if ( !this.binds_objects ) {
+                        this.selected = this.value;
+                    } else {
+                        console.error(`KsSelect Invalid label '${this.labelKey}'. Could not find label key in selected`);
+                    }
+                }
             },
 
             value_index() {
