@@ -84,6 +84,7 @@
         overflow: hidden;
         width: 100%;
         white-space: nowrap;
+        min-height: 2.125rem;
 
         .ks-select-arrow {
             @include triangle-down($size: rem(9px), $color: $select-arrow-color);
