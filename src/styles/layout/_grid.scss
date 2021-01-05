@@ -47,7 +47,7 @@
 // no gutter
 .no-gutter {
     @each $name, $map in $breakpoint-list {
-        $map: map-merge($map, (gutter: 0));
+        $map: map-merge($map, (gutter: 0px));
         @include breakpoint($map) {
             @for $i from 1 through map-get($map, columns) {
                 $columns: map-get($map, columns);
