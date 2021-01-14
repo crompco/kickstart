@@ -22,10 +22,6 @@
                 type: String,
                 default: ''
             },
-            disabled: {
-                type: Boolean,
-                default: false,
-            },
             accept: {
                 type: [Boolean, Function],
                 default: true,
@@ -46,10 +42,6 @@
                 return state_classes;
             },
             allowsDrop() {
-                if ( this.disabled ) {
-                    return false;
-                }
-
                 if ( typeof this.accept === 'function' ) {
                     return this.accept();
                 }

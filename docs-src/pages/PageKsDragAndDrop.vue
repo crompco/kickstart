@@ -98,12 +98,6 @@
                             <td>What the html class is for the droppable element when there isn't a draggable element hovering over</td>
                         </tr>
                         <tr>
-                            <td>disabled</td>
-                            <td><pre>Boolean</pre></td>
-                            <td><pre>false</pre></td>
-                            <td>Disables droppable area for allowing draggable elements to drop</td>
-                        </tr>
-                        <tr>
                             <td>accept</td>
                             <td><pre>Boolean, Function</pre></td>
                             <td><pre>true</pre></td>
