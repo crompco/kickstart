@@ -24,7 +24,6 @@
                     <ks-droppable
                         style="background: aliceblue;width: 200px;height: 200px;"
                         @drop="dropItem"
-                        :accept="accepts"
                     >
                         Drop stuff here
                     </ks-droppable>
@@ -187,9 +186,6 @@
             },
             dropItem() {
                 this.droppedItem = Object.assign({}, this.dragItem);
-            },
-            accepts() {
-                return this.dragItem.id !== 2;
             },
         },
 
