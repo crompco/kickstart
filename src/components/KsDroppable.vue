@@ -22,6 +22,14 @@
                 type: String,
                 default: ''
             },
+            disabled: {
+                type: Boolean,
+                default: false,
+            },
+            accept: {
+                type: [Boolean, Function],
+                default: true,
+            },
         },
 
         computed: {
@@ -36,8 +44,18 @@
                 }
 
                 return state_classes;
-            }
+            },
+            allowsDrop() {
+                if ( this.disabled ) {
+                    return false;
+                }
 
+                if ( typeof this.accept === 'function' ) {
+                    return this.accept();
+                }
+
+                return this.accept;
+            },
         },
 
         data() {
@@ -57,13 +75,21 @@
 
         methods: {
             dragOver(e) {
+                if ( !this.allowsDrop ) {
+                    return;
+                }
+
                 e.preventDefault();
                 this.active = true;
             },
-            dragLeave(e) {
+            dragLeave() {
                 this.active = false;
             },
             dropEvent(e) {
+                if ( !this.allowsDrop ) {
+                    return;
+                }
+
                 e.stopPropagation();
                 e.preventDefault();
                 this.$emit('drop', e);
@@ -71,7 +97,7 @@
             },
             dragEnd() {
                 this.active = false;
-            }
+            },
         },
 
         beforeDestroy() {
@@ -79,10 +105,6 @@
             this.$el.removeEventListener('dragleave', this.dragLeave, false)
             this.$el.removeEventListener('drop', this.dropEvent, false);
             this.$el.removeEventListener('dragend', this.dragEnd, false)
-
-
         },
-
-        components: {}
     }
 </script>
