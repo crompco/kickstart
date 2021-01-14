@@ -41,13 +41,6 @@
 
                 return state_classes;
             },
-            allowsDrop() {
-                if ( typeof this.accept === 'function' ) {
-                    return this.accept();
-                }
-
-                return this.accept;
-            },
         },
 
         data() {
@@ -67,7 +60,7 @@
 
         methods: {
             dragOver(e) {
-                if ( !this.allowsDrop ) {
+                if ( !this.allowsDrop() ) {
                     return;
                 }
 
@@ -78,7 +71,7 @@
                 this.active = false;
             },
             dropEvent(e) {
-                if ( !this.allowsDrop ) {
+                if ( !this.allowsDrop() ) {
                     return;
                 }
 
@@ -89,6 +82,13 @@
             },
             dragEnd() {
                 this.active = false;
+            },
+            allowsDrop() {
+                if ( typeof this.accept === 'function' ) {
+                    return this.accept();
+                }
+
+                return this.accept;
             },
         },
 
