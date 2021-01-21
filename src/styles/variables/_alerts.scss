@@ -32,5 +32,12 @@ $alerts: (
 		border-color: $state-error-border,
 		button-background-color: $state-error,
 		button-color: $white
-	)
+	),
+    muted: (
+        color: darken($text-muted, 5%),
+        background-color: $lighter-gray,
+        border-color: $text-muted,
+        button-background-color: $lighter-gray,
+        button-color: darken($text-muted, 5%)
+    )
 );
