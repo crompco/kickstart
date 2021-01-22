@@ -44,7 +44,9 @@ export function posesses(str) {
  * @returns {string}
  */
 export function currency(str, symbol = '$') {
-	return symbol + parseFloat(str.replace(/,/g, ''))
+	str = typeof str === 'string' ? str.replace(/,/g, '') : str;
+
+	return symbol + parseFloat(str)
 		.toFixed(2)
 		.replace(/./g, function(c, i, a) {
 			return i && c !== "." && ((a.length - i) % 3 === 0) ? ',' + c : c;
