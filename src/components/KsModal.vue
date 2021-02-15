@@ -1,7 +1,5 @@
 <template>
-    <div class="ks-modal" v-show="isOpen" :class="[{ 'danger': danger }, classObj]">
-        <div class="ks-modal-mask" @click.prevent="maskClick" ref="mask"></div>
-
+    <div class="ks-modal" v-show="isOpen" :class="[{ 'danger': danger }, classObj]" @click.prevent="maskClick">
         <div class="ks-modal-wrapper"
              :style="[modalStyle, modalObj]"
              tabindex="-1"
@@ -9,31 +7,32 @@
              @click.stop
              @keydown.esc.stop="escape()"
         >
-
-            <!-- Modal header-->
-            <div class="ks-modal-header" v-if="showHeader">
-                <slot name="header">
-                    <h4>{{title}}</h4>
-                </slot>
-                <div class="ks-modal-close" v-if="showClose">
-                    <a href="#" @click.prevent="close">
-                        <close></close>
-                    </a>
+            <div>
+                <!-- Modal header-->
+                <div class="ks-modal-header" v-if="showHeader">
+                    <slot name="header">
+                        <h4>{{title}}</h4>
+                    </slot>
+                    <div class="ks-modal-close" v-if="showClose">
+                        <a href="#" @click.prevent="close">
+                            <close></close>
+                        </a>
+                    </div>
                 </div>
+
+                <ks-loader-line :show="isLoading"></ks-loader-line>
+
+                <!-- Modal body-->
+                <div class="ks-modal-body" ref="body">
+                    <slot></slot>
+                </div>
+
+                <!-- Modal Footer-->
+                <div class="ks-modal-footer">
+                    <slot name="footer"></slot>
+                </div>
+
             </div>
-
-            <ks-loader-line :show="isLoading"></ks-loader-line>
-
-            <!-- Modal body-->
-            <div class="ks-modal-body" ref="body">
-                <slot></slot>
-            </div>
-
-            <!-- Modal Footer-->
-            <div class="ks-modal-footer">
-                <slot name="footer"></slot>
-            </div>
-
         </div>
     </div>
 </template>
