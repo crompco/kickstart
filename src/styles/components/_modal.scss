@@ -7,23 +7,12 @@
 .ks-modal {
 	@include overlay-bg();
 	z-index: 100;
+    background: rgba($modal-mask-bg, $modal-mask-opacity);
     &:after {
         content: "";
         display: table;
         clear: both;
     }
-
-	.ks-modal-mask {
-        position: fixed;
-		width: 100%;
-		height: 100%;
-		background: rgba($modal-mask-bg, $modal-mask-opacity);
-        &:after {
-            content: "";
-            display: table;
-            clear: both;
-        }
-	}
 
 	.ks-modal-wrapper {
 		position: absolute;
@@ -31,11 +20,14 @@
 		top: 25%;
 		transform: translateY(-25%);
 		overflow-y: initial !important;
-		background-color: $modal-wrapper-bg;
-		@if $modal-wrapper-box-shadow != false {
-			box-shadow: $modal-wrapper-box-shadow;
-		}
 		outline: none;
+        > div {
+            background-color: $modal-wrapper-bg;
+            @if $modal-wrapper-box-shadow != false {
+                box-shadow: $modal-wrapper-box-shadow;
+            }
+            margin-bottom: 2rem;
+        }
 	}
 
 	&.modal-scroll .ks-modal-wrapper {
