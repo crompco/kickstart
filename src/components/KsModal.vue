@@ -229,7 +229,6 @@
                     this.width = rect.width;
 
                     this.$set(this.modalObj, 'left', ((100 - ((rect.width / window_width) * 100)) / 2).toFixed(3) + '%');
-                    this.$refs.mask.style.height = modal_height;
                 });
 
                 if ( !this.forceScroll && scroll_to_top ) {
