@@ -11,25 +11,25 @@
 	left: 0;
 }
 
-.t-right {
+.t-right, .text-right {
 	text-align: right;
 	right: 0;
 }
 
-.t-left {
+.t-left, .text-left {
 	text-align: left;
 	left: 0;
 }
 
-.t-center {
+.t-center, .text-center {
 	text-align: center;
 }
 
-.rel {
+.rel, .relative {
 	position: relative;
 }
 
-.abs {
+.abs, .absolute {
 	position: absolute;
 }
 
@@ -41,8 +41,12 @@
 	display: none;
 }
 
-.v-hide {
+.v-hide, .hidden {
 	visibility: hidden;
+}
+
+.visible {
+	visibility: visible;
 }
 
 .muted {

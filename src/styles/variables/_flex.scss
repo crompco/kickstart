@@ -1,0 +1,27 @@
+$flex-direction: (
+    'column': column,
+    'row': row
+);
+
+$flex-wrap: (
+    'wrap': wrap,
+);
+
+$flex-align: (
+    'center': center,
+    'start': flex-start,
+    'baseline': baseline,
+    'end': flex-end,
+    'stretch': stretch,
+);
+
+$flex-justify-content: (
+    'center': center,
+    'between': space-between,
+    'end': flex-end,
+    'stretch': stretch,
+);
+
+$flex-align-self: (
+    'center': center,
+);

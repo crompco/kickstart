@@ -4,6 +4,11 @@
 // Grid
 @import "layout/_grid";
 
+// Utilities
+@import "components/utilities/_layout";
+@import "components/utilities/_spacing";
+@import "components/utilities/_text";
+
 // Components
 @import "components/_general";
 @import "components/_alerts";
