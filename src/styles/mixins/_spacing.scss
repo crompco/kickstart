@@ -1,0 +1,42 @@
+@mixin spacing($map, $name, $size) {
+    $type: map_get($map, 'type');
+    $code: map_get($map, 'code');
+    $prefix: unquote('');
+
+    @if (map_has_key($map, 'prefix')) {
+        $prefix: unquote(map_get($map, 'prefix'));
+    }
+
+    .#{$code}-#{$name} {
+        #{$type}: #{$prefix}$size;
+    }
+    .#{$code}t-#{$name} {
+        #{$type}-top: #{$prefix}$size;
+    }
+    .#{$code}b-#{$name} {
+        #{$type}-bottom: #{$prefix}$size;
+    }
+    .#{$code}r-#{$name} {
+        #{$type}-right: #{$prefix}$size;
+    }
+    .#{$code}l-#{$name} {
+        #{$type}-left: #{$prefix}$size;
+    }
+    .#{$code}y-#{$name} {
+        #{$type}-top: #{$prefix}$size;
+        #{$type}-bottom: #{$prefix}$size;
+    }
+    .#{$code}x-#{$name} {
+        #{$type}-left: #{$prefix}$size;
+        #{$type}-right: #{$prefix}$size;
+    }
+}
+
+@mixin size($map, $name, $size) {
+    $type: map_get($map, 'type');
+    $code: map_get($map, 'code');
+
+    .#{$code}-#{$name} {
+        #{$type}: $size;
+    }
+}
