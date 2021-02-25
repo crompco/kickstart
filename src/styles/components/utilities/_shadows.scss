@@ -1,0 +1,7 @@
+@import "../../variables/shadows";
+
+@each $name, $value in $shadows {
+    .#{$name} {
+        box-shadow: $value;
+    }
+}
