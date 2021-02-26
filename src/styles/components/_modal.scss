@@ -75,6 +75,16 @@
     &.danger .ks-modal-header {
         background-color: $modal-header-danger-bg;
         color: $modal-header-danger-color;
+
+		.ks-modal-close {
+			svg path {
+				fill: $modal-header-danger-close-color;
+			}
+
+			&:hover svg path {
+				fill: $modal-header-danger-close-color-hover;
+			}
+		}
     }
 	.ks-modal-body, .ks-modal-footer {
 		padding: rem($modal-body-padding);

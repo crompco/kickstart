@@ -13,6 +13,8 @@ $modal-header-box-shadow: inset 0 -10px 15px -12px rgba($black, 0.2) !default;
 
 $modal-header-danger-bg: $state-danger-bg !default;
 $modal-header-danger-color: $state-danger-color !default;
+$modal-header-danger-close-color: get_color("red", 200) !default;
+$modal-header-danger-close-color-hover: get_color("red", 100) !default;
 
 // Wrapper
 $modal-wrapper-bg: $white !default;
