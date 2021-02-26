@@ -49,4 +49,23 @@
             }
         }
     }
+
+    &.light-card {
+        box-shadow: $card-light-box-shadow;
+
+        .card-header {
+            font-size: $card-light-header-font-size;
+            background: $card-light-header-bg;
+            color: $card-light-header-color;
+
+            &.light {
+                background: $white;
+                color: lighten($text-color, 10%);
+            }
+        }
+
+        .card-body {
+            padding: $card-light-body-padding;
+        }
+    }
 }

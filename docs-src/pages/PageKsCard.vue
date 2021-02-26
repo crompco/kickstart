@@ -17,6 +17,21 @@
                     </div>
                 </div>
             </div>
+            <div class="sm-8 tab-4">
+                <div class="ks-card light-card">
+                    <div class="card-header">
+                        Foo
+                    </div>
+                    <div class="card-body">
+                        Here is the body of the card. <br>
+                        Let's break it down!
+                    </div>
+                    <div class="card-footer">
+                        <button>Edit</button>
+                        <button class="danger">Delete</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="alert info">
