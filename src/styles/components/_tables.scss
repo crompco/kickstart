@@ -2,6 +2,7 @@
 @import "../mixins/_grid";
 @import "../variables/_global";
 @import "../variables/_tables";
+@import "../variables/_spacing";
 
 %table-header-no-border {
 	border-bottom: 0;
@@ -165,14 +166,11 @@
 	}
 
 	&.bordered {
+		border-collapse: collapse;
 		border: 1px solid $table-border-color;
 
 		th, td {
-			border-right: 1px solid $table-border-color;
-
-			&:last-child {
-				border-right: 0;
-			}
+			border: 1px solid $table-border-color;
 		}
 	}
 
@@ -180,9 +178,26 @@
 		box-shadow: $table-box-shadow;
 	}
 
+	&.collapse {
+		border: 0;
+		margin: 0;
+		padding: 0;
+		tbody tr, tr th, tr td {
+			border: 0;
+		}
+	}
+
 	@each $name, $color in $brand {
 		&.#{$name} {
 			@include table-head-color($color);
+		}
+	}
+
+	@each $name, $size in $spacing {
+		&.p-#{$name} {
+			tr th, tr td {
+				padding: $size;
+			}
 		}
 	}
 }
