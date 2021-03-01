@@ -17,3 +17,7 @@
         @include size($map, $name, $size);
     }
 }
+
+.full-width {
+    width: 100%;
+}
