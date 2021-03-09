@@ -128,7 +128,6 @@
 			text-decoration: none;
 			padding: 1em;
 			display: inline-block;
-			@include transition(background-color, 0.3);
 
 			&:hover {
 				background-color: $nav-links-hover-color;

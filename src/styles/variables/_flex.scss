@@ -1,11 +1,11 @@
 $flex-direction: (
     'column': column,
     'row': row
-);
+) !default;
 
 $flex-wrap: (
     'wrap': wrap,
-);
+) !default;
 
 $flex-align: (
     'center': center,
@@ -13,15 +13,15 @@ $flex-align: (
     'baseline': baseline,
     'end': flex-end,
     'stretch': stretch,
-);
+) !default;
 
 $flex-justify-content: (
     'center': center,
     'between': space-between,
     'end': flex-end,
     'stretch': stretch,
-);
+) !default;
 
 $flex-align-self: (
     'center': center,
-);
+) !default;
