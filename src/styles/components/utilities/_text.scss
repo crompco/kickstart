@@ -1,0 +1,33 @@
+@import "../../variables/_font-size";
+@import "../../mixins/colors";
+
+.strike-through {
+    text-decoration: line-through;
+}
+.underline {
+    text-decoration: underline;
+}
+.uppercase {
+    text-transform: uppercase;
+}
+.lowercase {
+    text-transform: lowercase;
+}
+.italic {
+    font-style: italic;
+}
+.bold {
+    font-weight: bold;
+}
+.normal {
+    font-weight: normal;
+}
+
+// Font Size
+@each $name, $size in $fontSize {
+    .text-#{$name} {
+        font-size: $size;
+    }
+}
+
+@include color-class('text', 'color', true);

@@ -1,11 +1,14 @@
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
-const autoprefixer = require('autoprefixer');
+const TerserPlugin = require('terser-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 const options = require('./options');
 const base = require('./webpack.base.js');
 
 const config = {
+    mode: 'production',
+
     entry: {
         'kickstart-ui.min.js': options.paths.resolve('src/index.js'),
     },
@@ -25,8 +28,22 @@ const config = {
         vue: 'vue'
     },
 
+    optimization: {
+        minimizer: [
+            new TerserPlugin({
+                terserOptions: {
+                    output: {
+                        comments: false,
+                    },
+                    warnings: false,
+                },
+                extractComments: false,
+            })
+        ]
+    },
+
     plugins: [
-        new ExtractTextPlugin({
+        new MiniCssExtractPlugin({
             filename: 'kickstart-ui.min.css'
         }),
 
@@ -36,23 +53,17 @@ const config = {
 
         // Set the production environment
         new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: '"production"'
-            }
-        }),
-
-        // Minify with dead-code elimination
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false
-            }
+            'process.env.NODE_ENV': JSON.stringify('production'),
+            'process.env.BUILD': JSON.stringify('production')
         }),
 
         new webpack.BannerPlugin({
             banner: options.banner,
             raw: true,
             entryOnly: true
-        })
+        }),
+
+        new VueLoaderPlugin(),
     ]
 };
 

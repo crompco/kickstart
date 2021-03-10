@@ -1,0 +1,25 @@
+@mixin flex() {
+    .flex, .inline-flex {
+        @content;
+    }
+}
+
+@mixin flex-direction($direction) {
+    flex-direction: $direction;
+}
+
+@mixin flex-wrap($wrap) {
+    flex-wrap: $wrap;
+}
+
+@mixin flex-align($align) {
+    align-items: $align;
+}
+
+@mixin flex-justify-content($justify-content) {
+    justify-content: $justify-content;
+}
+
+@mixin flex-align-self($align) {
+    align-self: $align;
+}

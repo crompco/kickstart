@@ -1,7 +1,6 @@
 const options = require('./options');
-const path = require('path');
 const autoprefixer = require('autoprefixer');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
 	resolve: {
@@ -27,13 +26,6 @@ module.exports = {
                 test: /\.vue$/,
                 loader: 'vue-loader',
                 options: {
-                    loaders: {
-                        svg: 'svg-inline-loader',
-                        scss: ExtractTextPlugin.extract({
-                            use: ['css-loader', 'sass-loader'],
-                            fallback: 'style-loader'
-                        })
-                    },
 					postcss: [
 						autoprefixer({
 							browsers: ['last 3 versions', 'ie > 8', 'Firefox ESR']
@@ -43,11 +35,19 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                loader: ExtractTextPlugin.extract({
-                    use: ['css-loader', 'sass-loader'],
-                    fallback: 'style-loader'
-                })
+                use: [
+					MiniCssExtractPlugin.loader,
+					'css-loader',
+					'sass-loader'
+				],
             },
+			{
+				test: /\.css$/,
+				use: [
+					MiniCssExtractPlugin.loader,
+					'css-loader'
+				]
+			},
 			{
 				test: /\.js$/,
 				loader: 'babel-loader',

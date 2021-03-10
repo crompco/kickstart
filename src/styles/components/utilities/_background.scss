@@ -1,0 +1,3 @@
+@import "../../mixins/colors";
+
+@include color-class('bg', 'background-color', true);

@@ -1,0 +1,23 @@
+@import "../../variables/_spacing";
+@import "../../mixins/_spacing";
+
+@each $map in $spacing_map {
+    @each $name, $size in $spacing {
+        @include spacing($map, $name, $size);
+    }
+}
+
+.mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@each $map in $size_map {
+    @each $name, $size in $spacing {
+        @include size($map, $name, $size);
+    }
+}
+
+.full-width {
+    width: 100%;
+}

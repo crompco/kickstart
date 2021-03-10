@@ -1,0 +1,29 @@
+@import "../variables/colors";
+
+@mixin color-class($prefix, $property, $hover: false) {
+    @each $color, $value in $colors {
+        @if type-of($value) == 'map' {
+            @each $weight, $hex in $value {
+                .#{$prefix}-#{$color}-#{$weight} {
+                    #{$property}: $hex;
+                }
+
+                @if $hover {
+                    .hover\:#{$prefix}-#{$color}-#{$weight}:hover {
+                        #{$property}: $hex;
+                    }
+                }
+            }
+        } @else {
+            .#{$prefix}-#{$color} {
+                #{$property}: $value;
+            }
+
+            @if $hover {
+                .hover\:#{$prefix}-#{$color}:hover {
+                    #{$property}: $value;
+                }
+            }
+        }
+    }
+}
