@@ -54,11 +54,14 @@
                 window.addEventListener('resize', this.windowResize);
             });
 
-            addEvent(this.$el.querySelector('.dropdown-toggle'), 'click', function(e) {
-		 		e.preventDefault();
+            const dropdown = this.$el.querySelector('.dropdown-toggle');
+            if ( dropdown ) {
+                addEvent(dropdown, 'click', function(e) {
+                    e.preventDefault();
 
-		 		toggleClass(parent(this, '.dropdown'), 'show');
-			});
+                    toggleClass(parent(this, '.dropdown'), 'show');
+                });
+            }
 
             if ( this.hasSidebar ) {
                 addEvent(this.$el.querySelector('.mobile-menu.has-sidebar'), 'click', function(e) {

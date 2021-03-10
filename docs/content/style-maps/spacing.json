@@ -1,0 +1,88 @@
+{
+  "spacing": [
+    {
+      "name": "0",
+      "size": "0"
+    },
+    {
+      "name": "0.5",
+      "size": "0.125rem"
+    },
+    {
+      "name": "1",
+      "size": "0.25rem"
+    },
+    {
+      "name": "1.5",
+      "size": "0.375rem"
+    },
+    {
+      "name": "2",
+      "size": "0.5rem"
+    },
+    {
+      "name": "2.5",
+      "size": "0.625rem"
+    },
+    {
+      "name": "3",
+      "size": "0.75rem"
+    },
+    {
+      "name": "4",
+      "size": "1rem"
+    },
+    {
+      "name": "5",
+      "size": "1.25rem"
+    },
+    {
+      "name": "6",
+      "size": "1.5rem"
+    },
+    {
+      "name": "8",
+      "size": "2rem"
+    },
+    {
+      "name": "10",
+      "size": "2.5rem"
+    },
+    {
+      "name": "12",
+      "size": "3rem"
+    },
+    {
+      "name": "16",
+      "size": "4rem"
+    },
+    {
+      "name": "20",
+      "size": "5rem"
+    },
+    {
+      "name": "24",
+      "size": "6rem"
+    },
+    {
+      "name": "32",
+      "size": "8rem"
+    },
+    {
+      "name": "40",
+      "size": "10rem"
+    },
+    {
+      "name": "48",
+      "size": "12rem"
+    },
+    {
+      "name": "56",
+      "size": "14rem"
+    },
+    {
+      "name": "64",
+      "size": "16rem"
+    }
+  ]
+}

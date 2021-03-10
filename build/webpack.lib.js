@@ -1,10 +1,14 @@
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
+const TerserPlugin = require('terser-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 const options = require('./options');
 const base = require('./webpack.base.js');
 
 const config = {
+    mode: 'production',
+
     entry: {
         // Components
         KsAutocomplete: ['./src/components/KsAutocomplete.vue'],
@@ -54,8 +58,22 @@ const config = {
         rules: base.module.rules
     },
 
+    optimization: {
+        minimizer: [
+            new TerserPlugin({
+                terserOptions: {
+                    output: {
+                        comments: false,
+                    },
+                    warnings: false,
+                },
+                extractComments: false,
+            })
+        ]
+    },
+
     plugins: [
-        new ExtractTextPlugin({
+        new MiniCssExtractPlugin({
             filename: '[name]'
         }),
 
@@ -65,17 +83,11 @@ const config = {
 
         // Set the production environment
         new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: '"production"'
-            }
+            'process.env.NODE_ENV': JSON.stringify('production'),
+            'process.env.BUILD': JSON.stringify('production')
         }),
 
-        // Minify with dead-code elimination
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false
-            }
-        })
+        new VueLoaderPlugin(),
     ],
 
     stats: base.stats

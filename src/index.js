@@ -28,7 +28,9 @@ import KsDroppable from './components/KsDroppable.vue';
 import * as animations from './components/transitions/Transitions';
 import * as strings from './helpers/strings';
 
-require('./styles/app.scss');
+if (process.env.BUILD === 'production') {
+    require('./styles/app.scss');
+}
 
 const Kickstart = {
 	KsAutocomplete,

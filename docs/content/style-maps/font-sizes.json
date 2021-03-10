@@ -1,0 +1,32 @@
+{
+  "sizes": [
+    {
+      "name": "xs",
+      "size": "0.75rem"
+    },
+    {
+      "name": "sm",
+      "size": "0.875rem"
+    },
+    {
+      "name": "base",
+      "size": "1rem"
+    },
+    {
+      "name": "lg",
+      "size": "1.25rem"
+    },
+    {
+      "name": "xl",
+      "size": "1.5rem"
+    },
+    {
+      "name": "2xl",
+      "size": "1.875rem"
+    },
+    {
+      "name": "3xl",
+      "size": "2rem"
+    }
+  ]
+}
