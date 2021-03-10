@@ -79,7 +79,7 @@
     .ks-select-selection {
         position: relative;
         border: none;
-        padding: rem($select-selected-padding) 1.25rem rem($select-selected-padding) rem($select-selected-padding);
+        padding: rem($select-selected-padding) 2rem rem($select-selected-padding) rem($select-selected-padding);
         text-overflow: ellipsis;
         overflow: hidden;
         width: 100%;

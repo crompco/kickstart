@@ -4,14 +4,6 @@
 // Grid
 @import "layout/_grid";
 
-// Utilities
-@import "components/utilities/_layout";
-@import "components/utilities/_spacing";
-@import "components/utilities/_text";
-@import "components/utilities/_borders";
-@import "components/utilities/_shadows";
-@import "components/utilities/_background";
-
 // Components
 @import "components/_general";
 @import "components/_alerts";
@@ -41,3 +33,11 @@
 @import "components/_tooltip";
 @import "components/_timepicker";
 @import "components/_drag_and_drop";
+
+// Utilities
+@import "components/utilities/_layout";
+@import "components/utilities/_spacing";
+@import "components/utilities/_text";
+@import "components/utilities/_borders";
+@import "components/utilities/_shadows";
+@import "components/utilities/_background";
