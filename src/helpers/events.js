@@ -7,14 +7,14 @@
  * @param event_capturing
  */
 export function addEvent(el, eventName, callback, event_capturing = false) {
-	if ( el.addEventListener ) {
-		el.addEventListener(eventName, callback, event_capturing);
-		if ( eventName == 'mousewheel' ) {
-			el.addEventListener("DOMMouseScroll", callback, event_capturing);
-		}
-	} else {
-		el.attachEvent(eventName, callback)
-	}
+    if ( el.addEventListener ) {
+        el.addEventListener(eventName, callback, event_capturing);
+        if ( eventName === 'mousewheel' ) {
+            el.addEventListener('DOMMouseScroll', callback, event_capturing);
+        }
+    } else {
+        el.attachEvent(eventName, callback);
+    }
 };
 
 /**
@@ -26,14 +26,14 @@ export function addEvent(el, eventName, callback, event_capturing = false) {
  * @param event_capturing
  */
 export function removeEvent(el, eventName, callback, event_capturing = false) {
-	if ( el.removeEventListener ) {
-		el.removeEventListener(eventName, callback, event_capturing);
-		if ( eventName == 'mousewheel' ) {
-			el.removeEventListener("DOMMouseScroll", callback, event_capturing);
-		}
-	} else {
-		el.detachEvent(eventName, callback)
-	}
+    if ( el.removeEventListener ) {
+        el.removeEventListener(eventName, callback, event_capturing);
+        if ( eventName == 'mousewheel' ) {
+            el.removeEventListener('DOMMouseScroll', callback, event_capturing);
+        }
+    } else {
+        el.detachEvent(eventName, callback);
+    }
 }
 
 /**
@@ -44,7 +44,7 @@ export function removeEvent(el, eventName, callback, event_capturing = false) {
  * @return {{focus}, {blur}}
  */
 export function smartFocusToggle(el, callback, delay = 150) {
-	const focused = [];
+    const focused = [];
     const smart_focus_toggle = {
         el,
         focus: (e) => {
@@ -63,8 +63,8 @@ export function smartFocusToggle(el, callback, delay = 150) {
                     }
                 }
             }, delay);
-        }
-    }
+        },
+    };
 
     addEvent(el, 'focus', smart_focus_toggle.focus, true);
     addEvent(el, 'blur', smart_focus_toggle.blur, true);
@@ -92,7 +92,7 @@ export function removeSmartFocusToggle(o) {
  * @returns {Number}
  */
 export function keyCode(e) {
-	return e.keyCode ? e.keyCode : e.charCode;
+    return e.keyCode ? e.keyCode : e.charCode;
 }
 
 /**
@@ -102,23 +102,23 @@ export function keyCode(e) {
  * @param el
  */
 export function stopParentScroll(el) {
-	addEvent(el, 'wheel', (e) => {
-		let offsetHeight = el.offsetHeight;
-		let scrollHeight = el.scrollHeight;
-		let scrollTop = el.scrollTop;
+    addEvent(el, 'wheel', (e) => {
+        let offsetHeight = el.offsetHeight;
+        let scrollHeight = el.scrollHeight;
+        let scrollTop = el.scrollTop;
 
-		if ( e.wheelDelta > 0 || e.deltaY < 0 ) {
-			if ( scrollTop == 0 ) {
-				e.preventDefault();
-			}
-		} else {
-			if ( offsetHeight + scrollTop >= scrollHeight ) {
-				e.preventDefault();
-			}
-		}
+        if ( e.wheelDelta > 0 || e.deltaY < 0 ) {
+            if ( scrollTop == 0 ) {
+                e.preventDefault();
+            }
+        } else {
+            if ( offsetHeight + scrollTop >= scrollHeight ) {
+                e.preventDefault();
+            }
+        }
 
-		e.stopPropagation();
-	});
+        e.stopPropagation();
+    });
 }
 
 /**
@@ -128,9 +128,9 @@ export function stopParentScroll(el) {
  * @returns {boolean}
  */
 export function scrolledToBottom(el, callback, delay = 100, threshold = 20) {
-	let timer;
+    let timer;
 
-	addEvent(el, 'scroll', (e) => {
+    addEvent(el, 'scroll', (e) => {
         clearTimeout(timer);
 
         // Using a timeout will prevent this from firing too often
@@ -139,7 +139,7 @@ export function scrolledToBottom(el, callback, delay = 100, threshold = 20) {
                 callback();
             }
         }, delay);
-	});
+    });
 }
 
 /**
@@ -154,13 +154,13 @@ export function isScrolledToBottom(el, threshold = 20) {
     let scrollHeight = el.scrollHeight;
 
     // For some reason the scroll gets triggered when containers are empty
-	// in that event we want to just return false
-	if ( scrollTop === 0 ) {
-		return false;
-	}
+    // in that event we want to just return false
+    if ( scrollTop === 0 ) {
+        return false;
+    }
 
-	// When scrolled to the bottom then we should run the next page
-	if ( scrollTop + offsetHeight >= scrollHeight - threshold ) {
+    // When scrolled to the bottom then we should run the next page
+    if ( scrollTop + offsetHeight >= scrollHeight - threshold ) {
         return true;
     }
 
@@ -176,47 +176,52 @@ export function isScrolledToBottom(el, threshold = 20) {
  * @param speed
  */
 export function mouseHold(el, callback, delay = 300, speed = 300) {
-	let held = false;
-	let poll_timer = null;
-	let delay_timer = null;
-	let _speed = speed;
+    let held = false;
+    let poll_timer = null;
+    let delay_timer = null;
+    let _speed = speed;
+    // Lower is faster
+    let max_speed = 80;
 
-	// Incrementing poll
-	function sendPoll() {
-		poll_timer = setTimeout(() => {
-			callback();
+    // Incrementing poll
+    function sendPoll() {
+        poll_timer = setTimeout(() => {
+            callback();
 
-			_speed = _speed * 0.925;
-			sendPoll();
-		}, _speed);
-	}
+            _speed = _speed * 0.925 > max_speed ? _speed * 0.925 : max_speed;
+            sendPoll();
+        }, _speed);
+    }
 
-	// mousedown to start the event
-	addEvent(el, 'mousedown', () => {
-		delay_timer = setTimeout(() => {
-			held = true;
-			if ( held === true ) {
-				sendPoll();
-			}
-		}, delay)
-	});
+    let clearMouseHold = () => {
+        clearTimeout(delay_timer);
+        clearTimeout(poll_timer);
+        held = false;
+        _speed = speed;
+    };
 
-	// mouseup to end the timers and reset the speed
-	addEvent(el, 'mouseup', () => {
-		clearTimeout(delay_timer);
-		clearTimeout(poll_timer);
-		held = false;
-		_speed = speed;
-	});
+    // mousedown to start the event
+    addEvent(el, 'mousedown', () => {
+        delay_timer = setTimeout(() => {
+            held = true;
+            if ( held === true ) {
+                sendPoll();
+            }
+        }, delay);
+    });
+
+    // mouseup to end the timers and reset the speed
+    addEvent(el, 'mouseup', clearMouseHold);
+    addEvent(el, 'dragend', clearMouseHold);
 }
 
 export default {
-	addEvent,
-	smartFocusToggle,
+    addEvent,
+    smartFocusToggle,
     removeSmartFocusToggle,
-	keyCode,
-	stopParentScroll,
-	scrolledToBottom,
-	isScrolledToBottom,
-	mouseHold,
-}
+    keyCode,
+    stopParentScroll,
+    scrolledToBottom,
+    isScrolledToBottom,
+    mouseHold,
+};
