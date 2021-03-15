@@ -180,16 +180,25 @@ export function mouseHold(el, callback, delay = 300, speed = 300) {
 	let poll_timer = null;
 	let delay_timer = null;
 	let _speed = speed;
+	// Lower is faster
+	let max_speed = 80;
 
 	// Incrementing poll
 	function sendPoll() {
 		poll_timer = setTimeout(() => {
 			callback();
 
-			_speed = _speed * 0.925;
+			_speed = _speed * 0.925 > max_speed ? _speed * 0.925 : max_speed;
 			sendPoll();
 		}, _speed);
 	}
+
+	let clearMouseHold = () => {
+        clearTimeout(delay_timer);
+        clearTimeout(poll_timer);
+        held = false;
+        _speed = speed;
+    };
 
 	// mousedown to start the event
 	addEvent(el, 'mousedown', () => {
@@ -202,12 +211,8 @@ export function mouseHold(el, callback, delay = 300, speed = 300) {
 	});
 
 	// mouseup to end the timers and reset the speed
-	addEvent(el, 'mouseup', () => {
-		clearTimeout(delay_timer);
-		clearTimeout(poll_timer);
-		held = false;
-		_speed = speed;
-	});
+    addEvent(el, 'mouseup', clearMouseHold);
+    addEvent(el, 'dragend', clearMouseHold);
 }
 
 export default {
