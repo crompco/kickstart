@@ -1,11 +1,17 @@
 <template>
-    <div class="ks-modal" v-show="isOpen" :class="[{ 'danger': danger }, classObj]" @click.prevent="maskClick">
+    <div class="ks-modal"
+         v-show="isOpen"
+         :class="[{ 'danger': danger }, classObj]"
+         @click.prevent="maskClick"
+         @mousedown="mask_interaction = true"
+    >
         <div class="ks-modal-wrapper"
              :style="[modalStyle, modalObj]"
              tabindex="-1"
              ref="container"
              @click.stop
              @keydown.esc.stop="escape()"
+             @mousedown.stop="mask_interaction = false"
         >
             <div>
                 <!-- Modal header-->
@@ -106,6 +112,8 @@
                 updatePosition: false,
                 modalObj: {},
                 width: null,
+                // This variable is used to detect when a user is interacting with the mask vs the body
+                mask_interaction: false,
             };
         },
 
@@ -156,6 +164,7 @@
         methods: {
             open() {
                 this.isOpen = true;
+                this.mask_interaction = false;
                 this.$emit('open');
 
                 addClass(document.documentElement, 'modal-open');
@@ -190,7 +199,7 @@
                 }
             },
             maskClick() {
-                if ( this.closeOnMaskClick ) {
+                if ( this.closeOnMaskClick && this.mask_interaction ) {
                     this.close();
                 }
             },
