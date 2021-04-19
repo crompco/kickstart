@@ -12,6 +12,7 @@ $top-bar-hover-bg: get($brand, light);
 $top-bar-hover-color: $white;
 
 @import "../../../src/styles/kickstart";
+@import "../../../src/styles/utilities";
 
 .nav-links {
     margin-top: 1.25rem !important;

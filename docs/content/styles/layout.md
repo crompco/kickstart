@@ -44,27 +44,27 @@ wrap:
     - name: wrap
       definition: "flex-wrap: wrap;"
 align:
-    - name: center
+    - name: align-center
       definition: "align-items: center;"
-    - name: start
+    - name: align-start
       definition: "align-items: flex-start;"
-    - name: baseline
+    - name: align-baseline
       definition: "align-items: baseline;"
-    - name: end
+    - name: align-end
       definition: "align-items: flex-end;"
-    - name: stretch
+    - name: align-stretch
       definition: "align-items: stretch;"
 justify:
-    - name: center
+    - name: jc-center
       definition: "justify-content: center;"
-    - name: between
+    - name: jc-between
       definition: "justify-content: space-between;"
-    - name: end
+    - name: jc-end
       definition: "justify-content: flex-end;"
-    - name: stretch
+    - name: jc-stretch
       definition: "justify-content: stretch;"
 align-self:
-    - name: center
+    - name: align-self-center
       definition: "align-self: center;"
 ---
 
