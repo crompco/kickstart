@@ -184,7 +184,7 @@
 
         methods: {
             runSearch({term, callback, page}) {
-                callback(`/api/countries?q=${term}&page=${page}`);
+                callback(`/.netlify/functions/countries?q=${term}&page=${page}`);
             }
         },
 

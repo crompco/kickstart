@@ -296,7 +296,7 @@
 
         methods: {
             runSearch({term, callback, page}) {
-                callback(`/countries?q=${term}&page=${page}`);
+                callback(`/.netlify/functions/countries?q=${term}&page=${page}`);
             },
         },
 
