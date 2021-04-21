@@ -3,10 +3,9 @@ export default {
 
     target: 'static',
 
-    ssr: false,
-
     generate: {
         dir: 'nuxt-dist',
+        fallback: true,
     },
 
     components: [
