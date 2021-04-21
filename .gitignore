@@ -3,3 +3,4 @@ node_modules
 .vercel
 .nuxt
 .vercel_cache
+.netlify
