@@ -45,6 +45,8 @@
             this.$nextTick(() => {
                 this.$el.addEventListener('dragstart', this.dragStart, false);
                 this.$el.addEventListener('dragend', this.dragEnd, false);
+                this.$el.addEventListener('mousedown', this.mouseDown, false);
+                this.$el.addEventListener('mouseup', this.mouseUp, false);
             });
         },
 
@@ -58,11 +60,19 @@
                 this.$emit('dragend', e, false);
                 this.dragging = false;
             },
+            mouseDown(e) {
+                this.$emit('mousedown', e);
+            },
+            mouseUp(e) {
+                this.$emit('mouseup', e);
+            },
         },
 
         beforeDestroy() {
             this.$el.removeEventListener('dragstart', this.dragStart, false);
             this.$el.removeEventListener('dragend', this.dragEnd, false);
+            this.$el.removeEventListener('mousedown', this.mouseDown, false);
+            this.$el.removeEventListener('mouseup', this.mouseUp, false);
         },
 
         components: {}
