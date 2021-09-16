@@ -141,6 +141,37 @@
                     </template>
                 </code-block>
             </div>
+
+          <div class="form-group">
+            <div class="label">With `label` slot</div>
+            <ks-autocomplete
+                :items="countries"
+                selection-key="name"
+                :multiple="true"
+                v-model="value6"
+            >
+              <template v-slot:label="{item}">
+                {{item.code}}
+              </template>
+            </ks-autocomplete>
+
+            <code-block>
+              <template v-pre>
+                &lt;ks-autocomplete
+                selection-key="name"
+                :items="countries"
+                v-model="value6"
+                :multiple="true"
+                >
+                  &lt;template v-slot:label="{item}">
+                    {{item.code}}
+                  &lt;/template>
+                &lt;/ks-autocomplete>
+              </template>
+
+            </code-block>
+          </div>
+
         </div>
     </div>
 </template>
@@ -166,6 +197,7 @@
                 value3: '',
                 value4: '',
                 value5: '',
+                value6: '',
                 countries: [],
                 characters: []
             };
