@@ -1,6 +1,6 @@
 {
   "name": "kickstart-ui",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Vue components and js libs",
   "main": "index.js",
   "repository": {
