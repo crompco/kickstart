@@ -140,4 +140,6 @@ api:
     slots:
         - name: default
           description: This is a <a href="https://vuejs.org/v2/guide/components.html#Scoped-Slots" target="_blank">scoped slot</a>. This is used so that you have more control over the look of the data. The component loops through the data and passes the props with a props attribute. An example can be seem above in either the Multiple selection examples.
+        - name: label
+          description: This is a scoped slot. It will allow you to control the display of the selection.  
 ---

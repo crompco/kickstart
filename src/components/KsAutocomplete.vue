@@ -9,7 +9,9 @@
 		<!-- Selections  -->
 		<span class="selection" v-if="selectionKey && has_selections" @click.prevent="editSelection" ref="selections">
 			<span v-for="s in selection" class="selection-text" tabindex="0" @keyup.delete.prevent.stop="clearSelection(s)">
-				{{getSelectionLabel(s)}}
+        <slot name="label" :item="s">
+				  {{getSelectionLabel(s)}}
+        </slot>
 				<a href="#" @click.prevent.stop="clearSelection(s)" class="clear-selection" tabindex="-1">
 					<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 						<g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
