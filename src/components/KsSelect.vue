@@ -253,12 +253,13 @@
 
             this.$nextTick(() => {
                 this.refreshSelected();
+
+                this.initListNavigation({
+                    lookup: 'lookup',
+                    list: 'list',
+                });
             })
 
-            this.initListNavigation({
-                lookup: 'lookup',
-                list: 'list',
-            });
 
             this.$on('clear', () => {
                 this.isOpen = false;
