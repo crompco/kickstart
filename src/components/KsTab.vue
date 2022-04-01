@@ -31,7 +31,7 @@
 				parent.registerTab(this);
 				parent.$on('tab-changed', (title) => {
 					if ( title != this.title ) {
-						this.active = false;
+						this.setActive(false);
 					}
 				})
 			});
