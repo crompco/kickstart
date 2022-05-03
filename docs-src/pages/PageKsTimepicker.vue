@@ -30,12 +30,13 @@
 
         <div class="basic-block">
             <div class="form-group">
-                <div class="label">Timepicker</div>
+                <div class="label">Timepicker (24-Hour)</div>
                 <ks-timepicker
                     name="start_time"
                     :time-format="time_format"
+                    min-time="00:00"
                     display-format="H:i"
-                    time-step="15"
+                    time-step="30"
                     v-model="start_time"
                 ></ks-timepicker>
             </div>
@@ -44,13 +45,12 @@
 
             <code-block>
                 <template v-pre>
-                    &lt;ks-timepicker
                     name="start_time"
                     :time-format="time_format"
+                    min-time="00:00"
                     display-format="H:i"
-                    time-step="15"
+                    time-step="30"
                     v-model="start_time"
-                    >&lt;/ks-timepicker>
                 </template>
             </code-block>
         </div>
