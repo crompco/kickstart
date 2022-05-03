@@ -46,6 +46,7 @@
     import {smartFocusToggle} from "../helpers/events";
     import {parseTime, formatTime} from "../helpers/dates";
     import ListIndexNavigator from './mixins/ListIndexNavigator';
+    import {object_get} from "../helpers/objects";
 
     export default {
         name: 'KsTimepicker',
@@ -113,7 +114,9 @@
 
                 return options;
             },
+            customFilterLookupName() {
 
+            }
         },
 
         data() {
@@ -272,7 +275,9 @@
                     this.list = this.timeOptions.slice(0);
                 } else {
                     this.list = this.timeOptions.filter((time) => {
-                        return time.match(this.nameRegex) ? true : false;
+
+                        console.debug(time);
+                        return this.filterDisplayValue(time);
                     });
                     // Select the first item when there is only one result
                     if ( this.list.length == 1 ) {
@@ -318,7 +323,45 @@
 
             open() {
                 this.isOpen = true;
-            }
+            },
+
+            filterDisplayValue(item) {
+                let lookup_name = this.lookup_name;
+
+                console.debug(lookup_name);
+                if ( ('' + this.display_value).includes('H') ) {
+                    let time_parts = lookup_name.match(new RegExp('^(\\d{1,2})(\\d{2})$'));
+
+                    let am_pm = 'am';
+
+                    if ( time_parts ) {
+                        let hours = parseInt(time_parts[1]);
+                        let minutes = parseInt(time_parts[2]);
+
+                        lookup_name = this.formatTimeValue(`${hours}:${minutes} ${am_pm}`, this.displayFormat);
+                    }
+                    console.display(lookup_name)
+                }
+                if ( (new RegExp('^\\d{1,2}$')).test(lookup_name) ) {
+                    let hours = parseInt(lookup_name);
+
+                    if ( hours > 12 ) {
+                        hours = hours - 12;
+                        console.debug('hours = ' + hours)
+                    }
+
+                    if ( hours === 0 ) {
+                        hours = 12;
+                        console.debug('hours = ' + hours)
+                    }
+
+                    console.debug('^0?' + hours + '.*');
+                    return  !!item.match(RegExp('^0?' + hours + '.*', 'i'));
+                }
+
+                console.debug('^0?' + lookup_name + '.*');
+                return !!item.match(new RegExp('^0?' + lookup_name + '.*', 'i'));
+            },
         },
 
         watch: {
