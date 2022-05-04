@@ -287,8 +287,6 @@
                     this.list = this.timeOptions.slice(0);
                 } else {
                     this.list = this.timeOptions.filter((time) => {
-
-                        console.debug(time);
                         return this.filterDisplayValue(time);
                     });
                     // Select the first item when there is only one result
