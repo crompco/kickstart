@@ -275,7 +275,6 @@
                     this.list = this.timeOptions.slice(0);
                 } else {
                     this.list = this.timeOptions.filter((time) => {
-                        // return time.replace(':', '').match(this.nameRegex) ? true : false;
                         return this.filterDisplayValue(time);
                     });
                     // Select the first item when there is only one result
