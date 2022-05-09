@@ -136,7 +136,7 @@ export function formatTime(time, to_format = 'h:i a') {
     	return '';
     }
 
-    return to_format.replace('H', time_info.full_hour)
+    return to_format.replace('H', String(time_info.full_hour).padStart(2, '0'))
         .replace('h', String(time_info.hour).padStart(2, '0'))
         .replace('i', String(time_info.minute).padStart(2, '0'))
         .replace('a', time_info.meridiem.toLowerCase())

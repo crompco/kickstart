@@ -46,6 +46,7 @@
     import {smartFocusToggle} from "../helpers/events";
     import {parseTime, formatTime} from "../helpers/dates";
     import ListIndexNavigator from './mixins/ListIndexNavigator';
+    import {escapeRegExp} from '../helpers/strings';
 
     export default {
         name: 'KsTimepicker',
@@ -113,7 +114,9 @@
 
                 return options;
             },
-
+            customFilterLookupName() {
+                return escapeRegExp(this.lookup_name.replace(':', ''));
+            },
         },
 
         data() {
@@ -272,7 +275,7 @@
                     this.list = this.timeOptions.slice(0);
                 } else {
                     this.list = this.timeOptions.filter((time) => {
-                        return time.match(this.nameRegex) ? true : false;
+                        return this.filterDisplayValue(time);
                     });
                     // Select the first item when there is only one result
                     if ( this.list.length == 1 ) {
@@ -318,7 +321,11 @@
 
             open() {
                 this.isOpen = true;
-            }
+            },
+
+            filterDisplayValue(time) {
+                return !!time.replace(':', '').match(new RegExp('^0?' + this.customFilterLookupName + '.*', 'i'));
+            },
         },
 
         watch: {
