@@ -46,7 +46,7 @@
     import {smartFocusToggle} from "../helpers/events";
     import {parseTime, formatTime} from "../helpers/dates";
     import ListIndexNavigator from './mixins/ListIndexNavigator';
-    import {object_get} from "../helpers/objects";
+    import {escapeRegExp} from '../helpers/strings';
 
     export default {
         name: 'KsTimepicker',
@@ -115,20 +115,8 @@
                 return options;
             },
             customFilterLookupName() {
-                let lookup_name = this.lookup_name;
-                if ( ('' + this.displayFormat).includes('H') ) {
-                    let time_parts = lookup_name.match(new RegExp('^(\\d{1,2})(\\d{2})$'));
-
-                    if ( time_parts ) {
-                        let hours = time_parts[1];
-                        let minutes = time_parts[2];
-                        lookup_name = this.formatTimeValue(`${hours}:${minutes}`, this.displayFormat);
-                    }
-                } else if ( lookup_name.match(/^1$/) ) {
-                    lookup_name = '01';
-                }
-                return lookup_name;
-            }
+                return escapeRegExp(this.lookup_name.replace(':', ''));
+            },
         },
 
         data() {
@@ -287,6 +275,7 @@
                     this.list = this.timeOptions.slice(0);
                 } else {
                     this.list = this.timeOptions.filter((time) => {
+                        // return time.replace(':', '').match(this.nameRegex) ? true : false;
                         return this.filterDisplayValue(time);
                     });
                     // Select the first item when there is only one result
@@ -336,7 +325,7 @@
             },
 
             filterDisplayValue(time) {
-                return !!time.match(new RegExp('^0?' + this.customFilterLookupName + '.*', 'i'));
+                return !!time.replace(':', '').match(new RegExp('^0?' + this.customFilterLookupName + '.*', 'i'));
             },
         },
 

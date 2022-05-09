@@ -56,21 +56,6 @@ test('Timepicker:filterDisplayValue 24-hour Military Input', t => {
 	t.true(vm.filterDisplayValue('00:00 am'));
 });
 
-test('Timepicker:filterDisplayValue military time input only works for 24-hour display formats', t => {
-	resetDocument();
-
-	let vm = component(KsTimepicker, {
-		minTime: '08:30 am',
-		timeStep: '15',
-		maxTime: '9:15 am',
-		displayFormat: 'h:i a'
-	});
-
-	vm.lookup_name = '0900';
-
-	t.false(vm.filterDisplayValue('09:00 am'));
-});
-
 test('Timepicker:filterDisplayValue matches left to right', t => {
 	resetDocument();
 

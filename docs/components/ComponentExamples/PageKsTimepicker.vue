@@ -11,6 +11,7 @@
                     v-model="start_time"
                 ></ks-timepicker>
             </div>
+            <pre>display format: h:i A</pre>
             <pre>format: {{time_format}}</pre>
             <pre>v-model: {{start_time}}</pre>
 
@@ -39,6 +40,7 @@
                     v-model="start_time"
                 ></ks-timepicker>
             </div>
+            <pre>display format: H:i</pre>
             <pre>format: {{time_format}}</pre>
             <pre>v-model: {{start_time}}</pre>
 
