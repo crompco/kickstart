@@ -66,17 +66,17 @@
                 :options="radioGroup"
                 value-key="code"
                 label-key="name"
-                v-model="values.group1"
+                v-model="values.group3"
             ></ks-radio-group>
 
             <code-block>
                 &lt;ks-radio-group
                     class="form-group"
-                    name="group1"
+                    name="group3"
                     :options="radioGroup"
                     value-key="code"
                     label-key="name"
-                    v-model="values.group1"
+                    v-model="values.group3"
                 >&lt;/ks-radio-group>
             </code-block>
         </div>
@@ -92,7 +92,7 @@
                 :options="radioGroup"
                 value-key="code"
                 label-key="name"
-                v-model="values.group1"
+                v-model="values.group4"
             >
                 <span slot="AW">Foo (Actually Aruba)</span>
             </ks-radio-group>
@@ -100,11 +100,11 @@
             <code-block>
                 &lt;ks-radio-group
                     class="form-group"
-                    name="group1"
+                    name="group4"
                     :options="radioGroup"
                     value-key="code"
                     label-key="name"
-                    v-model="values.group1"
+                    v-model="values.group4"
                 >
                     &lt;span slot="AW">Foo (Actually Aruba)&lt;/span>
                 &lt;/ks-radio-group>
@@ -123,7 +123,9 @@
             return {
                 values: {
                     group1: null,
-                    group2: null
+                    group2: null,
+                    group3: null,
+                    group4: null,
                 },
                 radioGroup: [],
                 buttonGroup: [],

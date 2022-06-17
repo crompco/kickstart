@@ -6,15 +6,11 @@
 	align-items: center;
 	margin-bottom: rem($form-options-margin-bottom);
     user-select: none;
+    position: relative;
 
 	&.inline {
 		display: inline-flex;
 		margin-right: rem($form-options-margin-right);
-	}
-
-	input[type="checkbox"], input[type="radio"] {
-		opacity: 0;
-		position: absolute;
 	}
 
 	&.ks-state-active {
@@ -83,6 +79,22 @@
         cursor: pointer;
     }
 
+    input[type="checkbox"], input[type="radio"] {
+        position: absolute;
+        appearance: none;
+        background: transparent;
+        margin: 0;
+        height: 1.15rem;
+        width: 1.15rem;
+        border-radius: 50%;
+        &:focus {
+            outline: none;
+            & + .ks-checkbox-input-wrapper, & + .ks-radio-input-wrapper {
+                border-color: $form-options-focus-border;
+            }
+        }
+    }
+
 }
 // Option buttons
 .ks-radio-group.option-buttons, .ks-checkbox-group.option-buttons {
@@ -108,11 +120,14 @@
             color: $text-color;
         }
         &.ks-state-active {
-            box-shadow: inset 0 0 10px darken($form-options-active-bg, 17%);
+            box-shadow: inset 0 0 10px darken($form-options-active-bg, 12%);
             background: $form-options-active-bg;
             color: $form-checkbox-check-fill;
             text-shadow: 1px 0px 0px $form-checkbox-check-fill;
             border-color: $form-options-active-bg;
+        }
+        &.ks-state-focus {
+            box-shadow: inset 0 0 0 2px $form-options-focus-border;
         }
 
         .ks-checkbox-input-wrapper, .ks-radio-input-wrapper {

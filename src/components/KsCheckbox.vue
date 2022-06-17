@@ -7,6 +7,8 @@
             :checked="isChecked"
             @click="toggle"
             :disabled="disabled"
+            @focus="isFocused = true"
+            @blur="isFocused = false"
         >
         <div class="ks-checkbox-switch" v-if="switchStyle"></div>
         <template v-else>
@@ -66,7 +68,8 @@
 
         data() {
             return {
-                isChecked: false
+                isChecked: false,
+                isFocused: false,
             };
         },
 
@@ -74,6 +77,7 @@
             classStates() {
                 return {
                     "ks-state-active": this.isChecked,
+                    "ks-state-focus": this.isFocused,
                     "switch": this.switchStyle,
                     "inline": this.inline
                 }
