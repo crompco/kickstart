@@ -5,6 +5,8 @@
 			:name="name"
 			:value="value"
 			:checked="isChecked"
+            @focus="is_focused = true"
+            @blur="is_focused = false"
 		>
 		<div class="ks-radio-input-wrapper">
 			<span class="radio-check"></span>
@@ -37,21 +39,23 @@
 				type: Boolean,
 				default: false
 			},
-			inline: {
-			    type: Boolean,
-			    default: false
-			}
+            inline: {
+                type: Boolean,
+                default: false
+            }
 		},
 
 		data() {
 			return {
+                is_focused: false,
 			};
 		},
 
 		computed: {
 			classStates() {
 				return {
-					"ks-state-active": this.isChecked,
+                    "ks-state-active": this.isChecked,
+                    "ks-state-focus": this.is_focused,
 					"inline": this.inline
 				}
 			},
