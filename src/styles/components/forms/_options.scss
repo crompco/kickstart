@@ -168,7 +168,6 @@
     }
 
     input[type="checkbox"] {
-        display: none;
 
         + .ks-checkbox-switch {
             display: inline-block;
@@ -180,7 +179,7 @@
             margin: 0;
             padding: 0;
             position: relative;
-            transition: all 0.3s ease;
+            transition: background 0.3s ease;
             width: $switch-width;
             z-index: 0;
 
@@ -242,6 +241,13 @@
             ~ .ks-checkbox-label-wrapper {
                 opacity: 0.5;
                 font-style: italic;
+            }
+        }
+
+        &:focus {
+            + .ks-checkbox-switch {
+                outline-color: $form-options-focus-border;
+                outline-style: solid;
             }
         }
     }
