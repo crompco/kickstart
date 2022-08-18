@@ -4,7 +4,7 @@
          :style="tooltip_styles"
          @mouseenter="clearTimeout"
          @mouseleave="hideTooltip"
-         @click.prevent.stop
+         @click.stop
          :class="{'show-arrow': showArrow}"
     >
         <div class="ks-tooltip-arrow" v-if="showArrow"></div>
