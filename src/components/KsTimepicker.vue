@@ -155,7 +155,8 @@
              */
             startTyping(e) {
                 if ((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 96 && e.keyCode <= 105)) {
-                    this.tmp_type += String.fromCharCode(e.keyCode);
+                    const keyCode = e.keyCode <= 57 ? e.keyCode : e.keyCode - 48;
+                    this.tmp_type += String.fromCharCode(keyCode);
                     if ( document.activeElement != this.$refs.lookup ) {
                         clearTimeout(this.timer);
                         this.timer = setTimeout(() => {
