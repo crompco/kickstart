@@ -1,7 +1,7 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const TerserPlugin = require('terser-webpack-plugin');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const { VueLoaderPlugin } = require('vue-loader');
 
 const options = require('./options');
 const base = require('./webpack.base.js');
@@ -25,7 +25,10 @@ const config = {
     },
 
     externals: {
-        vue: 'vue'
+        vue: 'vue',
+        axios: 'axios',
+        tether: 'tether',
+        'velocity-animate': 'velocity-animate'
     },
 
     optimization: {
