@@ -60,7 +60,7 @@
 
         <div class="basic-block">
             <div class="form-group">
-                <div class="label">Timepicker</div>
+                <div class="label">Timepicker (end-of-day option)</div>
                 <ks-timepicker
                     name="start_time"
                     :time-format="time_format"
@@ -77,12 +77,12 @@
             <code-block>
                 <template v-pre>
                     &lt;ks-timepicker
-                    name="start_time"
-                    :time-format="time_format"
-                    display-format="h:i A"
-                    time-step="30"
-                    v-model="start_time"
-                    :end-of-day="true"
+                        name="start_time"
+                        :time-format="time_format"
+                        display-format="h:i A"
+                        time-step="30"
+                        v-model="start_time"
+                        :end-of-day="true"
                     >&lt;/ks-timepicker>
                 </template>
             </code-block>
