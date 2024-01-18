@@ -12,7 +12,7 @@
   "scripts": {
     "dev": "nuxt",
     "build": "cross-env NODE_ENV=production webpack --config build/webpack.dist.js",
-    "build:docs": "nuxt build",
+    "build:docs": "nuxt generate",
     "build:lib": "webpack --config build/webpack.lib.js",
     "build:all": "npm run build && npm run build:lib",
     "clean": "rimraf ./dist ./lib ./docs/docs.bundle.css ./docs/docs.bundle.js",
