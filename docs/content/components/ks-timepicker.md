@@ -31,6 +31,10 @@ api:
           type: Boolean
           default: false
           description: Whether or not disable the input
+        - name: endOfDay
+          type: Boolean
+          default: false
+          description: Enables the selection of "End of day" times like 11:59 PM or 23:59
     methods: 
         - name: setTime(time)
           description: Sets the time of the timepicker to the given value
