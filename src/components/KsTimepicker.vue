@@ -116,7 +116,7 @@
                     }
                 }
 
-                if ( this.endOfDay ) {
+                if ( this.endOfDay && this.maxTime >= '23:59' ) {
                     options.push(this.formatTimeValue('23:59', this.displayFormat));
                 }
 
