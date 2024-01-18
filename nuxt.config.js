@@ -1,14 +1,15 @@
 export default {
     srcDir: `${__dirname}/docs`,
 
-    ssr: true,
+    target: 'static',
+
+    generate: {
+        dir: 'nuxt-dist',
+        fallback: true,
+    },
 
     components: [
         '~/components',
-    ],
-
-    serverMiddleware: [
-        {path: '/api/countries', handler: '~/api/countries.js'},
     ],
 
     plugins: [
