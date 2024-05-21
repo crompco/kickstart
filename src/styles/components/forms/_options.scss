@@ -19,7 +19,7 @@
 			border-color: $form-options-active-border;
 
 			svg {
-				$abs_offset: $form-options-border-radius / 2 * -1;
+				$abs_offset: ($form-options-border-radius / 2) * -1;
 
 				position: absolute;
 				height: calc(#{rem($form-options-height)} - #{$form-options-border-radius});
