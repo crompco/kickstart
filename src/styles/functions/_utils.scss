@@ -35,7 +35,7 @@
 
 	// 100% font size == 16px is most browsers
 	@if unit($base) == '%' {
-		$base: $base / 100% * 16px;
+		$base: ($base / 100%) * 16px;
 	}
 
 	@if $count == 1 {
