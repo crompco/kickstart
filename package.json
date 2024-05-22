@@ -81,6 +81,7 @@
     "velocity-animate": "^1.5.2"
   },
   "peerDependencies": {
+    "normalize.css": "^5.0.0",
     "vue": "^2.2.0"
   },
   "ava": {
