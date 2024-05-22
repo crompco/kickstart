@@ -1,3 +1,4 @@
+@use "sass:math";
 @import "../functions/_utils";
 @import "../variables/_navigation";
 @import "../variables/_forms";
@@ -46,8 +47,8 @@
 		}
 
 		a, button {
-			padding: rem($top-bar-dd-link-padding / 2);
-			line-height: rem(($nav-height / 2));
+			padding: rem(math.div($top-bar-dd-link-padding, 2));
+			line-height: rem(math.div($nav-height, 2));
 
 			@include breakpoint(map-get($breakpoint-list, $top-bar-breakpoint)) {
 				padding: rem($top-bar-dd-link-padding);

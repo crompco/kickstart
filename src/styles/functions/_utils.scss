@@ -1,3 +1,4 @@
+@use "sass:math";
 @import "../variables/_global";
 
 
@@ -6,7 +7,7 @@
 /// @return {Number} - Unitless number
 @function strip-unit($number) {
 	@if type-of($number) == 'number' and not unitless($number) {
-		@return $number / ($number * 0 + 1);
+		@return math.div($number, $number * 0 + 1);
 	}
 
 	@return $number;
@@ -18,7 +19,7 @@
 	}
 
 	@if unit($value) != 'rem' {
-		$value: strip-unit($value) / strip-unit($base) * 1rem;
+		$value: math.div(strip-unit($value), strip-unit($base)) * 1rem;
 	}
 
 	@if $value == 0rem {
@@ -35,7 +36,7 @@
 
 	// 100% font size == 16px is most browsers
 	@if unit($base) == '%' {
-		$base: ($base / 100%) * 16px;
+		$base: math.div($base, 100%) * 16px;
 	}
 
 	@if $count == 1 {
