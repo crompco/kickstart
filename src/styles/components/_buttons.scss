@@ -50,8 +50,8 @@
 	@each $name, $map in $buttons {
 		$bg-color: get($map, background-color);
 
-		&.#{$name} {
-			background-color: $bg-color;
+		&.#{"#{$name}"} {
+			background-color: "" + $bg-color;
 			color: get($map, color);
 			border: 1px solid get($map, border-color);
 
