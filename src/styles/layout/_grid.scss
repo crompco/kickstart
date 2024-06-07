@@ -1,3 +1,4 @@
+@use "sass:math";
 // External
 @import "~bourbon-neat/core/_neat";
 // Internal
@@ -10,15 +11,15 @@
         @for $i from 1 through map-get($map, columns) {
             $columns: map-get($map, columns);
 
-            @if calc($i / $columns) == 0.5 {
+            @if math.div($i, $columns) == 0.5 {
                 .#{$name}-#{$i}, .#{$name}-half {
                     @include grid-column($i, $map);
                 }
-            } @else if calc($i / $columns) == 0.25 {
+            } @else if math.div($i, $columns) == 0.25 {
                 .#{$name}-#{$i}, .#{$name}-quarter {
                     @include grid-column($i, $map);
                 }
-            } @else if calc($i / $columns) == 1 {
+            } @else if math.div($i, $columns) == 1 {
                 .#{$name}-#{$i}, .#{$name}-full {
                     @include grid-column($i, $map);
                 }
@@ -52,15 +53,15 @@
             @for $i from 1 through map-get($map, columns) {
                 $columns: map-get($map, columns);
 
-                @if calc($i / $columns) == 0.5 {
+                @if math.div($i, $columns) == 0.5 {
                     .#{$name}-#{$i}, .#{$name}-half {
                         @include grid-column($i, $map);
                     }
-                } @else if calc($i / $columns) == 0.25 {
+                } @else if math.div($i, $columns) == 0.25 {
                     .#{$name}-#{$i}, .#{$name}-quarter {
                         @include grid-column($i, $map);
                     }
-                } @else if calc($i / $columns) == 1 {
+                } @else if math.div($i, $columns) == 1 {
                     .#{$name}-#{$i}, .#{$name}-full {
                         @include grid-column($i, $map);
                     }
