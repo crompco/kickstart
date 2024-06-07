@@ -81,6 +81,10 @@
                 type: String,
                 default: '23:59'
             },
+            endOfDay: {
+                type: Boolean,
+                default: false,
+            },
             listHeight: {
                 type: String,
                 default: '200px'
@@ -110,6 +114,10 @@
 
                         options.push(this.formatTimeValue(`${i}:${j}`, this.displayFormat));
                     }
+                }
+
+                if ( this.endOfDay && this.maxTime >= '23:59' ) {
+                    options.push(this.formatTimeValue('23:59', this.displayFormat));
                 }
 
                 return options;
