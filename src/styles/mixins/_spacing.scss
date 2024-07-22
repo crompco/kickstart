@@ -8,27 +8,27 @@
     }
 
     .#{$code}-#{$name} {
-        #{$type}: #{$prefix}$size;
+        #{$type}: #{$prefix}#{$size};
     }
     .#{$code}t-#{$name} {
-        #{$type}-top: #{$prefix}$size;
+        #{$type}-top: #{$prefix}#{$size};
     }
     .#{$code}b-#{$name} {
-        #{$type}-bottom: #{$prefix}$size;
+        #{$type}-bottom: #{$prefix}#{$size};
     }
     .#{$code}r-#{$name} {
-        #{$type}-right: #{$prefix}$size;
+        #{$type}-right: #{$prefix}#{$size};
     }
     .#{$code}l-#{$name} {
-        #{$type}-left: #{$prefix}$size;
+        #{$type}-left: #{$prefix}#{$size};
     }
     .#{$code}y-#{$name} {
-        #{$type}-top: #{$prefix}$size;
-        #{$type}-bottom: #{$prefix}$size;
+        #{$type}-top: #{$prefix}#{$size};
+        #{$type}-bottom: #{$prefix}#{$size};
     }
     .#{$code}x-#{$name} {
-        #{$type}-left: #{$prefix}$size;
-        #{$type}-right: #{$prefix}$size;
+        #{$type}-left: #{$prefix}#{$size};
+        #{$type}-right: #{$prefix}#{$size};
     }
 }
 
