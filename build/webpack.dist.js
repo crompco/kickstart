@@ -25,7 +25,8 @@ const config = {
     },
 
     externals: {
-        vue: 'vue'
+        vue: 'vue',
+        tether: 'tether'
     },
 
     optimization: {
