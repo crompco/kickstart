@@ -233,6 +233,75 @@
             </div>
         </div>
 
+        <div class="basic-block">
+            <div class="form-group">
+                <div class="label">Customizing displays</div>
+                <ks-select
+                    name="custom-labeling"
+                    :items="[
+                            {id: 1, display: 'Screen 1', ident: 'Tall-1', resolution: '1080x1920'},
+                            {id: 2, display: 'Screen 2', ident: 'Wide-1', resolution: '1920x1080'}
+                        ]"
+                    item-key="id"
+                    label-key="display"
+                    :single-deselect="true"
+                    v-model="custom_labeling"
+                >
+                    <template v-slot:label="{value}">
+                        <div>
+                            {{ value.display }}
+                            <div class="text-sm">
+                                <div ><span class="muted uppercase">Identifer:</span> {{ value.ident }}</div>
+                                <div ><span class="muted uppercase">Resolution:</span> {{ value.resolution }}</div>
+                            </div>
+                        </div>
+                    </template>
+                    <template v-slot="{item}">
+                        <div>
+                            {{ item.display }}
+                            <div class="text-sm">
+                                <div ><span class="muted uppercase">Resolution:</span> {{ item.resolution }}</div>
+                            </div>
+                        </div>
+                    </template>
+                </ks-select>
+                <code-block>
+                    <template v-pre>
+                        &lt;ks-select
+                            name="custom-labeling"
+                            :items="[
+                            {id: 1, display: 'Screen 1', ident: 'Tall-1', resolution: '1080x1920'},
+                            {id: 2, display: 'Screen 2', ident: 'Wide-1', resolution: '1920x1080'}
+                        ]"
+                            item-key="id"
+                            label-key="display"
+                            :single-deselect="true"
+                            v-model="custom_labeling"
+                        >
+                            &lt;template v-slot:label="{value}">
+                                &lt;div>
+                                    {{ value.display }}
+                                    &lt;div class="text-tiny">
+                                        &lt;div >&lt;span class="muted uppercase">Identifer:&lt;/span> {{ value.ident }}&lt;/div>
+                                        &lt;div >&lt;span class="muted uppercase">Resolution:&lt;/span> {{ value.resolution }}&lt;/div>
+                                    &lt;/div>
+                                &lt;/div>
+                            &lt;/template>
+                            &lt;template v-slot="{item}">
+                                &lt;div>
+                                    {{ item.display }}
+                                    &lt;div class="text-tiny">
+                                        &lt;div >&lt;span class="muted uppercase">Resolution:&lt;/span> {{ item.resolution }}&lt;/div>
+                                    &lt;/div>
+                                &lt;/div>
+                            &lt;/template>
+                        &lt;/ks-select>
+
+                    </template>
+                </code-block>
+            </div>
+        </div>
+
         <div class="alert warning">
             <strong>Warning v-model usage:</strong>
             <p>
@@ -282,6 +351,7 @@
                     },
                 ],
                 long: null,
+                custom_labeling: null,
             };
         },
 
