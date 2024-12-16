@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const instance = axios.create();
+let instance = axios.create();
 
 export default {
 	get(url, request, config = {}) {
@@ -37,7 +37,11 @@ export default {
 		axios.defaults.baseURL = url;
 	},
 
-	getInstance() {
+    createFromConfig(config = {}) {
+        instance = axios.create(config);
+    },
+
+    getInstance() {
 		return instance;
 	},
 
