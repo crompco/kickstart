@@ -397,12 +397,13 @@ export default {
             this.$emit('search', {
                 term,
                 page,
-                callback: (endpoint) => {
+                callback: (endpoint, config = {}) => {
 
                     let cancel_token = this.setupCancelToken();
 
                     return api.getInstance().get(endpoint, {
-                        cancelToken: cancel_token.token
+                        cancelToken: cancel_token.token,
+                        ...config,
                     }).then(({data}) => {
                         this.callback(data.data, true, concat);
 
