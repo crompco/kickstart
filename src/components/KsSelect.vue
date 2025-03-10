@@ -276,7 +276,6 @@
 
             handleScroll() {
                 let list_height = parseInt(this.$refs.list.offsetHeight);
-                let element_height = this.$el.offsetHeight;
                 if ( list_height == 0 ) {
                     this.list_style.top = false;
                     return;
@@ -298,7 +297,7 @@
                         adjustment = 2.125;
                     }
 
-                    this.list_style.top = `calc(${element_height -1}px ${operator} ${adjustment}rem)`;
+                    this.list_style.top = `calc(${operator} ${adjustment}rem)`;
                 }
             },
 
