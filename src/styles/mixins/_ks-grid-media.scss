@@ -1,0 +1,15 @@
+@import "../functions/_ks-parse-media";
+
+@mixin ks-grid-media($grids...) {
+    @each $_grid in $grids {
+        $_media: map-get($_grid, media);
+        $_query: ks-parse-media($_media);
+
+        @media #{$_query} {
+            $_default-neat-grid: $ks-grid;
+            $ks-grid: map-merge($ks-grid, $_grid) !global;
+            @content;
+            $ks-grid: $_default-neat-grid !global;
+        }
+    }
+}

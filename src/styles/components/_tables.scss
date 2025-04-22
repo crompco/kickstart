@@ -26,7 +26,7 @@
 		white-space: normal;
 	}
 
-	@include breakpoint(map-get($breakpoint-list, $table-breakpoint)) {
+	@include ks-breakpoint(map-get($breakpoint-list, $table-breakpoint)) {
 		tbody {
 			display: table-row-group;
 		}
@@ -43,14 +43,14 @@
 	thead {
 		display: none;
 
-		@include breakpoint(map-get($breakpoint-list, $table-breakpoint)) {
+		@include ks-breakpoint(map-get($breakpoint-list, $table-breakpoint)) {
 			display: table-header-group;
 		}
 	}
 
 	tbody {
 		tr {
-			@include breakpoint(map-get($breakpoint-list, $table-breakpoint)) {
+			@include ks-breakpoint(map-get($breakpoint-list, $table-breakpoint)) {
 				margin-bottom: 0;
 				border: 0;
 			}
@@ -59,7 +59,7 @@
 				td {
 					border-bottom: 1px solid $table-border-color;
 
-					@include breakpoint(map-get($breakpoint-list, $table-breakpoint)) {
+					@include ks-breakpoint(map-get($breakpoint-list, $table-breakpoint)) {
 						border-bottom: 0;
 					}
 				}
@@ -69,7 +69,7 @@
 		td {
 			text-align: right;
 
-			@include breakpoint(map-get($breakpoint-list, $table-breakpoint)) {
+			@include ks-breakpoint(map-get($breakpoint-list, $table-breakpoint)) {
 				text-align: left;
 			}
 
@@ -78,7 +78,7 @@
 				float: left;
 				font-size: 0.8rem;
 
-				@include breakpoint(map-get($breakpoint-list, $table-breakpoint)) {
+				@include ks-breakpoint(map-get($breakpoint-list, $table-breakpoint)) {
 					content: none;
 				}
 			}

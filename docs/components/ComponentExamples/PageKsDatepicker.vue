@@ -129,8 +129,6 @@
 
 <script>
     import KsDatepicker from '../../../src/components/KsDatepicker.vue';
-    import KsTabs from '../../../src/components/KsTabs.vue';
-    import KsTab from '../../../src/components/KsTab.vue';
     import {dateModify} from '../../../src/helpers/dates';
 
     export default {
@@ -150,8 +148,6 @@
 
         components: {
             KsDatepicker,
-            KsTabs,
-            KsTab,
         },
     }
 </script>

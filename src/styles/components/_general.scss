@@ -10,7 +10,7 @@ html {
 	// Set font-size to 14px base
 	font-size: $global-font-size * 0.875;
 
-	@include tab() {
+	@include ks-tab() {
 		// Set font size to 16px base
 		font-size: $global-font-size;
 	}
@@ -19,7 +19,7 @@ html {
 body {
 	font-size: rem(14px);
 
-	@include tab() {
+	@include ks-tab() {
 		font-size: rem(16px);
 	}
 }
@@ -33,9 +33,9 @@ html, body {
 
 .content {
 	height: 100%;
-	@include col(12);
+	@include ks-col(12);
 
-	@include breakpoint(map-get($breakpoint-list, $side-nav-breakpoint)) {
+	@include ks-breakpoint(map-get($breakpoint-list, $side-nav-breakpoint)) {
 		$width: $nav-width;
 
 		width: calc(100% - #{$width});

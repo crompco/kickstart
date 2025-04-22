@@ -5,7 +5,7 @@
 .steps {
     padding: 1rem 0;
 
-    @include tab() {
+    @include ks-tab() {
         padding: 1rem 2rem;
     }
     > ul {

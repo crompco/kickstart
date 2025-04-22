@@ -1,8 +1,10 @@
+@import "../functions/_ks-merge-defaults";
+
 $container-width: 1200px !default;
 
-$neat-grid: (
-	columns: 12,
-	gutter: 0
+$ks-grid: (
+    columns: 12,
+    gutter: 0,
 );
 
 // (name, columns, gutter, media)

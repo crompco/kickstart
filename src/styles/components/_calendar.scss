@@ -1,14 +1,7 @@
 // External
-@import "~bourbon-neat/core/_neat";
-@import "../mixins/_grid";
 @import "../mixins/_state";
 @import "../variables/calendar";
 @import "../functions/utils";
-
-$calendar-grid: (
-	columns: 7,
-	gutter: 0
-);
 
 .ks-calendar {
 	background: $calendar-bg;

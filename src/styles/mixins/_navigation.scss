@@ -21,7 +21,7 @@
 		vertical-align: middle;
 	}
 
-	@include breakpoint(map-get($breakpoint-list, $side-nav-breakpoint)) {
+	@include ks-breakpoint(map-get($breakpoint-list, $side-nav-breakpoint)) {
 		display: none;
 	}
 }
@@ -39,7 +39,7 @@
 			box-shadow: $top-bar-dd-box-shadow;
 		}
 
-		@include breakpoint(map-get($breakpoint-list, $top-bar-breakpoint)) {
+		@include ks-breakpoint(map-get($breakpoint-list, $top-bar-breakpoint)) {
 			display: block;
 			top: $nav-height;
 			position: absolute;
@@ -50,7 +50,7 @@
 			padding: rem(math.div($top-bar-dd-link-padding, 2));
 			line-height: rem(math.div($nav-height, 2));
 
-			@include breakpoint(map-get($breakpoint-list, $top-bar-breakpoint)) {
+			@include ks-breakpoint(map-get($breakpoint-list, $top-bar-breakpoint)) {
 				padding: rem($top-bar-dd-link-padding);
 			}
 
@@ -63,7 +63,7 @@
 }
 
 @mixin side-nav() {
-	@include row();
+	@include ks-row();
 	background-color: $side-nav-bg;
 	z-index: 6;
 	position: relative;
@@ -74,7 +74,7 @@
 	padding-top: 0;
 	margin-left: -60%;
 
-	@include tab() {
+	@include ks-tab() {
 		margin-left: 0;
 		display: block;
 	}
@@ -99,7 +99,7 @@
 		justify-content: center;
 		height: 100%;
 
-		@include breakpoint(map-get($breakpoint-list, $side-nav-breakpoint)) {
+		@include ks-breakpoint(map-get($breakpoint-list, $side-nav-breakpoint)) {
 			height: $nav-height;
 		}
 
@@ -116,7 +116,7 @@
 		width: 100%;
 		left: -100%;
 
-		@include breakpoint(map-get($breakpoint-list, $side-nav-breakpoint)) {
+		@include ks-breakpoint(map-get($breakpoint-list, $side-nav-breakpoint)) {
 			left: 0;
 		}
 
@@ -142,7 +142,7 @@
 	}
 
 	&.show {
-		@include breakpoint(map-get($breakpoint-list, $side-nav-breakpoint), true) {
+		@include ks-breakpoint(map-get($breakpoint-list, $side-nav-breakpoint), true) {
 			display: block;
 			overflow-y: auto;
 			margin-left: 0;
@@ -154,7 +154,7 @@
 		}
 	}
 
-	@include breakpoint(map-get($breakpoint-list, $side-nav-breakpoint), true) {
+	@include ks-breakpoint(map-get($breakpoint-list, $side-nav-breakpoint), true) {
 		height: 100%;
 		transition: margin .3s ease;
 
@@ -188,7 +188,7 @@
 		box-shadow: $top-bar-box-shadow;
 	}
 
-	@include breakpoint(map-get($breakpoint-list, $top-bar-breakpoint)) {
+	@include ks-breakpoint(map-get($breakpoint-list, $top-bar-breakpoint)) {
 		flex-wrap: nowrap;
 	}
 
@@ -221,7 +221,7 @@
 		height: 100%;
 		margin: 0 auto;
 
-		@include breakpoint(map-get($breakpoint-list, $side-nav-breakpoint)) {
+		@include ks-breakpoint(map-get($breakpoint-list, $side-nav-breakpoint)) {
 			background-color: $nav-brand-bg;
 			height: $nav-height;
 			color: $nav-brand-color;
@@ -240,7 +240,7 @@
 
 	.form-group {
 
-		@include breakpoint(map-get($breakpoint-list, $top-bar-breakpoint)) {
+		@include ks-breakpoint(map-get($breakpoint-list, $top-bar-breakpoint)) {
 			display: flex;
 			align-items: center;
 			margin-bottom: 0;
@@ -269,7 +269,7 @@
 			}
 		}
 
-		@include breakpoint(map-get($breakpoint-list, $top-bar-breakpoint)) {
+		@include ks-breakpoint(map-get($breakpoint-list, $top-bar-breakpoint)) {
 			height: 100%;
 			flex-direction: row;
 			display: flex;
@@ -294,7 +294,7 @@
 
 	&.show {
 		.collapse {
-			@include breakpoint(map-get($breakpoint-list, $top-bar-breakpoint), true) {
+			@include ks-breakpoint(map-get($breakpoint-list, $top-bar-breakpoint), true) {
 				display: block;
 				right: 0;
 			}
@@ -321,7 +321,7 @@
 			align-items: center;
 			flex-direction: column;
 
-			@include breakpoint(map-get($breakpoint-list, $top-bar-breakpoint)) {
+			@include ks-breakpoint(map-get($breakpoint-list, $top-bar-breakpoint)) {
 				flex-direction: row;
 			}
 		}
@@ -361,7 +361,7 @@
 					right: 5%;
 					@include triangle-down($top-bar-color, 8px);
 
-					@include breakpoint(map-get($breakpoint-list, $top-bar-breakpoint)) {
+					@include ks-breakpoint(map-get($breakpoint-list, $top-bar-breakpoint)) {
 						position: relative;
 						right: 0;
 						margin-left: rem(5px);
@@ -376,7 +376,7 @@
 		}
 
 		&.right {
-			@include breakpoint(map-get($breakpoint-list, $top-bar-breakpoint)) {
+			@include ks-breakpoint(map-get($breakpoint-list, $top-bar-breakpoint)) {
 				margin-left: auto;
 			}
 		}

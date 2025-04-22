@@ -1,0 +1,8 @@
+@function ks-column-default($grid, $columns) {
+    @if $columns == null {
+        $_grid-columns: map-get($grid, columns);
+        @return $_grid-columns;
+    } @else {
+        @return $columns;
+    }
+}

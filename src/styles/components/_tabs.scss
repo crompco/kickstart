@@ -11,7 +11,7 @@
 		position: relative;
 		height: rem($tabs-height);
 
-		@include tab(true) {
+		@include ks-tab(true) {
 			&:after {
 				content: '';
 				position: absolute;
@@ -61,7 +61,7 @@
 		flex-direction: column;
 		width: 100%;
 
-		@include tab() {
+		@include ks-tab() {
 			position: relative;
 			flex-direction: row;
 			width: auto;
@@ -97,7 +97,7 @@
 					opacity: 1;
 				}
 
-				@include tab() {
+				@include ks-tab() {
 					flex-grow: 0;
 					opacity: $tabs-opacity;
 				}
@@ -111,13 +111,13 @@
 					color: $tabs-links-color;
 					opacity: 1;
 
-					@include tab() {
+					@include ks-tab() {
 						border-top-color: $tabs-links-border-top-color;
 					}
 				}
 			}
 
-			@include tab(true) {
+			@include ks-tab(true) {
 				&:not(.selected-tab) {
 					display: none;
 				}

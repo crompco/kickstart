@@ -1,47 +1,46 @@
 @use "sass:math";
-// External
-@import "~bourbon-neat/core/_neat";
+
 // Internal
 @import "../mixins/_grid";
 @import "../variables/_grid";
 @import "../functions/_utils";
 
 @each $name, $map in $breakpoint-list {
-    @include breakpoint($map) {
+    @include ks-breakpoint($map) {
         @for $i from 1 through map-get($map, columns) {
             $columns: map-get($map, columns);
 
             @if math.div($i, $columns) == 0.5 {
                 .#{$name}-#{$i}, .#{$name}-half {
-                    @include grid-column($i, $map);
+                    @include ks-grid-column($i, $map);
                 }
             } @else if math.div($i, $columns) == 0.25 {
                 .#{$name}-#{$i}, .#{$name}-quarter {
-                    @include grid-column($i, $map);
+                    @include ks-grid-column($i, $map);
                 }
             } @else if math.div($i, $columns) == 1 {
                 .#{$name}-#{$i}, .#{$name}-full {
-                    @include grid-column($i, $map);
+                    @include ks-grid-column($i, $map);
                 }
             } @else {
                 .#{$name}-#{$i} {
-                    @include grid-column($i, $map);
+                    @include ks-grid-column($i, $map);
                 }
             }
         }
     }
 
 
-    @include breakpoint($map) {
+    @include ks-breakpoint($map) {
         @for $i from 1 through map-get($map, columns) {
             .#{$name}-push-#{$i} {
-                @include grid-push($i, $map);
+                @include ks-grid-push($i, $map);
             }
         }
     }
 
     .#{$name}-collapse {
-        @include grid-collapse($map);
+        @include ks-grid-collapse($map);
     }
 }
 
@@ -49,35 +48,35 @@
 .no-gutter {
     @each $name, $map in $breakpoint-list {
         $map: map-merge($map, (gutter: 0px));
-        @include breakpoint($map) {
+        @include ks-breakpoint($map) {
             @for $i from 1 through map-get($map, columns) {
                 $columns: map-get($map, columns);
 
                 @if math.div($i, $columns) == 0.5 {
                     .#{$name}-#{$i}, .#{$name}-half {
-                        @include grid-column($i, $map);
+                        @include ks-grid-column($i, $map);
                     }
                 } @else if math.div($i, $columns) == 0.25 {
                     .#{$name}-#{$i}, .#{$name}-quarter {
-                        @include grid-column($i, $map);
+                        @include ks-grid-column($i, $map);
                     }
                 } @else if math.div($i, $columns) == 1 {
                     .#{$name}-#{$i}, .#{$name}-full {
-                        @include grid-column($i, $map);
+                        @include ks-grid-column($i, $map);
                     }
                 } @else {
                     .#{$name}-#{$i} {
-                        @include grid-column($i, $map);
+                        @include ks-grid-column($i, $map);
                     }
                 }
             }
         }
 
 
-        @include breakpoint($map) {
+        @include ks-breakpoint($map) {
             @for $i from 1 through map-get($map, columns) {
                 .#{$name}-push-#{$i} {
-                    @include grid-push($i, $map);
+                    @include ks-grid-push($i, $map);
                 }
             }
         }
@@ -97,13 +96,13 @@
             $map: map-get($breakpoint-list, nth($keys, $i + 1));
         }
 
-        @include breakpoint($map, true) {
+        @include ks-breakpoint($map, true) {
             .#{$name}-hide {
                 display: none;
             }
         }
     } @else if $i == length($breakpoint-list) {
-        @include breakpoint($map) {
+        @include ks-breakpoint($map) {
             .#{$name}-hide {
                 display: none;
             }
@@ -111,17 +110,17 @@
     } @else {
         $max-map: map-get($breakpoint-list, nth($keys, $i + 1));
         $min-max-grid: map-merge($map, (media: quote('(min-width:' + map-get($map, media) + ') and (max-width:' + map-get($max-map, media) + ')')));
-        @include breakpoint($min-max-grid) {
+        @include ks-breakpoint($min-max-grid) {
             .#{$name}-hide {
                 display: none;
             }
         }
-        @include breakpoint($map) {
+        @include ks-breakpoint($map) {
             .#{$name}-hide-up {
                 display: none;
             }
         }
-        @include breakpoint($max-map, true) {
+        @include ks-breakpoint($max-map, true) {
             .#{$name}-hide-down {
                 display: none;
             }
@@ -134,13 +133,13 @@
             $map: map-get($breakpoint-list, nth($keys, $i + 1));
         }
 
-        @include breakpoint($map) {
+        @include ks-breakpoint($map) {
             .#{$name}-show {
                 display: none;
             }
         }
     } @else if $i == length($breakpoint-list) {
-        @include breakpoint($map, true) {
+        @include ks-breakpoint($map, true) {
             .#{$name}-show {
                 display: none;
             }
@@ -148,7 +147,7 @@
     } @else {
         $max-map: map-get($breakpoint-list, nth($keys, $i + 1));
         $min-max-grid: map-merge($map, (media: quote('(max-width:' + map-get($map, media) + '), (min-width:' + map-get($max-map, media) + ')')));
-        @include breakpoint($min-max-grid) {
+        @include ks-breakpoint($min-max-grid) {
             .#{$name}-show {
                 display: none;
             }
@@ -157,11 +156,11 @@
 }
 
 .row-collapse {
-    @include grid-collapse($grid-sm);
+    @include ks-grid-collapse($grid-sm);
 }
 
 .container {
-    @include grid-container;
+    @include ks-grid-container;
     max-width: $container-width;
     margin: auto;
     &:before {
@@ -174,7 +173,7 @@
 }
 
 .row {
-    @include grid-container;
+    @include ks-grid-container;
 }
 
 .full-height {

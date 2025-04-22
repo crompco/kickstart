@@ -1,0 +1,7 @@
+@mixin ks-grid-container() {
+    &::after {
+        clear: both;
+        content: "";
+        display: block;
+    }
+}

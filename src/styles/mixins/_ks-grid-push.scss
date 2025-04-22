@@ -1,0 +1,13 @@
+@mixin ks-grid-push($push: false, $grid: $neat-grid) {
+    $_grid-columns: map-get($grid, columns);
+    $_grid-gutter: map-get($grid, gutter);
+
+    @if $push {
+        $_gutter-affordance: $_grid-gutter * 2;
+        $_margin-value: calc(#{ks-column-width($grid, $push)} + #{$_gutter-affordance});
+        margin-#{ks-float-direction($grid)}: $_margin-value;
+    } @else {
+        $_margin-value: map-get($grid, gutter);
+        margin-#{ks-float-direction($grid)}: $_margin-value;
+    }
+}

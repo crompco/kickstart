@@ -1,0 +1,10 @@
+@mixin ks-grid-shift($shift: false, $grid: $neat-grid) {
+    @if $shift {
+        $_shift-value: calc(#{ks-column-width($grid, $shift)} + #{map-get($grid, gutter)});
+        #{ks-float-direction($grid)}: $_shift-value;
+    } @else {
+        #{ks-float-direction($grid)}: auto;
+    }
+
+    position: relative;
+}

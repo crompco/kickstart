@@ -1,81 +1,8 @@
-// External
-@import "~bourbon-neat/core/_neat";
+// Functions
+@import "../functions/_grid-functions";
 
-// Internal
+// Variables
 @import "../variables/_grid";
 
-@mixin breakpoint($grid, $max: false) {
-	@if map-get($grid, media) == null {
-		@content
-	} @else {
-		@if $max {
-			$grid: map-merge($grid, (media: quote('(max-width:' + map-get($grid, media) + ')')));
-		}
-
-		@include grid-media($grid) {
-			@content;
-		}
-	}
-}
-
-@mixin sm() {
-	@include breakpoint($grid-sm) {
-		@content;
-	}
-}
-
-@mixin tab($max: false) {
-	@include breakpoint($grid-tab, $max) {
-		@content;
-	}
-}
-
-@mixin med() {
-	@include breakpoint($grid-med) {
-		@content;
-	}
-}
-
-@mixin lg() {
-	@include breakpoint($grid-lg) {
-		@content;
-	}
-}
-
-@mixin xlg() {
-	@include breakpoint($grid-xlg) {
-		@content;
-	}
-}
-
-@mixin row() {
-	@include grid-container;
-}
-
-@mixin col($column, $grid: false) {
-	@if $grid == false {
-		@include grid-column($column);
-	} @else {
-		@include grid-column($column, $grid);
-	}
-}
-
-@mixin col-sm($column) {
-	@include col($column, $grid-sm);
-}
-
-@mixin col-tab($column) {
-	@include col($column, $grid-tab);
-}
-
-@mixin col-med($column) {
-	@include col($column, $grid-med);
-}
-
-@mixin col-lg($column) {
-	@include col($column, $grid-lg);
-}
-
-@mixin col-xlg($column) {
-	@include col($column, $grid-xlg);
-}
+// Grid Mixins and Styles
+@import "./_ks-grid";
