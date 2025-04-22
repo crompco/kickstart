@@ -75,7 +75,6 @@
   },
   "dependencies": {
     "axios": "^0.15.3",
-    "bourbon-neat": "^4.0.0",
     "popper.js": "^1.9.1",
     "v-mask": "^1.2.0",
     "velocity-animate": "^1.5.2"
