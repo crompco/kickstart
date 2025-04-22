@@ -73,12 +73,8 @@
     $_grid-gutter: map-get($grid, gutter);
 
     width: calc(#{ks-column-width($grid, $columns)});
-
-    // TODO this is not working
-    // float: ks-float-direction($grid);
-    // margin-#{ks-float-direction($grid)}: $_grid-gutter;
-    float: left;
-    margin-left: $_grid-gutter;
+    float: ks-float-direction($grid);
+    margin-#{ks-float-direction($grid)}: $_grid-gutter;
 }
 
 @mixin ks-col($column, $grid: false) {
