@@ -184,7 +184,9 @@
 		mounted() {
 			if ( !this.itemFilter ) {
 				this.filter = this.selectionKey;
-			}
+			} else {
+                this.filter = this.itemFilter;
+            }
 			this.refreshSelection();
 
 			this.$nextTick(() => {

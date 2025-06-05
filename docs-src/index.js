@@ -5,7 +5,13 @@ import Kickstart from '../src';
 Vue.use(VueMask);
 Vue.use(Kickstart)
 import './app.scss';
-new Vue().$mount('#app');
+new Vue({
+    data() {
+        return {
+            models: []
+        };
+    }
+}).$mount('#app');
 
 
 

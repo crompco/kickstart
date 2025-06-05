@@ -13,10 +13,35 @@
                 <ks-datepicker
                     :year-picker="true"
                     :month-picker="true"
+                    v-model="models[0]"
                 ></ks-datepicker>
+                <pre>{{models[0] ?? ''}}</pre>
             </div>
             <div class="sm-6">
                 <ks-calendar></ks-calendar>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 5rem;">
+            <div class="sm-6">
+                <ks-select
+                    name="select"
+                    :items="[{name: 'Item 1', value: 1}, {name: 'Item 2', value: 2}, {name: 'Item 3', value: 3}]"
+                    label-key="name"
+                    v-model="models[1]"
+                ></ks-select>
+                <pre>{{models[1] ?? ''}}</pre>
+            </div>
+            <div class="sm-6">
+                <ks-autocomplete
+                    name="autocomplete"
+                    :items="[{name: 'Item 1', value: 1}, {name: 'Item 2', value: 2}, {name: 'Item 3', value: 3}]"
+                    v-model="models[2]"
+                    :min-search="0"
+                    selection-key="name"
+                    :multiple="true"
+                    :item-filter="(item) => true"
+                ></ks-autocomplete>
+                <pre>{{models[2] ?? ''}}</pre>
             </div>
         </div>
     </div>
