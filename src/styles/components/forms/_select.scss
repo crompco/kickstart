@@ -64,12 +64,12 @@
                     }
                 }
 
-                &.empty-list-message {
+                &.ks-empty-list-message {
                     color: $select-empty-message-color;
                     font-style: $select-empty-message-style;
 
-                    &.active-empty-list-message:hover, &.selected-item {
-                        @extend .selected-item;
+                    &.ks-active-empty-list-message:hover, &.ks-selected-item {
+                        @extend .ks-selected-item;
                     }
                 }
             }

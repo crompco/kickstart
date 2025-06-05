@@ -104,3 +104,9 @@
 @mixin ks-col-xlg($column) {
     @include ks-col($column, $grid-xlg);
 }
+
+@mixin ks-grid($columns, $grid: $ks-grid) {
+    display: map-get($grid, display, grid);
+
+    grid-template-columns: repeat(12, 1fr);
+}

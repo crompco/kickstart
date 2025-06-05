@@ -5,7 +5,7 @@
 @import "../variables/_autocomplete";
 @import "../variables/_forms";
 
-.autocomplete-holder {
+.ks-autocomplete-holder {
     position: relative;
     display: inline-block;
     margin-right: rem($ac-margin-right);
@@ -16,11 +16,11 @@
     padding: 0;
     border: 0;
     width: calc(100% - (#{rem($ac-margin-right)} + #{rem($ac-margin-left)}));
-    &:not(.is-multiple) > input {
+    &:not(.ks-multiple) > input {
         @include ks-autocomplete-input;
         margin-bottom: 0;
     }
-    &.is-multiple > input {
+    &.ks-multiple > input {
         border: 0;
         outline: none;
         display: inline-block;
@@ -34,7 +34,7 @@
     > input::-ms-clear {
         display: none;
     }
-    .searching-results {
+    .ks-searching-results {
         position: absolute;
         width: 100%;
         left: 0;
@@ -43,20 +43,20 @@
         border: 0;
         height: 4px;
     }
-    &:not(.is-multiple).is-selected {
-        .selection {
+    &:not(.ks-multiple).ks-selected {
+        .ks-selection {
             @include ks-autocomplete-input;
         }
     }
-    &:not(.is-multiple) {
-        .selection {
+    &:not(.ks-multiple) {
+        .ks-selection {
             display: block;
             width: 100%;
             padding: rem($ac-selection-padding);
         }
     }
-    .selection {
-        .selection-text {
+    .ks-selection {
+        .ks-selection-text {
             background-color: $ac-selection-bg;
             display: inline-block;
             color: $ac-selection-color;
@@ -82,15 +82,15 @@
             }
         }
     }
-    &.is-multiple {
+    &.ks-multiple {
         @include ks-autocomplete-input;
         padding: calc(#{rem($ac-input-multi-padding)} - #{$ac-multi-margin}) rem($ac-input-multi-padding);
         width: calc(100% - (#{rem($ac-margin-right)} + #{rem($ac-margin-left)}));
-        &:not(.is-selected) {
+        &:not(.ks-selected) {
             // 1px is for border
             padding: calc(#{rem($ac-input-padding)} - 1px);
         }
-        .autocomplete-list {
+        .ks-autocomplete-list {
             // 2px is for border
             // -1px is to move over to compensate for parent borders
             // margin-top is for when there is a selection. padding of the wrapper changes when there are selections
@@ -98,11 +98,11 @@
             left: -1px;
             margin-top: rem($ac-input-padding);
         }
-        &.is-selected .autocomplete-list {
+        &.ks-selected .ks-autocomplete-list {
             // Set margin top 2px for border width
             margin-top: 2px;
         }
-        .selection .selection-text {
+        .ks-selection .ks-selection-text {
             background-color: $ac-multi-bg;
             margin: $ac-multi-margin;
             padding: $ac-multi-padding;
@@ -124,7 +124,7 @@
     }
 }
 
-.autocomplete-list {
+.ks-autocomplete-list {
     margin: 0;
     margin-bottom: 0.5rem;
     z-index: 100;
@@ -149,10 +149,10 @@
         border-bottom-color: $ac-list-item-border;
         // If its the last child or an option group then we disable the border
         &:last-child,
-        &.opt-group {
+        &.ks-opt-group {
             border-bottom-color: transparent;
         }
-        &.opt-group {
+        &.ks-opt-group {
             padding-bottom: 0;
             strong {
                 display: block;
@@ -162,7 +162,7 @@
                 padding-top: 0;
             }
         }
-        &.selected-item {
+        &.ks-selected-item {
             @include state-hover();
             color: $ac-list-selected-color;
         }
@@ -171,7 +171,7 @@
             //background: $ac-list-item-hover-bg;
         }
 
-        &.empty-list-message {
+        &.ks-empty-list-message {
             color: $ac-empty-message-color;
             font-style: $ac-empty-message-style;
         }

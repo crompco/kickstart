@@ -49,17 +49,17 @@
             <div class="ks-select-list">
                 <ul
                     ref="list"
-                    class="autocomplete-list"
+                    class="ks-autocomplete-list"
                     :class="{'inverted': this.inverted}"
                     :style="list_style"
                 >
                     <template v-if="groupBy">
-                        <li v-for="(group_list, group) in groups" class="opt-group">
+                        <li v-for="(group_list, group) in groups" class="ks-opt-group">
                             <strong>{{group}}</strong>
                             <ul>
                                 <li
                                     v-for="(item, index) in group_list"
-                                    :class="{ 'selected-item': item._index == selected_index }"
+                                    :class="{ 'ks-selected-item': item._index == selected_index }"
                                     @click.prevent="selectItem(item._index, $event)"
                                     @mouseover="setHoverIndex(item._index)"
                                 >
@@ -72,7 +72,7 @@
                     <template v-else>
                         <li
                             v-for="(item, index) in list"
-                            :class="{ 'selected-item': index == selected_index }"
+                            :class="{ 'ks-selected-item': index == selected_index }"
                             @click.prevent="selectItem(index)"
                             @mouseover="setHoverIndex(index)"
                         >
@@ -81,13 +81,13 @@
                         </li>
                     </template>
                     <!-- Slot for empty search results-->
-                    <li v-if="!acceptEmptySelection && hasEmptyMessage && !loading && list.length == 0" class="empty-list-message">
+                    <li v-if="!acceptEmptySelection && hasEmptyMessage && !loading && list.length == 0" class="ks-empty-list-message">
                         <slot :term="lookup_name" name="empty">{{emptyMessage}}</slot>
                     </li>
                     <li
                         v-if="acceptEmptySelection && hasEmptyMessage && !loading && list.length == 0"
-                        class="empty-list-message active-empty-list-message"
-                        :class="{ 'selected-item': selected_empty }"
+                        class="ks-empty-list-message ks-active-empty-list-message"
+                        :class="{ 'ks-selected-item': selected_empty }"
                         @click.prevent="selectEmpty(true)"
                     >
                         <slot :term="lookup_name" name="empty">{{emptyMessage}}</slot>

@@ -37,7 +37,7 @@
                     padding-top: 0;
                 }
             }
-            &.selected-item {
+            &.ks-selected-item {
                 @include state-hover();
                 color: $timepicker-list-selected-color;
             }
