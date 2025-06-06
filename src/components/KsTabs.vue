@@ -19,7 +19,6 @@
 
 
 <script>
-
     import throttle from '../helpers/throttle';
 
     export default {

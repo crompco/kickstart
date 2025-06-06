@@ -2,7 +2,10 @@ const options = require('./options');
 const base = require('./webpack.base.js');
 const {VueLoaderPlugin} = require('vue-loader');
 const webpack = require('webpack');
-// const serve = require('./serve');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ContentRoutePlugin = require('./ContentRoutePlugin');
+
+const serve = require('./serve');
 
 const config = {
     watch: true,
@@ -10,7 +13,7 @@ const config = {
 
     entry: {
         'docs.bundle.js': options.paths.resolve('docs-src/index.js'),
-        'docs.bundle.css': options.paths.resolve('docs-src/app.scss')
+        'docs.bundle.css': options.paths.resolve('docs-src/assets/sass/docs.scss')
     },
 
     output: {
@@ -33,7 +36,7 @@ const config = {
         devMiddleware: {
             stats: 'none'
         },
-        // onBeforeSetupMiddleware: serve
+        setupMiddlewares: serve
     },
 
     module: {
@@ -58,6 +61,13 @@ const config = {
                 ]
             },
             {
+                test: /\.css$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader'
+                ]
+            },
+            {
                 test: /\.js$/,
                 loader: 'babel-loader',
                 exclude: /node_modules/
@@ -65,6 +75,10 @@ const config = {
             {
                 test: /\.svg$/,
                 loader: 'vue-svg-loader'
+            },
+            {
+                test: /\.md$/,
+                loader: 'raw-loader'
             }
         ]
     },
@@ -76,7 +90,13 @@ const config = {
             'process.env.BUILD': JSON.stringify('dev')
         }),
 
+        new MiniCssExtractPlugin({
+            filename: 'docs.styles.bundle.css'
+        }),
+
         new VueLoaderPlugin(),
+
+        new ContentRoutePlugin()
     ],
 
     stats: base.stats
