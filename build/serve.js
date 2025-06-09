@@ -1,4 +1,4 @@
-const countries = require('../docs-src/static/countries.json');
+const countries = require('../docs/static/countries.json');
 
 let matchOperatorsRe = /[|\\{}()[\]^$+*?.]/g;
 function escapeRegExp(str) {

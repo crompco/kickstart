@@ -75,10 +75,6 @@ const config = {
             {
                 test: /\.svg$/,
                 loader: 'vue-svg-loader'
-            },
-            {
-                test: /\.md$/,
-                loader: 'raw-loader'
             }
         ]
     },
