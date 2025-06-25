@@ -1,18 +1,18 @@
 <style></style>
 
 <template>
-	<div v-show="active" :class="{'active-tab': active}">
-		<slot v-if="active"></slot>
-	</div>
+    <div v-show="active" :class="{'active-tab': active}">
+        <slot v-if="active"></slot>
+    </div>
 </template>
 
 
 <script>
-	export default {
-		name: 'KsTab',
+    export default {
+        name: 'KsTab',
 
-		props: {
-			title: {},
+        props: {
+            title: {},
 
             tabClass: {
                 type: String,
@@ -28,48 +28,48 @@
                 type: String,
                 default: ''
             },
-		},
+        },
 
-		data() {
-			return {
-				active: false
-			};
-		},
+        data() {
+            return {
+                active: false
+            };
+        },
 
-		computed: {},
+        computed: {},
 
-		mounted() {
-			this.$nextTick(() => {
+        mounted() {
+            this.$nextTick(() => {
 
-				let parent = this.getTabsParent(this);
+                let parent = this.getTabsParent(this);
 
-				parent.registerTab(this);
-				parent.$on('tab-changed', (title) => {
-					if ( title != this.title ) {
-						this.setActive(false);
-					}
-				})
-			});
-		},
+                parent.registerTab(this);
+                parent.$on('tab-changed', (title) => {
+                    if ( title != this.title ) {
+                        this.setActive(false);
+                    }
+                })
+            });
+        },
 
-		methods: {
-			setActive(active) {
-				this.active = active;
-				if ( this.active ) {
+        methods: {
+            setActive(active) {
+                this.active = active;
+                if ( this.active ) {
                     this.$emit('active');
                 } else {
                     this.$emit('inactive');
                 }
-			},
-			getTabsParent(vm) {
-				if ( vm.$parent.$options._componentTag === 'ks-tabs' ) {
-					return this.$parent;
-				}
+            },
+            getTabsParent(vm) {
+                if ( vm.$parent.$options._componentTag === 'ks-tabs' ) {
+                    return this.$parent;
+                }
 
-				return this.getTabsParent(this.$parent);
-			}
-		},
+                return this.getTabsParent(this.$parent);
+            }
+        },
 
-		watch: {},
-	}
+        watch: {},
+    }
 </script>
