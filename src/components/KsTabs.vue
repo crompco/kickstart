@@ -2,16 +2,18 @@
     <div class="ks-tabs">
         <div class="tabs-title-bar-wrapper" :class="classWrapperObj">
             <ul class="tabs-title-bar" :class="classObj">
-                <li v-for="tab in tabs" :class="{'selected-tab': tab.active}">
-                    <a :href="'#' + tab.title"
-                       @click.prevent="setActiveTab(tab)"
-                    >
+                <li
+                    v-for="(tab, index) in tabs"
+                    :key="index"
+                    :class="[tab.tabClass, { 'selected-tab': tab.active, [tab.tabActiveClass]: tab.active }]"
+                >
+                    <a :href="'#' + tab.title" @click.prevent="setActiveTab(tab)">
                         {{tab.title}}
                     </a>
                 </li>
             </ul>
         </div>
-        <div class="tabs-content">
+        <div class="tabs-content" :class="activeTabContentClass">
             <slot></slot>
         </div>
     </div>
@@ -67,7 +69,11 @@
         computed: {
             hasTabCacheEnabled() {
                 return this.rememberTab && this.id && sessionStorage ? true : false;
-            }
+            },
+
+            activeTabContentClass() {
+                return this.activeTab?.contentClass ?? '';
+            },
         },
 
         mounted() {
@@ -95,7 +101,7 @@
             },
 
             setActiveTab(tab) {
-                this.activeTab = tab.title;
+                this.activeTab = tab;
                 tab.setActive(true);
                 this.$emit('tab-changed', tab.title);
                 this.mobileShow();
