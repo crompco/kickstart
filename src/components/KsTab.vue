@@ -12,7 +12,22 @@
 		name: 'KsTab',
 
 		props: {
-			title: {}
+			title: {},
+
+            tabClass: {
+                type: String,
+                default: ''
+            },
+
+            tabActiveClass: {
+                type: String,
+                default: ''
+            },
+
+            contentClass: {
+                type: String,
+                default: ''
+            },
 		},
 
 		data() {
