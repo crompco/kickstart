@@ -33,9 +33,8 @@ const config = {
 
         // Set the production environment
         new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: '"production"'
-            }
+            'process.env.NODE_ENV': JSON.stringify('production'),
+            'process.env.BUILD': JSON.stringify('docs')
         }),
 
         new VueLoaderPlugin(),
