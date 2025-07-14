@@ -11,7 +11,7 @@
   "license": "MIT",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --config build/webpack.dist.js",
-    "build:docs": "node build/generate-content && cross-env NODE_ENV=production webpack --config build/webpack.docs.js",
+    "build:docs": "cross-env NODE_ENV=production webpack --config build/webpack.docs.js",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.js --hot",
     "build:lib": "webpack --config build/webpack.lib.js",
     "build:all": "npm run build && npm run build:lib",

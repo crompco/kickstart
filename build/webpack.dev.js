@@ -8,7 +8,6 @@ const ContentRoutePlugin = require('./ContentRoutePlugin');
 const serve = require('./serve');
 
 const config = {
-    watch: true,
     devtool: 'eval-source-map',
 
     entry: {
@@ -82,8 +81,8 @@ const config = {
     plugins: [
         // Set the production environment
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify('dev'),
-            'process.env.BUILD': JSON.stringify('dev')
+            'process.env.NODE_ENV': JSON.stringify('development'),
+            'process.env.BUILD': JSON.stringify('development')
         }),
 
         new MiniCssExtractPlugin({

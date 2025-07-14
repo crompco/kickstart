@@ -1,5 +1,3 @@
-<style></style>
-
 <template>
 	<div v-show="active" :class="{'active-tab': active}">
 		<slot v-if="active"></slot>
@@ -54,7 +52,5 @@
 				return this.getTabsParent(this.$parent);
 			}
 		},
-
-		watch: {},
 	}
 </script>

@@ -63,7 +63,5 @@
                 }
             }
         },
-
-        components: {}
     }
 </script>

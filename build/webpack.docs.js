@@ -1,5 +1,7 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
+const {VueLoaderPlugin} = require('vue-loader');
+const ContentRoutePlugin = require('./ContentRoutePlugin');
 
 const options = require('./options');
 const base = require('./webpack.base.js');
@@ -35,6 +37,10 @@ const config = {
                 NODE_ENV: '"production"'
             }
         }),
+
+        new VueLoaderPlugin(),
+
+        new ContentRoutePlugin()
     ],
 
     stats: base.stats

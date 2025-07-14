@@ -1,4 +1,3 @@
-// import 'helpers/modality';
 // eslint-disable-next-line no-unused-vars
 require('./assets/sass/docs.scss');
 
@@ -54,10 +53,17 @@ Vue.use(VueRouter);
 Vue.use(VueMask);
 Vue.use(KickStart);
 
-Vue.api.interceptors.request({
-    headers: {
+Vue.api.interceptors.request((config) => {
+    config.headers = {
         'X-KickStart': 'Kickstart'
     }
+
+    // json data works without needing a server
+    if ( process.env.NODE_ENV === 'production' && !config.url.endsWith('.json') ) {
+        config.url = config.url.replace('/api', '/.netlify/functions');
+    }
+
+    return config;
 });
 
 const router = new VueRouter({

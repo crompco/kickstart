@@ -170,7 +170,5 @@
                 })
             }
         },
-
-        components: {}
     }
 </script>

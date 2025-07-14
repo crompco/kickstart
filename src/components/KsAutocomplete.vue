@@ -105,12 +105,12 @@
 	// Internal
 	import LoaderLine from './KsLoaderLine.vue';
     import {object_get} from '../helpers/objects';
-    import ListIndexNavigatior from './mixins/ListIndexNavigator';
+    import ListIndexNavigator from './mixins/ListIndexNavigator';
 
 	export default {
 		name: 'KsAutocomplete',
 
-		mixins: [ListIndexNavigatior],
+		mixins: [ListIndexNavigator],
 
 		props: {
 			value: {},

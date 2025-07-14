@@ -152,6 +152,7 @@
     } from '../helpers/dates';
     import {mouseHold} from '../helpers/events';
     import DownSvg from '../svg/cheveron-down.svg';
+    import KsDroppable from './KsDroppable.vue';
 
     export default {
         name: 'KsCalendar',
@@ -617,7 +618,8 @@
         },
 
         components: {
-            DownSvg
+            DownSvg,
+            KsDroppable
         }
 
     }
