@@ -5,18 +5,18 @@
     box-shadow: $card-box-shadow;
     background: $card-bg;
 
-    .card-header {
+    .ks-card-header {
         font-size: rem($card-header-font-size);
         line-height: rem($card-header-font-size);
         padding: rem($card-header-padding);
         box-shadow: $card-header-box-shadow;
     }
 
-    .card-body {
+    .ks-card-body {
         padding: rem($card-body-padding);
     }
 
-    .card-footer {
+    .ks-card-footer {
         display: flex;
         justify-content: space-around;
 
@@ -50,21 +50,21 @@
         }
     }
 
-    &.light-card {
+    &.ks-light-card {
         box-shadow: $card-light-box-shadow;
 
-        .card-header {
+        .ks-card-header {
             font-size: $card-light-header-font-size;
             background: $card-light-header-bg;
             color: $card-light-header-color;
 
-            &.light {
+            &.ks-light {
                 background: $white;
                 color: lighten($text-color, 10%);
             }
         }
 
-        .card-body {
+        .ks-card-body {
             padding: $card-light-body-padding;
         }
     }
