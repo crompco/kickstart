@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="basic-block">
-            <table class="table responsive">
+            <table class="ks-table responsive">
                 <thead>
                 <tr>
                     <th>First</th>
@@ -41,7 +41,7 @@
             <div>
                 <code-block>
                     <template v-pre>
-                        &lt;table class="table responsive">
+                        &lt;table class="ks-table responsive">
                             &lt;thead>
                                 &lt;tr>
                                     &lt;th>First&lt;/th>
@@ -83,8 +83,8 @@
         </div>
 
         <div class="basic-block">
-            <div class="scroll-table">
-                <table class="table striped">
+            <div class="ks-scroll-table">
+                <table class="ks-table striped">
                     <thead>
                     <tr>
                         <th>First</th>
@@ -167,7 +167,7 @@
                 <div>
                     <code-block>
                         <template v-pre>
-                            &lt;table class="table striped">
+                            &lt;table class="ks-table striped">
                                 &lt;thead>
                                     &lt;tr>
                                         &lt;th>First&lt;/th>
@@ -220,7 +220,7 @@
         </div>
 
         <div class="basic-block">
-            <table class="table bordered">
+            <table class="ks-table bordered">
                 <thead>
                 <tr>
                     <th>First</th>
@@ -255,7 +255,7 @@
             <div>
                 <code-block>
                     <template v-pre>
-                        &lt;table class="table bordered">
+                        &lt;table class="ks-table bordered">
                             &lt;thead>
                                 &lt;tr>
                                     &lt;th>First&lt;/th>
@@ -292,7 +292,7 @@
         </div>
 
         <div class="basic-block">
-            <table class="table shadow">
+            <table class="ks-table shadow">
                 <thead>
                 <tr>
                     <th>First</th>
@@ -326,7 +326,7 @@
             <div>
                 <code-block>
                     <template v-pre>
-                        &lt;table class="table shadow">
+                        &lt;table class="ks-table shadow">
                             &lt;thead>
                                 &lt;tr>
                                     &lt;th>First&lt;/th>
@@ -363,7 +363,7 @@
         </div>
 
         <div class="basic-block">
-            <table class="table primary bordered striped">
+            <table class="ks-table primary bordered striped">
                 <thead>
                 <tr>
                     <th>First</th>
@@ -397,7 +397,7 @@
             <div>
                 <code-block>
                     <template v-pre>
-                        &lt;table class="table primary bordered striped">
+                        &lt;table class="ks-table primary bordered striped">
                             &lt;thead>
                                 &lt;tr>
                                     &lt;th>First&lt;/th>
