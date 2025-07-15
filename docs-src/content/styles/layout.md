@@ -41,30 +41,84 @@ direction:
       definition: "flex-direction: column;"
     - name: row
       definition: "flex-direction: row;"
+    - name: column-reverse
+      definition: "flex-direction: column-reverse;"
+    - name: row-reverse
+      definition: "flex-direction: row-reverse;"
 wrap: 
     - name: wrap
       definition: "flex-wrap: wrap;"
+    - name: nowrap
+      definition: "flex-wrap: nowrap;"
+    - name: wrap-reverse
+      definition: "flex-wrap: wrap-reverse;"
+    - name: column-reverse
+      definition: "flex-wrap: column-reverse;"
 align:
-    - name: align-center
+    - name: items-center
       definition: "align-items: center;"
-    - name: align-start
+    - name: items-start
       definition: "align-items: flex-start;"
-    - name: align-baseline
+    - name: items-baseline
       definition: "align-items: baseline;"
-    - name: align-end
+    - name: items-end
       definition: "align-items: flex-end;"
-    - name: align-stretch
+    - name: items-stretch
       definition: "align-items: stretch;"
+content:
+    - name: content-normal
+      definition: "align-content: normal;"
+    - name: content-center
+      definition: "align-content: center;"
+    - name: content-start
+      definition: "align-content: flex-start;"
+    - name: content-end
+      definition: "align-content: flex-end;"
+    - name: content-between
+      definition: "align-content: space-between;"
+    - name: content-around
+      definition: "align-content: space-around;"
+    - name: content-evenly
+      definition: "align-content: space-evenly;"
+    - name: content-baseline
+      definition: "align-content: baseline;"
+    - name: content-stretch
+      definition: "align-content: stretch;"
 justify:
-    - name: jc-center
+    - name: justify-center
       definition: "justify-content: center;"
-    - name: jc-between
+    - name: justify-between
       definition: "justify-content: space-between;"
-    - name: jc-end
+    - name: justify-end
       definition: "justify-content: flex-end;"
-    - name: jc-stretch
+    - name: justify-stretch
       definition: "justify-content: stretch;"
+    - name: justify-start
+      definition: "justify-content: flex-start;"
+    - name: justify-around
+      definition: "justify-content: space-around;"
+    - name: justify-evenly
+      definition: "justify-content: space-evenly;"
 align-self:
-    - name: align-self-center
+    - name: self-center
       definition: "align-self: center;"
+    - name: self-auto
+      definition: "align-self: auto;"
+    - name: self-start
+      definition: "align-self: flex-start;"
+    - name: self-end
+      definition: "align-self: flex-end;"
+    - name: self-stretch
+      definition: "align-self: stretch;"
+    - name: self-baseline
+      definition: "align-self: baseline;"
+flex:
+    - name: flex-1
+      definition: "flex: 1 1 0%;"
+    - name: flex-auto
+      definition: "flex: 1 1 auto;"
+    - name: flex-initial
+      definition: "flex: 0 1 auto;"
+    - name: flex-none
+      definition: "flex: none;"
 ---
