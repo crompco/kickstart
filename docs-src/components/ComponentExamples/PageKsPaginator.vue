@@ -1,13 +1,15 @@
 <template>
     <div>
         <div class="basic-block">
-            Event
+            <h3>
+                Events
+            </h3>
             <ks-paginator
                 :pagination="pagination"
                 @input="pagination.current_page=$event"
             ></ks-paginator>
 
-            <div class="row">
+            <div class="row mt-4">
                 <code-block>
                     <template v-pre>
                         &lt;ks-paginator
@@ -20,14 +22,16 @@
         </div>
 
         <div class="basic-block">
-            Routed
+            <h3>
+                Routed parameters
+            </h3>
             <ks-paginator
                 :pagination="pagination2"
                 :routed="true"
                 @input="pagination.current_page=$event"
             ></ks-paginator>
 
-            <div class="row">
+            <div class="row mt-4">
                 <code-block>
                     <template v-pre>
                         &lt;ks-paginator
@@ -41,14 +45,14 @@
         </div>
 
         <div class="basic-block">
-            Simple Paginator
+            <h3>Simple Paginator</h3>
 
             <ks-simple-paginator
                 :pagination="simple_paginator"
                 :routed="true"
             ></ks-simple-paginator>
 
-            <div class="row">
+            <div class="row mt-4">
                 <code-block>
                     <template v-pre>
                         &lt;ks-simple-paginator
