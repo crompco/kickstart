@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="basic-block">
-            <button class="button" @click="show=!show">
+            <button class="ks-button" @click="show=!show">
                 <template v-if="show">
                     Stop
                 </template>

@@ -7,7 +7,7 @@
                         Show/Stop
                     </div>
                     <div class="data">
-                        <button class="button" @click="show_spin=!show_spin">
+                        <button class="ks-button" @click="show_spin=!show_spin">
                             <template v-if="show_spin">
                                 Stop
                             </template>

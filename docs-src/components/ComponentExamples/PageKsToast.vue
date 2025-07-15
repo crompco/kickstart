@@ -1,10 +1,10 @@
 <template>
     <div>
         <div class="basic-block">
-            <button class="button" @click="show('success')">Show Toast (Success)</button>
-            <button class="button" @click="show('info')">Show Toast (Info)</button>
-            <button class="button" @click="show('error')">Show Toast (Error)</button>
-            <button class="button" @click="show('warning')">Show Toast (Warning)</button>
+            <button class="ks-button" @click="show('success')">Show Toast (Success)</button>
+            <button class="ks-button" @click="show('info')">Show Toast (Info)</button>
+            <button class="ks-button" @click="show('error')">Show Toast (Error)</button>
+            <button class="ks-button" @click="show('warning')">Show Toast (Warning)</button>
         </div>
 
         <div class="row">

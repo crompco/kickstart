@@ -1,6 +1,6 @@
 <template>
     <button
-        class="button"
+        class="ks-button"
         :class="modifierClasses"
         @click="$emit('click', $event)"
         @focus="$emit('focus', $event)"
