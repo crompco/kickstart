@@ -1,7 +1,7 @@
 <template>
     <div class="ks-calendar" tabindex="-1">
         <div class="ks-calendar-title">
-            <a v-if="showControls" href="#" @click.prevent="previous" class="ctrl-left" ref="previous">
+            <a v-if="showControls" href="#" @click.prevent="previous" class="ks-ctrl-left" ref="previous">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 2 20 20">
                     <path d="M7.05 9.293L6.343 10 12 15.657l1.414-1.414L9.172 10l4.242-4.243L12 4.343z"/>
                 </svg>
@@ -10,7 +10,7 @@
                v-if="monthPicker"
                @click.prevent="toggleMonthPicker"
                class="ks-calendar-month-picker"
-               :class="{'open-picker': monthPickerOpen }"
+               :class="{'ks-open-picker': monthPickerOpen }"
             >
                 {{month}}
                 <down-svg></down-svg>
@@ -21,14 +21,14 @@
                v-if="yearPicker"
                @click.prevent="toggleYearPicker"
                class="ks-calendar-year-picker"
-               :class="{'open-picker': yearPickerOpen }"
+               :class="{'ks-open-picker': yearPickerOpen }"
             >
                 {{year}}
                 <down-svg></down-svg>
             </a>
             <span v-else class="ks-calendar-year-picker">{{year}}</span>
 
-            <a v-if="showControls" href="#" @click.prevent="next" class="ctrl-right" ref="next">
+            <a v-if="showControls" href="#" @click.prevent="next" class="ks-ctrl-right" ref="next">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 2 20 20">
                     <path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"/>
                 </svg>
@@ -45,14 +45,14 @@
                 <div class="ks-calendar-month">
 
                     <!-- Heading -->
-                    <div class="cal-week cal-week-header">
-                        <div v-for="title in week_titles" class="cal-day">
+                    <div class="ks-cal-week ks-cal-week-header">
+                        <div v-for="title in week_titles" class="ks-cal-day">
                             {{title}}
                         </div>
                     </div>
 
                     <!-- Weeks -->
-                    <div class="cal-week"
+                    <div class="ks-cal-week"
                          v-for="week in weeks"
                          :style="week_style"
                     >
@@ -60,7 +60,7 @@
                         <component :is="droppableDays ? 'ks-droppable' : 'div'"
                                  v-for="day in week"
                                  v-if="isInMonth(day)"
-                                 class="cal-day"
+                                 class="ks-cal-day"
                                  :tabindex="tabindex && isDayInScope(day)"
                                  :class="dayClass(day)"
                                  @click.prevent="selectDay(day)"
@@ -73,11 +73,11 @@
 
                             <div>
                                 <div v-if="interactiveDays" class="row row-collapse">
-                                    <a href="#" class="day-num" :class="'date-' + formatDate(day)" @click.prevent.stop="dayClicked(day)">
+                                    <a href="#" class="ks-day-num" :class="'ks-date-' + formatDate(day)" @click.prevent.stop="dayClicked(day)">
                                         {{day | day}}
                                     </a>
                                 </div>
-                                <span v-else class="day-num" :class="'date-' + formatDate(day)">{{day | day}}</span>
+                                <span v-else class="ks-day-num" :class="'ks-date-' + formatDate(day)">{{day | day}}</span>
 
                                 <slot :name="formatDate(day)"></slot>
 
@@ -87,7 +87,7 @@
 
                         <component :is="droppableDays ? 'ks-droppable' : 'div'"
                             v-else
-                            class="cal-blank"
+                            class="ks-cal-blank"
                             :class="dayClass(day)"
                             @click.prevent="selectDay(day)"
                             :active-class="droppable_active_class"
@@ -98,11 +98,11 @@
 
                             <div v-if="showTrailingDays">
                                 <div v-if="interactiveDays" class="row row-collapse">
-                                    <a href="#" class="day-num" :class="'date-' + formatDate(day)" @click.prevent.stop="dayClicked(day)">
+                                    <a href="#" class="ks-day-num" :class="'ks-date-' + formatDate(day)" @click.prevent.stop="dayClicked(day)">
                                         {{day | day}}
                                     </a>
                                 </div>
-                                <span v-else class="day-num" :class="'date-' + formatDate(day)">{{day | day}}</span>
+                                <span v-else class="ks-day-num" :class="'ks-date-' + formatDate(day)">{{day | day}}</span>
                             </div>
 
                         </component>
@@ -110,10 +110,10 @@
                     </div>
                 </div>
             </div>
-            <div v-show="monthPickerOpen" class="month-selection" :style="selectorStyle">
+            <div v-show="monthPickerOpen" class="ks-month-selection" :style="selectorStyle">
                 <div
                     v-for="(m, index) in lang.months.names"
-                    :class="{ 'selected-month': m == month}"
+                    :class="{ 'ks-selected-month': m == month}"
                     tabindex="0"
                     @click.prevent="changeMonth(index)"
                     @keydown.enter.stop.prevent="changeMonth(index)"
@@ -122,12 +122,12 @@
                 </div>
             </div>
             <div v-show="yearPickerOpen" :style="selectorStyle">
-                <ul class="year-selection">
+                <ul class="ks-year-selection">
                     <li
                         v-for="y in year_list"
                         tabindex="0"
                         v-text="y"
-                        :class="{ 'selected-year': y == year}"
+                        :class="{ 'ks-selected-year': y == year}"
                         @click.prevent="changeYear(y)"
                         @keydown.enter.stop.prevent="changeYear(y)"
                     ></li>
@@ -487,9 +487,9 @@
                 let day = this.formatDate(date);
 
                 return {
-                    'selected': day === this.selection,
-                    'today': day == this.today,
-                    'out_of_scope': this.isDayInScope(date) ? false : true
+                    'ks-selected': day === this.selection,
+                    'ks-today': day == this.today,
+                    'ks-out_of_scope': this.isDayInScope(date) ? false : true
                 };
             },
 
