@@ -3,7 +3,7 @@
         <div v-for="type in types" class="mb-12">
             <h3>{{type.name}}</h3>
 
-            <table class="table striped shadow">
+            <table class="ks-table striped shadow">
                 <tbody>
                     <template v-for="space in spacing">
                         <tr>
