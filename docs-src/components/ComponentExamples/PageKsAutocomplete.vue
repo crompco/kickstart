@@ -1,8 +1,8 @@
 <template>
     <div>
         <div class="basic-block">
-            <div class="form-group">
-                <div class="label">Ajax with pagination</div>
+            <div class="ks-form-group">
+                <div class="ks-label">Ajax with pagination</div>
                 <ks-autocomplete
                     selection-key="name"
                     v-model="value1"
@@ -25,8 +25,8 @@
             </div>
 
 
-            <div class="form-group">
-                <div class="label">Passed items</div>
+            <div class="ks-form-group">
+                <div class="ks-label">Passed items</div>
                 <ks-autocomplete
                     :items="countries"
                     selection-key="name"
@@ -46,8 +46,8 @@
 
 
 
-            <div class="form-group">
-                <div class="label">Multiple Selections with custom template</div>
+            <div class="ks-form-group">
+                <div class="ks-label">Multiple Selections with custom template</div>
                 <ks-autocomplete
                     :items="countries"
                     selection-key="name"
@@ -79,8 +79,8 @@
             </div>
 
 
-            <div class="form-group">
-                <div class="label">Multiple Selections with taggable (add new, minSearch of 0)</div>
+            <div class="ks-form-group">
+                <div class="ks-label">Multiple Selections with taggable (add new, minSearch of 0)</div>
                 <ks-autocomplete
                     :min-search="0"
                     :taggable="true"
@@ -115,8 +115,8 @@
                 </code-block>
             </div>
 
-            <div class="form-group">
-                <div class="label">Grouped options, Multiple Selections with taggable (add new, minSearch of 0)</div>
+            <div class="ks-form-group">
+                <div class="ks-label">Grouped options, Multiple Selections with taggable (add new, minSearch of 0)</div>
                 <ks-autocomplete
                     :min-search="0"
                     :taggable="true"
@@ -142,8 +142,8 @@
                 </code-block>
             </div>
 
-          <div class="form-group">
-            <div class="label">With `label` slot</div>
+          <div class="ks-form-group">
+            <div class="ks-label">With `label` slot</div>
             <ks-autocomplete
                 :items="countries"
                 selection-key="name"

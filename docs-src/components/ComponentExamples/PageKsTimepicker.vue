@@ -1,8 +1,8 @@
 <template>
     <div>
         <div class="basic-block">
-            <div class="form-group">
-                <div class="label">Timepicker</div>
+            <div class="ks-form-group">
+                <div class="ks-label">Timepicker</div>
                 <ks-timepicker
                     name="start_time"
                     :time-format="time_format"
@@ -29,8 +29,8 @@
         </div>
 
         <div class="basic-block">
-            <div class="form-group">
-                <div class="label">Timepicker (24-Hour)</div>
+            <div class="ks-form-group">
+                <div class="ks-label">Timepicker (24-Hour)</div>
                 <ks-timepicker
                     name="start_time"
                     :time-format="time_format"
@@ -59,8 +59,8 @@
         </div>
 
         <div class="basic-block">
-            <div class="form-group">
-                <div class="label">Timepicker (end-of-day option)</div>
+            <div class="ks-form-group">
+                <div class="ks-label">Timepicker (end-of-day option)</div>
                 <ks-timepicker
                     name="start_time"
                     :time-format="time_format"

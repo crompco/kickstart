@@ -5,17 +5,17 @@
             <form>
                 <div class="row">
                     <div class="tab-full">
-                        <div class="form-group">
-                            <div class="label">Username (with an error)</div>
+                        <div class="ks-form-group">
+                            <div class="ks-label">Username (with an error)</div>
                             <input type="text">
-                            <div class="error-msg">Username is required</div>
+                            <div class="ks-error-msg">Username is required</div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="tab-full">
-                        <div class="form-group">
-                            <div class="label">Autocomplete</div>
+                        <div class="ks-form-group">
+                            <div class="ks-label">Autocomplete</div>
                             <ks-autocomplete></ks-autocomplete>
                         </div>
                     </div>
@@ -23,7 +23,7 @@
                 <div class="row">
                     <div class="tab-half">
                         <ks-checkbox-group
-                            class="form-group"
+                            class="ks-form-group"
                             name="group2"
                             :options="buttonGroup"
                             :buttons="true"
@@ -36,7 +36,7 @@
                     </div>
                     <div class="tab-half">
                         <ks-radio-group
-                            class="form-group"
+                            class="ks-form-group"
                             name="group2"
                             :options="buttonGroup"
                             :buttons="true"
@@ -50,50 +50,50 @@
                 </div>
                 <div class="row">
                     <div class="tab-half">
-                        <div class="form-group">
-                            <div class="label">First Name</div>
+                        <div class="ks-form-group">
+                            <div class="ks-label">First Name</div>
                             <input type="text">
                         </div>
                     </div>
                     <div class="tab-half">
-                        <div class="form-group">
-                            <div class="label">Last Name</div>
+                        <div class="ks-form-group">
+                            <div class="ks-label">Last Name</div>
                             <input type="text">
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="tab-half">
-                        <div class="form-group">
-                            <div class="label">Password</div>
+                        <div class="ks-form-group">
+                            <div class="ks-label">Password</div>
                             <input type="password">
                         </div>
                     </div>
                     <div class="tab-half">
-                        <div class="form-group">
-                            <div class="label">Password Confirmation</div>
+                        <div class="ks-form-group">
+                            <div class="ks-label">Password Confirmation</div>
                             <input type="password">
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="tab-half">
-                        <div class="form-group">
-                            <div class="label">Text</div>
+                        <div class="ks-form-group">
+                            <div class="ks-label">Text</div>
                             <input type="text">
                         </div>
-                        <div class="form-group">
-                            <div class="label">Datepicker</div>
+                        <div class="ks-form-group">
+                            <div class="ks-label">Datepicker</div>
                             <ks-datepicker></ks-datepicker>
                         </div>
                     </div>
                     <div class="tab-half">
-                        <div class="form-group">
-                            <div class="label">select</div>
+                        <div class="ks-form-group">
+                            <div class="ks-label">select</div>
                             <ks-select name="foo" label-key="foo"></ks-select>
                         </div>
-                        <div class="form-group">
-                            <div class="label">Password Confirmation</div>
+                        <div class="ks-form-group">
+                            <div class="ks-label">Password Confirmation</div>
                             <input type="password">
                         </div>
                     </div>
@@ -104,17 +104,17 @@
                     &lt;form>
                         &lt;div class="row">
                             &lt;div class="tab-full">
-                                &lt;div class="form-group">
-                                    &lt;div class="label">Username (with an error)&lt;/div>
+                                &lt;div class="ks-form-group">
+                                    &lt;div class="ks-label">Username (with an error)&lt;/div>
                                     &lt;input type="text">
-                                    &lt;div class="error-msg">Username is required&lt;/div>
+                                    &lt;div class="ks-error-msg">Username is required&lt;/div>
                                 &lt;/div>
                             &lt;/div>
                         &lt;/div>
                         &lt;div class="row">
                             &lt;div class="tab-full">
-                                &lt;div class="form-group">
-                                    &lt;div class="label">Autocomplete&lt;/div>
+                                &lt;div class="ks-form-group">
+                                    &lt;div class="ks-label">Autocomplete&lt;/div>
                                     &lt;ks-autocomplete>&lt;/ks-autocomplete>
                                 &lt;/div>
                             &lt;/div>
@@ -122,7 +122,7 @@
                         &lt;div class="row">
                             &lt;div class="tab-half">
                                 &lt;ks-checkbox-group
-                                    class="form-group"
+                                    class="ks-form-group"
                                     name="group2"
                                     :options="buttonGroup"
                                     :buttons="true"
@@ -135,7 +135,7 @@
                             &lt;/div>
                             &lt;div class="tab-half">
                                 &lt;ks-radio-group
-                                    class="form-group"
+                                    class="ks-form-group"
                                     name="group2"
                                     :options="buttonGroup"
                                     :buttons="true"
@@ -149,28 +149,28 @@
                         &lt;/div>
                         &lt;div class="row">
                             &lt;div class="tab-half">
-                                &lt;div class="form-group">
-                                    &lt;div class="label">First Name&lt;/div>
+                                &lt;div class="ks-form-group">
+                                    &lt;div class="ks-label">First Name&lt;/div>
                                     &lt;input type="text">
                                 &lt;/div>
                             &lt;/div>
                             &lt;div class="tab-half">
-                                &lt;div class="form-group">
-                                    &lt;div class="label">Last Name&lt;/div>
+                                &lt;div class="ks-form-group">
+                                    &lt;div class="ks-label">Last Name&lt;/div>
                                     &lt;input type="text">
                                 &lt;/div>
                             &lt;/div>
                         &lt;/div>
                         &lt;div class="row">
                             &lt;div class="tab-half">
-                                &lt;div class="form-group">
-                                    &lt;div class="label">Password&lt;/div>
+                                &lt;div class="ks-form-group">
+                                    &lt;div class="ks-label">Password&lt;/div>
                                     &lt;input type="password">
                                 &lt;/div>
                             &lt;/div>
                             &lt;div class="tab-half">
-                                &lt;div class="form-group">
-                                    &lt;div class="label">Password Confirmation&lt;/div>
+                                &lt;div class="ks-form-group">
+                                    &lt;div class="ks-label">Password Confirmation&lt;/div>
                                     &lt;input type="password">
                                 &lt;/div>
                             &lt;/div>
@@ -184,8 +184,8 @@
         <form class="basic-block">
             <div class="row">
                 <div class="tab-half">
-                    <div class="form-group">
-                        <div class="label">Address</div>
+                    <div class="ks-form-group">
+                        <div class="ks-label">Address</div>
                         <input type="text" name="address1" placeholder="Address 1">
                         <input type="text" name="address2" placeholder="Address 2">
                     </div>
@@ -193,14 +193,14 @@
             </div>
             <div class="row">
                 <div class="tab-half">
-                    <div class="form-group">
-                        <div class="label">City</div>
+                    <div class="ks-form-group">
+                        <div class="ks-label">City</div>
                         <input type="text" name="city" placeholder="City">
                     </div>
                 </div>
                 <div class="tab-half">
-                    <div class="form-group">
-                        <div class="label">State</div>
+                    <div class="ks-form-group">
+                        <div class="ks-label">State</div>
                         <ks-select
                             name="state"
                             :items="states"
@@ -213,14 +213,14 @@
             </div>
             <div class="row">
                 <div class="tab-half">
-                    <div class="form-group">
-                        <div class="label">Zip</div>
+                    <div class="ks-form-group">
+                        <div class="ks-label">Zip</div>
                         <input type="text" name="zip" placeholder="Zip Code">
                     </div>
                 </div>
                 <div class="tab-half">
-                    <div class="form-group">
-                        <div class="label">Country</div>
+                    <div class="ks-form-group">
+                        <div class="ks-label">Country</div>
                         <ks-select
                             name="country"
                             :items="countries"

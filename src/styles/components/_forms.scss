@@ -3,10 +3,10 @@
 @import "forms/_select";
 @import "../mixins/_forms";
 
-.form-group {
+.ks-form-group {
 	margin-bottom: rem($form-group-margin-bottom);
 
-	.label {
+	.ks-label {
 		max-width: 100%;
 		margin-bottom: rem($form-title-margin-bottom);
 		display: block;
@@ -26,7 +26,7 @@
 		}
 	}
 
-    .error-msg {
+    .ks-error-msg {
         color: $form-error-color;
         background: $form-error-bg-color;
         font-size: $form-error-font-size;
@@ -55,8 +55,8 @@
 		resize: none;
 	}
 
-	&.inline {
-		.title {
+	&.ks-inline {
+		.ks-title {
 			display: inline-block;
 
 			margin-right: rem($form-title-margin-right);

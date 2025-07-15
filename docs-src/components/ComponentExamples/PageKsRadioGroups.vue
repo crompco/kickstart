@@ -2,7 +2,7 @@
     <div>
         <div class="basic-block">
             <ks-radio-group
-                class="form-group"
+                class="ks-form-group"
                 name="group1"
                 :options="radioGroup"
                 value-key="code"
@@ -14,7 +14,7 @@
 
             <code-block>
                 &lt;ks-radio-group
-                    class="form-group"
+                    class="ks-form-group"
                     name="group1"
                     :options="radioGroup"
                     value-key="code"
@@ -28,7 +28,7 @@
 
         <div class="basic-block">
             <ks-radio-group
-                class="form-group"
+                class="ks-form-group"
                 name="group2"
                 :buttons="true"
                 :options="buttonGroup"
@@ -42,7 +42,7 @@
 
             <code-block>
                 &lt;ks-radio-group
-                    class="form-group"
+                    class="ks-form-group"
                     name="group2"
                     :buttons="true"
                     :options="buttonGroup"
@@ -61,7 +61,7 @@
                 <p>Radio button group with no label</p>
             </div>
             <ks-radio-group
-                class="form-group"
+                class="ks-form-group"
                 name="group1"
                 :options="radioGroup"
                 value-key="code"
@@ -71,7 +71,7 @@
 
             <code-block>
                 &lt;ks-radio-group
-                    class="form-group"
+                    class="ks-form-group"
                     name="group3"
                     :options="radioGroup"
                     value-key="code"
@@ -87,7 +87,7 @@
                 <p>Radio button group with slot buttons</p>
             </div>
             <ks-radio-group
-                class="form-group"
+                class="ks-form-group"
                 name="group1"
                 :options="radioGroup"
                 value-key="code"
@@ -99,7 +99,7 @@
 
             <code-block>
                 &lt;ks-radio-group
-                    class="form-group"
+                    class="ks-form-group"
                     name="group4"
                     :options="radioGroup"
                     value-key="code"

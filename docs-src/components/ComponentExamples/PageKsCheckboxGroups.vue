@@ -2,7 +2,7 @@
     <div>
         <div class="basic-block">
             <ks-checkbox-group
-                class="form-group"
+                class="ks-form-group"
                 name="group1"
                 :options="checkboxGroup"
                 value-key="code"
@@ -15,7 +15,7 @@
             <code-block>
                 <template v-pre>
                     &lt;ks-checkbox-group
-                        class="form-group"
+                        class="ks-form-group"
                         name="group1"
                         :options="checkboxGroup"
                         value-key="code"
@@ -30,7 +30,7 @@
 
         <div class="basic-block">
             <ks-checkbox-group
-                class="form-group"
+                class="ks-form-group"
                 name="group2"
                 :buttons="true"
                 :options="buttonGroup"
@@ -44,7 +44,7 @@
             <code-block>
                 <template v-pre>
                     &lt;ks-checkbox-group
-                        class="form-group"
+                        class="ks-form-group"
                         name="group2"
                         :buttons="true"
                         :options="buttonGroup"
