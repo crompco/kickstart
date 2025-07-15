@@ -57,11 +57,6 @@
             font-size: $card-light-header-font-size;
             background: $card-light-header-bg;
             color: $card-light-header-color;
-
-            &.ks-light {
-                background: $white;
-                color: lighten($text-color, 10%);
-            }
         }
 
         .ks-card-body {
