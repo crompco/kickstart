@@ -20,7 +20,7 @@
             },
             activeClass: {
                 type: String,
-                default: 'dragging',
+                default: 'ks-dragging',
             }
         },
 

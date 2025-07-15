@@ -239,7 +239,7 @@
             },
             droppableActiveClass: {
                 type: String,
-                default: 'drop-zone-active'
+                default: 'ks-drop-zone-active'
             },
             droppableInactiveClass: {
                 type: String,
