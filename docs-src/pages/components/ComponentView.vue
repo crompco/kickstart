@@ -278,8 +278,11 @@
         },
 
         beforeRouteUpdate(to, from, next) {
-            this.$set(this, 'data', {});
-            this.fetchData(to.path);
+            if ( to.path !== from.path ) {
+                this.$set(this, 'data', {});
+                this.fetchData(to.path);
+            }
+
             next();
         },
 
