@@ -39,7 +39,7 @@
 }
 
 @each $name, $value in $flex-align-self {
-    .align-self-#{$name} {
+    .align-self-#{$name}, .self-#{$name} {
         align-self: $value;
     }
 }

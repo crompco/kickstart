@@ -5,19 +5,19 @@
                 <div>Default</div>
                 <hr>
                 <div class="sm-12">
-                    <button class="button">
+                    <button class="ks-button">
                         I'm a default button
                     </button>
-                    <a href="#" class="button tiny">
+                    <a href="#" class="ks-button tiny">
                         I'm a tiny button
                     </a>
-                    <a href="#" class="button small">
+                    <a href="#" class="ks-button small">
                         I'm a small button
                     </a>
-                    <a href="#" class="button large danger">
+                    <a href="#" class="ks-button large danger">
                         I'm a large button
                     </a>
-                    <a href="#" class="button large success">
+                    <a href="#" class="ks-button large success">
                         I'm a large button
                     </a>
                 </div>
@@ -26,16 +26,16 @@
                 <template v-pre>
                     // Can be used with an anchor tag or button tag
 
-                    &lt;button class="button">
+                    &lt;button class="ks-button">
                         I'm a default button
                     &lt;/button>
-                    &lt;a href="#" class="button tiny">
+                    &lt;a href="#" class="ks-button tiny">
                         I'm a tiny button
                     &lt;/a>
-                    &lt;a href="#" class="button small">
+                    &lt;a href="#" class="ks-button small">
                         I'm a small button
                     &lt;/a>
-                    &lt;a href="#" class="button large danger">
+                    &lt;a href="#" class="ks-button large danger">
                         I'm a large button
                     &lt;/a>
                 </template>
@@ -45,35 +45,35 @@
                 <div>Outline</div>
                 <hr>
                 <div class="sm-12">
-                    <button class="button outline disabled" disabled="disabled">
+                    <button class="ks-button outline disabled" disabled="disabled">
                         I'm a default button
                     </button>
-                    <a href="#" class="button outline tiny">
+                    <a href="#" class="ks-button outline tiny">
                         I'm a tiny button
                     </a>
-                    <a href="#" class="button outline small">
+                    <a href="#" class="ks-button outline small">
                         I'm a small button
                     </a>
-                    <a href="#" class="button outline large danger">
+                    <a href="#" class="ks-button outline large danger">
                         I'm a large button
                     </a>
-                    <a href="#" class="button outline large success">
+                    <a href="#" class="ks-button outline large success">
                         I'm a large button
                     </a>
                 </div>
             </div>
             <code-block class="mt-2">
                 <template v-pre>
-                    &lt;button class="button outline disabled" disabled="disabled">
+                    &lt;button class="ks-button outline disabled" disabled="disabled">
                         I'm a default button
                     &lt;/button>
-                    &lt;a href="#" class="button outline tiny">
+                    &lt;a href="#" class="ks-button outline tiny">
                         I'm a tiny button
                     &lt;/a>
-                    &lt;a href="#" class="button outline small">
+                    &lt;a href="#" class="ks-button outline small">
                         I'm a small button
                     &lt;/a>
-                    &lt;a href="#" class="button outline large danger">
+                    &lt;a href="#" class="ks-button outline large danger">
                         I'm a large button
                     &lt;/a>
                 </template>
@@ -83,35 +83,35 @@
                 <div>None</div>
                 <hr>
                 <div class="sm-12">
-                    <button class="button none disabled">
+                    <button class="ks-button none disabled">
                         I'm a default button
                     </button>
-                    <a href="#" class="button none tiny">
+                    <a href="#" class="ks-button none tiny">
                         I'm a tiny button
                     </a>
-                    <a href="#" class="button none small">
+                    <a href="#" class="ks-button none small">
                         I'm a small button
                     </a>
-                    <a href="#" class="button none large danger">
+                    <a href="#" class="ks-button none large danger">
                         I'm a large button
                     </a>
-                    <a href="#" class="button none large success">
+                    <a href="#" class="ks-button none large success">
                         I'm a large button
                     </a>
                 </div>
             </div>
             <code-block class="mt-2">
                 <template v-pre>
-                    &lt;button class="button none disabled">
+                    &lt;button class="ks-button none disabled">
                         I'm a default button
                     &lt;/button>
-                    &lt;a href="#" class="button none tiny">
+                    &lt;a href="#" class="ks-button none tiny">
                         I'm a tiny button
                     &lt;/a>
-                    &lt;a href="#" class="button none small">
+                    &lt;a href="#" class="ks-button none small">
                         I'm a small button
                     &lt;/a>
-                    &lt;a href="#" class="button none large danger">
+                    &lt;a href="#" class="ks-button none large danger">
                         I'm a large button
                     &lt;/a>
                 </template>

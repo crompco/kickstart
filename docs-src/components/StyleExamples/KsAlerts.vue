@@ -1,41 +1,41 @@
 <template>
     <div>
         <div class="basic-block">
-            <div class="alert success">
+            <div class="ks-alert success">
                 <strong>Success</strong> This is a success message
             </div>
 
-            <div class="alert error">
+            <div class="ks-alert error">
                 <strong>Error</strong> This is an error message
             </div>
 
-            <div class="alert info">
+            <div class="ks-alert info">
                 <strong>Info</strong> This is an info message
             </div>
 
-            <div class="alert warning">
+            <div class="ks-alert warning">
                 <strong>Warning</strong> This is a warning message
             </div>
 
             <div>
                 <code-block>
                     <template v-pre>
-                        &lt;div class="alert success">
+                        &lt;div class="ks-alert success">
                             &lt;strong>Success&lt;/strong>
                             this is a success message
                         &lt;/div>
 
-                        &lt;div class="alert error">
+                        &lt;div class="ks-alert error">
                             &lt;strong>Error&lt;/strong>
                             this is a error message
                         &lt;/div>
 
-                        &lt;div class="alert info">
+                        &lt;div class="ks-alert info">
                             &lt;strong>Info&lt;/strong>
                             this is a info message
                         &lt;/div>
 
-                        &lt;div class="alert warning">
+                        &lt;div class="ks-alert warning">
                             &lt;strong>Warning&lt;/strong>
                             this is a warning message
                         &lt;/div>

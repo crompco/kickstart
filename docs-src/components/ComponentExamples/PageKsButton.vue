@@ -81,8 +81,8 @@
                 <ks-modal ref="modal">
                     <p>Some thing that needs to load</p>
                     <div slot="footer">
-                        <ks-button @click.prevent="spinModal = true" class="button" :spin="spinModal">Yes</ks-button>
-                        <ks-button :outline="true" class="button outline" @click.prevent="spinModal = false">Stop</ks-button>
+                        <ks-button @click.prevent="spinModal = true" :spin="spinModal">Yes</ks-button>
+                        <ks-button :outline="true" @click.prevent="spinModal = false">Stop</ks-button>
                     </div>
                 </ks-modal>
             </div>
@@ -92,8 +92,8 @@
                     &lt;ks-button @click="$refs.modal.open()">Open Modal&lt;/ks-button>
                     &lt;ks-modal ref="modal">
                         &lt;div slot="footer">
-                            &lt;ks-button @click.prevent="spinModal = true" class="button" :spin="spinModal">Yes&lt;/ks-button>
-                            &lt;ks-button :outline="true" class="button outline" @click.prevent="spinModal = false">Stop&lt;/ks-button>
+                            &lt;ks-button @click.prevent="spinModal = true" :spin="spinModal">Yes&lt;/ks-button>
+                            &lt;ks-button :outline="true" @click.prevent="spinModal = false">Stop&lt;/ks-button>
                         &lt;/div>
                     &lt;/ks-modal>
                 </template>

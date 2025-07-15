@@ -5,7 +5,7 @@
 
             <div class="row">
                 <div class="col sm-full med-half">
-                    <button class="button" @click.prevent="$refs.modal1.open()">
+                    <button class="ks-button" @click.prevent="$refs.modal1.open()">
                         Simple Modal
                     </button>
 
@@ -16,7 +16,7 @@
                     </ks-modal>
                     <code-block>
                         <template v-pre>
-                            &lt;button class="button" @click.prevent="$refs.modal1.open()">
+                            &lt;button class="ks-button" @click.prevent="$refs.modal1.open()">
                                 Simple Modal
                             &lt;/button>
 
@@ -29,7 +29,7 @@
                     </code-block>
                 </div>
                 <div class="col sm-full med-half">
-                    <button class="button" @click.prevent="openModal2()">
+                    <button class="ks-button" @click.prevent="openModal2()">
                         Modal with buttons
                     </button>
 
@@ -39,14 +39,14 @@
                             This is a simple modal with just a title and content
                         </p>
                         <div slot="footer">
-                            <button class="button">Yes</button>
-                            <button class="button" @click.prevent="$refs.modal2.close()">Cancel</button>
+                            <button class="ks-button">Yes</button>
+                            <button class="ks-button" @click.prevent="$refs.modal2.close()">Cancel</button>
                         </div>
                     </ks-modal>
 
                     <code-block>
                         <template v-pre>
-                            &lt;button class="button" @click.prevent="$refs.modal2.open()">
+                            &lt;button class="ks-button" @click.prevent="$refs.modal2.open()">
                                 Modal with buttons
                             &lt;/button>
 
@@ -55,8 +55,8 @@
                                     This is a simple modal with just a title and content
                                 &lt;/p>
                                 &lt;div slot="footer">
-                                    &lt;button class="button">Yes&lt;/button>
-                                    &lt;button class="button" @click.prevent="$refs.modal2.close()">Cancel&lt;/button>
+                                    &lt;button class="ks-button">Yes&lt;/button>
+                                    &lt;button class="ks-button" @click.prevent="$refs.modal2.close()">Cancel&lt;/button>
                                 &lt;/div>
                             &lt;/ks-modal>
                         </template>
@@ -65,7 +65,7 @@
 
                 <!-- Danger button modal -->
                 <div class="col sm-full med-half">
-                    <button class="button danger" @click.prevent="$refs.modal_danger.open()">
+                    <button class="ks-button danger" @click.prevent="$refs.modal_danger.open()">
                         Danger Modal
                     </button>
 
@@ -74,14 +74,14 @@
                             Be careful with this action!
                         </p>
                         <div slot="footer">
-                            <button class="button danger">Yes, Delete</button>
-                            <button class="button" @click.prevent="$refs.modal_danger.close()">Cancel</button>
+                            <button class="ks-button danger">Yes, Delete</button>
+                            <button class="ks-button" @click.prevent="$refs.modal_danger.close()">Cancel</button>
                         </div>
                     </ks-modal>
 
                     <code-block>
                         <template v-pre>
-                            &lt;button class="button danger" @click.prevent="$refs.modal_danger.open()">
+                            &lt;button class="ks-button danger" @click.prevent="$refs.modal_danger.open()">
                                 Danger Modal
                             &lt;/button>
 
@@ -90,15 +90,15 @@
                                     Be careful with this action!
                                 &lt;/p>
                                 &lt;div slot="footer">
-                                    &lt;button class="button danger">Yes, Delete&lt;/button>
-                                    &lt;button class="button" @click.prevent="$refs.modal_danger.close()">Cancel&lt;/button>
+                                    &lt;button class="ks-button danger">Yes, Delete&lt;/button>
+                                    &lt;button class="ks-button" @click.prevent="$refs.modal_danger.close()">Cancel&lt;/button>
                                 &lt;/div>
                             &lt;/ks-modal>
                         </template>
                     </code-block>
                 </div>
                 <div class="col sm-full med-half">
-                    <button class="button" @click.prevent="$refs.modal3.open()">
+                    <button class="ks-button" @click.prevent="$refs.modal3.open()">
                         Modal without header
                     </button>
 
@@ -113,7 +113,7 @@
 
                     <code-block>
                         <template v-pre>
-                            &lt;button class="button" @click.prevent="$refs.modal3.open()">
+                            &lt;button class="ks-button" @click.prevent="$refs.modal3.open()">
                                 Modal without header
                             &lt;/button>
 
@@ -129,7 +129,7 @@
                     </code-block>
                 </div>
                 <div class="col sm-full med-half">
-                    <button class="button" @click.prevent="$refs.modal4.open()">
+                    <button class="ks-button" @click.prevent="$refs.modal4.open()">
                         Modal with a lot of content
                     </button>
 
@@ -213,14 +213,14 @@
                             </p>
                         </div>
                         <div slot="footer">
-                            <button class="button">Yes</button>
-                            <button class="button" @click.prevent="$refs.modal4.close()">Cancel</button>
+                            <button class="ks-button">Yes</button>
+                            <button class="ks-button" @click.prevent="$refs.modal4.close()">Cancel</button>
                         </div>
                     </ks-modal>
 
                     <code-block>
                         <template v-pre>
-                            &lt;button class="button" @click.prevent="$refs.modal4.open()">
+                            &lt;button class="ks-button" @click.prevent="$refs.modal4.open()">
                                 Modal with a lot of content
                             &lt;/button>
 
@@ -238,15 +238,15 @@
                                     ...
                                 &lt;/div>
                                 &lt;div slot="footer">
-                                    &lt;button class="button">Yes&lt;/button>
-                                    &lt;button class="button" @click.prevent="$refs.modal4.close()">Cancel&lt;/button>
+                                    &lt;button class="ks-button">Yes&lt;/button>
+                                    &lt;button class="ks-button" @click.prevent="$refs.modal4.close()">Cancel&lt;/button>
                                 &lt;/div>
                             &lt;/ks-modal>
                         </template>
                     </code-block>
                 </div>
                 <div class="col sm-full med-half">
-                    <button class="button" @click.prevent="$refs.modal5.open()">
+                    <button class="ks-button" @click.prevent="$refs.modal5.open()">
                         Modal with Select
                     </button>
 
@@ -272,14 +272,14 @@
                             <template v-slot="{item}">{{item.name}}</template>
                         </ks-select>
                         <div slot="footer">
-                            <button class="button error">Yes</button>
-                            <button class="button" @click.prevent="$refs.modal5.close()">Cancel</button>
+                            <button class="ks-button error">Yes</button>
+                            <button class="ks-button" @click.prevent="$refs.modal5.close()">Cancel</button>
                         </div>
                     </ks-modal>
 
                     <code-block>
                         <template v-pre>
-                            &lt;button class="button" @click.prevent="$refs.modal5.open()">
+                            &lt;button class="ks-button" @click.prevent="$refs.modal5.open()">
                                 Modal with Select
                             &lt;/button>
 
@@ -298,8 +298,8 @@
                                     &lt;template v-slot="{item}">{{item.name}}&lt;/template>
                                 &lt;/ks-select>
                                 &lt;div slot="footer">
-                                    &lt;button class="button error">Yes&lt;/button>
-                                    &lt;button class="button" @click.prevent="$refs.modal5.close()">Cancel&lt;/button>
+                                    &lt;button class="ks-button error">Yes&lt;/button>
+                                    &lt;button class="ks-button" @click.prevent="$refs.modal5.close()">Cancel&lt;/button>
                                 &lt;/div>
                             &lt;/ks-modal>
                         </template>

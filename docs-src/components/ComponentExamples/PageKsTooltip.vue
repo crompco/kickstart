@@ -3,19 +3,19 @@
         <div class="basic-block">
             <div class="row col row-collapse">
                 <div class="sm-6">
-                    <button class="button" ref="tooltipTarget" @click="active = !active">
+                    <button class="ks-button" ref="tooltipTarget" @click="active = !active">
                         Hover Over
                     </button>
 
                     <ks-tooltip target="tooltipTarget">
                         <div>Another tooltip right here</div>
                         <h2>Title tag</h2>
-                        <button class="button">iButton</button>
+                        <button class="ks-button">iButton</button>
                     </ks-tooltip>
                 </div>
 
                 <div class="sm-6">
-                    <button class="button" v-ks-tooltip="'Tooltip text, add more text'" :props="{trigger: 'click'}">
+                    <button class="ks-button" v-ks-tooltip="'Tooltip text, add more text'" :props="{trigger: 'click'}">
                         Directive
                     </button>
                 </div>
@@ -23,17 +23,17 @@
             <div class="row col">
                 <code-block>
                     <template v-pre>
-                        &lt;button class="button" ref="tooltipTarget" @click="active = !active">
+                        &lt;button class="ks-button" ref="tooltipTarget" @click="active = !active">
                             Hover Over
                         &lt;/button>
 
                         &lt;ks-tooltip target="tooltipTarget">
                             &lt;div>Another tooltip right here&lt;/div>
                             &lt;h2>Title tag&lt;/h2>
-                            &lt;button class="button">iButton&lt;/button>
+                            &lt;button class="ks-button">iButton&lt;/button>
                         &lt;/ks-tooltip>
 
-                        &lt;button class="button" v-ks-tooltip="'Tooltip text, add more text'" :props="{trigger: 'click'}">
+                        &lt;button class="ks-button" v-ks-tooltip="'Tooltip text, add more text'" :props="{trigger: 'click'}">
                             Directive
                         &lt;/button>
                     </template>
@@ -44,12 +44,12 @@
         <div class="basic-block">
             <div class="row col row-collapse">
                 <div class="sm-12">
-                    <button class="button">
+                    <button class="ks-button">
                         Hover Over (Delayed)
                         <ks-tooltip :hover-delay="500">
                             <div>Another tooltip right here (delayed)</div>
                             <h2>Title tag</h2>
-                            <button class="button">iButton</button>
+                            <button class="ks-button">iButton</button>
                         </ks-tooltip>
                     </button>
                 </div>
@@ -57,12 +57,12 @@
             <div class="row col">
                 <code-block>
                     <template v-pre>
-                        &lt;button class="button">
+                        &lt;button class="ks-button">
                             Hover Over (Delayed)
                             &lt;ks-tooltip :hover-delay="500">
                                 &lt;div>Another tooltip right here (delayed)&lt;/div>
                                 &lt;h2>Title tag&lt;/h2>
-                                &lt;button class="button">iButton&lt;/button>
+                                &lt;button class="ks-button">iButton&lt;/button>
                             &lt;/ks-tooltip>
                         &lt;/button>
                     </template>

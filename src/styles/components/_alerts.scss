@@ -1,7 +1,7 @@
 @import "../functions/_map";
 @import "../variables/_settings";
 
-.alert {
+.ks-alert {
 	padding: $alert-padding;
 	margin: $alert-margin;
 	border-radius: $alert-border-radius;
@@ -9,7 +9,7 @@
 }
 
 @each $name, $map in $alerts {
-	.alert.#{$name} {
+	.ks-alert.#{$name} {
 		color: get($map, color);
 		background-color: get($map, background-color);
 		border-color: get($map, border-color)
