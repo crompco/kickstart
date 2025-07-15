@@ -1,6 +1,6 @@
 <template>
     <div :style="'height: ' + height">
-        <div v-show="show" class="loader-line" :style="loader_style"></div>
+        <div v-show="show" class="ks-loader-line" :style="loader_style"></div>
     </div>
 </template>
 

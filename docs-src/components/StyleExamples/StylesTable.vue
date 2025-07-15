@@ -1,5 +1,5 @@
 <template>
-    <table class="table striped shadow">
+    <table class="ks-table striped shadow">
         <tbody>
         <template v-for="style in classes">
             <tr v-if="typeof style.map === 'undefined'">

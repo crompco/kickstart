@@ -1,6 +1,6 @@
 @import '../variables/paginator';
 
-.pagination {
+.ks-paginator {
     > ul {
         margin: 0;
         padding: 0.25rem 0 0.65rem;
@@ -11,6 +11,7 @@
             float: left;
             a {
                 display: block;
+                color: $paginator-link-color;
                 border: solid 1px $paginator-link-color;
                 padding: 0.25rem 0.5rem;
                 text-decoration: none;

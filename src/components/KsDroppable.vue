@@ -16,7 +16,7 @@
             },
             activeClass: {
                 type: String,
-                default: 'drop-zone-active'
+                default: 'ks-drop-zone-active'
             },
             inactiveClass: {
                 type: String,

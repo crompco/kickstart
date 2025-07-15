@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="row">
-            <table class="table">
+            <table class="ks-table">
                 <thead>
                 <tr>
                     <th></th>
@@ -42,7 +42,7 @@
         </div>
 
         <div class="row">
-            <table class="table">
+            <table class="ks-table">
                 <thead>
                 <tr>
                     <th></th>
@@ -239,7 +239,7 @@
 
         <div class="row">
             <h3>Helpers</h3>
-            <table class="table striped shadow">
+            <table class="ks-table striped shadow">
                 <tbody>
                 <tr>
                     <td><code>.row</code></td>

@@ -42,7 +42,7 @@
 
             <!-- Loading indicator -->
             <div style="position: relative; height: 5px;margin-top: -5px;">
-                <loader-line :show="loading" :absolute="true"></loader-line>
+                <ks-loader-line :show="loading" :absolute="true"></ks-loader-line>
             </div>
 
             <!-- Autocomplete list-->
@@ -101,9 +101,8 @@
 
 <script>
 
-    import KsAutocomplete from './KsAutocomplete.vue';
     import ListIndexNavigator from './mixins/ListIndexNavigator';
-    import LoaderLine from './KsLoaderLine.vue';
+    import KsLoaderLine from './KsLoaderLine.vue';
     import {object_get} from '../helpers/objects';
 
     export default {
@@ -555,8 +554,7 @@
         },
 
         components: {
-            KsAutocomplete,
-            LoaderLine
+            KsLoaderLine
         }
     }
 </script>

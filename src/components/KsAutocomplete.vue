@@ -44,7 +44,7 @@
 		<!-- List -->
 		<div v-show="show_list" class="autocomplete-list-wrapper">
 			<div class="ks-searching-results">
-				<loader-line :show="loading"></loader-line>
+				<ks-loader-line :show="loading"></ks-loader-line>
 			</div>
 			<ul class="ks-autocomplete-list"
 			    :style="'max-height:'+this.listHeight"
@@ -103,7 +103,7 @@
 
 <script>
 	// Internal
-	import LoaderLine from './KsLoaderLine.vue';
+	import KsLoaderLine from './KsLoaderLine.vue';
     import {object_get} from '../helpers/objects';
     import ListIndexNavigator from './mixins/ListIndexNavigator';
 
@@ -415,7 +415,7 @@
 		},
 
 		components: {
-			LoaderLine
+			KsLoaderLine
 		}
 	}
 </script>

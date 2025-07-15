@@ -8,7 +8,7 @@
             </ul>
         </ks-side-nav>
 
-        <div class="content pb-12">
+        <div class="ks-content pb-12">
             <router-view></router-view>
         </div>
     </div>

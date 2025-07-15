@@ -2,8 +2,8 @@
     <div>
         <div class="basic-block row">
             <div class="med-6">
-                <div class="form-group">
-                    <div class="label">Simple Datepicker</div>
+                <div class="ks-form-group">
+                    <div class="ks-label">Simple Datepicker</div>
                     <div class="data">
                         <ks-datepicker
                             ref="dpicker"
@@ -30,8 +30,8 @@
 
         <div class="basic-block row">
             <div class="med-6">
-                <div class="form-group">
-                    <div class="label">Custom Date format with year and month picker</div>
+                <div class="ks-form-group">
+                    <div class="ks-label">Custom Date format with year and month picker</div>
                     <div class="data">
                         <ks-datepicker
                             v-model="date2"
@@ -63,8 +63,8 @@
 
         <div class="basic-block row">
             <div class="med-6">
-                <div class="form-group">
-                    <div class="label">min/max Date requirements</div>
+                <div class="ks-form-group">
+                    <div class="ks-label">min/max Date requirements</div>
                     <div class="data">
                         <ks-datepicker
                             v-model="date3"

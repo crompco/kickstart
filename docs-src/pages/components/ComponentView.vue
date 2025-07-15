@@ -26,7 +26,7 @@
                     <ks-tab title="Props" v-if="props">
                         <template v-if="isGrouped" v-for="(group_props, name) in props">
                             <h3>{{name}}</h3>
-                            <table class="table striped">
+                            <table class="ks-table striped">
                                 <thead>
                                 <tr>
                                     <th>Name</th>
@@ -46,7 +46,7 @@
                             </table>
                         </template>
 
-                        <table class="table striped" v-if="!isGrouped">
+                        <table class="ks-table striped" v-if="!isGrouped">
                             <thead>
                             <tr>
                                 <th>Name</th>
@@ -69,7 +69,7 @@
                         <template v-if="isGrouped" v-for="(group_events, name) in events">
                             <h3>{{name}}</h3>
 
-                            <table class="table striped">
+                            <table class="ks-table striped">
                                 <thead>
                                 <tr>
                                     <th>Name</th>
@@ -85,7 +85,7 @@
                             </table>
                         </template>
 
-                        <table class="table striped" v-if="!isGrouped">
+                        <table class="ks-table striped" v-if="!isGrouped">
                             <thead>
                             <tr>
                                 <th>Name</th>
@@ -103,7 +103,7 @@
                     <ks-tab title="Methods" v-if="methods">
                         <template v-if="isGrouped" v-for="(group_methods, name) in methods">
                             <h3>{{name}}</h3>
-                            <table class="table striped">
+                            <table class="ks-table striped">
                                 <thead>
                                 <tr>
                                     <th>Name</th>
@@ -119,7 +119,7 @@
                             </table>
                         </template>
 
-                        <table class="table striped" v-if="!isGrouped">
+                        <table class="ks-table striped" v-if="!isGrouped">
                             <thead>
                             <tr>
                                 <th>Name</th>
@@ -138,7 +138,7 @@
                         <template v-if="isGrouped" v-for="(group_slot, name) in slots">
                             <h3>{{name}}</h3>
 
-                            <table class="table striped">
+                            <table class="ks-table striped">
                                 <thead>
                                 <tr>
                                     <th>Name</th>
@@ -154,7 +154,7 @@
                             </table>
                         </template>
 
-                        <table class="table striped" v-if="!isGrouped">
+                        <table class="ks-table striped" v-if="!isGrouped">
                             <thead>
                             <tr>
                                 <th>Name</th>

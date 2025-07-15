@@ -4,7 +4,7 @@
             <h3>{{type.name}}</h3>
 
             <div class="max-h-96 shadow" style="overflow: scroll;">
-                <table class="table striped mb-0">
+                <table class="ks-table striped mb-0">
                     <tbody>
                         <template v-for="space in spacing">
                             <tr>

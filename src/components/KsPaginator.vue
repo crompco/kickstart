@@ -1,5 +1,5 @@
 <template>
-    <div class="pagination" v-show="total_pages > 1">
+    <div class="ks-paginator" v-show="total_pages > 1">
 
         <ul class="row">
             <li>

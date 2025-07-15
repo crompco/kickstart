@@ -24,10 +24,10 @@
             border-bottom-color: $timepicker-list-item-border;
             // If its the last child or an option group then we disable the border
             &:last-child,
-            &.opt-group {
+            &.ks-opt-group {
                 border-bottom-color: transparent;
             }
-            &.opt-group {
+            &.ks-opt-group {
                 padding-bottom: 0;
                 strong {
                     display: block;

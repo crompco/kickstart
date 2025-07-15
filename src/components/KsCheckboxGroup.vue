@@ -1,6 +1,6 @@
 <template>
     <div class="ks-checkbox-group" :class="groupClass">
-        <label class="ks-checkbox-group-title label">
+        <label class="ks-checkbox-group-title ks-label">
             <slot>{{label}}</slot>
         </label>
         <div class="checkbox">

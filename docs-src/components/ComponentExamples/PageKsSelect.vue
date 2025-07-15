@@ -2,8 +2,8 @@
     <div>
         <div class="basic-block">
             <p>Autocomplete and pagination (with slots: default, label)</p>
-            <div class="form-group">
-                <div class="label">
+            <div class="ks-form-group">
+                <div class="ks-label">
                     Country
                 </div>
                 <ks-select
@@ -48,8 +48,8 @@
                 </code-block>
             </div>
             <p>Plain select</p>
-            <div class="form-group">
-                <div class="label">Country</div>
+            <div class="ks-form-group">
+                <div class="ks-label">Country</div>
                 <ks-select
                     name="code"
                     :items="countries"
@@ -70,8 +70,8 @@
             </div>
 
             <p>Select without the search</p>
-            <div class="form-group">
-                <div class="label">Country</div>
+            <div class="ks-form-group">
+                <div class="ks-label">Country</div>
                 <ks-select
                     name="code"
                     :items="short_countries"
@@ -94,8 +94,8 @@
             </div>
 
             <p>Group Select</p>
-            <div class="form-group">
-                <div class="label">Characters</div>
+            <div class="ks-form-group">
+                <div class="ks-label">Characters</div>
                 <ks-select
                     name="name"
                     :items="characters"
@@ -118,8 +118,8 @@
                 </code-block>
             </div>
 
-            <div class="form-group">
-                <div class="label">Disabled Select</div>
+            <div class="ks-form-group">
+                <div class="ks-label">Disabled Select</div>
                 <ks-select name="foo" :disabled="true" label-key="foo"></ks-select>
             </div>
             <code-block>
@@ -128,8 +128,8 @@
                 </template>
             </code-block>
 
-            <div class="form-group">
-                <div class="label">Forced value binding</div>
+            <div class="ks-form-group">
+                <div class="ks-label">Forced value binding</div>
                 <ks-select
                     name="code"
                     :items="countries"
@@ -154,8 +154,8 @@
         </div>
 
         <div class="basic-block">
-            <div class="form-group">
-                <div class="label">Select with no options</div>
+            <div class="ks-form-group">
+                <div class="ks-label">Select with no options</div>
                 <ks-select
                     name="empty"
                     :items="emptyItems"
@@ -174,8 +174,8 @@
                 </code-block>
             </div>
 
-            <div class="form-group">
-                <div class="label">Select with no options, selectable empty item</div>
+            <div class="ks-form-group">
+                <div class="ks-label">Select with no options, selectable empty item</div>
                 <ks-select
                     name="empty"
                     :items="emptyItems"
@@ -211,8 +211,8 @@
         </div>
 
         <div class="basic-block">
-            <div class="form-group">
-                <div class="label">Select with long option name</div>
+            <div class="ks-form-group">
+                <div class="ks-label">Select with long option name</div>
                 <ks-select
                     name="id"
                     :items="[{id: 1, name: 'This is a really long option for the select to test the breakdown, and some more stuff to make this extra long for big screens to have touble '}]"

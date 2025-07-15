@@ -8,7 +8,7 @@
 	border-bottom: 0;
 }
 
-@mixin table-head-color($color) {
+@mixin ks-table-head-color($color) {
 	thead {
 		background-color: $color;
 		color: $table-brand-header-color;
@@ -19,7 +19,7 @@
 	}
 }
 
-@mixin responsive-table() {
+@mixin ks-responsive-table() {
 	tbody, tr, th, td {
 		display: block;
 		text-align: left;
@@ -86,13 +86,13 @@
 	}
 }
 
-.scroll-table {
+.ks-scroll-table {
 	overflow-x: auto;
 	overflow-y: hidden;
 	width: 100%;
 	display: block;
 
-	.table {
+	.ks-table {
 		thead, tbody {
 			tr td, tr th {
 				white-space: nowrap;
@@ -101,7 +101,7 @@
 	}
 }
 
-.table {
+.ks-table {
 	width: 100%;
 	max-width: 100%;
 	border-spacing: 0;
@@ -109,7 +109,7 @@
 	margin-bottom: rem($table-margin-bottom);
 
 	&.responsive {
-		@include responsive-table;
+		@include ks-responsive-table;
 	}
 
 
@@ -189,7 +189,7 @@
 
 	@each $name, $color in $brand {
 		&.#{$name} {
-			@include table-head-color($color);
+			@include ks-table-head-color($color);
 		}
 	}
 

@@ -31,7 +31,7 @@ html, body {
 	height: 100%;
 }
 
-.content {
+.ks-content {
 	height: 100%;
 	@include ks-col(12);
 
@@ -53,7 +53,7 @@ html, body {
     opacity: $disabled-opacity;
 }
 
-.heading {
+.ks-heading {
     font-weight: bold;
     display: block;
     margin-bottom: rem($heading-mb);

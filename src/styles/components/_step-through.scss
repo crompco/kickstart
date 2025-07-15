@@ -2,7 +2,7 @@
 @import "../mixins/grid";
 @import "../variables/step-through";
 
-.steps {
+.ks-steps {
     padding: 1rem 0;
 
     @include ks-tab() {

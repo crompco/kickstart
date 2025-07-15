@@ -2,8 +2,8 @@
     <div>
         <div class="basic-block">
             <div class="row">
-                <div class="form-group">
-                    <div class="label">
+                <div class="ks-form-group">
+                    <div class="ks-label">
                         Show/Stop
                     </div>
                     <div class="data">
