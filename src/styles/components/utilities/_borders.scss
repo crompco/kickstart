@@ -8,3 +8,24 @@
 }
 
 @include color-class('border', 'border-color');
+
+@each $name in $border_styles {
+    .border-#{$name} {
+        border-style: $name;
+    }
+}
+
+@each $map in $border_map {
+    $property: map_get($map, 'property');
+    $code: map_get($map, 'code');
+
+    .#{$code} {
+        #{$property}-width: 1px;
+    }
+
+    @each $name, $value in $border_sizing {
+        .#{$code}-#{$name} {
+            #{$property}-width: $value;
+        }
+    }
+}
