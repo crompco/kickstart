@@ -27,6 +27,7 @@ const config = {
         KsLoaderSpin: ['./src/components/KsLoaderSpin.vue'],
         KsModal: ['./src/components/KsModal.vue'],
         KsPaginator: ['./src/components/KsPaginator.vue'],
+        KsPanel: ['./src/components/KsPanel.vue'],
         KsRadio: ['./src/components/KsRadio.vue'],
         KsRadioGroup: ['./src/components/KsRadioGroup.vue'],
         KsSelect: ['./src/components/KsSelect.vue'],

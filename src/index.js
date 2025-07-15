@@ -14,6 +14,7 @@ import KsLoaderLine from './components/KsLoaderLine.vue';
 import KsLoaderSpin from './components/KsLoaderSpin.vue';
 import KsModal from './components/KsModal.vue';
 import KsPaginator from './components/KsPaginator.vue';
+import KsPanel from './components/KsPanel.vue';
 import KsRadio from './components/KsRadio.vue';
 import KsRadioGroup from './components/KsRadioGroup.vue';
 import KsSelect from './components/KsSelect.vue';
@@ -52,6 +53,7 @@ const Kickstart = {
 	KsLoaderSpin,
 	KsModal,
     KsPaginator,
+    KsPanel,
 	KsRadio,
 	KsRadioGroup,
 	KsSelect,
@@ -103,6 +105,7 @@ const Kickstart = {
         Vue.component('ks-loader-spin', KsLoaderSpin);
         Vue.component('ks-modal', KsModal);
         Vue.component('ks-paginator', KsPaginator);
+        Vue.component('ks-panel', KsPanel);
         Vue.component('ks-radio', KsRadio);
         Vue.component('ks-radio-group', KsRadioGroup);
         Vue.component('ks-select', KsSelect);
@@ -169,6 +172,7 @@ export {
     KsLoaderSpin,
     KsModal,
     KsPaginator,
+    KsPanel,
     KsRadio,
     KsRadioGroup,
     KsSelect,
