@@ -26,6 +26,7 @@ import KsTimepicker from './components/KsTimepicker.vue';
 import KsToast from './components/KsToast.vue';
 import KsTooltip from './components/KsTooltip.vue';
 import KsTopNav from './components/KsTopNav.vue';
+import KsCard from './components/KsCard.vue';
 import API from './helpers/api';
 import * as animations from './components/transitions/Transitions';
 import * as strings from './helpers/strings';
@@ -41,6 +42,7 @@ const Kickstart = {
 	KsAutocomplete,
 	KsButton,
 	KsCalendar,
+    KsCard,
 	KsCheckbox,
     KsCheckboxGroup,
 	KsDatepicker,
@@ -91,6 +93,7 @@ const Kickstart = {
         Vue.component('ks-autocomplete', KsAutocomplete);
         Vue.component('ks-button', KsButton);
         Vue.component('ks-calendar', KsCalendar);
+        Vue.component('ks-card', KsCard);
         Vue.component('ks-checkbox', KsCheckbox);
         Vue.component('ks-checkbox-group', KsCheckboxGroup);
         Vue.component('ks-datepicker', KsDatepicker);
@@ -156,6 +159,7 @@ export {
     KsAutocomplete,
     KsButton,
     KsCalendar,
+    KsCard,
     KsCheckbox,
     KsCheckboxGroup,
     KsDatepicker,

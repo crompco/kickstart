@@ -17,6 +17,7 @@ const config = {
         KsAutocomplete: ['./src/components/KsAutocomplete.vue'],
         KsButton: ['./src/components/KsButton'],
         KsCalendar: ['./src/components/KsCalendar.vue'],
+        KsCard: ['./src/components/KsCard.vue'],
         KsCheckbox: ['./src/components/KsCheckbox.vue'],
         KsCheckboxGroup: ['./src/components/KsCheckboxGroup.vue'],
         KsDatepicker: ['./src/components/KsDatepicker.vue'],
