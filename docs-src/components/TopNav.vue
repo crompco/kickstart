@@ -1,6 +1,8 @@
 <template>
     <ks-top-nav :has-sidebar="true">
-        <div class="brand text-xl">Kickstart</div>
+        <div class="brand text-xl">
+            <router-link :to="{name: 'Index'}">Kickstart</router-link>
+        </div>
         <div class="collapse">
             <ul class="dropdown right pr-4">
                 <li class="pr-2">
