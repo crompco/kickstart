@@ -6,3 +6,27 @@ $rounded: (
     'rounded-lg': 0.5rem,
     'rounded-full': 9999px,
 ) !default;
+
+$border_sizing: (
+    '0': 0,
+    '2': 2px,
+    '4': 4px,
+    '8': 8px
+) !default;
+
+$border_map: (
+    ('property': 'border', 'code': 'border'),
+    ('property': 'border-top', 'code': 'border-t'),
+    ('property': 'border-bottom', 'code': 'border-b'),
+    ('property': 'border-right', 'code': 'border-r'),
+    ('property': 'border-left', 'code': 'border-l'),
+);
+
+$border_styles: (
+    solid,
+    dashed,
+    dotted,
+    double,
+    hidden,
+    none
+);

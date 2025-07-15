@@ -14,6 +14,18 @@ api:
           definition: "border-radius: 0.5rem;"
         - name: rounded-full
           definition: "border-radius: 9999px;"
+        - name: border-solid
+          definition: "border-style: solid;"
+        - name: border-dashed
+          definition: "border-style: dashed;"
+        - name: border-dotted
+          definition: "border-style: dotted;"
+        - name: border-double
+          definition: "border-style: double;"
+        - name: border-hidden
+          definition: "border-style: hidden;"
+        - name: border-none
+          definition: "border-style: none;"
 ---
 
 #### Default Border Radius Map
@@ -28,3 +40,20 @@ $rounded: (
     'rounded-full': 9999px,
 );
 ```
+
+#### Border Size
+
+```sass
+$border_sizing: (
+    '0': 0,
+    '2': 2px,
+    '4': 4px,
+    '8': 8px
+);
+```
+
+<border-size-map></border-size-map>
+
+#### Border Color
+
+<border-color-map></border-color-map>
