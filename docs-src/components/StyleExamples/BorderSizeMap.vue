@@ -1,6 +1,6 @@
 <template>
     <div>
-        <table class="table striped shadow">
+        <table class="ks-table striped shadow">
             <tbody>
             <template v-for="type in types">
                 <tr>
