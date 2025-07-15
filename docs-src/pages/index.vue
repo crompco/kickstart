@@ -5,7 +5,7 @@
             <table class="ks-table striped">
                 <tbody>
                     <tr v-for="component in components">
-                        <td><router-link :to="component.path">{{component.title}}</router-link></td>
+                        <td><router-link :to="component.path" class="text-blue-700 hover:text-blue-600">{{component.title}}</router-link></td>
                     </tr>
                 </tbody>
             </table>
@@ -16,7 +16,7 @@
             <table class="ks-table striped">
                 <tbody>
                     <tr v-for="style in styles">
-                        <td><router-link :to="style.path">{{style.title}}</router-link></td>
+                        <td><router-link :to="style.path" class="text-blue-700 hover:text-blue-600">{{style.title}}</router-link></td>
                     </tr>
                 </tbody>
             </table>
