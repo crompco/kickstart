@@ -1,7 +1,7 @@
 @import "../functions/_utils";
 @import "../variables/_panels";
 
-.panel {
+.ks-panel {
 	margin-bottom: $panel-margin-bottom;
 
 	&:not(.light) {
@@ -41,11 +41,11 @@
 	}
 
 	&.light {
-		.panel-header {
+		.ks-panel-header {
 			color: $panel-light-header-color;
 		}
 
-		.panel-body:not(.no-bg) {
+		.ks-panel-body:not(.no-bg) {
 			background: $panel-light-body-bg;
 
 			@if $panel-light-body-box-shadow != false {

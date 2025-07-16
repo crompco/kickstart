@@ -1,17 +1,17 @@
 <template>
-	<div class="autocomplete-holder"
-		 :class="{ 'is-selected': has_selections, 'is-multiple': is_multiple, 'disabled': disabled}"
+	<div class="ks-autocomplete-holder"
+		 :class="{ 'ks-selected': has_selections, 'ks-multiple': is_multiple, 'disabled': disabled}"
 		 @click.prevent="setFocus('lookup')"
          @keydown.enter.prevent.stop="editSelection"
 	     tabindex="-1"
 	>
 
 		<!-- Selections  -->
-		<span class="selection" v-if="selectionKey && has_selections" @click.prevent="editSelection" ref="selections">
-			<span v-for="s in selection" class="selection-text" tabindex="0" @keyup.delete.prevent.stop="clearSelection(s)">
-        <slot name="label" :item="s">
-				  {{getSelectionLabel(s)}}
-        </slot>
+		<span class="ks-selection" v-if="selectionKey && has_selections" @click.prevent="editSelection" ref="selections">
+			<span v-for="s in selection" class="ks-selection-text" tabindex="0" @keyup.delete.prevent.stop="clearSelection(s)">
+                <slot name="label" :item="s">
+                          {{getSelectionLabel(s)}}
+                </slot>
 				<a href="#" @click.prevent.stop="clearSelection(s)" class="clear-selection" tabindex="-1">
 					<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 						<g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -43,28 +43,28 @@
 
 		<!-- List -->
 		<div v-show="show_list" class="autocomplete-list-wrapper">
-			<div class="searching-results">
-				<loader-line :show="loading"></loader-line>
+			<div class="ks-searching-results">
+				<ks-loader-line :show="loading"></ks-loader-line>
 			</div>
-			<ul class="autocomplete-list"
+			<ul class="ks-autocomplete-list"
 			    :style="'max-height:'+this.listHeight"
 			    ref="list"
 			>
 				<li
 					v-if="showTagInList && taggable && lookup_name"
-					:class="{ 'selected-item': -1 == selected_index }"
+					:class="{ 'ks-selected-item': -1 == selected_index }"
                     @click="selectItem(-1, $event)"
 				>
 					Add "<em v-text="lookup_name"></em>"
 				</li>
                 <template v-if="groupBy">
-                    <li v-for="(group_list, group) in groups" class="opt-group" :key="group">
+                    <li v-for="(group_list, group) in groups" class="ks-opt-group" :key="group">
                         <strong>{{group}}</strong>
                         <ul>
                             <li
                                 v-for="(item, index) in group_list"
 								:key="index"
-                                :class="{ 'selected-item': item._index == selected_index }"
+                                :class="{ 'ks-selected-item': item._index == selected_index }"
                                 @click.prevent="selectItem(item._index, $event)"
                                 @mouseover="setHoverIndex(item._index)"
                             >
@@ -78,7 +78,7 @@
                     <li
                         v-for="(item, index) in list"
 						:key="index"
-                        :class="{ 'selected-item': index == selected_index }"
+                        :class="{ 'ks-selected-item': index == selected_index }"
                         @click.prevent="selectItem(index, $event)"
                         @mouseover="setHoverIndex(index)"
                     >
@@ -86,12 +86,12 @@
                         <slot :item="item">{{item[selectionKey]}}</slot>
                     </li>
                 </template>
-                <li v-if="!acceptEmptySelection && hasEmptyMessage && !loading && list.length == 0" class="empty-list-message">
+                <li v-if="!acceptEmptySelection && hasEmptyMessage && !loading && list.length == 0" class="ks-empty-list-message">
                     <slot :term="lookup_name" name="empty">{{emptyMessage}}</slot>
                 </li>
                 <li v-if="acceptEmptySelection && hasEmptyMessage && !loading && list.length == 0"
-                    class="empty-list-message active-empty-list-message"
-                    :class="{'selected-item': selected_empty}"
+                    class="ks-empty-list-message active-empty-list-message"
+                    :class="{'ks-selected-item': selected_empty}"
                     @click.prevent="selectEmpty(true)"
                 >
                     <slot :term="lookup_name" name="empty">{{emptyMessage}}</slot>
@@ -103,14 +103,14 @@
 
 <script>
 	// Internal
-	import LoaderLine from './KsLoaderLine.vue';
+	import KsLoaderLine from './KsLoaderLine.vue';
     import {object_get} from '../helpers/objects';
-    import ListIndexNavigatior from './mixins/ListIndexNavigator';
+    import ListIndexNavigator from './mixins/ListIndexNavigator';
 
 	export default {
 		name: 'KsAutocomplete',
 
-		mixins: [ListIndexNavigatior],
+		mixins: [ListIndexNavigator],
 
 		props: {
 			value: {},
@@ -184,7 +184,9 @@
 		mounted() {
 			if ( !this.itemFilter ) {
 				this.filter = this.selectionKey;
-			}
+			} else {
+                this.filter = this.itemFilter;
+            }
 			this.refreshSelection();
 
 			this.$nextTick(() => {
@@ -413,7 +415,7 @@
 		},
 
 		components: {
-			LoaderLine
+			KsLoaderLine
 		}
 	}
 </script>

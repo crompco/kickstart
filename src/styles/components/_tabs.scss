@@ -7,11 +7,11 @@
 
 .ks-tabs {
 
-	.tabs-title-bar-wrapper {
+	.ks-tabs-title-bar-wrapper {
 		position: relative;
 		height: rem($tabs-height);
 
-		@include tab(true) {
+		@include ks-tab(true) {
 			&:after {
 				content: '';
 				position: absolute;
@@ -19,7 +19,7 @@
 				@include v-center();
 			}
 
-			.tabs-title-bar li.selected-tab a {
+			.ks-tabs-title-bar li.selected-tab a {
 				border-top-color: $tabs-links-border-top-color;
 			}
 			&:not(.show) {
@@ -32,7 +32,7 @@
 					z-index: 201;
 					@include triangle($color: #444, $size: 10px, $direction: 'up');
 				}
-				.tabs-title-bar {
+				.ks-tabs-title-bar {
 					z-index: 100;
 
 					li {
@@ -51,7 +51,7 @@
 		}
 	}
 
-	.tabs-title-bar {
+	.ks-tabs-title-bar {
 		padding: 0;
 		margin: 0;
 		list-style: none;
@@ -61,7 +61,7 @@
 		flex-direction: column;
 		width: 100%;
 
-		@include tab() {
+		@include ks-tab() {
 			position: relative;
 			flex-direction: row;
 			width: auto;
@@ -97,7 +97,7 @@
 					opacity: 1;
 				}
 
-				@include tab() {
+				@include ks-tab() {
 					flex-grow: 0;
 					opacity: $tabs-opacity;
 				}
@@ -111,13 +111,13 @@
 					color: $tabs-links-color;
 					opacity: 1;
 
-					@include tab() {
+					@include ks-tab() {
 						border-top-color: $tabs-links-border-top-color;
 					}
 				}
 			}
 
-			@include tab(true) {
+			@include ks-tab(true) {
 				&:not(.selected-tab) {
 					display: none;
 				}
@@ -149,7 +149,7 @@
 		}
 	}
 
-	.tabs-content {
+	.ks-tabs-content {
 		background-color: $tabs-content-bg;
 		padding: rem($tabs-content-padding);
 

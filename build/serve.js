@@ -1,17 +1,13 @@
-
-const countries = require('../docs/countries.json');
-
-
+const countries = require('../docs/static/countries.json');
 
 let matchOperatorsRe = /[|\\{}()[\]^$+*?.]/g;
 function escapeRegExp(str) {
 	return str.replace(matchOperatorsRe, '\\$&');
 }
 
-module.exports = (app) => {
-
-	app.get('/countries', function(req, res) {
-		let name_regex = new RegExp('^.*' + escapeRegExp(req.query.q) + '.*', 'i');
+module.exports = (middlewares, devServer) => {
+	devServer.app.get('/api/countries', function(req, res) {
+		let name_regex = new RegExp('^.*' + escapeRegExp(req.query?.q || '') + '.*', 'i');
 		let limit = 10;
 		let page = parseInt(typeof req.query.page != 'undefined' ? req.query.page : 1);
 		let slice_start = (page - 1) * limit;
@@ -27,4 +23,6 @@ module.exports = (app) => {
 
         }, 300);
 	});
+
+	return middlewares;
 }

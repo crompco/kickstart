@@ -1,7 +1,7 @@
 <template>
     <div class="ks-tabs">
-        <div class="tabs-title-bar-wrapper" :class="classWrapperObj">
-            <ul class="tabs-title-bar" :class="classObj">
+        <div class="ks-tabs-title-bar-wrapper" :class="classWrapperObj">
+            <ul class="ks-tabs-title-bar" :class="classObj">
                 <li v-for="tab in tabs" :class="{'selected-tab': tab.active}">
                     <a :href="'#' + tab.title"
                        @click.prevent="setActiveTab(tab)"
@@ -11,7 +11,7 @@
                 </li>
             </ul>
         </div>
-        <div class="tabs-content">
+        <div class="ks-tabs-content">
             <slot></slot>
         </div>
     </div>
@@ -19,9 +19,6 @@
 
 
 <script>
-
-    import throttle from '../helpers/throttle';
-
     export default {
         name: 'KsTabs',
 
@@ -105,7 +102,7 @@
             },
 
             mobileShow() {
-                let tabs = this.$el.querySelectorAll('.tabs-title-bar li:not(.selected-tab)');
+                let tabs = this.$el.querySelectorAll('.ks-tabs-title-bar li:not(.selected-tab)');
 
                 if ( tabs.length > 0 ) {
                     let visible = true;
@@ -120,7 +117,5 @@
                 }
             },
         },
-
-        watch: {},
     }
 </script>

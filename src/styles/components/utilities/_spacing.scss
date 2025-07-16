@@ -16,8 +16,14 @@
     @each $name, $size in $spacing {
         @include size($map, $name, $size);
     }
+
+    @if map-has-key($map, 'percent') {
+        @each $name, $size in $spacing_percent {
+            @include size($map, $name, $size);
+        }
+    }
 }
 
-.full-width {
+.full-width, .w-full {
     width: 100%;
 }

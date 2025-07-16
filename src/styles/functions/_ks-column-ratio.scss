@@ -1,0 +1,9 @@
+@use "sass:math";
+
+@function ks-column-ratio($grid, $columns) {
+    @if length($columns) > 1 {
+        @return math.div(nth($columns, 1), ks-parse-columns($columns));
+    } @else if $columns {
+        @return math.div($columns,  map-get($grid, columns));
+    }
+}

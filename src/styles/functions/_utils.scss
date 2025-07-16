@@ -49,3 +49,7 @@
 
 	@return $values;
 }
+
+@function map-get-default($map, $property, $default) {
+    @return if(map-has-key($map, $property), map-get($map, $property), $default);
+}

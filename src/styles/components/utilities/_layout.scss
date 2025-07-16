@@ -8,34 +8,50 @@
     }
 }
 
-@include flex() {
-    @each $name, $value in $flex-direction {
-        &.#{$name} {
-            @include flex-direction($value);
-        }
+@each $name, $value in $flex-direction {
+    .#{$name} {
+        flex-direction: $value;
     }
+}
 
-    @each $name, $value in $flex-wrap {
-        &.#{$name} {
-            @include flex-wrap($value);
-        }
+@each $name, $value in $flex-wrap {
+    .#{$name} {
+        flex-wrap: $value;
     }
+}
 
-    @each $name, $value in $flex-align {
-        &.align-#{$name} {
-            @include flex-align($value);
-        }
+@each $name, $value in $flex-align-items {
+    .align-#{$name}, .items-#{$name} {
+        align-items: $value;
     }
+}
 
-    @each $name, $value in $flex-justify-content {
-        &.jc-#{$name} {
-            @include flex-justify-content($value);
-        }
+@each $name, $value in $flex-align-content {
+    .content-#{$name} {
+        align-content: $value;
     }
+}
 
-    @each $name, $value in $flex-align-self {
-        &.align-self-#{$name} {
-            @include flex-align-self($value);
-        }
+@each $name, $value in $flex-justify-content {
+    .jc-#{$name}, .justify-#{$name} {
+        justify-content: $value;
+    }
+}
+
+@each $name, $value in $flex-align-self {
+    .align-self-#{$name}, .self-#{$name} {
+        align-self: $value;
+    }
+}
+
+@each $name, $value in $flex-basis {
+    .basis-#{$name} {
+        flex-basis: $value;
+    }
+}
+
+@each $name, $value in $flex {
+    .flex-#{$name} {
+        flex: $value;
     }
 }

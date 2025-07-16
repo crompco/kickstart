@@ -3,7 +3,7 @@
 
 .side-nav {
 	&.vertical {
-		@include breakpoint(map-get($breakpoint-list, $side-nav-breakpoint)) {
+		@include ks-breakpoint(map-get($breakpoint-list, $side-nav-breakpoint)) {
 			padding-top: rem($nav-vertical-padding-top);
 			width: $nav-width;
 			height: 100%;
@@ -24,7 +24,7 @@
 	&.fixed {
 		position: fixed;
 
-		@include breakpoint(map-get($breakpoint-list, $side-nav-breakpoint)) {
+		@include ks-breakpoint(map-get($breakpoint-list, $side-nav-breakpoint)) {
 			z-index: 10;
 			left: 0;
 		}

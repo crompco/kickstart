@@ -3,3 +3,5 @@ node_modules
 .vercel
 .nuxt
 .vercel_cache
+docs/*.bundle.*
+docs-src/generated/*.js

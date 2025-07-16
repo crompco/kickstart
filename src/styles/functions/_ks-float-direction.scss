@@ -1,0 +1,15 @@
+@function ks-float-direction($grid) {
+    $_direction: map-get-default($grid, direction, ltr);
+    $_float-direction: null;
+
+    @debug $_direction;
+    @debug "direction: #{$_direction}";
+
+
+    @if $_direction == "ltr" {
+        $_float-direction: left;
+    } @else if $_direction == "rtl" {
+        $_float-direction: right;
+    }
+    @return $_float-direction;
+}

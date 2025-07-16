@@ -1,0 +1,10 @@
+@function ks-opposite-direction($grid) {
+    $_direction: map-get($grid, direction);
+    $_float-direction: null;
+    @if $_direction == "ltr" {
+        $_float-direction: right;
+    } @else if $_direction == "rtl" {
+        $_float-direction: left;
+    }
+    @return $_float-direction;
+}

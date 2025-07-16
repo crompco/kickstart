@@ -1,13 +1,20 @@
+@import "spacing";
+
 $flex-direction: (
     'column': column,
-    'row': row
+    'row': row,
+    'column-reverse': column-reverse,
+    'row-reverse': row-reverse,
 ) !default;
 
 $flex-wrap: (
     'wrap': wrap,
+    'nowrap': nowrap,
+    'wrap-reverse': wrap-reverse,
+    'column-reverse': column-reverse
 ) !default;
 
-$flex-align: (
+$flex-align-items: (
     'center': center,
     'start': flex-start,
     'baseline': baseline,
@@ -15,13 +22,46 @@ $flex-align: (
     'stretch': stretch,
 ) !default;
 
+$flex-align-content: (
+    'normal': normal,
+    'center': center,
+    'start': flex-start,
+    'end': flex-end,
+    'between': space-between,
+    'around': space-around,
+    'evenly': space-evenly,
+    'baseline': baseline,
+    'stretch': stretch
+) !default;
+
 $flex-justify-content: (
+    'start': flex-start,
     'center': center,
     'between': space-between,
     'end': flex-end,
     'stretch': stretch,
+    'around': space-around,
+    'evenly': space-evenly,
 ) !default;
 
 $flex-align-self: (
     'center': center,
+    'auto': auto,
+    'start': flex-start,
+    'end': flex-end,
+    'stretch': stretch,
+    'baseline': baseline
+) !default;
+
+$flex-basis: map-merge(
+    map-merge($spacing, $spacing_percent),
+    ('auto': auto, 'full': 100%)
+) !default;
+
+
+$flex: (
+    '1': 1 1 0%,
+    'auto': 1 1 auto,
+    'initial': 0 1 auto,
+    'none': none,
 ) !default;

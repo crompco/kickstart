@@ -1,30 +1,34 @@
 import './helpers/polyfills';
+import KsAccordion from './components/KsAccordion.vue';
+import KsAccordionRow from './components/KsAccordionRow.vue';
+import KsActionMenu from './components/KsActionMenu.vue';
 import KsAutocomplete from './components/KsAutocomplete.vue';
+import KsButton from './components/KsButton.vue';
 import KsCalendar from './components/KsCalendar.vue';
 import KsCheckbox from './components/KsCheckbox.vue';
 import KsCheckboxGroup from './components/KsCheckboxGroup.vue';
 import KsDatepicker from './components/KsDatepicker.vue';
-import KsLoaderSpin from './components/KsLoaderSpin.vue';
+import KsDraggable from './components/KsDraggable.vue';
+import KsDroppable from './components/KsDroppable.vue';
 import KsLoaderLine from './components/KsLoaderLine.vue';
+import KsLoaderSpin from './components/KsLoaderSpin.vue';
 import KsModal from './components/KsModal.vue';
+import KsPaginator from './components/KsPaginator.vue';
+import KsPanel from './components/KsPanel.vue';
 import KsRadio from './components/KsRadio.vue';
 import KsRadioGroup from './components/KsRadioGroup.vue';
 import KsSelect from './components/KsSelect.vue';
+import KsSideNav from './components/KsSideNav.vue';
+import KsSimplePaginator from './components/KsSimplePaginator.vue';
+import KsStepThrough from './components/KsStepThrough.vue';
 import KsTab from './components/KsTab.vue';
 import KsTabs from './components/KsTabs.vue';
-import API from './helpers/api';
-import KsToast from './components/KsToast.vue';
-import KsPaginator from './components/KsPaginator.vue';
-import KsSimplePaginator from './components/KsSimplePaginator.vue';
-import KsActionMenu from './components/KsActionMenu.vue';
-import KsStepThrough from './components/KsStepThrough.vue';
-import KsAccordion from './components/KsAccordion.vue';
-import KsAccordionRow from './components/KsAccordionRow.vue';
-import KsTooltip from './components/KsTooltip.vue';
-import KsButton from './components/KsButton.vue';
 import KsTimepicker from './components/KsTimepicker.vue';
-import KsDraggable from './components/KsDraggable.vue';
-import KsDroppable from './components/KsDroppable.vue';
+import KsToast from './components/KsToast.vue';
+import KsTooltip from './components/KsTooltip.vue';
+import KsTopNav from './components/KsTopNav.vue';
+import KsCard from './components/KsCard.vue';
+import API from './helpers/api';
 import * as animations from './components/transitions/Transitions';
 import * as strings from './helpers/strings';
 
@@ -33,30 +37,35 @@ if (process.env.BUILD === 'production') {
 }
 
 const Kickstart = {
+    KsAccordion,
+    KsAccordionRow,
+	KsActionMenu,
 	KsAutocomplete,
+	KsButton,
 	KsCalendar,
+    KsCard,
 	KsCheckbox,
+    KsCheckboxGroup,
 	KsDatepicker,
-	KsLoaderSpin,
+    KsDraggable,
+    KsDroppable,
 	KsLoaderLine,
+	KsLoaderSpin,
 	KsModal,
+    KsPaginator,
+    KsPanel,
 	KsRadio,
 	KsRadioGroup,
 	KsSelect,
+    KsSideNav,
+    KsSimplePaginator,
+    KsStepThrough,
 	KsTab,
     KsTabs,
-    KsToast,
-    KsPaginator,
-	KsActionMenu,
-    KsStepThrough,
-    KsAccordion,
-    KsAccordionRow,
-    KsTooltip,
-	KsButton,
     KsTimepicker,
-    KsDraggable,
-    KsDroppable,
-    KsSimplePaginator,
+    KsToast,
+    KsTooltip,
+    KsTopNav,
 	install(Vue) {
         function open(propsData) {
             const Toast = Vue.extend(KsToast);
@@ -80,30 +89,34 @@ const Kickstart = {
 			}, params))
 		};
 
-        Vue.component('ks-autocomplete', KsAutocomplete)
-        Vue.component('ks-calendar', KsCalendar)
-        Vue.component('ks-checkbox', KsCheckbox)
-        Vue.component('ks-checkbox-group', KsCheckboxGroup)
-        Vue.component('ks-datepicker', KsDatepicker)
-        Vue.component('ks-loader-spin', KsLoaderSpin)
-        Vue.component('ks-loader-line', KsLoaderLine)
-        Vue.component('ks-modal', KsModal)
-        Vue.component('ks-radio', KsRadio)
-        Vue.component('ks-radio-group', KsRadioGroup)
-        Vue.component('ks-select', KsSelect)
-        Vue.component('ks-tab', KsTab)
-        Vue.component('ks-tabs', KsTabs)
-        Vue.component('ks-paginator', KsPaginator)
-        Vue.component('ks-simple-paginator', KsSimplePaginator)
-        Vue.component('ks-action-menu', KsActionMenu)
-        Vue.component('ks-step-through', KsStepThrough)
-        Vue.component('ks-accordion', KsAccordion)
-        Vue.component('ks-accordion-row', KsAccordionRow)
-        Vue.component('ks-tooltip', KsTooltip)
+        Vue.component('ks-accordion', KsAccordion);
+        Vue.component('ks-accordion-row', KsAccordionRow);
+        Vue.component('ks-action-menu', KsActionMenu);
+        Vue.component('ks-autocomplete', KsAutocomplete);
         Vue.component('ks-button', KsButton);
-        Vue.component('ks-timepicker', KsTimepicker);
+        Vue.component('ks-calendar', KsCalendar);
+        Vue.component('ks-card', KsCard);
+        Vue.component('ks-checkbox', KsCheckbox);
+        Vue.component('ks-checkbox-group', KsCheckboxGroup);
+        Vue.component('ks-datepicker', KsDatepicker);
         Vue.component('ks-draggable', KsDraggable);
         Vue.component('ks-droppable', KsDroppable);
+        Vue.component('ks-loader-line', KsLoaderLine);
+        Vue.component('ks-loader-spin', KsLoaderSpin);
+        Vue.component('ks-modal', KsModal);
+        Vue.component('ks-paginator', KsPaginator);
+        Vue.component('ks-panel', KsPanel);
+        Vue.component('ks-radio', KsRadio);
+        Vue.component('ks-radio-group', KsRadioGroup);
+        Vue.component('ks-select', KsSelect);
+        Vue.component('ks-side-nav', KsSideNav);
+        Vue.component('ks-simple-paginator', KsSimplePaginator);
+        Vue.component('ks-step-through', KsStepThrough);
+        Vue.component('ks-tab', KsTab);
+        Vue.component('ks-tabs', KsTabs);
+        Vue.component('ks-timepicker', KsTimepicker);
+        Vue.component('ks-tooltip', KsTooltip);
+        Vue.component('ks-top-nav', KsTopNav);
 
 		for ( let i in animations ) {
 			Vue.component(i, animations[i]);
@@ -142,15 +155,34 @@ const Kickstart = {
 
 export default Kickstart;
 
-export {KsAutocomplete};
-export {KsCalendar};
-export {KsCheckbox};
-export {KsDatepicker};
-export {KsLoaderSpin};
-export {KsLoaderLine};
-export {KsModal};
-export {KsRadio};
-export {KsRadioGroup};
-export {KsSelect};
-export {KsTab};
-export {KsTabs};
+export {
+    KsAccordion,
+    KsAccordionRow,
+    KsActionMenu,
+    KsAutocomplete,
+    KsButton,
+    KsCalendar,
+    KsCard,
+    KsCheckbox,
+    KsCheckboxGroup,
+    KsDatepicker,
+    KsDraggable,
+    KsDroppable,
+    KsLoaderLine,
+    KsLoaderSpin,
+    KsModal,
+    KsPaginator,
+    KsPanel,
+    KsRadio,
+    KsRadioGroup,
+    KsSelect,
+    KsSideNav,
+    KsSimplePaginator,
+    KsStepThrough,
+    KsTab,
+    KsTabs,
+    KsTimepicker,
+    KsToast,
+    KsTooltip,
+    KsTopNav,
+};

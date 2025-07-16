@@ -22,6 +22,7 @@
     // External Dependencies
 
     // Internal Dependencies
+    import {SlideTransition} from './transitions/Transitions';
 
     export default {
         name: 'KsAccordionRow',
@@ -63,6 +64,10 @@
             setActive(bool) {
                 this.showContent = bool;
             }
-        }
+        },
+
+        components: {
+            SlideTransition,
+        },
     }
 </script>

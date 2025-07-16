@@ -32,7 +32,7 @@
                 v-for="(time, index) in list"
                 :key="time"
                 @click.prevent.stop="selectItemAtIndex(index)"
-                :class="{ 'selected-item': index == selected_index }"
+                :class="{ 'ks-selected-item': index == selected_index }"
                 @mouseover="setHoverIndex(index)"
             >
                 {{time}}

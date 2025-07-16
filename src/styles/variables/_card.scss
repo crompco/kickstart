@@ -13,9 +13,9 @@ $card-light-box-shadow: 0 2px 4px rgba(170, 170, 170, 0.4) !default;
 $card-header-font-size: 1.3rem !default;
 $card-header-padding: 0.5rem 1rem !default;
 $card-header-box-shadow: 0 1px 2px rgba($med-gray, 0.3) !default;
-$card-light-header-bg: map_get($brand, 'primary') !default;
+$card-light-header-bg: $white !default;
 $card-light-header-font-size: 1rem !default;
-$card-light-header-color: $white !default;
+$card-light-header-color: $text-color !default;
 
 //
 // Body

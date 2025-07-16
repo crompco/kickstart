@@ -1,5 +1,5 @@
 <template>
-    <div class="steps">
+    <div class="ks-steps">
         <ul class="step-list">
             <li :class="{ 'active': index+1 == activeStep, 'completed': completed[index] }" v-for="(step, index) in steps">
                 <div class="step-line"></div>
@@ -63,7 +63,5 @@
                 }
             }
         },
-
-        components: {}
     }
 </script>

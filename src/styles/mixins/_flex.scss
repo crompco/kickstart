@@ -16,6 +16,10 @@
     align-items: $align;
 }
 
+@mixin flex-align-content($align) {
+    align-content: $align;
+}
+
 @mixin flex-justify-content($justify-content) {
     justify-content: $justify-content;
 }

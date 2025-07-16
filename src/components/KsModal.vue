@@ -50,6 +50,7 @@
 
     // Internal Dependencies
     import {addClass, removeClass} from '../helpers/dom';
+    import KsLoaderLine from './KsLoaderLine.vue';
 
     export default {
         name: 'KsModal',
@@ -260,7 +261,8 @@
         },
 
         components: {
-            Close
+            Close,
+            KsLoaderLine
         }
     }
 </script>

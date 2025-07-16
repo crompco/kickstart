@@ -93,6 +93,7 @@ export default {
             key_pressed_timer: '',
             cancel_token_source: null,
             selected_empty: false,
+            filter: null,
         };
     },
 

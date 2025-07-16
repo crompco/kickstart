@@ -1,6 +1,6 @@
 <template>
 	<div class="ks-radio-group" :class="groupClass">
-		<label class="ks-radio-group-title label" v-if="$slots['default'] || label">
+		<label class="ks-radio-group-title ks-label" v-if="$slots['default'] || label">
 			<slot>{{label}}</slot>
 		</label>
 		<div class="radio">

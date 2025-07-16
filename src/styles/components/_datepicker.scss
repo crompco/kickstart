@@ -20,10 +20,10 @@
 		font-size: 0.8em;
 		box-shadow: $datepicker-cal-box-shadow;
 		z-index: 100;
-		.cal-week {
+		.ks-cal-week {
 			min-height: 2rem;
-            .cal-day .day-num,
-            .cal-blank .day-num {
+            .ks-cal-day .ks-day-num,
+            .ks-cal-blank .ks-day-num {
                 text-align: center;
             }
 		}

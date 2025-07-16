@@ -1,14 +1,7 @@
 // External
-@import "~bourbon-neat/core/_neat";
-@import "../mixins/_grid";
 @import "../mixins/_state";
 @import "../variables/calendar";
 @import "../functions/utils";
-
-$calendar-grid: (
-	columns: 7,
-	gutter: 0
-);
 
 .ks-calendar {
 	background: $calendar-bg;
@@ -25,7 +18,7 @@ $calendar-grid: (
 			color: $calendar-header-color;
 			text-decoration: none;
             padding: 0.25rem;
-            &.open-picker {
+            &.ks-open-picker {
                 @include state-default();
             }
 			svg {
@@ -48,8 +41,8 @@ $calendar-grid: (
 	}
 
 	.ks-calendar-view.interactive {
-		.cal-week:not(.cal-week-header) {
-			.cal-day:not(.out_of_scope) {
+		.ks-cal-week:not(.ks-cal-week-header) {
+			.ks-cal-day:not(.ks-out_of_scope) {
 				&:hover {
 					@include state-hover();
 					border: 0;
@@ -65,14 +58,14 @@ $calendar-grid: (
 					cursor: pointer;
 
 				}
-				&.selected {
+				&.ks-selected {
 					@include state-default();
 					border: 0;
 				}
 			}
-            .cal-day.out_of_scope {
+            .ks-cal-day.ks-out_of_scope {
                 background: $calendar-inactive-day-background;
-                .day-num {
+                .ks-day-num {
                     color: $calendar-inactive-day-color;
                 }
                 cursor: default;
@@ -82,7 +75,7 @@ $calendar-grid: (
 
 	.ks-calendar-title {
 		position: relative;
-        .ctrl-left, .ctrl-right {
+        .ks-ctrl-left, .ks-ctrl-right {
             font-family: "helvetica Neue", "Helvetica", sans-serif;
             font-size: 1rem;
             line-height: 1.25rem;
@@ -97,11 +90,11 @@ $calendar-grid: (
                 background: $state-default-bg;
             }
         }
-		.ctrl-left:first-child {
+		.ks-ctrl-left:first-child {
 			position: absolute;
 			left: 0.5rem;
 		}
-		.ctrl-right:last-child {
+		.ks-ctrl-right:last-child {
 			position: absolute;
 			right: 0.5rem;
 		}
@@ -113,19 +106,19 @@ $calendar-grid: (
 		border-collapse: collapse;
         transition: height 0.2s ease-in-out;
 
-		.cal-week:first-of-type .cal-day:first-of-type {
+		.ks-cal-week:first-of-type .ks-cal-day:first-of-type {
 			//margin-left: 42.85714%;
 		}
-		.cal-week {
+		.ks-cal-week {
 			display: flex;
-			.cal-day, .cal-blank {
+			.ks-cal-day, .ks-cal-blank {
 				flex-grow: 1;
 				flex-shrink: 1;
 				flex-basis: 0;
 			}
 		}
 
-		.cal-day, .cal-blank {
+		.ks-cal-day, .ks-cal-blank {
             .row-collapse {
                 margin-left: -0.5rem;
                 margin-right: -0.5rem;
@@ -134,15 +127,15 @@ $calendar-grid: (
 			> div {
 				padding: 0.5rem;
 			}
-			.day-num {
+			.ks-day-num {
 				display: block;
 				text-align: right;
 			}
-            &.cal-blank .day-num {
+            &.ks-cal-blank .ks-day-num {
                 color: #DDD;
                 cursor: pointer;
             }
-            a.day-num {
+            a.ks-day-num {
                 display: inline-block;
                 font-size: 0.9rem;
                 float: right;
@@ -165,7 +158,7 @@ $calendar-grid: (
                 }
             }
 		}
-		.cal-day {
+		.ks-cal-day {
 			box-shadow: -1px -1px $calendar-day-border-color, inset -1px -1px $calendar-day-border-color;
 			&.today {
 				color: $calendar-today-color;
@@ -173,9 +166,9 @@ $calendar-grid: (
 			}
 		}
 
-		.cal-week-header {
+		.ks-cal-week-header {
 			font-weight: bold;
-			.cal-day {
+			.ks-cal-day {
 				text-align: center;
 				color: $calendar-week-header-color;
 				box-shadow: none;
@@ -185,7 +178,7 @@ $calendar-grid: (
 	}
 
 
-    .month-selection {
+    .ks-month-selection {
         width: 100%;
         height: 100%;
         overflow: hidden;
@@ -222,7 +215,7 @@ $calendar-grid: (
                     color: $calendar-month-hover-color;
                 }
             }
-            &.selected-month {
+            &.ks-selected-month {
                 > div {
                     color: $calendar-month-selected-color;
                 }
@@ -231,7 +224,7 @@ $calendar-grid: (
         }
     }
 
-	.year-selection {
+	.ks-year-selection {
 		list-style: none;
 		padding: 0;
 		margin: 0;
@@ -246,7 +239,7 @@ $calendar-grid: (
 				color: $calendar-year-hover-color;
 				background: $calendar-year-hover-bg;
 			}
-			&.selected-year {
+			&.ks-selected-year {
 				font-size: $calendar-year-selected-size;
 				color: $calendar-year-selected-color;
 				background: $calendar-year-selected-bg;
