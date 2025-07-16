@@ -3,7 +3,7 @@
 set -e
 
 if [[ -z $1 ]]; then
-    echo "Enter new version: "
+    echo "Enter new version (without the 'v' prefix ex: 2.0.0): "
     read VERSION
 else
     VERSION=$1
