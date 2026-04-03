@@ -1,11 +1,11 @@
 <template>
 	<div class="top-bar" :class="classObj">
 		<button class="mobile-menu">
-			<menu-svg></menu-svg>
+			<menu-icon></menu-icon>
 		</button>
 
 		<button class="mobile-menu has-sidebar" v-if="hasSidebar">
-			<dots-horizontal></dots-horizontal>
+			<dots-horizontal-icon></dots-horizontal-icon>
 		</button>
 		<slot></slot>
 	</div>
@@ -13,8 +13,8 @@
 
 <script>
     // External Dependencies
-    import MenuSvg from '../svg/menu.svg';
-    import DotsHorizontal from '../svg/dots-horizontal-triple.svg';
+    import MenuIcon from './icons/MenuIcon.vue';
+    import DotsHorizontalIcon from './icons/DotsHorizontalIcon.vue';
 
     // Internal Dependencies
     import {addEvent} from '../helpers/events';
@@ -85,8 +85,8 @@
 		},
 
 		components: {
-            MenuSvg,
-            DotsHorizontal
+            MenuIcon,
+            DotsHorizontalIcon,
 		}
     }
 </script>

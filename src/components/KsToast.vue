@@ -7,7 +7,7 @@
         enter-active-class="fadeIn"
         leave-active-class="fadeOut">
         <div class="alert animated" :class="[type, duration === 0 ? 'has-close' : '']" v-show="active">
-            <a @click.prevent="close()" class="close" v-if="duration === 0"><close></close></a>
+            <a @click.prevent="close()" class="close" v-if="duration === 0"><close-icon></close-icon></a>
             <slot>
                 <span v-html="message"></span>
             </slot>
@@ -17,7 +17,7 @@
 
 <script>
     // External Dependencies
-    import Close from '../svg/close.svg';
+    import CloseIcon from './icons/CloseIcon.vue';
 
     // Internal Dependencies
 
@@ -115,7 +115,7 @@
         },
 
         components: {
-            Close
+            CloseIcon,
         }
     }
 </script>

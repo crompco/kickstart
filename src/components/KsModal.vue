@@ -21,7 +21,7 @@
                     </slot>
                     <div class="ks-modal-close" v-if="showClose">
                         <a href="#" @click.prevent="close">
-                            <close></close>
+                            <close-icon></close-icon>
                         </a>
                     </div>
                 </div>
@@ -46,7 +46,7 @@
 
 <script>
     // External Dependencies
-    import Close from '../svg/close.svg';
+    import CloseIcon from './icons/CloseIcon.vue';
 
     // Internal Dependencies
     import {addClass, removeClass} from '../helpers/dom';
@@ -261,7 +261,7 @@
         },
 
         components: {
-            Close,
+            CloseIcon,
             KsLoaderLine
         }
     }

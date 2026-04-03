@@ -1,7 +1,7 @@
 <template>
 	<div class="side-nav" :class="classObj">
 		<button class="mobile-menu" @click="showLinks()">
-			<menu-svg></menu-svg>
+			<menu-icon></menu-icon>
 		</button>
 		<slot></slot>
 	</div>
@@ -9,7 +9,7 @@
 
 <script>
     // External Dependencies
-	import MenuSvg from '../svg/menu.svg';
+	import MenuIcon from './icons/MenuIcon.vue';
 
     // Internal Dependencies
 	import {addEvent} from '../helpers/events';
@@ -66,7 +66,7 @@
 		},
 
 		components: {
-            MenuSvg
+            MenuIcon,
 		}
     }
 </script>

@@ -1,7 +1,7 @@
 <template>
     <div class="ks-action-menu" @click.stop :class="actionMenuClass">
         <button class="menu-button" @click.prevent="toggle()" ref="menu">
-            <slot name="menu"><menu-svg></menu-svg></slot>
+            <slot name="menu"><menu-icon></menu-icon></slot>
         </button>
         <div class="ks-menu-list" ref="menuList" :class="menuListClass" @click="close()">
             <slot></slot>
@@ -11,7 +11,7 @@
 
 <script>
     // External Dependencies
-    import MenuSvg from '../svg/menu.svg';
+    import MenuIcon from './icons/MenuIcon.vue';
     import Tether from 'tether';
 
     // Internal Dependencies
@@ -165,7 +165,7 @@
         },
 
         components: {
-            MenuSvg
+            MenuIcon,
         }
     }
 </script>
