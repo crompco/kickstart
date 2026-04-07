@@ -28,7 +28,7 @@
 				top: $abs_offset;
 				left: $abs_offset;
 
-				path {
+				path, polygon {
 					fill: $form-checkbox-check-fill;
 				}
 			}
