@@ -84,3 +84,15 @@ test('Timepicker:filterDisplayValue matches left to right', t => {
 	t.true(vm.filterDisplayValue('01:00 pm'));
 	t.false(vm.filterDisplayValue('10:01 pm'));
 });
+
+test('Timepicker:min/max time can be null', t => {
+	resetDocument();
+
+	let vm = component(KsTimepicker, {
+		minTime: null,
+		maxTime: null,
+	});
+
+	t.deepEqual(vm.timeOptions[0], '04:00 am');
+	t.deepEqual(vm.timeOptions[vm.timeOptions.length - 1], '11:30 pm')
+});

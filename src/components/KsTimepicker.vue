@@ -48,6 +48,9 @@
     import ListIndexNavigator from './mixins/ListIndexNavigator';
     import {escapeRegExp} from '../helpers/strings';
 
+    const defaultMinTime = '04:00';
+    const defaultMaxTime = '23:59';
+
     export default {
         name: 'KsTimepicker',
 
@@ -75,11 +78,11 @@
             },
             minTime: {
                 type: String,
-                default: '04:00'
+                default: defaultMinTime
             },
             maxTime: {
                 type: String,
-                default: '23:59'
+                default: defaultMaxTime
             },
             endOfDay: {
                 type: Boolean,
@@ -98,8 +101,8 @@
              * @returns {Array}
              */
             timeOptions() {
-                let min_time = parseTime(this.minTime);
-                let max_time = parseTime(this.maxTime);
+                let min_time = parseTime(this.minTime ?? defaultMinTime);
+                let max_time = parseTime(this.maxTime ?? defaultMaxTime);
 
                 let options = [];
 
