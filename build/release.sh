@@ -18,7 +18,7 @@ if [[ $REPLY =~ [Yy]$ ]]; then
     npm run build:all
 
     # Set new version to package.json
-    npm --no-git-tag-version version $VERSION
+    npm --no-git-tag-version --allow-same-version version $VERSION
 
     # Commit the build and new version
     git add -A
