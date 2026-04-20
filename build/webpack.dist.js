@@ -70,4 +70,19 @@ const config = {
     ]
 };
 
-module.exports = config;
+const esmConfig = {
+    ...config,
+    entry: {
+        'kickstart-ui.esm.js': options.paths.resolve('src/index.js'),
+    },
+    output: {
+        filename: '[name]',
+        path: options.paths.output.main,
+        library: { type: 'module' },
+    },
+    experiments: {
+        outputModule: true,
+    },
+};
+
+module.exports = [config, esmConfig];

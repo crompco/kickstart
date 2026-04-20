@@ -20,8 +20,8 @@ api:
           default: 
           description: The class to attach when the menu is opened
     events:
-        - name: action
-          description: Fired when the menu is opened or closed. The action event provides a boolean value, true for opened, false for closed.
+        - name: active
+          description: Fired when the menu is opened or closed. The active event provides a boolean value, true for opened, false for closed.
     methods: 
         - name: toggle
           description: This will toggle the open state of the menu
