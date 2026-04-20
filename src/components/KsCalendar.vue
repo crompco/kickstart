@@ -13,7 +13,7 @@
                :class="{'ks-open-picker': monthPickerOpen }"
             >
                 {{month}}
-                <chevron-down-icon></chevron-down-icon>
+                <down-svg></down-svg>
             </a>
             <span v-else class="ks-calendar-month-picker">{{month}}</span>
 
@@ -24,7 +24,7 @@
                :class="{'ks-open-picker': yearPickerOpen }"
             >
                 {{year}}
-                <chevron-down-icon></chevron-down-icon>
+                <down-svg></down-svg>
             </a>
             <span v-else class="ks-calendar-year-picker">{{year}}</span>
 
@@ -151,7 +151,7 @@
         cloneDate,
     } from '../helpers/dates';
     import {mouseHold} from '../helpers/events';
-    import ChevronDownIcon from './icons/ChevronDownIcon.vue';
+    import DownSvg from '../svg/cheveron-down.svg';
     import KsDroppable from './KsDroppable.vue';
 
     export default {
@@ -618,7 +618,7 @@
         },
 
         components: {
-            ChevronDownIcon,
+            DownSvg,
             KsDroppable
         }
 

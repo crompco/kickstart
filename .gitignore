@@ -5,3 +5,4 @@ node_modules
 .vercel_cache
 docs/*.bundle.*
 docs-src/generated/*.js
+/CLAUDE.md

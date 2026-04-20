@@ -13,7 +13,7 @@
         <div class="ks-checkbox-switch" v-if="switchStyle"></div>
         <template v-else>
             <div class="ks-checkbox-input-wrapper">
-                <checkmark-icon v-show="isChecked"></checkmark-icon>
+                <checkmark v-show="isChecked"></checkmark>
             </div>
         </template>
         <div class="ks-checkbox-label-wrapper">
@@ -25,7 +25,7 @@
 
 <script>
     // External Dependencies
-    import CheckmarkIcon from './icons/CheckmarkIcon.vue';
+    import Checkmark from '../svg/checkmark.svg';
 
     // Internal Dependencies
     import {looseIndexOf} from '../helpers/objects';
@@ -138,7 +138,7 @@
         },
 
         components: {
-            CheckmarkIcon,
+            Checkmark
         }
     }
 </script>
