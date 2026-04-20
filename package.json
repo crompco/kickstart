@@ -1,7 +1,8 @@
 {
   "name": "kickstart-ui",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "Vue components and js libs",
+  "module": "dist/kickstart-ui.esm.js",
   "main": "index.js",
   "repository": {
     "type": "git",
@@ -89,6 +90,7 @@
     ]
   },
   "files": [
+    "index.js",
     "src",
     "dist",
     "lib"

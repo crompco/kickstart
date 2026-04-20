@@ -18,7 +18,7 @@
 		box-shadow: $button-box-shadow;
 	}
 
-	&:hover:not(.disabled) {
+	&:hover {
 		@include state-hover;
 	}
 
