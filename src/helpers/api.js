@@ -27,8 +27,8 @@ export default {
             .catch((error) => Promise.reject(error));
     },
 
-	delete(url, request) {
-		return instance.delete(url, request)
+	delete(url, config = {}) {
+		return instance.delete(url, config)
 			.then((response) => Promise.resolve(response))
 			.catch((error) => Promise.reject(error));
 	},

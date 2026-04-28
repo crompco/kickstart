@@ -194,6 +194,12 @@ export default {
             this.ref_list = options.list || 'list';
 
             this.$nextTick(() => {
+                // prevent component initialization callbacks if component is
+                // destroyed/destroying
+                if ( this._isDestroyed || this._isBeingDestroyed ) {
+                    return;
+                }
+
                 this.listenForScroll();
 
                 addEvent(document, 'mousemove', () => {
