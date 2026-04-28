@@ -91,6 +91,24 @@
                 </template>
             </code-block>
         </div>
+        <br>
+        <div class="callout">
+            <ks-tabs :scrollable="true">
+                <ks-tab v-for="title in scrollableTabs" :key="title" :title="title">
+                    <p>{{ title }} content</p>
+                </ks-tab>
+            </ks-tabs>
+
+            <code-block>
+                <template v-pre>
+                    &lt;ks-tabs :scrollable="true">
+                        &lt;ks-tab title="Tab 1">…&lt;/ks-tab>
+                        &lt;ks-tab title="Tab 2">…&lt;/ks-tab>
+                        &lt;!-- many more tabs -->
+                    &lt;/ks-tabs>
+                </template>
+            </code-block>
+        </div>
     </div>
 </template>
 
@@ -101,6 +119,15 @@
 
     export default {
         name: 'PageKsTabs',
+
+        data() {
+            return {
+                scrollableTabs: [
+                    'Overview', 'Activity', 'Files', 'Notes', 'Tasks', 'Schedule',
+                    'Invoices', 'Quotes', 'Compliance', 'Reports', 'History', 'Settings',
+                ],
+            };
+        },
 
         components: {
             KsTabs,

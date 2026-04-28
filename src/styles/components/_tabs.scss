@@ -157,4 +157,60 @@
 			box-shadow: $tabs-content-box-shadow;
 		}
 	}
+
+	&.scrollable {
+		@include ks-tab() {
+			.ks-tabs-title-bar {
+				flex-wrap: nowrap;
+				overflow-x: auto;
+				scrollbar-width: none;
+				-ms-overflow-style: none;
+
+				&::-webkit-scrollbar {
+					display: none;
+				}
+
+				li {
+					flex: 0 0 auto;
+				}
+			}
+
+			.ks-tabs-scroll-arrow {
+				position: absolute;
+				top: 0;
+				height: rem($tabs-height);
+				width: rem($tabs-height);
+				z-index: 5;
+				border: 0;
+				padding: 0;
+				cursor: pointer;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				background: $tabs-links-bg;
+				color: $tabs-inactive-color;
+				@include transition();
+
+				svg {
+					width: 1rem;
+					height: 1rem;
+					fill: currentColor;
+				}
+
+				&:hover {
+					color: $tabs-links-color;
+				}
+			}
+
+			.ks-tabs-scroll-arrow-left {
+				left: 0;
+				box-shadow: 6px 0 6px -4px rgba(0, 0, 0, 0.15);
+			}
+
+			.ks-tabs-scroll-arrow-right {
+				right: 0;
+				box-shadow: -6px 0 6px -4px rgba(0, 0, 0, 0.15);
+			}
+		}
+	}
 }
