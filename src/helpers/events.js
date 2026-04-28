@@ -7,6 +7,10 @@
  * @param event_capturing
  */
 export function addEvent(el, eventName, callback, event_capturing = false) {
+    if ( !el ) {
+        return;
+    }
+
     if ( el.addEventListener ) {
         el.addEventListener(eventName, callback, event_capturing);
         if ( eventName === 'mousewheel' ) {
@@ -26,6 +30,10 @@ export function addEvent(el, eventName, callback, event_capturing = false) {
  * @param event_capturing
  */
 export function removeEvent(el, eventName, callback, event_capturing = false) {
+    if ( !el ) {
+        return;
+    }
+
     if ( el.removeEventListener ) {
         el.removeEventListener(eventName, callback, event_capturing);
         if ( eventName == 'mousewheel' ) {
