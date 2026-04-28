@@ -113,13 +113,8 @@
         },
 
         beforeDestroy() {
-            if ( this.$refs.tabs ) {
-                this.$refs.tabs.removeEventListener('scroll', this.updateScrollArrows);
-            }
-
-            if ( this.resize_observer ) {
-                this.resize_observer.disconnect();
-            }
+            this.$refs.tabs?.removeEventListener('scroll', this.updateScrollArrows);
+            this.resize_observer?.disconnect();
         },
 
         methods: {
