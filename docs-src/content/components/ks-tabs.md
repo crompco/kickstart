@@ -24,6 +24,11 @@ api:
           default: true
           description: Only used when an ID is provided in case you want to use an id without remembering the tab selection.
           group: KsTabs
+        - name: scrollable
+          type: Boolean
+          default: false
+          description: When set to true the title bar scrolls horizontally instead of overflowing, with arrow buttons that appear at the edges when more tabs are available in that direction.
+          group: KsTabs
         - name: title
           type: String
           default: "NULL"
