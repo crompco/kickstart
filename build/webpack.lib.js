@@ -20,6 +20,8 @@ const config = {
         KsCard: ['./src/components/KsCard.vue'],
         KsCheckbox: ['./src/components/KsCheckbox.vue'],
         KsCheckboxGroup: ['./src/components/KsCheckboxGroup.vue'],
+        KsDataColumn: ['./src/components/KsDataColumn.vue'],
+        KsDataTable: ['./src/components/KsDataTable.vue'],
         KsDatepicker: ['./src/components/KsDatepicker.vue'],
         KsDraggable: ['./src/components/KsDraggable.vue'],
         KsDroppable: ['./src/components/KsDroppable.vue'],
