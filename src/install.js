@@ -2,6 +2,7 @@ import api from './helpers/api';
 import * as strings from './helpers/strings';
 import * as transitions from './components/transitions/Transitions';
 import { KsToast, registeredComponents } from './components';
+import KsTooltipDirective from './directives/KsTooltip';
 
 /**
  * Global template filters. Vue 3 has no filters, so templates should move to
@@ -50,7 +51,7 @@ function createToaster(Vue) {
 
 /**
  * Vue.use(Kickstart) - registers the ks-* components, the transitions, the
- * filters, Vue.api / this.$api and Vue.toast / this.$toast.
+ * filters, the v-ks-tooltip directive, Vue.api / this.$api and Vue.toast / this.$toast.
  *
  * Everything that depends on the Vue 2 global API lives here, so the Vue 3
  * plugin only needs a new install function.
@@ -69,6 +70,8 @@ export function install(Vue) {
     for ( const [name, transition] of Object.entries(transitions) ) {
         Vue.component(name, transition);
     }
+
+    Vue.directive('ks-tooltip', KsTooltipDirective);
 
     for ( const [name, filter] of Object.entries(filters) ) {
         Vue.filter(name, filter);

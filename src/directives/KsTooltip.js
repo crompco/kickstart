@@ -1,17 +1,4 @@
-// External Dependencies
-import Vue from 'vue';
-import Tether from 'tether';
-
-// Internal Dependencies
-import {object_get} from "../helpers/objects";
-import '../helpers/tether-constraints';
-
-let tether = false;
-let showing = false;
-let props = false;
-let events = {};
-
-// vertical = middle, top, bottom, horizontal = center, left, right
+import { attach } from '../helpers/position';
 
 export const defaultOptions = {
     attachment: 'top center',
@@ -19,125 +6,155 @@ export const defaultOptions = {
     constraints: [
         {
             to: 'window',
-            attachment: 'together ks-together'
-        }
+            attachment: 'together ks-together',
+        },
     ],
 };
 
-function hasClass($el, className) {
-    if ( $el.classList ) {
-        return $el.classList.contains(className);
+/**
+ * v-ks-tooltip="'Text'" or v-ks-tooltip="{ content, html, trigger, isActive, showArrow, attachment, targetAttachment, constraints }"
+ * v-ks-tooltip.click="'Text'" opens on click instead of hover.
+ */
+
+const states = new WeakMap();
+
+function options(binding) {
+    const value = binding.value !== null && typeof binding.value === 'object' ? binding.value : { content: binding.value };
+
+    return {
+        content: '',
+        html: false,
+        trigger: binding.modifiers && binding.modifiers.click ? 'click' : 'hover',
+        isActive: true,
+        showArrow: true,
+        ...defaultOptions,
+        ...value,
+    };
+}
+
+function render(state) {
+    const { tooltip, options: config } = state;
+
+    tooltip.className = config.showArrow ? 'ks-tooltip show-arrow' : 'ks-tooltip';
+    tooltip.innerHTML = config.showArrow ? '<div class="ks-tooltip-arrow"></div>' : '';
+
+    const content = document.createElement('div');
+    if ( config.html ) {
+        content.innerHTML = config.content == null ? '' : String(config.content);
+    } else {
+        content.textContent = config.content == null ? '' : String(config.content);
     }
-
-    return new RegExp('(^| )' + className + '( |$)', 'gi').test($el.className);
+    tooltip.appendChild(content);
 }
 
-function isUndefined(item) {
-    return typeof item === 'undefined';
-}
-
-function createTooltipDiv(wrapper, binding) {
-    let new_div = wrapper.appendChild(document.createElement('div'));
-    new_div.className = 'ks-tooltip';
-
-    if ( isUndefined(props.showArrow) || props.showArrow ) {
-        new_div.className += ' show-arrow';
-        new_div.innerHTML += '<div class="ks-tooltip-arrow"></div>';
-    }
-
-    new_div.innerHTML += binding.value;
-
-    return new_div;
-}
-
-export function initTether(el, target, options = {}) {
-    return new Tether(Object.assign({
-        element: el,
-        target: target,
-    }, defaultOptions, options));
-}
-
-function showTooltip(el, binding) {
-    showing = true;
-
-    if ( props != false && !isUndefined(props['is-active']) && props['is-active'] == false ) {
+function show(el) {
+    const state = states.get(el);
+    if ( !state || state.showing || state.options.isActive === false ) {
         return;
     }
 
-    if ( tether == false ) {
-        let tooltip_div = createTooltipDiv(el, binding);
+    state.showing = true;
+    render(state);
+    state.tooltip.style.display = '';
+    document.body.appendChild(state.tooltip);
 
-        tether = initTether(tooltip_div, el);
-        tether.position();
+    state.positioner = attach(el, state.tooltip, {
+        attachment: state.options.attachment,
+        targetAttachment: state.options.targetAttachment,
+        constraints: state.options.constraints,
+    });
+}
+
+function hide(el) {
+    const state = states.get(el);
+    if ( !state || !state.showing ) {
+        return;
+    }
+
+    state.showing = false;
+    state.tooltip.style.display = 'none';
+
+    if ( state.positioner ) {
+        state.positioner.destroy();
+        state.positioner = null;
+    }
+}
+
+function bind(el, binding) {
+    const state = {
+        options: options(binding),
+        tooltip: document.createElement('div'),
+        showing: false,
+        positioner: null,
+        listeners: {},
+    };
+
+    if ( state.options.trigger === 'click' ) {
+        state.listeners = {
+            click: (e) => {
+                e.stopPropagation();
+                state.showing ? hide(el) : show(el);
+            },
+        };
+        state.outside = () => hide(el);
+        document.addEventListener('click', state.outside);
     } else {
-        for ( let child of el.childNodes ) {
-            if ( hasClass(child, 'ks-tooltip') ) {
-                child.style.display = '';
-            }
-        }
+        state.listeners = {
+            mouseenter: () => show(el),
+            mouseleave: () => hide(el),
+        };
+    }
+
+    for ( const [event, listener] of Object.entries(state.listeners) ) {
+        el.addEventListener(event, listener);
+    }
+
+    states.set(el, state);
+}
+
+function update(el, binding) {
+    const state = states.get(el);
+    if ( !state ) {
+        return;
+    }
+
+    state.options = { ...options(binding), trigger: state.options.trigger };
+
+    if ( state.options.isActive === false ) {
+        hide(el);
+    } else if ( state.showing ) {
+        render(state);
     }
 }
 
-function hideTooltip(el) {
-    showing = false;
-    for ( let child of el.childNodes ) {
-        if ( hasClass(child, 'ks-tooltip') ) {
-            child.style.display = 'none';
-        }
+function unbind(el) {
+    const state = states.get(el);
+    if ( !state ) {
+        return;
     }
-}
 
-function toggleTooltip(el, binding) {
-    showing ? hideTooltip(el) : showTooltip(el, binding);
-}
+    hide(el);
 
-function useClickEvent(props) {
-    return props != false && !isUndefined(props.trigger) && props.trigger == 'click';
-}
-
-Vue.directive('ks-tooltip', {
-    bind(el, binding, vnode) {
-        props = object_get(vnode.data, 'attrs.props', false);
-
-        if ( useClickEvent(props) ) {
-            events = {
-                'click': function () {
-                    toggleTooltip(el, binding);
-                }
-            };
-
-            el.addEventListener('click', events.click)
-        } else {
-            events = {
-                'mouseenter': function() {
-                    showTooltip(el, binding);
-                },
-                'mouseleave': function () {
-                    hideTooltip(el);
-                }
-            };
-
-            el.addEventListener('mouseenter', events.mouseenter);
-            el.addEventListener('mouseleave', events.mouseleave);
-        }
-    },
-
-    unbind(el, binding, vnode) {
-        props = object_get(vnode.data, 'attrs.props', false);
-
-        el.remove();
-
-        if ( tether !== false ) {
-            tether.destroy();
-        }
-
-        if ( useClickEvent(props) ) {
-            el.removeEventListener('click', events.click)
-        } else {
-            el.removeEventListener('mouseenter', events.mouseenter);
-            el.removeEventListener('mouseleave', events.mouseleave);
-        }
-
-        tether = false;
+    for ( const [event, listener] of Object.entries(state.listeners) ) {
+        el.removeEventListener(event, listener);
     }
-});
+
+    if ( state.outside ) {
+        document.removeEventListener('click', state.outside);
+    }
+
+    state.tooltip.remove();
+    states.delete(el);
+}
+
+export default {
+    // Vue 2
+    bind,
+    componentUpdated: update,
+    unbind,
+
+    // Vue 3
+    beforeMount: bind,
+    updated: update,
+    beforeUnmount: unbind,
+};

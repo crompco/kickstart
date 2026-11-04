@@ -5,6 +5,8 @@ export * from './components';
 
 export { install };
 
+export { default as KsTooltipDirective } from './directives/KsTooltip';
+
 export default {
     ...Object.fromEntries(Object.entries(components).filter(([name]) => name.startsWith('Ks'))),
     install,

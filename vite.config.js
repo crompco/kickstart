@@ -35,8 +35,7 @@ export default defineConfig({
                 globals: {
                     vue: 'Vue',
                     axios: 'axios',
-                    tether: 'Tether',
-                    'velocity-animate': 'Velocity',
+                    '@floating-ui/dom': 'FloatingUIDOM',
                 },
             },
         },

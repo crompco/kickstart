@@ -1,23 +1,24 @@
 <template>
-    <div v-show="showing"
-         class="ks-tooltip"
-         :style="tooltip_styles"
-         @mouseenter="clearTimeout"
-         @mouseleave="hideTooltip"
-         @click.stop
-         :class="{'show-arrow': showArrow}"
+    <div
+        v-show="showing"
+        class="ks-tooltip"
+        :class="{'show-arrow': showArrow}"
+        :style="tooltip_styles"
+        @mouseenter="clearTimeout"
+        @mouseleave="hideTooltip"
+        @click.stop
     >
-        <div class="ks-tooltip-arrow" v-if="showArrow"></div>
+        <div
+            v-if="showArrow"
+            class="ks-tooltip-arrow"
+        ></div>
         <slot></slot>
     </div>
 </template>
 
 <script>
-    // External Dependencies
-
-    // Internal Dependencies
-    import {initTether, defaultOptions} from '../directives/KsTooltip';
-    import {parent} from '../helpers/dom';
+    import { attach } from '../helpers/position';
+    import { defaultOptions } from '../directives/KsTooltip';
 
     export default {
         name: 'KsTooltip',
@@ -26,7 +27,7 @@
             // Whether or not the tooltip responds to events.
             isActive: {
                 type: Boolean,
-                default: true
+                default: true,
             },
 
             // The event which triggers the tooltip.
@@ -35,40 +36,40 @@
                 default: 'hover',
                 validator(event) {
                     return ['click', 'hover'].indexOf(event) != -1;
-                }
+                },
             },
 
             // The width of the tooltip container, taken as is.
             width: {
                 type: String,
-                default: ''
+                default: '',
             },
 
             height: {
                 type: String,
-                default: ''
+                default: '',
             },
 
+            // A ref name on the parent component or an element; defaults to the parent element
             target: {
-                type: String,
-                default: ''
+                default: '',
             },
 
             attachment: {
                 type: String,
-                default: defaultOptions.attachment
+                default: defaultOptions.attachment,
             },
 
             targetAttachment: {
                 type: String,
-                default: defaultOptions.targetAttachment
+                default: defaultOptions.targetAttachment,
             },
 
             constraints: {
                 type: [Array, Object],
                 default() {
                     return defaultOptions.constraints;
-                }
+                },
             },
 
             showArrow: {
@@ -78,59 +79,81 @@
 
             hoverDelay: {
                 type: Number,
-                default: null
+                default: null,
             },
 
             hideDelay: {
                 type: Number,
-                default: 150
-            }
+                default: 150,
+            },
         },
+
+        emits: ['tooltip-showed', 'tooltip-hidden'],
 
         computed: {
             tooltip_styles() {
                 let styles = {
-                    width: this.width
+                    width: this.width,
                 };
 
-                if (this.height != '') {
+                if ( this.height != '' ) {
                     styles['height'] = this.height;
                     styles['overflow-y'] = 'auto';
                 }
 
                 return styles;
-            }
+            },
         },
 
         data() {
             return {
-                tether: false,
                 showing: false,
-                target_element: false,
-                timeout: false,
-                show_timeout: false,
-            }
+                target_element: null,
+                timeout: null,
+                show_timeout: null,
+            };
         },
 
         mounted() {
+            this.positioner = null;
+
             this.$nextTick(() => {
                 this.setUpTooltip();
             });
         },
 
         beforeDestroy() {
-            this.destroyTooltip();
+            this.teardown();
         },
 
-        destroyed() {
-            this.$el.remove();
+        beforeUnmount() {
+            this.teardown();
         },
 
         methods: {
-            setUpTooltip() {
-                this.target_element = this.target === '' ? parent(this.$el) : this.$parent.$refs[this.target];
+            resolveTarget() {
+                if ( this.target instanceof Element ) {
+                    return this.target;
+                }
 
-                if ( this.target_element == null ) {
+                if ( this.target ) {
+                    const ref = this.$parent && this.$parent.$refs[this.target];
+                    const target = Array.isArray(ref) ? ref[0] : ref;
+
+                    return target && target.$el ? target.$el : (target || null);
+                }
+
+                return this.$el.parentNode;
+            },
+
+            setUpTooltip() {
+                if ( this.target_element ) {
+                    return;
+                }
+
+                this.target_element = this.resolveTarget();
+
+                if ( !this.target_element ) {
                     return;
                 }
 
@@ -149,6 +172,8 @@
                 }
 
                 this.clearTimeout();
+                clearTimeout(this.show_timeout);
+
                 if ( this.hoverDelay ) {
                     this.show_timeout = setTimeout(() => {
                         this.showNow();
@@ -156,22 +181,31 @@
                 } else {
                     this.showNow();
                 }
-
             },
 
             showNow() {
-                this.showing = true;
-
-                if ( this.tether == false ) {
-                    this.tether = initTether(this.$el, this.target_element, {
-                        attachment: this.attachment,
-                        targetAttachment: this.targetAttachment,
-                        constraints: this.constraints,
-                    });
+                if ( !this.target_element ) {
+                    return;
                 }
 
+                this.showing = true;
+
                 this.$nextTick(() => {
-                    this.tether.position();
+                    if ( !this.showing ) {
+                        return;
+                    }
+
+                    if ( this.$el.parentNode !== document.body ) {
+                        document.body.appendChild(this.$el);
+                    }
+
+                    if ( !this.positioner ) {
+                        this.positioner = attach(this.target_element, this.$el, {
+                            attachment: this.attachment,
+                            targetAttachment: this.targetAttachment,
+                            constraints: this.constraints,
+                        });
+                    }
                 });
 
                 this.$emit('tooltip-showed');
@@ -182,6 +216,7 @@
                 clearTimeout(this.show_timeout);
 
                 if ( this.trigger == 'hover' ) {
+                    this.clearTimeout();
                     this.timeout = setTimeout(() => {
                         this.triggerHide();
                     }, this.hideDelay);
@@ -191,6 +226,7 @@
             triggerHide() {
                 if ( this.showing ) {
                     this.showing = false;
+                    this.stopPositioning();
                     this.$emit('tooltip-hidden');
                 }
             },
@@ -205,13 +241,20 @@
                 this.showing ? this.triggerHide() : this.showTooltip();
             },
 
-            destroyTooltip() {
-                if ( typeof this.target_element != 'function' ) {
-                    return;
+            stopPositioning() {
+                if ( this.positioner ) {
+                    this.positioner.destroy();
+                    this.positioner = null;
                 }
+            },
 
-                if ( this.tether !== false ) {
-                    this.tether.destroy();
+            destroyTooltip() {
+                this.clearTimeout();
+                clearTimeout(this.show_timeout);
+                this.stopPositioning();
+
+                if ( !this.target_element ) {
+                    return;
                 }
 
                 if ( this.trigger == 'hover' ) {
@@ -222,8 +265,25 @@
                     document.removeEventListener('click', this.triggerHide);
                 }
 
-                this.target_element = false;
-            }
-        }
-    }
+                this.target_element = null;
+            },
+
+            teardown() {
+                this.destroyTooltip();
+
+                // The tooltip lives in <body> once shown, outside the parent's DOM
+                if ( this.$el.parentNode === document.body ) {
+                    this.$el.remove();
+                }
+            },
+        },
+
+        watch: {
+            isActive(active) {
+                if ( !active ) {
+                    this.triggerHide();
+                }
+            },
+        },
+    };
 </script>
