@@ -7,14 +7,17 @@
 </template>
 
 <script>
-    // External Dependencies
-
-    // Internal Dependencies
-
     export default {
         name: 'KsAccordion',
 
+        provide() {
+            return {
+                ksAccordion: this,
+            };
+        },
+
         props: {
+            // When true only one row is open at a time
             collapsible: {
                 type: Boolean,
                 default: true
@@ -22,34 +25,41 @@
         },
 
         data() {
-            return{
-                activeAccordion: null,
+            return {
                 accordions: []
             }
         },
 
         methods: {
             registerAccordion(accordion) {
-                this.accordions.push(accordion);
-            },
-
-            setActiveAccordion(accordion) {
-                if ( this.collapsible == true ) {
-                    for ( let acc of this.accordions ) {
-
-                        if ( acc.$data.showContent === true && acc != accordion ) {
-                            acc.setActive(false);
-                        } else if ( acc == accordion ) {
-                            accordion.setActive(!accordion.$data.showContent);
-                        }
-                    }
-                } else {
-                    accordion.setActive(!accordion.$data.showContent);
+                if ( !this.accordions.includes(accordion) ) {
+                    this.accordions.push(accordion);
                 }
             },
 
+            unregisterAccordion(accordion) {
+                const index = this.accordions.indexOf(accordion);
+                if ( index !== -1 ) {
+                    this.accordions.splice(index, 1);
+                }
+            },
+
+            setActiveAccordion(accordion) {
+                const open = !accordion.showContent;
+
+                if ( this.collapsible && open ) {
+                    for ( const acc of this.accordions ) {
+                        if ( acc !== accordion ) {
+                            acc.setActive(false);
+                        }
+                    }
+                }
+
+                accordion.setActive(open);
+            },
+
             collapseAll() {
-                for ( let acc of this.accordions ) {
+                for ( const acc of this.accordions ) {
                     acc.setActive(false);
                 }
             }

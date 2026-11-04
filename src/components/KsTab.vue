@@ -1,56 +1,73 @@
 <template>
-	<div v-show="active" :class="{'active-tab': active}">
-		<slot v-if="active"></slot>
-	</div>
+    <div
+        v-show="active"
+        :class="{'active-tab': active}"
+    >
+        <slot v-if="active"></slot>
+    </div>
 </template>
 
 
 <script>
-	export default {
-		name: 'KsTab',
+    export default {
+        name: 'KsTab',
 
-		props: {
-			title: {}
-		},
+        inject: {
+            ksTabs: {
+                default: null,
+            },
+        },
 
-		data() {
-			return {
-				active: false
-			};
-		},
+        props: {
+            title: {},
+        },
 
-		computed: {},
+        emits: ['active', 'inactive'],
 
-		mounted() {
-			this.$nextTick(() => {
+        computed: {
+            active() {
+                return !!this.ksTabs && this.ksTabs.active_tab === this;
+            },
+        },
 
-				let parent = this.getTabsParent(this);
+        mounted() {
+            if ( !this.ksTabs ) {
+                console.error('KsTab must be inside a KsTabs');
+                return;
+            }
 
-				parent.registerTab(this);
-				parent.$on('tab-changed', (title) => {
-					if ( title != this.title ) {
-						this.setActive(false);
-					}
-				})
-			});
-		},
+            this.ksTabs.registerTab(this);
+        },
 
-		methods: {
-			setActive(active) {
-				this.active = active;
-				if ( this.active ) {
-                    this.$emit('active');
-                } else {
-                    this.$emit('inactive');
+        beforeDestroy() {
+            this.unregister();
+        },
+
+        beforeUnmount() {
+            this.unregister();
+        },
+
+        methods: {
+            /**
+             * Makes this the active tab; another tab must be activated to deactivate it
+             */
+            setActive(active) {
+                if ( active && this.ksTabs ) {
+                    this.ksTabs.setActiveTab(this);
                 }
-			},
-			getTabsParent(vm) {
-				if ( vm.$parent.$options._componentTag === 'ks-tabs' ) {
-					return this.$parent;
-				}
+            },
 
-				return this.getTabsParent(this.$parent);
-			}
-		},
-	}
+            unregister() {
+                if ( this.ksTabs ) {
+                    this.ksTabs.unregisterTab(this);
+                }
+            },
+        },
+
+        watch: {
+            active(active) {
+                this.$emit(active ? 'active' : 'inactive');
+            },
+        },
+    }
 </script>
