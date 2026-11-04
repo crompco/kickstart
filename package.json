@@ -20,6 +20,10 @@
     "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest",
+    "demos:dev": "vite --config demos/vite.config.js",
+    "demos:build": "vite build --config demos/vite.config.js",
+    "docs:dev": "yarn demos:build && yarn --cwd docs dev",
+    "docs:build": "yarn demos:build && yarn --cwd docs build",
     "prepack": "yarn clean && yarn build"
   },
   "devDependencies": {

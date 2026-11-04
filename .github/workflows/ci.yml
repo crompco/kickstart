@@ -28,6 +28,9 @@ jobs:
         with:
           node-version: 22
           cache: yarn
+          cache-dependency-path: |
+            yarn.lock
+            docs/yarn.lock
 
       - run: yarn install --frozen-lockfile
 
@@ -37,3 +40,6 @@ jobs:
       - run: yarn build
 
       - run: yarn test
+
+      - run: yarn --cwd docs install --frozen-lockfile && yarn docs:build
+        if: matrix.tz == 'UTC'

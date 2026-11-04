@@ -8,9 +8,9 @@ export default [
             'dist/**',
             'lib/**',
             'docs/**',
-            'docs-src/**',
+            // Example pages carried over from the 2.x docs
+            'demos/examples/**',
             'node_modules/**',
-            'nuxt-dist/**',
         ],
     },
     js.configs.recommended,

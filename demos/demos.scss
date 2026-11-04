@@ -1,0 +1,16 @@
+body {
+    margin: 0;
+    background: #fff;
+}
+
+.ks-demo {
+    // Contain floated example content so its height is measured
+    display: flow-root;
+    padding: 1rem 1rem 2rem;
+}
+
+.code-block-accordion pre {
+    margin: 0;
+    overflow-x: auto;
+    font-size: 0.85rem;
+}

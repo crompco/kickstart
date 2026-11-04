@@ -72,7 +72,7 @@
 - attachment/targetAttachment/constraints props keep the tether format; same tether-* classes on the element (CSS unchanged).
 - Tooltip: positions only while shown; listeners removed on destroy (v2 leaked: guard always returned); target may be an Element; isActive=false hides an open tooltip.
 - Tooltip directive: text by default; `{ content, html: true }` for HTML; options via value object; .click modifier; per element.
-- Action menu: list still moved to <body> (selectors `.ks-menu-list.active` unchanged); beforeRouteUpdate/Leave hooks removed (never worked on non-route components); window.actionEvent global removed (CustomEvent 'close:actionmenu' with detail).
+- Action menu: list still moved to `<body>` (selectors `.ks-menu-list.active` unchanged); beforeRouteUpdate/Leave hooks removed (never worked on non-route components); window.actionEvent global removed (CustomEvent 'close:actionmenu' with detail).
 - SlideTransition: Web Animations API instead of Velocity; same 400ms; no-op where el.animate is missing.
 
 ## Datepicker
@@ -150,7 +150,7 @@
 - ESLint 10 flat config, plugin-vue flat/vue2-essential; runs in CI.
 
 ## New: KsDataTable / KsDataColumn (phase 5, from PR #92)
-- Declarative table: <ks-data-column> children (label, field as key / dotted path / array of keys, sortable, align, width, tdClass, thClass; default scoped slot { row, value }, header scoped slot).
+- Declarative table: `<ks-data-column>` children (label, field as key / dotted path / array of keys, sortable, align, width, tdClass, thClass; default scoped slot { row, value }, header scoped slot).
 - Controlled sort (sortField/sortDirection + `sort` { field, direction } cycling asc → desc → null), selection (multiple/single; internal or v-model / :selected.sync with event update:selected; emits new arrays), expandable rows (expansion slot), rowClass (value or function), scrollable / stickyHeader / maxHeight, loader/empty/footer/paginator slots, built-in KsPaginator (`page` event).
 - Changes from the PR: columns register through inject `ksDataTable` and keep document order when added later (v-if); dotted field paths; rows without an id get unique keys; slot access works with Vue 3 $slots; no `_uid`; emits declared; unused $sortInfo provide removed.
 - Render function uses the Vue 2 createElement data shape; a Vue 3 move rewrites it with `h` from 'vue'.
