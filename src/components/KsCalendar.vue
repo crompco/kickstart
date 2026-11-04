@@ -232,9 +232,7 @@
         props: {
             date: {
                 type: [String, Date],
-                default() {
-                    return new Date();
-                }
+                default: ''
             },
             selection: {
                 type: [String, Array, Date],
@@ -336,7 +334,7 @@
 
                 const parsed = this.date ? parseDate(this.date, this.format, this.timezone) : null;
 
-                return parsed && !isNaN(parsed) ? parsed : new Date();
+                return parsed && !isNaN(parsed) ? parsed : this.today_date;
             },
             date_parts() {
                 return dateParts(this.date_obj, this.timezone);
@@ -403,9 +401,14 @@
                     'min-height': this.weekHeight
                 };
             },
-            today() {
+            today_date() {
                 // A UTC calendar holds plain dates, so today is the viewer's local date
-                return formatDate(new Date(), this.format, this.format, this.lang, this.timezone === UTC ? LOCAL : this.timezone);
+                const { year, month, day } = dateParts(new Date(), this.timezone === UTC ? LOCAL : this.timezone);
+
+                return makeDate({ year, month, day }, this.timezone);
+            },
+            today() {
+                return this.formatDate(this.today_date);
             },
             selectorStyle() {
                 let style = '';

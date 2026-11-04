@@ -1,113 +1,150 @@
-# Upgrade Guide
+# Upgrading from 2.x to 3.0
 
-- [Upgrade to 2.0 from 1.x](#upgrade-to-20-from-1x)
-
-## Upgrade to 2.0 from 1.x
-
-### Css Class Prefixes
-Many of the css class names have now been prefixed with `ks-` to prevent conflict with other styles. 
-
-Be sure to update any styles you have that are targeting the following classes:
-
-| Old Class Name             | New Class Name                | 
-|:---------------------------|:------------------------------|
-| .active-empty-list-message | .ks-active-empty-list-message |
-| .alert                     | .ks-alert                     |
-| .autocomplete-holder       | .ks-autocomplete-holder       |
-| .autocomplete-list         | .ks-autocomplete-list         |
-| .button                    | .ks-button                    |
-| .cal-blank                 | .ks-cal-blank                 |
-| .cal-day                   | .ks-cal-day                   |
-| .cal-week                  | .ks-cal-week                  |
-| .cal-week-header           | .ks-cal-week-header           |
-| .card-body                 | .ks-card-body                 |
-| .card-footer               | .ks-card-footer               |
-| .card-header               | .ks-card-header               |
-| .content                   | .ks-content                   |
-| .ctrl-left                 | .ks-ctrl-left                 |
-| .ctrl-right                | .ks-ctrl-right                |
-| .day-num                   | .ks-day-num                   |
-| .dragging                  | .ks-dragging                  |
-| .drop-zone-active          | .ks-drop-zone-active          |
-| .empty-list-message        | .ks-empty-list-message        |
-| .form-group                | .ks-form-group                |
-| .form-group.error-msg      | .ks-form-group.ks-error-msg   |
-| .form-group.inline         | .ks-form-group.ks-inline      |
-| .heading                   | .ks-heading                   |
-| .is-multiple               | .ks-multiple                  |
-| .is-selected               | .ks-selected                  |
-| .label                     | .ks-label                     |
-| .light-card                | .ks-light-card                |
-| .loader-line               | .ks-loader-line               |
-| .month-selection           | .ks-month-selection           |
-| .open-picker               | .ks-open-picker               |
-| .opt-group                 | .ks-opt-group                 |
-| .out-of-scope              | .ks-out-of-scope              |
-| .pagination                | .ks-paginator                 |
-| .panel                     | .ks-panel                     |
-| .panel-body                | .ks-panel-body                |
-| .panel-footer              | .ks-panel-footer              |
-| .panel-header              | .ks-panel-header              |
-| .scroll-table              | .ks-scroll-table              |
-| .searching-results         | .ks-searching-results         |
-| .selected                  | .ks-selected                  |
-| .selected-item             | .ks-selected-item             |
-| .selected-month            | .ks-selected-month            |
-| .selected-year             | .ks-selected-year             |
-| .selection                 | .ks-selection                 |
-| .selection-text            | .ks-selection-text            |
-| .steps                     | .ks-steps                     |
-| .table                     | .ks-table                     |
-| .tabs-content              | .ks-tabs-content              |
-| .tabs-title-bar            | .ks-tabs-title-bar            |
-| .tabs-title-bar-wrapper    | .ks-tabs-title-bar-wrapper    |
-| .year-selection            | .ks-year-selection            |
+> Draft: raw change notes. They are rewritten as a guide before the 3.0 release.
 
 
-### KsCard Light Header class removed
-`.(ks-)light-card.(ks-)card-header.light` adding the `light` class to your card header inside of the `ks-light-card` is no longer necessary since that is the default style. 
+## Requirements
+- vue ^2.7 peer (was ^2.2)
+- axios now ^1.x dependency (was 0.15). Consumers' own axios separate. axios 1 config.headers is AxiosHeaders (set()/get(); bracket access still works).
+- normalize.css stays v5 (dev only; consumers already import ~normalize.css via _kickstart.scss)
+- Removed deps: tether, velocity-animate, popper.js, v-mask (kickstart no longer registers or needs v-mask; consumers that use v-mask themselves keep their own)
 
-### Sass Functions and Mixins
-A big part of this update was to remove the dependency on the Bourbon Neat package for grid and layout utlities. 
-All functions and mixins were replace with local copies and renamed with the `ks-` prefix.
+## Package / build
+- `main` now dist/kickstart-ui.min.js (was missing index.js); module dist/kickstart-ui.esm.js; style dist/kickstart-ui.min.css
+- dist/ and lib/ not in git anymore; built on `npm pack/publish` (prepack). Same filenames.
+- lib/* are ES modules now (were UMD). webpack 5 / Vite fine. lib shared code in lib/chunks/.
+- UMD global KickstartUI; externals vue (Vue), axios (axios), @floating-ui/dom (FloatingUIDOM) must be loaded first when using script tags.
+- src/helpers/polyfills, src/helpers/throttle.js, src/helpers/animations.js, src/helpers/tether-constraints.js, src/js/navigation.js removed. src/svg/*.svg stay but components use src/components/icons/*.vue.
+- Webpack-only `process.env.BUILD` css require removed.
 
-> Also note that the `$neat-grid` variable was also replaced by `$ks-grid`
+## Dates (lib/dates)
+- New trailing `timezone` param: 'UTC' (default), 'local', or IANA name. parseDate/getDaysInMonth default 'local'.
+  - formatDate(date, format, parse_format, locale, timezone)
+  - addDays/subDays/addMonths/subMonths/subYears/addYears(date, n, timezone); dateModify(d, inc, val, timezone)
+  - parseDate(str, format, timezone='local'); getDaysInMonth(month, year, timezone='local')
+  - diffInDays(d1, d2, format, timezone)
+- New exports: UTC, LOCAL, dateParts, makeDate, addYears; dateModify now in default export.
+- Behavior fixes:
+  - formatDate(string) parses the string in the same tz as formatting → string round trips in every zone (was off by one in UTC+ zones).
+  - formatDate returns '' for invalid/empty dates (was "NaN-aN-aN" or threw).
+  - Tokens replaced in one pass, all occurrences (was first occurrence only; inserted text could be re-replaced). Tokens unchanged: Y y m M d D l.
+  - day/week/month/year arithmetic is calendar arithmetic in the tz (DST safe with 'local'/IANA). Default UTC = same results as v2 (+24h).
+  - subYears now uses the tz (default UTC; v2 used local setFullYear).
+  - diffInDays counts calendar days (was ceil of elapsed ms → DST off by one; time-of-day partial days counted).
+  - parseDate: returns Invalid Date for empty/non-string (was throw); clones Date input.
+  - parseTime: accepts "1430", "930", "2pm"; 24:00 is 12:00 am (#43); 24-hour value with meridiem ("13:30 pm") keeps 24h value (v2 gave full_hour 25); invalid minute/hour → default; no console.error; non-string → default (was throw).
+  - formatTime tokens H h i a A one pass.
 
-| Old Mixin/Function Name | New Mixin/Function Name |
-|-------------------------|-------------------------|
-| breakpoint()            | ks-breakpoint()         |
-| col()                   | ks-col()                |
-| col-lg()                | ks-col-lg()             |
-| col-med()               | ks-col-med()            |
-| col-sm()                | ks-col-sm()             |
-| col-tab()               | ks-col-tab()            |
-| col-xlg()               | ks-col-xlg()            |
-| column-default()        | ks-column-default()     |
-| column-ratio()          | ks-column-ratio()       |
-| column-width()          | ks-column-width()       |
-| float-direction()       | ks-float-direction()    |
-| grid()                  | ks-grid()               |
-| grid-collapse()         | ks-grid-collapse()      |
-| grid-column()           | ks-grid-column()        |
-| grid-container()        | ks-grid-container()     |
-| grid-media()            | ks-grid-media()         |
-| grid-push()             | ks-grid-push()          |
-| grid-shift()            | ks-grid-shift()         |
-| lg()                    | ks-lg()                 |
-| med()                   | ks-med()                |
-| merge-defaults()        | ks-merge-defaults()     |
-| opposite-direction()    | ks-opposite-direction() |
-| overlay-bg()            | ks-overlay-bg()         |
-| parse-columns()         | ks-parse-columns()      |
-| parse-media()           | ks-parse-media()        |
-| rem()                   | ks-rem()                |
-| row()                   | ks-row()                |
-| row()                   | ks-row()                |
-| side-nav()              | ks-side-nav()           |
-| sm()                    | ks-sm()                 |
-| tab()                   | ks-tab()                |
-| top-bar()               | ks-top-bar()            |
-| transition()            | ks-transition()         |
-| v-center()              | ks-v-center()           |
-| xlg()                   | ks-xlg()                |
+## strings (lib/strings)
+- ucwords/posesses/ellipsis: null/undefined → '' (was "Null"/throw).
+- currency: non-number → '' (was "$NaN"); fixes "-,123.00" for -123.
+- possesses alias added.
 
+## objects (lib/objects)
+- object_get returns falsy values (0, false, ''); default only for null/undefined/missing; no throw on null in the path. (v2 returned default for 0/false/'')
+- looseIndexOf returns a number for arrays (was string key).
+
+## events (lib/events)
+- removeSmartFocusToggle actually removes listeners (v2 passed wrong args) and cancels pending blur callback.
+- stopParentScroll, scrolledToBottom, mouseHold return a remover function.
+- removeEvent in default export. IE attachEvent paths removed.
+- mouseHold stops on mouseleave too.
+
+## dom
+- parent(el, selector) uses closest(); null-safe class helpers.
+
+## api (lib/api)
+- baseUrl() sets the shared instance AND axios.defaults (axios 1 copies defaults at create; needed so VITE_API_URL keeps working).
+- interceptors: onRejected returning a promise now settles the request (retry works); returning undefined keeps the original error (v2 rejected with undefined); missing onFulfilled no longer throws.
+- api.isCancel(error) added.
+- createFromConfig still replaces the instance (interceptors don't carry over) - unchanged, documented.
+
+## install
+- One install() in src/install.js; throws on Vue 3 app.
+- Registers v-ks-tooltip directive (v2 registered it as an import side effect on the global Vue, with shared state across all elements).
+- Named export `install`, `KsTooltipDirective`, `registeredComponents`.
+- Filters still registered (Vue 2 only) — deprecated for Vue 3; use lib/strings functions.
+
+## Toast
+- KsToast emits 'closed'; $toast destroys it (component no longer calls $destroy on itself). One shared .ks-toast container.
+
+## Positioning (tether → floating-ui)
+- attachment/targetAttachment/constraints props keep the tether format; same tether-* classes on the element (CSS unchanged).
+- Tooltip: positions only while shown; listeners removed on destroy (v2 leaked: guard always returned); target may be an Element; isActive=false hides an open tooltip.
+- Tooltip directive: text by default; `{ content, html: true }` for HTML; options via value object; .click modifier; per element.
+- Action menu: list still moved to <body> (selectors `.ks-menu-list.active` unchanged); beforeRouteUpdate/Leave hooks removed (never worked on non-route components); window.actionEvent global removed (CustomEvent 'close:actionmenu' with detail).
+- SlideTransition: Web Animations API instead of Velocity; same 400ms; no-op where el.animate is missing.
+
+## Datepicker
+- Internal mask replaces v-mask (same ##/##/#### behavior; literal added when the next digit is typed).
+
+## Tabs / Accordion / Steps (phase 4a)
+- KsTab registers through inject; works with PascalCase/local registration (v2 needed `ks-tabs` tag name, else infinite recursion).
+- active/inactive fire only on change (v2 fired inactive on every tab change for every tab).
+- Remembered tab that no longer exists → first tab (v2: no tab active).
+- Tabs added later (v-if) keep document order; removing the active tab activates a neighbour.
+- KsTabs `activeTab` is now a computed title (same value as v2 data); internal `active_tab` is the component. `tab`/`sessionTab` data removed.
+- align/expand classes now reactive.
+- New prop `scrollable` (#91) with arrow buttons; new CSS .ks-tabs.scrollable, .ks-tabs-scroll-arrow(-left|-right).
+- KsTab.setActive(false) no longer deactivates (activate another tab instead).
+- Accordion rows register via inject (v2 walked $parent and crashed without KsAccordion); a row alone toggles itself. `activeAccordion` data removed.
+- KsStepThrough completed marks now render (v2 not reactive).
+
+## Modal (phase 4b)
+- loading prop applies at mount.
+- destroy emits close only if open (v2 emitted close for every destroyed modal).
+- resize listener removed on destroy.
+- internal $on('open') removed (no consumer impact).
+
+## Checkbox / Radio (phase 4c)
+- KsCheckbox emits a NEW array (v2 pushed/spliced the bound array in place). Code that relied on the same array reference must use the emitted value.
+- KsCheckbox without `value` is a boolean (v2: value undefined → never checked, emitted undefined).
+- KsCheckbox follows `value` prop changes.
+- KsRadio: `disabled` prop now works (v2 ignored it); emits once on the input change event (v2 label click could emit twice); null label OK; slot-only label shown; new class ks-state-disabled.
+- KsRadioGroup passes `disabled` to each radio (v2 only added a class). selectedValue data removed.
+- OptionGroups: empty options OK.
+
+## Paginators / Button / misc (phase 4d)
+- Routed paginators push { path, query } (v2 pushed { to, params, query }; `to` is not a vue-router key).
+- KsPaginator prev/next get `disabled` class at the ends.
+- KsButton `el` prop renders that element (#26); non-button elements get aria-disabled + .disabled and block clicks.
+- KsDroppable `accept` function receives the drag event; dragenter handled; leaving onto a child keeps it active.
+- KsDraggable sets 'text/plain' '' (v2 set "null"); disabled prevents dragstart.
+- KsSideNav: `classObj` is computed; link click resets state (v2 left `show` true so the class came back); removes listener and body class on destroy; console.log removed.
+- KsTopNav: listeners removed on destroy; resize listener added once; `fixed` reactive.
+- KsLoaderLine got name.
+
+## Select / Autocomplete (phase 4e)
+- Dropdowns use fixed positioning against the control (floating-ui): not clipped by overflow containers (modals); flip above when no room below (#68-style). `inverted` now from real overflow, not invertOffsetRatio (prop kept, unused, deprecated).
+- New CSS: .ks-select-dropdown is flex column (.ks-select-dropdown-inverted reverses); .autocomplete-list-wrapper is flex column (.inverted reverses); .ks-autocomplete-list inside them is position: relative, margin 0. Custom CSS that offsets the absolute list (top/margin-top/left) inside these no longer applies.
+- Window scroll listener removed from KsSelect (handleScroll gone).
+- KsSelect: value 0 is a value (v2 showed placeholder); clear() closes; selectItem ignores a missing item.
+- KsAutocomplete multiple: emits NEW arrays and no longer mutates the bound array (v2 pushed/spliced value in place).
+- KsAutocomplete: backspace via @keyup.backspace; keys on lists; listHeight is a computed style.
+- ListIndexNavigator: in-flight searches abort on new search/destroy (AbortController; api.isCancel ignored); all document/list listeners removed on destroy (v2 leaked mousemove and focus toggles); filter matches non-string fields via String(); no filter cache for items mode.
+- emits declared on all.
+
+## Calendar / Datepicker (phase 4f)
+- New `timezone` prop on KsCalendar and KsDatepicker ('UTC' default, 'local', IANA). Date props (date, selection, minDate, maxDate, datepicker value) are read in it; strings are plain dates. v2 mixed local and UTC → wrong days/weekday alignment in UTC+ zones (e.g. Asia/Tokyo); now correct in every zone.
+- Without a date the calendar shows the viewer's local month (`date` default is now ''; v2 default new Date()). `today` (ks-today) is the viewer's local date for a UTC calendar, or the date in the IANA zone (v2: UTC date → wrong in US evenings).
+- changeMonth/changeYear keep the day inside the month (v2: Jan 31 → March 3; Feb 29 → March 1).
+- min/max compare calendar dates (v2 compared instants: minDate = new Date() excluded today).
+- `selection` accepts an array of dates or a Date (v2: string only).
+- Day cells have tabindex 0 only when interactive and in scope (v2 rendered tabindex="true"/"false").
+- `| day` filter and the unused provide() removed; mouse hold listeners removed on destroy / when showControls turns off.
+- Datepicker: hidden input holds the formatted value_date (v2: raw value, a Date rendered as toString()); display shows the value on first render (v2 data read a computed before it existed); emits '' on clear only if there was a value; close emitted once; listeners removed on unmount.
+- emits declared.
+
+## Timepicker (phase 4g)
+- List positioned with fixed positioning against the field (#68): not hidden behind/clipped by other elements; flips above (ul gets .inverted; new CSS border rule).
+- 24-hour input (#69): typing "1300"/"1437" filters to and accepts that time; Enter/blur keeps a typed time that is not in the list.
+- Typed times validated with parseTime (v2 used new Date("09:00 am") → always invalid in most browsers, so typed values were reset).
+- Clearing the text and leaving the field clears the value (v2 restored the old value).
+- Selecting the first option by index 0 works (v2 `index || selected_index`).
+- endOfDay compares the parsed max time (v2 string compare "11:59 pm" >= "23:59" failed) and no duplicate 23:59; option keys unique (#41/#43).
+- Options stay on step boundaries of the hour (unchanged from v2); bad min/max fall back to defaults.
+- Own focus listener removed (mixin's is used, removed on destroy); keyCode modifiers replaced (.backspace); hidden input no longer re-emits DOM input events.
+- emits declared.
+
+## Lint
+- ESLint 10 flat config, plugin-vue flat/vue2-essential; runs in CI.

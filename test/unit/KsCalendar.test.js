@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import { afterEach, describe, expect, test } from 'vitest';
+import { afterEach, describe, expect, test, vi } from 'vitest';
 import KsCalendar from '../../src/components/KsCalendar.vue';
 import KsDatepicker from '../../src/components/KsDatepicker.vue';
 import { flushPromises } from '../helpers/layout';
@@ -17,6 +17,7 @@ function dayKeys(calendar) {
 }
 
 afterEach(() => {
+    vi.useRealTimers();
     if ( wrapper ) {
         wrapper.destroy();
         wrapper = null;
@@ -109,6 +110,16 @@ describe('KsCalendar', () => {
         expect(wrapper.find('.ks-today .ks-day-num').classes()).toContain(`ks-date-${today}`);
     });
 
+    test('without a date it shows the local month', () => {
+        // Already February in UTC, still January west of UTC
+        vi.useFakeTimers({ toFake: ['Date'] });
+        vi.setSystemTime(new Date('2021-02-01T01:00:00Z'));
+        mountCalendar({ date: '' });
+
+        expect(wrapper.find('.ks-calendar-month-picker').text()).toBe(wrapper.vm.lang.months.names[new Date().getMonth()]);
+        expect(wrapper.find('.ks-today').exists()).toBe(true);
+    });
+
     test('uses the format for keys and events', async () => {
         mountCalendar({ date: '02/10/2021', format: 'm/d/Y' });
 
@@ -173,6 +184,16 @@ describe('KsDatepicker', () => {
         expect(wrapper.vm.date).toBe('2021-03-12');
         expect(picker.vm.is_open).toBe(false);
         expect(picker.emitted('close')).toHaveLength(1);
+    });
+
+    test('an empty picker opens on the local month', async () => {
+        vi.useFakeTimers({ toFake: ['Date'] });
+        vi.setSystemTime(new Date('2021-02-01T01:00:00Z'));
+        mountPicker('<ks-datepicker v-model="date"></ks-datepicker>', { date: '' });
+
+        await wrapper.find('.ks-datepicker-display').trigger('focus');
+
+        expect(wrapper.find('.ks-calendar-month-picker').text()).toBe(wrapper.findComponent(KsCalendar).vm.lang.months.names[new Date().getMonth()]);
     });
 
     test('reads a Date value in the timezone prop', () => {

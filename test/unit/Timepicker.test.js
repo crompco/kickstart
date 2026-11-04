@@ -174,6 +174,23 @@ describe('KsTimepicker', () => {
 		expect(wrapper.find('input[type="text"]').element.value).toBe('02:37 pm');
 	});
 
+	test('Enter keeps a typed 24 hour time that is not in the list', async () => {
+		mountPicker('<ks-timepicker v-model="time"></ks-timepicker>', { time: '' });
+		const input = wrapper.find('input[type="text"]');
+
+		input.element.focus();
+		await flushPromises();
+		await input.setValue('1437');
+		await input.trigger('keyup', { key: '7' });
+		expect(wrapper.findAll('li').length).toBe(0);
+
+		await input.trigger('keydown', { key: 'Enter' });
+		await flushPromises();
+
+		expect(wrapper.vm.time).toBe('14:37');
+		expect(input.element.value).toBe('02:37 pm');
+	});
+
 	test('an invalid typed time resets and an empty one clears', async () => {
 		mountPicker('<ks-timepicker v-model="time"></ks-timepicker>', { time: '09:00' });
 		const picker = wrapper.findComponent(KsTimepicker);
