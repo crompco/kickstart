@@ -76,16 +76,5 @@
             }
         },
 
-		data() {
-			return {};
-		},
-
-		mounted() {
-
-		},
-
-		methods: {},
-
-		watch: {},
 	}
 </script>

@@ -1,53 +1,61 @@
 <template>
-	<div class="ks-radio-group" :class="groupClass">
-		<label class="ks-radio-group-title ks-label" v-if="$slots['default'] || label">
-			<slot>{{label}}</slot>
-		</label>
-		<div class="radio">
-			<template v-for="option in optionsList">
-				<ks-radio
-					:name="name"
-					:value="option.value"
-					:label="option.label"
-					:checked="value"
-                    @input="selectRadio($event)"
-				><slot v-if="$slots[option.value]" :name="option.value"></slot></ks-radio>
-			</template>
-		</div>
-	</div>
+    <div
+        class="ks-radio-group"
+        :class="groupClass"
+    >
+        <label
+            v-if="$slots['default'] || label"
+            class="ks-radio-group-title ks-label"
+        >
+            <slot>{{ label }}</slot>
+        </label>
+        <div class="radio">
+            <ks-radio
+                v-for="(option, index) in optionsList"
+                :key="index"
+                :name="name"
+                :value="option.value"
+                :label="option.label"
+                :checked="value"
+                :disabled="disabled"
+                @input="selectRadio($event)"
+            >
+                <slot
+                    v-if="$slots[option.value]"
+                    :name="option.value"
+                ></slot>
+            </ks-radio>
+        </div>
+    </div>
 </template>
 
 
 <script>
-	import KsRadio from './KsRadio.vue';
+    import KsRadio from './KsRadio.vue';
     import OptionGroups from './mixins/OptionGroups';
 
     export default {
-		name: 'KsRadioGroup',
+        name: 'KsRadioGroup',
 
         mixins: [OptionGroups],
 
-		model: {
-			prop: 'value'
-		},
+        model: {
+            prop: 'value'
+        },
 
-		props: {
-			value: {},
-			label: {
-				type: String,
-				default: ''
-			},
-			name: {
-				type: String,
-				required: true
-			},
-		},
+        props: {
+            value: {},
+            label: {
+                type: String,
+                default: ''
+            },
+            name: {
+                type: String,
+                required: true
+            },
+        },
 
-		data() {
-			return {
-				selectedValue: this.value
-			};
-		},
+        emits: ['input'],
 
         methods: {
             selectRadio(value) {
@@ -57,8 +65,8 @@
             }
         },
 
-		components: {
-			KsRadio
-		}
-	}
+        components: {
+            KsRadio
+        }
+    }
 </script>

@@ -1,92 +1,111 @@
 <template>
-	<div class="top-bar" :class="classObj">
-		<button class="mobile-menu">
-			<menu-svg></menu-svg>
-		</button>
+    <div
+        class="top-bar"
+        :class="{ fixed }"
+    >
+        <button class="mobile-menu">
+            <menu-svg></menu-svg>
+        </button>
 
-		<button class="mobile-menu has-sidebar" v-if="hasSidebar">
-			<dots-horizontal></dots-horizontal>
-		</button>
-		<slot></slot>
-	</div>
+        <button
+            v-if="hasSidebar"
+            class="mobile-menu has-sidebar"
+        >
+            <dots-horizontal></dots-horizontal>
+        </button>
+        <slot></slot>
+    </div>
 </template>
 
 <script>
-    // External Dependencies
     import MenuSvg from './icons/IconMenu.vue';
     import DotsHorizontal from './icons/IconDotsHorizontal.vue';
-
-    // Internal Dependencies
-    import {addEvent} from '../helpers/events';
-    import {toggleClass, parent, removeClass} from '../helpers/dom';
+    import { addEvent, removeEvent } from '../helpers/events';
+    import { toggleClass, parent, removeClass } from '../helpers/dom';
 
     export default {
         name: 'KsTopNav',
 
         props: {
-	  		hasSidebar: {
-	  		    type: Boolean,
-				default: false
-			},
+            hasSidebar: {
+                type: Boolean,
+                default: false
+            },
 
-			fixed: {
-	  		    type: Boolean,
-				default: false
-			}
-		},
-
-        data() {
-            return {
-                classObj: {
-					fixed: this.fixed
-                },
-				selector: null
+            fixed: {
+                type: Boolean,
+                default: false
             }
         },
 
+        computed: {
+            selector() {
+                return this.hasSidebar ? '.side-nav' : '.top-bar';
+            },
+        },
+
         mounted() {
-            this.selector = this.hasSidebar ? '.side-nav' : '.top-bar';
-            addEvent(this.$el.querySelector('.mobile-menu'), 'click', (e) => {
+            this.menu_button = this.$el.querySelector('.mobile-menu');
+            this.dropdown = this.$el.querySelector('.dropdown-toggle');
+            this.sidebar_button = this.$el.querySelector('.mobile-menu.has-sidebar');
+
+            addEvent(this.menu_button, 'click', this.toggleMenu);
+            addEvent(this.dropdown, 'click', this.toggleDropdown);
+            addEvent(this.sidebar_button, 'click', this.toggleSidebarMenu);
+        },
+
+        beforeDestroy() {
+            this.teardown();
+        },
+
+        beforeUnmount() {
+            this.teardown();
+        },
+
+        methods: {
+            toggleMenu(e) {
                 e.preventDefault();
 
                 toggleClass(document.querySelector(this.selector), 'show');
                 toggleClass(document.body, 'side-nav-open');
+
+                window.removeEventListener('resize', this.windowResize);
                 window.addEventListener('resize', this.windowResize);
-            });
+            },
 
-            const dropdown = this.$el.querySelector('.dropdown-toggle');
-            if ( dropdown ) {
-                addEvent(dropdown, 'click', function(e) {
-                    e.preventDefault();
+            toggleDropdown(e) {
+                e.preventDefault();
 
-                    toggleClass(parent(this, '.dropdown'), 'show');
-                });
-            }
+                toggleClass(parent(e.currentTarget, '.dropdown'), 'show');
+            },
 
-            if ( this.hasSidebar ) {
-                addEvent(this.$el.querySelector('.mobile-menu.has-sidebar'), 'click', function(e) {
-			   		e.preventDefault();
+            toggleSidebarMenu(e) {
+                e.preventDefault();
 
-			   		toggleClass(parent(this, '.top-bar'), 'show');
-				});
-			}
+                toggleClass(this.$el, 'show');
+            },
+
+            windowResize() {
+                const style = window.getComputedStyle(this.menu_button);
+
+                if ( style.display == 'none' ) {
+                    removeClass(document.body, 'side-nav-open');
+                    removeClass(document.querySelector(this.selector), 'show');
+                    window.removeEventListener('resize', this.windowResize);
+                }
+            },
+
+            teardown() {
+                removeEvent(this.menu_button, 'click', this.toggleMenu);
+                removeEvent(this.dropdown, 'click', this.toggleDropdown);
+                removeEvent(this.sidebar_button, 'click', this.toggleSidebarMenu);
+                window.removeEventListener('resize', this.windowResize);
+            },
         },
 
-		methods: {
-	  		windowResize() {
-	  		    let style = window.getComputedStyle(this.$el.querySelector('.mobile-menu'));
-
-	  		    if ( style.display == 'none' ) {
-					removeClass(document.body, 'side-nav-open');
-					removeClass(document.querySelector(this.selector), 'show');
-					window.removeEventListener('resize', this.windowResize);
-				}
-			}
-		},
-
-		components: {
+        components: {
             MenuSvg,
             DotsHorizontal
-		}
+        }
     }
 </script>

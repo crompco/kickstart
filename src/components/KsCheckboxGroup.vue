@@ -1,19 +1,22 @@
 <template>
-    <div class="ks-checkbox-group" :class="groupClass">
+    <div
+        class="ks-checkbox-group"
+        :class="groupClass"
+    >
         <label class="ks-checkbox-group-title ks-label">
-            <slot>{{label}}</slot>
+            <slot>{{ label }}</slot>
         </label>
         <div class="checkbox">
-            <template v-for="option in optionsList">
-                <ks-checkbox
-                    :name="name"
-                    :value="option.value"
-                    :label="option.label"
-                    :checked="value"
-                    :disabled="disabled"
-                    @input="$emit('input', $event)"
-                ></ks-checkbox>
-            </template>
+            <ks-checkbox
+                v-for="(option, index) in optionsList"
+                :key="index"
+                :name="name"
+                :value="option.value"
+                :label="option.label"
+                :checked="value"
+                :disabled="disabled"
+                @input="$emit('input', $event)"
+            ></ks-checkbox>
         </div>
     </div>
 </template>
@@ -45,10 +48,10 @@
             },
         },
 
+        emits: ['input'],
+
         components: {
             KsCheckbox
         }
     }
 </script>
-
-<style></style>

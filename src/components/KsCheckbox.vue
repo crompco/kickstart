@@ -1,34 +1,38 @@
 <template>
-    <label class="ks-checkbox" :class="classStates">
+    <label
+        class="ks-checkbox"
+        :class="classStates"
+    >
         <input
             type="checkbox"
             :name="name"
             :value="value"
             :checked="isChecked"
-            @click="toggle"
             :disabled="disabled"
+            @click="toggle"
             @focus="isFocused = true"
             @blur="isFocused = false"
         >
-        <div class="ks-checkbox-switch" v-if="switchStyle"></div>
-        <template v-else>
-            <div class="ks-checkbox-input-wrapper">
-                <checkmark v-show="isChecked"></checkmark>
-            </div>
-        </template>
+        <div
+            v-if="switchStyle"
+            class="ks-checkbox-switch"
+        ></div>
+        <div
+            v-else
+            class="ks-checkbox-input-wrapper"
+        >
+            <checkmark v-show="isChecked"></checkmark>
+        </div>
         <div class="ks-checkbox-label-wrapper">
-            <slot>{{label}}</slot>
+            <slot>{{ label }}</slot>
         </div>
     </label>
 </template>
 
 
 <script>
-    // External Dependencies
     import Checkmark from './icons/IconCheckmark.vue';
-
-    // Internal Dependencies
-    import {looseIndexOf} from '../helpers/objects';
+    import { looseIndexOf } from '../helpers/objects';
 
     export default {
         name: 'KsCheckbox',
@@ -41,6 +45,7 @@
         props: {
             name: String,
             label: String,
+            // The value when checked; without a value the checkbox is a boolean
             value: {},
             switchStyle: {
                 type: Boolean,
@@ -66,6 +71,8 @@
             }
         },
 
+        emits: ['input'],
+
         data() {
             return {
                 isChecked: false,
@@ -81,7 +88,10 @@
                     "switch": this.switchStyle,
                     "inline": this.inline
                 }
-            }
+            },
+            trueValue() {
+                return typeof this.value === 'undefined' ? true : this.value;
+            },
         },
 
         mounted() {
@@ -91,7 +101,12 @@
         methods: {
             refreshChecked() {
                 if ( Array.isArray(this.checked) ) {
-                    this.isChecked = -1 !== looseIndexOf(this.checked, this.value) ? true : false;
+                    this.isChecked = looseIndexOf(this.checked, this.trueValue) !== -1;
+                    return;
+                }
+
+                if ( typeof this.value === 'undefined' ) {
+                    this.isChecked = this.checked === true;
                     return;
                 }
 
@@ -111,30 +126,28 @@
                 }
             },
             removeValue(checked) {
-                if ( checked instanceof Array ) {
-                    let index = looseIndexOf(checked, this.value);
-                    if ( index >= 0 ) {
-                        checked.splice(index, 1);
-                        return checked;
-                    }
-                } else {
-                    return this.falseValue;
-                }
-            },
-            addValue(checked) {
-                if ( checked instanceof Array ) {
-                    checked.push(this.value);
-                    return checked;
+                if ( Array.isArray(checked) ) {
+                    return checked.filter(item => item != this.trueValue);
                 }
 
-                return this.value;
+                return this.falseValue;
+            },
+            addValue(checked) {
+                if ( Array.isArray(checked) ) {
+                    return looseIndexOf(checked, this.trueValue) === -1 ? [...checked, this.trueValue] : [...checked];
+                }
+
+                return this.trueValue;
             }
         },
 
         watch: {
             checked() {
                 this.refreshChecked();
-            }
+            },
+            value() {
+                this.refreshChecked();
+            },
         },
 
         components: {

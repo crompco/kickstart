@@ -1,72 +1,86 @@
 <template>
-	<div class="side-nav" :class="classObj">
-		<button class="mobile-menu" @click="showLinks()">
-			<menu-svg></menu-svg>
-		</button>
-		<slot></slot>
-	</div>
+    <div
+        class="side-nav"
+        :class="classObj"
+    >
+        <button
+            class="mobile-menu"
+            @click="showLinks()"
+        >
+            <menu-svg></menu-svg>
+        </button>
+        <slot></slot>
+    </div>
 </template>
 
 <script>
-    // External Dependencies
-	import MenuSvg from './icons/IconMenu.vue';
-
-    // Internal Dependencies
-	import {addEvent} from '../helpers/events';
-	import {removeClass, parent, addClass} from '../helpers/dom';
+    import MenuSvg from './icons/IconMenu.vue';
+    import { addEvent, removeEvent } from '../helpers/events';
+    import { addClass, removeClass } from '../helpers/dom';
 
     export default {
         name: 'KsSideNav',
 
-		props: {
-	  		fixed: {
-	  		    type: Boolean,
-				default: true
-			}
-		},
-
-		data() {
-	  		return {
-	  		    classObj: {
-					show: false,
-					fixed: this.fixed
-				}
-			}
-		},
-
-		mounted() {
-            let $element = this.$el.querySelector('.nav-links');
-
-            if ( $element != null ) {
-                addEvent($element, 'click', function (e) {
-                    removeClass(parent(this, '.side-nav'), 'show');
-                    removeClass(document.body, 'side-nav-open');
-                });
+        props: {
+            fixed: {
+                type: Boolean,
+                default: true
             }
-
-            window.addEventListener('resize', this.windowResize);
         },
 
-		methods: {
-	  		showLinks() {
-				this.classObj.show = !this.classObj.show;
+        data() {
+            return {
+                show: false,
+            }
+        },
 
-				if ( this.classObj.show ) {
-					addClass(document.body, 'side-nav-open');
-				} else {
+        computed: {
+            classObj() {
+                return {
+                    show: this.show,
+                    fixed: this.fixed,
+                };
+            },
+        },
+
+        mounted() {
+            this.links = this.$el.querySelector('.nav-links');
+            addEvent(this.links, 'click', this.hideLinks);
+        },
+
+        beforeDestroy() {
+            this.teardown();
+        },
+
+        beforeUnmount() {
+            this.teardown();
+        },
+
+        methods: {
+            showLinks() {
+                this.show = !this.show;
+
+                if ( this.show ) {
+                    addClass(document.body, 'side-nav-open');
+                } else {
                     removeClass(document.body, 'side-nav-open');
-				}
-			},
+                }
+            },
 
-			windowResize(e) {
-	  		    if ( this.classObj.show ) {
-                    console.log('window resize: ', e);
-				}
-			}
-		},
+            hideLinks() {
+                this.show = false;
+                removeClass(this.$el, 'show');
+                removeClass(document.body, 'side-nav-open');
+            },
 
-		components: {
+            teardown() {
+                removeEvent(this.links, 'click', this.hideLinks);
+                removeClass(document.body, 'side-nav-open');
+            },
+        },
+
+        components: {
             MenuSvg
-		}
+        }
     }
 </script>

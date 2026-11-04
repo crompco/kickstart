@@ -1,15 +1,17 @@
 <template>
-    <button
+    <component
+        :is="el"
         class="ks-button"
         :class="modifierClasses"
-        @click="$emit('click', $event)"
+        :disabled="is_button ? (disabled || spin) : null"
+        :aria-disabled="!is_button && (disabled || spin) ? 'true' : null"
+        @click="handleClick"
         @focus="$emit('focus', $event)"
         @blur="$emit('blur', $event)"
-        :disabled="disabled || spin"
     >
         <span
-            ref="spinWrapper"
             v-show="spin"
+            ref="spinWrapper"
             style="width: calc(100% - 1.2rem);text-align: center;position:absolute;"
         >
             <ks-loader-spin
@@ -17,27 +19,30 @@
                 :size="spinSize"
                 :color="spinColor"
                 :bg="spinBackground"
-                :height="''"
-                :width="'100%'"
+                height=""
+                width="100%"
             ></ks-loader-spin>
         </span>
-        <span class="button-label" ref="label" :class="{ hidden: spin }">
+        <span
+            ref="label"
+            class="button-label"
+            :class="{ hidden: spin }"
+        >
             <slot></slot>
         </span>
-    </button>
+    </component>
 </template>
 
 <script>
-
     import KsLoaderSpin from './KsLoaderSpin.vue';
 
     export default {
         name: 'KsButton',
 
         props: {
-            // It would be nice to use this with a render method for custom elements
+            // The element to render, for example "a"
             el: {
-                type: String,
+                type: [String, Object],
                 default: 'button'
             },
             disabled: {
@@ -82,7 +87,12 @@
             }
         },
 
+        emits: ['click', 'focus', 'blur'],
+
         computed: {
+            is_button() {
+                return this.el === 'button';
+            },
             modifierClasses() {
                 return {
                     'outline': this.outline,
@@ -90,9 +100,21 @@
                     'tiny': this.tiny,
                     'small': this.small,
                     'large': this.large,
-                    'spinning': this.spin
+                    'spinning': this.spin,
+                    'disabled': !this.is_button && (this.disabled || this.spin),
                 }
             }
+        },
+
+        methods: {
+            handleClick(e) {
+                if ( !this.is_button && (this.disabled || this.spin) ) {
+                    e.preventDefault();
+                    return;
+                }
+
+                this.$emit('click', e);
+            },
         },
 
         watch: {
