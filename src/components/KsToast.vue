@@ -51,6 +51,8 @@
             }
         },
 
+        emits: ['closed'],
+
         data() {
             return {
                 parent: null,
@@ -60,26 +62,33 @@
         },
 
         beforeMount() {
-            let container = document.body;
             let parent = document.querySelector('.ks-toast');
 
             if ( !parent ) {
                 parent = document.createElement('div');
+                parent.className = 'ks-toast';
+                document.body.appendChild(parent);
             }
 
             this.parent = parent;
-
-            container.appendChild(parent);
         },
 
         mounted() {
             this.show();
         },
 
+        beforeDestroy() {
+            this.clearTimer();
+        },
+
+        beforeUnmount() {
+            this.clearTimer();
+        },
+
         methods: {
             show() {
                 if ( this.hasChildren() ) {
-                    setTimeout(() => {
+                    this.timer = setTimeout(() => {
                         this.show();
                     }, 350);
                     return;
@@ -90,7 +99,6 @@
                 this.parent.appendChild(this.$el);
                 this.active = true;
 
-
                 if ( this.duration > 0 ) {
                     this.timer = setTimeout(() => {
                         this.close();
@@ -99,14 +107,18 @@
             },
 
             close() {
-                clearTimeout(this.timer);
+                this.clearTimer();
                 this.active = false;
 
-                setTimeout(() => {
-                    this.$destroy();
-
+                this.timer = setTimeout(() => {
                     this.$el.remove();
+                    this.$emit('closed');
                 }, 250);
+            },
+
+            clearTimer() {
+                clearTimeout(this.timer);
+                this.timer = null;
             },
 
             hasChildren() {

@@ -1,96 +1,107 @@
-let matchOperatorsRe = /[|\\{}()[\]^$+*?.]/g;
+const matchOperatorsRe = /[|\\{}()[\]^$+*?.]/g;
 
-/**
- *
- * @param str
- * @returns {*|string|void|XML}
- */
-export function escapeRegExp(str) {
-	if (typeof str !== 'string') {
-		throw new TypeError('Expected a string');
-	}
-
-	return str.replace(matchOperatorsRe, '\\$&');
+function isEmpty(value) {
+    return value === null || typeof value === 'undefined';
 }
 
 /**
- *
- * @param str
+ * @param {string} str
+ * @returns {string}
+ */
+export function escapeRegExp(str) {
+    if ( typeof str !== 'string' ) {
+        throw new TypeError('Expected a string');
+    }
+
+    return str.replace(matchOperatorsRe, '\\$&');
+}
+
+/**
+ * @param {*} str
  * @returns {string}
  */
 export function ucwords(str) {
-	return (str + '').replace(/^([a-z])|\s+([a-z])/g, function ($1) {
-		return $1.toUpperCase();
-	});
+    if ( isEmpty(str) ) {
+        return '';
+    }
+
+    return String(str).replace(/^([a-z])|\s+([a-z])/g, $1 => $1.toUpperCase());
 }
 
 /**
+ * Possessive form of a name: "Sara's", "Chas'"
  *
- * @param str
+ * @param {*} str
  * @returns {string}
  */
 export function posesses(str) {
-	let posesses_name = str;
-	if ( str[str.length -1] == 's' ) {
-		return posesses_name + "'";
-	}
+    if ( isEmpty(str) || str === '' ) {
+        return '';
+    }
 
-	return posesses_name + "'s";
+    str = String(str);
+
+    return str[str.length - 1] === 's' ? `${str}'` : `${str}'s`;
 }
 
+export const possesses = posesses;
+
 /**
+ * Formats a number as money: currency(1234.5) is "$1,234.50", currency(-5) is "$-5.00"
  *
- * @param str
- * @returns {string}
+ * @param {*} str
+ * @param {string} symbol
+ * @returns {string} An empty string when the value is not a number
  */
 export function currency(str, symbol = '$') {
-	str = typeof str === 'string' ? str.replace(/,/g, '') : str;
+    str = typeof str === 'string' ? str.replace(/,/g, '') : str;
 
-	return symbol + parseFloat(str)
-		.toFixed(2)
-		.replace(/./g, function(c, i, a) {
-			return i && c !== "." && ((a.length - i) % 3 === 0) ? ',' + c : c;
-		});
+    const amount = parseFloat(str);
+    if ( isNaN(amount) ) {
+        return '';
+    }
+
+    const sign = amount < 0 ? '-' : '';
+    const [whole, cents] = Math.abs(amount).toFixed(2).split('.');
+
+    return `${symbol}${sign}${whole.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}.${cents}`;
 }
 
 /**
- * Pads a string
- * @param str
- * @param pad_with
- * @param pad_length
+ * @param {*} str
+ * @param {*} pad_with
+ * @param {number} pad_length
  * @return {string}
  */
 export function pad_left(str, pad_with, pad_length) {
-	str = String(str);
-	let delta = pad_length - str.length;
-
-	if ( delta > 0 ) {
-		return String(pad_with).repeat(delta) + str;
-	}
-
-	return str;
+    return String(str).padStart(pad_length, String(pad_with));
 }
 
 /**
- *
- * @param str
- * @param max_length
+ * @param {*} str
+ * @param {number} max_length
  * @return {string}
  */
 export function ellipsis(str, max_length = 20) {
+    if ( isEmpty(str) ) {
+        return '';
+    }
+
+    str = String(str);
+
     if ( str.length > max_length ) {
-        return str.substr(0, max_length) + '...';
+        return str.substring(0, max_length) + '...';
     }
 
     return str;
 }
 
-
 export default {
-	escapeRegExp,
-	ucwords,
-	posesses,
-	currency,
-	pad_left,
-    ellipsis
-}
+    escapeRegExp,
+    ucwords,
+    posesses,
+    possesses,
+    currency,
+    pad_left,
+    ellipsis,
+};

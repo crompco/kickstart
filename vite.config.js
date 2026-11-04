@@ -37,7 +37,6 @@ export default defineConfig({
                     axios: 'axios',
                     tether: 'Tether',
                     'velocity-animate': 'Velocity',
-                    'v-mask': 'VueMask',
                 },
             },
         },

@@ -92,3 +92,24 @@ test('objects:object_set', () => {
     obj = objects.object_set(obj, 'foo', 'baz');
     expect({foo: ['bar', 'baz']}).toEqual(obj);
 })
+test('objects:object_get returns falsy values', () => {
+    const values = { zero: 0, no: false, empty: '', nested: { zero: 0 } };
+
+    expect(objects.object_get(values, 'zero', 'default')).toBe(0);
+    expect(objects.object_get(values, 'no', 'default')).toBe(false);
+    expect(objects.object_get(values, 'empty', 'default')).toBe('');
+    expect(objects.object_get(values, 'nested.zero', 'default')).toBe(0);
+});
+
+test('objects:object_get returns the default for missing paths', () => {
+    expect(objects.object_get({ a: null }, 'a.b.c', 'default')).toBe('default');
+    expect(objects.object_get({ a: { b: null } }, 'a.b', 'default')).toBe('default');
+    expect(objects.object_get(null, 'a', 'default')).toBe('default');
+    expect(objects.object_get(o, 'missing')).toBe('');
+});
+
+test('objects:looseIndexOf returns a number for arrays', () => {
+    expect(objects.looseIndexOf([1, 2, 3], '2')).toBe(1);
+    expect(objects.looseIndexOf([1, 2, 3], 4)).toBe(-1);
+    expect(objects.looseIndexOf({ a: 1, b: 2 }, '2')).toBe('b');
+});

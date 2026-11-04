@@ -40,9 +40,8 @@
     "vue-template-compiler": "^2.7.16"
   },
   "dependencies": {
-    "axios": "^0.15.3",
+    "axios": "^1.21.0",
     "tether": "^1.4.0",
-    "v-mask": "^1.2.0",
     "velocity-animate": "^1.5.2"
   },
   "peerDependencies": {

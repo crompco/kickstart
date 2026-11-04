@@ -5,8 +5,8 @@
 
         <!-- Display field-->
         <input class="ks-datepicker-display"
-               v-model="input_date"
-               v-mask="mask"
+               :value="input_date"
+               @input="onDisplayInput"
                @focus="open"
                ref="display"
                type="text"
@@ -38,6 +38,7 @@
     import KsCalendar from './KsCalendar.vue';
     import {formatDate, parseDate} from '../helpers/dates';
     import {smartFocusToggle, removeSmartFocusToggle} from '../helpers/events';
+    import { applyMask, dateMask } from '../helpers/mask';
 
     export default {
         name: 'KsDatepicker',
@@ -92,7 +93,7 @@
                 return '';
             },
             mask() {
-                return this.displayFormat.replace('m', '##').replace('Y', '####').replace('d', '##');
+                return dateMask(this.displayFormat);
             },
             show() {
                 return this.is_open;
@@ -121,6 +122,15 @@
         },
 
         methods: {
+            onDisplayInput(e) {
+                const masked = applyMask(e.target.value, this.mask);
+
+                if ( e.target.value !== masked ) {
+                    e.target.value = masked;
+                }
+
+                this.input_date = masked;
+            },
             selectDay(day) {
                 this.$emit('input', formatDate(day, this.dateFormat));
                 this.is_open = false;

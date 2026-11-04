@@ -11,6 +11,16 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        tz:
+          - UTC
+          - America/New_York
+          - Asia/Tokyo
+
+    env:
+      TZ: ${{ matrix.tz }}
+
     steps:
       - uses: actions/checkout@v4
 
