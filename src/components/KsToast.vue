@@ -17,7 +17,7 @@
 
 <script>
     // External Dependencies
-    import Close from '../svg/close.svg';
+    import Close from './icons/IconClose.vue';
 
     // Internal Dependencies
 

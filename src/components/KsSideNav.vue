@@ -9,7 +9,7 @@
 
 <script>
     // External Dependencies
-	import MenuSvg from '../svg/menu.svg';
+	import MenuSvg from './icons/IconMenu.vue';
 
     // Internal Dependencies
 	import {addEvent} from '../helpers/events';

@@ -1,4 +1,3 @@
-import './helpers/polyfills';
 import KsAccordion from './components/KsAccordion.vue';
 import KsAccordionRow from './components/KsAccordionRow.vue';
 import KsActionMenu from './components/KsActionMenu.vue';
@@ -31,10 +30,6 @@ import KsCard from './components/KsCard.vue';
 import API from './helpers/api';
 import * as animations from './components/transitions/Transitions';
 import * as strings from './helpers/strings';
-
-if (process.env.BUILD === 'production') {
-    require('./styles/app.scss');
-}
 
 const Kickstart = {
     KsAccordion,

@@ -46,7 +46,7 @@
 
 <script>
     // External Dependencies
-    import Close from '../svg/close.svg';
+    import Close from './icons/IconClose.vue';
 
     // Internal Dependencies
     import {addClass, removeClass} from '../helpers/dom';
@@ -150,7 +150,7 @@
         beforeUpdate() {
             if ( this.updatePosition && typeof this.$slots.default !== 'undefined' ) {
                 this.updatePosition = false;
-                setImmediate(() => {
+                setTimeout(() => {
                     this.positionModal();
                 });
             }

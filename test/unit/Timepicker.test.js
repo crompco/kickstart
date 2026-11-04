@@ -1,17 +1,17 @@
-import test from 'ava';
-import KsTimepicker from '../../lib/KsTimepicker';
-import {resetDocument, component} from '../helpers/test-bootstrap';
+import { expect, test } from 'vitest';
+import { mount } from '@vue/test-utils';
+import KsTimepicker from '../../src/components/KsTimepicker.vue';
 
-test('Timepicker:computed', t => {
-	resetDocument();
+test('Timepicker:computed', () => {
+	let vm = mount(KsTimepicker, {
+		propsData: {
+			minTime: '08:30 am',
+			timeStep: '15',
+			maxTime: '9:15 am'
+		},
+	}).vm;
 
-	let vm = component(KsTimepicker, {
-		minTime: '08:30 am',
-		timeStep: '15',
-		maxTime: '9:15 am'
-	});
-
-	t.deepEqual(vm.timeOptions, [
+	expect(vm.timeOptions).toEqual([
 		'08:30 am',
 		'08:45 am',
 		'09:00 am',
@@ -19,80 +19,80 @@ test('Timepicker:computed', t => {
 	]);
 });
 
-test('Timepicker:filterDisplayValue 24-hour Military Input', t => {
-	resetDocument();
-
-	let vm = component(KsTimepicker, {
-		minTime: '00:00',
-		timeStep: '30',
-		maxTime: '11:30 pm',
-		timeFiormat: 'H:i',
-		displayFormat: 'H:i a'
-	});
+test('Timepicker:filterDisplayValue 24-hour Military Input', () => {
+	let vm = mount(KsTimepicker, {
+		propsData: {
+			minTime: '00:00',
+			timeStep: '30',
+			maxTime: '11:30 pm',
+			timeFormat: 'H:i',
+			displayFormat: 'H:i a'
+		},
+	}).vm;
 
 	vm.lookup_name = '0900';
 
-	t.true(vm.filterDisplayValue('09:00 am'));
-	t.false(vm.filterDisplayValue('09:45 pm'));
-	t.false(vm.filterDisplayValue('09:15 pm'));
-	t.false(vm.filterDisplayValue('08:45 pm'));
+	expect(vm.filterDisplayValue('09:00 am')).toBe(true);
+	expect(vm.filterDisplayValue('09:45 pm')).toBe(false);
+	expect(vm.filterDisplayValue('09:15 pm')).toBe(false);
+	expect(vm.filterDisplayValue('08:45 pm')).toBe(false);
 
 	vm.lookup_name = '900'
-	t.true(vm.filterDisplayValue('09:00 am'));
+	expect(vm.filterDisplayValue('09:00 am')).toBe(true);
 
 	vm.lookup_name = '0930'
-	t.true(vm.filterDisplayValue('09:30 am'));
+	expect(vm.filterDisplayValue('09:30 am')).toBe(true);
 
 	vm.lookup_name = '930'
-	t.true(vm.filterDisplayValue('09:30 am'));
+	expect(vm.filterDisplayValue('09:30 am')).toBe(true);
 
 	vm.lookup_name = '1200'
-	t.true(vm.filterDisplayValue('12:00 pm'));
+	expect(vm.filterDisplayValue('12:00 pm')).toBe(true);
 
 	vm.lookup_name = '0000'
-	t.true(vm.filterDisplayValue('00:00 am'));
+	expect(vm.filterDisplayValue('00:00 am')).toBe(true);
 
 	vm.lookup_name = '000'
-	t.true(vm.filterDisplayValue('00:00 am'));
+	expect(vm.filterDisplayValue('00:00 am')).toBe(true);
 });
 
-test('Timepicker:filterDisplayValue matches left to right', t => {
-	resetDocument();
-
-	let vm = component(KsTimepicker, {
-		minTime: '10:00 am',
-		timeStep: '15',
-		displayFormat: 'h:i a'
-	});
+test('Timepicker:filterDisplayValue matches left to right', () => {
+	let vm = mount(KsTimepicker, {
+		propsData: {
+			minTime: '10:00 am',
+			timeStep: '15',
+			displayFormat: 'h:i a'
+		},
+	}).vm;
 
 	vm.lookup_name = '1';
-	t.true(vm.filterDisplayValue('01:00 pm'));
-	t.false(vm.filterDisplayValue('02:10 pm'));
-	t.false(vm.filterDisplayValue('00:10 pm'));
+	expect(vm.filterDisplayValue('01:00 pm')).toBe(true);
+	expect(vm.filterDisplayValue('02:10 pm')).toBe(false);
+	expect(vm.filterDisplayValue('00:10 pm')).toBe(false);
 
 	vm.lookup_name = '1:';
-	t.true(vm.filterDisplayValue('1:00 pm'));
-	t.true(vm.filterDisplayValue('01:00 pm'));
+	expect(vm.filterDisplayValue('1:00 pm')).toBe(true);
+	expect(vm.filterDisplayValue('01:00 pm')).toBe(true);
 
 	vm.lookup_name = '01';
-	t.true(vm.filterDisplayValue('01:00 am'));
-	t.true(vm.filterDisplayValue('01:00 pm'));
-	t.false(vm.filterDisplayValue('10:01 pm'));
+	expect(vm.filterDisplayValue('01:00 am')).toBe(true);
+	expect(vm.filterDisplayValue('01:00 pm')).toBe(true);
+	expect(vm.filterDisplayValue('10:01 pm')).toBe(false);
 
 	vm.lookup_name = '01:';
-	t.true(vm.filterDisplayValue('01:00 am'));
-	t.true(vm.filterDisplayValue('01:00 pm'));
-	t.false(vm.filterDisplayValue('10:01 pm'));
+	expect(vm.filterDisplayValue('01:00 am')).toBe(true);
+	expect(vm.filterDisplayValue('01:00 pm')).toBe(true);
+	expect(vm.filterDisplayValue('10:01 pm')).toBe(false);
 });
 
-test('Timepicker:min/max time can be null', t => {
-	resetDocument();
+test('Timepicker:min/max time can be null', () => {
+	let vm = mount(KsTimepicker, {
+		propsData: {
+			minTime: null,
+			maxTime: null,
+		},
+	}).vm;
 
-	let vm = component(KsTimepicker, {
-		minTime: null,
-		maxTime: null,
-	});
-
-	t.deepEqual(vm.timeOptions[0], '04:00 am');
-	t.deepEqual(vm.timeOptions[vm.timeOptions.length - 1], '11:30 pm')
+	expect(vm.timeOptions[0]).toEqual('04:00 am');
+	expect(vm.timeOptions[vm.timeOptions.length - 1]).toEqual('11:30 pm')
 });

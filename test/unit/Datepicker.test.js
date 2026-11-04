@@ -1,14 +1,14 @@
-import test from 'ava';
-import KsDatepicker from '../../lib/KsDatepicker';
-import {resetDocument, component} from '../helpers/test-bootstrap';
+import { expect, test } from 'vitest';
+import { mount } from '@vue/test-utils';
+import KsDatepicker from '../../src/components/KsDatepicker.vue';
 
-test('Datepicker:computed', t => {
-	resetDocument();
+test('Datepicker:computed', () => {
+	let vm = mount(KsDatepicker, {
+		propsData: {
+			value: new Date(2017, 0, 1)
+		},
+	}).vm;
 
-	let vm = component(KsDatepicker, {
-		value: new Date(2017, 0, 1)
-	});
-
-	t.is(vm.display_date, '01/01/2017');
-	t.is(vm.value_date, '2017-01-01');
+	expect(vm.display_date).toBe('01/01/2017');
+	expect(vm.value_date).toBe('2017-01-01');
 });

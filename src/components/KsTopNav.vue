@@ -13,8 +13,8 @@
 
 <script>
     // External Dependencies
-    import MenuSvg from '../svg/menu.svg';
-    import DotsHorizontal from '../svg/dots-horizontal-triple.svg';
+    import MenuSvg from './icons/IconMenu.vue';
+    import DotsHorizontal from './icons/IconDotsHorizontal.vue';
 
     // Internal Dependencies
     import {addEvent} from '../helpers/events';

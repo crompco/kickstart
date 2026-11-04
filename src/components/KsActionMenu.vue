@@ -11,7 +11,7 @@
 
 <script>
     // External Dependencies
-    import MenuSvg from '../svg/menu.svg';
+    import MenuSvg from './icons/IconMenu.vue';
     import Tether from 'tether';
 
     // Internal Dependencies

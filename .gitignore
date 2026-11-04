@@ -6,3 +6,5 @@ node_modules
 docs/*.bundle.*
 docs-src/generated/*.js
 /CLAUDE.md
+/dist
+/lib

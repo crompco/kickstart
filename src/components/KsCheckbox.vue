@@ -25,7 +25,7 @@
 
 <script>
     // External Dependencies
-    import Checkmark from '../svg/checkmark.svg';
+    import Checkmark from './icons/IconCheckmark.vue';
 
     // Internal Dependencies
     import {looseIndexOf} from '../helpers/objects';

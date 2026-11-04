@@ -151,7 +151,7 @@
         cloneDate,
     } from '../helpers/dates';
     import {mouseHold} from '../helpers/events';
-    import DownSvg from '../svg/cheveron-down.svg';
+    import DownSvg from './icons/IconChevronDown.vue';
     import KsDroppable from './KsDroppable.vue';
 
     export default {
