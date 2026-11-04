@@ -18,6 +18,11 @@
         border-top: 0;
         overflow-y: auto;
         left: 0;
+        // Above the field the open side is the bottom
+        &.inverted {
+            border-top: solid 1px $timepicker-list-border;
+            border-bottom: 0;
+        }
         li {
             padding: rem($timepicker-list-item-padding);
             border: 1px solid transparent;

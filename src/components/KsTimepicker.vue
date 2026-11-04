@@ -8,53 +8,65 @@
         @keydown.tab="selectItemAtIndex(null, $event)"
         @keydown.esc.prevent="resetFocus(true)"
         @keydown="startTyping($event)"
-        @keydown.8.prevent.stop="clearAndFocus"
+        @keydown.backspace.prevent.stop="clearAndFocus"
     >
         <input
-            tabindex="-1"
             ref="lookup"
-            type="text"
             v-model="display_value"
-            @input=""
-            @focus="isOpen = true"
+            tabindex="-1"
+            type="text"
             autocomplete="off"
-            @keydown.8.stop
-            @keyup.stop="searchTime"
             :disabled="disabled"
-        />
-        <input type="hidden" :name="name" :value="value" @input="$emit('input', $event)" :disabled="disabled">
+            @focus="isOpen = true"
+            @keydown.backspace.stop
+            @keyup.stop="searchTime"
+        >
+        <input
+            type="hidden"
+            :name="name"
+            :value="value"
+            :disabled="disabled"
+        >
         <ul
             v-show="isOpen"
             ref="list"
-            :style="'max-height:'+this.listHeight"
+            :class="{ 'inverted': inverted }"
+            :style="list_style"
         >
             <li
                 v-for="(time, index) in list"
                 :key="time"
-                @click.prevent.stop="selectItemAtIndex(index)"
                 :class="{ 'ks-selected-item': index == selected_index }"
+                @click.prevent.stop="selectItemAtIndex(index)"
                 @mouseover="setHoverIndex(index)"
             >
-                {{time}}
+                {{ time }}
             </li>
         </ul>
     </div>
 </template>
 
 <script>
-
-    import {smartFocusToggle} from "../helpers/events";
-    import {parseTime, formatTime} from "../helpers/dates";
+    import { parseTime, formatTime } from '../helpers/dates';
+    import { escapeRegExp } from '../helpers/strings';
     import ListIndexNavigator from './mixins/ListIndexNavigator';
-    import {escapeRegExp} from '../helpers/strings';
+    import FloatingDropdown from './mixins/FloatingDropdown';
 
     const defaultMinTime = '04:00';
     const defaultMaxTime = '23:59';
+    const END_OF_DAY = 23 * 60 + 59;
+
+    /**
+     * Minutes since midnight of a parsed time
+     */
+    function minutesOf(time_info) {
+        return time_info.full_hour * 60 + time_info.minute;
+    }
 
     export default {
         name: 'KsTimepicker',
 
-        mixins: [ListIndexNavigator],
+        mixins: [ListIndexNavigator, FloatingDropdown],
 
         props: {
             name: {},
@@ -94,6 +106,8 @@
             }
         },
 
+        emits: ['input', 'clear', 'blur', 'focus', 'search'],
+
         computed: {
             /**
              * Extract a list of options to choose from
@@ -101,32 +115,33 @@
              * @returns {Array}
              */
             timeOptions() {
-                let min_time = parseTime(this.minTime ?? defaultMinTime);
-                let max_time = parseTime(this.maxTime ?? defaultMaxTime);
+                const min_time = parseTime(this.minTime ?? defaultMinTime) || parseTime(defaultMinTime);
+                const max_time = parseTime(this.maxTime ?? defaultMaxTime) || parseTime(defaultMaxTime);
+                const step = parseInt(this.timeStep) || 30;
 
-                let options = [];
+                const options = [];
 
-                for ( var i = min_time.full_hour; i <= max_time.full_hour; i++ ) {
-                    for ( var j = 0; j < 60; j += parseInt(this.timeStep) ) {
-                        if (
-                            ( i === min_time.full_hour && j < min_time.minute ) ||
-                            ( i === max_time.full_hour && j > max_time.minute )
-                        ) {
-                            continue;
-                        }
+                // Options sit on the step boundaries of the hour (8:10 with a 30 minute step starts at 8:30)
+                const first = Math.ceil(minutesOf(min_time) / step) * step;
 
-                        options.push(this.formatTimeValue(`${i}:${j}`, this.displayFormat));
-                    }
+                for ( let minutes = first; minutes <= minutesOf(max_time); minutes += step ) {
+                    options.push(this.formatTimeValue(`${Math.floor(minutes / 60)}:${minutes % 60}`, this.displayFormat));
                 }
 
-                if ( this.endOfDay && this.maxTime >= '23:59' ) {
+                if ( this.endOfDay && minutesOf(max_time) >= END_OF_DAY ) {
                     options.push(this.formatTimeValue('23:59', this.displayFormat));
                 }
 
-                return options;
+                // A display format without the hour or meridiem can format two times the same
+                return [...new Set(options)];
             },
             customFilterLookupName() {
                 return escapeRegExp(this.lookup_name.replace(':', ''));
+            },
+            list_style() {
+                return {
+                    'max-height': this.listHeight,
+                };
             },
         },
 
@@ -135,21 +150,14 @@
                 isOpen: false,
                 focused: false,
                 tmp_type: '',
-                timer: null,
                 list: [],
                 minIndex: 0,
                 startIndex: 0,
-                display_value: this.formatTimeValue(this.value, this.displayFormat)
-            }
+                display_value: this.formatTimeValue(this.value, this.displayFormat),
+            };
         },
 
         mounted() {
-            this.$nextTick(() => {
-                smartFocusToggle(this.$el, (focus, e) => {
-                    this.focused = focus;
-                }, 150);
-            });
-
             this.initListNavigation({
                 lookup: 'lookup',
                 list: 'list',
@@ -160,33 +168,40 @@
             this.resetList();
         },
 
+        beforeDestroy() {
+            clearTimeout(this.typing_timer);
+        },
+
+        beforeUnmount() {
+            clearTimeout(this.typing_timer);
+        },
+
         methods: {
             /**
              * Catch key presses on the focused parent and autofill the search
              */
             startTyping(e) {
-                if ((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 96 && e.keyCode <= 105)) {
-                    const keyCode = e.keyCode <= 57 ? e.keyCode : e.keyCode - 48;
-                    this.tmp_type += String.fromCharCode(keyCode);
-                    if ( document.activeElement != this.$refs.lookup ) {
-                        clearTimeout(this.timer);
-                        this.timer = setTimeout(() => {
-                            this.display_value = this.tmp_type;
-                            this.tmp_type = '';
-                            this.$nextTick(() => {
-                                this.$refs.lookup.focus();
-                                this.searchTime(e);
-                            })
-                        }, 75);
-                    }
+                if ( !/^[0-9]$/.test(e.key) || document.activeElement == this.$refs.lookup ) {
+                    return;
                 }
+
+                this.tmp_type += e.key;
+                clearTimeout(this.typing_timer);
+                this.typing_timer = setTimeout(() => {
+                    this.display_value = this.tmp_type;
+                    this.tmp_type = '';
+                    this.$nextTick(() => {
+                        this.$refs.lookup.focus();
+                        this.searchTime(e);
+                    });
+                }, 75);
             },
 
             clearAndFocus() {
                 this.setTime('');
                 this.$nextTick(() => {
                     this.$refs.lookup.focus();
-                })
+                });
             },
 
             /**
@@ -216,19 +231,21 @@
              * @param time
              */
             setTime(time) {
-                let time_formatted = this.formatTimeValue(time, this.timeFormat);
-                if ( time_formatted != this.value ) {
+                const time_formatted = this.formatTimeValue(time, this.timeFormat);
+                if ( time_formatted != (this.value || '') ) {
                     this.$emit('input', time_formatted);
                 }
             },
 
             /**
-             * Sets the value to the item at the given index or at the current selected index
+             * Sets the value to the item at the given index or at the current selected index.
+             * Without a list item a typed time ("1430", "2:15 pm") is used.
              *
-             * @param int|null index
+             * @param {Number|null} index
+             * @param {Event|null} event
              */
             selectItemAtIndex(index = null, event = null) {
-                if ( event && event.keyCode == 9 ) {
+                if ( event && event.key == 'Tab' ) {
                     if ( !this.isOpen ) {
                         return;
                     }
@@ -241,11 +258,13 @@
                     return;
                 }
 
-                index = index || this.selected_index;
+                index = index === null ? this.selected_index : index;
 
                 if ( this.list[index] ) {
                     this.setTime(this.list[index]);
                     this.resetFocus();
+                } else if ( this.display_value && parseTime(this.display_value) ) {
+                    this.resetFocus(true);
                 }
             },
 
@@ -261,13 +280,13 @@
                         if ( validate ) {
                             this.validateDisplayValue();
                         }
-                    })
-                })
+                    });
+                });
             },
 
             searchTime(e) {
                 // Ignore navigation keys
-                if ( e.keyCode == 38 || e.keyCode == 40 || e.keyCode == 9 ) {
+                if ( ['ArrowUp', 'ArrowDown', 'Tab', 'Enter', 'Escape'].includes(e.key) ) {
                     return;
                 }
 
@@ -286,9 +305,7 @@
                 if ( !this.lookup_name ) {
                     this.list = this.timeOptions.slice(0);
                 } else {
-                    this.list = this.timeOptions.filter((time) => {
-                        return this.filterDisplayValue(time);
-                    });
+                    this.list = this.timeOptions.filter(time => this.filterDisplayValue(time));
                     // Select the first item when there is only one result
                     if ( this.list.length == 1 ) {
                         this.selected_index = 0;
@@ -309,21 +326,16 @@
             },
 
             /**
-             * Validates the format of a typed value and resets the value when it's invalid
+             * Emits a valid typed time, clears an empty one and resets an invalid one
              */
             validateDisplayValue() {
-                let validationRegex = new RegExp(this.displayFormat
-                    .replace(/(h|H|i)/g, '([0-9]{1,2})')
-                    .replace(/\s/g, '\\s+')
-                    .replace(':', '\\:+')
-                    .replace(/a/i, '(am|pm)'));
-
-                if ( !this.display_value.match(validationRegex) || isNaN(new Date(this.display_value).getTime()) ) {
-                    // If it doesn't match the format then reset it
-                    this.resetDisplayValue();
-                } else {
-                    // If it does validate then we should emit a new value
+                if ( !this.display_value ) {
+                    this.setTime('');
+                } else if ( parseTime(this.display_value) ) {
                     this.setTime(this.display_value);
+                    this.display_value = this.formatTimeValue(this.display_value, this.displayFormat);
+                } else {
+                    this.resetDisplayValue();
                 }
             },
 
@@ -335,8 +347,20 @@
                 this.isOpen = true;
             },
 
+            /**
+             * Matches the lookup against the start of the displayed time, or for
+             * 3-4 digits ("930", "1430") against its 24 hour time
+             */
             filterDisplayValue(time) {
-                return !!time.replace(':', '').match(new RegExp('^0?' + this.customFilterLookupName + '.*', 'i'));
+                const pattern = new RegExp('^0?' + this.customFilterLookupName, 'i');
+
+                if ( pattern.test(time.replace(':', '')) ) {
+                    return true;
+                }
+
+                const time_info = /^\d{3,4}$/.test(this.lookup_name) && parseTime(time);
+
+                return !!time_info && pattern.test(formatTime(time, 'Hi'));
             },
         },
 
@@ -353,7 +377,7 @@
              * Update the value when the timeFormat is changed
              */
             timeFormat() {
-                this.$emit('input', this.formatTimeValue(this.value, this.timeFormat))
+                this.$emit('input', this.formatTimeValue(this.value, this.timeFormat));
             },
 
             /**
@@ -384,16 +408,21 @@
              * Reset the list when it's closed
              */
             isOpen() {
-                if ( this.isOpen ) {
-                    this.resetList();
-                    // If it's opening then let's pre-select the current time
-                    var index = this.list.indexOf(this.display_value)
-                    if ( -1 != index ) {
-                        this.selected_index = index;
-                        this.$nextTick(() => {
-                            this.initListScrollTo(index);
-                        })
-                    }
+                if ( !this.isOpen ) {
+                    this.stopDropdown();
+                    return;
+                }
+
+                this.resetList();
+                this.$nextTick(() => this.startDropdown(this.$el, this.$refs.list));
+
+                // If it's opening then let's pre-select the current time
+                const index = this.list.indexOf(this.display_value);
+                if ( -1 != index ) {
+                    this.selected_index = index;
+                    this.$nextTick(() => {
+                        this.initListScrollTo(index);
+                    });
                 }
             }
         }

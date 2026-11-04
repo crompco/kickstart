@@ -70,7 +70,7 @@
     function storage() {
         try {
             return window.sessionStorage || null;
-        } catch ( e ) {
+        } catch {
             return null;
         }
     }
