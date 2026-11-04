@@ -1,7 +1,6 @@
-import {object_get} from '../../helpers/objects';
-import {addEvent, smartFocusToggle, keyCode, stopParentScroll, scrolledToBottom} from '../../helpers/events';
-import {escapeRegExp} from '../../helpers/strings';
-import axios from 'axios';
+import { object_get } from '../../helpers/objects';
+import { addEvent, keyCode, removeEvent, removeSmartFocusToggle, scrolledToBottom, smartFocusToggle, stopParentScroll } from '../../helpers/events';
+import { escapeRegExp } from '../../helpers/strings';
 import api from '../../helpers/api';
 
 export default {
@@ -91,9 +90,9 @@ export default {
             mousescroll_delay: 100,
             navigating_with_keys: false,
             key_pressed_timer: '',
-            cancel_token_source: null,
             selected_empty: false,
             filter: null,
+            timer: null,
         };
     },
 
@@ -117,12 +116,11 @@ export default {
             }
 
             return (item) => {
-                let name_match = object_get(item, filter, '').match(this.nameRegex) ? true : false;
+                const name_match = this.nameRegex.test(String(object_get(item, filter, '')));
 
                 // If groupBy is set then we should filter on the group name or the name match
                 if ( this.groupBy ) {
-                    let group_match = object_get(item, this.groupBy, '').match(this.nameRegex) ? true : false;
-                    return name_match || group_match;
+                    return name_match || this.nameRegex.test(String(object_get(item, this.groupBy, '')));
                 }
 
                 return name_match;
@@ -136,7 +134,7 @@ export default {
         /**
          * Returns true when list expects multiple selections
          *
-         * @return {props.taggable|{type, default}|taggable|props.multiple|multiple|boolean}
+         * @return {boolean}
          */
         is_multiple() {
             return this.taggable || this.multiple;
@@ -156,30 +154,42 @@ export default {
                 return {};
             }
 
-            let groups = {}
+            const groups = {};
 
-            // Using custom group by in order to retain the original index for selecting the items
-            for ( let i in this.list ) {
-                let group = object_get(this.list[i], this.groupBy);
+            // Keep the original index as _index for selecting the items
+            this.list.forEach((item, index) => {
+                const group = object_get(item, this.groupBy);
 
-                // Initialize the group
                 if ( typeof groups[group] == 'undefined' ) {
                     groups[group] = [];
                 }
 
-                // Push the group with the original index as _index
                 groups[group].push({
-                    ...this.list[i],
-                    _index: i
+                    ...item,
+                    _index: index,
                 });
-            }
+            });
 
             return groups;
         },
 
         hasEmptyMessage() {
-            return this.emptyMessage || this.$slots.empty || this.$scopedSlots.empty;
+            return !!(this.emptyMessage || this.$slots.empty || (this.$scopedSlots && this.$scopedSlots.empty));
         },
+    },
+
+    mounted() {
+        this.list_teardown = [];
+        this.is_unmounted = false;
+        this.abort_controller = null;
+    },
+
+    beforeDestroy() {
+        this.teardownListNavigation();
+    },
+
+    beforeUnmount() {
+        this.teardownListNavigation();
     },
 
     methods: {
@@ -194,19 +204,20 @@ export default {
             this.ref_list = options.list || 'list';
 
             this.$nextTick(() => {
-                // prevent component initialization callbacks if component is
-                // destroyed/destroying
-                if ( this._isDestroyed || this._isBeingDestroyed ) {
+                // The component can be destroyed before the next tick
+                if ( this.is_unmounted ) {
                     return;
                 }
 
                 this.listenForScroll();
 
-                addEvent(document, 'mousemove', () => {
+                const stopKeyNavigation = () => {
                     this.navigating_with_keys = false;
-                });
+                };
+                addEvent(document, 'mousemove', stopKeyNavigation);
+                this.list_teardown.push(() => removeEvent(document, 'mousemove', stopKeyNavigation));
 
-                smartFocusToggle(this.$el, (focus, e) => {
+                const focus_toggle = smartFocusToggle(this.$el, (focus) => {
                     this.focused = focus;
                     if ( !focus ) {
                         this.$emit('blur');
@@ -216,31 +227,45 @@ export default {
                         }
                     }
                 }, 50);
+                this.list_teardown.push(() => removeSmartFocusToggle(focus_toggle));
 
                 if ( this.focus ) {
                     this.setFocus();
                 }
-            })
+            });
+        },
+
+        teardownListNavigation() {
+            this.is_unmounted = true;
+            clearTimeout(this.timer);
+            this.abortSearch();
+
+            (this.list_teardown || []).forEach(teardown => teardown());
+            this.list_teardown = [];
         },
 
         /**
          * Listens for the scroll changes to detect when to run the next page
          */
         listenForScroll() {
+            const list = this.$refs[this.ref_list];
+            if ( !list ) {
+                return;
+            }
+
             if ( this.paginated ) {
-                scrolledToBottom(this.$refs[this.ref_list], () => {
+                this.list_teardown.push(scrolledToBottom(list, () => {
                     if ( this.last_index && !this.list_exhausted && this.list.length ) {
                         this.runNextPage(this.last_index);
                     }
-                }, this.mousescroll_delay, this.mousescroll_threshold);
+                }, this.mousescroll_delay, this.mousescroll_threshold));
             }
             if ( this.stopParentScroll ) {
-                stopParentScroll(this.$refs[this.ref_list]);
+                this.list_teardown.push(stopParentScroll(list));
             }
         },
 
         /**
-         *
          * @param index
          */
         setHoverIndex(index) {
@@ -254,7 +279,7 @@ export default {
          */
         selectUp() {
             this.navigating_with_keys = true;
-            let index = this.selected_index - 1;
+            const index = this.selected_index - 1;
             if ( !(index < this.minIndex) ) {
                 this.selected_index -= 1;
                 this.callHookMethod('onSelectUp');
@@ -262,7 +287,6 @@ export default {
                 this.callHookMethod('onSelectStartBoundary');
             }
 
-            // Auto scroll
             if ( this.list.length > 0 ) {
                 this.$nextTick(() => {
                     this.autoScroll('up');
@@ -275,7 +299,7 @@ export default {
          */
         selectDown() {
             this.navigating_with_keys = true;
-            let index = this.selected_index + 1;
+            const index = this.selected_index + 1;
 
             if ( index <= this.last_index ) {
                 this.selected_index += 1;
@@ -284,7 +308,6 @@ export default {
                 this.callHookMethod('onSelectEndBoundary');
             }
 
-            // Auto scroll
             if ( this.list.length > 0 ) {
                 this.$nextTick(() => {
                     this.autoScroll('down');
@@ -300,7 +323,7 @@ export default {
             this.resetList();
             this.lookup_name = '';
             this.list = [];
-            if ( this.$refs[this.ref_lookup] === document.activeElement && !keep_focus_or_event) {
+            if ( this.$refs[this.ref_lookup] === document.activeElement && !keep_focus_or_event ) {
                 this.$refs[this.ref_lookup].blur();
             }
             this.$emit('clear', keep_focus_or_event);
@@ -331,7 +354,7 @@ export default {
         getItemByIndex(index) {
             index = parseInt(index);
 
-            if ( this.list.length > index ) {
+            if ( index >= 0 && this.list.length > index ) {
                 return this.list[index];
             }
 
@@ -345,7 +368,7 @@ export default {
          */
         setFocus(ref) {
             const reference = this.$refs[ref || this.ref_lookup];
-            if ( typeof reference !== 'undefined' ) {
+            if ( reference ) {
                 reference.focus();
             }
             this.$emit('focus');
@@ -355,13 +378,12 @@ export default {
          * Looks for the term in the cache
          *
          * @param term
-         * @returns {boolean}
+         * @param page
+         * @returns {Array|boolean}
          */
         findCache(term, page) {
-            if ( term in this.cache ) {
-                if ( page in this.cache[term] ) {
-                    return this.cache[term][page];
-                }
+            if ( term in this.cache && page in this.cache[term] ) {
+                return this.cache[term][page];
             }
 
             return false;
@@ -373,7 +395,6 @@ export default {
          * @param term
          * @param page
          * @param results
-         * @return {boolean}
          */
         addCache(term, page, results) {
             if ( !this.cache[term] ) {
@@ -392,7 +413,7 @@ export default {
         runSearch(term, concat = false) {
             // See if we can process the request from our cache
             if ( this.cacheResults ) {
-                let cached_list = this.findCache(term, this.page)
+                const cached_list = this.findCache(term, this.page);
                 if ( cached_list ) {
                     this.callback(cached_list, false, concat);
                     return;
@@ -400,55 +421,63 @@ export default {
             }
 
             this.loading = true;
-            let page = this.page;
+            const page = this.page;
             this.$emit('search', {
                 term,
                 page,
                 callback: (endpoint, config = {}) => {
-
-                    let cancel_token = this.setupCancelToken();
+                    const signal = this.setupAbortSignal();
 
                     return api.getInstance().get(endpoint, {
-                        cancelToken: cancel_token.token,
+                        signal,
                         ...config,
-                    }).then(({data}) => {
+                    }).then(({ data }) => {
                         this.callback(data.data, true, concat);
 
                         return data;
                     }).catch((e) => {
-                        if ( e.message !== "KS-ABORT" ) {
+                        if ( !api.isCancel(e) ) {
+                            this.loading = false;
                             console.error(e);
                         }
-                    })
+                    });
                 }
             });
         },
 
         /**
+         * Aborts the previous search request and returns the signal for the next one
          *
-         * @returns {*}
+         * @returns {AbortSignal}
          */
-        setupCancelToken() {
-            if ( this.cancel_token_source ) {
-                this.cancel_token_source.cancel('KS-ABORT');
-            }
-            let CancelToken = axios.CancelToken;
+        setupAbortSignal() {
+            this.abortSearch();
+            this.abort_controller = new AbortController();
 
-            return this.cancel_token_source = CancelToken.source();
+            return this.abort_controller.signal;
+        },
+
+        abortSearch() {
+            if ( this.abort_controller ) {
+                this.abort_controller.abort();
+                this.abort_controller = null;
+            }
         },
 
         /**
          * Callback when list is updated
          *
          * @param list
+         * @param cache
+         * @param concat
          */
         callback(list, cache = true, concat = false) {
             this.loading = false;
-            let term = this.lookup_name;
+            const term = this.lookup_name;
+            list = Array.isArray(list) ? list : [];
 
-            let start_index = this.getSearchStartIndex();
+            const start_index = this.getSearchStartIndex();
             if ( this.paginated ) {
-                // If we have results and the we want them concatenated
                 if ( list.length ) {
                     if ( concat ) {
                         this.list = this.list.concat(list);
@@ -460,7 +489,6 @@ export default {
                     // Save when we reach the last page to prevent repeated calls
                     this.last_page = this.page;
 
-                    // If it's not a concatenation then the list should be cleared out
                     if ( !concat ) {
                         this.list = list;
                     }
@@ -476,31 +504,19 @@ export default {
         },
 
         /**
-         *
          * @returns {Number}
          */
-        getSearchStartIndex()
-        {
+        getSearchStartIndex() {
             return parseInt(this.startIndex);
         },
 
         /**
-         * Runs the filter for the given lookup text
+         * Filters the items by the lookup text
          */
         runFilter() {
-            if ( this.findCache(this.lookup_name) ) {
-                return;
-            }
+            const items = Array.isArray(this.items) ? this.items : [];
 
-            this.loading = true;
-
-            if ( !this.lookup_name ) {
-                this.list = this.items;
-            } else {
-                this.list = this.items.filter(this.filter_function);
-                this.cache[this.lookup_name] = this.list;
-            }
-
+            this.list = this.lookup_name ? items.filter(this.filter_function) : items;
             this.loading = false;
         },
 
@@ -508,11 +524,11 @@ export default {
          * Begins the execution of a search from the user
          * this is triggered before runSearch or runFilter
          *
-         * @param Number index
+         * @param {Number|null} index
          */
         startSearch(index = null) {
             // If a value index is provided then we should initialize to that
-            this.selected_index = parseInt(index && index != -1 ? index : this.startIndex);
+            this.selected_index = parseInt(index !== null && index != -1 ? index : this.startIndex);
             this.$nextTick(() => {
                 this.initListScrollTo(this.selected_index);
             });
@@ -527,12 +543,10 @@ export default {
                 return;
             }
 
-            if ( this.timer ) {
-                clearTimeout(this.timer);
-            }
+            clearTimeout(this.timer);
 
             // Store the current lookup name for the search
-            let term = this.lookup_name;
+            const term = this.lookup_name;
             this.timer = setTimeout(() => {
                 // Reset page since the search term has changed
                 this.page = 1;
@@ -545,20 +559,24 @@ export default {
          * Sets up the scroll to of the list when it is opened
          */
         initListScrollTo(index) {
-            let scrollStart = 0;
-            if ( index > 0 && this.$refs[this.ref_list].children[index] ) {
-                scrollStart = (this.$refs[this.ref_list].children[index].scrollHeight + 2) * index;
-                scrollStart = parseInt(Math.abs(scrollStart));
+            const list = this.$refs[this.ref_list];
+            if ( !list ) {
+                return;
             }
 
-            this.$refs[this.ref_list].scrollTop = scrollStart;
+            let scrollStart = 0;
+            if ( index > 0 && list.children[index] ) {
+                scrollStart = parseInt(Math.abs((list.children[index].scrollHeight + 2) * index));
+            }
+
+            list.scrollTop = scrollStart;
         },
 
         /**
          * Resets the scroll of the given reference
          */
         resetList() {
-            if ( typeof this.$refs[this.ref_list] === 'undefined' ) {
+            if ( !this.$refs[this.ref_list] ) {
                 return;
             }
 
@@ -567,29 +585,28 @@ export default {
         },
 
         /**
-         * Auto scrolls the the list based on the offset of the items
-         * takes a direction for scrolling down or up
+         * Scrolls the list to keep the selected item visible
          *
          * @param direction
          */
         autoScroll(direction) {
-            let li = this.$refs[this.ref_list].getElementsByClassName('selected-item')[0];
+            const list = this.$refs[this.ref_list];
+            const li = list && list.getElementsByClassName('ks-selected-item')[0];
             if ( !li ) {
                 return;
             }
-            let itemOffset = li.offsetTop;
-            let itemHeight = li.offsetHeight;
-            let scrollTop = this.$refs[this.ref_list].scrollTop;
-            let offsetHeight = this.$refs[this.ref_list].offsetHeight;
+
+            const itemOffset = li.offsetTop;
+            const itemHeight = li.offsetHeight;
+            const scrollTop = list.scrollTop;
+            const offsetHeight = list.offsetHeight;
 
             if ( direction == 'down' ) {
                 if ( itemOffset + itemHeight >= scrollTop + offsetHeight ) {
-                    this.$refs[this.ref_list].scrollTop += itemHeight;
+                    list.scrollTop += itemHeight;
                 }
-            } else {
-                if ( itemOffset - (itemHeight / 2) <= scrollTop ) {
-                    this.$refs[this.ref_list].scrollTop -= itemHeight;
-                }
+            } else if ( itemOffset - (itemHeight / 2) <= scrollTop ) {
+                list.scrollTop -= itemHeight;
             }
         },
 

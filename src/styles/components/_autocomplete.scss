@@ -186,3 +186,20 @@
         }
     }
 }
+
+// The wrapper is positioned against the holder, so the list sits in its flow and flips with it
+.autocomplete-list-wrapper {
+    display: flex;
+    flex-direction: column;
+    &.inverted {
+        flex-direction: column-reverse;
+    }
+}
+
+.ks-autocomplete-holder .autocomplete-list-wrapper .ks-autocomplete-list,
+.ks-autocomplete-holder.ks-multiple.ks-selected .autocomplete-list-wrapper .ks-autocomplete-list {
+    position: relative;
+    left: 0;
+    width: 100%;
+    margin: 0;
+}

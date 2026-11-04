@@ -2,7 +2,8 @@
     <div
         class="ks-select"
         :class="{ 'ks-select-open': isOpen }"
-        tabindex="0"
+        :tabindex="disabled ? -1 : 0"
+        :disabled="disabled"
         @keydown.space.prevent.stop="open"
         @keydown.enter.prevent.stop="enterOpen"
         @keydown.tab="tabOpen"
@@ -10,39 +11,69 @@
         @keydown.up.prevent="openSelectUp"
         @keydown="keyOpen"
         @keyup.esc="close"
-        :disabled="disabled"
     >
-        <input type="text" :name="name" :value="inputValue" @input="filledInput" class="select-input-field"
-               tabindex="-1">
-        <div class="ks-select-selection" @click.prevent="toggleOpen">
-            <div class="ks-select-placeholder" v-if="!value">{{placeholder}}</div>
+        <input
+            type="text"
+            tabindex="-1"
+            :name="name"
+            :value="inputValue"
+            class="select-input-field"
+            @input="filledInput"
+        >
+        <div
+            class="ks-select-selection"
+            @click.prevent="toggleOpen"
+        >
+            <div
+                v-if="!has_value"
+                class="ks-select-placeholder"
+            >{{ placeholder }}</div>
             <template v-else>
-                <slot :value="value" :label="selected" name="label">
-                    {{selected}}
+                <slot
+                    name="label"
+                    :value="value"
+                    :label="selected"
+                >
+                    {{ selected }}
                 </slot>
             </template>
-            <span class="ks-select-deselect" v-if="showDeselect" @click.prevent.stop="clearSelection()">x</span>
+            <span
+                v-if="showDeselect"
+                class="ks-select-deselect"
+                @click.prevent.stop="clearSelection()"
+            >x</span>
             <span class="ks-select-arrow"></span>
         </div>
 
-        <div class="ks-select-dropdown" v-show="isOpen">
+        <div
+            v-show="isOpen"
+            ref="dropdown"
+            class="ks-select-dropdown"
+            :class="{ 'ks-select-dropdown-inverted': inverted }"
+        >
             <!-- Lookup field-->
-            <div class="ks-select-dropdown-input" v-show="show_search">
+            <div
+                v-show="show_search"
+                class="ks-select-dropdown-input"
+            >
                 <input
-                    type="text"
-                    autocomplete="new-password"
                     ref="lookup"
                     v-model="lookup_name"
+                    type="text"
+                    autocomplete="new-password"
                     :placeholder="placeholder"
+                    :class="{ 'is-multiple': multiple }"
                     @keyup.esc.stop="clear"
                     @keydown.space.stop
-                    :class="{ 'is-multiple': multiple }"
                 >
             </div>
 
             <!-- Loading indicator -->
             <div style="position: relative; height: 5px;margin-top: -5px;">
-                <ks-loader-line :show="loading" :absolute="true"></ks-loader-line>
+                <ks-loader-line
+                    :show="loading"
+                    :absolute="true"
+                ></ks-loader-line>
             </div>
 
             <!-- Autocomplete list-->
@@ -50,21 +81,26 @@
                 <ul
                     ref="list"
                     class="ks-autocomplete-list"
-                    :class="{'inverted': this.inverted}"
+                    :class="{'inverted': inverted}"
                     :style="list_style"
                 >
                     <template v-if="groupBy">
-                        <li v-for="(group_list, group) in groups" class="ks-opt-group">
-                            <strong>{{group}}</strong>
+                        <li
+                            v-for="(group_list, group) in groups"
+                            :key="group"
+                            class="ks-opt-group"
+                        >
+                            <strong>{{ group }}</strong>
                             <ul>
                                 <li
-                                    v-for="(item, index) in group_list"
+                                    v-for="item in group_list"
+                                    :key="item._index"
                                     :class="{ 'ks-selected-item': item._index == selected_index }"
                                     @click.prevent="selectItem(item._index, $event)"
                                     @mouseover="setHoverIndex(item._index)"
                                 >
                                     <!-- Scoped slot -->
-                                    <slot :item="item">{{item[labelKey]}}</slot>
+                                    <slot :item="item">{{ item[labelKey] }}</slot>
                                 </li>
                             </ul>
                         </li>
@@ -72,17 +108,24 @@
                     <template v-else>
                         <li
                             v-for="(item, index) in list"
+                            :key="index"
                             :class="{ 'ks-selected-item': index == selected_index }"
                             @click.prevent="selectItem(index)"
                             @mouseover="setHoverIndex(index)"
                         >
                             <!-- Scoped slot  that defaults to the labelKey-->
-                            <slot :item="item">{{item[labelKey]}}</slot>
+                            <slot :item="item">{{ item[labelKey] }}</slot>
                         </li>
                     </template>
                     <!-- Slot for empty search results-->
-                    <li v-if="!acceptEmptySelection && hasEmptyMessage && !loading && list.length == 0" class="ks-empty-list-message">
-                        <slot :term="lookup_name" name="empty">{{emptyMessage}}</slot>
+                    <li
+                        v-if="!acceptEmptySelection && hasEmptyMessage && !loading && list.length == 0"
+                        class="ks-empty-list-message"
+                    >
+                        <slot
+                            name="empty"
+                            :term="lookup_name"
+                        >{{ emptyMessage }}</slot>
                     </li>
                     <li
                         v-if="acceptEmptySelection && hasEmptyMessage && !loading && list.length == 0"
@@ -90,7 +133,10 @@
                         :class="{ 'ks-selected-item': selected_empty }"
                         @click.prevent="selectEmpty(true)"
                     >
-                        <slot :term="lookup_name" name="empty">{{emptyMessage}}</slot>
+                        <slot
+                            name="empty"
+                            :term="lookup_name"
+                        >{{ emptyMessage }}</slot>
                     </li>
                 </ul>
             </div>
@@ -100,15 +146,19 @@
 
 
 <script>
-
     import ListIndexNavigator from './mixins/ListIndexNavigator';
+    import FloatingDropdown from './mixins/FloatingDropdown';
     import KsLoaderLine from './KsLoaderLine.vue';
-    import {object_get} from '../helpers/objects';
+    import { object_get } from '../helpers/objects';
+
+    function isEmpty(value) {
+        return value === null || typeof value === 'undefined' || value === '';
+    }
 
     export default {
         name: 'KsSelect',
 
-        mixins: [ListIndexNavigator],
+        mixins: [ListIndexNavigator, FloatingDropdown],
 
         props: {
             name: {
@@ -161,13 +211,24 @@
                 type: Boolean,
                 default: false,
             },
+            // No longer used: the dropdown flips above the select when there is no room below
             invertOffsetRatio: {
                 type: Number,
                 default: .75
             }
         },
 
+        emits: ['input', 'deleted', 'selected-empty', 'clear', 'blur', 'focus', 'search'],
+
         computed: {
+            keyName() {
+                return this.itemKey || this.name;
+            },
+
+            has_value() {
+                return !isEmpty(this.value);
+            },
+
             inputValue() {
                 if ( this.value instanceof Object ) {
                     return this.keyName in this.value ? this.value[this.keyName] : this.value;
@@ -177,7 +238,7 @@
             },
 
             using_items() {
-                return this.items ? true : false;
+                return !!this.items;
             },
 
             binds_objects() {
@@ -185,14 +246,12 @@
                     return false;
                 }
 
-                // Try to determine what type of value the consumer expects
-                // If they don't provide a value then we will assume they want objects
+                // Without a value assume the consumer wants objects
                 if ( this.forceObjects || null === this.value || typeof this.value === "undefined" ) {
                     return true;
                 }
 
-                // We will
-                return typeof this.value !== 'object' ? false : true;
+                return typeof this.value === 'object';
             },
             show_search() {
                 if ( this.disableSearch ) {
@@ -203,18 +262,19 @@
                     return true;
                 }
 
-                if ( this.items.length > this.searchThreshold ) {
-                    return true;
-                }
-
-                return false;
+                return this.items.length > this.searchThreshold;
             },
             showDeselect() {
                 if ( this.multiple ) {
                     return false;
                 }
 
-                return this.singleDeselect && this.inputValue;
+                return this.singleDeselect && !isEmpty(this.inputValue);
+            },
+            list_style() {
+                return {
+                    'max-height': this.listHeight,
+                };
             },
         },
 
@@ -226,25 +286,13 @@
                 startIndex: 0,
                 minIndex: 0,
                 selected_index: 0,
-                keyName: this.itemKey,
-                filter: this.itemFilter,
                 isOpen: false,
                 needs_new_search: true,
-                inverted: false,
-                list_style: {
-                    'max-height': this.listHeight,
-                    top: null,
-                }
             };
         },
 
         mounted() {
-            if ( !this.itemKey ) {
-                this.keyName = this.name;
-            }
-            if ( !this.itemFilter ) {
-                this.filter = this.labelKey;
-            }
+            this.filter = this.itemFilter || this.labelKey;
 
             if ( Array.isArray(this.items) ) {
                 this.list = this.items;
@@ -257,60 +305,19 @@
                     lookup: 'lookup',
                     list: 'list',
                 });
-            })
-
-
-            this.$on('clear', () => {
-                this.isOpen = false;
             });
-
-            window.addEventListener('scroll', this.handleScroll);
-        },
-
-        beforeDestroy() {
-            window.removeEventListener('scroll', this.handleScroll);
         },
 
         methods: {
-
-            handleScroll() {
-                let list_height = parseInt(this.$refs.list.offsetHeight);
-                let element_height = this.$el.offsetHeight;
-                if ( list_height == 0 ) {
-                    this.list_style.top = false;
-                    return;
-                }
-
-                let bottom_of_element = this.$el.getBoundingClientRect().top + (list_height * this.invertOffsetRatio) + window.scrollY;
-
-                // Chect that the overall window height vs the list_height is large enough to even considering flipping the screen
-                // Then see if the bottom of the element is passed our scrolled height
-                if ( (window.innerHeight > list_height + 115) && bottom_of_element > ((window.innerHeight + window.scrollY)) ) {
-                    this.inverted = true;
-                    this.list_style.top = `calc(-${list_height}px - 2.135rem)`
-                } else {
-                    this.inverted = false;
-                    let operator = '+';
-                    let adjustment = 0.875;
-                    if ( !this.show_search ) {
-                        operator = '-';
-                        adjustment = 2.125;
-                    }
-
-                    this.list_style.top = `calc(${element_height -1}px ${operator} ${adjustment}rem)`;
-                }
-            },
-
             filledInput(e) {
-                this.list.find((item, index) => {
-                    if ( this.keyName in item && e.target.value == item[this.keyName] ) {
-                        this.selectItem(index, e, false);
-                        return;
-                    }
-                });
+                const index = this.list.findIndex(item => item && this.keyName in item && e.target.value == item[this.keyName]);
+
+                if ( index !== -1 ) {
+                    this.selectItem(index, e, false);
+                }
             },
             /**
-             * Clear the lookup
+             * Clear the lookup and close the list
              */
             clear() {
                 this.resetList();
@@ -319,14 +326,15 @@
                 if ( this.$refs[this.ref_lookup] === document.activeElement ) {
                     this.$refs[this.ref_lookup].blur();
                 }
+                this.isOpen = false;
                 this.$emit('clear');
             },
 
             clearSelection(s = null) {
                 let popped = null;
 
-                if ( this.multiple ) {
-                    let index = this.selected.indexOf(s);
+                if ( this.multiple && Array.isArray(this.selected) ) {
+                    const index = this.selected.indexOf(s);
                     if ( index > -1 ) {
                         popped = this.selected.splice(index, 1);
                     }
@@ -389,7 +397,7 @@
              * @returns {boolean}
              */
             isTypeKey(e) {
-                let keycode = e.keyCode;
+                const keycode = e.keyCode;
                 return (keycode > 47 && keycode < 58) || // number keys
                     keycode == 32 || // spacebar
                     (keycode > 64 && keycode < 91) || // letter keys
@@ -400,7 +408,7 @@
             blurred() {
                 this.close();
             },
-            open(e) {
+            open() {
                 if ( this.disabled ) {
                     return false;
                 }
@@ -418,31 +426,27 @@
                     return;
                 }
 
-                // If user is selecting index -1 then we should just clear the selection
-                // This should only happen when single deselect is active
+                // Index -1 clears the selection; only single deselect gets there
                 if ( index == -1 ) {
                     this.clearSelection();
                     return this.resetSelect();
                 }
 
-                // Find the item by the given index
-                let item = this.getItemByIndex(index);
-                if ( item != null && !(this.keyName in item) ) {
-                    console.error('KsSelect: Could not find key: ' + this.keyName, item);
-                }
-
                 if ( this.selected_empty ) {
                     this.$emit('selected-empty', true);
                 } else {
-                    // Determine what value to emit
-                    if ( this.binds_objects ) {
-                        this.$emit('input', item);
-                    } else {
-                        this.$emit('input', item[this.keyName]);
+                    const item = this.getItemByIndex(index);
+                    if ( item === null ) {
+                        return;
                     }
+
+                    if ( !(this.keyName in item) ) {
+                        console.error('KsSelect: Could not find key: ' + this.keyName, item);
+                    }
+
+                    this.$emit('input', this.binds_objects ? item : item[this.keyName]);
                 }
 
-                // Reset the select to it starting state
                 if ( reset ) {
                     this.resetSelect();
                 }
@@ -457,25 +461,19 @@
             },
 
             refreshSelected() {
-                if ( !this.value ) {
+                if ( !this.has_value ) {
                     this.selected = '';
                     return;
                 }
 
                 if ( this.binds_objects ) {
                     this.selected = object_get(this.value, this.labelKey, null);
-                } else if ( this.list.length === 0 ) {
-                    this.selected = '';
                 } else {
-                    for ( let i in this.list ) {
-                        if ( this.list[i][this.keyName] == this.value ) {
-                            this.selected = object_get(this.list[i], this.labelKey, null);
-                            break;
-                        }
-                    }
+                    const item = this.list.find(item => item && item[this.keyName] == this.value);
+                    this.selected = item ? object_get(item, this.labelKey, null) : null;
                 }
 
-                // Validate the selection
+                // Without a label in the list show the value itself
                 if ( null === this.selected ) {
                     if ( !this.binds_objects ) {
                         this.selected = this.value;
@@ -486,19 +484,12 @@
             },
 
             value_index() {
-                // This currently only works properly with the
-                //&& this.using_items
-                if ( this.value && !this.multiple ) {
+                if ( this.has_value && !this.multiple ) {
                     if ( this.binds_objects ) {
-                        return parseInt(this.list.indexOf(this.value));
+                        return this.list.indexOf(this.value);
                     }
 
-                    // When not using objects we need to iterate over the list to determine the values index
-                    for ( var i in this.list ) {
-                        if ( this.list[i][this.keyName] == this.value ) {
-                            return parseInt(i);
-                        }
-                    }
+                    return this.list.findIndex(item => item && item[this.keyName] == this.value);
                 }
 
                 return -1;
@@ -511,45 +502,47 @@
                 this.needs_new_search = true;
             },
             list() {
-                this.$nextTick(() => {
-                    this.handleScroll();
-                });
-
                 if ( this.list.length > 0 ) {
                     this.selected_empty = false;
                 }
             },
             value() {
                 this.refreshSelected();
-                if ( !this.value ) {
+                if ( !this.has_value ) {
                     this.close();
                 }
             },
             items() {
-                this.list = ( Array.isArray(this.items) && this.items.length > 0 ) ? this.items : [];
+                this.list = Array.isArray(this.items) ? this.items : [];
                 this.clearCache();
                 this.refreshSelected();
                 this.selected_empty = false;
             },
+            itemFilter() {
+                this.filter = this.itemFilter || this.labelKey;
+            },
             isOpen(open, oldOpen) {
-                if ( open ) {
-                    this.$nextTick(() => {
-                        this.setFocus('lookup');
-                        if ( oldOpen != open ) {
-                            // Only start the new search when the list is empty
-                            // otherwise we can just keep the current list
-                            let value_index = this.value_index();
-                            if ( this.list.length == 0 || this.needs_new_search ) {
-                                this.startSearch(value_index);
-                                this.needs_new_search = false;
-                            } else {
-                                this.selected_index = value_index;
-                                this.initListScrollTo(this.selected_index);
-                            }
-                            this.handleScroll();
-                        }
-                    });
+                if ( !open ) {
+                    this.stopDropdown();
+                    return;
                 }
+
+                this.$nextTick(() => {
+                    this.startDropdown(this.$el, this.$refs.dropdown);
+                    this.setFocus('lookup');
+
+                    if ( oldOpen != open ) {
+                        // Only search again when the list is empty or the lookup changed
+                        const value_index = this.value_index();
+                        if ( this.list.length == 0 || this.needs_new_search ) {
+                            this.startSearch(value_index);
+                            this.needs_new_search = false;
+                        } else {
+                            this.selected_index = value_index;
+                            this.initListScrollTo(this.selected_index);
+                        }
+                    }
+                });
             },
         },
 

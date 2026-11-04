@@ -31,6 +31,19 @@
         width: 100%;
         background: $select-bg;
         z-index: 2;
+        display: flex;
+        flex-direction: column;
+
+        // Above the select the list sits on top of the lookup field
+        &.ks-select-dropdown-inverted {
+            flex-direction: column-reverse;
+        }
+
+        // The list is part of the dropdown so the dropdown can flip as one block
+        .ks-autocomplete-list {
+            position: relative;
+            margin-bottom: 0;
+        }
 
         .ks-select-dropdown-input {
             padding: rem($select-input-padding);
