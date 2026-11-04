@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue2';
 
-import { root, sassOptions } from '../build/shared.mjs';
+import { root, sassOptions, vueOptions } from '../build/shared.mjs';
 
 /**
  * Vue 2.7 app with the live examples; the docs show each example in an iframe.
@@ -11,7 +11,7 @@ export default defineConfig({
     base: './',
 
     plugins: [
-        vue(),
+        vue(vueOptions),
     ],
 
     resolve: {

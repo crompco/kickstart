@@ -11,8 +11,7 @@
     >
         <span
             v-show="spin"
-            ref="spinWrapper"
-            style="width: calc(100% - 1.2rem);text-align: center;position:absolute;"
+            class="ks-button-spinner"
         >
             <ks-loader-spin
                 :show="spin"
@@ -115,14 +114,6 @@
 
                 this.$emit('click', e);
             },
-        },
-
-        watch: {
-            spin() {
-                if ( this.$refs.label.offsetWidth ) {
-                    this.$refs.spinWrapper.style.width = (this.$refs.label.offsetWidth || 60) + 'px';
-                }
-            }
         },
 
         components: {

@@ -10,7 +10,7 @@
 - Removed deps: tether, velocity-animate, popper.js, v-mask (kickstart no longer registers or needs v-mask; consumers that use v-mask themselves keep their own)
 
 ## Package / build
-- `main` now dist/kickstart-ui.min.js (was missing index.js); module dist/kickstart-ui.esm.js; style dist/kickstart-ui.min.css
+- package.json entry fields: `"main"` is now dist/kickstart-ui.min.js (2.x pointed at a missing index.js); `"module"` is dist/kickstart-ui.esm.js; `"style"` is dist/kickstart-ui.min.css
 - dist/ and lib/ not in git anymore; built on `npm pack/publish` (prepack). Same filenames.
 - lib/* are ES modules now (were UMD). webpack 5 / Vite fine. lib shared code in lib/chunks/.
 - UMD global KickstartUI; externals vue (Vue), axios (axios), @floating-ui/dom (FloatingUIDOM) must be loaded first when using script tags.
@@ -108,6 +108,7 @@
 - Routed paginators push { path, query } (v2 pushed { to, params, query }; `to` is not a vue-router key).
 - KsPaginator prev/next get `disabled` class at the ends.
 - KsButton `el` prop renders that element (#26); non-button elements get aria-disabled + .disabled and block clicks.
+- KsButton spinner is centered in the button (v2 placed it by the label width and line box, so it sat off-center, most visibly in small buttons). The wrapper is the new class `.ks-button-spinner`; its inline width is gone.
 - KsDroppable `accept` function receives the drag event; dragenter handled; leaving onto a child keeps it active.
 - KsDraggable sets 'text/plain' '' (v2 set "null"); disabled prevents dragstart.
 - KsSideNav: `classObj` is computed; link click resets state (v2 left `show` true so the class came back); removes listener and body class on destroy; console.log removed.

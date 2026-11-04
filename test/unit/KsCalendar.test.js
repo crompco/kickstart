@@ -36,6 +36,12 @@ describe('KsCalendar', () => {
         expect(wrapper.find('.ks-calendar-month-picker').text()).toBe('February');
     });
 
+    test('keeps the space between month and year', () => {
+        mountCalendar({ date: '2021-02-10' });
+
+        expect(wrapper.find('.ks-calendar-title').text().replace(/\s+/g, ' ')).toBe('February 2021');
+    });
+
     test('starts the week on weekStart', () => {
         const keys = dayKeys(mountCalendar({ date: '2021-02-10', weekStart: 1 }));
 

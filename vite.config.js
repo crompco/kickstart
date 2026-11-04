@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue2';
 
-import { banner, isExternal, root } from './build/shared.mjs';
+import { banner, isExternal, root, vueOptions } from './build/shared.mjs';
 
 /**
  * Bundles: dist/kickstart-ui.esm.js (ES) and dist/kickstart-ui.min.js (UMD, global KickstartUI)
@@ -10,7 +10,7 @@ export default defineConfig({
     root,
 
     plugins: [
-        vue(),
+        vue(vueOptions),
     ],
 
     build: {

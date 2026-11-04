@@ -40,3 +40,15 @@ export const sassOptions = {
         },
     ],
 };
+
+/**
+ * Vue plugin options for every build. 2.x was compiled by vue-loader 15, which
+ * keeps the whitespace between inline elements; plugin-vue2 condenses it.
+ */
+export const vueOptions = {
+    template: {
+        compilerOptions: {
+            whitespace: 'preserve',
+        },
+    },
+};

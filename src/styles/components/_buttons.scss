@@ -40,6 +40,15 @@
         }
     }
 
+    // Covers the button so the spinner is centered whatever the padding
+    .ks-button-spinner {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
     .button-label {
         display: inline-block;
         &.hidden {

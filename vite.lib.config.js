@@ -3,7 +3,7 @@ import { basename, resolve } from 'node:path';
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue2';
 
-import { banner, isExternal, root } from './build/shared.mjs';
+import { banner, isExternal, root, vueOptions } from './build/shared.mjs';
 
 const components = readdirSync(resolve(root, 'src/components'))
     .filter(file => /^Ks.+\.vue$/.test(file));
@@ -17,7 +17,7 @@ export default defineConfig({
     root,
 
     plugins: [
-        vue(),
+        vue(vueOptions),
     ],
 
     build: {

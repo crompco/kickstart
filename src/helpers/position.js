@@ -246,6 +246,9 @@ export function attach(target, element, options = {}) {
 
     let destroyed = false;
 
+    // Measure with the final strategy, not the element's CSS position
+    element.style.position = strategy;
+
     const update = () => computePosition(target, element, { strategy, placement: 'bottom', middleware })
         .then(({ x, y, middlewareData }) => {
             if ( destroyed ) {

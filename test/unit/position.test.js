@@ -59,6 +59,15 @@ describe('attach', () => {
         positioner.destroy();
     });
 
+    test('uses the strategy before the first position is computed', () => {
+        // The first measurement must see the element with its final position
+        const positioner = attach(target, element, { strategy: 'fixed' });
+
+        expect(element.style.position).toBe('fixed');
+
+        positioner.destroy();
+    });
+
     test('aligns the right edges', async () => {
         const positioner = attach(target, element, { attachment: 'top right', targetAttachment: 'bottom right' });
         await flushPromises();

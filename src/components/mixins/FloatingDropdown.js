@@ -37,6 +37,9 @@ export default {
             }
 
             dropdown.style.zIndex = '100';
+            // Hidden until it is positioned: a frame at the old place flashes and
+            // hovers the item under the pointer
+            dropdown.style.visibility = 'hidden';
 
             this.dropdown_positioner = attach(control, dropdown, {
                 strategy: 'fixed',
@@ -45,6 +48,7 @@ export default {
                 constraints: [{ to: 'window', attachment: 'together none' }],
                 matchWidth: true,
                 onUpdate: (data) => {
+                    dropdown.style.visibility = '';
                     this.inverted = !!data && data.attachment.vertical === 'bottom';
                 },
             });
