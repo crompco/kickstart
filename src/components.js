@@ -7,6 +7,8 @@ import KsCalendar from './components/KsCalendar.vue';
 import KsCard from './components/KsCard.vue';
 import KsCheckbox from './components/KsCheckbox.vue';
 import KsCheckboxGroup from './components/KsCheckboxGroup.vue';
+import KsDataColumn from './components/KsDataColumn.vue';
+import KsDataTable from './components/KsDataTable.vue';
 import KsDatepicker from './components/KsDatepicker.vue';
 import KsDraggable from './components/KsDraggable.vue';
 import KsDroppable from './components/KsDroppable.vue';
@@ -38,6 +40,8 @@ export {
     KsCard,
     KsCheckbox,
     KsCheckboxGroup,
+    KsDataColumn,
+    KsDataTable,
     KsDatepicker,
     KsDraggable,
     KsDroppable,
@@ -73,6 +77,8 @@ export const registeredComponents = {
     'ks-card': KsCard,
     'ks-checkbox': KsCheckbox,
     'ks-checkbox-group': KsCheckboxGroup,
+    'ks-data-column': KsDataColumn,
+    'ks-data-table': KsDataTable,
     'ks-datepicker': KsDatepicker,
     'ks-draggable': KsDraggable,
     'ks-droppable': KsDroppable,
