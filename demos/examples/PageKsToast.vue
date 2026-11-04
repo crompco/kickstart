@@ -12,7 +12,7 @@
                 <template v-pre>
                     &lt;!-- Success -->
                     &lt;ks-toast
-                        message="This is an success toast"
+                        message="This is a success toast"
                         type="success"
                     >&lt;/ks-toast>
 
@@ -29,7 +29,7 @@
 
                     &lt;!-- Warning -->
                     &lt;ks-toast
-                        message="This is an warning toast"
+                        message="This is a warning toast"
                         type="warning"
                     >&lt;/ks-toast>
                 </template>
@@ -79,8 +79,10 @@
 
         methods: {
             show(type = 'info') {
+                const article = ['error', 'info'].includes(type) ? 'an' : 'a';
+
                 this.$toast({
-                    message: `This is an <strong class="tiny-text">${type}</strong> toast`,
+                    message: `This is ${article} <strong class="tiny-text">${type}</strong> toast`,
                     type: type,
                     limit: 4
                 });
