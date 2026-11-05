@@ -4,7 +4,7 @@
         height: var(--ks-tabs-height);
 
         /* Below the tab breakpoint the title bar is a dropdown of the tabs */
-        @media (max-width: 769px) {
+        @media (max-width: 768px) {
             &:after {
                 content: "";
                 position: absolute;
@@ -118,7 +118,7 @@
                 }
             }
 
-            @media (max-width: 769px) {
+            @media (max-width: 768px) {
                 &:not(.selected-tab) {
                     display: none;
                 }

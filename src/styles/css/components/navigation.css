@@ -167,7 +167,7 @@ body.side-nav-open {
   background-color: var(--ks-nav-links-active-bg);
   color: var(--ks-nav-links-active-color);
 }
-@media (max-width: 769px) {
+@media (max-width: 768px) {
   .side-nav.show {
     display: block;
     overflow-y: auto;
@@ -178,7 +178,7 @@ body.side-nav-open {
   margin-left: 60%;
   overflow: hidden;
 }
-@media (max-width: 769px) {
+@media (max-width: 768px) {
   .side-nav {
     height: 100%;
     transition: margin 0.3s ease;
@@ -304,7 +304,7 @@ body.side-nav-open {
     width: unset;
   }
 }
-@media (max-width: 769px) {
+@media (max-width: 768px) {
   .top-bar.show .collapse {
     display: block;
     right: 0;
