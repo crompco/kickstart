@@ -1,0 +1,46 @@
+[
+  {
+    "name": "Jerry Seinfeld",
+    "show": "Seinfeld"
+  },
+  {
+    "name": "Elaine Benes",
+    "show": "Seinfeld"
+  },
+  {
+    "name": "George Costanza",
+    "show": "Seinfeld"
+  },
+  {
+    "name": "Kramer",
+    "show": "Seinfeld"
+  },
+  {
+    "name": "Newman",
+    "show": "Seinfeld"
+  },
+  {
+    "name": "Phillip J. Fry",
+    "show": "Futurama"
+  },
+  {
+    "name": "Bender",
+    "show": "Futurama"
+  },
+  {
+    "name": "Leela",
+    "show": "Futurama"
+  },
+  {
+    "name": "Zoidberg",
+    "show": "Futurama"
+  },
+  {
+    "name": "Amy Wong",
+    "show": "Futurama"
+  },
+  {
+    "name": "Professor Farnsworth",
+    "show": "Futurama"
+  }
+]

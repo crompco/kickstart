@@ -1,0 +1,17 @@
+.ks-demo-frame {
+    margin: 16px 0;
+}
+
+.ks-demo-frame iframe {
+    display: block;
+    width: 100%;
+    border: 1px solid var(--vp-c-divider);
+    border-radius: 8px;
+    background: #fff;
+}
+
+.ks-demo-frame a {
+    display: inline-block;
+    margin-top: 4px;
+    font-size: 13px;
+}
