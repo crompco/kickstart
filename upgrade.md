@@ -8,6 +8,7 @@
 - axios now ^1.x dependency (was 0.15). Consumers' own axios separate. axios 1 config.headers is AxiosHeaders (set()/get(); bracket access still works).
 - normalize.css stays v5 (dev only; consumers already import ~normalize.css via _kickstart.scss)
 - Removed deps: tether, velocity-animate, popper.js, v-mask (kickstart no longer registers or needs v-mask; consumers that use v-mask themselves keep their own)
+- A consumer that imports popper.js, velocity-animate or v-mask must now declare it in its own package.json. With 2.x these came in through kickstart. vault-service imports popper.js in SearchFilters.vue, SavedSearchFilters.vue and UI/TextExcerpt.vue.
 
 ## Package / build
 - package.json entry fields: `"main"` is now dist/kickstart-ui.min.js (2.x pointed at a missing index.js); `"module"` is dist/kickstart-ui.esm.js; `"style"` is dist/kickstart-ui.min.css
