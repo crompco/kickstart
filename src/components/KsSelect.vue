@@ -226,7 +226,12 @@
             },
 
             has_value() {
-                return !isEmpty(this.value);
+                if ( isEmpty(this.value) ) {
+                    return false;
+                }
+
+                // An object binding has no selection until the value is an object
+                return !this.binds_objects || typeof this.value === 'object';
             },
 
             inputValue() {

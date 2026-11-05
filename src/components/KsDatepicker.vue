@@ -123,6 +123,14 @@
 
         mounted() {
             this.focus_toggle_event = smartFocusToggle(this.$el, this.handleFocusToggle, 50);
+
+            // An empty value is normalized to '' after mount, so a v-model binding can react to it.
+            // The next tick also catches a value that the parent empties while it mounts.
+            this.$nextTick(() => {
+                if ( !this.value && this.value !== '' ) {
+                    this.$emit('input', '');
+                }
+            });
         },
 
         beforeDestroy() {
@@ -224,7 +232,7 @@
                     if ( this.value_date != new_date ) {
                         this.$emit('input', new_date);
                     }
-                } else if ( this.input_date.length == 0 && this.value ) {
+                } else if ( this.input_date.length == 0 && this.value !== '' ) {
                     this.$emit('input', '');
                 }
             }

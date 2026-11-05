@@ -30,6 +30,7 @@
   - formatDate(string) parses the string in the same tz as formatting → string round trips in every zone (was off by one in UTC+ zones).
   - formatDate returns '' for invalid/empty dates (was "NaN-aN-aN" or threw).
   - Tokens replaced in one pass, all occurrences (was first occurrence only; inserted text could be re-replaced). Tokens unchanged: Y y m M d D l.
+    - Code that runs formatTime() over a full format and then passes the result to formatDate() as the format breaks: 'm/d/Y h:ia' → 'm/d/Y 10:43am' → "10/20/2026 10:43a10" ('m' in "am", 'M' in "AM"). Format the date and time parts separately (vault-service `date` filter in helpers/filters.js).
   - day/week/month/year arithmetic is calendar arithmetic in the tz (DST safe with 'local'/IANA). Default UTC = same results as v2 (+24h).
   - subYears now uses the tz (default UTC; v2 used local setFullYear).
   - diffInDays counts calendar days (was ceil of elapsed ms → DST off by one; time-of-day partial days counted).
@@ -94,7 +95,7 @@
 - KsStepThrough completed marks now render (v2 not reactive).
 
 ## Modal (phase 4b)
-- loading prop applies at mount.
+- loading prop applies at mount (v2 ignored the first value until it changed). A constant `:loading="true"` now shows a loader line that never stops: vault-service AdminBillingTermsList.vue "Payment Term Customers" modal. Modals that start with `loading: true` and load on open now show the loader during the first load.
 - destroy emits close only if open (v2 emitted close for every destroyed modal).
 - resize listener removed on destroy.
 - internal $on('open') removed (no consumer impact).
@@ -122,7 +123,7 @@
 - Dropdowns use fixed positioning against the control (floating-ui): not clipped by overflow containers (modals); flip above when no room below (#68-style). `inverted` now from real overflow, not invertOffsetRatio (prop kept, unused, deprecated).
 - New CSS: .ks-select-dropdown is flex column (.ks-select-dropdown-inverted reverses); .autocomplete-list-wrapper is flex column (.inverted reverses); .ks-autocomplete-list inside them is position: relative, margin 0. Custom CSS that offsets the absolute list (top/margin-top/left) inside these no longer applies.
 - Window scroll listener removed from KsSelect (handleScroll gone).
-- KsSelect: value 0 is a value (v2 showed placeholder); clear() closes; selectItem ignores a missing item.
+- KsSelect: value 0 is a value (v2 showed placeholder) when the select binds keys. When it binds objects (`force-objects`, or an object value), a value that is not an object is no selection, and the placeholder shows, as in 2.x. clear() closes; selectItem ignores a missing item.
 - KsAutocomplete multiple: emits NEW arrays and no longer mutates the bound array (v2 pushed/spliced value in place).
 - KsAutocomplete: backspace via @keyup.backspace; keys on lists; listHeight is a computed style.
 - ListIndexNavigator: in-flight searches abort on new search/destroy (AbortController; api.isCancel ignored); all document/list listeners removed on destroy (v2 leaked mousemove and focus toggles); filter matches non-string fields via String(); no filter cache for items mode.
@@ -136,7 +137,7 @@
 - `selection` accepts an array of dates or a Date (v2: string only).
 - Day cells have tabindex 0 only when interactive and in scope (v2 rendered tabindex="true"/"false").
 - `| day` filter and the unused provide() removed; mouse hold listeners removed on destroy / when showControls turns off.
-- Datepicker: hidden input holds the formatted value_date (v2: raw value, a Date rendered as toString()); display shows the value on first render (v2 data read a computed before it existed); emits '' on clear only if there was a value; close emitted once; listeners removed on unmount.
+- Datepicker: hidden input holds the formatted value_date (v2: raw value, a Date rendered as toString()); display shows the value on first render (v2 data read a computed before it existed); emits '' when the display empties, unless the value is already ''; an undefined or null value emits '' after mount, also when the parent empties it during mount, as in v2 (vault-service's Schedule > Map relies on it to fall back to today); close emitted once; listeners removed on unmount.
 - emits declared.
 
 ## Timepicker (phase 4g)
@@ -158,3 +159,6 @@
 - Controlled sort (sortField/sortDirection + `sort` { field, direction } cycling asc → desc → null), selection (multiple/single; internal or v-model / :selected.sync with event update:selected; emits new arrays), expandable rows (expansion slot), rowClass (value or function), scrollable / stickyHeader / maxHeight, loader/empty/footer/paginator slots, built-in KsPaginator (`page` event).
 - Changes from the PR: columns register through inject `ksDataTable` and keep document order when added later (v-if); dotted field paths; rows without an id get unique keys; slot access works with Vue 3 $slots; no `_uid`; emits declared; unused $sortInfo provide removed.
 - Render function uses the Vue 2 createElement data shape; a Vue 3 move rewrites it with `h` from 'vue'.
+
+## Icons
+- The kickstart icons (close, menu, dots, checkmark, chevron) no longer contain an SVG `<title>`. 2.x showed it as a hover tooltip ("close", "menu", "checkmark") and included the word in the element's text content, for example "checkmark Apple" for a checkbox. Tests that match the full text content of a checkbox, modal close button or menu button change.

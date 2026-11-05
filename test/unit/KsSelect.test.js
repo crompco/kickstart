@@ -65,6 +65,29 @@ describe('KsSelect', () => {
         expect(wrapper.find('.ks-select-selection').text()).toContain('Apple');
     });
 
+    test('shows the placeholder for an empty string', async () => {
+        vModel(KsSelect, '<component v-model="fruit" name="id" label-key="name" :items="items"></component>', { fruit: '', items: fruits });
+        await flushPromises();
+
+        expect(wrapper.find('.ks-select-placeholder').exists()).toBe(true);
+    });
+
+    test('shows the placeholder when an object binding gets a scalar', async () => {
+        const errors = [];
+        const original = console.error;
+        console.error = (...args) => errors.push(args.join(' '));
+
+        try {
+            vModel(KsSelect, '<component v-model="fruit" name="id" label-key="name" :items="items" :force-objects="true"></component>', { fruit: 0, items: fruits });
+            await flushPromises();
+        } finally {
+            console.error = original;
+        }
+
+        expect(wrapper.find('.ks-select-placeholder').exists()).toBe(true);
+        expect(errors.filter(e => e.includes('KsSelect'))).toEqual([]);
+    });
+
     test('positions the dropdown while open', async () => {
         vModel(KsSelect, '<component v-model="fruit" name="id" label-key="name" :items="items"></component>', { fruit: null, items: fruits });
         const select = wrapper.findComponent(KsSelect);
