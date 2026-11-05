@@ -3,6 +3,7 @@
   cursor: pointer;
   position: relative;
   display: inline-block;
+  vertical-align: bottom;
   border: var(--ks-form-border);
   color: var(--ks-form-color);
   width: 100%;

@@ -2,6 +2,8 @@
     cursor: pointer;
     position: relative;
     display: inline-block;
+    /* The selection clips its overflow, so the baseline is the bottom edge and baseline alignment adds the font descent below */
+    vertical-align: bottom;
     border: var(--ks-form-border);
     color: var(--ks-form-color);
     width: 100%;
