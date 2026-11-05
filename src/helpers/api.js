@@ -1,6 +1,60 @@
 import axios from 'axios';
 
-let instance = axios.create();
+function encodeParam(value) {
+    return encodeURIComponent(value)
+        .replace(/%40/gi, '@')
+        .replace(/%3A/gi, ':')
+        .replace(/%24/g, '$')
+        .replace(/%2C/gi, ',')
+        .replace(/%20/g, '+')
+        .replace(/%5B/gi, '[')
+        .replace(/%5D/gi, ']');
+}
+
+/**
+ * Serializes query params the way kickstart 2.x (axios 0.15) did, so APIs keep receiving the same query strings:
+ * an object value is sent as JSON, an array as key[]=… for each item, a Date as an ISO string,
+ * and null or undefined values are left out. axios 1.x would send objects as key[sub]=… instead.
+ *
+ * @param {Object|URLSearchParams} params
+ * @return {string}
+ */
+export function serializeParams(params) {
+    if ( typeof URLSearchParams !== 'undefined' && params instanceof URLSearchParams ) {
+        return params.toString();
+    }
+
+    const parts = [];
+
+    for ( const key of Object.keys(params || {}) ) {
+        const value = params[key];
+
+        if ( value === null || typeof value === 'undefined' ) {
+            continue;
+        }
+
+        const values = Array.isArray(value) ? value : [value];
+        const name = Array.isArray(value) ? `${key}[]` : key;
+
+        for ( let item of values ) {
+            if ( item instanceof Date ) {
+                item = item.toISOString();
+            } else if ( item !== null && typeof item === 'object' ) {
+                item = JSON.stringify(item);
+            }
+
+            parts.push(`${encodeParam(name)}=${encodeParam(item)}`);
+        }
+    }
+
+    return parts.join('&');
+}
+
+function createInstance({ paramsSerializer = serializeParams, ...config } = {}) {
+    return axios.create({ ...config, paramsSerializer });
+}
+
+let instance = createInstance();
 
 function isThenable(value) {
     return !!value && typeof value.then === 'function';
@@ -56,9 +110,11 @@ export default {
 
     /**
      * Replaces the shared instance. Interceptors of the old instance do not carry over.
+     * The 2.x query string format is kept unless the config has its own paramsSerializer.
+     * An object form such as { encode } replaces the 2.x format completely, objects included.
      */
     createFromConfig(config = {}) {
-        instance = axios.create(config);
+        instance = createInstance(config);
     },
 
     getInstance() {

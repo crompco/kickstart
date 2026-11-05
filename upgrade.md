@@ -6,6 +6,7 @@
 ## Requirements
 - vue ^2.7 peer (was ^2.2)
 - axios now ^1.x dependency (was 0.15). Consumers' own axios separate. axios 1 config.headers is AxiosHeaders (set()/get(); bracket access still works).
+- A cancel token made with a consumer's own older axios fails on the kickstart instance: axios 1's adapter calls `cancelToken.subscribe()`, which axios before 0.22 does not have. Use the same axios major version, or an `AbortController` signal. vault-service: `InvoiceItemMixin.js` (axios 0.15.3).
 - normalize.css stays v5 (dev only; consumers already import ~normalize.css via _kickstart.scss)
 - Removed deps: tether, velocity-animate, popper.js, v-mask (kickstart no longer registers or needs v-mask; consumers that use v-mask themselves keep their own)
 - A consumer that imports popper.js, velocity-animate or v-mask must now declare it in its own package.json. With 2.x these came in through kickstart. vault-service imports popper.js in SearchFilters.vue, SavedSearchFilters.vue and UI/TextExcerpt.vue.
@@ -58,6 +59,7 @@
 - baseUrl() sets the shared instance AND axios.defaults (axios 1 copies defaults at create; needed so VITE_API_URL keeps working).
 - interceptors: onRejected returning a promise now settles the request (retry works); returning undefined keeps the original error (v2 rejected with undefined); missing onFulfilled no longer throws.
 - api.isCancel(error) added.
+- GET params keep the 2.x (axios 0.15) query string format: object values are sent as JSON (`nearby={"bounds":…}`), arrays as `key[]=…`, Dates as ISO strings, null/undefined left out. axios 1.x on its own would send `nearby[bounds][north]=…`, which breaks backends that `json_decode()` the value (vault-service schedule map nearby filter). The shared instance and `createFromConfig()` use the exported `serializeParams`; a config with its own `paramsSerializer` keeps it. An object form such as `{ encode }` replaces the 2.x format completely, objects included. Direct calls to the global `axios` do not use the kickstart instance; set `axios.defaults.paramsSerializer = serializeParams` if the app sends object params that way.
 - createFromConfig still replaces the instance (interceptors don't carry over) - unchanged, documented.
 
 ## install
