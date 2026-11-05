@@ -1,3 +1,0 @@
-[build]
-    functions = "docs/functions"
-    publish = "docs"

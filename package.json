@@ -12,11 +12,9 @@
   "license": "MIT",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --config build/webpack.dist.js",
-    "build:docs": "cross-env NODE_ENV=production webpack --config build/webpack.docs.js",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.js --hot",
     "build:lib": "webpack --config build/webpack.lib.js",
     "build:all": "npm run build && npm run build:lib",
-    "clean": "rimraf ./dist ./lib ./docs/docs.bundle.css ./docs/docs.bundle.js",
+    "clean": "rimraf ./dist ./lib",
     "lint": "eslint --format=node_modules/eslint-formatter-pretty --ext .js,.vue,.html ./",
     "test": "npm run build:lib && ava",
     "test:watch": "npm run build:lib ava --watch"
