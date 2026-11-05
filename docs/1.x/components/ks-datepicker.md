@@ -14,11 +14,11 @@ title: Datepicker
 | <code>dateFormat</code> | <code>String</code> | <code>Y-m-d</code> | Format for the date value being binded to the v-model. All formats should include a single 'Y', 'm', 'd' |
 | <code>displayFormat</code> | <code>String</code> | <code>m/d/Y</code> | Format for the date being displayed in the input. All formats should include a single 'Y', 'm', 'd' |
 | <code>name</code> | <code>String</code> | <code>ks_datepicker</code> | The name of the input field |
-| <code>yearPicker</code> | <code>Boolean</code> | <code>False</code> | Whether to allow the user to use the year picker. This makes the year in the header interactive |
-| <code>monthPicker</code> | <code>Boolean</code> | <code>False</code> | Whether to allow the user to use the month picker. This makes the month in the header interactive |
+| <code>yearPicker</code> | <code>Boolean</code> | <code>false</code> | Whether to allow the user to use the year picker. This makes the year in the header interactive |
+| <code>monthPicker</code> | <code>Boolean</code> | <code>false</code> | Whether to allow the user to use the month picker. This makes the month in the header interactive |
 | <code>minDate</code> | <code>String</code> | <code>NULL</code> | The minimum date that can be selected. Should be in the same format as `dateFormat` |
 | <code>maxDate</code> | <code>String</code> | <code>NULL</code> | The maximum date that can be selected. Should be in the same format as `dateFormat` |
-| <code>disabled</code> | <code>Boolean</code> | <code>False</code> | Whether or not to disable the input field of the date. |
+| <code>disabled</code> | <code>Boolean</code> | <code>false</code> | Whether or not to disable the input field of the date. |
 
 ## Events
 

@@ -9,7 +9,7 @@ const docs = fileURLToPath(new URL('..', import.meta.url));
  */
 function pages(folder) {
     if ( !existsSync(`${docs}${folder}`) ) {
-        return [];
+        throw new Error(`docs/${folder} is missing; run yarn build:versions first`);
     }
 
     return readdirSync(`${docs}${folder}`)
@@ -62,13 +62,7 @@ export default defineConfig({
             '/2.x/': archivedSidebar('2.x', [{ text: 'Upgrade from 1.x', link: '/2.x/upgrade' }]),
             '/1.x/': archivedSidebar('1.x', []),
             '/': [
-                {
-                    text: 'Guide',
-                    items: [
-                        { text: 'Getting started', link: '/guide/getting-started' },
-                        { text: 'Upgrade from 2.x', link: '/guide/upgrade' },
-                    ],
-                },
+                { text: 'Guide', items: pages('guide') },
                 { text: 'Components', items: pages('components') },
                 { text: 'Styles', items: pages('styles') },
             ],

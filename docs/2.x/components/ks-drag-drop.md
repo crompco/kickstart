@@ -13,7 +13,7 @@ title: Drag and Drop
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | <code>tag</code> | <code>String</code> | <code>div</code> | What tag should be, this uses vue component :is="tag" |
-| <code>disabled</code> | <code>Boolean</code> | <code>False</code> | To make the draggable not drag. |
+| <code>disabled</code> | <code>Boolean</code> | <code>false</code> | To make the draggable not drag. |
 | <code>activeClass</code> | <code>String</code> | <code>dragging</code> | What the html class is for the draggable element |
 
 ### KsDroppable
@@ -23,7 +23,7 @@ title: Drag and Drop
 | <code>tag</code> | <code>String</code> | <code>div</code> | What tag should be, this uses vue component :is="tag" |
 | <code>activeClass</code> | <code>String</code> | <code>drop-zone-active</code> | What the html class is for the droppable element |
 | <code>inactiveClass</code> | <code>String</code> | <code>''</code> | What the html class is for the droppable element when there isn't a draggable element hovering over |
-| <code>accept</code> | <code>Boolean, Function</code> | <code>True</code> | Opposite of disabled prop. This can be a function that allows the parent component to have more control over the droppable area should allow draggable elements |
+| <code>accept</code> | <code>Boolean, Function</code> | <code>true</code> | Opposite of disabled prop. This can be a function that allows the parent component to have more control over the droppable area should allow draggable elements |
 
 ## Events
 

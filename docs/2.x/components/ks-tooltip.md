@@ -10,7 +10,7 @@ title: Tooltip
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| <code>isActive</code> | <code>Boolean</code> | <code>True</code> | Whether the tooltip is active or not. When false tooltip will not trigger |
+| <code>isActive</code> | <code>Boolean</code> | <code>true</code> | Whether the tooltip is active or not. When false tooltip will not trigger |
 | <code>trigger</code> | <code>String</code> | <code>hover</code> | The trigger for showing the tooltip. hover, click |
 | <code>width</code> | <code>String</code> |  | The width of the tooltip window. (auto by default) |
 | <code>height</code> | <code>String</code> |  | The height of the tooltip window. (auto by default) |

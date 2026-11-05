@@ -14,9 +14,9 @@ title: Checkbox Buttons
 | <code>name</code> | <code>String</code> | <code>''</code> | The name given to the input field |
 | <code>label</code> | <code>String</code> | <code>''</code> | The label to be used for the checkbox button |
 | <code>value</code> | <code>String, Number</code> | <code>NULL</code> | The actual value of the checkbox button |
-| <code>disabled</code> | <code>Boolean</code> | <code>False</code> | Whether the checkbox is disabled or not |
-| <code>inline</code> | <code>Boolean</code> | <code>False</code> | If set true the checkbox will be displayed inline |
-| <code>switchStyle</code> | <code>Boolean</code> | <code>False</code> | If set to true the checkbox will use a switch style instead of a check |
+| <code>disabled</code> | <code>Boolean</code> | <code>false</code> | Whether the checkbox is disabled or not |
+| <code>inline</code> | <code>Boolean</code> | <code>false</code> | If set true the checkbox will be displayed inline |
+| <code>switchStyle</code> | <code>Boolean</code> | <code>false</code> | If set to true the checkbox will use a switch style instead of a check |
 
 ## Events
 

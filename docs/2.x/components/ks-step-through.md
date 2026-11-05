@@ -12,7 +12,7 @@ title: Step Through
 | --- | --- | --- | --- |
 | <code>steps</code> | <code>Array</code> | <code>[]</code> | An array of the steps. This will be the text used for the steps. Here is what was used in the example above. <pre>['Create Idea', 'Build Idea', 'Profit']</pre> |
 | <code>activeStep</code> <Badge type="tip" text="v-model" /> | <code>Number, String</code> | <code>1</code> | The active step to be used. This can be binded with v-model. |
-| <code>allowInteraction</code> | <code>Boolean</code> | <code>False</code> | When this is enabled it allows users to click the steps to navigate. It is disabled by default. |
+| <code>allowInteraction</code> | <code>Boolean</code> | <code>false</code> | When this is enabled it allows users to click the steps to navigate. It is disabled by default. |
 
 ## Events
 

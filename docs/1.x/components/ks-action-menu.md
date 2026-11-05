@@ -10,7 +10,7 @@ title: Action Menu
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| <code>show</code> | <code>Boolean</code> | <code>False</code> | This will open the menu |
+| <code>show</code> | <code>Boolean</code> | <code>false</code> | This will open the menu |
 | <code>actionsAttachment</code> | <code>String</code> | <code>top left</code> | The position on the actions list that you want attached to the button/target |
 | <code>targetAttachment</code> | <code>String</code> | <code>bottom left</code> | The position on the target that you want the actions attached to |
 | <code>openClass</code> | <code>String</code> |  | The class to attach when the menu is opened |

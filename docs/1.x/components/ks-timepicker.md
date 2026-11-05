@@ -16,8 +16,8 @@ title: Timepicker
 | <code>minTime</code> | <code>String</code> | <code>04:00</code> | The minimum time for the options list |
 | <code>maxTime</code> | <code>String</code> | <code>24:00</code> | The maximum time fore the options list |
 | <code>listHeight</code> | <code>String</code> | <code>200px</code> | The height of the options list |
-| <code>disabled</code> | <code>Boolean</code> | <code>False</code> | Whether or not disable the input |
-| <code>endOfDay</code> | <code>Boolean</code> | <code>False</code> | Enables the selection of "End of day" times like 11:59 PM or 23:59 |
+| <code>disabled</code> | <code>Boolean</code> | <code>false</code> | Whether or not disable the input |
+| <code>endOfDay</code> | <code>Boolean</code> | <code>false</code> | Enables the selection of "End of day" times like 11:59 PM or 23:59 |
 
 ## Methods
 

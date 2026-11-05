@@ -12,12 +12,15 @@ yarn add kickstart-ui@1.1.2
 
 ```js
 import Vue from 'vue';
-import KickstartUI from 'kickstart-ui';
+import KickstartUI from 'kickstart-ui/dist/kickstart-ui.min.js';
+import 'kickstart-ui/dist/kickstart-ui.min.css';
 
 Vue.use(KickstartUI);
 ```
 
-The package installs `axios`, `popper.js`, `velocity-animate` and `v-mask`. It does not install `tether`, which `KsActionMenu` and the tooltip import, so add `tether@^1.4.0` to the app.
+The 1.x package has no ES module build, so the app imports the UMD bundle.
+
+The package installs `axios`, `bourbon-neat`, `popper.js`, `velocity-animate` and `v-mask`. It does not install `tether`, which `KsActionMenu` and the tooltip import, so add `tether@^1.4.0` to the app.
 
 
 

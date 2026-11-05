@@ -14,8 +14,8 @@ title: Radio Buttons
 | <code>name</code> | <code>String</code> | <code>''</code> | The name given to the input field |
 | <code>label</code> | <code>String</code> | <code>''</code> | The label to be used for the radio button |
 | <code>value</code> | <code>String, Number</code> | <code>NULL</code> | The actual value of the radio button |
-| <code>disabled</code> | <code>Boolean</code> | <code>False</code> | Whether the radio is disabled or not |
-| <code>inline</code> | <code>Boolean</code> | <code>False</code> | If set true the radio will be displayed inline |
+| <code>disabled</code> | <code>Boolean</code> | <code>false</code> | Whether the radio is disabled or not |
+| <code>inline</code> | <code>Boolean</code> | <code>false</code> | If set true the radio will be displayed inline |
 
 ## Events
 

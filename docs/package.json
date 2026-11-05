@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "versions": "yarn --cwd versions install --frozen-lockfile && node versions/build.mjs",
+    "build:versions": "yarn --cwd versions install --frozen-lockfile && node versions/build.mjs",
     "dev": "vitepress dev",
     "build": "vitepress build",
     "preview": "vitepress preview"

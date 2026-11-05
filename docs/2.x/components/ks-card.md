@@ -11,7 +11,7 @@ title: Card
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | <code>header</code> | <code>String</code> |  | Text to display in the card header |
-| <code>light</code> | <code>Boolean</code> | <code>False</code> | Applies the light ks-card style |
+| <code>light</code> | <code>Boolean</code> | <code>false</code> | Applies the light ks-card style |
 
 ## Slots
 

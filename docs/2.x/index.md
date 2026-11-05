@@ -13,6 +13,7 @@ yarn add kickstart-ui@2.1.1
 ```js
 import Vue from 'vue';
 import KickstartUI from 'kickstart-ui';
+import 'kickstart-ui/dist/kickstart-ui.min.css';
 
 Vue.use(KickstartUI);
 ```

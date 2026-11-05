@@ -1,5 +1,5 @@
 import { execFileSync } from 'node:child_process';
-import { cpSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { build } from 'vite';
 import config from './vite.config.mjs';
@@ -55,7 +55,13 @@ if ( !only.length || only.includes(CURRENT.version) ) {
 
     // The upgrade guide includes the branch's upgrade.md, which stays in the extracted copy
     const upgrade = `${docs}guide/upgrade.md`;
-    writeFileSync(upgrade, readFileSync(upgrade, 'utf8').replace('../../upgrade.md', `../.versions/${CURRENT.version}/upgrade.md`));
+    const guide = readFileSync(upgrade, 'utf8');
+
+    if ( !guide.includes('../../upgrade.md') ) {
+        throw new Error(`${upgrade} no longer includes ../../upgrade.md; update the include path in versions/build.mjs`);
+    }
+
+    writeFileSync(upgrade, guide.replace('../../upgrade.md', `../.versions/${CURRENT.version}/upgrade.md`));
 }
 
 for ( const { version, ref, docs_folder } of ARCHIVED ) {
@@ -66,4 +72,15 @@ for ( const { version, ref, docs_folder } of ARCHIVED ) {
     console.log(`Building the ${version} examples from ${ref}`);
     extract(version, ref, ['src', docs_folder]);
     await build(config({ version, docs_folder }));
+}
+
+const expected = [
+    ...CURRENT_PAGES.map(page => `${docs}${page}`),
+    `${docs}public/demos/index.html`,
+    ...ARCHIVED.map(({ version }) => `${docs}public/${version}/demos/index.html`),
+];
+const missing = expected.filter(path => !existsSync(path));
+
+if ( missing.length ) {
+    throw new Error(`The versions build is incomplete; missing:\n${missing.join('\n')}`);
 }

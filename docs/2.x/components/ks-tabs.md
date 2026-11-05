@@ -12,10 +12,10 @@ title: Tabs
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| <code>expand</code> | <code>Boolean</code> | <code>False</code> | When set to true the tabs will expand into an even width |
+| <code>expand</code> | <code>Boolean</code> | <code>false</code> | When set to true the tabs will expand into an even width |
 | <code>align</code> | <code>String</code> | <code>center</code> | Where to text align the tabs name. Options are ('left', 'center', 'right') |
 | <code>id</code> | <code>String</code> | <code>NULL</code> | When provided the last active tab will be remembered unless the rememberTab prop is set to false |
-| <code>rememberTab</code> | <code>Boolean</code> | <code>True</code> | Only used when an ID is provided in case you want to use an id without remembering the tab selection. |
+| <code>rememberTab</code> | <code>Boolean</code> | <code>true</code> | Only used when an ID is provided in case you want to use an id without remembering the tab selection. |
 
 ### KsTab
 

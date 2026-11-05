@@ -14,22 +14,22 @@ title: AutoComplete
 | <code>items</code> | <code>Array</code> | <code>NULL</code> | This is the list of options. <pre>[{Option data...},{Option data...}]</pre> |
 | <code>placeholder</code> | <code>String</code> | <code>Select...</code> | The placeholder in the select when nothing is selected. |
 | <code>minSearch</code> | <code>Number</code> | <code>0</code> | Minimum number of characters typed in the search box needed to trigger the search |
-| <code>multiple</code> | <code>Boolean</code> | <code>False</code> | Whether or not to support multiple selections |
-| <code>taggable</code> | <code>Boolean</code> | <code>False</code> | When true the user is allowed to enter values not in the list items. |
+| <code>multiple</code> | <code>Boolean</code> | <code>false</code> | Whether or not to support multiple selections |
+| <code>taggable</code> | <code>Boolean</code> | <code>false</code> | When true the user is allowed to enter values not in the list items. |
 | <code>groupBy</code> | <code>String</code> | <code>NULL</code> | The key to group items by. Dot notation is supported for nested values in the items. |
-| <code>showTagInList</code> | <code>Boolean</code> | <code>False</code> | Depends on taggable. When true the taggable will be shown in the list as "<em>Add</em> {term}" |
+| <code>showTagInList</code> | <code>Boolean</code> | <code>false</code> | Depends on taggable. When true the taggable will be shown in the list as "<em>Add</em> {term}" |
 | <code>delay</code> | <code>Number</code> | <code>100</code> | The amount of delay to be used when searching |
 | <code>searchThreshold</code> | <code>Number</code> | <code>7</code> | The minimum number of items for the search input to be shown. |
-| <code>keepTextOnDelete</code> | <code>Boolean</code> | <code>False</code> | When set to true if a user deletes a selection it will retain the text of the selection |
+| <code>keepTextOnDelete</code> | <code>Boolean</code> | <code>false</code> | When set to true if a user deletes a selection it will retain the text of the selection |
 | <code>itemFilter</code> | <code>Function, String</code> | <code>selectionKey</code> | When a function is provided it will be used when filtering results from the search box. The function should accept the item as a parameter and should return true for a match. If a String is provided it is used as the key to filter on when filtering items. |
 | <code>selectionKey</code> | <code>String</code> | <code>name</code> | This is the key used as the value for the items. And it is used to display selections |
 | <code>listHeight</code> | <code>String</code> | <code>250px</code> | The height of the drop down list |
-| <code>cacheResults</code> | <code>Boolean</code> | <code>True</code> | Whether or not to cache search results. |
-| <code>paginated</code> | <code>Boolean</code> | <code>False</code> | Whether or not the search data is being paginated. When true the select will emit the search event when the list is navigated to the end. |
+| <code>cacheResults</code> | <code>Boolean</code> | <code>true</code> | Whether or not to cache search results. |
+| <code>paginated</code> | <code>Boolean</code> | <code>false</code> | Whether or not the search data is being paginated. When true the select will emit the search event when the list is navigated to the end. |
 | <code>paginateThreshold</code> | <code>Number</code> | <code>3</code> | Determines when the paginate request will be called. So when the user scrolls down the list if this is set to 3 the request will be made when the user is 3 list items away from the bottom of the list. |
-| <code>stopParentScroll</code> | <code>Boolean</code> | <code>True</code> | When set to true the list will automatically prevent the parent container from scrolling when the list scroll has reached the bottom. |
+| <code>stopParentScroll</code> | <code>Boolean</code> | <code>true</code> | When set to true the list will automatically prevent the parent container from scrolling when the list scroll has reached the bottom. |
 | <code>emptyMessage</code> | <code>String</code> |  | A message to use when the select is empty. (ex: "No Results"). If left blank then no message will show up. |
-| <code>acceptEmptySelection</code> | <code>Boolean</code> | <code>False</code> | Works with the emptyMessage property. If this is set to true the empty option will be a selectable item instead of just text. |
+| <code>acceptEmptySelection</code> | <code>Boolean</code> | <code>false</code> | Works with the emptyMessage property. If this is set to true the empty option will be a selectable item instead of just text. |
 
 ## Events
 
@@ -42,7 +42,7 @@ title: AutoComplete
 | <code>blur</code> | Fired when the input field is blurred |
 | <code>clear</code> | Fired when the list is cleared |
 | <code>selected-empty</code> | Fired when <code>acceptEmptySelection</code> prop is set to true and the autocomplete term is not in the list. |
-| <code>search</code> | Fired when the input field is expecting a search to be performed. (depends on the minSearch prop) The payload is as follows... <pre> { term: term, // the term used in the search page: page, // the page of the search being requested callback: function // The callback function should be called with the proper endpoint to use // an optional data key param can be sent as second parameter // example: callback(`countries?q=${term}&page=${page}`, 'results') } </pre> |
+| <code>search</code> | Fired when the input field is expecting a search to be performed. (depends on the minSearch prop) The payload is as follows... <pre>    {<br>        term: term, // the term used in the search<br>        page: page, // the page of the search being requested<br>        callback: function<br>        // The callback function should be called with the proper endpoint to use<br>        // an optional data key param can be sent as second parameter<br>        // example: callback(`countries?q=${term}&page=${page}`, 'results')<br>    }</pre> |
 
 ## Methods
 

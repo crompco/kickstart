@@ -38,20 +38,20 @@ jobs:
 
       - run: yarn --cwd docs install --frozen-lockfile
 
-      - run: yarn --cwd docs versions
+      - run: yarn --cwd docs build:versions
 
       - run: yarn --cwd docs build
 
       - uses: actions/configure-pages@v5
-        if: github.event_name != 'pull_request'
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master'
 
       - uses: actions/upload-pages-artifact@v3
-        if: github.event_name != 'pull_request'
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master'
         with:
           path: docs/.vitepress/dist
 
   deploy:
-    if: github.event_name != 'pull_request'
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master'
     needs: build
     runs-on: ubuntu-latest
 

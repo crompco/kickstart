@@ -12,7 +12,7 @@ title: Accordion
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| <code>collapsible</code> | <code>Boolean</code> | <code>True</code> | This will close other rows that are open when the row is clicked |
+| <code>collapsible</code> | <code>Boolean</code> | <code>true</code> | This will close other rows that are open when the row is clicked |
 
 ### Accordion Row
 

@@ -11,7 +11,7 @@ title: Panel
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | <code>header</code> | <code>String</code> |  | Text to display in the panel header |
-| <code>light</code> | <code>Boolean</code> | <code>False</code> | Applies the light ks-panel style |
+| <code>light</code> | <code>Boolean</code> | <code>false</code> | Applies the light ks-panel style |
 
 ## Slots
 
