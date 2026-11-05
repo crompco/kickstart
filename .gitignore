@@ -1,8 +1,14 @@
 .idea
 node_modules
 .vercel
-.nuxt
 .vercel_cache
-docs/*.bundle.*
-docs-src/generated/*.js
 /CLAUDE.md
+/docs/.versions
+/docs/public/demos
+/docs/public/*.x/demos
+/docs/index.md
+/docs/components
+/docs/guide
+/docs/styles
+/docs/.vitepress/dist
+/docs/.vitepress/cache

@@ -8,8 +8,10 @@ Install dependencies
 yarn install
 ```
 
-Run local server (it hosts documentation and examples)
+The documentation for every major version is at https://crompco.github.io/kickstart/. Run it locally:
 
 ```sh
-yarn run dev
+yarn --cwd docs install
+yarn --cwd docs build:versions
+yarn --cwd docs dev
 ```
