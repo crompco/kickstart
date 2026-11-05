@@ -6,135 +6,40 @@
 @import "../variables/_buttons";
 @import "../variables/_alerts";
 
-.ks-button {
-	display: inline-block;
-	padding: rem($button-padding);
-	cursor: pointer;
-	text-decoration: none;
-	border-radius: $button-border-radius;
-	@include transition(background-color);
-	@include state-default;
-	@if $button-box-shadow != false {
-		box-shadow: $button-box-shadow;
-	}
+@import "../tokens/_tokens";
+@import "../tokens/_global";
+@import "../tokens/_alerts";
+@import "../tokens/_buttons";
 
-	&:hover {
-		@include state-hover;
-	}
+@include ks-emit-tokens(global, alerts, buttons);
 
-	&.disabled, &:disabled {
-		@include disable;
-	}
+@import "../css/components/buttons";
 
-    &.danger {
-        @include state-danger;
-        &:hover {
-            @include state-danger-hover();
+@import "../mixins/_buttons";
+
+@each $name, $map in $buttons {
+    @if not index($ks-default-buttons, $name) {
+        @include ks-button-variant($name);
+    }
+}
+
+@each $name, $size in $button-sizes {
+    @if not index($ks-default-button-sizes, $name) {
+        .ks-button.#{$name} {
+            font-size: var(--ks-button-size-#{$name});
         }
     }
+}
 
-    &.spinning {
-        position: relative;
-        .ks-spin-loading {
-            border-top-color: darken($state-default-bg, 10%);
-        }
-    }
-
-    // Covers the button so the spinner is centered whatever the padding
-    .ks-button-spinner {
-        position: absolute;
-        inset: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .button-label {
-        display: inline-block;
-        &.hidden {
-            visibility: hidden;
-        }
-    }
-
-	@each $name, $map in $buttons {
-		$bg-color: get($map, background-color);
-
-		&.#{$name} {
-			background-color: $bg-color;
-			color: get($map, color);
-			border: 1px solid get($map, border-color);
-
-			@if map-has-key($map, box-shadow) {
-				box-shadow: get($map, box-shadow);
-			}
-
-            &.spinning {
-                .ks-spin-loading {
-                    border-color: get($map, border-color);
-                    border-top-color: $bg-color;
-                }
-            }
-
-			&:hover:not(.disabled) {
-				border: 1px solid get($map, border-color);
-				background-color: darken($bg-color, 4%);
-				color: get($map, hover);
-			}
-
-			&.danger {
-				border-color: get($map, danger-border-color);
-				color: get($map, danger-color);
-				background-color: get($map, danger-bg);
-
-                &.spinning {
-                    .ks-spin-loading {
-                        border-color: get($map, danger-border-color);
-                        border-top-color: get($map, danger-bg);
-                    }
-                }
-
-				&:hover:not(.disabled) {
-					border-color: darken(get($map, danger-border-color), 12%);
-					color: darken(get($map, danger-color), 12%);
-					background-color: darken($bg-color, 4%);
-				}
-			}
-
-            &.success {
-                border-color: get($map, success-border-color);
-                color: get($map, success-color);
-                background-color: get($map, success-bg);
-
-                &.spinning {
-                    .ks-spin-loading {
-                        border-color: get($map, success-border-color);
-                        border-top-color: get($map, success-bg);
-                    }
-                }
-
-                &:hover:not(.disabled) {
-                    border-color: darken(get($map, success-border-color), 12%);
-                    color: darken(get($map, success-color), 12%);
-                    background-color: darken($bg-color, 4%);
-                }
-            }
-		}
-	}
-
-	@each $name, $size in $button-sizes {
-		&.#{$name} {
-			font-size: rem($size);
-		}
-	}
-
-    @each $name, $map in $alerts {
-        &.#{$name} {
-            background: get($map, button-background-color);
-            color: get($map, button-color);
+@each $name, $map in $alerts {
+    @if not index($ks-default-alerts, $name) {
+        .ks-button.#{$name} {
+            background: var(--ks-alert-#{$name}-button-background-color);
+            color: var(--ks-alert-#{$name}-button-color);
 
             &:hover {
-                background: darken(get($map, button-background-color), 8%);
+                background: hsl(from var(--ks-alert-#{$name}-button-background-color) h s calc(l - 8));
             }
         }
     }
- }
+}

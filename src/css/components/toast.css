@@ -1,0 +1,99 @@
+.ks-toast {
+    position: fixed;
+    z-index: 100;
+
+    &.top {
+        top: 1rem;
+        bottom: 1rem;
+        left: 0;
+        right: 0;
+
+        .alert {
+            margin-right: auto;
+            margin-left: auto;
+        }
+    }
+
+    &.top-left {
+        top: 1rem;
+        left: 1rem;
+    }
+
+    &.top-right {
+        top: 1rem;
+        right: 1rem;
+    }
+
+    &.bottom {
+        bottom: 1rem;
+        left: 0;
+        right: 0;
+
+        .alert {
+            margin-right: auto;
+            margin-left: auto;
+        }
+    }
+
+    &.bottom-left {
+        bottom: 1rem;
+        left: 1rem;
+    }
+
+    &.bottom-right {
+        bottom: 1rem;
+        right: 1rem;
+    }
+
+    div.ks-alert {
+        max-width: 400px;
+        position: relative;
+
+        &.has-close {
+            padding-right: 2rem;
+        }
+
+        a.close {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+
+            &:hover {
+                cursor: pointer;
+
+                svg path {
+                    fill-opacity: 1;
+                }
+            }
+
+            svg {
+                width: 14px;
+                height: 14px;
+
+                path {
+                    fill-opacity: 0.6;
+                }
+            }
+        }
+
+        &.success svg path {
+            fill: var(--ks-alert-success-color);
+        }
+
+        &.info svg path {
+            fill: var(--ks-alert-info-color);
+        }
+
+        &.warning svg path {
+            fill: var(--ks-alert-warning-color);
+        }
+
+        &.error svg path {
+            fill: var(--ks-alert-error-color);
+        }
+
+        &.muted svg path {
+            fill: var(--ks-alert-muted-color);
+        }
+    }
+}

@@ -1,0 +1,23 @@
+.ks-datepicker {
+    position: relative;
+
+    .ks-calendar-view {
+        width: 17rem;
+    }
+
+    .ks-datepicker-cal {
+        position: absolute;
+        font-size: 0.8em;
+        box-shadow: var(--ks-datepicker-cal-box-shadow);
+        z-index: 100;
+
+        .ks-cal-week {
+            min-height: 2rem;
+
+            .ks-cal-day .ks-day-num,
+            .ks-cal-blank .ks-day-num {
+                text-align: center;
+            }
+        }
+    }
+}

@@ -1,13 +1,8 @@
 @import "../variables/_global.scss";
 
-a {
-    text-decoration: none;
+@import "../tokens/_tokens";
+@import "../tokens/_global";
 
-    &.danger {
-        color: $state-danger-bg;
+@include ks-emit-tokens(global);
 
-        &:hover {
-            color: darken($state-danger-bg, 12%);
-        }
-    }
-}
+@import "../css/components/links";

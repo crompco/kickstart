@@ -1,0 +1,456 @@
+/* Generated from src/styles/components/utilities/_background.scss by build/generate-css.mjs */
+.bg-transparent {
+  background-color: transparent;
+}
+
+.hover\:bg-transparent:hover {
+  background-color: transparent;
+}
+
+.bg-white {
+  background-color: #ffffff;
+}
+
+.hover\:bg-white:hover {
+  background-color: #ffffff;
+}
+
+.bg-black {
+  background-color: #000000;
+}
+
+.hover\:bg-black:hover {
+  background-color: #000000;
+}
+
+.bg-gray-100 {
+  background-color: #E4E7EB;
+}
+
+.hover\:bg-gray-100:hover {
+  background-color: #E4E7EB;
+}
+
+.bg-gray-200 {
+  background-color: #CBD2D9;
+}
+
+.hover\:bg-gray-200:hover {
+  background-color: #CBD2D9;
+}
+
+.bg-gray-300 {
+  background-color: #9AA5B1;
+}
+
+.hover\:bg-gray-300:hover {
+  background-color: #9AA5B1;
+}
+
+.bg-gray-400 {
+  background-color: #7B8794;
+}
+
+.hover\:bg-gray-400:hover {
+  background-color: #7B8794;
+}
+
+.bg-gray-500 {
+  background-color: #616E7C;
+}
+
+.hover\:bg-gray-500:hover {
+  background-color: #616E7C;
+}
+
+.bg-gray-600 {
+  background-color: #52606D;
+}
+
+.hover\:bg-gray-600:hover {
+  background-color: #52606D;
+}
+
+.bg-gray-700 {
+  background-color: #3E4C59;
+}
+
+.hover\:bg-gray-700:hover {
+  background-color: #3E4C59;
+}
+
+.bg-gray-800 {
+  background-color: #323F4B;
+}
+
+.hover\:bg-gray-800:hover {
+  background-color: #323F4B;
+}
+
+.bg-gray-900 {
+  background-color: #1F2933;
+}
+
+.hover\:bg-gray-900:hover {
+  background-color: #1F2933;
+}
+
+.bg-orange-100 {
+  background-color: #FAB38B;
+}
+
+.hover\:bg-orange-100:hover {
+  background-color: #FAB38B;
+}
+
+.bg-orange-200 {
+  background-color: #EF8E58;
+}
+
+.hover\:bg-orange-200:hover {
+  background-color: #EF8E58;
+}
+
+.bg-orange-300 {
+  background-color: #E67635;
+}
+
+.hover\:bg-orange-300:hover {
+  background-color: #E67635;
+}
+
+.bg-orange-400 {
+  background-color: #D25028;
+}
+
+.hover\:bg-orange-400:hover {
+  background-color: #D25028;
+}
+
+.bg-orange-500 {
+  background-color: #C65D21;
+}
+
+.hover\:bg-orange-500:hover {
+  background-color: #C65D21;
+}
+
+.bg-orange-600 {
+  background-color: #AB4E19;
+}
+
+.hover\:bg-orange-600:hover {
+  background-color: #AB4E19;
+}
+
+.bg-orange-700 {
+  background-color: #8C3D10;
+}
+
+.hover\:bg-orange-700:hover {
+  background-color: #8C3D10;
+}
+
+.bg-orange-800 {
+  background-color: #77340D;
+}
+
+.hover\:bg-orange-800:hover {
+  background-color: #77340D;
+}
+
+.bg-orange-900 {
+  background-color: #572508;
+}
+
+.hover\:bg-orange-900:hover {
+  background-color: #572508;
+}
+
+.bg-blue-100 {
+  background-color: #D1EEFC;
+}
+
+.hover\:bg-blue-100:hover {
+  background-color: #D1EEFC;
+}
+
+.bg-blue-200 {
+  background-color: #A7D8F0;
+}
+
+.hover\:bg-blue-200:hover {
+  background-color: #A7D8F0;
+}
+
+.bg-blue-300 {
+  background-color: #7CC1E4;
+}
+
+.hover\:bg-blue-300:hover {
+  background-color: #7CC1E4;
+}
+
+.bg-blue-400 {
+  background-color: #55AAD4;
+}
+
+.hover\:bg-blue-400:hover {
+  background-color: #55AAD4;
+}
+
+.bg-blue-500 {
+  background-color: #3994C1;
+}
+
+.hover\:bg-blue-500:hover {
+  background-color: #3994C1;
+}
+
+.bg-blue-600 {
+  background-color: #2D83AE;
+}
+
+.hover\:bg-blue-600:hover {
+  background-color: #2D83AE;
+}
+
+.bg-blue-700 {
+  background-color: #1D6F98;
+}
+
+.hover\:bg-blue-700:hover {
+  background-color: #1D6F98;
+}
+
+.bg-blue-800 {
+  background-color: #166086;
+}
+
+.hover\:bg-blue-800:hover {
+  background-color: #166086;
+}
+
+.bg-blue-900 {
+  background-color: #0B4F71;
+}
+
+.hover\:bg-blue-900:hover {
+  background-color: #0B4F71;
+}
+
+.bg-purple-100 {
+  background-color: #CFBCF2;
+}
+
+.hover\:bg-purple-100:hover {
+  background-color: #CFBCF2;
+}
+
+.bg-purple-200 {
+  background-color: #A081D9;
+}
+
+.hover\:bg-purple-200:hover {
+  background-color: #A081D9;
+}
+
+.bg-purple-300 {
+  background-color: #8662C7;
+}
+
+.hover\:bg-purple-300:hover {
+  background-color: #8662C7;
+}
+
+.bg-purple-400 {
+  background-color: #724BB7;
+}
+
+.hover\:bg-purple-400:hover {
+  background-color: #724BB7;
+}
+
+.bg-purple-500 {
+  background-color: #653CAD;
+}
+
+.hover\:bg-purple-500:hover {
+  background-color: #653CAD;
+}
+
+.bg-purple-600 {
+  background-color: #51279B;
+}
+
+.hover\:bg-purple-600:hover {
+  background-color: #51279B;
+}
+
+.bg-purple-700 {
+  background-color: #421987;
+}
+
+.hover\:bg-purple-700:hover {
+  background-color: #421987;
+}
+
+.bg-purple-800 {
+  background-color: #34126F;
+}
+
+.hover\:bg-purple-800:hover {
+  background-color: #34126F;
+}
+
+.bg-purple-900 {
+  background-color: #240754;
+}
+
+.hover\:bg-purple-900:hover {
+  background-color: #240754;
+}
+
+.bg-green-100 {
+  background-color: #C1EAC5;
+}
+
+.hover\:bg-green-100:hover {
+  background-color: #C1EAC5;
+}
+
+.bg-green-200 {
+  background-color: #A3D9A5;
+}
+
+.hover\:bg-green-200:hover {
+  background-color: #A3D9A5;
+}
+
+.bg-green-300 {
+  background-color: #7BC47F;
+}
+
+.hover\:bg-green-300:hover {
+  background-color: #7BC47F;
+}
+
+.bg-green-400 {
+  background-color: #57AE5B;
+}
+
+.hover\:bg-green-400:hover {
+  background-color: #57AE5B;
+}
+
+.bg-green-500 {
+  background-color: #3F9142;
+}
+
+.hover\:bg-green-500:hover {
+  background-color: #3F9142;
+}
+
+.bg-green-600 {
+  background-color: #2F8132;
+}
+
+.hover\:bg-green-600:hover {
+  background-color: #2F8132;
+}
+
+.bg-green-700 {
+  background-color: #207227;
+}
+
+.hover\:bg-green-700:hover {
+  background-color: #207227;
+}
+
+.bg-green-800 {
+  background-color: #0E5814;
+}
+
+.hover\:bg-green-800:hover {
+  background-color: #0E5814;
+}
+
+.bg-green-900 {
+  background-color: #05400A;
+}
+
+.hover\:bg-green-900:hover {
+  background-color: #05400A;
+}
+
+.bg-red-100 {
+  background-color: #FACDCD;
+}
+
+.hover\:bg-red-100:hover {
+  background-color: #FACDCD;
+}
+
+.bg-red-200 {
+  background-color: #F29B9B;
+}
+
+.hover\:bg-red-200:hover {
+  background-color: #F29B9B;
+}
+
+.bg-red-300 {
+  background-color: #E66A6A;
+}
+
+.hover\:bg-red-300:hover {
+  background-color: #E66A6A;
+}
+
+.bg-red-400 {
+  background-color: #D64545;
+}
+
+.hover\:bg-red-400:hover {
+  background-color: #D64545;
+}
+
+.bg-red-500 {
+  background-color: #BA2525;
+}
+
+.hover\:bg-red-500:hover {
+  background-color: #BA2525;
+}
+
+.bg-red-600 {
+  background-color: #A61B1B;
+}
+
+.hover\:bg-red-600:hover {
+  background-color: #A61B1B;
+}
+
+.bg-red-700 {
+  background-color: #911111;
+}
+
+.hover\:bg-red-700:hover {
+  background-color: #911111;
+}
+
+.bg-red-800 {
+  background-color: #780A0A;
+}
+
+.hover\:bg-red-800:hover {
+  background-color: #780A0A;
+}
+
+.bg-red-900 {
+  background-color: #610404;
+}
+
+.hover\:bg-red-900:hover {
+  background-color: #610404;
+}

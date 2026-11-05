@@ -1,0 +1,208 @@
+/* Text fields of the autocomplete, select lookup and timepicker */
+.ks-timepicker input[type=text],
+.ks-autocomplete-holder.ks-multiple,
+.ks-autocomplete-holder:not(.ks-multiple).ks-selected .ks-selection,
+.ks-autocomplete-holder:not(.ks-multiple) > input,
+.ks-select .ks-select-dropdown .ks-select-dropdown-input > input:not(.is-multiple) {
+    border: 1px solid var(--ks-ac-input-border);
+    outline: none;
+    width: 100%;
+    padding: var(--ks-ac-input-padding);
+    box-shadow: var(--ks-ac-input-box-shadow);
+}
+
+.ks-autocomplete-holder {
+    position: relative;
+    display: inline-block;
+    margin-right: var(--ks-ac-margin-right);
+    margin-left: var(--ks-ac-margin-left);
+    color: var(--ks-form-color);
+    box-shadow: var(--ks-form-box-shadow);
+    background: var(--ks-ac-bg);
+    padding: 0;
+    border: 0;
+    width: calc(100% - (var(--ks-ac-margin-right) + var(--ks-ac-margin-left)));
+
+    &[disabled] {
+        cursor: not-allowed;
+        opacity: 0.8;
+        background: #eee;
+    }
+
+    &:not(.ks-multiple) > input {
+        margin-bottom: 0;
+    }
+
+    &.ks-multiple > input {
+        border: 0;
+        outline: none;
+        display: inline-block;
+        margin-top: 0;
+        margin-bottom: 0;
+        box-shadow: none;
+        max-width: 100%;
+        width: auto;
+        padding: 1px 0;
+    }
+
+    > input::-ms-clear {
+        display: none;
+    }
+
+    .ks-searching-results {
+        position: absolute;
+        width: 100%;
+        left: 0;
+        padding: 0;
+        margin: 0;
+        border: 0;
+        height: 4px;
+    }
+
+    &:not(.ks-multiple) .ks-selection {
+        display: block;
+        width: 100%;
+        padding: var(--ks-ac-selection-padding);
+    }
+
+    .ks-selection .ks-selection-text {
+        background-color: var(--ks-ac-selection-bg);
+        display: inline-block;
+        color: var(--ks-ac-selection-color);
+
+        a {
+            height: var(--ks-ac-clear-height);
+            width: var(--ks-ac-clear-width);
+            position: relative;
+            display: inline-block;
+            color: inherit;
+        }
+
+        svg {
+            height: var(--ks-ac-clear-height);
+            width: var(--ks-ac-clear-width);
+            position: absolute;
+            top: 1px;
+        }
+    }
+
+    &.ks-multiple {
+        padding: calc(var(--ks-ac-input-multi-padding) - var(--ks-ac-multi-margin)) var(--ks-ac-input-multi-padding);
+        width: calc(100% - (var(--ks-ac-margin-right) + var(--ks-ac-margin-left)));
+
+        /* 1px for the border */
+        &:not(.ks-selected) {
+            padding: calc(var(--ks-ac-input-padding) - 1px);
+        }
+
+        /* Wider by the borders, and moved over the parent border */
+        .ks-autocomplete-list {
+            width: calc(100% + 2px);
+            left: -1px;
+            margin-top: var(--ks-ac-input-padding);
+        }
+
+        &.ks-selected .ks-autocomplete-list {
+            margin-top: 2px;
+        }
+
+        .ks-selection .ks-selection-text {
+            background-color: var(--ks-ac-multi-bg);
+            margin: var(--ks-ac-multi-margin);
+            padding: var(--ks-ac-multi-padding);
+            border-radius: var(--ks-ac-multi-border-radius);
+            color: var(--ks-ac-multi-color);
+
+            &:focus {
+                box-shadow: var(--ks-ac-multi-selection-focus-box-shadow);
+                background-color: hsl(from var(--ks-ac-multi-bg) h s calc(l + 15));
+            }
+        }
+    }
+}
+
+.ks-autocomplete-list {
+    margin: 0;
+    margin-bottom: 0.5rem;
+    z-index: 100;
+    padding: 0;
+    width: 100%;
+    background-color: var(--ks-ac-list-bg);
+    position: absolute;
+    list-style: none;
+    border: solid 1px var(--ks-ac-list-border);
+    overflow-y: auto;
+    left: 0;
+    transition: top 0.3s;
+
+    &.inverted {
+        border-bottom: 0;
+    }
+
+    &:not(.inverted) {
+        border-top: 0;
+    }
+
+    li {
+        padding: var(--ks-ac-list-item-padding);
+        border: 1px solid transparent;
+        border-bottom-color: var(--ks-ac-list-item-border);
+
+        /* No border under the last item or an option group */
+        &:last-child, &.ks-opt-group {
+            border-bottom-color: transparent;
+        }
+
+        &.ks-opt-group {
+            padding-bottom: 0;
+
+            strong {
+                display: block;
+                padding: 0.125rem;
+            }
+
+            &:first-child strong {
+                padding-top: 0;
+            }
+        }
+
+        &.ks-selected-item {
+            background-color: var(--ks-state-hover-bg);
+            border: 1px solid var(--ks-state-hover-border);
+            font-weight: normal;
+            color: var(--ks-ac-list-selected-color);
+        }
+
+        &.ks-empty-list-message {
+            color: var(--ks-ac-empty-message-color);
+            font-style: var(--ks-ac-empty-message-style);
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+
+            li {
+                padding-left: 1rem;
+            }
+        }
+    }
+}
+
+/* The wrapper is positioned against the holder, so the list sits in its flow and flips with it */
+.autocomplete-list-wrapper {
+    display: flex;
+    flex-direction: column;
+
+    &.inverted {
+        flex-direction: column-reverse;
+    }
+}
+
+.ks-autocomplete-holder .autocomplete-list-wrapper .ks-autocomplete-list,
+.ks-autocomplete-holder.ks-multiple.ks-selected .autocomplete-list-wrapper .ks-autocomplete-list {
+    position: relative;
+    left: 0;
+    width: 100%;
+    margin: 0;
+}

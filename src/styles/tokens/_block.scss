@@ -1,0 +1,10 @@
+@import "../functions/_utils";
+@import "../variables/_block";
+
+@mixin ks-tokens-block {
+    --ks-bb-bg: #{$bb-bg};
+    --ks-bb-border-color: #{$bb-border-color};
+    --ks-bb-padding: #{rem($bb-padding)};
+    --ks-bb-margin-top: #{rem($bb-margin-top)};
+    --ks-bb-margin-bottom: #{rem($bb-margin-bottom)};
+}

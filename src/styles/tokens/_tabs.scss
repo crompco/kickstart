@@ -1,0 +1,19 @@
+@import "../functions/_utils";
+@import "../variables/_tabs";
+
+@mixin ks-tokens-tabs {
+    --ks-tabs-inactive-color: #{$tabs-inactive-color};
+    --ks-tabs-font-size: #{rem($tabs-font-size)};
+    --ks-tabs-height: #{rem($tabs-height)};
+    --ks-tabs-min-width: #{rem($tabs-min-width)};
+    --ks-tabs-padding: #{rem($tabs-padding)};
+    --ks-tabs-opacity: #{$tabs-opacity};
+    --ks-tabs-bg: #{$tabs-bg};
+    --ks-tabs-links-bg: #{$tabs-links-bg};
+    --ks-tabs-links-color: #{$tabs-links-color};
+    --ks-tabs-links-border-top-color: #{$tabs-links-border-top-color};
+    --ks-tabs-links-border-right: #{ks-optional($tabs-links-border-right)};
+    --ks-tabs-content-padding: #{rem($tabs-content-padding)};
+    --ks-tabs-content-bg: #{$tabs-content-bg};
+    --ks-tabs-content-box-shadow: #{ks-optional($tabs-content-box-shadow)};
+}

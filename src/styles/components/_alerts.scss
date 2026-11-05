@@ -1,17 +1,20 @@
 @import "../functions/_map";
 @import "../variables/_settings";
 
-.ks-alert {
-	padding: $alert-padding;
-	margin: $alert-margin;
-	border-radius: $alert-border-radius;
-	border: 1px solid transparent;
-}
+@import "../tokens/_tokens";
+@import "../tokens/_global";
+@import "../tokens/_alerts";
+
+@include ks-emit-tokens(global, alerts);
+
+@import "../css/components/alerts";
 
 @each $name, $map in $alerts {
-	.ks-alert.#{$name} {
-		color: get($map, color);
-		background-color: get($map, background-color);
-		border-color: get($map, border-color)
-	}
+    @if not index($ks-default-alerts, $name) {
+        .ks-alert.#{$name} {
+            color: var(--ks-alert-#{$name}-color);
+            background-color: var(--ks-alert-#{$name}-background-color);
+            border-color: var(--ks-alert-#{$name}-border-color);
+        }
+    }
 }

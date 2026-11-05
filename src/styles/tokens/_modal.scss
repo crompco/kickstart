@@ -1,0 +1,24 @@
+@import "../functions/_utils";
+@import "../variables/_modal";
+
+@mixin ks-tokens-modal {
+    --ks-modal-mask-bg: #{$modal-mask-bg};
+    --ks-modal-mask-opacity: #{$modal-mask-opacity};
+    --ks-modal-margin-top: #{$modal-margin-top};
+    --ks-modal-header-bg: #{$modal-header-bg};
+    --ks-modal-header-color: #{$modal-header-color};
+    --ks-modal-header-box-shadow: #{ks-optional($modal-header-box-shadow)};
+    --ks-modal-header-danger-bg: #{$modal-header-danger-bg};
+    --ks-modal-header-danger-color: #{$modal-header-danger-color};
+    --ks-modal-header-danger-close-color: #{$modal-header-danger-close-color};
+    --ks-modal-header-danger-close-color-hover: #{$modal-header-danger-close-color-hover};
+    --ks-modal-wrapper-bg: #{$modal-wrapper-bg};
+    --ks-modal-wrapper-box-shadow: #{ks-optional($modal-wrapper-box-shadow)};
+    --ks-modal-body-padding: #{rem($modal-body-padding)};
+    --ks-modal-close-bg: #{$modal-close-bg};
+    --ks-modal-close-opacity: #{$modal-close-opacity};
+    --ks-modal-close-hover-bg: #{$modal-close-hover-bg};
+    --ks-modal-footer-bg: #{ks-optional($modal-footer-bg)};
+    --ks-modal-footer-top-border: #{ks-optional($modal-footer-top-border)};
+    --ks-modal-button-align: #{$modal-button-align};
+}

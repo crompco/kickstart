@@ -1,0 +1,36 @@
+.ks-alert {
+    padding: var(--ks-alert-padding);
+    margin: var(--ks-alert-margin);
+    border-radius: var(--ks-alert-border-radius);
+    border: 1px solid transparent;
+}
+
+.ks-alert.success {
+    color: var(--ks-alert-success-color);
+    background-color: var(--ks-alert-success-background-color);
+    border-color: var(--ks-alert-success-border-color);
+}
+
+.ks-alert.info {
+    color: var(--ks-alert-info-color);
+    background-color: var(--ks-alert-info-background-color);
+    border-color: var(--ks-alert-info-border-color);
+}
+
+.ks-alert.warning {
+    color: var(--ks-alert-warning-color);
+    background-color: var(--ks-alert-warning-background-color);
+    border-color: var(--ks-alert-warning-border-color);
+}
+
+.ks-alert.error {
+    color: var(--ks-alert-error-color);
+    background-color: var(--ks-alert-error-background-color);
+    border-color: var(--ks-alert-error-border-color);
+}
+
+.ks-alert.muted {
+    color: var(--ks-alert-muted-color);
+    background-color: var(--ks-alert-muted-background-color);
+    border-color: var(--ks-alert-muted-border-color);
+}

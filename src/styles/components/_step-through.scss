@@ -2,83 +2,10 @@
 @import "../mixins/grid";
 @import "../variables/step-through";
 
-.ks-steps {
-    padding: 1rem 0;
+@import "../tokens/_tokens";
+@import "../tokens/_global";
+@import "../tokens/_step-through";
 
-    @include ks-tab() {
-        padding: 1rem 2rem;
-    }
-    > ul {
-        display: flex;
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        align-items: stretch;
-        li {
-            position: relative;
-            text-align: center;
-            flex-grow: 1;
-            a {
-                display: block;
-                text-decoration: none;
-            }
-            div.num {
-                position: relative;
-                z-index: 5;
+@include ks-emit-tokens(global, step-through);
 
-                border-radius: 50%;
-                height: 1.5rem;
-                width: 1.5rem;
-                padding: 0.25rem;
-                text-decoration: none;
-                background: $steps-number-bg;
-                display: inline-block;
-                vertical-align: middle;
-                color: $steps-number-color;
-            }
-
-            p {
-                color: $steps-text-color;
-                padding-right: 0.25rem;
-                padding-left: 0.25rem;
-            }
-
-            &.active {
-                font-weight: bold;
-            }
-
-            &.active div.num,
-            &.completed div.num,
-            a:hover:not(.interactive-disabled) div.num {
-                color: $steps-active-number-color;
-                background: $steps-active-number-bg;
-            }
-            .step-line {
-                position: absolute;
-                width: 100%;
-                height: 5px;
-                background: white;
-                top: 0.75em;
-                z-index: 1;
-            }
-            &.active .step-line
-            {
-                background: $steps-line-color;
-            }
-            &.completed {
-                a .num {
-                    background: $steps-complete-number-bg;
-                    color: $steps-complete-number-color;
-                }
-                .step-line {
-                    background: $steps-line-complete-color;
-                }
-                p {
-                    font-weight: bold;
-                    color: $steps-complete-color;
-                }
-            }
-
-        }
-    }
-}
+@import "../css/components/step-through";

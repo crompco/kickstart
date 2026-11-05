@@ -1,66 +1,10 @@
 @import "../functions/_utils";
 @import "../variables/_card";
 
-.ks-card {
-    box-shadow: $card-box-shadow;
-    background: $card-bg;
+@import "../tokens/_tokens";
+@import "../tokens/_global";
+@import "../tokens/_card";
 
-    .ks-card-header {
-        font-size: rem($card-header-font-size);
-        line-height: rem($card-header-font-size);
-        padding: rem($card-header-padding);
-        box-shadow: $card-header-box-shadow;
-    }
+@include ks-emit-tokens(global, card);
 
-    .ks-card-body {
-        padding: rem($card-body-padding);
-    }
-
-    .ks-card-footer {
-        display: flex;
-        justify-content: space-around;
-
-        button, a {
-            width: 100%;
-            border: solid $card-footer-border-color;
-            border-width: 1px 1px 0 0;
-            background: $card-footer-bg;
-            padding: rem($card-footer-padding);
-            cursor: pointer;
-            outline: none;
-            color: $card-footer-color;
-            text-decoration: none;
-            text-align: center;
-
-            &:last-child {
-                border-right: 0;
-            }
-            &.danger {
-                color: $card-footer-danger-color;
-            }
-
-            &:not(.danger):hover {
-                background: $card-footer-hover-bg;
-                color: $card-footer-hover-color;
-            }
-            &.danger:hover {
-                background: $card-footer-danger-hover-bg;
-                color: $card-footer-danger-hover-color;
-            }
-        }
-    }
-
-    &.ks-light-card {
-        box-shadow: $card-light-box-shadow;
-
-        .ks-card-header {
-            font-size: $card-light-header-font-size;
-            background: $card-light-header-bg;
-            color: $card-light-header-color;
-        }
-
-        .ks-card-body {
-            padding: $card-light-body-padding;
-        }
-    }
-}
+@import "../css/components/card";

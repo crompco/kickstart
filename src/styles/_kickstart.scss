@@ -1,5 +1,7 @@
+@import "_deprecation";
+
 // Normalize
-@import "~normalize.css/normalize";
+@import "../css/normalize";
 
 // Grid
 @import "layout/_grid";

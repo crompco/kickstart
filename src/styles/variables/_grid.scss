@@ -5,7 +5,7 @@ $container-width: 1200px !default;
 $ks-grid: (
     columns: 12,
     gutter: 0,
-);
+) !default;
 
 // (name, columns, gutter, media)
 $breakpoint-list: (
@@ -14,14 +14,14 @@ $breakpoint-list: (
 	med: (columns: 12, gutter: 1rem, media: 1024px),
 	lg: (columns: 12, gutter: 1rem, media: 1224px),
 	xlg: (columns: 12, gutter: 1rem, media: 1400px),
-);
+) !default;
 
 // Breakpoints
-$grid-sm: map-get($breakpoint-list, sm);
-$grid-tab: map-get($breakpoint-list, tab);
-$grid-med: map-get($breakpoint-list, med);
-$grid-lg: map-get($breakpoint-list, lg);
-$grid-xlg: map-get($breakpoint-list, xlg);
+$grid-sm: map-get($breakpoint-list, sm) !default;
+$grid-tab: map-get($breakpoint-list, tab) !default;
+$grid-med: map-get($breakpoint-list, med) !default;
+$grid-lg: map-get($breakpoint-list, lg) !default;
+$grid-xlg: map-get($breakpoint-list, xlg) !default;
 
 
-$grid-margin-bottom: 1rem;
+$grid-margin-bottom: 1rem !default;

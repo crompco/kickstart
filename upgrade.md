@@ -7,7 +7,7 @@
 - vue ^2.7 peer (was ^2.2)
 - axios now ^1.x dependency (was 0.15). Consumers' own axios separate. axios 1 config.headers is AxiosHeaders (set()/get(); bracket access still works).
 - A cancel token made with a consumer's own older axios fails on the kickstart instance: axios 1's adapter calls `cancelToken.subscribe()`, which axios before 0.22 does not have. Use the same axios major version, or an `AbortController` signal. vault-service: `InvoiceItemMixin.js` (axios 0.15.3).
-- normalize.css stays v5 (dev only; consumers already import ~normalize.css via _kickstart.scss)
+- normalize.css v5.0.0 is vendored as src/css/normalize.css. `_kickstart.scss` imports that copy, so consumers no longer need the `normalize.css` package for kickstart.
 - Removed deps: tether, velocity-animate, popper.js, v-mask (kickstart no longer registers or needs v-mask; consumers that use v-mask themselves keep their own)
 - A consumer that imports popper.js, velocity-animate or v-mask must now declare it in its own package.json. With 2.x these came in through kickstart. vault-service imports popper.js in SearchFilters.vue, SavedSearchFilters.vue and UI/TextExcerpt.vue.
 
@@ -159,6 +159,54 @@
 - Controlled sort (sortField/sortDirection + `sort` { field, direction } cycling asc → desc → null), selection (multiple/single; internal or v-model / :selected.sync with event update:selected; emits new arrays), expandable rows (expansion slot), rowClass (value or function), scrollable / stickyHeader / maxHeight, loader/empty/footer/paginator slots, built-in KsPaginator (`page` event).
 - Changes from the PR: columns register through inject `ksDataTable` and keep document order when added later (v-if); dotted field paths; rows without an id get unique keys; slot access works with Vue 3 $slots; no `_uid`; emits declared; unused $sortInfo provide removed.
 - Render function uses the Vue 2 createElement data shape; a Vue 3 move rewrites it with `h` from 'vue'.
+
+## Form control spacing (CSS phase)
+- Text inputs, textareas, `.ks-datepicker` inputs, `.ks-select`, `.ks-autocomplete-holder` and option buttons no longer have a `0.3rem` bottom margin. The parent spaces controls: `.ks-form-group` has `margin-bottom: 1rem`. A control outside a `.ks-form-group` now sits flush against what follows it. Add spacing on its container where you need it.
+- `$form-block-margin-bottom` still exists for the deprecated `form-input()` mixin, which still emits the margin. No `--ks-*` token replaces it.
+- The "Control heights" styles page measures each control next to a text input.
+- Controls are one height. Option buttons use `0.5rem` padding and the text-input line height (2.x used `0.532rem`). `$button-padding` defaults to `0.5em 0.75em` (2.x: `0.4em 0.6em`), so a default `.ks-button` is as tall as a text input. The padding stays in `em` on purpose: `.tiny`, `.small` and `.large` change only the font size, so their padding scales with it. `.tiny`, `.small` and `.large` still scale from it. The `.ks-select` selection uses padding plus `1lh` for its minimum height, not `2.125rem`, so it matches an input at the 14px and the 16px root size.
+- Padding sits on a 0.25rem scale. A 0.125rem step is used only for small items: badges, autocomplete chips and option group titles. Changed defaults (2.x → 3.0):
+  - `$am-button-padding` 3px 5px → 0.25rem; `$am-list-link-padding` 0.35rem 0.75rem 0.35rem 0.5rem → 0.5rem 0.75rem 0.5rem 0.5rem
+  - `$ac-input-multi-padding` 0.3rem → 0.25rem; `$ac-list-item-padding` and `$timepicker-list-item-padding` left 0.2rem → 0.25rem; `$ac-multi-padding` 3px 5px → 0.125rem 0.25rem
+  - `$badge-padding` 3px 8px → 0.125rem 0.5rem; `$button-padding` 0.4em 0.6em → 0.5em 0.75em; `$form-error-padding` 0.2rem → 0.25rem
+  - `$nav-padding` 10px → 0.5rem (no rule uses it, and it has no token); `$panel-header-padding` 10px → 0.75rem; `$panel-body-padding` 15px → 1rem; `$select-input-padding` 0.4rem → 0.5rem
+  - Fixed values: toast close gap 30px → 2rem; modal header title 0.9rem → 1rem; accordion content 0.6rem → 0.5rem; side nav links 1em → 1rem; top bar dropdown links 10px → 0.5rem; top bar links 15px 10px → 1rem 0.75rem; option group titles 0.15rem → 0.125rem
+  - Values kept on purpose: the 1px offsets that make up for borders, the `p-*` table spacing utilities, and the mobile top bar dropdown padding, which is half of `$top-bar-dd-link-padding`.
+- `.ks-button` has no drop shadow: `$button-box-shadow` defaults to `false`. Set it, or `--ks-button-box-shadow`, to bring the shadow back.
+- `.button-label` is `display: inline`, not `inline-block`, so the button text sits on the same baseline as other control text.
+- Checked checkbox and radio labels, and active option buttons, no longer have the fake-bold `text-shadow`. A text shadow switches Chrome on Windows to grayscale antialiasing, so that text rendered differently from other control text.
+- Active option buttons have no inset shadow, so they are a flat fill like `.ks-button`. The 2px focus ring (`.ks-state-focus`) is unchanged.
+- The X on autocomplete selections uses `currentColor`, so it matches the selection text (white on multiple-selection chips). `$ac-clear-color`, `$ac-clear-color-hover`, `$ac-multi-close-color` and `$ac-multi-close-color-hover` no longer have an effect, and they have no `--ks-*` tokens. vault-service and vault-api set the two multi-close variables; those overrides can go.
+- `$flex-wrap` no longer has a `column-reverse` entry. It wrote an invalid `.column-reverse { flex-wrap: column-reverse }` rule. `.column-reverse` still sets `flex-direction: column-reverse`.
+
+## Styles: CSS and tokens (CSS phase)
+- The styles are plain CSS in `src/css`. Entry points:
+  - `src/css/app.css`: everything. It is the source of `dist/kickstart-ui.min.css`.
+  - `src/css/kickstart.css`: tokens, normalize, the grid and all components. It has no utility classes.
+  - `src/css/utilities.css`: the utility classes only.
+  - One file per component in `src/css/components/`, and `src/css/layout/grid.css`. `dist/css/` has the same files, minified.
+- The source files use native CSS nesting. The `dist/` files have the nesting flattened. All files use relative colors (`hsl(from var(--ks-…) h s calc(l - 10))`), so the minimum browsers are Chrome 119, Firefox 128 and Safari 18.
+- Theme with the `--ks-*` custom properties on `:root`. `src/css/tokens.css` defines them all. A token name is the Sass variable name with a `--ks-` prefix: `$button-padding` → `--ks-button-padding`. Map entries become one token for each key, for example `--ks-button-outline-background-color`.
+- A component file needs `tokens.css` first. Some files also need another file first:
+  - `components/forms.css` needs `components/forms/options.css` and `components/forms/select.css`.
+  - `components/datepicker.css` needs `components/calendar.css`.
+- The grid and the map-driven utilities (layout, spacing, text, borders, shadows, background) are generated from the Sass maps with their default values. Run `yarn generate:css` to update them. A test fails when a generated file is out of date.
+- The grid stays float-based. `.row` stays a clearfix, because many pages and kickstart components use it on elements that are not grid rows (paginators, accordion rows, calendar cells).
+- `.sm-collapse`, `.tab-collapse`, `.med-collapse`, `.lg-collapse`, `.xlg-collapse` and `.row-collapse` set `margin-right: -1rem`. 2.x wrote an invalid `margin-: -1rem`, because `ks-opposite-direction()` had no `ltr` default. In normal block layout these elements have a fixed width, so nothing moves. In a flex container, 2.x shrank the row by 1rem (it overflowed on the right). v3 does not shrink it, so the row bleeds 1rem on both sides as intended, and it is 1rem wider than in 2.x. In vault-service this moves list columns such as Actions 1rem to the right, in line with the buttons above them.
+
+### Sass shim (deprecated)
+- `src/styles` still compiles: `_kickstart.scss`, `_utilities.scss`, and each component partial alone. It will be removed in v4.
+- The shim imports `src/styles/css/components/*.css`, generated copies of `src/css/components` with the nesting written out as full selectors (`yarn generate:css`). Two reasons:
+  - Sass cannot `@extend` into native nesting the way it extends flat rules. For example, vault-service's `.form-group > .error-msg { @extend .ks-error-msg; }` became `.ks-form-group .form-group > .error-msg`, so form errors lost their style.
+  - Sass before about 1.80 (vault-service uses 1.77) loses the parent selector of an `@media` nested two rules deep. It wrote `@media … { &.vertical { … } }`, so side nav, top bar, tabs and responsive table rules matched nothing or the whole page.
+- Each compile shows one deprecation `@warn`. Set `$ks-sass-deprecation-warning: false` before the import to hide it.
+- The shim writes your Sass variable overrides as `--ks-*` tokens on `:root`, then imports the CSS. Each token group is written once per compile.
+- Map keys that are not defaults get their own rules: `$buttons`, `$button-sizes`, `$alerts`, `$brand` and `$spacing`. Custom `$colors` maps also work through the shim, because the shim compiles the utilities from Sass.
+- The 2.x mixins, functions and placeholders stay available, including `form-input()`, `%form-input`, `%ks-autocomplete-input`, `v-center()` and the grid mixins.
+- A variable set to `false` (an optional property) writes the token as `initial`. The property then falls back to its unset value.
+- `_kickstart.scss` no longer needs a `~` importer for normalize.css.
+- `.ks-select .ks-select-dropdown .autocomplete-list` rules are gone. KsSelect has rendered `.ks-autocomplete-list` since 2.x, so they matched nothing.
+- These variables no longer have an effect: `$ac-clear-color`, `$ac-clear-color-hover`, `$ac-multi-close-color`, `$ac-multi-close-color-hover` (see above) and `$nav-padding`.
 
 ## Icons
 - The kickstart icons (close, menu, dots, checkmark, chevron) no longer contain an SVG `<title>`. 2.x showed it as a hover tooltip ("close", "menu", "checkmark") and included the word in the element's text content, for example "checkmark Apple" for a checkbox. Tests that match the full text content of a checkbox, modal close button or menu button change.

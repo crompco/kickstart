@@ -1,0 +1,12 @@
+.ks-drop-zone-active {
+    outline: var(--ks-drop-zone-outline-color) dashed;
+}
+
+[draggable] {
+    transition: all 150ms ease-out;
+}
+
+.ks-dragging {
+    transform: scale(0.8);
+    opacity: 0.8;
+}

@@ -1,0 +1,86 @@
+.ks-loader-line {
+    height: var(--ks-line-loader-height);
+    width: var(--ks-line-loader-width);
+    position: relative;
+    overflow: hidden;
+    background-color: var(--ks-line-loader-bg);
+
+    &:before {
+        display: block;
+        position: absolute;
+        content: "";
+        left: -200px;
+        width: 200px;
+        height: var(--ks-line-loader-height);
+        background-color: var(--ks-line-loader-bg-active);
+        animation: line-loading var(--ks-line-loader-speed) var(--ks-line-loader-animation-style) var(--ks-line-loader-animation-length);
+    }
+}
+
+@keyframes line-loading {
+    from { left: -100px; width: 20%; }
+    50% { width: 30%; }
+    70% { width: 70%; }
+    80% { left: 50%; }
+    95% { left: 120%; }
+    to { left: 100%; }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.ks-loader-spin {
+    position: relative;
+    text-align: center;
+}
+
+.ks-spin-loading {
+    border-radius: 50%;
+    width: var(--ks-spinner-size);
+    height: var(--ks-spinner-size);
+    border: var(--ks-spinner-border-width) solid var(--ks-spinner-border);
+    border-top-color: var(--ks-spinner-border-active);
+    animation: spin var(--ks-spinner-speed) var(--ks-spinner-animation-style) var(--ks-spinner-animation-length);
+    margin: 0 auto;
+
+    &.double {
+        border-width: calc(var(--ks-spinner-border-width) * 2);
+        border-style: double;
+    }
+
+    &.loader-tiny {
+        border-width: calc(var(--ks-spinner-border-width) * 0.5);
+        width: calc(var(--ks-spinner-size) * 0.5);
+        height: calc(var(--ks-spinner-size) * 0.5);
+    }
+
+    &.loader-small {
+        border-width: calc(var(--ks-spinner-border-width) * 0.75);
+        width: calc(var(--ks-spinner-size) * 0.75);
+        height: calc(var(--ks-spinner-size) * 0.75);
+    }
+
+    &.loader-medium {
+        border-width: calc(var(--ks-spinner-border-width) * 2);
+        width: calc(var(--ks-spinner-size) * 2);
+        height: calc(var(--ks-spinner-size) * 2);
+    }
+
+    &.loader-large {
+        border-width: calc(var(--ks-spinner-border-width) * 3);
+        width: calc(var(--ks-spinner-size) * 3);
+        height: calc(var(--ks-spinner-size) * 3);
+    }
+
+    &.loader-x-large {
+        border-width: calc(var(--ks-spinner-border-width) * 4);
+        width: calc(var(--ks-spinner-size) * 4);
+        height: calc(var(--ks-spinner-size) * 4);
+    }
+}

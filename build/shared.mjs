@@ -1,6 +1,5 @@
 import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { fileURLToPath } from 'node:url';
 
 const pkg = JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8'));
 
@@ -23,22 +22,10 @@ export function isExternal(id) {
 }
 
 /**
- * Sass options shared by the CSS build and the demo app
+ * Sass options for the generated CSS and the demo styles
  */
 export const sassOptions = {
     silenceDeprecations: ['import', 'global-builtin', 'color-functions', 'slash-div', 'if-function'],
-    importers: [
-        {
-            // Webpack-style "~package/path" imports resolve from node_modules
-            findFileUrl(url) {
-                if ( !url.startsWith('~') ) {
-                    return null;
-                }
-
-                return pathToFileURL(resolve(root, 'node_modules', url.slice(1)));
-            },
-        },
-    ],
 };
 
 /**
@@ -52,3 +39,9 @@ export const vueOptions = {
         },
     },
 };
+
+/**
+ * CSS targets: the oldest browsers with relative color syntax.
+ * Nesting is flattened for them.
+ */
+export const cssTarget = ['chrome119', 'firefox128', 'safari18'];

@@ -1,0 +1,5 @@
+@import "../variables/_paginator";
+
+@mixin ks-tokens-paginator {
+    --ks-paginator-link-color: #{$paginator-link-color};
+}

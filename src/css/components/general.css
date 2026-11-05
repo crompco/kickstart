@@ -1,0 +1,55 @@
+* {
+    box-sizing: border-box;
+}
+
+/* 14px base, 16px from the tab breakpoint */
+html {
+    font-size: calc(var(--ks-global-font-size) * 0.875);
+
+    @media only screen and (min-width: 769px) {
+        font-size: var(--ks-global-font-size);
+    }
+}
+
+body {
+    font-size: 0.875rem;
+
+    @media only screen and (min-width: 769px) {
+        font-size: 1rem;
+    }
+}
+
+html, body {
+    background-color: var(--ks-body-bg);
+    color: var(--ks-body-color);
+    line-height: var(--ks-global-line-height);
+    height: 100%;
+}
+
+.ks-content {
+    height: 100%;
+    width: calc(100%);
+    float: left;
+    margin-left: 0;
+
+    @media only screen and (min-width: 769px) {
+        width: calc(100% - var(--ks-nav-width));
+        margin-left: var(--ks-nav-width);
+    }
+}
+
+.collapse {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: var(--ks-disabled-opacity);
+}
+
+.ks-heading {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0.625rem;
+}

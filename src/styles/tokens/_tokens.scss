@@ -1,0 +1,50 @@
+@use "sass:list";
+@use "sass:meta";
+@import "../_deprecation";
+
+$ks-emitted-tokens: () !default;
+
+/// Token value of a variable that may be false to leave its property out.
+/// `initial` makes var() invalid, so the property falls back to its unset value.
+/// @param {*} $value
+/// @return {*}
+@function ks-optional($value) {
+    @if $value == false {
+        @return initial;
+    }
+
+    @return $value;
+}
+
+/// Token value of a length used in calc(): unitless zero becomes 0px.
+/// @param {Number} $value
+/// @return {Number}
+@function ks-length($value) {
+    @if $value == 0 {
+        @return 0px;
+    }
+
+    @return $value;
+}
+
+/// Emits the --ks-* custom properties of each group once per compile,
+/// so component partials work when imported alone or together.
+/// @param {String...} $groups - token group names, e.g. global, badge
+@mixin ks-emit-tokens($groups...) {
+    $pending: ();
+
+    @each $group in $groups {
+        @if not list.index($ks-emitted-tokens, $group) {
+            $pending: list.append($pending, $group);
+            $ks-emitted-tokens: list.append($ks-emitted-tokens, $group) !global;
+        }
+    }
+
+    @if list.length($pending) > 0 {
+        :root {
+            @each $group in $pending {
+                @include meta.apply(meta.get-mixin("ks-tokens-#{$group}"));
+            }
+        }
+    }
+}

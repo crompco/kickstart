@@ -1,0 +1,37 @@
+.ks-accordion {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+
+    > li {
+        position: relative;
+        background: #fff;
+        border: solid #ccc;
+        border-width: 1px 1px 0 1px;
+
+        &:last-child {
+            border-bottom-width: 1px;
+        }
+
+        .ks-accordion-title-row {
+            display: flex;
+            align-items: center;
+        }
+
+        a.ks-accordion-title {
+            text-decoration: none;
+            color: #444;
+            display: block;
+            width: 100%;
+            padding: 0.5rem 1rem;
+        }
+
+        .ks-accordion-buttons > * {
+            padding-right: 0.5rem;
+        }
+
+        .ks-accordion-content {
+            padding: 0.5rem 1rem;
+        }
+    }
+}

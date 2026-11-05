@@ -1,0 +1,21 @@
+@import "../functions/_utils";
+@import "../variables/_select";
+
+@mixin ks-tokens-select {
+    --ks-select-bg: #{$select-bg};
+    --ks-select-border-color: #{$select-border-color};
+    --ks-select-input-padding: #{rem($select-input-padding)};
+    --ks-select-selected-padding: #{rem($select-selected-padding)};
+    --ks-select-arrow-color: #{$select-arrow-color};
+    --ks-select-dropdown-border-color: #{$select-dropdown-border-color};
+    --ks-select-deselect-border-radius: #{$select-deselect-border-radius};
+    --ks-select-deselect-border-color: #{$select-deselect-border-color};
+    --ks-select-deselect-color: #{$select-deselect-color};
+    --ks-select-deselect-bg: #{$select-deselect-bg};
+    --ks-select-deselect-hover-color: #{$select-deselect-hover-color};
+    --ks-select-deselect-hover-bg: #{$select-deselect-hover-bg};
+    --ks-select-deselect-hover-border-color: #{$select-deselect-hover-border-color};
+    --ks-select-empty-message-color: #{$select-empty-message-color};
+    --ks-select-empty-message-style: #{$select-empty-message-style};
+    --ks-select-open-shadow: #{$select-open-shadow};
+}

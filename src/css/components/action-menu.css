@@ -1,0 +1,80 @@
+.ks-action-menu {
+    display: inline-block;
+    position: relative;
+
+    .menu-button {
+        border: var(--ks-am-button-border);
+        background: var(--ks-am-button-bg);
+        padding: var(--ks-am-button-padding);
+        outline: none;
+        cursor: pointer;
+        position: relative;
+        z-index: 2;
+
+        svg {
+            vertical-align: middle;
+        }
+    }
+}
+
+.ks-menu-list {
+    background: var(--ks-am-list-bg);
+    min-width: var(--ks-am-list-min-width);
+    display: none;
+    z-index: 3;
+    box-shadow: var(--ks-am-box-shadow-bottom);
+
+    &.active {
+        display: block;
+    }
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    a {
+        margin-right: 0;
+
+        &:hover svg {
+            color: var(--ks-white);
+        }
+    }
+
+    /* .list-item and a differ in specificity, so these are not nested under the pair */
+    .list-item, a {
+        text-decoration: none;
+        padding: var(--ks-am-list-link-padding);
+        display: block;
+        color: var(--ks-am-list-link-color);
+        white-space: nowrap;
+    }
+
+    .list-item.separator, a.separator {
+        border-top: 1px solid var(--ks-am-list-separator);
+    }
+
+    .list-item:hover, a:hover {
+        background: var(--ks-am-list-link-hover-bg);
+        color: var(--ks-am-list-link-hover-color);
+    }
+
+    .list-item.danger, a.danger {
+        color: var(--ks-state-danger-bg);
+    }
+
+    .list-item.danger:hover, a.danger:hover {
+        background: var(--ks-state-danger-bg);
+        color: var(--ks-state-danger-color);
+    }
+
+    .list-item.success, a.success {
+        color: var(--ks-state-success);
+    }
+
+    .list-item.success:hover, a.success:hover {
+        background: hsl(from var(--ks-state-success) h s calc(l + 10));
+        color: var(--ks-white);
+    }
+}

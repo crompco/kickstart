@@ -1,0 +1,19 @@
+@import "../functions/_utils";
+@import "../variables/_loaders";
+
+@mixin ks-tokens-loaders {
+    --ks-line-loader-height: #{$line-loader-height};
+    --ks-line-loader-width: #{$line-loader-width};
+    --ks-line-loader-bg: #{$line-loader-bg};
+    --ks-line-loader-bg-active: #{$line-loader-bg-active};
+    --ks-line-loader-speed: #{$line-loader-speed}s;
+    --ks-line-loader-animation-style: #{$line-loader-animation-style};
+    --ks-line-loader-animation-length: #{$line-loader-animation-length};
+    --ks-spinner-size: #{$spinner-size};
+    --ks-spinner-border: #{$spinner-border};
+    --ks-spinner-border-width: #{rem($spinner-border-width)};
+    --ks-spinner-border-active: #{$spinner-border-active};
+    --ks-spinner-speed: #{$spinner-speed}s;
+    --ks-spinner-animation-style: #{$spinner-animation-style};
+    --ks-spinner-animation-length: #{$spinner-animation-length};
+}

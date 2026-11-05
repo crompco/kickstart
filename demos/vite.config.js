@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue2';
 
-import { root, sassOptions, vueOptions } from '../build/shared.mjs';
+import { cssTarget, root, sassOptions, vueOptions } from '../build/shared.mjs';
 
 /**
  * Vue 2.7 app with the live examples; the docs show each example in an iframe.
@@ -31,5 +31,6 @@ export default defineConfig({
     build: {
         outDir: `${root}docs/public/demos`,
         emptyOutDir: true,
+        cssTarget,
     },
 });

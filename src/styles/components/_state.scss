@@ -1,9 +1,8 @@
 @import "../mixins/_state";
 
-.ks-state-default {
-	@include state-default;
-}
+@import "../tokens/_tokens";
+@import "../tokens/_global";
 
-.ks-state-hover {
-	@include state-hover;
-}
+@include ks-emit-tokens(global);
+
+@import "../css/components/state";

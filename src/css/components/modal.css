@@ -1,0 +1,120 @@
+.ks-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    background: rgb(from var(--ks-modal-mask-bg) r g b / var(--ks-modal-mask-opacity));
+
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    .ks-modal-wrapper {
+        position: absolute;
+        margin: 0 auto;
+        top: 25%;
+        transform: translateY(-25%);
+        overflow-y: initial !important;
+        outline: none;
+
+        > div {
+            background-color: var(--ks-modal-wrapper-bg);
+            box-shadow: var(--ks-modal-wrapper-box-shadow);
+            margin-bottom: 2rem;
+        }
+    }
+
+    &.modal-scroll .ks-modal-wrapper {
+        top: 0;
+        transform: translate(0, 0);
+        margin: 1rem auto;
+    }
+
+    .ks-modal-header {
+        position: relative;
+        background-color: var(--ks-modal-header-bg);
+        color: var(--ks-modal-header-color);
+        box-shadow: var(--ks-modal-header-box-shadow);
+
+        h1, h2, h3, h4 {
+            margin: 0;
+            padding: 1rem;
+        }
+
+        .ks-modal-close {
+            right: 0.5rem;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+
+            svg {
+                vertical-align: middle;
+
+                path {
+                    fill: var(--ks-modal-close-bg);
+                    opacity: var(--ks-modal-close-opacity);
+                    transition: all 0.3s ease;
+                }
+            }
+
+            &:hover {
+                svg path {
+                    fill: var(--ks-modal-close-hover-bg);
+                    opacity: 1;
+                }
+            }
+        }
+    }
+
+    &.danger .ks-modal-header {
+        background-color: var(--ks-modal-header-danger-bg);
+        color: var(--ks-modal-header-danger-color);
+
+        .ks-modal-close {
+            svg path {
+                fill: var(--ks-modal-header-danger-close-color);
+            }
+
+            &:hover svg path {
+                fill: var(--ks-modal-header-danger-close-color-hover);
+            }
+        }
+    }
+
+    .ks-modal-body, .ks-modal-footer {
+        padding: var(--ks-modal-body-padding);
+    }
+
+    .ks-modal-body {
+        overflow-y: visible;
+    }
+
+    .ks-modal-footer {
+        text-align: var(--ks-modal-button-align);
+        border-top: var(--ks-modal-footer-top-border);
+        background-color: var(--ks-modal-footer-bg);
+
+        &:empty {
+            padding: 0;
+        }
+    }
+
+    &.warning {
+        .ks-modal-header {
+            background-color: var(--ks-state-error);
+        }
+    }
+}
+
+.modal-open {
+    overflow: hidden !important;
+
+    .ks-modal {
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+}

@@ -1,0 +1,186 @@
+/* Generated from src/css/components/buttons.css by build/generate-css.mjs */
+.ks-button {
+  display: inline-block;
+  padding: var(--ks-button-padding);
+  cursor: pointer;
+  text-decoration: none;
+  border-radius: var(--ks-button-border-radius);
+  transition: background-color 0.2s ease;
+  background-color: var(--ks-state-default-bg);
+  border: 1px solid var(--ks-state-default-border);
+  font-weight: normal;
+  color: var(--ks-state-default-color);
+  box-shadow: var(--ks-button-box-shadow);
+}
+.ks-button:hover {
+  background-color: var(--ks-state-hover-bg);
+  border: 1px solid var(--ks-state-hover-border);
+  font-weight: normal;
+  color: var(--ks-state-hover-color);
+}
+.ks-button.disabled,
+.ks-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.ks-button.danger {
+  background-color: var(--ks-state-danger-bg);
+  border: 1px solid var(--ks-state-danger-border);
+  color: var(--ks-state-danger-color);
+}
+.ks-button.danger:hover {
+  background-color: var(--ks-state-danger-hover-bg);
+  border: 1px solid var(--ks-state-danger-hover-border);
+  font-weight: normal;
+  color: var(--ks-state-danger-hover-color);
+}
+.ks-button.spinning {
+  position: relative;
+}
+.ks-button.spinning .ks-spin-loading {
+  border-top-color: hsl(from var(--ks-state-default-bg) h s calc(l - 10));
+}
+.ks-button .ks-button-spinner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ks-button .button-label {
+  display: inline;
+}
+.ks-button .button-label.hidden {
+  visibility: hidden;
+}
+.ks-button.outline {
+  background-color: var(--ks-button-outline-background-color);
+  color: var(--ks-button-outline-color);
+  border: 1px solid var(--ks-button-outline-border-color);
+  box-shadow: var(--ks-button-outline-box-shadow, var(--ks-button-box-shadow));
+}
+.ks-button.outline.spinning .ks-spin-loading {
+  border-color: var(--ks-button-outline-border-color);
+  border-top-color: var(--ks-button-outline-background-color);
+}
+.ks-button.outline:hover:not(.disabled) {
+  border: 1px solid var(--ks-button-outline-border-color);
+  background-color: hsl(from var(--ks-button-outline-background-color) h s calc(l - 4));
+  color: var(--ks-button-outline-hover);
+}
+.ks-button.outline.danger {
+  border-color: var(--ks-button-outline-danger-border-color);
+  color: var(--ks-button-outline-danger-color);
+  background-color: var(--ks-button-outline-danger-bg);
+}
+.ks-button.outline.danger.spinning .ks-spin-loading {
+  border-color: var(--ks-button-outline-danger-border-color);
+  border-top-color: var(--ks-button-outline-danger-bg);
+}
+.ks-button.outline.danger:hover:not(.disabled) {
+  border-color: hsl(from var(--ks-button-outline-danger-border-color) h s calc(l - 12));
+  color: hsl(from var(--ks-button-outline-danger-color) h s calc(l - 12));
+  background-color: hsl(from var(--ks-button-outline-background-color) h s calc(l - 4));
+}
+.ks-button.outline.success {
+  border-color: var(--ks-button-outline-success-border-color);
+  color: var(--ks-button-outline-success-color);
+  background-color: var(--ks-button-outline-success-bg);
+}
+.ks-button.outline.success.spinning .ks-spin-loading {
+  border-color: var(--ks-button-outline-success-border-color);
+  border-top-color: var(--ks-button-outline-success-bg);
+}
+.ks-button.outline.success:hover:not(.disabled) {
+  border-color: hsl(from var(--ks-button-outline-success-border-color) h s calc(l - 12));
+  color: hsl(from var(--ks-button-outline-success-color) h s calc(l - 12));
+  background-color: hsl(from var(--ks-button-outline-background-color) h s calc(l - 4));
+}
+.ks-button.none {
+  background-color: var(--ks-button-none-background-color);
+  color: var(--ks-button-none-color);
+  border: 1px solid var(--ks-button-none-border-color);
+  box-shadow: var(--ks-button-none-box-shadow, var(--ks-button-box-shadow));
+}
+.ks-button.none.spinning .ks-spin-loading {
+  border-color: var(--ks-button-none-border-color);
+  border-top-color: var(--ks-button-none-background-color);
+}
+.ks-button.none:hover:not(.disabled) {
+  border: 1px solid var(--ks-button-none-border-color);
+  background-color: hsl(from var(--ks-button-none-background-color) h s calc(l - 4));
+  color: var(--ks-button-none-hover);
+}
+.ks-button.none.danger {
+  border-color: var(--ks-button-none-danger-border-color);
+  color: var(--ks-button-none-danger-color);
+  background-color: var(--ks-button-none-danger-bg);
+}
+.ks-button.none.danger.spinning .ks-spin-loading {
+  border-color: var(--ks-button-none-danger-border-color);
+  border-top-color: var(--ks-button-none-danger-bg);
+}
+.ks-button.none.danger:hover:not(.disabled) {
+  border-color: hsl(from var(--ks-button-none-danger-border-color) h s calc(l - 12));
+  color: hsl(from var(--ks-button-none-danger-color) h s calc(l - 12));
+  background-color: hsl(from var(--ks-button-none-background-color) h s calc(l - 4));
+}
+.ks-button.none.success {
+  border-color: var(--ks-button-none-success-border-color);
+  color: var(--ks-button-none-success-color);
+  background-color: var(--ks-button-none-success-bg);
+}
+.ks-button.none.success.spinning .ks-spin-loading {
+  border-color: var(--ks-button-none-success-border-color);
+  border-top-color: var(--ks-button-none-success-bg);
+}
+.ks-button.none.success:hover:not(.disabled) {
+  border-color: hsl(from var(--ks-button-none-success-border-color) h s calc(l - 12));
+  color: hsl(from var(--ks-button-none-success-color) h s calc(l - 12));
+  background-color: hsl(from var(--ks-button-none-background-color) h s calc(l - 4));
+}
+.ks-button.tiny {
+  font-size: var(--ks-button-size-tiny);
+}
+.ks-button.small {
+  font-size: var(--ks-button-size-small);
+}
+.ks-button.large {
+  font-size: var(--ks-button-size-large);
+}
+.ks-button.success {
+  background: var(--ks-alert-success-button-background-color);
+  color: var(--ks-alert-success-button-color);
+}
+.ks-button.success:hover {
+  background: hsl(from var(--ks-alert-success-button-background-color) h s calc(l - 8));
+}
+.ks-button.info {
+  background: var(--ks-alert-info-button-background-color);
+  color: var(--ks-alert-info-button-color);
+}
+.ks-button.info:hover {
+  background: hsl(from var(--ks-alert-info-button-background-color) h s calc(l - 8));
+}
+.ks-button.warning {
+  background: var(--ks-alert-warning-button-background-color);
+  color: var(--ks-alert-warning-button-color);
+}
+.ks-button.warning:hover {
+  background: hsl(from var(--ks-alert-warning-button-background-color) h s calc(l - 8));
+}
+.ks-button.error {
+  background: var(--ks-alert-error-button-background-color);
+  color: var(--ks-alert-error-button-color);
+}
+.ks-button.error:hover {
+  background: hsl(from var(--ks-alert-error-button-background-color) h s calc(l - 8));
+}
+.ks-button.muted {
+  background: var(--ks-alert-muted-button-background-color);
+  color: var(--ks-alert-muted-button-color);
+}
+.ks-button.muted:hover {
+  background: hsl(from var(--ks-alert-muted-button-background-color) h s calc(l - 8));
+}

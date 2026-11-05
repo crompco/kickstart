@@ -1,0 +1,12 @@
+@import "../functions/_utils";
+@import "../variables/_timepicker";
+
+@mixin ks-tokens-timepicker {
+    --ks-timepicker-bg: #{$timepicker-bg};
+    --ks-timepicker-list-bg: #{$timepicker-list-bg};
+    --ks-timepicker-list-border: #{$timepicker-list-border};
+    --ks-timepicker-list-item-border: #{$timepicker-list-item-border};
+    --ks-timepicker-list-item-padding: #{rem($timepicker-list-item-padding)};
+    --ks-timepicker-list-selected-color: #{$timepicker-list-selected-color};
+    --ks-timepicker-list-item-hover-bg: #{$timepicker-list-item-hover-bg};
+}

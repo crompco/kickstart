@@ -3,286 +3,37 @@
 @import "../variables/_global";
 @import "../variables/_tables";
 @import "../variables/_spacing";
+@import "../mixins/_tables";
 
-%table-header-no-border {
-	border-bottom: 0;
+@import "../tokens/_tokens";
+@import "../tokens/_global";
+@import "../tokens/_tables";
+
+@include ks-emit-tokens(global, tables);
+
+@import "../css/components/tables";
+
+$ks-default-spacing: ('px', '0', '0\\.5', '1', '1\\.5', '2', '2\\.5', '3', '4', '5', '6', '8', '10', '12', '16', '20', '24', '32', '40', '48', '56', '64', '72', '80', '96');
+
+@each $name, $color in $brand {
+    @if not index($ks-default-brand, $name) {
+        .ks-table.#{$name} thead {
+            background-color: var(--ks-brand-#{$name});
+            color: var(--ks-table-brand-header-color);
+
+            th {
+                border-bottom: 0;
+            }
+        }
+    }
 }
 
-@mixin ks-table-head-color($color) {
-	thead {
-		background-color: $color;
-		color: $table-brand-header-color;
-
-		th {
-			@extend %table-header-no-border;
-		}
-	}
-}
-
-@mixin ks-responsive-table() {
-	tbody, tr, th, td {
-		display: block;
-		text-align: left;
-		white-space: normal;
-	}
-
-	@include ks-breakpoint(map-get($breakpoint-list, $table-breakpoint)) {
-		tbody {
-			display: table-row-group;
-		}
-
-		tr {
-			display: table-row;
-		}
-
-		th, td {
-			display: table-cell;
-		}
-	}
-
-	thead {
-		display: none;
-
-		@include ks-breakpoint(map-get($breakpoint-list, $table-breakpoint)) {
-			display: table-header-group;
-		}
-	}
-
-	tbody {
-		tr {
-			@include ks-breakpoint(map-get($breakpoint-list, $table-breakpoint)) {
-				margin-bottom: 0;
-				border: 0;
-			}
-
-			&:last-child {
-				td {
-					border-bottom: 1px solid $table-border-color;
-
-					@include ks-breakpoint(map-get($breakpoint-list, $table-breakpoint)) {
-						border-bottom: 0;
-					}
-				}
-			}
-		}
-
-		td {
-			text-align: right;
-
-			@include ks-breakpoint(map-get($breakpoint-list, $table-breakpoint)) {
-				text-align: left;
-			}
-
-			&[data-title]:before {
-				content: attr(data-title);
-				float: left;
-				font-size: 0.8rem;
-
-				@include ks-breakpoint(map-get($breakpoint-list, $table-breakpoint)) {
-					content: none;
-				}
-			}
-		}
-	}
-}
-
-.ks-scroll-table {
-	overflow-x: auto;
-	overflow-y: hidden;
-	width: 100%;
-	display: block;
-
-	.ks-table {
-		thead, tbody {
-			tr td, tr th {
-				white-space: nowrap;
-			}
-		}
-	}
-}
-
-.ks-table {
-	width: 100%;
-	max-width: 100%;
-	border-spacing: 0;
-	background-color: $table-bg;
-	margin-bottom: rem($table-margin-bottom);
-
-	&.responsive {
-		@include ks-responsive-table;
-	}
-
-
-	thead {
-		text-align: left;
-
-		th {
-			padding: rem($table-cell-padding);
-			border-bottom: 2px solid $table-border-color;
-			vertical-align: top;
-		}
-
-		&.middle th {
-			vertical-align: middle;
-		}
-	}
-
-	tbody {
-		td {
-			padding: rem($table-cell-padding);
-			border-bottom: 1px solid $table-border-color;
-			vertical-align: top;
-		}
-
-		&.middle td {
-			vertical-align: middle;
-		}
-
-		tr {
-			border: 1px solid $table-border-color;
-			border-bottom: 0;
-			margin: rem($table-res-margin);
-
-			&:last-child {
-				td {
-					border-bottom: 0;
-				}
-			}
-		}
-	}
-
-	&.middle {
-		th, td {
-			vertical-align: middle;
-		}
-	}
-
-	&.striped {
-		tbody {
-			tr:nth-child(odd) {
-				background-color: $table-strip-tr-color;
-			}
-		}
-	}
-
-	&.bordered {
-		border-collapse: collapse;
-		border: 1px solid $table-border-color;
-
-		th, td {
-			border: 1px solid $table-border-color;
-		}
-	}
-
-	&.shadow {
-		box-shadow: $table-box-shadow;
-	}
-
-	&.collapse {
-		border: 0;
-		margin: 0;
-		padding: 0;
-		tbody tr, tr th, tr td {
-			border: 0;
-		}
-	}
-
-	@each $name, $color in $brand {
-		&.#{$name} {
-			@include ks-table-head-color($color);
-		}
-	}
-
-	@each $name, $size in $spacing {
-		&.p-#{$name} {
-			tr th, tr td {
-				padding: $size;
-			}
-		}
-	}
-}
-
-// Data Table
-.ks-data-table {
-
-	.ks-data-table-select {
-		width: 1px;
-		white-space: nowrap;
-		text-align: center;
-	}
-
-	.ks-data-table-empty {
-		padding: rem($table-cell-padding);
-	}
-
-	.ks-data-table-paginator {
-		padding: rem($table-cell-padding) 0;
-	}
-
-	// Sortable column headers
-	.ks-data-table-sortable {
-		cursor: pointer;
-		user-select: none;
-
-		&:hover {
-			background-color: $table-strip-tr-color;
-		}
-	}
-
-	// Expander column
-	.ks-data-table-expander-cell {
-		width: 1px;
-		white-space: nowrap;
-		text-align: center;
-		cursor: pointer;
-	}
-
-	.ks-data-table-expander {
-		display: inline-block;
-		width: 0;
-		height: 0;
-		border-top: 5px solid transparent;
-		border-bottom: 5px solid transparent;
-		border-left: 6px solid currentColor;
-		transition: transform 0.15s ease;
-
-		&.expanded {
-			transform: rotate(90deg);
-		}
-	}
-
-	.ks-data-table-expansion-row > td {
-		background-color: $table-strip-tr-color;
-	}
-
-	.ks-data-table-sort {
-		display: inline-block;
-		width: 0;
-		height: 0;
-		margin-left: 0.4rem;
-		vertical-align: middle;
-		// Neutral (unsorted) state: dimmed down-caret
-		border-left: 4px solid transparent;
-		border-right: 4px solid transparent;
-		border-top: 5px solid $table-border-color;
-
-		&.asc {
-			border-top: 0;
-			border-bottom: 5px solid currentColor;
-		}
-
-		&.desc {
-			border-top: 5px solid currentColor;
-		}
-	}
-}
-
-// Sticky header (used together with scrollable + max-height)
-.ks-table.sticky-header {
-	thead th {
-		position: sticky;
-		top: 0;
-		z-index: 1;
-		background-color: $table-bg;
-	}
+@each $name, $size in $spacing {
+    @if not index($ks-default-spacing, $name) {
+        .ks-table.p-#{$name} {
+            tr th, tr td {
+                padding: $size;
+            }
+        }
+    }
 }

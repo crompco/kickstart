@@ -1,0 +1,80 @@
+/* Generated from src/css/components/toast.css by build/generate-css.mjs */
+.ks-toast {
+  position: fixed;
+  z-index: 100;
+}
+.ks-toast.top {
+  top: 1rem;
+  bottom: 1rem;
+  left: 0;
+  right: 0;
+}
+.ks-toast.top .alert {
+  margin-right: auto;
+  margin-left: auto;
+}
+.ks-toast.top-left {
+  top: 1rem;
+  left: 1rem;
+}
+.ks-toast.top-right {
+  top: 1rem;
+  right: 1rem;
+}
+.ks-toast.bottom {
+  bottom: 1rem;
+  left: 0;
+  right: 0;
+}
+.ks-toast.bottom .alert {
+  margin-right: auto;
+  margin-left: auto;
+}
+.ks-toast.bottom-left {
+  bottom: 1rem;
+  left: 1rem;
+}
+.ks-toast.bottom-right {
+  bottom: 1rem;
+  right: 1rem;
+}
+.ks-toast div.ks-alert {
+  max-width: 400px;
+  position: relative;
+}
+.ks-toast div.ks-alert.has-close {
+  padding-right: 2rem;
+}
+.ks-toast div.ks-alert a.close {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+.ks-toast div.ks-alert a.close:hover {
+  cursor: pointer;
+}
+.ks-toast div.ks-alert a.close:hover svg path {
+  fill-opacity: 1;
+}
+.ks-toast div.ks-alert a.close svg {
+  width: 14px;
+  height: 14px;
+}
+.ks-toast div.ks-alert a.close svg path {
+  fill-opacity: 0.6;
+}
+.ks-toast div.ks-alert.success svg path {
+  fill: var(--ks-alert-success-color);
+}
+.ks-toast div.ks-alert.info svg path {
+  fill: var(--ks-alert-info-color);
+}
+.ks-toast div.ks-alert.warning svg path {
+  fill: var(--ks-alert-warning-color);
+}
+.ks-toast div.ks-alert.error svg path {
+  fill: var(--ks-alert-error-color);
+}
+.ks-toast div.ks-alert.muted svg path {
+  fill: var(--ks-alert-muted-color);
+}

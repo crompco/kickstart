@@ -1,0 +1,30 @@
+@use "sass:math";
+@import "../functions/_utils";
+@import "../variables/_navigation";
+
+@mixin ks-tokens-navigation {
+    --ks-nav-width: #{$nav-width};
+    --ks-nav-height: #{$nav-height};
+    --ks-top-bar-bg: #{$top-bar-bg};
+    --ks-top-bar-hover-bg: #{$top-bar-hover-bg};
+    --ks-top-bar-color: #{$top-bar-color};
+    --ks-top-bar-hover-color: #{$top-bar-hover-color};
+    --ks-top-bar-box-shadow: #{ks-optional($top-bar-box-shadow)};
+    --ks-top-bar-dd-bg: #{$top-bar-dd-bg};
+    --ks-top-bar-dd-link-padding: #{rem($top-bar-dd-link-padding)};
+    --ks-top-bar-dd-link-padding-half: #{rem(math.div($top-bar-dd-link-padding, 2))};
+    --ks-top-bar-dd-line-height: #{rem(math.div($nav-height, 2))};
+    --ks-top-bar-dd-hover-color: #{$top-bar-dd-hover-color};
+    --ks-top-bar-dd-hover: #{$top-bar-dd-hover};
+    --ks-nav-brand-bg: #{$nav-brand-bg};
+    --ks-nav-brand-color: #{$nav-brand-color};
+    --ks-side-nav-bg: #{$side-nav-bg};
+    --ks-side-nav-links-color: #{$side-nav-links-color};
+    --ks-nav-links-hover-color: #{$nav-links-hover-color};
+    --ks-nav-links-active-bg: #{$nav-links-active-bg};
+    --ks-nav-links-active-color: #{$nav-links-active-color};
+    --ks-nav-vertical-padding-top: #{rem($nav-vertical-padding-top)};
+    --ks-nav-vertical-link-padding: #{rem($nav-vertical-link-padding)};
+    --ks-nav-mobile-icon-padding: #{rem($nav-mobile-icon-padding)};
+    --ks-top-bar-dd-box-shadow: #{ks-optional($top-bar-dd-box-shadow)};
+}

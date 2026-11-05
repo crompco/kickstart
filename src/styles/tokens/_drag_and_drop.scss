@@ -1,0 +1,5 @@
+@import "../variables/_drag_and_drop";
+
+@mixin ks-tokens-drag_and_drop {
+    --ks-drop-zone-outline-color: #{$drop-zone-outline-color};
+}

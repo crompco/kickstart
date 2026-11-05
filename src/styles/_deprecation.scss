@@ -1,0 +1,7 @@
+$ks-sass-deprecation-warning: true !default;
+
+@if $ks-sass-deprecation-warning {
+    @warn "kickstart-ui: the Sass sources are deprecated and will be removed in v4. Import kickstart-ui/src/css/*.css or dist/kickstart-ui.min.css, and theme with the --ks-* custom properties. Set $ks-sass-deprecation-warning: false to hide this message.";
+
+    $ks-sass-deprecation-warning: false !global;
+}

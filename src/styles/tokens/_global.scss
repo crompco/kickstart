@@ -1,0 +1,58 @@
+@import "../variables/_global";
+
+$ks-default-brand: (primary, light, lighter, secondary, off);
+
+@mixin ks-tokens-global {
+    --ks-white: #{$white};
+    --ks-black: #{$black};
+    --ks-header-color: #{$header-color};
+    --ks-lighter-gray: #{$lighter-gray};
+    --ks-light-gray: #{$light-gray};
+    --ks-gray: #{$gray};
+    --ks-med-gray: #{$med-gray};
+    --ks-dark-gray: #{$dark-gray};
+    --ks-darker-gray: #{$darker-gray};
+    --ks-text-color: #{$text-color};
+
+    @each $name, $value in $brand {
+        --ks-brand-#{$name}: #{$value};
+    }
+
+    --ks-state-success: #{$state-success};
+    --ks-state-success-bg: #{$state-success-bg};
+    --ks-state-success-border: #{$state-success-border};
+    --ks-state-info: #{$state-info};
+    --ks-state-info-bg: #{$state-info-bg};
+    --ks-state-info-border: #{$state-info-border};
+    --ks-state-warning: #{$state-warning};
+    --ks-state-warning-bg: #{$state-warning-bg};
+    --ks-state-warning-border: #{$state-warning-border};
+    --ks-state-error: #{$state-error};
+    --ks-state-error-bg: #{$state-error-bg};
+    --ks-state-error-border: #{$state-error-border};
+
+    --ks-state-default-bg: #{$state-default-bg};
+    --ks-state-default-border: #{$state-default-border};
+    --ks-state-default-color: #{$state-default-color};
+    --ks-state-danger-bg: #{$state-danger-bg};
+    --ks-state-danger-border: #{$state-danger-border};
+    --ks-state-danger-color: #{$state-danger-color};
+    --ks-state-danger-hover-bg: #{$state-danger-hover-bg};
+    --ks-state-danger-hover-border: #{$state-danger-hover-border};
+    --ks-state-danger-hover-color: #{$state-danger-hover-color};
+    --ks-state-hover-bg: #{$state-hover-bg};
+    --ks-state-hover-border: #{$state-hover-border};
+    --ks-state-hover-color: #{$state-hover-color};
+    --ks-state-focus-bg: #{$state-focus-bg};
+    --ks-state-focus-border: #{$state-focus-border};
+    --ks-state-focus-color: #{$state-focus-color};
+
+    --ks-global-font-size: #{$global-font-size};
+    --ks-global-width: #{$global-width};
+    --ks-global-line-height: #{$global-line-height};
+    --ks-body-bg: #{$body-bg};
+    --ks-body-color: #{$body-color};
+    --ks-disabled-opacity: #{$disabled-opacity};
+    --ks-heading-mb: #{$heading-mb};
+    --ks-text-muted: #{$text-muted};
+}

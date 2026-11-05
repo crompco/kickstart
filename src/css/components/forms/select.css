@@ -1,0 +1,108 @@
+.ks-select {
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    border: var(--ks-form-border);
+    color: var(--ks-form-color);
+    width: 100%;
+    box-shadow: var(--ks-form-box-shadow);
+    background: var(--ks-select-bg);
+    padding: 0;
+
+    &[disabled] {
+        cursor: not-allowed;
+        opacity: 0.8;
+        background: #eee;
+    }
+
+    /* Hidden, but present so the browser can autofill it */
+    input.select-input-field {
+        position: absolute;
+        height: 0;
+        width: 0;
+        padding: 0;
+        margin: 0;
+        opacity: 0;
+    }
+
+    .ks-select-dropdown {
+        border: 0;
+        position: absolute;
+        width: 100%;
+        background: var(--ks-select-bg);
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+
+        /* Above the select the list sits on top of the lookup field */
+        &.ks-select-dropdown-inverted {
+            flex-direction: column-reverse;
+        }
+
+        /* The list is part of the dropdown so the dropdown can flip as one block */
+        .ks-autocomplete-list {
+            position: relative;
+            margin-bottom: 0;
+        }
+
+        .ks-select-dropdown-input {
+            padding: var(--ks-select-input-padding);
+            box-shadow: 0px -1px 0 0px #fff, 0 0 0 1px #aaa;
+            background: var(--ks-select-bg);
+
+            > input.is-multiple {
+                border: 0;
+                outline: none;
+            }
+        }
+    }
+
+    .ks-select-selection {
+        position: relative;
+        border: none;
+        padding: var(--ks-select-selected-padding) 2rem var(--ks-select-selected-padding) var(--ks-select-selected-padding);
+        text-overflow: ellipsis;
+        overflow: hidden;
+        width: 100%;
+        white-space: nowrap;
+        min-height: calc(var(--ks-select-selected-padding) * 2 + 1lh);
+
+        .ks-select-arrow {
+            width: 0;
+            height: 0;
+            border-left: 0.28125rem solid transparent;
+            border-right: 0.28125rem solid transparent;
+            border-top: 0.5625rem solid var(--ks-select-arrow-color);
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 0.75rem;
+        }
+
+        .ks-select-deselect {
+            display: inline-block;
+            font-weight: bold;
+            font-size: 0.9rem;
+            font-family: "helvetica Neue", "Helvetica", sans-serif;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 2.1rem;
+            padding: 0.25rem;
+            height: 1.75rem;
+            width: 1.75rem;
+            border-radius: var(--ks-select-deselect-border-radius);
+            text-align: center;
+            border: solid 1px var(--ks-select-deselect-border-color);
+            color: var(--ks-select-deselect-color);
+            background: var(--ks-select-deselect-bg);
+            transition: all 0.2s;
+
+            &:hover {
+                background: var(--ks-select-deselect-hover-bg);
+                color: var(--ks-select-deselect-hover-color);
+                border: solid 1px var(--ks-select-deselect-hover-border-color);
+            }
+        }
+    }
+}

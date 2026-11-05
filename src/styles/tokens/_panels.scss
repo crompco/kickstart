@@ -1,0 +1,21 @@
+@import "../functions/_utils";
+@import "../variables/_panels";
+
+@mixin ks-tokens-panels {
+    --ks-panel-margin-bottom: #{$panel-margin-bottom};
+    --ks-panel-bg: #{$panel-bg};
+    --ks-panel-header-bg: #{$panel-header-bg};
+    --ks-panel-header-padding: #{rem($panel-header-padding)};
+    --ks-panel-header-color: #{$panel-header-color};
+    --ks-panel-border-color: #{$panel-border-color};
+    --ks-panel-box-shadow: #{$panel-box-shadow};
+    --ks-panel-box-shadow-color: #{$panel-box-shadow-color};
+    --ks-panel-border: #{$panel-border};
+    --ks-panel-header-font-weight: #{$panel-header-font-weight};
+    --ks-panel-header-border-top: #{ks-optional($panel-header-border-top)};
+    --ks-pane-header-box-shadow: #{ks-optional($pane-header-box-shadow)};
+    --ks-panel-body-padding: #{rem($panel-body-padding)};
+    --ks-panel-light-header-color: #{$panel-light-header-color};
+    --ks-panel-light-body-bg: #{$panel-light-body-bg};
+    --ks-panel-light-body-box-shadow: #{ks-optional($panel-light-body-box-shadow)};
+}

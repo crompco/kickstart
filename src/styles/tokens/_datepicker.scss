@@ -1,0 +1,5 @@
+@import "../variables/_datepicker";
+
+@mixin ks-tokens-datepicker {
+    --ks-datepicker-cal-box-shadow: #{$datepicker-cal-box-shadow};
+}

@@ -1,0 +1,86 @@
+.ks-steps {
+    padding: 1rem 0;
+
+    @media only screen and (min-width: 769px) {
+        padding: 1rem 2rem;
+    }
+
+    > ul {
+        display: flex;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        align-items: stretch;
+
+        li {
+            position: relative;
+            text-align: center;
+            flex-grow: 1;
+
+            a {
+                display: block;
+                text-decoration: none;
+            }
+
+            div.num {
+                position: relative;
+                z-index: 5;
+                border-radius: 50%;
+                height: 1.5rem;
+                width: 1.5rem;
+                padding: 0.25rem;
+                text-decoration: none;
+                background: var(--ks-steps-number-bg);
+                display: inline-block;
+                vertical-align: middle;
+                color: var(--ks-steps-number-color);
+            }
+
+            p {
+                color: var(--ks-steps-text-color);
+                padding-right: 0.25rem;
+                padding-left: 0.25rem;
+            }
+
+            &.active {
+                font-weight: bold;
+            }
+
+            &.active div.num,
+            &.completed div.num,
+            a:hover:not(.interactive-disabled) div.num {
+                color: var(--ks-steps-active-number-color);
+                background: var(--ks-steps-active-number-bg);
+            }
+
+            .step-line {
+                position: absolute;
+                width: 100%;
+                height: 5px;
+                background: white;
+                top: 0.75em;
+                z-index: 1;
+            }
+
+            &.active .step-line {
+                background: var(--ks-steps-line-color);
+            }
+
+            &.completed {
+                a .num {
+                    background: var(--ks-steps-complete-number-bg);
+                    color: var(--ks-steps-complete-number-color);
+                }
+
+                .step-line {
+                    background: var(--ks-steps-line-complete-color);
+                }
+
+                p {
+                    font-weight: bold;
+                    color: var(--ks-steps-complete-color);
+                }
+            }
+        }
+    }
+}

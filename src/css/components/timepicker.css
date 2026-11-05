@@ -1,0 +1,63 @@
+.ks-timepicker {
+    position: relative;
+
+    > ul {
+        margin: 0;
+        z-index: 100;
+        padding: 0;
+        width: 100%;
+        background-color: var(--ks-timepicker-bg);
+        position: absolute;
+        list-style: none;
+        border: solid 1px var(--ks-timepicker-list-border);
+        border-top: 0;
+        overflow-y: auto;
+        left: 0;
+
+        /* Above the field the open side is the bottom */
+        &.inverted {
+            border-top: solid 1px var(--ks-timepicker-list-border);
+            border-bottom: 0;
+        }
+
+        li {
+            padding: var(--ks-timepicker-list-item-padding);
+            border: 1px solid transparent;
+            border-bottom-color: var(--ks-timepicker-list-item-border);
+
+            /* No border under the last item or an option group */
+            &:last-child, &.ks-opt-group {
+                border-bottom-color: transparent;
+            }
+
+            &.ks-opt-group {
+                padding-bottom: 0;
+
+                strong {
+                    display: block;
+                    padding: 0.125rem;
+                }
+
+                &:first-child strong {
+                    padding-top: 0;
+                }
+            }
+
+            &.ks-selected-item {
+                background-color: var(--ks-state-hover-bg);
+                border: 1px solid var(--ks-state-hover-border);
+                font-weight: normal;
+                color: var(--ks-timepicker-list-selected-color);
+            }
+
+            ul {
+                list-style: none;
+                padding: 0;
+
+                li {
+                    padding-left: 1rem;
+                }
+            }
+        }
+    }
+}

@@ -2,59 +2,10 @@
 @import "../mixins/_grid";
 @import "../variables/_settings";
 
-* {
-	box-sizing: border-box;
-}
+@import "../tokens/_tokens";
+@import "../tokens/_global";
+@import "../tokens/_navigation";
 
-html {
-	// Set font-size to 14px base
-	font-size: $global-font-size * 0.875;
+@include ks-emit-tokens(global, navigation);
 
-	@include ks-tab() {
-		// Set font size to 16px base
-		font-size: $global-font-size;
-	}
-}
-
-body {
-	font-size: rem(14px);
-
-	@include ks-tab() {
-		font-size: rem(16px);
-	}
-}
-
-html, body {
-	background-color: $body-bg;
-	color: $body-color;
-	line-height: $global-line-height;
-	height: 100%;
-}
-
-.ks-content {
-	height: 100%;
-	@include ks-col(12);
-
-	@include ks-breakpoint(map-get($breakpoint-list, $side-nav-breakpoint)) {
-		$width: $nav-width;
-
-		width: calc(100% - #{$width});
-		margin-left: $width;
-	}
-}
-
-.collapse {
-	padding-left: 0 !important;
-	padding-right: 0 !important;
-}
-
-.disabled {
-    pointer-events: none;
-    opacity: $disabled-opacity;
-}
-
-.ks-heading {
-    font-weight: bold;
-    display: block;
-    margin-bottom: rem($heading-mb);
-}
+@import "../css/components/general";

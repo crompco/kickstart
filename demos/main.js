@@ -2,7 +2,7 @@ import Vue from 'vue';
 import axios from 'axios';
 import KickstartUI from '@src/index';
 import api from '@src/helpers/api';
-import '@src/styles/app.scss';
+import '@src/css/app.css';
 import './demos.scss';
 
 import App from './App.vue';

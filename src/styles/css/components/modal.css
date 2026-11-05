@@ -1,0 +1,99 @@
+/* Generated from src/css/components/modal.css by build/generate-css.mjs */
+.ks-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  background: rgb(from var(--ks-modal-mask-bg) r g b / var(--ks-modal-mask-opacity));
+}
+.ks-modal:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.ks-modal .ks-modal-wrapper {
+  position: absolute;
+  margin: 0 auto;
+  top: 25%;
+  transform: translateY(-25%);
+  overflow-y: initial !important;
+  outline: none;
+}
+.ks-modal .ks-modal-wrapper > div {
+  background-color: var(--ks-modal-wrapper-bg);
+  box-shadow: var(--ks-modal-wrapper-box-shadow);
+  margin-bottom: 2rem;
+}
+.ks-modal.modal-scroll .ks-modal-wrapper {
+  top: 0;
+  transform: translate(0, 0);
+  margin: 1rem auto;
+}
+.ks-modal .ks-modal-header {
+  position: relative;
+  background-color: var(--ks-modal-header-bg);
+  color: var(--ks-modal-header-color);
+  box-shadow: var(--ks-modal-header-box-shadow);
+}
+.ks-modal .ks-modal-header h1,
+.ks-modal .ks-modal-header h2,
+.ks-modal .ks-modal-header h3,
+.ks-modal .ks-modal-header h4 {
+  margin: 0;
+  padding: 1rem;
+}
+.ks-modal .ks-modal-header .ks-modal-close {
+  right: 0.5rem;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.ks-modal .ks-modal-header .ks-modal-close svg {
+  vertical-align: middle;
+}
+.ks-modal .ks-modal-header .ks-modal-close svg path {
+  fill: var(--ks-modal-close-bg);
+  opacity: var(--ks-modal-close-opacity);
+  transition: all 0.3s ease;
+}
+.ks-modal .ks-modal-header .ks-modal-close:hover svg path {
+  fill: var(--ks-modal-close-hover-bg);
+  opacity: 1;
+}
+.ks-modal.danger .ks-modal-header {
+  background-color: var(--ks-modal-header-danger-bg);
+  color: var(--ks-modal-header-danger-color);
+}
+.ks-modal.danger .ks-modal-header .ks-modal-close svg path {
+  fill: var(--ks-modal-header-danger-close-color);
+}
+.ks-modal.danger .ks-modal-header .ks-modal-close:hover svg path {
+  fill: var(--ks-modal-header-danger-close-color-hover);
+}
+.ks-modal .ks-modal-body,
+.ks-modal .ks-modal-footer {
+  padding: var(--ks-modal-body-padding);
+}
+.ks-modal .ks-modal-body {
+  overflow-y: visible;
+}
+.ks-modal .ks-modal-footer {
+  text-align: var(--ks-modal-button-align);
+  border-top: var(--ks-modal-footer-top-border);
+  background-color: var(--ks-modal-footer-bg);
+}
+.ks-modal .ks-modal-footer:empty {
+  padding: 0;
+}
+.ks-modal.warning .ks-modal-header {
+  background-color: var(--ks-state-error);
+}
+.modal-open {
+  overflow: hidden !important;
+}
+.modal-open .ks-modal {
+  overflow-x: hidden;
+  overflow-y: auto;
+}

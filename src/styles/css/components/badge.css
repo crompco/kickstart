@@ -1,0 +1,33 @@
+/* Generated from src/css/components/badge.css by build/generate-css.mjs */
+.ks-badge {
+  background: var(--ks-badge-bg);
+  color: var(--ks-badge-color);
+  display: inline-block;
+  text-align: center;
+  line-height: 1;
+  font-size: var(--ks-badge-font-size);
+  white-space: nowrap;
+  vertical-align: middle;
+  padding: var(--ks-badge-padding);
+  border-radius: var(--ks-badge-border-radius);
+}
+.ks-badge.success {
+  background: var(--ks-alert-success-background-color);
+  color: var(--ks-alert-success-color);
+}
+.ks-badge.info {
+  background: var(--ks-alert-info-background-color);
+  color: var(--ks-alert-info-color);
+}
+.ks-badge.warning {
+  background: var(--ks-alert-warning-background-color);
+  color: var(--ks-alert-warning-color);
+}
+.ks-badge.error {
+  background: var(--ks-alert-error-background-color);
+  color: var(--ks-alert-error-color);
+}
+.ks-badge.muted {
+  background: var(--ks-alert-muted-background-color);
+  color: var(--ks-alert-muted-color);
+}

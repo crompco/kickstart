@@ -48,7 +48,6 @@ title: Layout Utilities
 | <code>wrap</code> | <code>flex-wrap: wrap;</code> |
 | <code>nowrap</code> | <code>flex-wrap: nowrap;</code> |
 | <code>wrap-reverse</code> | <code>flex-wrap: wrap-reverse;</code> |
-| <code>column-reverse</code> | <code>flex-wrap: column-reverse;</code> |
 
 ## Flex Align
 

@@ -1,0 +1,124 @@
+/* Generated from src/css/components/tooltip.css by build/generate-css.mjs */
+.ks-tooltip {
+  background: #fff;
+  border: 1px solid #aaa;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  z-index: 101;
+  color: var(--ks-text-color);
+}
+.ks-tooltip .ks-tooltip-arrow {
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  position: absolute;
+  margin: 0 auto;
+  right: 0;
+  left: 0;
+}
+.ks-tooltip .ks-tooltip-arrow:before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  position: absolute;
+  display: block;
+  margin: 0 auto;
+  left: -6px;
+}
+.ks-tooltip.tether-element-attached-right .ks-tooltip-arrow {
+  right: -1px;
+  left: auto;
+}
+.ks-tooltip.tether-element-attached-left .ks-tooltip-arrow {
+  left: -1px;
+  right: auto;
+}
+.ks-tooltip.tether-target-attached-bottom {
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+}
+.ks-tooltip.tether-target-attached-bottom.show-arrow {
+  margin-top: 7px;
+}
+.ks-tooltip.tether-target-attached-bottom.tether-target-attached-right.tether-element-attached-left,
+.ks-tooltip.tether-target-attached-bottom.tether-target-attached-left.tether-element-attached-left {
+  border-top-left-radius: 0;
+}
+.ks-tooltip.tether-target-attached-bottom.tether-target-attached-right.tether-element-attached-left .ks-tooltip-arrow,
+.ks-tooltip.tether-target-attached-bottom.tether-target-attached-left.tether-element-attached-left .ks-tooltip-arrow {
+  border-left: none;
+}
+.ks-tooltip.tether-target-attached-bottom.tether-target-attached-right.tether-element-attached-left .ks-tooltip-arrow:before,
+.ks-tooltip.tether-target-attached-bottom.tether-target-attached-left.tether-element-attached-left .ks-tooltip-arrow:before {
+  border-left: none;
+  left: 1px;
+  top: 2px;
+}
+.ks-tooltip.tether-target-attached-bottom.tether-target-attached-left.tether-element-attached-right,
+.ks-tooltip.tether-target-attached-bottom.tether-target-attached-right.tether-element-attached-right {
+  border-top-right-radius: 0;
+}
+.ks-tooltip.tether-target-attached-bottom.tether-target-attached-left.tether-element-attached-right .ks-tooltip-arrow,
+.ks-tooltip.tether-target-attached-bottom.tether-target-attached-right.tether-element-attached-right .ks-tooltip-arrow {
+  border-right: none;
+}
+.ks-tooltip.tether-target-attached-bottom.tether-target-attached-left.tether-element-attached-right .ks-tooltip-arrow:before,
+.ks-tooltip.tether-target-attached-bottom.tether-target-attached-right.tether-element-attached-right .ks-tooltip-arrow:before {
+  border-right: none;
+  right: 1px;
+  top: 2px;
+  left: unset;
+}
+.ks-tooltip.tether-target-attached-bottom .ks-tooltip-arrow {
+  border-bottom: 7px solid #aaa;
+  top: -7px;
+}
+.ks-tooltip.tether-target-attached-bottom .ks-tooltip-arrow:before {
+  border-bottom: 7px solid #fff;
+  top: 1px;
+}
+.ks-tooltip.tether-target-attached-top {
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+}
+.ks-tooltip.tether-target-attached-top.show-arrow {
+  margin-top: -7px;
+}
+.ks-tooltip.tether-target-attached-top.tether-target-attached-right.tether-element-attached-left,
+.ks-tooltip.tether-target-attached-top.tether-target-attached-left.tether-element-attached-left {
+  border-bottom-left-radius: 0;
+}
+.ks-tooltip.tether-target-attached-top.tether-target-attached-right.tether-element-attached-left .ks-tooltip-arrow,
+.ks-tooltip.tether-target-attached-top.tether-target-attached-left.tether-element-attached-left .ks-tooltip-arrow {
+  border-left: none;
+}
+.ks-tooltip.tether-target-attached-top.tether-target-attached-right.tether-element-attached-left .ks-tooltip-arrow:before,
+.ks-tooltip.tether-target-attached-top.tether-target-attached-left.tether-element-attached-left .ks-tooltip-arrow:before {
+  border-left: none;
+  left: 1px;
+  bottom: 2px;
+}
+.ks-tooltip.tether-target-attached-top.tether-target-attached-left.tether-element-attached-right,
+.ks-tooltip.tether-target-attached-top.tether-target-attached-right.tether-element-attached-right {
+  border-bottom-right-radius: 0;
+}
+.ks-tooltip.tether-target-attached-top.tether-target-attached-left.tether-element-attached-right .ks-tooltip-arrow,
+.ks-tooltip.tether-target-attached-top.tether-target-attached-right.tether-element-attached-right .ks-tooltip-arrow {
+  border-right: none;
+}
+.ks-tooltip.tether-target-attached-top.tether-target-attached-left.tether-element-attached-right .ks-tooltip-arrow:before,
+.ks-tooltip.tether-target-attached-top.tether-target-attached-right.tether-element-attached-right .ks-tooltip-arrow:before {
+  border-right: none;
+  right: 1px;
+  bottom: 2px;
+  left: unset;
+}
+.ks-tooltip.tether-target-attached-top .ks-tooltip-arrow {
+  border-top: 7px solid #aaa;
+  bottom: -7px;
+}
+.ks-tooltip.tether-target-attached-top .ks-tooltip-arrow:before {
+  border-top: 7px solid #fff;
+  bottom: 1px;
+}

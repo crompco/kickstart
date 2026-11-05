@@ -1,74 +1,9 @@
 @import "../functions/_utils";
 @import "../variables/_loaders";
 
-.ks-loader-line {
-	height: $line-loader-height;
-	width: $line-loader-width;
-	position: relative;
-	overflow: hidden;
-	background-color: $line-loader-bg;
+@import "../tokens/_tokens";
+@import "../tokens/_loaders";
 
-	&:before {
-		display: block;
-		position: absolute;
-		content: "";
-		left: -200px;
-		width: 200px;
-		height: $line-loader-height;
-		background-color: $line-loader-bg-active;
-		animation: line-loading #{$line-loader-speed}s $line-loader-animation-style $line-loader-animation-length;
-	}
-}
+@include ks-emit-tokens(loaders);
 
-@keyframes line-loading {
-	from {left: -100px; width: 20%;}
-	50% {width: 30%;}
-	70% {width: 70%;}
-	80% { left: 50%;}
-	95% {left: 120%;}
-	to {left: 100%;}
-}
-
-@keyframes spin {
-	0% {
-		transform: rotate(0deg);
-	}
-	100% {
-		transform: rotate(360deg);
-	}
-}
-
-.ks-loader-spin {
-	position: relative;
-	text-align: center;
-}
-
-.ks-spin-loading {
-	border-radius: 50%;
-	width: $spinner-size;
-	height: $spinner-size;
-	border: rem($spinner-border-width) solid $spinner-border;
-	border-top-color: $spinner-border-active;
-	animation: spin #{$spinner-speed}s $spinner-animation-style $spinner-animation-length;
-	margin: 0 auto;
-
-	&.double {
-		border-width: rem($spinner-border-width * 2);
-		border-style: double;
-	}
-
-    $sizes: (
-        tiny: 0.5,
-        small: 0.75,
-        medium: 2,
-        large: 3,
-        x-large: 4
-    );
-    @each $size, $multiplier in $sizes {
-        &.loader-#{$size} {
-            border-width: rem($spinner-border-width * $multiplier);
-            width: $spinner-size * $multiplier;
-            height: $spinner-size * $multiplier;
-        }
-    }
-}
+@import "../css/components/loaders";

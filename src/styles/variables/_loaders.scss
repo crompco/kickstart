@@ -2,19 +2,19 @@
 @import "_global";
 
 // Line Loader
-$line-loader-height: 4px;
-$line-loader-width: 100%;
-$line-loader-bg: #ddd;
-$line-loader-bg-active: #7b699f;
-$line-loader-speed: 1.5;
-$line-loader-animation-style: linear;
-$line-loader-animation-length: infinite;
+$line-loader-height: 4px !default;
+$line-loader-width: 100% !default;
+$line-loader-bg: #ddd !default;
+$line-loader-bg-active: #7b699f !default;
+$line-loader-speed: 1.5 !default;
+$line-loader-animation-style: linear !default;
+$line-loader-animation-length: infinite !default;
 
 // Spinner Loader
-$spinner-size: 28px;
-$spinner-border: #ddd;
-$spinner-border-width: .25rem;
-$spinner-border-active: #7b699f;
-$spinner-speed: 1;
-$spinner-animation-style: linear;
-$spinner-animation-length: infinite;
+$spinner-size: 28px !default;
+$spinner-border: #ddd !default;
+$spinner-border-width: .25rem !default;
+$spinner-border-active: #7b699f !default;
+$spinner-speed: 1 !default;
+$spinner-animation-style: linear !default;
+$spinner-animation-length: infinite !default;

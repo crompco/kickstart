@@ -1,56 +1,10 @@
 @import "../functions/_utils";
 @import "../variables/_panels";
 
-.ks-panel {
-	margin-bottom: $panel-margin-bottom;
+@import "../tokens/_tokens";
+@import "../tokens/_global";
+@import "../tokens/_panels";
 
-	&:not(.light) {
-		border: $panel-border;
-		box-shadow: $panel-box-shadow $panel-box-shadow-color;
-		background-color: $panel-bg;
-	}
+@include ks-emit-tokens(global, panels);
 
-	&:not(.light) &-header {
-		font-weight: $panel-header-font-weight;
-
-		@if $panel-header-border-top != false {
-			border-top: $panel-header-border-top;
-		}
-
-		@if $pane-header-box-shadow != false {
-			box-shadow: $pane-header-box-shadow;
-		}
-	}
-
-	&:not(.light) &-header, &:not(.light) &-footer {
-		background-color: $panel-header-bg;
-		padding: rem($panel-header-padding);
-		color: $panel-header-color;
-	}
-
-	& &-header, & &-footer {
-		padding: rem($panel-header-padding);
-	}
-
-	& &-body {
-		padding: rem($panel-body-padding);
-	}
-
-	&.no-shadow {
-		box-shadow: none;
-	}
-
-	&.light {
-		.ks-panel-header {
-			color: $panel-light-header-color;
-		}
-
-		.ks-panel-body:not(.no-bg) {
-			background: $panel-light-body-bg;
-
-			@if $panel-light-body-box-shadow != false {
-				box-shadow: $panel-light-body-box-shadow;
-			}
-		}
-	}
-}
+@import "../css/components/panels";

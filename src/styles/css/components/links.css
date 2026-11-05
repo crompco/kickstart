@@ -1,0 +1,10 @@
+/* Generated from src/css/components/links.css by build/generate-css.mjs */
+a {
+  text-decoration: none;
+}
+a.danger {
+  color: var(--ks-state-danger-bg);
+}
+a.danger:hover {
+  color: hsl(from var(--ks-state-danger-bg) h s calc(l - 12));
+}

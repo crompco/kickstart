@@ -1,0 +1,15 @@
+@import "../variables/_alerts";
+
+$ks-default-alerts: (success, info, warning, error, muted);
+
+@mixin ks-tokens-alerts {
+    --ks-alert-padding: #{$alert-padding};
+    --ks-alert-margin: #{$alert-margin};
+    --ks-alert-border-radius: #{$alert-border-radius};
+
+    @each $name, $map in $alerts {
+        @each $property, $value in $map {
+            --ks-alert-#{$name}-#{$property}: #{$value};
+        }
+    }
+}

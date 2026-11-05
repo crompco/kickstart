@@ -1,0 +1,85 @@
+@import "../functions/_utils";
+@import "./_grid";
+@import "../variables/_tables";
+
+%table-header-no-border {
+	border-bottom: 0;
+}
+
+@mixin ks-table-head-color($color) {
+	thead {
+		background-color: $color;
+		color: $table-brand-header-color;
+
+		th {
+			@extend %table-header-no-border;
+		}
+	}
+}
+
+@mixin ks-responsive-table() {
+	tbody, tr, th, td {
+		display: block;
+		text-align: left;
+		white-space: normal;
+	}
+
+	@include ks-breakpoint(map-get($breakpoint-list, $table-breakpoint)) {
+		tbody {
+			display: table-row-group;
+		}
+
+		tr {
+			display: table-row;
+		}
+
+		th, td {
+			display: table-cell;
+		}
+	}
+
+	thead {
+		display: none;
+
+		@include ks-breakpoint(map-get($breakpoint-list, $table-breakpoint)) {
+			display: table-header-group;
+		}
+	}
+
+	tbody {
+		tr {
+			@include ks-breakpoint(map-get($breakpoint-list, $table-breakpoint)) {
+				margin-bottom: 0;
+				border: 0;
+			}
+
+			&:last-child {
+				td {
+					border-bottom: 1px solid $table-border-color;
+
+					@include ks-breakpoint(map-get($breakpoint-list, $table-breakpoint)) {
+						border-bottom: 0;
+					}
+				}
+			}
+		}
+
+		td {
+			text-align: right;
+
+			@include ks-breakpoint(map-get($breakpoint-list, $table-breakpoint)) {
+				text-align: left;
+			}
+
+			&[data-title]:before {
+				content: attr(data-title);
+				float: left;
+				font-size: 0.8rem;
+
+				@include ks-breakpoint(map-get($breakpoint-list, $table-breakpoint)) {
+					content: none;
+				}
+			}
+		}
+	}
+}
