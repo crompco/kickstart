@@ -133,3 +133,50 @@ test('KsRadioGroup selects an option and passes disabled down', async () => {
     await wrapper.setData({ disabled: true });
     expect(wrapper.findAll('input').wrappers.every(input => input.element.disabled)).toBe(true);
 });
+
+describe.each([
+    ['KsCheckboxGroup', KsCheckboxGroup, '.ks-checkbox'],
+    ['KsRadioGroup', KsRadioGroup, '.ks-radio'],
+])('%s options', (name, component, option_selector) => {
+    function group(propsData) {
+        return mount(component, { propsData: { name: 'fruit', value: null, ...propsData } });
+    }
+
+    function options(wrapper) {
+        return wrapper.findAll(option_selector).wrappers.map(option => [option.find('input').element.value, option.text()]);
+    }
+
+    test('uses each scalar option as value and label', () => {
+        expect(options(group({ options: ['S', 'M'] }))).toEqual([['S', 'S'], ['M', 'M']]);
+    });
+
+    test('reads value and label from objects with the default keys', () => {
+        const wrapper = group({ options: [{ value: 1, label: 'Apple' }, { value: 2, label: 'Pear' }] });
+
+        expect(options(wrapper)).toEqual([['1', 'Apple'], ['2', 'Pear']]);
+    });
+
+    test('reads value and label from objects with custom keys', () => {
+        const wrapper = group({ options: [{ id: 1, name: 'Apple' }], valueKey: 'id', labelKey: 'name' });
+
+        expect(options(wrapper)).toEqual([['1', 'Apple']]);
+    });
+
+    test('accepts an object of options', () => {
+        const wrapper = group({ options: { a: { value: 'a', label: 'Apple' }, p: { value: 'p', label: 'Pear' } } });
+
+        expect(options(wrapper)).toEqual([['a', 'Apple'], ['p', 'Pear']]);
+    });
+
+    test('renders no options without options', () => {
+        expect(options(group({}))).toEqual([]);
+        expect(options(group({ options: [] }))).toEqual([]);
+    });
+
+    test('sets the buttons, custom and disabled classes', () => {
+        const wrapper = group({ options: ['S'], buttons: true, classNames: 'compact', disabled: true });
+
+        expect(wrapper.classes()).toEqual(expect.arrayContaining(['option-buttons', 'compact', 'disabled']));
+        expect(group({ options: ['S'] }).classes()).not.toContain('option-buttons');
+    });
+});

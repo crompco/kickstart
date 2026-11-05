@@ -132,6 +132,206 @@ describe('KsSelect', () => {
     });
 });
 
+describe('KsSelect keyboard', () => {
+    function key(target, name, key_code, extra = {}) {
+        return target.trigger('keydown', { key: name, keyCode: key_code, ...extra });
+    }
+
+    function highlighted() {
+        return wrapper.find('.ks-autocomplete-list .ks-selected-item').text();
+    }
+
+    async function mountSelect(value = null) {
+        vModel(KsSelect, '<component v-model="fruit" name="id" label-key="name" :items="items"></component>', { fruit: value, items: fruits });
+        await flushPromises();
+
+        return wrapper.find('.ks-select');
+    }
+
+    test('ArrowDown opens on the first item and Enter selects the highlighted item', async () => {
+        const select = await mountSelect();
+
+        await key(select, 'ArrowDown', 40);
+        await flushPromises();
+        expect(select.classes()).toContain('ks-select-open');
+        expect(highlighted()).toBe('Apple');
+
+        await key(select, 'ArrowDown', 40);
+        expect(highlighted()).toBe('Banana');
+
+        await key(select, 'Enter', 13);
+        await flushPromises();
+
+        expect(wrapper.vm.fruit).toBe(fruits[1]);
+        expect(select.classes()).not.toContain('ks-select-open');
+    });
+
+    test('the highlight stops at the first and the last item', async () => {
+        const select = await mountSelect();
+
+        await key(select, 'ArrowDown', 40);
+        await flushPromises();
+        await key(select, 'ArrowUp', 38);
+        expect(highlighted()).toBe('Apple');
+
+        for ( let i = 0; i < 5; i++ ) {
+            await key(select, 'ArrowDown', 40);
+        }
+        expect(highlighted()).toBe('Cherry');
+    });
+
+    test('opening highlights the current value', async () => {
+        const select = await mountSelect(2);
+
+        await key(select, ' ', 32);
+        await flushPromises();
+
+        expect(select.classes()).toContain('ks-select-open');
+        expect(highlighted()).toBe('Cherry');
+    });
+
+    test('Enter on a closed select opens it without a change', async () => {
+        const select = await mountSelect(fruits[2]);
+
+        await key(select, 'Enter', 13);
+        await flushPromises();
+
+        expect(select.classes()).toContain('ks-select-open');
+        expect(wrapper.findComponent(KsSelect).emitted('input')).toBeUndefined();
+        expect(wrapper.vm.fruit).toBe(fruits[2]);
+    });
+
+    test('a letter key opens the list', async () => {
+        const select = await mountSelect();
+
+        await key(select, 'b', 66);
+        await flushPromises();
+
+        expect(select.classes()).toContain('ks-select-open');
+    });
+
+    test('Tab selects the highlighted item when open', async () => {
+        const select = await mountSelect();
+
+        await key(select, 'ArrowDown', 40);
+        await flushPromises();
+        await key(select, 'ArrowDown', 40);
+        await key(select, 'ArrowDown', 40);
+        await key(select, 'Tab', 9);
+        await flushPromises();
+
+        expect(wrapper.vm.fruit).toBe(fruits[2]);
+    });
+
+    test('Tab on a closed select changes nothing', async () => {
+        const select = await mountSelect(fruits[2]);
+
+        await key(select, 'Tab', 9);
+        await flushPromises();
+
+        expect(wrapper.findComponent(KsSelect).emitted('input')).toBeUndefined();
+        expect(wrapper.vm.fruit).toBe(fruits[2]);
+        expect(select.classes()).not.toContain('ks-select-open');
+    });
+
+    test('Escape closes without a change', async () => {
+        const select = await mountSelect(fruits[0]);
+
+        await key(select, 'ArrowDown', 40);
+        await flushPromises();
+        await key(select, 'ArrowDown', 40);
+        await select.trigger('keyup', { key: 'Escape', keyCode: 27 });
+        await flushPromises();
+
+        expect(select.classes()).not.toContain('ks-select-open');
+        expect(wrapper.vm.fruit).toBe(fruits[0]);
+    });
+});
+
+describe('KsAutocomplete keyboard', () => {
+    async function search(text) {
+        vModel(KsAutocomplete, '<component v-model="fruit" selection-key="name" :items="items"></component>', { fruit: null, items: fruits });
+        await flushPromises();
+
+        const input = wrapper.find('input');
+        input.element.focus();
+        await input.setValue(text);
+        await flushPromises();
+
+        return input;
+    }
+
+    function highlighted() {
+        const item = wrapper.find('.ks-autocomplete-list .ks-selected-item');
+
+        return item.exists() ? item.text() : null;
+    }
+
+    test('ArrowUp and ArrowDown move the highlight and stop at the ends', async () => {
+        const input = await search('an');
+        const key = (name, key_code) => input.trigger('keydown', { key: name, keyCode: key_code });
+
+        expect(highlighted()).toBeNull();
+
+        await key('ArrowDown', 40);
+        expect(highlighted()).toBe('Banana');
+
+        await key('ArrowDown', 40);
+        expect(highlighted()).toBe('Banana');
+
+        await key('ArrowUp', 38);
+        expect(highlighted()).toBeNull();
+
+        await key('ArrowUp', 38);
+        await key('ArrowDown', 40);
+        expect(highlighted()).toBe('Banana');
+    });
+
+    test('Enter without a highlight selects nothing', async () => {
+        const input = await search('a');
+
+        await input.trigger('keydown', { key: 'Enter', keyCode: 13 });
+        await flushPromises();
+
+        expect(wrapper.vm.fruit).toBeNull();
+    });
+
+    test('Tab selects the highlighted item', async () => {
+        const input = await search('a');
+
+        await input.trigger('keydown', { key: 'ArrowDown', keyCode: 40 });
+        await input.trigger('keydown', { key: 'ArrowDown', keyCode: 40 });
+        await input.trigger('keydown', { key: 'Tab', keyCode: 9 });
+        await flushPromises();
+
+        expect(wrapper.vm.fruit).toBe(fruits[1]);
+    });
+
+    test('Shift+Tab clears the lookup and selects nothing', async () => {
+        const input = await search('a');
+
+        await input.trigger('keydown', { key: 'ArrowDown', keyCode: 40 });
+        await input.trigger('keydown', { key: 'Tab', keyCode: 9, shiftKey: true });
+        await flushPromises();
+
+        expect(wrapper.vm.fruit).toBeNull();
+        expect(input.element.value).toBe('');
+    });
+
+    test('Escape clears the lookup and closes the list', async () => {
+        const input = await search('a');
+        const autocomplete = wrapper.findComponent(KsAutocomplete);
+        expect(autocomplete.vm.show_list).toBe(true);
+
+        await input.trigger('keyup', { key: 'Escape', keyCode: 27 });
+        await flushPromises();
+
+        expect(input.element.value).toBe('');
+        expect(autocomplete.vm.show_list).toBe(false);
+        expect(wrapper.vm.fruit).toBeNull();
+    });
+});
+
 describe('KsAutocomplete', () => {
     test('selects a single item', async () => {
         vModel(KsAutocomplete, '<component v-model="fruit" selection-key="name" :items="items"></component>', { fruit: null, items: fruits });
