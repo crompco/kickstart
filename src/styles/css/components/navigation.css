@@ -17,7 +17,7 @@
 .side-nav .mobile-menu svg {
   vertical-align: middle;
 }
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 768px) {
   .top-bar .mobile-menu,
   .side-nav .mobile-menu {
     display: none;
@@ -33,7 +33,7 @@
   flex-direction: column;
   box-shadow: var(--ks-top-bar-dd-box-shadow);
 }
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 768px) {
   .top-bar .dropdown li:hover ul.sub-dropdown,
   .top-bar .dropdown.show > li:first-child ul.sub-dropdown {
     display: block;
@@ -49,7 +49,7 @@
   padding: var(--ks-top-bar-dd-link-padding-half);
   line-height: var(--ks-top-bar-dd-line-height);
 }
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 768px) {
   .top-bar .dropdown li:hover ul.sub-dropdown a,
   .top-bar .dropdown.show > li:first-child ul.sub-dropdown a,
   .top-bar .dropdown li:hover ul.sub-dropdown button,
@@ -67,7 +67,7 @@
 body.side-nav-open {
   overflow: hidden;
 }
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 768px) {
   .side-nav.vertical {
     padding-top: var(--ks-nav-vertical-padding-top);
     width: var(--ks-nav-width);
@@ -86,7 +86,7 @@ body.side-nav-open {
 .side-nav.fixed {
   position: fixed;
 }
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 768px) {
   .side-nav.fixed {
     z-index: 10;
     left: 0;
@@ -106,7 +106,7 @@ body.side-nav-open {
   padding-top: 0;
   margin-left: -60%;
 }
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 768px) {
   .side-nav {
     margin-left: 0;
     display: block;
@@ -129,7 +129,7 @@ body.side-nav-open {
   justify-content: center;
   height: 100%;
 }
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 768px) {
   .side-nav .brand {
     height: var(--ks-nav-height);
   }
@@ -145,7 +145,7 @@ body.side-nav-open {
   width: 100%;
   left: -100%;
 }
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 768px) {
   .side-nav .nav-links {
     left: 0;
   }
@@ -167,7 +167,7 @@ body.side-nav-open {
   background-color: var(--ks-nav-links-active-bg);
   color: var(--ks-nav-links-active-color);
 }
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .side-nav.show {
     display: block;
     overflow-y: auto;
@@ -178,7 +178,7 @@ body.side-nav-open {
   margin-left: 60%;
   overflow: hidden;
 }
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .side-nav {
     height: 100%;
     transition: margin 0.3s ease;
@@ -207,7 +207,7 @@ body.side-nav-open {
   color: var(--ks-top-bar-color);
   box-shadow: var(--ks-top-bar-box-shadow);
 }
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 768px) {
   .top-bar {
     flex-wrap: nowrap;
   }
@@ -238,7 +238,7 @@ body.side-nav-open {
   height: 100%;
   margin: 0 auto;
 }
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 768px) {
   .top-bar .brand {
     background-color: var(--ks-nav-brand-bg);
     height: var(--ks-nav-height);
@@ -253,7 +253,7 @@ body.side-nav-open {
   height: 100%;
   width: auto;
 }
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 768px) {
   .top-bar .form-group {
     display: flex;
     align-items: center;
@@ -284,7 +284,7 @@ body.side-nav-open {
 .top-bar .collapse .dropdown a {
   width: 100%;
 }
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 768px) {
   .top-bar .collapse {
     height: 100%;
     flex-direction: row;
@@ -304,7 +304,7 @@ body.side-nav-open {
     width: unset;
   }
 }
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .top-bar.show .collapse {
     display: block;
     right: 0;
@@ -324,7 +324,7 @@ body.side-nav-open {
   align-items: center;
   flex-direction: column;
 }
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 768px) {
   .top-bar .dropdown li {
     flex-direction: row;
   }
@@ -364,7 +364,7 @@ body.side-nav-open {
   border-right: 4px solid transparent;
   border-top: 8px solid var(--ks-top-bar-color);
 }
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 768px) {
   .top-bar .dropdown li a.dropdown-toggle:after,
   .top-bar .dropdown li button.dropdown-toggle:after {
     position: relative;
@@ -377,7 +377,7 @@ body.side-nav-open {
   background-color: var(--ks-top-bar-hover-bg);
   color: var(--ks-top-bar-hover-color);
 }
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 768px) {
   .top-bar .dropdown.right {
     margin-left: auto;
   }

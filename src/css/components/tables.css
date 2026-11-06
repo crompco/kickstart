@@ -25,7 +25,7 @@
             white-space: normal;
         }
 
-        @media only screen and (min-width: 769px) {
+        @media only screen and (min-width: 768px) {
             tbody {
                 display: table-row-group;
             }
@@ -42,14 +42,14 @@
         thead {
             display: none;
 
-            @media only screen and (min-width: 769px) {
+            @media only screen and (min-width: 768px) {
                 display: table-header-group;
             }
         }
 
         tbody {
             tr {
-                @media only screen and (min-width: 769px) {
+                @media only screen and (min-width: 768px) {
                     margin-bottom: 0;
                     border: 0;
                 }
@@ -57,7 +57,7 @@
                 &:last-child td {
                     border-bottom: 1px solid var(--ks-table-border-color);
 
-                    @media only screen and (min-width: 769px) {
+                    @media only screen and (min-width: 768px) {
                         border-bottom: 0;
                     }
                 }
@@ -66,7 +66,7 @@
             td {
                 text-align: right;
 
-                @media only screen and (min-width: 769px) {
+                @media only screen and (min-width: 768px) {
                     text-align: left;
                 }
 
@@ -75,7 +75,7 @@
                     float: left;
                     font-size: 0.8rem;
 
-                    @media only screen and (min-width: 769px) {
+                    @media only screen and (min-width: 768px) {
                         content: none;
                     }
                 }

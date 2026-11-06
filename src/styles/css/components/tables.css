@@ -26,7 +26,7 @@
   text-align: left;
   white-space: normal;
 }
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 768px) {
   .ks-table.responsive tbody {
     display: table-row-group;
   }
@@ -41,12 +41,12 @@
 .ks-table.responsive thead {
   display: none;
 }
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 768px) {
   .ks-table.responsive thead {
     display: table-header-group;
   }
 }
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 768px) {
   .ks-table.responsive tbody tr {
     margin-bottom: 0;
     border: 0;
@@ -55,7 +55,7 @@
 .ks-table.responsive tbody tr:last-child td {
   border-bottom: 1px solid var(--ks-table-border-color);
 }
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 768px) {
   .ks-table.responsive tbody tr:last-child td {
     border-bottom: 0;
   }
@@ -63,7 +63,7 @@
 .ks-table.responsive tbody td {
   text-align: right;
 }
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 768px) {
   .ks-table.responsive tbody td {
     text-align: left;
   }
@@ -73,7 +73,7 @@
   float: left;
   font-size: 0.8rem;
 }
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 768px) {
   .ks-table.responsive tbody td[data-title]:before {
     content: none;
   }

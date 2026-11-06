@@ -1,7 +1,7 @@
 .ks-steps {
     padding: 1rem 0;
 
-    @media only screen and (min-width: 769px) {
+    @media only screen and (min-width: 768px) {
         padding: 1rem 2rem;
     }
 

@@ -6,7 +6,7 @@
 html {
     font-size: calc(var(--ks-global-font-size) * 0.875);
 
-    @media only screen and (min-width: 769px) {
+    @media only screen and (min-width: 768px) {
         font-size: var(--ks-global-font-size);
     }
 }
@@ -14,7 +14,7 @@ html {
 body {
     font-size: 0.875rem;
 
-    @media only screen and (min-width: 769px) {
+    @media only screen and (min-width: 768px) {
         font-size: 1rem;
     }
 }
@@ -32,7 +32,7 @@ html, body {
     float: left;
     margin-left: 0;
 
-    @media only screen and (min-width: 769px) {
+    @media only screen and (min-width: 768px) {
         width: calc(100% - var(--ks-nav-width));
         margin-left: var(--ks-nav-width);
     }

@@ -15,7 +15,7 @@
         vertical-align: middle;
     }
 
-    @media only screen and (min-width: 769px) {
+    @media only screen and (min-width: 768px) {
         display: none;
     }
 }
@@ -31,7 +31,7 @@
     flex-direction: column;
     box-shadow: var(--ks-top-bar-dd-box-shadow);
 
-    @media only screen and (min-width: 769px) {
+    @media only screen and (min-width: 768px) {
         display: block;
         top: var(--ks-nav-height);
         position: absolute;
@@ -46,7 +46,7 @@
     padding: var(--ks-top-bar-dd-link-padding-half);
     line-height: var(--ks-top-bar-dd-line-height);
 
-    @media only screen and (min-width: 769px) {
+    @media only screen and (min-width: 768px) {
         padding: var(--ks-top-bar-dd-link-padding);
     }
 }
@@ -65,7 +65,7 @@ body.side-nav-open {
 
 .side-nav {
     &.vertical {
-        @media only screen and (min-width: 769px) {
+        @media only screen and (min-width: 768px) {
             padding-top: var(--ks-nav-vertical-padding-top);
             width: var(--ks-nav-width);
             height: 100%;
@@ -86,7 +86,7 @@ body.side-nav-open {
     &.fixed {
         position: fixed;
 
-        @media only screen and (min-width: 769px) {
+        @media only screen and (min-width: 768px) {
             z-index: 10;
             left: 0;
         }
@@ -108,7 +108,7 @@ body.side-nav-open {
     padding-top: 0;
     margin-left: -60%;
 
-    @media only screen and (min-width: 769px) {
+    @media only screen and (min-width: 768px) {
         margin-left: 0;
         display: block;
     }
@@ -132,7 +132,7 @@ body.side-nav-open {
         justify-content: center;
         height: 100%;
 
-        @media only screen and (min-width: 769px) {
+        @media only screen and (min-width: 768px) {
             height: var(--ks-nav-height);
         }
 
@@ -149,7 +149,7 @@ body.side-nav-open {
         width: 100%;
         left: -100%;
 
-        @media only screen and (min-width: 769px) {
+        @media only screen and (min-width: 768px) {
             left: 0;
         }
 
@@ -175,7 +175,7 @@ body.side-nav-open {
     }
 
     &.show {
-        @media (max-width: 768px) {
+        @media (max-width: 767px) {
             display: block;
             overflow-y: auto;
             margin-left: 0;
@@ -187,7 +187,7 @@ body.side-nav-open {
         }
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 767px) {
         height: 100%;
         transition: margin 0.3s ease;
 
@@ -219,7 +219,7 @@ body.side-nav-open {
     color: var(--ks-top-bar-color);
     box-shadow: var(--ks-top-bar-box-shadow);
 
-    @media only screen and (min-width: 769px) {
+    @media only screen and (min-width: 768px) {
         flex-wrap: nowrap;
     }
 
@@ -253,7 +253,7 @@ body.side-nav-open {
         height: 100%;
         margin: 0 auto;
 
-        @media only screen and (min-width: 769px) {
+        @media only screen and (min-width: 768px) {
             background-color: var(--ks-nav-brand-bg);
             height: var(--ks-nav-height);
             color: var(--ks-nav-brand-color);
@@ -271,7 +271,7 @@ body.side-nav-open {
     }
 
     .form-group {
-        @media only screen and (min-width: 769px) {
+        @media only screen and (min-width: 768px) {
             display: flex;
             align-items: center;
             margin-bottom: 0;
@@ -300,7 +300,7 @@ body.side-nav-open {
             }
         }
 
-        @media only screen and (min-width: 769px) {
+        @media only screen and (min-width: 768px) {
             height: 100%;
             flex-direction: row;
             display: flex;
@@ -322,7 +322,7 @@ body.side-nav-open {
     }
 
     &.show .collapse {
-        @media (max-width: 768px) {
+        @media (max-width: 767px) {
             display: block;
             right: 0;
         }
@@ -342,7 +342,7 @@ body.side-nav-open {
             align-items: center;
             flex-direction: column;
 
-            @media only screen and (min-width: 769px) {
+            @media only screen and (min-width: 768px) {
                 flex-direction: row;
             }
         }
@@ -382,7 +382,7 @@ body.side-nav-open {
                     border-right: 4px solid transparent;
                     border-top: 8px solid var(--ks-top-bar-color);
 
-                    @media only screen and (min-width: 769px) {
+                    @media only screen and (min-width: 768px) {
                         position: relative;
                         right: 0;
                         margin-left: 0.3125rem;
@@ -397,7 +397,7 @@ body.side-nav-open {
         }
 
         &.right {
-            @media only screen and (min-width: 769px) {
+            @media only screen and (min-width: 768px) {
                 margin-left: auto;
             }
         }
