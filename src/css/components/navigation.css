@@ -175,7 +175,7 @@ body.side-nav-open {
     }
 
     &.show {
-        @media (max-width: 767px) {
+        @media (width < 768px) {
             display: block;
             overflow-y: auto;
             margin-left: 0;
@@ -187,7 +187,7 @@ body.side-nav-open {
         }
     }
 
-    @media (max-width: 767px) {
+    @media (width < 768px) {
         height: 100%;
         transition: margin 0.3s ease;
 
@@ -322,7 +322,7 @@ body.side-nav-open {
     }
 
     &.show .collapse {
-        @media (max-width: 767px) {
+        @media (width < 768px) {
             display: block;
             right: 0;
         }
