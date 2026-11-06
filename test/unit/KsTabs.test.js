@@ -71,6 +71,16 @@ describe('remember tab', () => {
 
         expect(sessionStorage.getItem('ks-tabs.t')).toBe('Two');
     });
+
+    test('keeps the remembered tab when the tabs are destroyed', async () => {
+        const wrapper = mountTabs(TABS, { third: true, changed: [], events: [] });
+        await wrapper.vm.$nextTick();
+        await wrapper.findAll('.ks-tabs-title-bar a').at(0).trigger('click');
+
+        wrapper.destroy();
+
+        expect(sessionStorage.getItem('ks-tabs.t')).toBe('One');
+    });
 });
 
 test('keeps document order and handles removed tabs', async () => {

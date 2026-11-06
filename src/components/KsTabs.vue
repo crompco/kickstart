@@ -168,10 +168,12 @@
         },
 
         beforeDestroy() {
+            this.destroying = true;
             this.teardown();
         },
 
         beforeUnmount() {
+            this.destroying = true;
             this.teardown();
         },
 
@@ -202,6 +204,11 @@
                 }
 
                 this.tabs.splice(index, 1);
+
+                // Tabs unregister one by one when the whole set is destroyed; reselecting would overwrite the remembered tab
+                if ( this.destroying ) {
+                    return;
+                }
 
                 if ( this.active_tab === tab ) {
                     this.active_tab = null;
