@@ -10,8 +10,9 @@
     @if map-get($grid, media) == null {
         @content
     } @else {
+        // Max queries stop 1px below the breakpoint so they never overlap its min-width query
         @if $max {
-            $grid: map-merge($grid, (media: quote('(max-width:' + map-get($grid, media) + ')')));
+            $grid: map-merge($grid, (media: quote('(max-width:' + (map-get($grid, media) - 1px) + ')')));
         }
 
         @include ks-grid-media($grid) {

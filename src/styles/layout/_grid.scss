@@ -109,7 +109,7 @@
         }
     } @else {
         $max-map: map-get($breakpoint-list, nth($keys, $i + 1));
-        $min-max-grid: map-merge($map, (media: quote('(min-width:' + map-get($map, media) + ') and (max-width:' + map-get($max-map, media) + ')')));
+        $min-max-grid: map-merge($map, (media: quote('(min-width:' + map-get($map, media) + ') and (max-width:' + (map-get($max-map, media) - 1px) + ')')));
         @include ks-breakpoint($min-max-grid) {
             .#{$name}-hide {
                 display: none;
@@ -146,7 +146,7 @@
         }
     } @else {
         $max-map: map-get($breakpoint-list, nth($keys, $i + 1));
-        $min-max-grid: map-merge($map, (media: quote('(max-width:' + map-get($map, media) + '), (min-width:' + map-get($max-map, media) + ')')));
+        $min-max-grid: map-merge($map, (media: quote('(max-width:' + (map-get($map, media) - 1px) + '), (min-width:' + map-get($max-map, media) + ')')));
         @include ks-breakpoint($min-max-grid) {
             .#{$name}-show {
                 display: none;
