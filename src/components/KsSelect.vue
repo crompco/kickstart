@@ -231,7 +231,13 @@
                 }
 
                 // An object binding has no selection until the value is an object
-                return !this.binds_objects || typeof this.value === 'object';
+                if ( this.binds_objects ) {
+                    return typeof this.value === 'object';
+                }
+
+                // 0 is a value only when an item has the key 0; otherwise it means no selection, as in 2.x
+                // (APIs often send 0 for an empty id)
+                return this.value !== 0 || this.list.some(item => item && item[this.keyName] === 0);
             },
 
             inputValue() {
@@ -274,7 +280,7 @@
                     return false;
                 }
 
-                return this.singleDeselect && !isEmpty(this.inputValue);
+                return this.singleDeselect && this.has_value;
             },
             list_style() {
                 return {

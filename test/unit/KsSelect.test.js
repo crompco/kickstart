@@ -65,6 +65,15 @@ describe('KsSelect', () => {
         expect(wrapper.find('.ks-select-selection').text()).toContain('Apple');
     });
 
+    test('shows the placeholder for 0 when no item has the key 0', async () => {
+        vModel(KsSelect, '<component v-model="fruit" name="id" label-key="name" :items="items" :force-values="true" single-deselect></component>', { fruit: 0, items: fruits.slice(1) });
+        await flushPromises();
+
+        expect(wrapper.find('.ks-select-placeholder').exists()).toBe(true);
+        expect(wrapper.find('.ks-select-deselect').exists()).toBe(false);
+        expect(wrapper.vm.fruit).toBe(0);
+    });
+
     test('shows the placeholder for an empty string', async () => {
         vModel(KsSelect, '<component v-model="fruit" name="id" label-key="name" :items="items"></component>', { fruit: '', items: fruits });
         await flushPromises();
