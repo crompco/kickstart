@@ -26,7 +26,12 @@ export default {
     },
 
     methods: {
-        startDropdown(control, dropdown) {
+        /**
+         * @param {HTMLElement} control
+         * @param {HTMLElement} dropdown
+         * @param {{matchWidth?: boolean}} options matchWidth (default true) gives the dropdown the control's width
+         */
+        startDropdown(control, dropdown, { matchWidth = true } = {}) {
             if ( !control || !dropdown ) {
                 return;
             }
@@ -46,7 +51,7 @@ export default {
                 attachment: 'top left',
                 targetAttachment: 'bottom left',
                 constraints: [{ to: 'window', attachment: 'together none' }],
-                matchWidth: true,
+                matchWidth,
                 onUpdate: (data) => {
                     dropdown.style.visibility = '';
                     this.inverted = !!data && data.attachment.vertical === 'bottom';

@@ -1,6 +1,7 @@
 import { expect, test } from 'vitest';
 import { mount } from '@vue/test-utils';
 import KsDatepicker from '../../src/components/KsDatepicker.vue';
+import { flushPromises } from '../helpers/layout';
 
 test('Datepicker:computed from a date string', () => {
     const vm = mount(KsDatepicker, {
@@ -83,4 +84,27 @@ test('Datepicker:does not emit when the value changes to an empty string', async
     await wrapper.setProps({ value: '' });
 
     expect(wrapper.emitted('input')).toBeUndefined();
+});
+
+test('Datepicker:positions the calendar while open and keeps its own width', async () => {
+    const wrapper = mount(KsDatepicker, {
+        propsData: {
+            value: '2017-01-01',
+        },
+        attachTo: document.body,
+    });
+
+    await wrapper.find('.ks-datepicker-display').trigger('focus');
+    await flushPromises();
+
+    const calendar = wrapper.find('.ks-datepicker-cal').element;
+    expect(wrapper.vm.dropdown_positioner).not.toBeNull();
+    expect(calendar.style.position).toBe('fixed');
+    expect(calendar.style.width).toBe('');
+
+    wrapper.vm.close();
+    await flushPromises();
+    expect(wrapper.vm.dropdown_positioner).toBeNull();
+
+    wrapper.destroy();
 });

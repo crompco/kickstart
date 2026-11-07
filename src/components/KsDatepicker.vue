@@ -24,6 +24,7 @@
         <!-- Calendar -->
         <div
             v-show="show"
+            ref="dropdown"
             class="ks-datepicker-cal"
         >
             <ks-calendar
@@ -47,12 +48,15 @@
 
 <script>
     import KsCalendar from './KsCalendar.vue';
+    import FloatingDropdown from './mixins/FloatingDropdown';
     import { UTC, defaultLocale, formatDate } from '../helpers/dates';
     import { smartFocusToggle, removeSmartFocusToggle } from '../helpers/events';
     import { applyMask, dateMask } from '../helpers/mask';
 
     export default {
         name: 'KsDatepicker',
+
+        mixins: [FloatingDropdown],
 
         props: {
             value: {},
@@ -196,9 +200,14 @@
             is_open() {
                 // Reset the calendar when the datepicker is closed
                 if ( !this.is_open ) {
+                    this.stopDropdown();
                     this.$refs.calendar.closeMonth();
                     this.$refs.calendar.closeYear();
+                    return;
                 }
+
+                // The calendar keeps its own width; it is wider than most inputs
+                this.$nextTick(() => this.startDropdown(this.$el, this.$refs.dropdown, { matchWidth: false }));
             },
             value_date() {
                 this.calendar_date = this.value_date;

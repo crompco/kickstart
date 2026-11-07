@@ -81,6 +81,7 @@
 
 ## Datepicker
 - Internal mask replaces v-mask (same ##/##/#### behavior; literal added when the next digit is typed).
+- The calendar uses the same fixed positioning against the field as the select, autocomplete and timepicker lists (floating-ui): not clipped by modals, panels or tables; follows the field on scroll and resize; flips above when there is no room below. It keeps its own width. 2.x placed it with `position: absolute`. The `.ks-datepicker-cal` element stays inside `.ks-datepicker`, so selectors still match. Apps that fixed the calendar in place themselves (vault-service `DisplayCustomField.vue`) can remove that code.
 
 ## Tabs / Accordion / Steps (phase 4a)
 - KsTab registers through inject; works with PascalCase/local registration (v2 needed `ks-tabs` tag name, else infinite recursion).
