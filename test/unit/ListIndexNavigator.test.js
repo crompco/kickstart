@@ -382,4 +382,36 @@ describe('grouped items', () => {
 
         expect(wrapper.vm.value).toBe(fruits[3]);
     });
+
+    test('the keyboard follows the order on screen when the groups are not contiguous', async () => {
+        mountGrouped(KsSelect, 'name="id" label-key="name"');
+        await flushPromises();
+
+        await wrapper.find('.ks-select-selection').trigger('click');
+        await flushPromises();
+
+        expect(groupTitles()).toEqual(['Tree', 'Bush', 'Palm']);
+
+        const select = wrapper.find('.ks-select');
+        const highlighted = [wrapper.find('.ks-selected-item').text()];
+        for ( let i = 0; i < 6; i++ ) {
+            await select.trigger('keydown', { key: 'ArrowDown', keyCode: 40 });
+            await flushPromises();
+            highlighted.push(wrapper.find('.ks-selected-item').text());
+        }
+
+        expect(highlighted).toEqual(['Apple', 'Apricot', 'Cherry', 'Blueberry', 'Cranberry', 'Date', 'Date']);
+
+        await select.trigger('keydown', { key: 'ArrowUp', keyCode: 38 });
+        await select.trigger('keydown', { key: 'ArrowUp', keyCode: 38 });
+        await select.trigger('keydown', { key: 'ArrowUp', keyCode: 38 });
+        await flushPromises();
+
+        expect(wrapper.find('.ks-selected-item').text()).toBe('Cherry');
+
+        await select.trigger('keydown', { key: 'Enter', keyCode: 13 });
+        await flushPromises();
+
+        expect(wrapper.vm.value).toBe(fruits[3]);
+    });
 });

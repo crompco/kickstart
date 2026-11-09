@@ -173,6 +173,19 @@ export default {
             return groups;
         },
 
+        /**
+         * The list indexes in the order the groups show them, or null without groupBy
+         *
+         * @returns {Array<Number>|null}
+         */
+        navigation_order() {
+            if ( !this.groupBy ) {
+                return null;
+            }
+
+            return Object.values(this.groups).flatMap(group => group.map(item => item._index));
+        },
+
         hasEmptyMessage() {
             return !!(this.emptyMessage || this.$slots.empty || (this.$scopedSlots && this.$scopedSlots.empty));
         },
@@ -275,13 +288,42 @@ export default {
         },
 
         /**
+         * The list index one step up (-1) or down (1) from the selection, in the order on screen.
+         * Above the first item it is -1; below the last item it is past the last index.
+         *
+         * @param {Number} step
+         * @returns {Number}
+         */
+        adjacentIndex(step) {
+            const order = this.navigation_order;
+            if ( !order ) {
+                return this.selected_index + step;
+            }
+
+            const position = order.indexOf(this.selected_index);
+            if ( position == -1 ) {
+                return step > 0 && order.length ? order[0] : this.selected_index + step;
+            }
+
+            const next_position = position + step;
+            if ( next_position < 0 ) {
+                return -1;
+            }
+            if ( next_position >= order.length ) {
+                return this.last_index + 1;
+            }
+
+            return order[next_position];
+        },
+
+        /**
          * Move the selection up
          */
         selectUp() {
             this.navigating_with_keys = true;
-            const index = this.selected_index - 1;
+            const index = this.adjacentIndex(-1);
             if ( !(index < this.minIndex) ) {
-                this.selected_index -= 1;
+                this.selected_index = index;
                 this.callHookMethod('onSelectUp');
             } else {
                 this.callHookMethod('onSelectStartBoundary');
@@ -299,10 +341,10 @@ export default {
          */
         selectDown() {
             this.navigating_with_keys = true;
-            const index = this.selected_index + 1;
+            const index = this.adjacentIndex(1);
 
             if ( index <= this.last_index ) {
-                this.selected_index += 1;
+                this.selected_index = index;
                 this.callHookMethod('onSelectDown');
             } else {
                 this.callHookMethod('onSelectEndBoundary');
