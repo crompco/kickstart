@@ -302,7 +302,13 @@ export default {
 
             const position = order.indexOf(this.selected_index);
             if ( position == -1 ) {
-                return step > 0 && order.length ? order[0] : this.selected_index + step;
+                if ( step > 0 && order.length ) {
+                    return order[0];
+                }
+
+                return step < 0 && this.selected_index > this.last_index && order.length
+                    ? order[order.length - 1]
+                    : this.selected_index + step;
             }
 
             const next_position = position + step;
@@ -662,7 +668,9 @@ export default {
                 return;
             }
 
-            if ( this.paginated && this.last_index - this.paginateThreshold <= index ) {
+            const position = this.navigation_order ? this.navigation_order.indexOf(index) : index;
+
+            if ( this.paginated && this.last_index - this.paginateThreshold <= position ) {
                 if ( !this.list_exhausted ) {
                     this.page++;
                     this.runSearch(this.lookup_name, true)

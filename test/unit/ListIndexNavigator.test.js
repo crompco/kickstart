@@ -438,4 +438,45 @@ describe('grouped items', () => {
 
         expect(wrapper.vm.value).toBe(fruits[3]);
     });
+
+    test('ArrowUp from past the end of a shorter list goes to the last item on screen', async () => {
+        mountGrouped(KsSelect, 'name="id" label-key="name"', fruits.slice(0, 4));
+        await flushPromises();
+
+        await wrapper.find('.ks-select-selection').trigger('click');
+        await flushPromises();
+
+        wrapper.findComponent(KsSelect).vm.selected_index = 5;
+        await wrapper.find('.ks-select').trigger('keydown', { key: 'ArrowUp', keyCode: 38 });
+        await flushPromises();
+
+        expect(wrapper.find('.ks-selected-item').text()).toBe('Blueberry');
+    });
+
+    test('with groups, the next page loads near the end of the list on screen', async () => {
+        const page_one = [fruits[0], fruits[2], fruits[3], fruits[5]];
+        respondWith(config => ok(config, config.params.page == 1 ? page_one : []));
+        mountSearch(KsAutocomplete, 'selection-key="name" group-by="type" :delay="0" paginated :paginate-threshold="1"');
+        await flushPromises();
+
+        await type('e');
+        await flushPromises();
+
+        expect(groupTitles()).toEqual(['Tree', 'Bush', 'Palm']);
+
+        const input = wrapper.find('input');
+        const down = async () => {
+            await input.trigger('keydown', { key: 'ArrowDown', keyCode: 40 });
+            await flushPromises();
+        };
+
+        await down();
+        await down();
+        expect(wrapper.find('.ks-selected-item').text()).toBe('Cherry');
+        expect(wrapper.vm.searches.length).toBe(1);
+
+        await down();
+        expect(wrapper.find('.ks-selected-item').text()).toBe('Blueberry');
+        expect(wrapper.vm.searches[1]).toEqual({ term: 'e', page: 2 });
+    });
 });
