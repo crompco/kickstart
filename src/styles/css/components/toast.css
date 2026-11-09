@@ -2,6 +2,7 @@
 .ks-toast {
   position: fixed;
   z-index: 100;
+  pointer-events: none;
 }
 .ks-toast.top {
   top: 1rem;
@@ -41,6 +42,7 @@
 .ks-toast div.ks-alert {
   max-width: 400px;
   position: relative;
+  pointer-events: auto;
 }
 .ks-toast div.ks-alert.has-close {
   padding-right: 2rem;

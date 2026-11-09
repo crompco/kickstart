@@ -70,7 +70,7 @@
 - Filters still registered (Vue 2 only) — deprecated for Vue 3; use lib/strings functions.
 
 ## Toast
-- KsToast emits 'closed'; $toast destroys it (component no longer calls $destroy on itself). One shared .ks-toast container.
+- KsToast emits 'closed'; $toast destroys it (component no longer calls $destroy on itself). One .ks-toast container per position (2.x moved all open toasts to the newest toast's position); `limit` counts the toasts of one position. The container ignores pointer events, only the toasts take clicks.
 
 ## Positioning (tether → floating-ui)
 - attachment/targetAttachment/constraints props keep the tether format; same tether-* classes on the element (CSS unchanged).
