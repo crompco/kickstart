@@ -89,6 +89,15 @@ test('toasts share one container', () => {
     expect(container().childElementCount).toBe(2);
 });
 
+test('a toast with another position opens in its own container and does not move the open toasts', () => {
+    const top = toast({ message: 'Top', position: 'top-right' });
+    const bottom = toast({ message: 'Bottom', position: 'bottom-left' });
+
+    expect(top.element.parentElement.className).toBe('ks-toast top-right');
+    expect(bottom.element.parentElement.className).toBe('ks-toast bottom-left');
+    expect(document.querySelectorAll('.ks-toast')).toHaveLength(2);
+});
+
 test('a toast over the limit waits until another one closes', () => {
     toast({ message: 'One', duration: 1000, limit: 2 });
     toast({ message: 'Two', duration: 5000, limit: 2 });

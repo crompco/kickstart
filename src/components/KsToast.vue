@@ -62,11 +62,12 @@
         },
 
         beforeMount() {
-            let parent = document.querySelector('.ks-toast');
+            let parent = [...document.querySelectorAll('.ks-toast')]
+                .find(container => container.classList.contains(this.position));
 
             if ( !parent ) {
                 parent = document.createElement('div');
-                parent.className = 'ks-toast';
+                parent.classList.add('ks-toast', this.position);
                 document.body.appendChild(parent);
             }
 
@@ -94,8 +95,6 @@
                     return;
                 }
 
-                this.parent.className = '';
-                this.parent.classList.add('ks-toast', this.position);
                 this.parent.appendChild(this.$el);
                 this.active = true;
 
