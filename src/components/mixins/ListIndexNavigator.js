@@ -658,6 +658,10 @@ export default {
          * @param index
          */
         runNextPage(index) {
+            if ( this.loading ) {
+                return;
+            }
+
             if ( this.paginated && this.last_index - this.paginateThreshold <= index ) {
                 if ( !this.list_exhausted ) {
                     this.page++;

@@ -256,6 +256,30 @@ describe('remote search', () => {
         expect(wrapper.vm.searches.length).toBe(3);
     });
 
+    test('does not request the next page while a page is loading', async () => {
+        const pages = { 1: fruits.slice(0, 2), 2: fruits.slice(2, 4), 3: fruits.slice(4) };
+        const page_two = deferred();
+        respondWith(config => (config.params.page == 2 ? page_two.promise : ok(config, pages[config.params.page])));
+        mountSearch(KsAutocomplete, 'selection-key="name" :delay="0" paginated :paginate-threshold="1"');
+        const autocomplete = wrapper.findComponent(KsAutocomplete);
+        await flushPromises();
+
+        await type('r');
+        await flushPromises();
+
+        const input = wrapper.find('input');
+        for ( let i = 0; i < 4; i++ ) {
+            await input.trigger('keydown', { key: 'ArrowDown', keyCode: 40 });
+        }
+
+        expect(wrapper.vm.searches).toEqual([{ term: 'r', page: 1 }, { term: 'r', page: 2 }]);
+
+        page_two.resolve(ok(requests[1], pages[2]));
+        await flushPromises();
+
+        expect(autocomplete.vm.list).toEqual(fruits.slice(0, 4));
+    });
+
     test('a new term starts again at page 1', async () => {
         respondWith(config => ok(config, fruits.slice(0, 4)));
         mountSearch(KsAutocomplete, 'selection-key="name" :delay="0" paginated :paginate-threshold="3"');
