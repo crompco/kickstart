@@ -4,7 +4,7 @@ title: Colors
 
 # Colors
 
-Kickstart uses the [Tailwind CSS v3](https://v3.tailwindcss.com/docs/customizing-colors) colors: red, orange, yellow, green, blue, purple and gray, each in shades 50 to 950. The same values feed the color utilities, the `--ks-*` tokens, the Sass `get_color()` function and the state colors of the components.
+The Kickstart palette is adapted from the [Tailwind CSS v3](https://v3.tailwindcss.com/docs/customizing-colors) colors. It has red, orange, yellow, green, blue, purple and gray, each in shades 50 to 950. The same values feed the color utilities, the `--ks-*` tokens, the Sass `get_color()` function and the state colors of the components.
 
 ## Palette
 
