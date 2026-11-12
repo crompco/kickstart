@@ -33,15 +33,16 @@
         margin-bottom: 0;
     }
 
+    /* The input fills the rest of the line after the last selection, and wraps when less than 4rem is left */
     &.ks-multiple > input {
         border: 0;
         outline: none;
-        display: inline-block;
+        flex: 1 0 4rem;
+        min-width: 0;
         margin-top: 0;
         margin-bottom: 0;
         box-shadow: none;
         max-width: 100%;
-        width: auto;
         padding: 1px 0;
     }
 
@@ -87,6 +88,9 @@
     }
 
     &.ks-multiple {
+        display: inline-flex;
+        flex-wrap: wrap;
+        align-items: center;
         padding: calc(var(--ks-ac-input-multi-padding) - var(--ks-ac-multi-margin)) var(--ks-ac-input-multi-padding);
         width: calc(100% - (var(--ks-ac-margin-right) + var(--ks-ac-margin-left)));
 
@@ -104,6 +108,10 @@
 
         &.ks-selected .ks-autocomplete-list {
             margin-top: 2px;
+        }
+
+        .ks-selection {
+            display: contents;
         }
 
         .ks-selection .ks-selection-text {

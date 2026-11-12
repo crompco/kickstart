@@ -127,6 +127,7 @@
 - KsSelect: value 0 is a value (v2 showed placeholder) when the select binds keys and an item has the key 0. When no item has the key 0, 0 is no selection: the placeholder shows and there is no deselect, as in 2.x (APIs often send 0 for an empty id). When it binds objects (`force-objects`, or an object value), a value that is not an object is no selection, and the placeholder shows, as in 2.x. clear() closes; selectItem ignores a missing item.
 - KsAutocomplete multiple: emits NEW arrays and no longer mutates the bound array (v2 pushed/spliced value in place).
 - KsAutocomplete: backspace via @keyup.backspace; keys on lists; listHeight is a computed style.
+- KsAutocomplete multiple: the input follows the last selection on the same line and fills the rest of it. It wraps to the next line only when less than 4rem is left. 2.x gave the input a fixed width (about 20 characters), so it often wrapped with room left. `.ks-autocomplete-holder.ks-multiple` is `inline-flex` (wrap), and its `.ks-selection` is `display: contents`.
 - ListIndexNavigator: in-flight searches abort on new search/destroy (AbortController; api.isCancel ignored); all document/list listeners removed on destroy (v2 leaked mousemove and focus toggles); filter matches non-string fields via String(); no filter cache for items mode.
 - emits declared on all.
 
