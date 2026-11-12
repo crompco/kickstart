@@ -1,0 +1,25 @@
+@import "../functions/_utils";
+@import "../variables/_card";
+
+@mixin ks-tokens-card {
+    --ks-card-bg: #{$card-bg};
+    --ks-card-box-shadow: #{$card-box-shadow};
+    --ks-card-light-box-shadow: #{$card-light-box-shadow};
+    --ks-card-header-font-size: #{rem($card-header-font-size)};
+    --ks-card-header-padding: #{rem($card-header-padding)};
+    --ks-card-header-box-shadow: #{$card-header-box-shadow};
+    --ks-card-light-header-bg: #{$card-light-header-bg};
+    --ks-card-light-header-font-size: #{$card-light-header-font-size};
+    --ks-card-light-header-color: #{$card-light-header-color};
+    --ks-card-body-padding: #{rem($card-body-padding)};
+    --ks-card-light-body-padding: #{$card-light-body-padding};
+    --ks-card-footer-padding: #{rem($card-footer-padding)};
+    --ks-card-footer-border-color: #{$card-footer-border-color};
+    --ks-card-footer-color: #{$card-footer-color};
+    --ks-card-footer-bg: #{$card-footer-bg};
+    --ks-card-footer-danger-color: #{$card-footer-danger-color};
+    --ks-card-footer-danger-hover-color: #{$card-footer-danger-hover-color};
+    --ks-card-footer-danger-hover-bg: #{$card-footer-danger-hover-bg};
+    --ks-card-footer-hover-color: #{$card-footer-hover-color};
+    --ks-card-footer-hover-bg: #{$card-footer-hover-bg};
+}

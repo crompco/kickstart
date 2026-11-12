@@ -1,0 +1,51 @@
+.ks-paginator {
+    > ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        li {
+            float: left;
+
+            a {
+                display: block;
+                color: var(--ks-paginator-link-color);
+                border: solid 1px var(--ks-paginator-link-color);
+                padding: 0.25rem 0.5rem;
+                text-decoration: none;
+
+                &:hover {
+                    background: hsl(from var(--ks-paginator-link-color) h s calc(l + 20));
+                    color: var(--ks-white);
+                }
+
+                &.current-page {
+                    background: var(--ks-paginator-link-color);
+                    color: var(--ks-white);
+                }
+            }
+
+            &:nth-child(n+3) a {
+                border-left: none;
+            }
+
+            & a.next-page, & a.prev-page {
+                border: solid 1px transparent;
+
+                &:hover {
+                    border-color: hsl(from var(--ks-paginator-link-color) h s calc(l + 20));
+                }
+            }
+
+            /* add left border back into the page link */
+            &.dot-pages {
+                padding: 0.25rem 0.5rem;
+                vertical-align: middle;
+
+                + li a {
+                    border: solid 1px var(--ks-paginator-link-color);
+                }
+            }
+        }
+    }
+}

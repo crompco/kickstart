@@ -1,0 +1,232 @@
+.ks-checkbox, .ks-radio {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--ks-form-options-margin-bottom);
+    user-select: none;
+    position: relative;
+
+    &.inline {
+        display: inline-flex;
+        margin-right: var(--ks-form-options-margin-right);
+    }
+
+    &.ks-state-active {
+        .ks-checkbox-input-wrapper {
+            background-color: var(--ks-form-options-active-bg);
+            border-color: var(--ks-form-options-active-border);
+
+            svg {
+                position: absolute;
+                height: calc(var(--ks-form-options-height) - var(--ks-form-options-border-radius));
+                width: calc(var(--ks-form-options-width) - var(--ks-form-options-border-radius));
+                top: calc(var(--ks-form-options-border-radius) / -2);
+                left: calc(var(--ks-form-options-border-radius) / -2);
+
+                path {
+                    fill: var(--ks-form-checkbox-check-fill);
+                }
+            }
+        }
+
+        .ks-radio-input-wrapper {
+            border-color: var(--ks-form-options-active-border);
+
+            .radio-check {
+                position: absolute;
+                display: block;
+                background-color: var(--ks-form-options-active-bg);
+                border-radius: 50%;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin: auto;
+                transform: scale(var(--ks-form-radio-select-scale));
+            }
+        }
+    }
+
+    .ks-checkbox-input-wrapper, .ks-radio-input-wrapper {
+        position: relative;
+        background-color: var(--ks-form-options-bg);
+        border: 2px solid var(--ks-form-options-border);
+        height: var(--ks-form-options-height);
+        width: var(--ks-form-options-width);
+        border-radius: var(--ks-form-options-border-radius);
+        flex-shrink: 0;
+        margin-right: var(--ks-form-options-margin-right);
+    }
+
+    .ks-radio-input-wrapper {
+        border-radius: 50%;
+    }
+
+    .ks-checkbox-label-wrapper, .ks-radio-label-wrapper {
+        line-height: var(--ks-form-options-height);
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    input[type=checkbox], input[type=radio] {
+        position: absolute;
+        appearance: none;
+        background: transparent;
+        margin: 0;
+        height: 1.15rem;
+        width: 1.15rem;
+        border-radius: 50%;
+
+        &:focus {
+            outline: none;
+
+            + .ks-checkbox-input-wrapper, + .ks-radio-input-wrapper {
+                border-color: var(--ks-form-options-focus-border);
+            }
+        }
+    }
+}
+
+/* Option buttons */
+.ks-radio-group.option-buttons, .ks-checkbox-group.option-buttons {
+    display: inline-block;
+
+    .ks-radio, .ks-checkbox {
+        display: inline-block;
+        padding: 0.5rem;
+        border: solid 1px var(--ks-gray);
+        border-left-width: 0;
+        color: hsl(from var(--ks-text-color) h s calc(l + 10));
+        white-space: nowrap;
+        margin: 0;
+
+        &:first-child {
+            border-left-width: 1px;
+            border-top-left-radius: 3px;
+            border-bottom-left-radius: 3px;
+        }
+
+        &:last-child {
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+        }
+
+        &:hover {
+            color: var(--ks-text-color);
+        }
+
+        &.ks-state-active {
+            background: var(--ks-form-options-active-bg);
+            color: var(--ks-form-checkbox-check-fill);
+            border-color: var(--ks-form-options-active-bg);
+        }
+
+        &.ks-state-focus {
+            box-shadow: inset 0 0 0 2px var(--ks-form-options-focus-border);
+        }
+
+        .ks-checkbox-input-wrapper, .ks-radio-input-wrapper {
+            display: none;
+        }
+
+        /* Same line height as a text input, so both are one control height */
+        .ks-checkbox-label-wrapper, .ks-radio-label-wrapper {
+            line-height: var(--ks-global-line-height);
+        }
+    }
+}
+
+.ks-checkbox.switch {
+    border-radius: 1.4rem;
+    cursor: pointer;
+    height: 1.4rem;
+    position: relative;
+    display: inline-block;
+    width: auto;
+    margin-bottom: 0rem;
+
+    .ks-checkbox-label-wrapper {
+        margin-left: 0.25rem;
+        display: inline-block;
+        vertical-align: 0.3rem;
+        transition: all 0.2s;
+    }
+
+    input[type=checkbox] {
+        + .ks-checkbox-switch {
+            display: inline-block;
+            background: hsl(from var(--ks-switch-background-color) h s calc(l - 9));
+            border: 0;
+            border-radius: 1.4rem;
+            cursor: pointer;
+            height: 1.4rem;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            transition: background 0.3s ease;
+            width: 2.25rem;
+            z-index: 0;
+
+            &::before {
+                position: absolute;
+                top: 2px;
+                right: 0;
+                bottom: 0;
+                left: 2px;
+                background: var(--ks-switch-background-color);
+                border-radius: 1.4rem;
+                content: "";
+                height: 1.2rem;
+                transform: scale(1);
+                transition: all 0.3s ease;
+                width: 2.05rem;
+                z-index: 1;
+            }
+
+            &::after {
+                position: absolute;
+                top: 2px;
+                right: 0;
+                bottom: 0;
+                left: 2px;
+                height: 1.2rem;
+                width: 1.2rem;
+                background: var(--ks-switch-background-color);
+                border-radius: 1.2rem;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+                content: "";
+                transition: all 0.3s ease;
+                z-index: 2;
+            }
+        }
+
+        &:checked + .ks-checkbox-switch {
+            background: var(--ks-switch-active-color);
+
+            &::before {
+                transform: scale(0);
+            }
+
+            &::after {
+                left: 0.95rem;
+            }
+        }
+
+        &:disabled {
+            + .ks-checkbox-switch::before {
+                background: var(--ks-switch-disabled-color);
+            }
+
+            ~ .ks-checkbox-label-wrapper {
+                opacity: 0.5;
+                font-style: italic;
+            }
+        }
+
+        &:focus + .ks-checkbox-switch {
+            outline-color: var(--ks-form-options-focus-border);
+            outline-style: solid;
+        }
+    }
+}

@@ -1,11 +1,18 @@
 <template>
-    <component :is="tag" :class="stateClasses">
+    <component
+        :is="tag"
+        :class="stateClasses"
+        @dragenter="dragOver"
+        @dragover="dragOver"
+        @dragleave="dragLeave"
+        @drop="dropEvent"
+        @dragend="dragEnd"
+    >
         <slot></slot>
     </component>
 </template>
 
 <script>
-
     export default {
         name: 'KsDroppable',
 
@@ -22,15 +29,18 @@
                 type: String,
                 default: ''
             },
+            // true, false, or a function given the drag event that returns whether a drop is allowed
             accept: {
                 type: [Boolean, Function],
                 default: true,
             },
         },
 
+        emits: ['drop'],
+
         computed: {
             stateClasses() {
-                let state_classes = {};
+                const state_classes = {};
 
                 if ( this.activeClass ) {
                     state_classes[this.activeClass] = this.active;
@@ -49,29 +59,25 @@
             };
         },
 
-        mounted() {
-            this.$nextTick(() => {
-                this.$el.addEventListener('dragover', this.dragOver, false)
-                this.$el.addEventListener('dragleave', this.dragLeave, false)
-                this.$el.addEventListener('drop', this.dropEvent, false)
-                this.$el.addEventListener('dragend', this.dragEnd, false)
-            });
-        },
-
         methods: {
             dragOver(e) {
-                if ( !this.allowsDrop() ) {
+                if ( !this.allowsDrop(e) ) {
                     return;
                 }
 
                 e.preventDefault();
                 this.active = true;
             },
-            dragLeave() {
+            dragLeave(e) {
+                // Moving onto a child element is not leaving the drop zone
+                if ( e && e.relatedTarget && this.$el.contains(e.relatedTarget) ) {
+                    return;
+                }
+
                 this.active = false;
             },
             dropEvent(e) {
-                if ( !this.allowsDrop() ) {
+                if ( !this.allowsDrop(e) ) {
                     return;
                 }
 
@@ -83,20 +89,13 @@
             dragEnd() {
                 this.active = false;
             },
-            allowsDrop() {
+            allowsDrop(e) {
                 if ( typeof this.accept === 'function' ) {
-                    return this.accept();
+                    return this.accept(e);
                 }
 
                 return this.accept;
             },
-        },
-
-        beforeDestroy() {
-            this.$el.removeEventListener('dragover', this.dragOver, false);
-            this.$el.removeEventListener('dragleave', this.dragLeave, false)
-            this.$el.removeEventListener('drop', this.dropEvent, false);
-            this.$el.removeEventListener('dragend', this.dragEnd, false)
         },
     }
 </script>

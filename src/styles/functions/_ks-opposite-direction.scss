@@ -1,5 +1,5 @@
 @function ks-opposite-direction($grid) {
-    $_direction: map-get($grid, direction);
+    $_direction: map-get-default($grid, direction, ltr);
     $_float-direction: null;
     @if $_direction == "ltr" {
         $_float-direction: right;

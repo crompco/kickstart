@@ -1,54 +1,9 @@
 @import "../mixins/_utils";
 @import "../variables/_global";
 
-.right {
-	float: right;
-}
+@import "../tokens/_tokens";
+@import "../tokens/_global";
 
-.left {
-	float: left;
-}
+@include ks-emit-tokens(global);
 
-.t-right, .text-right {
-	text-align: right;
-}
-
-.t-left, .text-left {
-	text-align: left;
-}
-
-.t-center, .text-center {
-	text-align: center;
-}
-
-.rel, .relative {
-	position: relative;
-}
-
-.abs, .absolute {
-	position: absolute;
-}
-
-.v-center {
-	@include v-center();
-}
-
-.hide {
-	display: none;
-}
-
-.v-hide, .hidden {
-	visibility: hidden;
-}
-
-.visible {
-	visibility: visible;
-}
-
-.muted {
-	color: $text-muted;
-}
-
-.pointer {
-	cursor: pointer;
-}
+@import "../css/components/utils";

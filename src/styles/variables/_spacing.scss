@@ -59,7 +59,7 @@ $spacing_map: (
     ('type': padding, 'code': p),
     ('type': margin, 'code': m),
     ('type': margin, 'code': -m, 'prefix': '-'),
-);
+) !default;
 
 $size_map: (
     ('type': height, 'code': h, 'percent': 1),
@@ -68,4 +68,4 @@ $size_map: (
     ('type': 'min-height', 'code': 'min-h'),
     ('type': 'max-width', 'code': 'max-w'),
     ('type': 'min-width', 'code': 'mix-w'),
-);
+) !default;

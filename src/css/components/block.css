@@ -1,0 +1,12 @@
+.basic-block {
+    background-color: var(--ks-bb-bg);
+    border: 1px solid var(--ks-bb-border-color);
+    padding: var(--ks-bb-padding);
+    margin-top: var(--ks-bb-margin-top);
+    margin-bottom: var(--ks-bb-margin-bottom);
+
+    > :first-child {
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+    }
+}

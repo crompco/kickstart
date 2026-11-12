@@ -1,0 +1,10 @@
+@import "../functions/_utils";
+@import "../variables/_badge";
+
+@mixin ks-tokens-badge {
+    --ks-badge-bg: #{$badge-bg};
+    --ks-badge-color: #{$badge-color};
+    --ks-badge-font-size: #{rem($badge-font-size)};
+    --ks-badge-padding: #{rem($badge-padding)};
+    --ks-badge-border-radius: #{rem($badge-border-radius)};
+}

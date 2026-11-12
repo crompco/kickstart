@@ -1,49 +1,9 @@
 @import '../variables/paginator';
 
-.ks-paginator {
-    > ul {
-        margin: 0;
-        padding: 0;
-        list-style: none;
+@import "../tokens/_tokens";
+@import "../tokens/_global";
+@import "../tokens/_paginator";
 
-        li {
+@include ks-emit-tokens(global, paginator);
 
-            float: left;
-            a {
-                display: block;
-                color: $paginator-link-color;
-                border: solid 1px $paginator-link-color;
-                padding: 0.25rem 0.5rem;
-                text-decoration: none;
-                &:hover {
-                    background: lighten($paginator-link-color, 20%);
-                    color: $white;
-                }
-                &.current-page {
-                    background: $paginator-link-color;
-                    color: $white;
-                }
-            }
-            &:nth-child(n+3) a {
-                border-left: none;
-            }
-
-            & a.next-page, & a.prev-page {
-                border: solid 1px transparent;
-                &:hover {
-                    border-color: lighten($paginator-link-color, 20%);
-                }
-            }
-
-            // add left border back into the page link
-            &.dot-pages {
-                padding: 0.25rem 0.5rem;
-                vertical-align: middle;
-                + li a {
-                    border: solid 1px $paginator-link-color;
-                }
-            }
-
-        }
-    }
-}
+@import "../css/components/paginator";

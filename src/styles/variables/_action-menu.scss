@@ -5,7 +5,7 @@
 //
 $am-button-bg: transparent !default;
 $am-button-border: 1px solid transparent !default;
-$am-button-padding: 3px 5px !default;
+$am-button-padding: 0.25rem !default;
 
 //
 // List
@@ -13,7 +13,7 @@ $am-button-padding: 3px 5px !default;
 $am-list-bg: $white !default;
 $am-list-min-width: 100px !default;
 $am-list-link-color: $state-default-bg !default;
-$am-list-link-padding: 0.35rem 0.75rem 0.35rem 0.5rem !default;
+$am-list-link-padding: 0.5rem 0.75rem 0.5rem 0.5rem !default;
 $am-list-link-hover-bg: $state-default-bg !default;
 $am-list-link-hover-color: $white !default;
 $am-list-separator: #ddd !default;

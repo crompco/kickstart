@@ -1,22 +1,27 @@
 <template>
-    <div class="ks-paginator" v-show="show_pagination">
+    <div
+        v-show="show_pagination"
+        class="ks-paginator"
+    >
         <ul class="row">
             <li>
-                <a href="#"
-                   @click.prevent.stop="previousPage()"
-                   class="prev-page"
-                   :class="{'disabled': pagination.previous_page == null}"
+                <a
+                    href="#"
+                    class="prev-page"
+                    :class="{'disabled': pagination.previous_page == null}"
+                    @click.prevent.stop="previousPage()"
                 >
-                    <
+                    &lt;
                 </a>
             </li>
             <li>
-                <a href="#"
-                   @click.prevent.stop="nextPage()"
-                   class="next-page"
-                   :class="{'disabled': pagination.next_page == null}"
+                <a
+                    href="#"
+                    class="next-page"
+                    :class="{'disabled': pagination.next_page == null}"
+                    @click.prevent.stop="nextPage()"
                 >
-                    >
+                    &gt;
                 </a>
             </li>
         </ul>
@@ -24,24 +29,14 @@
 </template>
 
 <script>
-    // External Dependencies
-
-    // Internal Dependencies
+    import RoutedPagination from './mixins/RoutedPagination';
 
     export default {
         name: 'KsSimplePaginator',
 
+        mixins: [RoutedPagination],
+
         props: {
-            routed: {
-                type: Boolean,
-                default: false
-            },
-
-            pageVar: {
-                type: String,
-                default: 'page'
-            },
-
             pagination: {
                 type: Object,
                 default() {
@@ -71,7 +66,7 @@
                     return;
                 }
 
-                this.changePage(this.pagination.current_page - 1);
+                this.changePage(parseInt(this.pagination.current_page) - 1);
             },
 
             nextPage() {
@@ -79,23 +74,7 @@
                     return;
                 }
 
-                this.changePage(this.pagination.current_page + 1);
-            },
-
-            changePage(page) {
-                if ( !this.routed ) {
-                    return this.$emit('input', page);
-                }
-
-                const query = Object.assign({}, this.$route.query, {[this.pageVar]: page});
-
-                this.$router.push({
-                    to: {
-                        name: this.$route.name,
-                    },
-                    params: this.$route.params,
-                    query
-                });
+                this.changePage(parseInt(this.pagination.current_page) + 1);
             },
         }
     }

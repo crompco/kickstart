@@ -1,0 +1,20 @@
+/* Generated from src/css/components/datepicker.css by build/generate-css.mjs */
+.ks-datepicker {
+  position: relative;
+}
+.ks-datepicker .ks-calendar-view {
+  width: 17rem;
+}
+.ks-datepicker .ks-datepicker-cal {
+  position: absolute;
+  font-size: 0.8em;
+  box-shadow: var(--ks-datepicker-cal-box-shadow);
+  z-index: 100;
+}
+.ks-datepicker .ks-datepicker-cal .ks-cal-week {
+  min-height: 2rem;
+}
+.ks-datepicker .ks-datepicker-cal .ks-cal-week .ks-cal-day .ks-day-num,
+.ks-datepicker .ks-datepicker-cal .ks-cal-week .ks-cal-blank .ks-day-num {
+  text-align: center;
+}

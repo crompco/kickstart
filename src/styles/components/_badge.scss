@@ -2,22 +2,20 @@
 @import "../variables/_alerts";
 @import "../variables/_badge";
 
-.ks-badge {
-    background: $badge-bg;
-    color: $badge-color;
-    display: inline-block;
-    text-align: center;
-    line-height: 1;
-    font-size: rem($badge-font-size);
-    white-space: nowrap;
-    vertical-align: middle;
-    padding: rem($badge-padding);
-    border-radius: rem($badge-border-radius);
+@import "../tokens/_tokens";
+@import "../tokens/_global";
+@import "../tokens/_alerts";
+@import "../tokens/_badge";
 
-    @each $name, $map in $alerts {
-        &.#{$name} {
-            background: get($map, background-color);
-            color: get($map, color);
+@include ks-emit-tokens(global, alerts, badge);
+
+@import "../css/components/badge";
+
+@each $name, $map in $alerts {
+    @if not index($ks-default-alerts, $name) {
+        .ks-badge.#{$name} {
+            background: var(--ks-alert-#{$name}-background-color);
+            color: var(--ks-alert-#{$name}-color);
         }
     }
 }

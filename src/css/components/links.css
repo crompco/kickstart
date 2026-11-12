@@ -1,0 +1,11 @@
+a {
+    text-decoration: none;
+
+    &.danger {
+        color: var(--ks-state-danger-bg);
+
+        &:hover {
+            color: hsl(from var(--ks-state-danger-bg) h s calc(l - 12));
+        }
+    }
+}

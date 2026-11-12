@@ -1,26 +1,37 @@
 <template>
-    <div class="ks-modal"
-         v-show="isOpen"
-         :class="[{ 'danger': danger }, classObj]"
-         @click.prevent="maskClick"
-         @mousedown="mask_interaction = true"
+    <div
+        v-show="isOpen"
+        class="ks-modal"
+        :class="[{ 'danger': danger }, classObj]"
+        @click.prevent="maskClick"
+        @mousedown="mask_interaction = true"
     >
-        <div class="ks-modal-wrapper"
-             :style="[modalStyle, modalObj]"
-             tabindex="-1"
-             ref="container"
-             @click.stop
-             @keydown.esc.stop="escape()"
-             @mousedown.stop="mask_interaction = false"
+        <div
+            ref="container"
+            tabindex="-1"
+            class="ks-modal-wrapper"
+            :style="[modalStyle, modalObj]"
+            @click.stop
+            @keydown.esc.stop="escape()"
+            @mousedown.stop="mask_interaction = false"
         >
             <div>
                 <!-- Modal header-->
-                <div class="ks-modal-header" v-if="showHeader">
+                <div
+                    v-if="showHeader"
+                    class="ks-modal-header"
+                >
                     <slot name="header">
-                        <h4>{{title}}</h4>
+                        <h4>{{ title }}</h4>
                     </slot>
-                    <div class="ks-modal-close" v-if="showClose">
-                        <a href="#" @click.prevent="close">
+                    <div
+                        v-if="showClose"
+                        class="ks-modal-close"
+                    >
+                        <a
+                            href="#"
+                            @click.prevent="close"
+                        >
                             <close></close>
                         </a>
                     </div>
@@ -29,7 +40,10 @@
                 <ks-loader-line :show="isLoading"></ks-loader-line>
 
                 <!-- Modal body-->
-                <div class="ks-modal-body" ref="body">
+                <div
+                    ref="body"
+                    class="ks-modal-body"
+                >
                     <slot></slot>
                 </div>
 
@@ -37,7 +51,6 @@
                 <div class="ks-modal-footer">
                     <slot name="footer"></slot>
                 </div>
-
             </div>
         </div>
     </div>
@@ -45,11 +58,8 @@
 
 
 <script>
-    // External Dependencies
-    import Close from '../svg/close.svg';
-
-    // Internal Dependencies
-    import {addClass, removeClass} from '../helpers/dom';
+    import Close from './icons/IconClose.vue';
+    import { addClass, removeClass } from '../helpers/dom';
     import KsLoaderLine from './KsLoaderLine.vue';
 
     export default {
@@ -105,15 +115,21 @@
             }
         },
 
+        emits: ['open', 'close'],
+
         data() {
             return {
                 isOpen: false,
-                isLoading: false,
-                classObj: {},
+                isLoading: this.loading,
+                classObj: {
+                    'modal-scroll': false,
+                },
                 updatePosition: false,
-                modalObj: {},
+                modalObj: {
+                    left: null,
+                },
                 width: null,
-                // This variable is used to detect when a user is interacting with the mask vs the body
+                // Detects when a user is interacting with the mask vs the body
                 mask_interaction: false,
             };
         },
@@ -129,34 +145,24 @@
             }
         },
 
-        mounted() {
-            this.$on('open', () => {
-                document.body.appendChild(this.$el);
-
-                window.addEventListener('resize', this.windowResize);
-
-                this.$nextTick(() => {
-                    this.$refs.container.focus();
-                });
-            });
+        beforeDestroy() {
+            this.teardown();
         },
 
-        beforeDestroy() {
-            this.$el.remove();
-
-            this.close();
+        beforeUnmount() {
+            this.teardown();
         },
 
         beforeUpdate() {
-            if ( this.updatePosition && typeof this.$slots.default !== 'undefined' ) {
+            if ( this.updatePosition && this.$slots.default ) {
                 this.updatePosition = false;
-                setImmediate(() => {
+                setTimeout(() => {
                     this.positionModal();
                 });
             }
 
             this.$nextTick(() => {
-                if ( this.isOpen && this.width !== null && this.width != this.$refs.container.getBoundingClientRect().width ) {
+                if ( this.isOpen && this.width !== null && this.$refs.container && this.width != this.$refs.container.getBoundingClientRect().width ) {
                     this.positionModal();
                 }
             });
@@ -166,12 +172,25 @@
             open() {
                 this.isOpen = true;
                 this.mask_interaction = false;
-                this.$emit('open');
+
+                // The modal lives in <body> while it is used so no container can clip it
+                if ( this.$el.parentNode !== document.body ) {
+                    document.body.appendChild(this.$el);
+                }
+
+                window.removeEventListener('resize', this.windowResize);
+                window.addEventListener('resize', this.windowResize);
 
                 addClass(document.documentElement, 'modal-open');
 
+                this.$emit('open');
+
                 this.$nextTick(() => {
-                    if ( typeof this.$slots.default === 'undefined' ) {
+                    if ( this.$refs.container ) {
+                        this.$refs.container.focus();
+                    }
+
+                    if ( !this.$slots.default ) {
                         this.updatePosition = true;
                     } else {
                         this.positionModal();
@@ -185,13 +204,8 @@
                 window.removeEventListener('resize', this.windowResize);
 
                 this.$nextTick(() => {
-                    const other_modal_open = [...document.querySelectorAll('.ks-modal')]
-                        .filter(modal => modal.offsetHeight !== 0)
-
-                    if ( other_modal_open.length === 0 ) {
-                        removeClass(document.documentElement, 'modal-open');
-                    }
-                    this.$set(this.classObj, 'modal-scroll', false);
+                    this.releaseDocument();
+                    this.classObj['modal-scroll'] = false;
                 })
             },
             escape() {
@@ -214,39 +228,53 @@
             },
             positionModal() {
                 const $doc = document.documentElement;
-                let modal = this.$refs.container;
-                let modal_height = modal.clientHeight;
-                let window_height = $doc.clientHeight;
-                let window_width = $doc.clientWidth;
-                let style = window.getComputedStyle(modal);
-                const modal_is_bigger = modal_height > window_height;
-                let scroll_to_top = false;
+                const modal = this.$refs.container;
 
-                if ( modal_is_bigger || this.forceScroll ) {
-                    this.$set(this.classObj, 'modal-scroll', true);
-                    this.$nextTick(() => {
-                        modal_height += parseFloat(style.marginTop) + parseFloat(style.marginBottom);
-                        modal_height = modal_is_bigger ? `${modal_height}px` : '';
-                    });
-                } else {
-                    scroll_to_top = true;
-                    this.$set(this.classObj, 'modal-scroll', false);
-                    modal_height = '';
+                if ( !modal ) {
+                    return;
                 }
+
+                const modal_height = modal.clientHeight;
+                const window_height = $doc.clientHeight;
+                const window_width = $doc.clientWidth;
+                const modal_is_bigger = modal_height > window_height;
+
+                this.classObj['modal-scroll'] = modal_is_bigger || this.forceScroll;
 
                 this.$nextTick(() => {
                     const rect = modal.getBoundingClientRect();
                     this.width = rect.width;
 
-                    this.$set(this.modalObj, 'left', ((100 - ((rect.width / window_width) * 100)) / 2).toFixed(3) + '%');
+                    if ( window_width ) {
+                        this.modalObj.left = ((100 - ((rect.width / window_width) * 100)) / 2).toFixed(3) + '%';
+                    }
                 });
 
-                if ( !this.forceScroll && scroll_to_top ) {
+                if ( !this.forceScroll && !modal_is_bigger ) {
                     this.$el.scrollTop = 0;
                 }
             },
             windowResize() {
                 this.positionModal();
+            },
+            releaseDocument() {
+                const other_modal_open = [...document.querySelectorAll('.ks-modal')]
+                    .filter(modal => modal !== this.$el && modal.style.display !== 'none' && modal.offsetHeight !== 0);
+
+                if ( other_modal_open.length === 0 ) {
+                    removeClass(document.documentElement, 'modal-open');
+                }
+            },
+            teardown() {
+                window.removeEventListener('resize', this.windowResize);
+
+                if ( this.isOpen ) {
+                    this.isOpen = false;
+                    this.$emit('close');
+                }
+
+                this.$el.remove();
+                this.releaseDocument();
             },
         },
 

@@ -1,0 +1,44 @@
+.ks-panel {
+    margin-bottom: var(--ks-panel-margin-bottom);
+
+    &:not(.light) {
+        border: var(--ks-panel-border);
+        box-shadow: var(--ks-panel-box-shadow) var(--ks-panel-box-shadow-color);
+        background-color: var(--ks-panel-bg);
+    }
+
+    &:not(.light) .ks-panel-header {
+        font-weight: var(--ks-panel-header-font-weight);
+        border-top: var(--ks-panel-header-border-top);
+        box-shadow: var(--ks-pane-header-box-shadow);
+    }
+
+    &:not(.light) .ks-panel-header, &:not(.light) .ks-panel-footer {
+        background-color: var(--ks-panel-header-bg);
+        padding: var(--ks-panel-header-padding);
+        color: var(--ks-panel-header-color);
+    }
+
+    .ks-panel-header, .ks-panel-footer {
+        padding: var(--ks-panel-header-padding);
+    }
+
+    .ks-panel-body {
+        padding: var(--ks-panel-body-padding);
+    }
+
+    &.no-shadow {
+        box-shadow: none;
+    }
+
+    &.light {
+        .ks-panel-header {
+            color: var(--ks-panel-light-header-color);
+        }
+
+        .ks-panel-body:not(.no-bg) {
+            background: var(--ks-panel-light-body-bg);
+            box-shadow: var(--ks-panel-light-body-box-shadow);
+        }
+    }
+}

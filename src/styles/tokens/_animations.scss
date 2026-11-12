@@ -1,0 +1,5 @@
+@import "../variables/_animations";
+
+@mixin ks-tokens-animations {
+    --ks-animation-speed: #{$animation-speed};
+}

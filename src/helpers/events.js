@@ -1,58 +1,50 @@
 /**
- * Add event listener
- *
- * @param el
- * @param eventName
- * @param callback
- * @param event_capturing
+ * @param {EventTarget} el
+ * @param {string} eventName
+ * @param {Function} callback
+ * @param {boolean|object} event_capturing Capture flag or listener options
  */
 export function addEvent(el, eventName, callback, event_capturing = false) {
     if ( !el ) {
         return;
     }
 
-    if ( el.addEventListener ) {
-        el.addEventListener(eventName, callback, event_capturing);
-        if ( eventName === 'mousewheel' ) {
-            el.addEventListener('DOMMouseScroll', callback, event_capturing);
-        }
-    } else {
-        el.attachEvent(eventName, callback);
+    el.addEventListener(eventName, callback, event_capturing);
+    if ( eventName === 'mousewheel' ) {
+        el.addEventListener('DOMMouseScroll', callback, event_capturing);
     }
-};
+}
 
 /**
- * Remove event listener
- *
- * @param el
- * @param eventName
- * @param callback
- * @param event_capturing
+ * @param {EventTarget} el
+ * @param {string} eventName
+ * @param {Function} callback
+ * @param {boolean|object} event_capturing Must match the value given to addEvent
  */
 export function removeEvent(el, eventName, callback, event_capturing = false) {
     if ( !el ) {
         return;
     }
 
-    if ( el.removeEventListener ) {
-        el.removeEventListener(eventName, callback, event_capturing);
-        if ( eventName == 'mousewheel' ) {
-            el.removeEventListener('DOMMouseScroll', callback, event_capturing);
-        }
-    } else {
-        el.detachEvent(eventName, callback);
+    el.removeEventListener(eventName, callback, event_capturing);
+    if ( eventName === 'mousewheel' ) {
+        el.removeEventListener('DOMMouseScroll', callback, event_capturing);
     }
 }
 
 /**
+ * Calls back with true when focus enters the element (or a child) and with
+ * false once focus has left all of them for the delay.
  *
- * @param el
- * @param callback
- * @param delay
- * @return {{focus}, {blur}}
+ * @param {HTMLElement} el
+ * @param {Function} callback (focused, event)
+ * @param {number} delay
+ * @return {{el: HTMLElement, focus: Function, blur: Function, cancel: Function}} Pass to removeSmartFocusToggle
  */
 export function smartFocusToggle(el, callback, delay = 150) {
     const focused = [];
+    const timers = new Set();
+
     const smart_focus_toggle = {
         el,
         focus: (e) => {
@@ -60,17 +52,22 @@ export function smartFocusToggle(el, callback, delay = 150) {
             focused.push(e.target);
         },
         blur: (e) => {
-            let index = focused.indexOf(e.target);
+            const index = focused.indexOf(e.target);
             if ( index !== -1 ) {
                 focused.splice(index, 1);
             }
-            setTimeout(() => {
-                if ( 0 === focused.length ) {
-                    if ( el !== document.activeElement ) {
-                        callback(false, e);
-                    }
+
+            const timer = setTimeout(() => {
+                timers.delete(timer);
+                if ( focused.length === 0 && el !== document.activeElement ) {
+                    callback(false, e);
                 }
             }, delay);
+            timers.add(timer);
+        },
+        cancel: () => {
+            timers.forEach(timer => clearTimeout(timer));
+            timers.clear();
         },
     };
 
@@ -81,150 +78,157 @@ export function smartFocusToggle(el, callback, delay = 150) {
 }
 
 /**
- * Removes the events setup by the smartFocusToggle function.
- * Expects an object that was returned from the smartFocusToggle method.
+ * Removes the listeners of a smartFocusToggle and cancels its pending callback
  *
- * @param o
+ * @param {{el: HTMLElement, focus: Function, blur: Function, cancel?: Function}} o
  */
 export function removeSmartFocusToggle(o) {
     if ( o && o.focus && o.blur && o.el ) {
-        removeEvent(o.el, o.focus);
-        removeEvent(o.el, o.blur);
+        removeEvent(o.el, 'focus', o.focus, true);
+        removeEvent(o.el, 'blur', o.blur, true);
+
+        if ( o.cancel ) {
+            o.cancel();
+        }
     }
 }
 
 /**
- *
- *
- * @param e
- * @returns {Number}
+ * @param {KeyboardEvent} e
+ * @returns {number}
  */
 export function keyCode(e) {
     return e.keyCode ? e.keyCode : e.charCode;
 }
 
 /**
- * Stop the parent element from scrolling on the wheel scroll
+ * Stops the wheel from scrolling the parent once the element hits its top or bottom
  *
- * @param el
- * @param el
+ * @param {HTMLElement} el
+ * @return {Function} Removes the listener
  */
 export function stopParentScroll(el) {
-    addEvent(el, 'wheel', (e) => {
-        let offsetHeight = el.offsetHeight;
-        let scrollHeight = el.scrollHeight;
-        let scrollTop = el.scrollTop;
+    const listener = (e) => {
+        const offsetHeight = el.offsetHeight;
+        const scrollHeight = el.scrollHeight;
+        const scrollTop = el.scrollTop;
 
         if ( e.wheelDelta > 0 || e.deltaY < 0 ) {
-            if ( scrollTop == 0 ) {
+            if ( scrollTop === 0 ) {
                 e.preventDefault();
             }
-        } else {
-            if ( offsetHeight + scrollTop >= scrollHeight ) {
-                e.preventDefault();
-            }
+        } else if ( offsetHeight + scrollTop >= scrollHeight ) {
+            e.preventDefault();
         }
 
         e.stopPropagation();
-    });
+    };
+
+    addEvent(el, 'wheel', listener, { passive: false });
+
+    return () => removeEvent(el, 'wheel', listener, { passive: false });
 }
 
 /**
+ * Calls back when the element is scrolled to the bottom
  *
- * @param el
- * @param threshold
- * @returns {boolean}
+ * @param {HTMLElement} el
+ * @param {Function} callback
+ * @param {number} delay
+ * @param {number} threshold
+ * @return {Function} Removes the listener
  */
 export function scrolledToBottom(el, callback, delay = 100, threshold = 20) {
     let timer;
 
-    addEvent(el, 'scroll', (e) => {
+    const listener = () => {
         clearTimeout(timer);
 
-        // Using a timeout will prevent this from firing too often
+        // A timeout keeps this from firing for every scroll event
         timer = setTimeout(() => {
             if ( isScrolledToBottom(el, threshold) ) {
                 callback();
             }
         }, delay);
-    });
+    };
+
+    addEvent(el, 'scroll', listener);
+
+    return () => {
+        clearTimeout(timer);
+        removeEvent(el, 'scroll', listener);
+    };
 }
 
 /**
- *
- * @param el
- * @param threshold
+ * @param {HTMLElement} el
+ * @param {number} threshold
  * @returns {boolean}
  */
 export function isScrolledToBottom(el, threshold = 20) {
-    let scrollTop = el.scrollTop;
-    let offsetHeight = el.offsetHeight;
-    let scrollHeight = el.scrollHeight;
+    const scrollTop = el.scrollTop;
 
-    // For some reason the scroll gets triggered when containers are empty
-    // in that event we want to just return false
+    // Empty containers can fire a scroll at the top
     if ( scrollTop === 0 ) {
         return false;
     }
 
-    // When scrolled to the bottom then we should run the next page
-    if ( scrollTop + offsetHeight >= scrollHeight - threshold ) {
-        return true;
-    }
-
-    return false;
+    return scrollTop + el.offsetHeight >= el.scrollHeight - threshold;
 }
 
 /**
- * Custom event listener for when a mouse click is helf
+ * Calls back repeatedly, faster over time, while the mouse is held down on the element
  *
- * @param el
- * @param callback
- * @param delay
- * @param speed
+ * @param {HTMLElement} el
+ * @param {Function} callback
+ * @param {number} delay Wait before the first repeat
+ * @param {number} speed Starting interval
+ * @return {Function} Removes the listeners
  */
 export function mouseHold(el, callback, delay = 300, speed = 300) {
-    let held = false;
     let poll_timer = null;
     let delay_timer = null;
-    let _speed = speed;
+    let current_speed = speed;
     // Lower is faster
-    let max_speed = 80;
+    const max_speed = 80;
 
-    // Incrementing poll
     function sendPoll() {
         poll_timer = setTimeout(() => {
             callback();
 
-            _speed = _speed * 0.925 > max_speed ? _speed * 0.925 : max_speed;
+            current_speed = Math.max(current_speed * 0.925, max_speed);
             sendPoll();
-        }, _speed);
+        }, current_speed);
     }
 
-    let clearMouseHold = () => {
+    const clearMouseHold = () => {
         clearTimeout(delay_timer);
         clearTimeout(poll_timer);
-        held = false;
-        _speed = speed;
+        current_speed = speed;
     };
 
-    // mousedown to start the event
-    addEvent(el, 'mousedown', () => {
-        delay_timer = setTimeout(() => {
-            held = true;
-            if ( held === true ) {
-                sendPoll();
-            }
-        }, delay);
-    });
+    const startMouseHold = () => {
+        clearMouseHold();
+        delay_timer = setTimeout(sendPoll, delay);
+    };
 
-    // mouseup to end the timers and reset the speed
+    addEvent(el, 'mousedown', startMouseHold);
     addEvent(el, 'mouseup', clearMouseHold);
+    addEvent(el, 'mouseleave', clearMouseHold);
     addEvent(el, 'dragend', clearMouseHold);
+
+    return () => {
+        clearMouseHold();
+        removeEvent(el, 'mousedown', startMouseHold);
+        removeEvent(el, 'mouseup', clearMouseHold);
+        removeEvent(el, 'mouseleave', clearMouseHold);
+        removeEvent(el, 'dragend', clearMouseHold);
+    };
 }
 
 export default {
     addEvent,
+    removeEvent,
     smartFocusToggle,
     removeSmartFocusToggle,
     keyCode,

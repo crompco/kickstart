@@ -1,31 +1,15 @@
-@import "calendar";
 @import "../mixins/_forms";
 @import "../variables/_forms";
 @import "../variables/_datepicker";
 
-.ks-datepicker {
-	position: relative;
+@import "../tokens/_tokens";
+@import "../tokens/_global";
+@import "../tokens/_forms";
+@import "../tokens/_calendar";
+@import "../tokens/_datepicker";
 
-	input.ks-datepicker-display {
-		@include form-input();
-	}
+@include ks-emit-tokens(global, forms, calendar, datepicker);
 
-	.ks-calendar-view {
-		width: 17rem;
-		//height: 15.5rem;
-	}
+@import "_calendar";
 
-	.ks-datepicker-cal {
-		position: absolute;
-		font-size: 0.8em;
-		box-shadow: $datepicker-cal-box-shadow;
-		z-index: 100;
-		.ks-cal-week {
-			min-height: 2rem;
-            .ks-cal-day .ks-day-num,
-            .ks-cal-blank .ks-day-num {
-                text-align: center;
-            }
-		}
-	}
-}
+@import "../css/components/datepicker";

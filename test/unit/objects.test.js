@@ -1,5 +1,5 @@
-import test from 'ava';
-import objects from '../../lib/objects';
+import { expect, test } from 'vitest';
+import objects from '../../src/helpers/objects';
 
 const o = {
 	foo: {
@@ -9,14 +9,14 @@ const o = {
     bar: 'bar'
 }
 
-test('objects:object_get', t => {
-	t.is(objects.object_get(o, 'foo.bar'), 'foobar');
-	t.is(objects.object_get(o, 'baz'), 'baz');
+test('objects:object_get', () => {
+	expect(objects.object_get(o, 'foo.bar')).toBe('foobar');
+	expect(objects.object_get(o, 'baz')).toBe('baz');
 });
 
-test('objects:object_only', t => {
-    t.deepEqual(objects.object_only(o, ['baz']), {baz: 'baz'});
-    t.deepEqual(objects.object_only(o, ['baz', 'bar']), {baz: 'baz', bar: 'bar'});
+test('objects:object_only', () => {
+    expect(objects.object_only(o, ['baz'])).toEqual({baz: 'baz'});
+    expect(objects.object_only(o, ['baz', 'bar'])).toEqual({baz: 'baz', bar: 'bar'});
 });
 
 const list = [
@@ -71,24 +71,45 @@ const listGroup = {
     ]
 }
 
-test('objects:groupBy', t => {
+test('objects:groupBy', () => {
     let grouped = objects.groupBy(list, 'show');
-	t.deepEqual(listGroup, grouped);
+	expect(listGroup).toEqual(grouped);
 });
 
-test('objects:object_set', t => {
+test('objects:object_set', () => {
     let obj = {};
 
     obj = objects.object_set(obj, 'foo.bar', 'baz');
-    t.deepEqual({foo: {bar: 'baz'}}, obj);
+    expect({foo: {bar: 'baz'}}).toEqual(obj);
 
     obj = {};
     obj = objects.object_set(obj, 'foo', 'bar');
-    t.deepEqual({foo: 'bar'}, obj);
+    expect({foo: 'bar'}).toEqual(obj);
 
     obj = {
         foo: ['bar']
     };
     obj = objects.object_set(obj, 'foo', 'baz');
-    t.deepEqual({foo: ['bar', 'baz']}, obj);
+    expect({foo: ['bar', 'baz']}).toEqual(obj);
 })
+test('objects:object_get returns falsy values', () => {
+    const values = { zero: 0, no: false, empty: '', nested: { zero: 0 } };
+
+    expect(objects.object_get(values, 'zero', 'default')).toBe(0);
+    expect(objects.object_get(values, 'no', 'default')).toBe(false);
+    expect(objects.object_get(values, 'empty', 'default')).toBe('');
+    expect(objects.object_get(values, 'nested.zero', 'default')).toBe(0);
+});
+
+test('objects:object_get returns the default for missing paths', () => {
+    expect(objects.object_get({ a: null }, 'a.b.c', 'default')).toBe('default');
+    expect(objects.object_get({ a: { b: null } }, 'a.b', 'default')).toBe('default');
+    expect(objects.object_get(null, 'a', 'default')).toBe('default');
+    expect(objects.object_get(o, 'missing')).toBe('');
+});
+
+test('objects:looseIndexOf returns a number for arrays', () => {
+    expect(objects.looseIndexOf([1, 2, 3], '2')).toBe(1);
+    expect(objects.looseIndexOf([1, 2, 3], 4)).toBe(-1);
+    expect(objects.looseIndexOf({ a: 1, b: 2 }, '2')).toBe('b');
+});

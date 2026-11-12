@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+      - v3.x
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        tz:
+          - UTC
+          - America/New_York
+          - Asia/Tokyo
+
+    env:
+      TZ: ${{ matrix.tz }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: yarn
+          cache-dependency-path: |
+            yarn.lock
+            docs/yarn.lock
+
+      - run: yarn install --frozen-lockfile
+
+      - run: yarn lint
+        if: matrix.tz == 'UTC'
+
+      - run: yarn build
+
+      - run: yarn test
+
+      - run: yarn --cwd docs install --frozen-lockfile && yarn docs:build
+        if: matrix.tz == 'UTC'

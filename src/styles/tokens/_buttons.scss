@@ -1,0 +1,21 @@
+@import "../functions/_utils";
+@import "../variables/_buttons";
+
+$ks-default-buttons: (outline, none);
+$ks-default-button-sizes: (tiny, small, large);
+
+@mixin ks-tokens-buttons {
+    --ks-button-padding: #{rem($button-padding)};
+    --ks-button-box-shadow: #{ks-optional($button-box-shadow)};
+    --ks-button-border-radius: #{$button-border-radius};
+
+    @each $name, $size in $button-sizes {
+        --ks-button-size-#{$name}: #{rem($size)};
+    }
+
+    @each $name, $map in $buttons {
+        @each $property, $value in $map {
+            --ks-button-#{$name}-#{$property}: #{$value};
+        }
+    }
+}

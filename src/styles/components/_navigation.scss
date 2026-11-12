@@ -1,38 +1,11 @@
 @import "../mixins/_grid";
 @import "../mixins/_navigation";
 
-.side-nav {
-	&.vertical {
-		@include ks-breakpoint(map-get($breakpoint-list, $side-nav-breakpoint)) {
-			padding-top: rem($nav-vertical-padding-top);
-			width: $nav-width;
-			height: 100%;
-		}
+@import "../tokens/_tokens";
+@import "../tokens/_global";
+@import "../tokens/_navigation";
+@import "../tokens/_forms";
 
-		ul.nav-links {
-			list-style-type: none;
-			padding: 0;
-			margin: 0;
+@include ks-emit-tokens(global, navigation, forms);
 
-			a {
-				display: block;
-				padding: rem($nav-vertical-link-padding);
-			}
-		}
-	}
-
-	&.fixed {
-		position: fixed;
-
-		@include ks-breakpoint(map-get($breakpoint-list, $side-nav-breakpoint)) {
-			z-index: 10;
-			left: 0;
-		}
-	}
-
-	@include side-nav;
-}
-
-.top-bar {
-	@include top-bar;
-}
+@import "../css/components/navigation";

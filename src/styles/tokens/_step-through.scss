@@ -1,0 +1,14 @@
+@import "../variables/_step-through";
+
+@mixin ks-tokens-step-through {
+    --ks-steps-text-color: #{$steps-text-color};
+    --ks-steps-complete-color: #{$steps-complete-color};
+    --ks-steps-line-color: #{$steps-line-color};
+    --ks-steps-line-complete-color: #{$steps-line-complete-color};
+    --ks-steps-number-color: #{$steps-number-color};
+    --ks-steps-number-bg: #{$steps-number-bg};
+    --ks-steps-active-number-color: #{$steps-active-number-color};
+    --ks-steps-active-number-bg: #{$steps-active-number-bg};
+    --ks-steps-complete-number-bg: #{$steps-complete-number-bg};
+    --ks-steps-complete-number-color: #{$steps-complete-number-color};
+}

@@ -1,90 +1,18 @@
 @import "../functions/_utils";
 @import "../variables/_alerts";
 
-.ks-toast {
-    position: fixed;
-    z-index: 100;
+@import "../tokens/_tokens";
+@import "../tokens/_global";
+@import "../tokens/_alerts";
 
-    &.top {
-        top: rem(1rem);
-        bottom: rem(1rem);
-        left: 0;
-        right: 0;
+@include ks-emit-tokens(global, alerts);
 
-        .alert {
-            margin-right: auto;
-            margin-left: auto;
-        }
+@import "../css/components/toast";
 
-        &-left {
-            top: rem(1rem);
-            left: rem(1rem);
-        }
-
-        &-right {
-            top: rem(1rem);
-            right: rem(1rem);
-        }
-    }
-
-    &.bottom {
-        bottom: rem(1rem);
-        left: 0;
-        right: 0;
-
-        .alert {
-            margin-right: auto;
-            margin-left: auto;
-        }
-
-        &-left {
-            bottom: rem(1rem);
-            left: rem(1rem);
-        }
-
-        &-right {
-            bottom: rem(1rem);
-            right: rem(1rem);
-        }
-    }
-
-    div.ks-alert {
-        max-width: 400px;
-        position: relative;
-
-        &.has-close {
-            padding-right: 30px;
-        }
-
-        a.close {
-            position: absolute;
-            right: 10px;
-            top: 10px;
-
-            &:hover {
-                cursor: pointer;
-
-                svg path {
-                    fill-opacity: 1;
-                }
-            }
-
-            svg {
-                width: 14px;
-                height: 14px;
-
-                path {
-                    fill-opacity: 0.6;
-                }
-            }
-        }
-
-        @each $name, $map in $alerts {
-            &.#{$name} {
-                svg path {
-                    fill: get($map, color);
-                }
-            }
+@each $name, $map in $alerts {
+    @if not index($ks-default-alerts, $name) {
+        .ks-toast div.ks-alert.#{$name} svg path {
+            fill: var(--ks-alert-#{$name}-color);
         }
     }
 }

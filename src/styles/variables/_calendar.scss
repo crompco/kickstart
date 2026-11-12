@@ -15,14 +15,14 @@ $calendar-day-border-color: lighten($gray, 5%) !default;
 $calendar-today-color: get($brand, primary) !default;
 
 // Controls
-$calendar-controls-bg: $light-gray !default;;
+$calendar-controls-bg: $light-gray !default;
 
 // Year Selector
 $calendar-year-hover-color: $white !default;
 $calendar-year-hover-bg: get($brand, light) !default;
 
 // Selected Year
-$calendar-year-selected-size: 2em;
+$calendar-year-selected-size: 2em !default;
 $calendar-year-selected-color: get($brand, lighter) !default;
 $calendar-year-selected-bg: inherit !default;
 
@@ -33,8 +33,8 @@ $calendar-month-hover-background: lighten($gray, 10%) !default;
 $calendar-month-border-color: lighten(get($brand, lighter), 15%) !default;
 
 // Selected Month
-$calendar-month-selected-color: $state-default-color;
-$calendar-month-selected-bg: $state-default-bg;
+$calendar-month-selected-color: $state-default-color !default;
+$calendar-month-selected-bg: $state-default-bg !default;
 
 // Inactive/Out of Scope colors
 $calendar-inactive-day-color: $med-gray !default;

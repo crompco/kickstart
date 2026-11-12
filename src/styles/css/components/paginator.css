@@ -1,0 +1,42 @@
+/* Generated from src/css/components/paginator.css by build/generate-css.mjs */
+.ks-paginator > ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ks-paginator > ul li {
+  float: left;
+}
+.ks-paginator > ul li a {
+  display: block;
+  color: var(--ks-paginator-link-color);
+  border: solid 1px var(--ks-paginator-link-color);
+  padding: 0.25rem 0.5rem;
+  text-decoration: none;
+}
+.ks-paginator > ul li a:hover {
+  background: hsl(from var(--ks-paginator-link-color) h s calc(l + 20));
+  color: var(--ks-white);
+}
+.ks-paginator > ul li a.current-page {
+  background: var(--ks-paginator-link-color);
+  color: var(--ks-white);
+}
+.ks-paginator > ul li:nth-child(n+3) a {
+  border-left: none;
+}
+.ks-paginator > ul li a.next-page,
+.ks-paginator > ul li a.prev-page {
+  border: solid 1px transparent;
+}
+.ks-paginator > ul li a.next-page:hover,
+.ks-paginator > ul li a.prev-page:hover {
+  border-color: hsl(from var(--ks-paginator-link-color) h s calc(l + 20));
+}
+.ks-paginator > ul li.dot-pages {
+  padding: 0.25rem 0.5rem;
+  vertical-align: middle;
+}
+.ks-paginator > ul li.dot-pages + li a {
+  border: solid 1px var(--ks-paginator-link-color);
+}

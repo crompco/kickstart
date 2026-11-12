@@ -1,0 +1,240 @@
+/* Generated from src/css/components/calendar.css by build/generate-css.mjs */
+.ks-calendar {
+  background: var(--ks-calendar-bg);
+  outline: none;
+}
+.ks-calendar .ks-calendar-title {
+  background: var(--ks-calendar-header-bg);
+  color: var(--ks-calendar-header-color);
+  padding: var(--ks-calendar-header-padding);
+  text-align: center;
+  font-size: 1.1rem;
+}
+.ks-calendar .ks-calendar-title a {
+  font-size: 1rem;
+  color: var(--ks-calendar-header-color);
+  text-decoration: none;
+  padding: 0.25rem;
+}
+.ks-calendar .ks-calendar-title a.ks-open-picker {
+  background-color: var(--ks-state-default-bg);
+  border: 1px solid var(--ks-state-default-border);
+  font-weight: normal;
+  color: var(--ks-state-default-color);
+}
+.ks-calendar .ks-calendar-title a svg {
+  vertical-align: bottom;
+  display: inline-block;
+  color: var(--ks-calendar-header-color);
+  height: 1rem;
+  width: 1rem;
+}
+.ks-calendar .ks-calendar-title a svg path {
+  fill: var(--ks-calendar-header-color);
+}
+.ks-calendar .ks-calendar-view {
+  overflow-y: auto;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+.ks-calendar .ks-calendar-view.interactive .ks-cal-week:not(.ks-cal-week-header) .ks-cal-day:not(.ks-out_of_scope):hover {
+  background-color: var(--ks-state-hover-bg);
+  font-weight: normal;
+  color: var(--ks-state-hover-color);
+  border: 0;
+}
+.ks-calendar .ks-calendar-view.interactive .ks-cal-week:not(.ks-cal-week-header) .ks-cal-day:not(.ks-out_of_scope):focus {
+  background-color: var(--ks-state-focus-bg);
+  font-weight: bold;
+  color: var(--ks-state-focus-color);
+  border: 0;
+  outline: none;
+}
+.ks-calendar .ks-calendar-view.interactive .ks-cal-week:not(.ks-cal-week-header) .ks-cal-day:not(.ks-out_of_scope) > div {
+  height: 100%;
+  cursor: pointer;
+}
+.ks-calendar .ks-calendar-view.interactive .ks-cal-week:not(.ks-cal-week-header) .ks-cal-day:not(.ks-out_of_scope).ks-selected {
+  background-color: var(--ks-state-default-bg);
+  font-weight: normal;
+  color: var(--ks-state-default-color);
+  border: 0;
+}
+.ks-calendar .ks-calendar-view.interactive .ks-cal-week:not(.ks-cal-week-header) .ks-cal-day.ks-out_of_scope {
+  background: var(--ks-calendar-inactive-day-background);
+  cursor: default;
+}
+.ks-calendar .ks-calendar-view.interactive .ks-cal-week:not(.ks-cal-week-header) .ks-cal-day.ks-out_of_scope .ks-day-num {
+  color: var(--ks-calendar-inactive-day-color);
+}
+.ks-calendar .ks-calendar-title {
+  position: relative;
+}
+.ks-calendar .ks-calendar-title .ks-ctrl-left,
+.ks-calendar .ks-calendar-title .ks-ctrl-right {
+  font-family:
+    "helvetica Neue",
+    "Helvetica",
+    sans-serif;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  display: block;
+  padding: 0.25rem;
+  top: 0.25rem;
+  width: 2rem;
+  border-radius: 50%;
+  transition: background 0.125s ease-in;
+}
+.ks-calendar .ks-calendar-title .ks-ctrl-left:hover,
+.ks-calendar .ks-calendar-title .ks-ctrl-right:hover {
+  background: var(--ks-state-default-bg);
+}
+.ks-calendar .ks-calendar-title .ks-ctrl-left:first-child {
+  position: absolute;
+  left: 0.5rem;
+}
+.ks-calendar .ks-calendar-title .ks-ctrl-right:last-child {
+  position: absolute;
+  right: 0.5rem;
+}
+.ks-calendar .ks-calendar-month {
+  width: 100%;
+  padding: 0.5rem 0 0 1px;
+  border-collapse: collapse;
+  transition: height 0.2s ease-in-out;
+}
+.ks-calendar .ks-calendar-month .ks-cal-week {
+  display: flex;
+}
+.ks-calendar .ks-calendar-month .ks-cal-week .ks-cal-day,
+.ks-calendar .ks-calendar-month .ks-cal-week .ks-cal-blank {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0;
+}
+.ks-calendar .ks-calendar-month .ks-cal-day .row-collapse,
+.ks-calendar .ks-calendar-month .ks-cal-blank .row-collapse {
+  margin-left: -0.5rem;
+  margin-right: -0.5rem;
+  width: calc(100% + 1rem);
+}
+.ks-calendar .ks-calendar-month .ks-cal-day > div,
+.ks-calendar .ks-calendar-month .ks-cal-blank > div {
+  padding: 0.5rem;
+}
+.ks-calendar .ks-calendar-month .ks-cal-day .ks-day-num,
+.ks-calendar .ks-calendar-month .ks-cal-blank .ks-day-num {
+  display: block;
+  text-align: right;
+}
+.ks-calendar .ks-calendar-month .ks-cal-day.ks-cal-blank .ks-day-num,
+.ks-calendar .ks-calendar-month .ks-cal-blank.ks-cal-blank .ks-day-num {
+  color: #DDD;
+  cursor: pointer;
+}
+.ks-calendar .ks-calendar-month .ks-cal-day a.ks-day-num,
+.ks-calendar .ks-calendar-month .ks-cal-blank a.ks-day-num {
+  display: inline-block;
+  font-size: 0.9rem;
+  float: right;
+  margin: -0.25rem 0.2rem 0 0;
+  padding: 0.25rem;
+  height: 1.75rem;
+  width: 1.75rem;
+  border-radius: var(--ks-calendar-day-select-border-radius);
+  text-align: center;
+  border: solid 1px var(--ks-calendar-day-select-border-color);
+  color: var(--ks-calendar-day-select-color);
+  background: var(--ks-calendar-day-select-bg);
+  transition: all 0.2s;
+}
+.ks-calendar .ks-calendar-month .ks-cal-day a.ks-day-num:hover,
+.ks-calendar .ks-calendar-month .ks-cal-blank a.ks-day-num:hover {
+  background: var(--ks-calendar-day-select-hover-bg);
+  color: var(--ks-calendar-day-select-hover-color);
+  border: solid 1px var(--ks-calendar-day-select-hover-border-color);
+}
+.ks-calendar .ks-calendar-month .ks-cal-day {
+  box-shadow: -1px -1px var(--ks-calendar-day-border-color), inset -1px -1px var(--ks-calendar-day-border-color);
+}
+.ks-calendar .ks-calendar-month .ks-cal-day.today {
+  color: var(--ks-calendar-today-color);
+  font-weight: bold;
+}
+.ks-calendar .ks-calendar-month .ks-cal-week-header {
+  font-weight: bold;
+}
+.ks-calendar .ks-calendar-month .ks-cal-week-header .ks-cal-day {
+  text-align: center;
+  color: var(--ks-calendar-week-header-color);
+  box-shadow: none;
+  padding: 0.25rem;
+}
+.ks-calendar .ks-month-selection {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  transition: height 0.2s ease-in-out;
+}
+.ks-calendar .ks-month-selection > div {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  width: 33.33%;
+  height: 25%;
+  cursor: pointer;
+  border: solid 1px var(--ks-calendar-month-border-color);
+  border-width: 0px 1px 1px 1px;
+}
+.ks-calendar .ks-month-selection > div:hover {
+  background-color: var(--ks-calendar-month-hover-background);
+}
+.ks-calendar .ks-month-selection > div:hover > div {
+  color: var(--ks-calendar-month-hover-color);
+}
+.ks-calendar .ks-month-selection > div:first-child,
+.ks-calendar .ks-month-selection > div:nth-child(3n+1) {
+  border-right: 0;
+}
+.ks-calendar .ks-month-selection > div:nth-child(3n) {
+  border-left: 0;
+}
+.ks-calendar .ks-month-selection > div > div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--ks-calendar-month-color);
+  font-weight: bold;
+}
+.ks-calendar .ks-month-selection > div > div:hover {
+  color: var(--ks-calendar-month-hover-color);
+}
+.ks-calendar .ks-month-selection > div.ks-selected-month {
+  background: var(--ks-calendar-month-selected-bg);
+}
+.ks-calendar .ks-month-selection > div.ks-selected-month > div {
+  color: var(--ks-calendar-month-selected-color);
+}
+.ks-calendar .ks-year-selection {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  transition: height 0.2s ease-in-out;
+}
+.ks-calendar .ks-year-selection li {
+  width: 100%;
+  padding: 0.25rem 0.5rem;
+  font-size: 1.2rem;
+  text-align: center;
+  cursor: pointer;
+}
+.ks-calendar .ks-year-selection li:hover {
+  color: var(--ks-calendar-year-hover-color);
+  background: var(--ks-calendar-year-hover-bg);
+}
+.ks-calendar .ks-year-selection li.ks-selected-year {
+  font-size: var(--ks-calendar-year-selected-size);
+  color: var(--ks-calendar-year-selected-color);
+  background: var(--ks-calendar-year-selected-bg);
+}

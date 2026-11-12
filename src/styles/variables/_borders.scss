@@ -20,7 +20,7 @@ $border_map: (
     ('property': 'border-bottom', 'code': 'border-b'),
     ('property': 'border-right', 'code': 'border-r'),
     ('property': 'border-left', 'code': 'border-l'),
-);
+) !default;
 
 $border_styles: (
     solid,
@@ -29,4 +29,4 @@ $border_styles: (
     double,
     hidden,
     none
-);
+) !default;

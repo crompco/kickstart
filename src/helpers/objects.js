@@ -1,104 +1,119 @@
-
-/**
- * @param Object
- * @param String expression
- */
-export function object_get(obj, expression, default_val = '') {
-    let reference = obj;
-    let keys = expression.split('.');
-
-    // Traverse to the last 'level' if we can. As soon as we find a missing
-    // property, we return the default value
-    for ( let i = 0; i < keys.length - 1; ++i ) {
-        let expression = keys[i];
-
-        if ( typeof reference[expression] == "undefined" ) {
-            return default_val;
-        }
-
-        reference = reference[expression];
-    }
-
-    return reference[keys[keys.length - 1]] || default_val;
+function isEmpty(value) {
+    return value === null || typeof value === 'undefined';
 }
 
 /**
+ * Reads a value by a dot path ("customer.name"). Returns the default when the
+ * path is missing or the value is null or undefined; falsy values such as 0,
+ * false and '' are returned as they are.
  *
- * @param obj
- * @param expression
- * @param value
- * @returns {*}
+ * @param {object} obj
+ * @param {string} expression
+ * @param {*} default_val
+ * @return {*}
+ */
+export function object_get(obj, expression, default_val = '') {
+    let reference = obj;
+
+    for ( const key of String(expression).split('.') ) {
+        if ( isEmpty(reference) ) {
+            return default_val;
+        }
+
+        reference = reference[key];
+    }
+
+    return isEmpty(reference) ? default_val : reference;
+}
+
+/**
+ * Sets a value by a dot path, creating objects on the way. A value set on an
+ * array is pushed onto it.
+ *
+ * @param {object} obj
+ * @param {string} expression
+ * @param {*} value
+ * @returns {object}
  */
 export function object_set(obj, expression, value) {
-    let reference = obj
-    let keys = expression.split('.');
+    const reference = obj;
+    const keys = expression.split('.');
 
     if ( keys.length > 1 ) {
-        if ( typeof reference[keys[0]] == 'undefined' ) {
+        if ( isEmpty(reference[keys[0]]) ) {
             reference[keys[0]] = {};
         }
-        reference[keys[0]] = object_set(reference[keys[0]], keys.splice(1).join('.'), value);
+        reference[keys[0]] = object_set(reference[keys[0]], keys.slice(1).join('.'), value);
+    } else if ( Array.isArray(reference[keys[0]]) ) {
+        reference[keys[0]].push(value);
     } else {
-        if ( Object.prototype.toString.call(reference[keys[0]]) === '[object Array]' ) {
-            reference[keys[0]].push(value);
-        } else {
-            reference[keys[0]] = value;
-        }
+        reference[keys[0]] = value;
     }
 
     return reference;
 }
 
 /**
- *
- * @param obj
- * @param only
- * @return {{}}
+ * @param {object} obj
+ * @param {string[]} only
+ * @return {object}
  */
 export function object_only(obj, only) {
-    let o = {};
+    const o = {};
 
-    for ( var i in only ) {
-        o[only[i]] = typeof obj[only[i]] !== 'undefined' ? obj[only[i]] : null;
+    for ( const key of only ) {
+        o[key] = typeof obj[key] !== 'undefined' ? obj[key] : null;
     }
 
     return o;
 }
 
 /**
+ * Index of the first value that loosely equals val (1 == '1')
  *
- * @param obj
- * @param val
- * @return {Number}
+ * @param {Array|object} obj
+ * @param {*} val
+ * @return {number|string} The array index, or the object key; -1 when not found
  */
 export function looseIndexOf(obj, val) {
-	for ( var i in obj ) {
-		if ( obj[i] == val ) {
-			return i;
-		}
-	}
+    if ( Array.isArray(obj) ) {
+        return obj.findIndex(item => item == val);
+    }
 
-	return -1;
-}
-
-export function groupBy(arr, groupBy) {
-    let groups = {};
-    for ( var i in arr ) {
-        let group = object_get(arr[i], groupBy)
-        if ( groups[group] ) {
-            groups[group].push(arr[i])
-        } else {
-            groups[group] = [arr[i]];
+    for ( const i in obj ) {
+        if ( obj[i] == val ) {
+            return i;
         }
     }
+
+    return -1;
+}
+
+/**
+ * @param {Array} arr
+ * @param {string} groupBy Dot path of the group value
+ * @return {object}
+ */
+export function groupBy(arr, groupBy) {
+    const groups = {};
+
+    for ( const item of arr ) {
+        const group = object_get(item, groupBy);
+
+        if ( groups[group] ) {
+            groups[group].push(item);
+        } else {
+            groups[group] = [item];
+        }
+    }
+
     return groups;
 }
 
-
 export default {
-	object_get,
+    object_get,
     object_only,
-	looseIndexOf,
+    looseIndexOf,
     object_set,
-    groupBy
-}
+    groupBy,
+};

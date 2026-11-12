@@ -1,0 +1,31 @@
+@import "../functions/_utils";
+@import "../variables/_autocomplete";
+
+@mixin ks-tokens-autocomplete {
+    --ks-ac-bg: #{$ac-bg};
+    --ks-ac-margin-right: #{ks-length(rem($ac-margin-right))};
+    --ks-ac-margin-left: #{ks-length(rem($ac-margin-left))};
+    --ks-ac-input-padding: #{rem($ac-input-padding)};
+    --ks-ac-input-border: #{$ac-input-border};
+    --ks-ac-input-box-shadow: #{ks-optional($ac-input-box-shadow)};
+    --ks-ac-input-multi-padding: #{rem($ac-input-multi-padding)};
+    --ks-ac-selection-padding: #{rem($ac-selection-padding)};
+    --ks-ac-selection-bg: #{$ac-selection-bg};
+    --ks-ac-selection-color: #{$ac-selection-color};
+    --ks-ac-clear-height: #{rem($ac-clear-height)};
+    --ks-ac-clear-width: #{rem($ac-clear-width)};
+    --ks-ac-list-item-padding: #{rem($ac-list-item-padding)};
+    --ks-ac-list-bg: #{$ac-list-bg};
+    --ks-ac-list-border: #{$ac-list-border};
+    --ks-ac-list-item-border: #{$ac-list-item-border};
+    --ks-ac-list-selected-color: #{$ac-list-selected-color};
+    --ks-ac-list-item-hover-bg: #{$ac-list-item-hover-bg};
+    --ks-ac-empty-message-color: #{$ac-empty-message-color};
+    --ks-ac-empty-message-style: #{$ac-empty-message-style};
+    --ks-ac-multi-bg: #{$ac-multi-bg};
+    --ks-ac-multi-margin: #{$ac-multi-margin};
+    --ks-ac-multi-padding: #{$ac-multi-padding};
+    --ks-ac-multi-border-radius: #{$ac-multi-border-radius};
+    --ks-ac-multi-color: #{$ac-multi-color};
+    --ks-ac-multi-selection-focus-box-shadow: #{$ac-multi-selection-focus-box-shadow};
+}

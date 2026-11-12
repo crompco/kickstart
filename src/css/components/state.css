@@ -1,0 +1,13 @@
+.ks-state-default {
+    background-color: var(--ks-state-default-bg);
+    border: 1px solid var(--ks-state-default-border);
+    font-weight: normal;
+    color: var(--ks-state-default-color);
+}
+
+.ks-state-hover {
+    background-color: var(--ks-state-hover-bg);
+    border: 1px solid var(--ks-state-hover-border);
+    font-weight: normal;
+    color: var(--ks-state-hover-color);
+}

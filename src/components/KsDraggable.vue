@@ -1,11 +1,16 @@
 <template>
-    <component :is="tag" :draggable="!disabled" :class="stateClasses">
+    <component
+        :is="tag"
+        :draggable="!disabled"
+        :class="stateClasses"
+        @dragstart="dragStart"
+        @dragend="dragEnd"
+    >
         <slot></slot>
     </component>
 </template>
 
 <script>
-
     export default {
         name: 'KsDraggable',
 
@@ -24,14 +29,15 @@
             }
         },
 
+        emits: ['dragstart', 'dragend'],
+
         computed: {
             stateClasses() {
-                let state_classes = {};
-                if ( this.activeClass ) {
-                    state_classes[this.activeClass] = this.dragging;
+                if ( !this.activeClass ) {
+                    return {};
                 }
 
-                return state_classes;
+                return { [this.activeClass]: this.dragging };
             }
         },
 
@@ -41,16 +47,18 @@
             }
         },
 
-        mounted() {
-            this.$nextTick(() => {
-                this.$el.addEventListener('dragstart', this.dragStart, false);
-                this.$el.addEventListener('dragend', this.dragEnd, false);
-            });
-        },
-
         methods: {
             dragStart(e) {
-                e.dataTransfer.setData('text/plain', null);
+                if ( this.disabled ) {
+                    e.preventDefault();
+                    return;
+                }
+
+                // Firefox only starts a drag when data is set
+                if ( e.dataTransfer ) {
+                    e.dataTransfer.setData('text/plain', '');
+                }
+
                 this.$emit('dragstart', e, false);
                 this.dragging = true;
             },
@@ -59,12 +67,5 @@
                 this.dragging = false;
             },
         },
-
-        beforeDestroy() {
-            this.$el.removeEventListener('dragstart', this.dragStart, false);
-            this.$el.removeEventListener('dragend', this.dragEnd, false);
-        },
-
-        components: {}
     }
 </script>

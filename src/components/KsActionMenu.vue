@@ -1,21 +1,32 @@
 <template>
-    <div class="ks-action-menu" @click.stop :class="actionMenuClass">
-        <button class="menu-button" @click.prevent="toggle()" ref="menu">
+    <div
+        class="ks-action-menu"
+        :class="actionMenuClass"
+        @click.stop
+    >
+        <button
+            ref="menu"
+            class="menu-button"
+            @click.prevent="toggle()"
+        >
             <slot name="menu"><menu-svg></menu-svg></slot>
         </button>
-        <div class="ks-menu-list" ref="menuList" :class="menuListClass" @click="close()">
+        <div
+            ref="menuList"
+            class="ks-menu-list"
+            :class="menuListClass"
+            @click="close()"
+        >
             <slot></slot>
         </div>
     </div>
 </template>
 
 <script>
-    // External Dependencies
-    import MenuSvg from '../svg/menu.svg';
-    import Tether from 'tether';
+    import MenuSvg from './icons/IconMenu.vue';
+    import { attach } from '../helpers/position';
 
-    // Internal Dependencies
-    import '../helpers/tether-constraints';
+    const CLOSE_EVENT = 'close:actionmenu';
 
     export default {
         name: 'KsActionMenu',
@@ -43,15 +54,19 @@
             }
         },
 
+        emits: ['active'],
+
         computed: {
             actionMenuClass() {
-                let classObj = {};
-                classObj[this.openClass] = this.active;
-                return classObj;
+                if ( !this.openClass ) {
+                    return {};
+                }
+
+                return { [this.openClass]: this.active };
             },
             menuListClass() {
                 return [
-                    {'active': this.active},
+                    { 'active': this.active },
                     this.listClass,
                 ];
             }
@@ -60,103 +75,105 @@
         data() {
             return {
                 active: false,
-                tether: false,
-                listening: false
             }
         },
 
         mounted() {
-            this.$nextTick(() => {
-                if ( !window.actionEvent ) {
-                    window.actionEvent = new Event('close:actionmenu');
-                }
+            this.positioner = null;
 
-                document.addEventListener('close:actionmenu', this.closeActionMenu);
-                document.addEventListener('click', this.closeActionMenu);
-            })
+            document.addEventListener(CLOSE_EVENT, this.closeOtherMenu);
+            document.addEventListener('click', this.close);
         },
 
         beforeDestroy() {
             this.destroyActionMenu();
         },
 
-        beforeRouteUpdate(to, from, next) {
+        beforeUnmount() {
             this.destroyActionMenu();
-
-            next();
-        },
-
-        beforeRouteLeave(to, from, next) {
-            this.destroyActionMenu();
-
-            next();
         },
 
         methods: {
-            createTether() {
-                this.tether = new Tether({
-                    element: this.$refs.menuList,
-                    target: this.$refs.menu,
+            position() {
+                const list = this.$refs.menuList;
+
+                // The list lives in <body> so containers with overflow can't clip it
+                if ( list.parentNode !== document.body ) {
+                    document.body.appendChild(list);
+                }
+
+                if ( this.positioner ) {
+                    this.positioner.update();
+                    return;
+                }
+
+                this.positioner = attach(this.$refs.menu, list, {
                     attachment: this.actionsAttachment,
                     targetAttachment: this.targetAttachment,
                     constraints: [
                         {
                             to: 'scrollParent',
-                            attachment: 'none ks-together'
-                        }
-                    ]
+                            attachment: 'none ks-together',
+                        },
+                    ],
                 });
-
-                this.tether.position();
             },
 
             update() {
-                this.tether ? this.tether.position() : this.$nextTick(this.createTether());
+                if ( this.active ) {
+                    this.$nextTick(() => this.position());
+                }
             },
 
             toggle() {
-                this.active = !this.active;
+                this.active ? this.close() : this.open();
+            },
 
-                this.$nextTick(() => {
-                    if ( this.active ) {
-                        document.dispatchEvent(window.actionEvent);
-
-                        this.update();
-                        this.listening = true;
-                    } else {
-                        this.listening = false;
-                    }
-                });
+            open() {
+                document.dispatchEvent(new CustomEvent(CLOSE_EVENT, { detail: this }));
+                this.active = true;
+                this.update();
             },
 
             close() {
+                if ( !this.active ) {
+                    return;
+                }
+
                 this.active = false;
-                this.listening = false;
+                this.stopPositioning();
             },
 
-            closeActionMenu() {
-                if ( this.listening ) {
+            closeOtherMenu(e) {
+                if ( e.detail !== this ) {
                     this.close();
                 }
             },
 
-            destroyActionMenu() {
-                this.$refs.menuList.remove();
+            stopPositioning() {
+                if ( this.positioner ) {
+                    this.positioner.destroy();
+                    this.positioner = null;
+                }
+            },
 
+            destroyActionMenu() {
                 this.active = false;
-                if ( this.tether !== false ) {
-                    this.tether.destroy();
+                this.stopPositioning();
+
+                if ( this.$refs.menuList && this.$refs.menuList.parentNode === document.body ) {
+                    this.$refs.menuList.remove();
                 }
 
-                document.removeEventListener('click', this.closeActionMenu);
-                document.removeEventListener('close:actionmenu', this.closeActionMenu);
+                document.removeEventListener('click', this.close);
+                document.removeEventListener(CLOSE_EVENT, this.closeOtherMenu);
             }
         },
 
         watch: {
             show() {
-                if (!this.show) {
-                    this.active = false;
+                if ( !this.show ) {
+                    this.close();
                 }
             },
             active() {

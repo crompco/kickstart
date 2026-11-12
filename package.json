@@ -1,9 +1,10 @@
 {
   "name": "kickstart-ui",
-  "version": "2.1.1",
+  "version": "3.0.0-alpha.0",
   "description": "Vue components and js libs",
+  "main": "dist/kickstart-ui.min.js",
   "module": "dist/kickstart-ui.esm.js",
-  "main": "index.js",
+  "style": "dist/kickstart-ui.min.css",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/crompco/kickstart.git"
@@ -11,88 +12,52 @@
   "author": "Crompco LLC",
   "license": "MIT",
   "scripts": {
-    "build": "cross-env NODE_ENV=production webpack --config build/webpack.dist.js",
-    "build:docs": "cross-env NODE_ENV=production webpack --config build/webpack.docs.js",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.js --hot",
-    "build:lib": "webpack --config build/webpack.lib.js",
-    "build:all": "npm run build && npm run build:lib",
-    "clean": "rimraf ./dist ./lib ./docs/docs.bundle.css ./docs/docs.bundle.js",
-    "lint": "eslint --format=node_modules/eslint-formatter-pretty --ext .js,.vue,.html ./",
-    "test": "npm run build:lib && ava",
-    "test:watch": "npm run build:lib ava --watch"
+    "build": "yarn build:dist && yarn build:lib && yarn build:css",
+    "build:dist": "vite build",
+    "build:lib": "vite build --config vite.lib.config.js",
+    "build:css": "node build/generate-css.mjs && node build/build-css.mjs",
+    "generate:css": "node build/generate-css.mjs",
+    "clean": "rimraf dist lib",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "demos:dev": "vite --config demos/vite.config.js",
+    "demos:build": "vite build --config demos/vite.config.js",
+    "docs:dev": "yarn demos:build && yarn --cwd docs dev",
+    "docs:build": "yarn demos:build && yarn --cwd docs build",
+    "prepack": "yarn clean && yarn build"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0",
-    "@babel/core": "^7.0.0",
-    "@babel/plugin-proposal-class-properties": "^7.0.0",
-    "@babel/plugin-proposal-decorators": "^7.0.0",
-    "@babel/plugin-proposal-export-namespace-from": "^7.0.0",
-    "@babel/plugin-proposal-function-sent": "^7.0.0",
-    "@babel/plugin-proposal-json-strings": "^7.0.0",
-    "@babel/plugin-proposal-numeric-separator": "^7.0.0",
-    "@babel/plugin-proposal-throw-expressions": "^7.0.0",
-    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
-    "@babel/plugin-syntax-import-meta": "^7.0.0",
-    "@babel/plugin-transform-runtime": "^7.0.0",
-    "@babel/preset-env": "^7.0.0",
-    "@mdit-vue/plugin-component": "^2.1.4",
-    "@starptech/rehype-webparser": "^0.10.0",
-    "autoprefixer": "^6.7.7",
-    "ava": "^0.19.0",
-    "babel-loader": "^8.0.0",
-    "browser-env": "^2.0.29",
-    "core-js": "^3.9.1",
-    "cross-env": "^3.2.3",
-    "css-loader": "^6.8.1",
-    "deep-assign": "^2.0.0",
-    "eslint": "^3.19.0",
-    "eslint-plugin-vue": "^2.0.1",
-    "fast-glob": "^3.3.3",
-    "file-loader": "^0.11.1",
-    "gray-matter": "^4.0.3",
-    "highlight.js": "^11.11.1",
-    "markdown-it": "^14.1.0",
-    "mini-css-extract-plugin": "^1.3.9",
+    "@eslint/js": "^10.0.1",
+    "@vitejs/plugin-vue2": "^2.3.4",
+    "@vue/test-utils": "^1.3.6",
+    "esbuild": "^0.28.2",
+    "eslint": "^10.14.0",
+    "eslint-plugin-vue": "^10.12.0",
+    "globals": "^17.14.0",
+    "jsdom": "^27.4.0",
     "normalize.css": "^5.0.0",
-    "postcss-loader": "^3.0.0",
-    "prismjs": "^1.6.0",
-    "raw-loader": "^4.0.2",
-    "sass": "^1.77.2",
-    "sass-loader": "^13.3.2",
-    "style-loader": "^3.3.3",
-    "svg-inline-loader": "^0.7.1",
-    "tether": "^1.4.0",
-    "url-loader": "^0.5.8",
-    "vue": "^2.2.0",
-    "vue-loader": "^15.11.1",
-    "vue-router": "^3.4.9",
-    "vue-server-renderer": "2.6.10",
-    "vue-style-loader": "^2.0.3",
-    "vue-svg-loader": "^0.1.2",
-    "vue-template-compiler": "^2.2.6",
-    "webpack": "^5.89.0",
-    "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^4.15.1"
+    "rimraf": "^6.1.4",
+    "sass": "^1.107.1",
+    "vite": "^7.3.7",
+    "vitest": "^4.1.12",
+    "vue": "^2.7.16",
+    "vue-eslint-parser": "^10.3.0",
+    "vue-template-compiler": "^2.7.16"
   },
   "dependencies": {
-    "axios": "^0.15.3",
-    "popper.js": "^1.9.1",
-    "v-mask": "^1.2.0",
-    "velocity-animate": "^1.5.2"
+    "@floating-ui/dom": "^1.8.0",
+    "axios": "^1.21.0"
   },
   "peerDependencies": {
-    "normalize.css": "^5.0.0",
-    "vue": "^2.2.0"
-  },
-  "ava": {
-    "require": [
-      "./test/helpers/setup.js"
-    ]
+    "vue": "^2.7.0"
   },
   "files": [
-    "index.js",
     "src",
     "dist",
     "lib"
-  ]
+  ],
+  "resolutions": {
+    "vite": "^7.3.7"
+  }
 }

@@ -1,8 +1,8 @@
 @import "_global";
 
-$alert-padding: 0.5rem;
-$alert-margin: 0 0 0.825rem 0;
-$alert-border-radius: 5px;
+$alert-padding: 0.5rem !default;
+$alert-margin: 0 0 0.825rem 0 !default;
+$alert-border-radius: 5px !default;
 
 $alerts: (
 	success: (
@@ -40,4 +40,4 @@ $alerts: (
         button-background-color: $lighter-gray,
         button-color: darken($text-muted, 5%)
     )
-);
+) !default;

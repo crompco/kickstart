@@ -1,8 +1,12 @@
 <template>
     <li class="row">
         <div class="ks-accordion-title-row">
-            <a href="#" @click.prevent="handleClick" class="ks-accordion-title">
-                <slot name="title">{{title}}</slot>
+            <a
+                href="#"
+                class="ks-accordion-title"
+                @click.prevent="handleClick"
+            >
+                <slot name="title">{{ title }}</slot>
             </a>
 
             <div class="ks-accordion-buttons">
@@ -11,7 +15,11 @@
         </div>
 
         <slide-transition>
-            <div class="ks-accordion-content" ref="content" v-show="showContent">
+            <div
+                v-show="showContent"
+                ref="content"
+                class="ks-accordion-content"
+            >
                 <slot></slot>
             </div>
         </slide-transition>
@@ -19,51 +27,63 @@
 </template>
 
 <script>
-    // External Dependencies
-
-    // Internal Dependencies
-    import {SlideTransition} from './transitions/Transitions';
+    import { SlideTransition } from './transitions/Transitions';
 
     export default {
         name: 'KsAccordionRow',
+
+        inject: {
+            ksAccordion: {
+                default: null,
+            },
+        },
 
         props: {
             title: {}
         },
 
+        emits: ['row-clicked'],
+
         data() {
             return {
                 showContent: false,
-                parent: false
             }
         },
 
         mounted() {
-            this.$nextTick(() => {
-                this.parent = this.getAccordionParent(this);
+            if ( this.ksAccordion ) {
+                this.ksAccordion.registerAccordion(this);
+            }
+        },
 
-                this.parent.registerAccordion(this);
-            });
+        beforeDestroy() {
+            this.unregister();
+        },
+
+        beforeUnmount() {
+            this.unregister();
         },
 
         methods: {
             handleClick(e) {
                 this.$emit('row-clicked', e);
 
-                this.parent.setActiveAccordion(this);
-            },
-
-            getAccordionParent(vm) {
-                if ( vm.$parent.$options.name === 'KsAccordion' ) {
-                    return vm.$parent;
+                if ( this.ksAccordion ) {
+                    this.ksAccordion.setActiveAccordion(this);
+                } else {
+                    this.setActive(!this.showContent);
                 }
-
-                return this.getAccordionParent(vm.$parent);
             },
 
             setActive(bool) {
                 this.showContent = bool;
-            }
+            },
+
+            unregister() {
+                if ( this.ksAccordion ) {
+                    this.ksAccordion.unregisterAccordion(this);
+                }
+            },
         },
 
         components: {

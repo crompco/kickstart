@@ -1,0 +1,13 @@
+@import "../functions/_utils";
+@import "../variables/_tables";
+
+@mixin ks-tokens-tables {
+    --ks-table-border-color: #{$table-border-color};
+    --ks-table-cell-padding: #{rem($table-cell-padding)};
+    --ks-table-bg: #{$table-bg};
+    --ks-table-margin-bottom: #{rem($table-margin-bottom)};
+    --ks-table-res-margin: #{rem($table-res-margin)};
+    --ks-table-strip-tr-color: #{$table-strip-tr-color};
+    --ks-table-box-shadow: #{$table-box-shadow};
+    --ks-table-brand-header-color: #{$table-brand-header-color};
+}

@@ -1,0 +1,33 @@
+@import "../functions/_utils";
+@import "../variables/_calendar";
+
+@mixin ks-tokens-calendar {
+    --ks-calendar-bg: #{$calendar-bg};
+    --ks-calendar-header-bg: #{$calendar-header-bg};
+    --ks-calendar-header-color: #{$calendar-header-color};
+    --ks-calendar-header-padding: #{rem($calendar-header-padding)};
+    --ks-calendar-week-header-color: #{$calendar-week-header-color};
+    --ks-calendar-day-border-color: #{$calendar-day-border-color};
+    --ks-calendar-today-color: #{$calendar-today-color};
+    --ks-calendar-controls-bg: #{$calendar-controls-bg};
+    --ks-calendar-year-hover-color: #{$calendar-year-hover-color};
+    --ks-calendar-year-hover-bg: #{$calendar-year-hover-bg};
+    --ks-calendar-year-selected-size: #{$calendar-year-selected-size};
+    --ks-calendar-year-selected-color: #{$calendar-year-selected-color};
+    --ks-calendar-year-selected-bg: #{$calendar-year-selected-bg};
+    --ks-calendar-month-color: #{$calendar-month-color};
+    --ks-calendar-month-hover-color: #{$calendar-month-hover-color};
+    --ks-calendar-month-hover-background: #{$calendar-month-hover-background};
+    --ks-calendar-month-border-color: #{$calendar-month-border-color};
+    --ks-calendar-month-selected-color: #{$calendar-month-selected-color};
+    --ks-calendar-month-selected-bg: #{$calendar-month-selected-bg};
+    --ks-calendar-inactive-day-color: #{$calendar-inactive-day-color};
+    --ks-calendar-inactive-day-background: #{$calendar-inactive-day-background};
+    --ks-calendar-day-select-border-radius: #{$calendar-day-select-border-radius};
+    --ks-calendar-day-select-border-color: #{$calendar-day-select-border-color};
+    --ks-calendar-day-select-color: #{$calendar-day-select-color};
+    --ks-calendar-day-select-bg: #{$calendar-day-select-bg};
+    --ks-calendar-day-select-hover-color: #{$calendar-day-select-hover-color};
+    --ks-calendar-day-select-hover-bg: #{$calendar-day-select-hover-bg};
+    --ks-calendar-day-select-hover-border-color: #{$calendar-day-select-hover-border-color};
+}

@@ -1,75 +1,49 @@
-// External Dependencies
-
-// Internal Dependencies
-
 export function domReady(cb) {
-    document.addEventListener("DOMContentLoaded", () => {
+    if ( document.readyState !== 'loading' ) {
         cb();
-    });
+        return;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => cb(), { once: true });
 }
 
 export function addClass($el, className) {
-    if ( $el.classList ) {
+    if ( $el ) {
         $el.classList.add(className);
-    } else {
-        $el.className += ' ' + className;
     }
 }
 
 export function removeClass($el, className) {
-    if ( $el.classList ) {
-        return $el.classList.remove(className);
+    if ( $el ) {
+        $el.classList.remove(className);
     }
-
-    $el.className = $el.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
 }
 
 export function hasClass($el, className) {
-    if ( $el.classList ) {
-        return $el.classList.contains(className);
-    }
-
-    return new RegExp('(^| )' + className + '( |$)', 'gi').test($el.className);
+    return !!$el && $el.classList.contains(className);
 }
 
 export function toggleClass($el, className) {
-    if ( hasClass($el, className) ) {
-        return removeClass($el, className);
+    if ( $el ) {
+        $el.classList.toggle(className);
     }
-
-    return addClass($el, className);
 }
 
-export function parent($el, className = false) {
-    if ( className !== false ) {
-        return matches($el, className);
+/**
+ * The parent node, or the closest element (itself included) that matches the selector
+ *
+ * @param {Element} $el
+ * @param {string|false} selector
+ * @return {Element|null}
+ */
+export function parent($el, selector = false) {
+    if ( !$el ) {
+        return null;
+    }
+
+    if ( selector !== false ) {
+        return $el.closest(selector);
     }
 
     return $el.parentNode;
-}
-
-
-function matches($el, parent) {
-    if ( !Element.prototype.matches ) {
-        Element.prototype.matches =
-            Element.prototype.matchesSelector ||
-            Element.prototype.mozMatchesSelector ||
-            Element.prototype.msMatchesSelector ||
-            Element.prototype.oMatchesSelector ||
-            Element.prototype.webkitMatchesSelector ||
-            function (s) {
-                let matches = (this.document || this.ownerDocument).querySelectorAll(s),
-                    i = matches.length;
-
-                while ( --i >= 0 && matches.item(i) !== this ) {}
-
-                return 1 > -1;
-            }
-    }
-
-    for ( ; $el && $el !== document; $el = $el.parentNode ) {
-        if ( $el.matches(parent) ) return $el;
-    }
-
-    return null;
 }

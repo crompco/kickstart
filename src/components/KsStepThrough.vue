@@ -1,12 +1,26 @@
 <template>
     <div class="ks-steps">
         <ul class="step-list">
-            <li :class="{ 'active': index+1 == activeStep, 'completed': completed[index] }" v-for="(step, index) in steps">
+            <li
+                v-for="(step, index) in steps"
+                :key="index"
+                :class="{ 'active': index + 1 == activeStep, 'completed': completed[index] }"
+            >
                 <div class="step-line"></div>
-                <a href="" @click.prevent="clickStep(index+1)" :class="{ 'interactive-disabled': !allowInteraction }">
-                    <div class="num" v-if="!completed[index]">{{index + 1}}</div>
-                    <div class="num" v-else>&#x2714;</div>
-                    <p>{{step}}</p>
+                <a
+                    href=""
+                    :class="{ 'interactive-disabled': !allowInteraction }"
+                    @click.prevent="clickStep(index + 1)"
+                >
+                    <div
+                        v-if="!completed[index]"
+                        class="num"
+                    >{{ index + 1 }}</div>
+                    <div
+                        v-else
+                        class="num"
+                    >&#x2714;</div>
+                    <p>{{ step }}</p>
                 </a>
             </li>
         </ul>
@@ -14,7 +28,6 @@
 </template>
 
 <script>
-
     export default {
         name: 'KsStepThrough',
 
@@ -40,6 +53,8 @@
             }
         },
 
+        emits: ['input'],
+
         data() {
             return {
                 completed: {}
@@ -48,7 +63,7 @@
 
         methods: {
             completeStep() {
-                this.completed[this.activeStep - 1] = true;
+                this.completed = { ...this.completed, [this.activeStep - 1]: true };
                 this.nextStep();
             },
             nextStep() {

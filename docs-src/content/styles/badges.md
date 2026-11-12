@@ -1,4 +1,0 @@
----
-title: Badges
-source: KsBadge
----

@@ -1,0 +1,55 @@
+/// Rules of a $buttons variant, reading the --ks-button-<name>-* tokens
+/// @param {String} $name - key in $buttons
+@mixin ks-button-variant($name) {
+    .ks-button.#{$name} {
+        background-color: var(--ks-button-#{$name}-background-color);
+        color: var(--ks-button-#{$name}-color);
+        border: 1px solid var(--ks-button-#{$name}-border-color);
+        box-shadow: var(--ks-button-#{$name}-box-shadow, var(--ks-button-box-shadow));
+
+        &.spinning .ks-spin-loading {
+            border-color: var(--ks-button-#{$name}-border-color);
+            border-top-color: var(--ks-button-#{$name}-background-color);
+        }
+
+        &:hover:not(.disabled) {
+            border: 1px solid var(--ks-button-#{$name}-border-color);
+            background-color: hsl(from var(--ks-button-#{$name}-background-color) h s calc(l - 4));
+            color: var(--ks-button-#{$name}-hover);
+        }
+
+        &.danger {
+            border-color: var(--ks-button-#{$name}-danger-border-color);
+            color: var(--ks-button-#{$name}-danger-color);
+            background-color: var(--ks-button-#{$name}-danger-bg);
+
+            &.spinning .ks-spin-loading {
+                border-color: var(--ks-button-#{$name}-danger-border-color);
+                border-top-color: var(--ks-button-#{$name}-danger-bg);
+            }
+
+            &:hover:not(.disabled) {
+                border-color: hsl(from var(--ks-button-#{$name}-danger-border-color) h s calc(l - 12));
+                color: hsl(from var(--ks-button-#{$name}-danger-color) h s calc(l - 12));
+                background-color: hsl(from var(--ks-button-#{$name}-background-color) h s calc(l - 4));
+            }
+        }
+
+        &.success {
+            border-color: var(--ks-button-#{$name}-success-border-color);
+            color: var(--ks-button-#{$name}-success-color);
+            background-color: var(--ks-button-#{$name}-success-bg);
+
+            &.spinning .ks-spin-loading {
+                border-color: var(--ks-button-#{$name}-success-border-color);
+                border-top-color: var(--ks-button-#{$name}-success-bg);
+            }
+
+            &:hover:not(.disabled) {
+                border-color: hsl(from var(--ks-button-#{$name}-success-border-color) h s calc(l - 12));
+                color: hsl(from var(--ks-button-#{$name}-success-color) h s calc(l - 12));
+                background-color: hsl(from var(--ks-button-#{$name}-background-color) h s calc(l - 4));
+            }
+        }
+    }
+}

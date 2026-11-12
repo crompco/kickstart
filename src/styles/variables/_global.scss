@@ -1,4 +1,5 @@
 @import "../functions/_map";
+@import "../variables/_colors";
 
 // Colors
 $white: #fff !default;
@@ -25,22 +26,22 @@ $brand: (
 	off: #C18C77
 ) !default;
 
-// State Colors
-$state-success: #3c763d !default;
-$state-success-bg: #dff0d8 !default;
-$state-success-border: darken($state-success-bg, 5%) !default;
+// State Colors (palette shades: text 700, or 800 for yellow; background 100; border 200)
+$state-success: get($ks-palette, "green", 700) !default;
+$state-success-bg: get($ks-palette, "green", 100) !default;
+$state-success-border: get($ks-palette, "green", 200) !default;
 
-$state-info: #31708f !default;
-$state-info-bg: #d9edf7 !default;
-$state-info-border: darken($state-info-bg, 7%) !default;
+$state-info: get($ks-palette, "blue", 700) !default;
+$state-info-bg: get($ks-palette, "blue", 100) !default;
+$state-info-border: get($ks-palette, "blue", 200) !default;
 
-$state-warning: #8a6d3b !default;
-$state-warning-bg:  #fcf8e3 !default;
-$state-warning-border: darken($state-warning-bg, 15%) !default;
+$state-warning: get($ks-palette, "yellow", 800) !default;
+$state-warning-bg: get($ks-palette, "yellow", 100) !default;
+$state-warning-border: get($ks-palette, "yellow", 200) !default;
 
-$state-error: #a94442 !default;
-$state-error-bg: #f2dede !default;
-$state-error-border: darken($state-error-bg, 5%) !default;
+$state-error: get($ks-palette, "red", 700) !default;
+$state-error-bg: get($ks-palette, "red", 100) !default;
+$state-error-border: get($ks-palette, "red", 200) !default;
 
 
 // State Actions
@@ -52,7 +53,7 @@ $state-danger-bg: $state-error !default;
 $state-danger-border: transparent !default;
 $state-danger-color: $white !default;
 
-$state-danger-hover-bg: darken($state-error, 12%) !default;
+$state-danger-hover-bg: get($ks-palette, "red", 800) !default;
 $state-danger-hover-border: transparent !default;
 $state-danger-hover-color: $white !default;
 

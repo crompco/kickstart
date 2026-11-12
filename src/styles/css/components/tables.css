@@ -1,0 +1,333 @@
+/* Generated from src/css/components/tables.css by build/generate-css.mjs */
+.ks-scroll-table {
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: 100%;
+  display: block;
+}
+.ks-scroll-table .ks-table thead tr td,
+.ks-scroll-table .ks-table thead tr th,
+.ks-scroll-table .ks-table tbody tr td,
+.ks-scroll-table .ks-table tbody tr th {
+  white-space: nowrap;
+}
+.ks-table {
+  width: 100%;
+  max-width: 100%;
+  border-spacing: 0;
+  background-color: var(--ks-table-bg);
+  margin-bottom: var(--ks-table-margin-bottom);
+}
+.ks-table.responsive tbody,
+.ks-table.responsive tr,
+.ks-table.responsive th,
+.ks-table.responsive td {
+  display: block;
+  text-align: left;
+  white-space: normal;
+}
+@media only screen and (min-width: 768px) {
+  .ks-table.responsive tbody {
+    display: table-row-group;
+  }
+  .ks-table.responsive tr {
+    display: table-row;
+  }
+  .ks-table.responsive th,
+  .ks-table.responsive td {
+    display: table-cell;
+  }
+}
+.ks-table.responsive thead {
+  display: none;
+}
+@media only screen and (min-width: 768px) {
+  .ks-table.responsive thead {
+    display: table-header-group;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .ks-table.responsive tbody tr {
+    margin-bottom: 0;
+    border: 0;
+  }
+}
+.ks-table.responsive tbody tr:last-child td {
+  border-bottom: 1px solid var(--ks-table-border-color);
+}
+@media only screen and (min-width: 768px) {
+  .ks-table.responsive tbody tr:last-child td {
+    border-bottom: 0;
+  }
+}
+.ks-table.responsive tbody td {
+  text-align: right;
+}
+@media only screen and (min-width: 768px) {
+  .ks-table.responsive tbody td {
+    text-align: left;
+  }
+}
+.ks-table.responsive tbody td[data-title]:before {
+  content: attr(data-title);
+  float: left;
+  font-size: 0.8rem;
+}
+@media only screen and (min-width: 768px) {
+  .ks-table.responsive tbody td[data-title]:before {
+    content: none;
+  }
+}
+.ks-table thead {
+  text-align: left;
+}
+.ks-table thead th {
+  padding: var(--ks-table-cell-padding);
+  border-bottom: 2px solid var(--ks-table-border-color);
+  vertical-align: top;
+}
+.ks-table thead.middle th {
+  vertical-align: middle;
+}
+.ks-table tbody td {
+  padding: var(--ks-table-cell-padding);
+  border-bottom: 1px solid var(--ks-table-border-color);
+  vertical-align: top;
+}
+.ks-table tbody.middle td {
+  vertical-align: middle;
+}
+.ks-table tbody tr {
+  border: 1px solid var(--ks-table-border-color);
+  border-bottom: 0;
+  margin: var(--ks-table-res-margin);
+}
+.ks-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+.ks-table.middle th,
+.ks-table.middle td {
+  vertical-align: middle;
+}
+.ks-table.striped tbody tr:nth-child(odd) {
+  background-color: var(--ks-table-strip-tr-color);
+}
+.ks-table.bordered {
+  border-collapse: collapse;
+  border: 1px solid var(--ks-table-border-color);
+}
+.ks-table.bordered th,
+.ks-table.bordered td {
+  border: 1px solid var(--ks-table-border-color);
+}
+.ks-table.shadow {
+  box-shadow: var(--ks-table-box-shadow);
+}
+.ks-table.collapse {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+.ks-table.collapse tbody tr,
+.ks-table.collapse tr th,
+.ks-table.collapse tr td {
+  border: 0;
+}
+.ks-table.primary thead {
+  background-color: var(--ks-brand-primary);
+  color: var(--ks-table-brand-header-color);
+}
+.ks-table.primary thead th {
+  border-bottom: 0;
+}
+.ks-table.light thead {
+  background-color: var(--ks-brand-light);
+  color: var(--ks-table-brand-header-color);
+}
+.ks-table.light thead th {
+  border-bottom: 0;
+}
+.ks-table.lighter thead {
+  background-color: var(--ks-brand-lighter);
+  color: var(--ks-table-brand-header-color);
+}
+.ks-table.lighter thead th {
+  border-bottom: 0;
+}
+.ks-table.secondary thead {
+  background-color: var(--ks-brand-secondary);
+  color: var(--ks-table-brand-header-color);
+}
+.ks-table.secondary thead th {
+  border-bottom: 0;
+}
+.ks-table.off thead {
+  background-color: var(--ks-brand-off);
+  color: var(--ks-table-brand-header-color);
+}
+.ks-table.off thead th {
+  border-bottom: 0;
+}
+.ks-table.p-px tr th,
+.ks-table.p-px tr td {
+  padding: 1px;
+}
+.ks-table.p-0 tr th,
+.ks-table.p-0 tr td {
+  padding: 0;
+}
+.ks-table.p-0\.5 tr th,
+.ks-table.p-0\.5 tr td {
+  padding: 0.125rem;
+}
+.ks-table.p-1 tr th,
+.ks-table.p-1 tr td {
+  padding: 0.25rem;
+}
+.ks-table.p-1\.5 tr th,
+.ks-table.p-1\.5 tr td {
+  padding: 0.375rem;
+}
+.ks-table.p-2 tr th,
+.ks-table.p-2 tr td {
+  padding: 0.5rem;
+}
+.ks-table.p-2\.5 tr th,
+.ks-table.p-2\.5 tr td {
+  padding: 0.625rem;
+}
+.ks-table.p-3 tr th,
+.ks-table.p-3 tr td {
+  padding: 0.75rem;
+}
+.ks-table.p-4 tr th,
+.ks-table.p-4 tr td {
+  padding: 1rem;
+}
+.ks-table.p-5 tr th,
+.ks-table.p-5 tr td {
+  padding: 1.25rem;
+}
+.ks-table.p-6 tr th,
+.ks-table.p-6 tr td {
+  padding: 1.5rem;
+}
+.ks-table.p-8 tr th,
+.ks-table.p-8 tr td {
+  padding: 2rem;
+}
+.ks-table.p-10 tr th,
+.ks-table.p-10 tr td {
+  padding: 2.5rem;
+}
+.ks-table.p-12 tr th,
+.ks-table.p-12 tr td {
+  padding: 3rem;
+}
+.ks-table.p-16 tr th,
+.ks-table.p-16 tr td {
+  padding: 4rem;
+}
+.ks-table.p-20 tr th,
+.ks-table.p-20 tr td {
+  padding: 5rem;
+}
+.ks-table.p-24 tr th,
+.ks-table.p-24 tr td {
+  padding: 6rem;
+}
+.ks-table.p-32 tr th,
+.ks-table.p-32 tr td {
+  padding: 8rem;
+}
+.ks-table.p-40 tr th,
+.ks-table.p-40 tr td {
+  padding: 10rem;
+}
+.ks-table.p-48 tr th,
+.ks-table.p-48 tr td {
+  padding: 12rem;
+}
+.ks-table.p-56 tr th,
+.ks-table.p-56 tr td {
+  padding: 14rem;
+}
+.ks-table.p-64 tr th,
+.ks-table.p-64 tr td {
+  padding: 16rem;
+}
+.ks-table.p-72 tr th,
+.ks-table.p-72 tr td {
+  padding: 18rem;
+}
+.ks-table.p-80 tr th,
+.ks-table.p-80 tr td {
+  padding: 20rem;
+}
+.ks-table.p-96 tr th,
+.ks-table.p-96 tr td {
+  padding: 24rem;
+}
+.ks-data-table .ks-data-table-select {
+  width: 1px;
+  white-space: nowrap;
+  text-align: center;
+}
+.ks-data-table .ks-data-table-empty {
+  padding: var(--ks-table-cell-padding);
+}
+.ks-data-table .ks-data-table-paginator {
+  padding: var(--ks-table-cell-padding) 0;
+}
+.ks-data-table .ks-data-table-sortable {
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.ks-data-table .ks-data-table-sortable:hover {
+  background-color: var(--ks-table-strip-tr-color);
+}
+.ks-data-table .ks-data-table-expander-cell {
+  width: 1px;
+  white-space: nowrap;
+  text-align: center;
+  cursor: pointer;
+}
+.ks-data-table .ks-data-table-expander {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 6px solid currentColor;
+  transition: transform 0.15s ease;
+}
+.ks-data-table .ks-data-table-expander.expanded {
+  transform: rotate(90deg);
+}
+.ks-data-table .ks-data-table-expansion-row > td {
+  background-color: var(--ks-table-strip-tr-color);
+}
+.ks-data-table .ks-data-table-sort {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 0.4rem;
+  vertical-align: middle;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid var(--ks-table-border-color);
+}
+.ks-data-table .ks-data-table-sort.asc {
+  border-top: 0;
+  border-bottom: 5px solid currentColor;
+}
+.ks-data-table .ks-data-table-sort.desc {
+  border-top: 5px solid currentColor;
+}
+.ks-table.sticky-header thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: var(--ks-table-bg);
+}

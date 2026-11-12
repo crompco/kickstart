@@ -1,0 +1,37 @@
+@import "../functions/_utils";
+@import "../variables/_forms";
+
+@mixin ks-tokens-forms {
+    --ks-form-border: #{$form-border};
+    --ks-form-color: #{$form-color};
+    --ks-form-padding: #{rem($form-padding)};
+    --ks-form-box-shadow: #{ks-optional($form-box-shadow)};
+    --ks-form-group-margin-bottom: #{rem($form-group-margin-bottom)};
+    --ks-form-font-size: #{$form-font-size};
+    --ks-form-title-margin-bottom: #{rem($form-title-margin-bottom)};
+    --ks-form-title-margin-right: #{rem($form-title-margin-right)};
+    --ks-form-title-font-weight: #{$form-title-font-weight};
+    --ks-form-title-disabled-opacity: #{$form-title-disabled-opacity};
+    --ks-form-block-margin-top: #{rem($form-block-margin-top)};
+    --ks-form-inline-margin-left: #{rem($form-inline-margin-left)};
+    --ks-form-inline-margin-right: #{rem($form-inline-margin-right)};
+    --ks-form-options-bg: #{$form-options-bg};
+    --ks-form-options-border: #{$form-options-border};
+    --ks-form-options-active-bg: #{$form-options-active-bg};
+    --ks-form-options-active-border: #{$form-options-active-border};
+    --ks-form-options-focus-border: #{$form-options-focus-border};
+    --ks-form-options-height: #{$form-options-height};
+    --ks-form-options-width: #{$form-options-width};
+    --ks-form-options-border-radius: #{$form-options-border-radius};
+    --ks-form-options-margin-right: #{rem($form-options-margin-right)};
+    --ks-form-options-margin-bottom: #{rem($form-options-margin-bottom)};
+    --ks-form-radio-select-scale: #{$form-radio-select-scale};
+    --ks-form-checkbox-check-fill: #{$form-checkbox-check-fill};
+    --ks-switch-active-color: #{$switch-active-color};
+    --ks-switch-disabled-color: #{$switch-disabled-color};
+    --ks-switch-background-color: #{$switch-background-color};
+    --ks-form-error-color: #{$form-error-color};
+    --ks-form-error-bg-color: #{$form-error-bg-color};
+    --ks-form-error-font-size: #{$form-error-font-size};
+    --ks-form-error-padding: #{$form-error-padding};
+}

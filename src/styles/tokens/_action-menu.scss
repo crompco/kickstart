@@ -1,0 +1,17 @@
+@import "../functions/_utils";
+@import "../variables/_action-menu";
+
+@mixin ks-tokens-action-menu {
+    --ks-am-button-bg: #{$am-button-bg};
+    --ks-am-button-border: #{$am-button-border};
+    --ks-am-button-padding: #{rem($am-button-padding)};
+    --ks-am-list-bg: #{$am-list-bg};
+    --ks-am-list-min-width: #{$am-list-min-width};
+    --ks-am-list-link-color: #{$am-list-link-color};
+    --ks-am-list-link-padding: #{rem($am-list-link-padding)};
+    --ks-am-list-link-hover-bg: #{$am-list-link-hover-bg};
+    --ks-am-list-link-hover-color: #{$am-list-link-hover-color};
+    --ks-am-list-separator: #{$am-list-separator};
+    --ks-am-box-shadow-top: #{$am-box-shadow-top};
+    --ks-am-box-shadow-bottom: #{$am-box-shadow-bottom};
+}
