@@ -210,5 +210,14 @@
 - `.ks-select .ks-select-dropdown .autocomplete-list` rules are gone. KsSelect has rendered `.ks-autocomplete-list` since 2.x, so they matched nothing.
 - These variables no longer have an effect: `$ac-clear-color`, `$ac-clear-color-hover`, `$ac-multi-close-color`, `$ac-multi-close-color-hover` (see above) and `$nav-padding`.
 
+## Colors
+- `$colors` is the Tailwind CSS v3 palette: red, orange, yellow, green, blue, purple and gray, shades 50 to 950. The 2.x values are gone, so every `.text-*`, `.bg-*`, `.border-*` color class and every `get_color()` call shows a different color. Check the pages that use them.
+- New: `yellow`, shades 50 and 950, and a `--ks-<color>-<shade>` token for each shade (e.g. `--ks-red-500`).
+- Classes for shade 50 now exist. In 2.x, `.bg-gray-50` and `.text-gray-50` had no style unless the app added the shade.
+- An app that sets its own `$colors` keeps its own classes and `get_color()` values. The state colors use `$ks-palette` and do not change with `$colors`.
+- 2.x `gray` was a blue gray; it is now Tailwind `gray`.
+- State colors are palette shades: success green-700 / green-100 / green-200, info blue-700 / blue-100 / blue-200, warning yellow-800 / yellow-100 / yellow-200, error red-700 / red-100 / red-200 (text / background / border). Danger hover is red-800. This changes alerts, badges, danger and success buttons, card footer danger, modal danger header, steps, form errors and the select deselect hover.
+- Not changed: brand colors, `$state-default-*` (buttons), `$lighter-gray` to `$darker-gray`, `$text-muted`, the muted alert.
+
 ## Icons
 - The kickstart icons (close, menu, dots, checkmark, chevron) no longer contain an SVG `<title>`. 2.x showed it as a hover tooltip ("close", "menu", "checkmark") and included the word in the element's text content, for example "checkmark Apple" for a checkbox. Tests that match the full text content of a checkbox, modal close button or menu button change.

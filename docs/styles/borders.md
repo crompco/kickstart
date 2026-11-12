@@ -50,3 +50,5 @@ $border_sizing: (
 #### Border Color
 
 <Demo name="BorderColorMap" />
+
+The classes use the [color palette](./colors).

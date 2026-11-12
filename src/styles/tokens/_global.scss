@@ -14,6 +14,14 @@ $ks-default-brand: (primary, light, lighter, secondary, off);
     --ks-darker-gray: #{$darker-gray};
     --ks-text-color: #{$text-color};
 
+    @each $color, $shades in $colors {
+        @if type-of($shades) == 'map' {
+            @each $shade, $value in $shades {
+                --ks-#{$color}-#{$shade}: #{$value};
+            }
+        }
+    }
+
     @each $name, $value in $brand {
         --ks-brand-#{$name}: #{$value};
     }
